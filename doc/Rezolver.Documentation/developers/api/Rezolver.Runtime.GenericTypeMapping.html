@@ -114,14 +114,14 @@
   
   <h1 id="Rezolver_Runtime_GenericTypeMapping" data-uid="Rezolver.Runtime.GenericTypeMapping" class="text-break">Class GenericTypeMapping
   </h1>
-  <div class="markdown level0 summary"><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success - 
+  <div class="markdown level0 summary"><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success -
 from a completely incompatible mapping (<a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>false</code>), or a successful mapping from
 an open generic type to a closed generic type which can then be constructed (<a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>true</code>
-and <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>true</code>) or, a successful mapping from an open generic type to another open 
+and <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>true</code>) or, a successful mapping from an open generic type to another open
 generic type (<a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>true</code> but <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>false</code>).</p>
-<p>This mapping is then used by both the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> and 
+<p>This mapping is then used by both the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> and
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a>
-functions.  Only fully bound mappings are supported by <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a>, whereas 
+functions.  Only fully bound mappings are supported by <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a>, whereas
 <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> will return <code>true</code> so long as the <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> is true.</p>
 <p>The caller, therefore, must ensure it is aware of the difference between open and closed generics.</p>
 </div>
@@ -240,8 +240,8 @@ an instance of an open generic.</p>
   <a id="Rezolver_Runtime_GenericTypeMapping_IsFullyBound_" data-uid="Rezolver.Runtime.GenericTypeMapping.IsFullyBound*"></a>
   <h4 id="Rezolver_Runtime_GenericTypeMapping_IsFullyBound" data-uid="Rezolver.Runtime.GenericTypeMapping.IsFullyBound">IsFullyBound</h4>
   <div class="markdown level1 summary"><p>If true, then the <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Type">Type</a> is a fully closed generic type that can be constructed (and therefore would
-be successfully bound by the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method, which uses the 
-<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> 
+be successfully bound by the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method, which uses the
+<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a>
 method).  If this is <code>false</code> but <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> is <code>true</code>, then while the target is technically
 compatible with the requested type, you can&apos;t create an instance.  The target will, however, be able to mapped to
 a closed generic type based on the same <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Type">Type</a>.</p>
@@ -307,8 +307,9 @@ that <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Run
   </span>
   <a id="Rezolver_Runtime_GenericTypeMapping_Success_" data-uid="Rezolver.Runtime.GenericTypeMapping.Success*"></a>
   <h4 id="Rezolver_Runtime_GenericTypeMapping_Success" data-uid="Rezolver.Runtime.GenericTypeMapping.Success">Success</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_DeclaredType">DeclaredType</a> of the 
-<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a><br>was successfully mapped to the requested type.  If so, and <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then an 
+  <div class="markdown level1 summary"><p>Gets a value indicating whether the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_DeclaredType">DeclaredType</a> of the
+<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+was successfully mapped to the requested type.  If so, and <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then an
 instance of <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Type">Type</a> will be compatible with the type that was requested.</p>
 <p>If <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>false</code>, then you can&apos;t create an instance of <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Type">Type</a> because it&apos;s
 an open generic - but you will be able to bind the same target to a closed generic of the same <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Type">Type</a>.</p>
@@ -345,7 +346,7 @@ an open generic - but you will be able to bind the same target to a closed gener
   <h4 id="Rezolver_Runtime_GenericTypeMapping_Type" data-uid="Rezolver.Runtime.GenericTypeMapping.Type">Type</h4>
   <div class="markdown level1 summary"><p>If <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>true</code>, gets the generic type to be used for the <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_RequestedType">RequestedType</a>.</p>
 <p>Note that this could be either an open or closed generic - the <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> offers a quick means
-by which to determine this.  If <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then the mapping will succeed when 
+by which to determine this.  If <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> is <code>true</code>, then the mapping will succeed when
 encountered by the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>

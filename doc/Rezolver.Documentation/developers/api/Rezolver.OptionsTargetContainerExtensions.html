@@ -158,11 +158,11 @@ of the various well-known <a class="xref" href="Rezolver.ITargetContainer.html">
 are actively <em>read</em> by the various <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>-related types throughout the Rezolver framework to
 control how certain standard functionality operates.</p>
 <p>The <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>, however, can be used both to <em>configure</em> those options and to add extra
-registrations (both <a class="xref" href="Rezolver.ITarget.html">ITarget</a> and, more commonly, other <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>s via the 
+registrations (both <a class="xref" href="Rezolver.ITarget.html">ITarget</a> and, more commonly, other <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>s via the
 <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> method).</p>
 <p>The automatic building of <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> sequences from all the targets registered for a type, for example,
-is enabled by attaching the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> to the target container.  Whereas, the 
-ability to actually register more than one target for a particular service in the first place is controlled by the 
+is enabled by attaching the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> to the target container.  Whereas, the
+ability to actually register more than one target for a particular service in the first place is controlled by the
 <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a> option.</p>
 <p><strong>Types of options</strong></p>
 <p>Ultimately an option can be of any type, but most of the built-in options use the <a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a>
@@ -172,8 +172,8 @@ there doesn&apos;t mean that all options must be literal value types (i.e. <a cl
 <p>Rezolver has several built-in option types - including <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a>, <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>,
 <a class="xref" href="Rezolver.Options.EnableContravariance.html">EnableContravariance</a> plus many more.  These use the <a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a> type to enable
 reading and writing simple boolean-like option values which switch behaviour on and off.</p>
-<p>In addition, the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> classes use the options 
-API to discover <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> objects to use when deciding whether to bind properties and/or fields when 
+<p>In addition, the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> classes use the options
+API to discover <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> objects to use when deciding whether to bind properties and/or fields when
 creating new objects.</p>
 <p>So you really can use anything you want as an option.</p>
 </div>
@@ -184,7 +184,7 @@ creating new objects.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOption%60%601(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L159">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L194">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption``1(Rezolver.ITargetContainer,``0)">GetOption&lt;TOption&gt;(ITargetContainer, TOption)</h4>
@@ -257,12 +257,12 @@ returning the <code data-dev-comment-type="paramref" class="paramref">default</c
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOption%60%601(Rezolver.ITargetContainer%2CSystem.Type%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L194">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L233">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption``1(Rezolver.ITargetContainer,System.Type,``0)">GetOption&lt;TOption&gt;(ITargetContainer, Type, TOption)</h4>
-  <div class="markdown level1 summary"><p>Gets an option either specific to the <code data-dev-comment-type="paramref" class="paramref">serviceType</code>, or a global option (if <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a> is 
-enabled), of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> 
+  <div class="markdown level1 summary"><p>Gets an option either specific to the <code data-dev-comment-type="paramref" class="paramref">serviceType</code>, or a global option (if <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a> is
+enabled), of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>
 from the <code data-dev-comment-type="paramref" class="paramref">targets</code> target container, returning the <code data-dev-comment-type="paramref" class="paramref">default</code> if the option has not been explicitly set.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -337,7 +337,7 @@ an option which is specific to this service, and then to search for more general
   <div class="markdown level1 remarks"><p>Options are frequently used to control how a Rezolver container interprets registrations.  Take, for example, the
 <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a> option - which is used to control whether a target container accepts multiple registrations
 for a given type.</p>
-<p>When defined globally (i.e. without a service type) it determines whether multiple registrations can be performed for all types.  However, 
+<p>When defined globally (i.e. without a service type) it determines whether multiple registrations can be performed for all types.  However,
 it can also be defined on a per-service basis - so, for example, if you want to restrict an application only to register one target for a
 particular service - e.g. <code>IMyApplication</code> - then you can set the <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a> option to <code>false</code> specifically against
 that type, and multiple registrations will result in a runtime error.</p>
@@ -352,7 +352,7 @@ is set to <code>true</code> for the <code data-dev-comment-type="paramref" class
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOption%60%602(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L224">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L274">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOption``2(Rezolver.ITargetContainer,``0)">GetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</h4>
@@ -429,7 +429,7 @@ is set to <code>true</code> for the <code data-dev-comment-type="paramref" class
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%601(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L239">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L293">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer)">GetOptions&lt;TOption&gt;(ITargetContainer)</h4>
@@ -497,7 +497,7 @@ set.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%601(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L257">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L314">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``1(Rezolver.ITargetContainer,System.Type)">GetOptions&lt;TOption&gt;(ITargetContainer, Type)</h4>
@@ -572,7 +572,7 @@ set.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.GetOptions%60%602(Rezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L285">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L351">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_GetOptions_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_" data-uid="Rezolver.OptionsTargetContainerExtensions.GetOptions``2(Rezolver.ITargetContainer)">GetOptions&lt;TOption, TService&gt;(ITargetContainer)</h4>
@@ -645,7 +645,7 @@ set.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.SetOption%60%601(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L64">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L66">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_SetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption``1(Rezolver.ITargetContainer,``0)">SetOption&lt;TOption&gt;(ITargetContainer, TOption)</h4>
@@ -719,7 +719,7 @@ or one of its overloads.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.SetOption%60%601(Rezolver.ITargetContainer%2C%60%600%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L87">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L97">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_SetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_System_Type_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption``1(Rezolver.ITargetContainer,``0,System.Type)">SetOption&lt;TOption&gt;(ITargetContainer, TOption, Type)</h4>
@@ -802,7 +802,7 @@ then it&apos;s equivalent to calling <a class="xref" href="Rezolver.OptionsTarge
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions_SetOption__2_Rezolver_ITargetContainer___0_.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions.SetOption%60%602(Rezolver.ITargetContainer%2C%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L117">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L138">View Source</a>
   </span>
   <a id="Rezolver_OptionsTargetContainerExtensions_SetOption_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption*"></a>
   <h4 id="Rezolver_OptionsTargetContainerExtensions_SetOption__2_Rezolver_ITargetContainer___0_" data-uid="Rezolver.OptionsTargetContainerExtensions.SetOption``2(Rezolver.ITargetContainer,``0)">SetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</h4>
@@ -888,7 +888,7 @@ or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OptionsTargetContainerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.OptionsTargetContainerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L52" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.OptionsExtensions.cs/#L54" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

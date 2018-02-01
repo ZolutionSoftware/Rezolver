@@ -3971,48 +3971,6 @@ references:
   commentId: N:Rezolver.Events
   fullName: Rezolver.Events
   nameWithType: Rezolver.Events
-- uid: Rezolver.Events.TargetContainerRegisteredEvent
-  name: TargetContainerRegisteredEvent
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html
-  commentId: T:Rezolver.Events.TargetContainerRegisteredEvent
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent
-  nameWithType: TargetContainerRegisteredEvent
-- uid: Rezolver.Events.TargetContainerRegisteredEvent.#ctor(Rezolver.ITargetContainer,System.Type)
-  name: TargetContainerRegisteredEvent(ITargetContainer, Type)
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent__ctor_Rezolver_ITargetContainer_System_Type_
-  commentId: M:Rezolver.Events.TargetContainerRegisteredEvent.#ctor(Rezolver.ITargetContainer,System.Type)
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainerRegisteredEvent(Rezolver.ITargetContainer, System.Type)
-  nameWithType: TargetContainerRegisteredEvent.TargetContainerRegisteredEvent(ITargetContainer, Type)
-- uid: Rezolver.Events.TargetContainerRegisteredEvent.#ctor*
-  name: TargetContainerRegisteredEvent
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent__ctor_
-  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEvent.#ctor
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainerRegisteredEvent
-  nameWithType: TargetContainerRegisteredEvent.TargetContainerRegisteredEvent
-- uid: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
-  name: TargetContainer
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_TargetContainer
-  commentId: P:Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
-  nameWithType: TargetContainerRegisteredEvent.TargetContainer
-- uid: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer*
-  name: TargetContainer
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_TargetContainer_
-  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent.TargetContainer
-  nameWithType: TargetContainerRegisteredEvent.TargetContainer
-- uid: Rezolver.Events.TargetContainerRegisteredEvent.Type
-  name: Type
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_Type
-  commentId: P:Rezolver.Events.TargetContainerRegisteredEvent.Type
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent.Type
-  nameWithType: TargetContainerRegisteredEvent.Type
-- uid: Rezolver.Events.TargetContainerRegisteredEvent.Type*
-  name: Type
-  href: api/Rezolver.Events.TargetContainerRegisteredEvent.html#Rezolver_Events_TargetContainerRegisteredEvent_Type_
-  commentId: Overload:Rezolver.Events.TargetContainerRegisteredEvent.Type
-  fullName: Rezolver.Events.TargetContainerRegisteredEvent.Type
-  nameWithType: TargetContainerRegisteredEvent.Type
 - uid: Rezolver.Events.TargetContainerRegisteredEventArgs
   name: TargetContainerRegisteredEventArgs
   href: api/Rezolver.Events.TargetContainerRegisteredEventArgs.html
@@ -4055,48 +4013,6 @@ references:
   commentId: Overload:Rezolver.Events.TargetContainerRegisteredEventArgs.Type
   fullName: Rezolver.Events.TargetContainerRegisteredEventArgs.Type
   nameWithType: TargetContainerRegisteredEventArgs.Type
-- uid: Rezolver.Events.TargetRegisteredEvent
-  name: TargetRegisteredEvent
-  href: api/Rezolver.Events.TargetRegisteredEvent.html
-  commentId: T:Rezolver.Events.TargetRegisteredEvent
-  fullName: Rezolver.Events.TargetRegisteredEvent
-  nameWithType: TargetRegisteredEvent
-- uid: Rezolver.Events.TargetRegisteredEvent.#ctor(Rezolver.ITarget,System.Type)
-  name: TargetRegisteredEvent(ITarget, Type)
-  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent__ctor_Rezolver_ITarget_System_Type_
-  commentId: M:Rezolver.Events.TargetRegisteredEvent.#ctor(Rezolver.ITarget,System.Type)
-  fullName: Rezolver.Events.TargetRegisteredEvent.TargetRegisteredEvent(Rezolver.ITarget, System.Type)
-  nameWithType: TargetRegisteredEvent.TargetRegisteredEvent(ITarget, Type)
-- uid: Rezolver.Events.TargetRegisteredEvent.#ctor*
-  name: TargetRegisteredEvent
-  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent__ctor_
-  commentId: Overload:Rezolver.Events.TargetRegisteredEvent.#ctor
-  fullName: Rezolver.Events.TargetRegisteredEvent.TargetRegisteredEvent
-  nameWithType: TargetRegisteredEvent.TargetRegisteredEvent
-- uid: Rezolver.Events.TargetRegisteredEvent.ServiceType
-  name: ServiceType
-  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_ServiceType
-  commentId: P:Rezolver.Events.TargetRegisteredEvent.ServiceType
-  fullName: Rezolver.Events.TargetRegisteredEvent.ServiceType
-  nameWithType: TargetRegisteredEvent.ServiceType
-- uid: Rezolver.Events.TargetRegisteredEvent.ServiceType*
-  name: ServiceType
-  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_ServiceType_
-  commentId: Overload:Rezolver.Events.TargetRegisteredEvent.ServiceType
-  fullName: Rezolver.Events.TargetRegisteredEvent.ServiceType
-  nameWithType: TargetRegisteredEvent.ServiceType
-- uid: Rezolver.Events.TargetRegisteredEvent.Target
-  name: Target
-  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_Target
-  commentId: P:Rezolver.Events.TargetRegisteredEvent.Target
-  fullName: Rezolver.Events.TargetRegisteredEvent.Target
-  nameWithType: TargetRegisteredEvent.Target
-- uid: Rezolver.Events.TargetRegisteredEvent.Target*
-  name: Target
-  href: api/Rezolver.Events.TargetRegisteredEvent.html#Rezolver_Events_TargetRegisteredEvent_Target_
-  commentId: Overload:Rezolver.Events.TargetRegisteredEvent.Target
-  fullName: Rezolver.Events.TargetRegisteredEvent.Target
-  nameWithType: TargetRegisteredEvent.Target
 - uid: Rezolver.Events.TargetRegisteredEventArgs
   name: TargetRegisteredEventArgs
   href: api/Rezolver.Events.TargetRegisteredEventArgs.html
@@ -4598,12 +4514,6 @@ references:
   fullName.vb: Rezolver.IMemberBindingBehaviourBuilder(Of TInstance).BuildBehaviour
   nameWithType: IMemberBindingBehaviourBuilder<TInstance>.BuildBehaviour
   nameWithType.vb: IMemberBindingBehaviourBuilder(Of TInstance).BuildBehaviour
-- uid: Rezolver.IOptionForAnyGeneric
-  name: IOptionForAnyGeneric
-  href: api/Rezolver.IOptionForAnyGeneric.html
-  commentId: T:Rezolver.IOptionForAnyGeneric
-  fullName: Rezolver.IOptionForAnyGeneric
-  nameWithType: IOptionForAnyGeneric
 - uid: Rezolver.IResolveContext
   name: IResolveContext
   href: api/Rezolver.IResolveContext.html

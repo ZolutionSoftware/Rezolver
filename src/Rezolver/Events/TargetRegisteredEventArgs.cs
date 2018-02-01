@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 
 namespace Rezolver.Events
@@ -29,8 +28,8 @@ namespace Rezolver.Events
         /// <param name="type"></param>
         public TargetRegisteredEventArgs(ITarget target, Type type)
         {
-            Target = target;
-            Type = type;
+            this.Target = target;
+            this.Type = type;
         }
     }
 }

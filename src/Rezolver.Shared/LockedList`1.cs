@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +20,19 @@ namespace Rezolver
         public class ListLock : IDisposable
         {
             private LockedList<T> _list;
+
             internal ListLock(LockedList<T> list)
             {
-                _list = list;
-                Monitor.Enter(_list._locker);
+                this._list = list;
+                Monitor.Enter(this._list._locker);
             }
+
             public void Dispose()
             {
-                if (Monitor.IsEntered(_list._locker))
-                    Monitor.Exit(_list._locker);
+                if (Monitor.IsEntered(this._list._locker))
+                {
+                    Monitor.Exit(this._list._locker);
+                }
             }
         }
 
@@ -36,9 +43,9 @@ namespace Rezolver
         {
             get
             {
-                lock (_locker)
+                lock (this._locker)
                 {
-                    return _inner.Count;
+                    return this._inner.Count;
                 }
             }
         }
@@ -47,9 +54,9 @@ namespace Rezolver
         {
             get
             {
-                lock (_locker)
+                lock (this._locker)
                 {
-                    return ((IList<T>)_inner).IsReadOnly;
+                    return ((IList<T>)this._inner).IsReadOnly;
                 }
             }
         }
@@ -58,34 +65,34 @@ namespace Rezolver
         {
             get
             {
-                lock (_locker)
+                lock (this._locker)
                 {
-                    return _inner[index];
+                    return this._inner[index];
                 }
             }
 
             set
             {
-                lock (_locker)
+                lock (this._locker)
                 {
-                    _inner[index] = value;
+                    this._inner[index] = value;
                 }
             }
         }
 
         public LockedList(IEnumerable<T> enumerable)
         {
-            _inner = new List<T>(enumerable);
+            this._inner = new List<T>(enumerable);
         }
 
         public LockedList(int capacity)
         {
-            _inner = new List<T>(capacity);
+            this._inner = new List<T>(capacity);
         }
 
         public LockedList()
         {
-            _inner = new List<T>();
+            this._inner = new List<T>();
         }
 
         public IDisposable Lock()
@@ -95,80 +102,80 @@ namespace Rezolver
 
         public int IndexOf(T item)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                return _inner.IndexOf(item);
+                return this._inner.IndexOf(item);
             }
         }
 
         public void Insert(int index, T item)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                _inner.Insert(index, item);
+                this._inner.Insert(index, item);
             }
         }
 
         public void RemoveAt(int index)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                _inner.RemoveAt(index);
+                this._inner.RemoveAt(index);
             }
         }
 
         public void Add(T item)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                _inner.Add(item);
+                this._inner.Add(item);
             }
         }
 
         public void Clear()
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                _inner.Clear();
+                this._inner.Clear();
             }
         }
 
         public bool Contains(T item)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                return _inner.Contains(item);
+                return this._inner.Contains(item);
             }
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                _inner.CopyTo(array, arrayIndex);
+                this._inner.CopyTo(array, arrayIndex);
             }
         }
 
         public bool Remove(T item)
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                return _inner.Remove(item);
+                return this._inner.Remove(item);
             }
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            lock (_locker)
+            lock (this._locker)
             {
-                var clone = _inner.ToArray();
+                var clone = this._inner.ToArray();
                 return clone.AsEnumerable().GetEnumerator();
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }

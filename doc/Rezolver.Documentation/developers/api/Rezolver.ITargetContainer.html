@@ -126,7 +126,7 @@ that the targets are registered against.</p>
     <pre><code class="lang-csharp hljs">public interface ITargetContainer</code></pre>
   </div>
   <h5 id="Rezolver_ITargetContainer_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>You do not resolve objects from a target container, instead, it holds the <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which will 
+  <div class="markdown level0 remarks"><p>You do not resolve objects from a target container, instead, it holds the <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which will
 later be compiled to produce the objects.</p>
 <p>A target container is considered mutable for its entire lifetime, because it&apos;s only a glorified dictionary
 of targets from which multiple <a class="xref" href="Rezolver.IContainer.html">IContainer</a> objects can be built (when using the types provided
@@ -143,11 +143,11 @@ are <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> and
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L87">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L86">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainer_CombineWith_" data-uid="Rezolver.ITargetContainer.CombineWith*"></a>
   <h4 id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_" data-uid="Rezolver.ITargetContainer.CombineWith(Rezolver.ITargetContainer,System.Type)">CombineWith(ITargetContainer, Type)</h4>
-  <div class="markdown level1 summary"><p>If supported by the implementation, this gets the container built from combining this container with 
+  <div class="markdown level1 summary"><p>If supported by the implementation, this gets the container built from combining this container with
 an <code data-dev-comment-type="paramref" class="paramref">existing</code> container as part of a registration inside another <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -195,8 +195,8 @@ an <code data-dev-comment-type="paramref" class="paramref">existing</code> conta
     </tbody>
   </table>
   <h5 id="Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Used most frequently in implementations of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> 
-when a container owner is already registered against the type, and a new container owner is then registered against the 
+  <div class="markdown level1 remarks"><p>Used most frequently in implementations of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>
+when a container owner is already registered against the type, and a new container owner is then registered against the
 same type.  This behaviour is used to implement open generics and decorators, and can be used to implement more besides.</p>
 </div>
   <h5 class="exceptions">Exceptions</h5>
@@ -220,7 +220,7 @@ same type.  This behaviour is used to implement open generics and decorators, an
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer_Fetch_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.Fetch(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L64">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L63">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainer_Fetch_" data-uid="Rezolver.ITargetContainer.Fetch*"></a>
   <h4 id="Rezolver_ITargetContainer_Fetch_System_Type_" data-uid="Rezolver.ITargetContainer.Fetch(System.Type)">Fetch(Type)</h4>
@@ -267,7 +267,7 @@ same type.  This behaviour is used to implement open generics and decorators, an
   </table>
   <h5 id="Rezolver_ITargetContainer_Fetch_System_Type__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The target you receive from this method depends entirely on the implementation.</p>
-<p>It could be the last target to be registered against the <code data-dev-comment-type="paramref" class="paramref">type</code> or the first, or 
+<p>It could be the last target to be registered against the <code data-dev-comment-type="paramref" class="paramref">type</code> or the first, or
 another target entirely.</p>
 <p>As mentioned in the documentation for the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">Register(ITarget, Type)</a> method - the only guarantee is that if
 at least one target has been registered for the same type, then this method should return a valid target.</p>
@@ -277,11 +277,11 @@ at least one target has been registered for the same type, then this method shou
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer_FetchAll_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.FetchAll(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L74">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L73">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainer_FetchAll_" data-uid="Rezolver.ITargetContainer.FetchAll*"></a>
   <h4 id="Rezolver_ITargetContainer_FetchAll_System_Type_" data-uid="Rezolver.ITargetContainer.FetchAll(System.Type)">FetchAll(Type)</h4>
-  <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that have been registered for a particular <code data-dev-comment-type="paramref" class="paramref">type</code>.  </p>
+  <div class="markdown level1 summary"><p>Retrieves an enumerable of all targets that have been registered for a particular <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -317,7 +317,7 @@ at least one target has been registered for the same type, then this method shou
     <tbody>
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
-        <td><p>An enumerable containing all the targets that have been registered against the given <code data-dev-comment-type="paramref" class="paramref">type</code>, or, 
+        <td><p>An enumerable containing all the targets that have been registered against the given <code data-dev-comment-type="paramref" class="paramref">type</code>, or,
 an empty enumerable if no targets have been registered.</p>
 </td>
       </tr>
@@ -332,7 +332,7 @@ through a call to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer_FetchContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.FetchContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L94">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L93">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainer_FetchContainer_" data-uid="Rezolver.ITargetContainer.FetchContainer*"></a>
   <h4 id="Rezolver_ITargetContainer_FetchContainer_System_Type_" data-uid="Rezolver.ITargetContainer.FetchContainer(System.Type)">FetchContainer(Type)</h4>
@@ -380,7 +380,7 @@ through a call to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L50">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L49">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainer_Register_" data-uid="Rezolver.ITargetContainer.Register*"></a>
   <h4 id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.ITargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
@@ -420,7 +420,7 @@ must be compatible with this type.</p>
   </table>
   <h5 id="Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The interface does not define the behaviour for when multiple targets are registered against the same type - although
-the default behaviour of the framework (via the <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> class) is to allow this, with the last registered target 
+the default behaviour of the framework (via the <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> class) is to allow this, with the last registered target
 being treated as the &apos;default&apos; for that type.</p>
 <p>The only guarantee expected by the framework from implementations of this interface is that if a target is registered against
 a given type with this method, then a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a> operation with the same type should return a valid target,
@@ -448,13 +448,13 @@ and a <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetConta
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L104">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L103">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainer_RegisterContainer_" data-uid="Rezolver.ITargetContainer.RegisterContainer*"></a>
   <h4 id="Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.ITargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
   <div class="markdown level1 summary"><p>Registers a container against a given <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
-<p>If a container already exists against this type, then the existing container&apos;s 
-<a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> method is called with the <code data-dev-comment-type="paramref" class="paramref">container</code> as the 
+<p>If a container already exists against this type, then the existing container&apos;s
+<a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> method is called with the <code data-dev-comment-type="paramref" class="paramref">container</code> as the
 argument, and the resulting container will replace the existing one.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -652,7 +652,7 @@ argument, and the resulting container will replace the existing one.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L31" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainer.cs/#L30" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

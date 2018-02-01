@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,7 +18,7 @@ namespace Rezolver
     public class ListMemberBinding : MemberBinding
     {
         /// <summary>
-        /// The element type of the enumerable (from the <see cref="MemberBinding.Target"/> whose contents will 
+        /// The element type of the enumerable (from the <see cref="MemberBinding.Target"/> whose contents will
         /// be added to the collection represented by the <see cref="MemberBinding.Member"/>.
         /// </summary>
         public Type ElementType { get; }
@@ -34,15 +37,15 @@ namespace Rezolver
         /// <param name="target">Required. The target whose elements (it must be an enumerable with element type equal
         /// to <paramref name="elementType"/>) will be added to the <paramref name="member"/> when an instance
         /// is bound.</param>
-        /// <param name="elementType">Required. The type of objects to be added to the collection exposed through the 
+        /// <param name="elementType">Required. The type of objects to be added to the collection exposed through the
         /// <paramref name="member"/></param>
         /// <param name="addMethod">Required. The method to call on the <paramref name="member"/> that will be used
         /// to add elements to the collection when initialisation occurs.</param>
         public ListMemberBinding(MemberInfo member, ITarget target, Type elementType, MethodInfo addMethod)
         : base(member, target)
         {
-            ElementType = elementType;
-            AddMethod = addMethod;
+            this.ElementType = elementType;
+            this.AddMethod = addMethod;
         }
     }
 }

@@ -178,7 +178,7 @@
   <div class="markdown level0 remarks"><p>Note to compiler implementers: This class can be used to represent simple
 expressions such as constants, constructor calls and so on; but can also contain whole
 lambda expressions with parameters.</p>
-<p>In the latter case, expression parameters are expected to receive injected arguments and, 
+<p>In the latter case, expression parameters are expected to receive injected arguments and,
 therefore, some rewriting of the expression is likely to be required.</p>
 </div>
   <h3 id="constructors">Constructors
@@ -212,7 +212,7 @@ therefore, some rewriting of the expression is likely to be required.</p>
       <tr>
         <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.expression(v=vs.110).aspx">Expression</a>&gt;</td>
         <td><span class="parametername">expressionFactory</span></td>
-        <td><p>Required. The factory delegate that a compiler should call to get the expression to use when 
+        <td><p>Required. The factory delegate that a compiler should call to get the expression to use when
 compiling this target.</p>
 </td>
       </tr>
@@ -230,7 +230,7 @@ returned by <code data-dev-comment-type="paramref" class="paramref">expressionFa
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.%23ctor(System.Linq.Expressions.Expression%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L61">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L59">View Source</a>
   </span>
   <a id="Rezolver_Targets_ExpressionTarget__ctor_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor*"></a>
   <h4 id="Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_" data-uid="Rezolver.Targets.ExpressionTarget.#ctor(System.Linq.Expressions.Expression,System.Type)">ExpressionTarget(Expression, Type)</h4>
@@ -279,11 +279,11 @@ an explicit type or when this target is used as a value inside another target).<
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L37">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L36">View Source</a>
   </span>
   <a id="Rezolver_Targets_ExpressionTarget_DeclaredType_" data-uid="Rezolver.Targets.ExpressionTarget.DeclaredType*"></a>
   <h4 id="Rezolver_Targets_ExpressionTarget_DeclaredType" data-uid="Rezolver.Targets.ExpressionTarget.DeclaredType">DeclaredType</h4>
-  <div class="markdown level1 summary"><p>Gets the type of <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget_Expression">Expression</a> or the type that all expressions returned by the 
+  <div class="markdown level1 summary"><p>Gets the type of <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget_Expression">Expression</a> or the type that all expressions returned by the
 <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget_ExpressionFactory">ExpressionFactory</a> are expected to be equal to.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -313,11 +313,11 @@ an explicit type or when this target is used as a value inside another target).<
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget_Expression.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.Expression%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L31">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L30">View Source</a>
   </span>
   <a id="Rezolver_Targets_ExpressionTarget_Expression_" data-uid="Rezolver.Targets.ExpressionTarget.Expression*"></a>
   <h4 id="Rezolver_Targets_ExpressionTarget_Expression" data-uid="Rezolver.Targets.ExpressionTarget.Expression">Expression</h4>
-  <div class="markdown level1 summary"><p>Gets the static expression represented by this target - if <code>null</code>, then 
+  <div class="markdown level1 summary"><p>Gets the static expression represented by this target - if <code>null</code>, then
 a factory is being used to produce the expression, which is available from
 the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget_ExpressionFactory">ExpressionFactory</a> property.</p>
 </div>
@@ -346,7 +346,7 @@ the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Target
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget_ExpressionFactory.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget.ExpressionFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L49">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L47">View Source</a>
   </span>
   <a id="Rezolver_Targets_ExpressionTarget_ExpressionFactory_" data-uid="Rezolver.Targets.ExpressionTarget.ExpressionFactory*"></a>
   <h4 id="Rezolver_Targets_ExpressionTarget_ExpressionFactory" data-uid="Rezolver.Targets.ExpressionTarget.ExpressionFactory">ExpressionFactory</h4>
@@ -405,7 +405,7 @@ from the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_T
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ExpressionTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ExpressionTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L24" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -226,7 +226,7 @@
   </div>
   <h5 id="Rezolver_CachingContainerBase_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Internally, the class uses a <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd287191(v=vs.110).aspx">ConcurrentDictionary&lt;TKey, TValue&gt;</a> to store <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>s keyed by the requested type.</p>
-<p>All the main <a class="xref" href="Rezolver.IContainer.html">IContainer</a> implementations used directly in an application should ideally inherit from this class, because otherwise every 
+<p>All the main <a class="xref" href="Rezolver.IContainer.html">IContainer</a> implementations used directly in an application should ideally inherit from this class, because otherwise every
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> operation would require a compilation phase before the object could be returned, which would be incredibly slow.</p>
 <p>It&apos;s because of this caching that registering new targets in any <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> used by this class is not recommended: because after the first request
 for a particular type is made, the resultant <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> is fixed until the container is thrown away.</p>
@@ -238,7 +238,7 @@ for a particular type is made, the resultant <a class="xref" href="Rezolver.ICom
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_CachingContainerBase__ctor_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase.%23ctor(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/CachingContainerBase.cs/#L35">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/CachingContainerBase.cs/#L34">View Source</a>
   </span>
   <a id="Rezolver_CachingContainerBase__ctor_" data-uid="Rezolver.CachingContainerBase.#ctor*"></a>
   <h4 id="Rezolver_CachingContainerBase__ctor_Rezolver_IRootTargetContainer_" data-uid="Rezolver.CachingContainerBase.#ctor(Rezolver.IRootTargetContainer)">CachingContainerBase(IRootTargetContainer)</h4>
@@ -262,9 +262,9 @@ for a particular type is made, the resultant <a class="xref" href="Rezolver.ICom
       <tr>
         <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
-        <td><p>Optional.  The target container whose registrations will be used for dependency lookup when 
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> (and other operations) is called.  If not provided, a new 
-<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> instance is constructed.  This will ultimately be available 
+        <td><p>Optional.  The target container whose registrations will be used for dependency lookup when
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> (and other operations) is called.  If not provided, a new
+<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> instance is constructed.  This will ultimately be available
 to inherited types, after construction, through the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> property.</p>
 </td>
       </tr>
@@ -277,7 +277,7 @@ to inherited types, after construction, through the <a class="xref" href="Rezolv
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_CachingContainerBase_GetCompiledTargetVirtual_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase.GetCompiledTargetVirtual(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/CachingContainerBase.cs/#L53">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/CachingContainerBase.cs/#L51">View Source</a>
   </span>
   <a id="Rezolver_CachingContainerBase_GetCompiledTargetVirtual_" data-uid="Rezolver.CachingContainerBase.GetCompiledTargetVirtual*"></a>
   <h4 id="Rezolver_CachingContainerBase_GetCompiledTargetVirtual_Rezolver_IResolveContext_" data-uid="Rezolver.CachingContainerBase.GetCompiledTargetVirtual(Rezolver.IResolveContext)">GetCompiledTargetVirtual(IResolveContext)</h4>
@@ -326,7 +326,7 @@ to inherited types, after construction, through the <a class="xref" href="Rezolv
   <div class="markdown level1 remarks"><p>The method is called by <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>
 to get the compiled target whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> method is to be used to get the instance that is to be resolved for
 a given request.</p>
-<p>The internal cache is examined first to see if an entry exists for the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> type and, if not, then 
+<p>The internal cache is examined first to see if an entry exists for the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> type and, if not, then
 the result of the base class&apos; <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledTarget_Rezolver_IResolveContext_">GetCompiledTarget(IResolveContext)</a> is cached and returned.</p>
 </div>
   <h3 id="implements">Implements</h3>
@@ -579,7 +579,7 @@ the result of the base class&apos; <a class="xref" href="Rezolver.ContainerBase.
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_CachingContainerBase.md&amp;value=---%0Auid%3A%20Rezolver.CachingContainerBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/CachingContainerBase.cs/#L24" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/CachingContainerBase.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

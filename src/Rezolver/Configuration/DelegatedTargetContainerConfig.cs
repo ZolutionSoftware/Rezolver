@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,11 +13,12 @@ namespace Rezolver.Configuration
 
         public DelegatedTargetContainerConfig(Action<IRootTargetContainer> configure)
         {
-            _configure = configure;
+            this._configure = configure;
         }
+
         void ITargetContainerConfig.Configure(IRootTargetContainer targets)
         {
-            _configure(targets);
+            this._configure(targets);
         }
     }
 }

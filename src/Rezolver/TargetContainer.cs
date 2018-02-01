@@ -1,33 +1,32 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
-using Rezolver.Events;
-using Rezolver.Runtime;
-using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Rezolver.Events;
+using Rezolver.Runtime;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
     /// <summary>
     /// Root container for <see cref="ITarget"/>s that can be used as the backing for the standard
     /// <see cref="IContainer"/> classes - <see cref="Container"/> and <see cref="ScopedContainer"/>.
-    /// 
+    ///
     /// Stores and retrieves registrations of <see cref="ITarget"/>s, is also Generic type aware,
     /// unlike its base class - <see cref="TargetDictionaryContainer"/>.
     /// </summary>
     /// <remarks>This is the type used by default for the <see cref="ContainerBase.Targets"/> of all
-    /// the standard containers in the core framework, e.g. <see cref="Container"/>, 
-    /// <see cref="ScopedContainer"/> etc, when you don't supply an instance of an 
+    /// the standard containers in the core framework, e.g. <see cref="Container"/>,
+    /// <see cref="ScopedContainer"/> etc, when you don't supply an instance of an
     /// <see cref="ITargetContainer"/> explicitly on construction.
-    /// 
-    /// Although you can derive from this class to extend its functionality; it's also possible to 
+    ///
+    /// Although you can derive from this class to extend its functionality; it's also possible to
     /// extend it via configuration (see <see cref="ITargetContainerConfig"/>) - which is how, for example,
     /// the framework enables automatic injection of enumerables (see <see cref="Configuration.InjectEnumerables"/>) and
     /// lists (see <see cref="Configuration.InjectLists"/>).
-    /// 
+    ///
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer, IRootTargetContainer
     {
@@ -45,17 +44,17 @@ namespace Rezolver
 
         void ICovariantTypeIndex.AddKnownType(Type serviceType)
         {
-            _typeIndex.AddKnownType(serviceType);
+            this._typeIndex.AddKnownType(serviceType);
         }
 
         IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType)
         {
-            return _typeIndex.GetKnownCovariantTypes(serviceType);
+            return this._typeIndex.GetKnownCovariantTypes(serviceType);
         }
 
         IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType)
         {
-            return _typeIndex.GetKnownCompatibleTypes(serviceType);
+            return this._typeIndex.GetKnownCompatibleTypes(serviceType);
         }
 
         /// <summary>
@@ -63,13 +62,13 @@ namespace Rezolver
         /// constructor when no configuration is explicitly passed.
         /// </summary>
         /// <remarks>The simplest way to configure all target container instances is to add/remove configs to this collection.
-        /// 
+        ///
         /// Note also that the <see cref="OverridingTargetContainer"/> class also uses this.
-        /// 
+        ///
         /// #### Default configurations
-        /// 
+        ///
         /// In addition to some internal configurations, the configurations applied by default are:
-        /// 
+        ///
         /// - <see cref="Configuration.InjectEnumerables"/>
         /// - <see cref="Configuration.InjectArrays"/>
         /// - <see cref="Configuration.InjectLists"/>
@@ -105,7 +104,9 @@ namespace Rezolver
             : this()
         {
             if (this.GetType() != typeof(TargetContainer))
+            {
                 throw new InvalidOperationException("Derived types must not use this constructor because it triggers virtual method calls via the configuration callbacks.  Please use the protected parameterless constructor instead");
+            }
 
             (config ?? DefaultConfig).Configure(this);
         }
@@ -113,32 +114,31 @@ namespace Rezolver
         /// <summary>
         /// Creates a new instance of the <see cref="TargetContainer"/> class without attaching any
         /// <see cref="ITargetContainerConfig"/> to it.  This is desirable for derived types as behaviours typically
-        /// will invoke methods on this target container which are declared virtual and which are, therefore, 
+        /// will invoke methods on this target container which are declared virtual and which are, therefore,
         /// unsafe to be called during construction.
         /// </summary>
         protected TargetContainer()
             : base()
         {
-            _typeIndex = new CovariantTypeIndex(this);
+            this._typeIndex = new CovariantTypeIndex(this);
         }
 
         /// <summary>
         /// Called to get the type that's to be used to fetch a child <see cref="ITargetContainer"/> for targets registered
         /// against a given <paramref name="serviceType"/>.
         /// </summary>
-        /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a 
+        /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a
         /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="ITargetContainer.Fetch(Type)"/>.</param>
         /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
         protected override Type GetTargetContainerType(Type serviceType)
         {
             // NOTE - shouldn't require descending to the base class because of the default type resolver option
-            return this.GetChildContainerType(serviceType, Root) ?? base.GetTargetContainerType(serviceType);
+            return this.GetChildContainerType(serviceType, this.Root) ?? base.GetTargetContainerType(serviceType);
         }
-
 
         /// <summary>
         /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>,
-        /// overriding the base version to extend special support for open generic types and for 
+        /// overriding the base version to extend special support for open generic types and for
         /// <see cref="ITargetContainerTypeResolver"/> options.
         /// </summary>
         /// <param name="type"></param>
@@ -151,19 +151,19 @@ namespace Rezolver
             // Easy way to check: see if GetTargetContainerType returns a difference type to the one passed,
             // and then autoregistering the container type if it does.  The EnsureContainer function takes
             // care of everything else.
-            if (GetTargetContainerType(type) != type)
+            if (this.GetTargetContainerType(type) != type)
             {
-                EnsureContainer(type).RegisterContainer(type, container);
-                TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+                this.EnsureContainer(type).RegisterContainer(type, container);
+                this.TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
                 return;
             }
 
             base.RegisterContainer(type, container);
-            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+            this.TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
         }
 
         /// <summary>
-        /// Overrides <see cref="TargetDictionaryContainer.CreateContainer(Type)"/> to provide special support 
+        /// Overrides <see cref="TargetDictionaryContainer.CreateContainer(Type)"/> to provide special support
         /// for open generic types and to support <see cref="ITargetContainerFactory"/> options.
         /// </summary>
         /// <param name="targetContainerType"></param>
@@ -171,11 +171,11 @@ namespace Rezolver
         protected override ITargetContainer CreateContainer(Type targetContainerType)
         {
             // NOTE - shouldn't require descending to the base class because of the default target factory option
-            return this.CreateChildContainer(targetContainerType, Root) ?? base.CreateContainer(targetContainerType);
+            return this.CreateChildContainer(targetContainerType, this.Root) ?? base.CreateContainer(targetContainerType);
         }
 
         /// <summary>
-        /// Overrides the base method to block registration if the <paramref name="target"/> does not support the 
+        /// Overrides the base method to block registration if the <paramref name="target"/> does not support the
         /// <paramref name="serviceType"/> (checked by calling the target's <see cref="ITarget.SupportsType(Type)"/> method).
         /// </summary>
         /// <param name="target">The target to be registered.</param>
@@ -185,10 +185,12 @@ namespace Rezolver
         {
             target.MustNotBeNull(nameof(target));
             if (serviceType != null && !target.SupportsType(serviceType))
+            {
                 throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, serviceType), nameof(target));
+            }
 
             base.Register(target, serviceType);
-            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
+            this.TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
         }
     }
 }

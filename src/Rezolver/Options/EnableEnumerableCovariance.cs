@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +9,7 @@ namespace Rezolver.Options
 {
     /// <summary>
     /// Option that controls whether or not auto-injected enumerables - either globally, or for a
-    /// given type - will perform covariant searches when locating targets to be included in the 
+    /// given type - will perform covariant searches when locating targets to be included in the
     /// enumerable. The <see cref="Default"/> is equivalent to <c>true</c>.
     /// </summary>
     public class EnableEnumerableCovariance : ContainerOption<bool>

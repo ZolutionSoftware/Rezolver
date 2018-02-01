@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,20 +11,20 @@ namespace Rezolver.Options
     /// A <see cref="bool"/> container options that controls whether contravariant generic
     /// parameters will be matched to registrations of bases/interfaces of the associated
     /// type.
-    /// 
+    ///
     /// This option can be applied globally or on a per-service basis. See the remarks section
     /// for more.
-    /// 
+    ///
     /// The <see cref="Default"/> (unset) is equivalent to <c>true</c>, meaning that contravariance
     /// is enabled, for all applicable types.
     /// </summary>
     /// <remarks>To disable contravariance globally, you can set this option to <c>false</c>
     /// using the <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>
     /// extension method.
-    /// 
-    /// You can also disable contravariance for a particular interface or delegate type - either by 
+    ///
+    /// You can also disable contravariance for a particular interface or delegate type - either by
     /// targetting the open generic (e.g. <see cref="Action{T}"/> - which disables it for any type lookup
-    /// for <see cref="Action{T}"/>) or for a specific closed version of that generic 
+    /// for <see cref="Action{T}"/>) or for a specific closed version of that generic
     /// (e.g. <c>Action&lt;Foo, Bar&gt;</c>).</remarks>
     /// <seealso cref="EnableGlobalOptions"/>
     public class EnableContravariance : ContainerOption<bool>

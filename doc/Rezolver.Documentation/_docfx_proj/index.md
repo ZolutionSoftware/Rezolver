@@ -39,7 +39,11 @@ _Linked topics provide high level overviews and examples in our developer guide 
   - 'Intelligent' constructor discovery based on registered services
   - Named argument binding
   - Parameters with default arguments are supported
-  - [Member injection](docs/constructor-injection/member-injection.md) (extensible)
+- [Member injection](docs/member-injection/index.md)
+  - Automatic public property (and/or) field injection
+  - Collection initialisers (via enumerables)
+  - Fluent API for per-member behaviours
+  - Extensible API for completely custom behaviours
 - [Open Generic Constructor Injection](docs/constructor-injection/generics.md) 
   - Specific closed generics take precedence
 - [Factory Delegates](docs/delegates.md)

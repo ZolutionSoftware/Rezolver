@@ -13,6 +13,9 @@
 - name: Constructor Injection
   href: constructor-injection/toc.yml
   homepage: constructor-injection/index.md
+- name: Member Injection
+  href: member-injection/toc.yml
+  homepage: member-injection/index.md
 - name: Enumerables
   href: enumerables/toc.yml
   homepage: enumerables.md

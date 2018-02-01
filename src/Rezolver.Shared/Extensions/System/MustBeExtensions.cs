@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System.Diagnostics;
 
 namespace System
@@ -11,7 +10,7 @@ namespace System
     {
         /// <summary>
         /// Helper method for argument validation - throws an ArgumentNullException if the passed object is null.
-        /// 
+        ///
         /// The <paramref name="paramName"/> parameter is used by the caller to indicate the name of the parameter whose
         /// argument was checked.
         /// </summary>
@@ -20,10 +19,14 @@ namespace System
         /// <param name="paramName">Name of the parameter.</param>
         /// <exception cref="System.ArgumentNullException">If <paramref name="obj"/> is null.</exception>
         [DebuggerStepThrough]
-        internal static T MustNotBeNull<T>(this T obj, string paramName = null) where T : class
+        internal static T MustNotBeNull<T>(this T obj, string paramName = null)
+            where T : class
         {
             if (obj == null)
+            {
                 throw new ArgumentNullException(paramName);
+            }
+
             return obj;
         }
 
@@ -41,7 +44,10 @@ namespace System
         {
             predicate.MustNotBeNull(nameof(predicate));
             if (predicate(obj))
+            {
                 throw new ArgumentException(message, paramName);
+            }
+
             return obj;
         }
 
@@ -49,7 +55,10 @@ namespace System
         {
             predicate.MustNotBeNull(nameof(predicate));
             if (!predicate(obj))
+            {
                 throw new ArgumentException(message, paramName);
+            }
+
             return obj;
         }
     }

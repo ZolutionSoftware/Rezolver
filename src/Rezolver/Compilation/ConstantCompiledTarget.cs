@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,8 +25,8 @@ namespace Rezolver.Compilation
         /// <param name="sourceTarget">The <see cref="ITarget"/> from which this compiled target is created.</param>
         public ConstantCompiledTarget(object obj, ITarget sourceTarget)
         {
-            SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
-            _obj = obj;
+            this.SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
+            this._obj = obj;
         }
 
         /// <summary>
@@ -34,7 +37,7 @@ namespace Rezolver.Compilation
         /// <returns></returns>
         public object GetObject(IResolveContext context)
         {
-            return _obj;
+            return this._obj;
         }
     }
 }

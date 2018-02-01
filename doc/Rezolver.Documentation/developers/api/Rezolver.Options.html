@@ -119,17 +119,17 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a></h4>
-      <section><p>A <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a> option that controls whether an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> 
+      <section><p>A <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a> option that controls whether an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 accepts multiple registered targets for the same underlying type.</p>
 <p>This option can be applied globally or on a per-service basis - but must be set <em>before</em>
 any potentially affected registrations are performed.</p>
 <p>The <a class="xref" href="Rezolver.Options.AllowMultiple.html#Rezolver_Options_AllowMultiple_Default">Default</a> (unset) is equivalent to <code>true</code></p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a></h4>
-      <section><p>A suggested base class to use for custom container options to be read/written through the 
+      <section><p>A suggested base class to use for custom container options to be read/written through the
 <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> extension methods.</p>
 <p>The type of the option value is the argument to the <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> type parameter.</p>
-<p>Options must currently be objects - the ability to use callbacks to get options might be added at a 
+<p>Options must currently be objects - the ability to use callbacks to get options might be added at a
 future date.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableArrayInjection.html">EnableArrayInjection</a></h4>
@@ -138,8 +138,8 @@ built-in IEnumerable injection) is enabled.</p>
 <p>If not defined the <a class="xref" href="Rezolver.Options.EnableArrayInjection.html#Rezolver_Options_EnableArrayInjection_Default">Default</a> is equivalent to <code>true</code>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableCollectionInjection.html">EnableCollectionInjection</a></h4>
-      <section><p>Boolean option which, if configured before the <a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a> configuration is applied, 
-will control whether automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a> (and related interfaces - see the documentation 
+      <section><p>Boolean option which, if configured before the <a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a> configuration is applied,
+will control whether automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a> (and related interfaces - see the documentation
 on that type for more) will be enabled.
 The <a class="xref" href="Rezolver.Options.EnableCollectionInjection.html#Rezolver_Options_EnableCollectionInjection_Default">Default</a> is equivalent to <code>true</code>.</p>
 </section>
@@ -154,7 +154,7 @@ is enabled, for all applicable types.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableEnumerableCovariance.html">EnableEnumerableCovariance</a></h4>
       <section><p>Option that controls whether or not auto-injected enumerables - either globally, or for a
-given type - will perform covariant searches when locating targets to be included in the 
+given type - will perform covariant searches when locating targets to be included in the
 enumerable. The <a class="xref" href="Rezolver.Options.EnableEnumerableCovariance.html#Rezolver_Options_EnableEnumerableCovariance_Default">Default</a> is equivalent to <code>true</code>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a></h4>
@@ -162,18 +162,18 @@ enumerable. The <a class="xref" href="Rezolver.Options.EnableEnumerableCovarianc
 or not.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a></h4>
-      <section><p>A <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a> container option which controls whether per-service options will fall back to 
+      <section><p>A <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a> container option which controls whether per-service options will fall back to
 a global option if not explicitly set.  The <a class="xref" href="Rezolver.Options.EnableGlobalOptions.html#Rezolver_Options_EnableGlobalOptions_Default">Default</a> (unconfigured) is <code>true</code>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableListInjection.html">EnableListInjection</a></h4>
-      <section><p>Boolean option which, if configured before the <a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a> configuration is applied, 
-will control whether automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a> (and related interfaces - see the documentation 
+      <section><p>Boolean option which, if configured before the <a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a> configuration is applied,
+will control whether automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a> (and related interfaces - see the documentation
 on that type for more) will be enabled.
 The <a class="xref" href="Rezolver.Options.EnableListInjection.html#Rezolver_Options_EnableListInjection_Default">Default</a> is equivalent to <code>true</code>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a></h4>
       <section><p>A boolean option for target containers that controls which registrations will be returned
-when <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> is called with a closed generic type, when using the 
+when <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> is called with a closed generic type, when using the
 built in target containers.</p>
 <p>This ultimately affects the objects that are materialised in automatically generated enumerables
 (when the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> is enabled - which it is, by default)

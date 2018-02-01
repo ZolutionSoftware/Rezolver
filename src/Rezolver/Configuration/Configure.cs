@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +9,7 @@ namespace Rezolver.Configuration
 {
     /// <summary>
     /// Provides factory methods for the <see cref="Configure{TOption}"/> generic class for when you need to
-    /// create a configuration object for a specific option outside of the functionality provided by the 
+    /// create a configuration object for a specific option outside of the functionality provided by the
     /// <see cref="CombinedTargetContainerConfigExtensions.ConfigureOption{TOption}(CombinedTargetContainerConfig, TOption)"/> function and
     /// its various overloads.
     /// </summary>

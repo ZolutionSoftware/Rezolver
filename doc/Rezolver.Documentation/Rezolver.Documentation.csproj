@@ -558,6 +558,13 @@
     <Content Include="_docfx_proj\docs\decorators\collections.md" />
     <Content Include="_docfx_proj\docs\variance\covariance.md" />
     <Content Include="toc.yml" />
+    <Content Include="_docfx_proj\docs\constructor-injection\generics-manual-constructor.md" />
+    <Content Include="_docfx_proj\docs\member-injection\toc.yml" />
+    <Content Include="_docfx_proj\docs\member-injection\options.md" />
+    <Content Include="_docfx_proj\docs\member-injection\per-registration.md" />
+    <Content Include="_docfx_proj\docs\member-injection\fluent-api.md" />
+    <Content Include="_docfx_proj\docs\member-injection\custom.md" />
+    <Content Include="_docfx_proj\docs\member-injection\collections.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -674,7 +681,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="_docfx_proj\docs\constructor-injection\toc.yml" />
-    <Content Include="_docfx_proj\docs\constructor-injection\member-injection.md" />
+    <Content Include="_docfx_proj\docs\member-injection\index.md" />
     <Content Include="_docfx_proj\docs\constructor-injection\generics.md" />
     <Content Include="_docfx_proj\docs\variance\toc.yml" />
     <Content Include="_docfx_proj\docs\variance\index.md" />

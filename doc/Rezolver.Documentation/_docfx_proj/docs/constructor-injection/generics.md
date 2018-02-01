@@ -16,14 +16,18 @@ This class knows how to map to a closed generic - i.e.
 `Foo<IMyService>` or `IBar<MyService1, MyService2, MyService3>` - from an open generic and then subsequently bind
 to the constructor of the closed version of that generic when requested from the container.
 
-## 'Best-match' only for now
+## 'Best-match' vs 'specific'
 
-The [best-match algorithm](index.md#best-match-examples) described in the [constructor injection](index.md) is the only option currently available
-to you when using @Rezolver.Targets.GenericConstructorTarget.  Theoretically, it's possible to specify the `ConstructorInfo` for the constructor you
-want bound on the concrete generic type that Rezolver eventually decides to build for you, but we have not implemented that functionality yet.
+Most of the time when you register an open generic type, you will simply rely on Rezolver to find the [best-matched](index.md#best-match-examples)
+constructor when it created an instance of a closed generic from that registration.
 
-You also cannot provide named arguments to help in the best-match search - to do so would be incredibly difficult, since if the type of a constructor 
-argument is dependant upon a type argument, then there's no way you could supply a binding for it up-front to satisfy all possible types that 
+The documentation presented here deals exclusively with this type of open generic registration, but - starting with
+v1.3.2 - it is now possible to instruct Rezolver to [bind to a particular constructor](generics-manual-constructor.md) on the generic type.  Before
+you read that topic, however, you should read through this one first.
+
+However, please note that you cannot provide named arguments to help either with the best-match search, or when specifying which constructor
+to invoke.  To do so would be incredibly difficult, since if the type of a constructor 
+argument is dependant upon a type argument, then there's no reasy way you could supply a binding for it up-front to satisfy all possible types that 
 might be passed to it.
 
 ## Creating/registering <xref:Rezolver.Targets.GenericConstructorTarget>s
@@ -180,12 +184,16 @@ Rezolver doesn't care how far it has to go to work out how a type argument on a 
 
 # Member Injection with Generics
 
-The same techniques that are shown in our [member injection documentation](member-injection.md) also work for generic types - if you supply an
+The same techniques that are shown in our [member injection documentation](../member-injection/index.md) also work for generic types - if you supply an
 @Rezolver.IMemberBindingBehaviour to the @Rezolver.Targets.GenericConstructorTarget when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.
 
 Equally, container-specific <xref:Rezolver.IMemberBindingBehaviour>s that are set through the options API will 
 also be used automatically.
+
+That said, there is no way, at this time, to generate a custom member binding behaviour using the APIs built into the library.  So, you can't
+explicitly target a member declared on the open generic type and then have that member bound automatically when instance of a closed generic
+version of that type is constructed.
 
 Refer to the topic for detailed examples on how to use member binding.
 
@@ -193,8 +201,7 @@ Refer to the topic for detailed examples on how to use member binding.
 
 # Next Steps
 
-Assuming you've read the previous topics on [constructor injection](index.md) and [member injection](member-injection.md),
-then that's it for constructor injection for now.
+- The [member injection documentation](../member-injection/index.md) might be of interest if you've not already read it.
 
 > [!NOTE]
 > A separate topic will be added in the future regarding Generic Specialisation in the container, but that covers all target types, 

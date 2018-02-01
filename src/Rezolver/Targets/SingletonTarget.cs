@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -12,13 +11,13 @@ using Rezolver.Compilation;
 
 namespace Rezolver.Targets
 {
-	/// <summary>
-	/// A target which applies the singleton pattern to any <see cref="ITarget"/>.
-	/// 
-	/// The inner target is available from the <see cref="InnerTarget"/> property.
-	/// </summary>
-	public class SingletonTarget : TargetBase
-	{
+    /// <summary>
+    /// A target which applies the singleton pattern to any <see cref="ITarget"/>.
+    ///
+    /// The inner target is available from the <see cref="InnerTarget"/> property.
+    /// </summary>
+    public class SingletonTarget : TargetBase
+    {
         internal class SingletonContainer
         {
             private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
@@ -33,51 +32,52 @@ namespace Rezolver.Targets
             private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext: ICompileContext
             {
-                return GetCompiled(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
+                return this.GetCompiled(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
             }
 
             private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, TypeAndTargetId key, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
-                return _cachedCompiled.GetOrAdd(key, t => compiledTargetFactory(context));
+                return this._cachedCompiled.GetOrAdd(key, t => compiledTargetFactory(context));
             }
 
             private Lazy<object> GetLazy(IResolveContext context, Guid targetId, Func<IResolveContext, object> lazyFactory)
             {
-                return GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
+                return this.GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
             }
 
             private Lazy<object> GetLazy(IResolveContext context, TypeAndTargetId key, Func<IResolveContext, object> lazyFactory)
             {
-                return _cached.GetOrAdd(key, c => new Lazy<object>(() => lazyFactory(context)));
+                return this._cached.GetOrAdd(key, c => new Lazy<object>(() => lazyFactory(context)));
             }
 
             public object GetObject<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
-                return GetObject(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
+                return this.GetObject(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
             }
 
             public object GetObject<TCompileContext>(TCompileContext context, TypeAndTargetId key, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
-                return _cachedObjects.GetOrAdd(key, k => {
-                    var compiled = GetCompiled(context, key, compiledTargetFactory);
-                    return GetLazy(context.ResolveContext, key, rc => compiled.GetObject(rc)).Value;
+                return this._cachedObjects.GetOrAdd(key, k =>
+                {
+                    var compiled = this.GetCompiled(context, key, compiledTargetFactory);
+                    return this.GetLazy(context.ResolveContext, key, rc => compiled.GetObject(rc)).Value;
                 });
             }
         }
-		
-		/// <summary>
-		/// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
-		/// </summary>
-		/// <value>The type of the declared.</value>
-		public override Type DeclaredType => InnerTarget.DeclaredType;
 
-		/// <summary>
-		/// Always returns <see cref="ScopeBehaviour.Explicit"/>.
-		/// </summary>
-		public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
+        /// <summary>
+        /// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
+        /// </summary>
+        /// <value>The type of the declared.</value>
+        public override Type DeclaredType => this.InnerTarget.DeclaredType;
+
+        /// <summary>
+        /// Always returns <see cref="ScopeBehaviour.Explicit"/>.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
 
         /// <summary>
         /// Always returns <see cref="ScopePreference.Root"/>
@@ -88,27 +88,27 @@ namespace Rezolver.Targets
         /// </summary>
         public ITarget InnerTarget { get; }
 
-		/// <summary>
-		/// Constructs a new instance of the <see cref="SingletonTarget"/> class.
-		/// </summary>
-		/// <param name="innerTarget">The target whose result (when compiled) is to be used as the singleton instance.</param>
-		public SingletonTarget(ITarget innerTarget)
-		{
-			innerTarget.MustNotBeNull("innerTarget");
-			innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
+        /// <summary>
+        /// Constructs a new instance of the <see cref="SingletonTarget"/> class.
+        /// </summary>
+        /// <param name="innerTarget">The target whose result (when compiled) is to be used as the singleton instance.</param>
+        public SingletonTarget(ITarget innerTarget)
+        {
+            innerTarget.MustNotBeNull("innerTarget");
+            innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
 
-			InnerTarget = innerTarget;
-		}
+            this.InnerTarget = innerTarget;
+        }
 
-		/// <summary>
-		/// Called to check whether a target can create an expression that builds an instance of the given <paramref name="type" />.
-		/// 
-		/// The base implementation always passes the call on to the <see cref="InnerTarget"/>
-		/// </summary>
-		/// <param name="type">Required</param>
-		public override bool SupportsType(Type type)
-		{
-			return InnerTarget.SupportsType(type);
-		}
-	}
+        /// <summary>
+        /// Called to check whether a target can create an expression that builds an instance of the given <paramref name="type" />.
+        ///
+        /// The base implementation always passes the call on to the <see cref="InnerTarget"/>
+        /// </summary>
+        /// <param name="type">Required</param>
+        public override bool SupportsType(Type type)
+        {
+            return this.InnerTarget.SupportsType(type);
+        }
+    }
 }

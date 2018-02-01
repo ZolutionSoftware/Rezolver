@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +12,7 @@ namespace Rezolver.Runtime
     /// <summary>
     /// Direct implementation of <see cref="IEnumerable{T}"/> for eagerly loaded enumerables when <see cref="Options.LazyEnumerables"/>
     /// has been disabled either globally, or for a specific enumerable's element type.
-    /// 
+    ///
     /// Rezolver uses this type instead of an array to prevent casting and modifying the contents of the enumerable.
     /// </summary>
     /// <remarks>See the remarks section on <see cref="LazyEnumerable{T}"/> for more about lazy and eager enumerables.</remarks>
@@ -23,7 +26,7 @@ namespace Rezolver.Runtime
         /// <param name="items"></param>
         public EagerEnumerable(T[] items)
         {
-            _items = items;
+            this._items = items;
         }
 
         /// <summary>
@@ -32,9 +35,8 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return (_items ?? (Enumerable.Empty<T>())).GetEnumerator();
+            return (this._items ?? (Enumerable.Empty<T>())).GetEnumerator();
         }
-
 
         /// <summary>
         /// Implementation of <see cref="IEnumerable.GetEnumerator"/>
@@ -42,7 +44,7 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +23,7 @@ namespace Rezolver.Targets
         /// <summary>
         /// Returns <c>true</c> if <see cref="Targets"/> is empty, otherwise <c>false</c>.
         /// </summary>
-        public override bool UseFallback => !Targets.Any();
+        public override bool UseFallback => !this.Targets.Any();
 
         /// <summary>
         /// The targets whose objects will be included in the enumerable
@@ -42,16 +45,20 @@ namespace Rezolver.Targets
         /// it must *not* be an open generic.</param>
         public EnumerableTarget(IEnumerable<ITarget> targets, Type elementType)
         {
-            Targets = targets ?? throw new ArgumentNullException(nameof(targets));
-            ElementType = elementType ?? throw new ArgumentNullException(nameof(elementType));
+            this.Targets = targets ?? throw new ArgumentNullException(nameof(targets));
+            this.ElementType = elementType ?? throw new ArgumentNullException(nameof(elementType));
 
             if (TypeHelpers.IsGenericType(elementType) && TypeHelpers.ContainsGenericParameters(elementType))
-                throw new ArgumentException($"If elementType is a generic type, then it must be fully closed; { elementType } contains generic parameters", nameof(elementType));
+            {
+                throw new ArgumentException($"If elementType is a generic type, then it must be fully closed; {elementType} contains generic parameters", nameof(elementType));
+            }
 
-            DeclaredType = typeof(IEnumerable<>).MakeGenericType(elementType);
+            this.DeclaredType = typeof(IEnumerable<>).MakeGenericType(elementType);
 
             if (!targets.All(t => t != null && t.SupportsType(elementType)))
-                throw new ArgumentException($"All targets must be non-null and support the type { elementType }", nameof(targets));
+            {
+                throw new ArgumentException($"All targets must be non-null and support the type {elementType}", nameof(targets));
+            }
         }
 
         /// <summary>
@@ -60,7 +67,7 @@ namespace Rezolver.Targets
         /// <returns></returns>
         public IEnumerator<ITarget> GetEnumerator()
         {
-            return Targets.GetEnumerator();
+            return this.Targets.GetEnumerator();
         }
 
         /// <summary>
@@ -69,7 +76,7 @@ namespace Rezolver.Targets
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Targets.GetEnumerator();
+            return this.Targets.GetEnumerator();
         }
     }
 }

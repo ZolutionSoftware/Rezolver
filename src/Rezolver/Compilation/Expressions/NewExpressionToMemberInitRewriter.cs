@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,26 +21,28 @@ namespace Rezolver.Compilation.Expressions
     private bool _found;
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="ctorType"></param>
     /// <param name="newBindings"></param>
     public NewExpressionMemberInitRewriter(Type ctorType, IEnumerable<System.Linq.Expressions.MemberBinding> newBindings)
     {
-      _ctorType = ctorType;
-      _newBindings = newBindings;
+      this._ctorType = ctorType;
+      this._newBindings = newBindings;
     }
+
     protected override Expression VisitNew(NewExpression node)
     {
-      if (!_found)
+      if (!this._found)
       {
-        if (node.Type == (_ctorType ?? node.Type))
+        if (node.Type == (this._ctorType ?? node.Type))
         {
-          //we've found the constructor call that we're after
-          _found = true;
-          return Expression.MemberInit(node, _newBindings);
+          // we've found the constructor call that we're after
+          this._found = true;
+          return Expression.MemberInit(node, this._newBindings);
         }
       }
+
       return base.VisitNew(node);
     }
   }

@@ -114,7 +114,8 @@
   
   <h1 id="Rezolver_RootTargetContainerExtensions" data-uid="Rezolver.RootTargetContainerExtensions" class="text-break">Class RootTargetContainerExtensions
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Extensions for the <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -158,15 +159,16 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer%2CSystem.Type%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L63">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L83">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer,System.Type,System.Type)">RegisterProjection(IRootTargetContainer, Type, Type)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void RegisterProjection(this IRootTargetContainer targets, Type fromService, Type toService)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void RegisterProjection(this IRootTargetContainer targets, Type fromType, Type toType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -185,13 +187,16 @@
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-        <td><span class="parametername">fromService</span></td>
-        <td></td>
+        <td><span class="parametername">fromType</span></td>
+        <td><p>The type of the enumerable that provides the source of the projection</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
-        <td><span class="parametername">toService</span></td>
-        <td></td>
+        <td><span class="parametername">toType</span></td>
+        <td><p>The type of the enumerable that will be the output of the projection - this type
+must be able to be created via automatic constructor injection.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -200,11 +205,12 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer%2CSystem.Type%2CSystem.Type%2CSystem.Func%7BRezolver.IRootTargetContainer%2CRezolver.ITarget%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L104">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L183">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer,System.Type,System.Type,System.Func{Rezolver.IRootTargetContainer,Rezolver.ITarget,Rezolver.ITarget})">RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -228,17 +234,22 @@
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">fromType</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that provides the source of the projection</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">toType</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that will be the output of the projection</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">implementationTargetFactory</span></td>
-        <td></td>
+        <td><p>A factory callback that will be called once for each target in the
+input enumerable - the target returned by the factory will then be used to produce the projected element
+in the output enumerable.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -247,11 +258,12 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer%2CSystem.Type%2CSystem.Type%2CSystem.Func%7BRezolver.IRootTargetContainer%2CRezolver.ITarget%2CSystem.Type%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L76">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L114">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer,System.Type,System.Type,System.Func{Rezolver.IRootTargetContainer,Rezolver.ITarget,System.Type})">RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -275,17 +287,21 @@
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">fromType</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that provides the source of the projection.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">toType</span></td>
-        <td></td>
+        <td><p>The type of the enumerable produced by the projection.</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
         <td><span class="parametername">implementationTypeSelector</span></td>
-        <td></td>
+        <td><p>A callback to be invoked for each target in the input enumerable which
+provides the type that is to be created for the corresponding element in the output enumerable.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -294,11 +310,12 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer%2CSystem.Type%2CSystem.Type%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L68">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L96">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Type_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer,System.Type,System.Type,System.Type)">RegisterProjection(IRootTargetContainer, Type, Type, Type)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Non-generic version of <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__3_Rezolver_IRootTargetContainer_">RegisterProjection&lt;TFrom, TTo, TImplementation&gt;(IRootTargetContainer)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -322,17 +339,21 @@
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">fromType</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that provides the source of the projection.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">toType</span></td>
-        <td></td>
+        <td><p>The type of the enumerable produced by the projection.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">implementationType</span></td>
-        <td></td>
+        <td><p>The type to be created for each element in the output enumerable.  Must be able to
+be created via automatic constructor injection.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -341,14 +362,14 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection%60%602(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L23">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L29">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection``2(Rezolver.IRootTargetContainer)">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Registers an enumerable projection that will create an enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code> 
+  <div class="markdown level1 summary"><p>Registers an enumerable projection that will create an enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code>
 from elements of an input enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TFrom</code> using constructor injection
 to create each instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code>.</p>
-<p>The same as calling <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Type_">RegisterProjection(IRootTargetContainer, Type, Type, Type)</a> with 
+<p>The same as calling <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Type_">RegisterProjection(IRootTargetContainer, Type, Type, Type)</a> with
 <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code> used as the argument to both <code>TTo</code> and <code>TImplementation</code> type parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -399,11 +420,14 @@ to create each instance of <code data-dev-comment-type="typeparamref" class="typ
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection%60%602(Rezolver.IRootTargetContainer%2CSystem.Func%7BRezolver.IRootTargetContainer%2CRezolver.ITarget%2CRezolver.ITarget%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L99">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L169">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection``2(Rezolver.IRootTargetContainer,System.Func{Rezolver.IRootTargetContainer,Rezolver.ITarget,Rezolver.ITarget})">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers an enumerable projection that will create an enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code>
+from elements of an input enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TFrom</code> using targets produced by the
+<code data-dev-comment-type="paramref" class="paramref">implementationTargetFactory</code> for each input element.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -427,7 +451,10 @@ to create each instance of <code data-dev-comment-type="typeparamref" class="typ
       <tr>
         <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">implementationTargetFactory</span></td>
-        <td></td>
+        <td><p>A factory callback that will be called once for each target in the
+input enumerable - the target returned by the factory will then be used to produce the projected element
+in the output enumerable.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -442,24 +469,36 @@ to create each instance of <code data-dev-comment-type="typeparamref" class="typ
     <tbody>
       <tr>
         <td><span class="parametername">TFrom</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that provides the source of the projection</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TTo</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that will be the output of the projection</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This overload is useful when output elements require more complex injection strategies other than just
+constructor injection; or perhaps where more advanced constructor injection is required (e.g. perhaps with member
+injection).</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection%60%602(Rezolver.IRootTargetContainer%2CSystem.Func%7BRezolver.IRootTargetContainer%2CRezolver.ITarget%2CSystem.Type%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L58">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L71">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection``2(Rezolver.IRootTargetContainer,System.Func{Rezolver.IRootTargetContainer,Rezolver.ITarget,System.Type})">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers an enumerable projection that create an enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code>
+from elements of an input enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TFrom</code> with the type of each
+projected element is determined by the result of the <code data-dev-comment-type="paramref" class="paramref">implementationTypeSelector</code>
+callback for each input target.  The type returned by this callback must be able to be created via
+automatic constructor injection.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -483,7 +522,9 @@ to create each instance of <code data-dev-comment-type="typeparamref" class="typ
       <tr>
         <td><span class="xref">System.Func</span>&lt;<a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
         <td><span class="parametername">implementationTypeSelector</span></td>
-        <td></td>
+        <td><p>A callback to be invoked for each target in the input enumerable which
+provides the type that is to be created for the corresponding element in the output enumerable.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -498,24 +539,30 @@ to create each instance of <code data-dev-comment-type="typeparamref" class="typ
     <tbody>
       <tr>
         <td><span class="parametername">TFrom</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that provides the source of the projection</p>
+</td>
       </tr>
       <tr>
         <td><span class="parametername">TTo</span></td>
-        <td></td>
+        <td><p>The type of the enumerable that will be the output of the projection</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h5 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This overload is useful for creating specialised generics which share the <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code> type
+as a base or interface.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions_RegisterProjection__3_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions.RegisterProjection%60%603(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L45">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L51">View Source</a>
   </span>
   <a id="Rezolver_RootTargetContainerExtensions_RegisterProjection_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection*"></a>
   <h4 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__3_Rezolver_IRootTargetContainer_" data-uid="Rezolver.RootTargetContainerExtensions.RegisterProjection``3(Rezolver.IRootTargetContainer)">RegisterProjection&lt;TFrom, TTo, TImplementation&gt;(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Registers an enumerable projection that will create an enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code> 
+  <div class="markdown level1 summary"><p>Registers an enumerable projection that will create an enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TTo</code>
 from elements of an input enumerable of type <code data-dev-comment-type="typeparamref" class="typeparamref">TFrom</code> using constructor injection
 to create each instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TImplementation</code>.</p>
 </div>
@@ -570,9 +617,9 @@ to create each instance of <code data-dev-comment-type="typeparamref" class="typ
   <h5 id="Rezolver_RootTargetContainerExtensions_RegisterProjection__3_Rezolver_IRootTargetContainer__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This is like hot-wiring the Linq <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb548891(v=vs.110).aspx">Select&lt;TSource, TResult&gt;(IEnumerable&lt;TSource&gt;, Func&lt;TSource, TResult&gt;)</a>
 directly into the container.</p>
-<p>Typically each instance of the implementation type <code data-dev-comment-type="typeparamref" class="typeparamref">TImplementation</code> will require an 
-instance of type <code data-dev-comment-type="typeparamref" class="typeparamref">TFrom</code> to be passed into its constructor - the framework 
-takes care of passing the individual elements in for each instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TImplementation</code> 
+<p>Typically each instance of the implementation type <code data-dev-comment-type="typeparamref" class="typeparamref">TImplementation</code> will require an
+instance of type <code data-dev-comment-type="typeparamref" class="typeparamref">TFrom</code> to be passed into its constructor - the framework
+takes care of passing the individual elements in for each instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TImplementation</code>
 that it creates.</p>
 </div>
 </article>
@@ -586,7 +633,7 @@ that it creates.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_RootTargetContainerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.RootTargetContainerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IRootTargetContainer.ProjectionExtensions.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -1,9 +1,12 @@
-﻿using Rezolver.Runtime;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rezolver.Runtime;
 
 namespace Rezolver
 {
@@ -13,11 +16,11 @@ namespace Rezolver
     public static partial class RootTargetContainerExtensions
     {
         /// <summary>
-        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/> 
+        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/>
         /// from elements of an input enumerable of type <typeparamref name="TFrom"/> using constructor injection
         /// to create each instance of <typeparamref name="TTo"/>.
-        /// 
-        /// The same as calling <see cref="RegisterProjection(IRootTargetContainer, Type, Type, Type)"/> with 
+        ///
+        /// The same as calling <see cref="RegisterProjection(IRootTargetContainer, Type, Type, Type)"/> with
         /// <typeparamref name="TTo"/> used as the argument to both `TTo` and `TImplementation` type parameters.
         /// </summary>
         /// <typeparam name="TFrom">The type of the enumerable that provides the source of the projection</typeparam>
@@ -29,7 +32,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/> 
+        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/>
         /// from elements of an input enumerable of type <typeparamref name="TFrom"/> using constructor injection
         /// to create each instance of <typeparamref name="TImplementation"/>.
         /// </summary>
@@ -40,10 +43,10 @@ namespace Rezolver
         /// <remarks>
         /// This is like hot-wiring the Linq <see cref="Enumerable.Select{TSource, TResult}(IEnumerable{TSource}, Func{TSource, TResult})"/>
         /// directly into the container.
-        /// 
-        /// Typically each instance of the implementation type <typeparamref name="TImplementation"/> will require an 
-        /// instance of type <typeparamref name="TFrom"/> to be passed into its constructor - the framework 
-        /// takes care of passing the individual elements in for each instance of <typeparamref name="TImplementation"/> 
+        ///
+        /// Typically each instance of the implementation type <typeparamref name="TImplementation"/> will require an
+        /// instance of type <typeparamref name="TFrom"/> to be passed into its constructor - the framework
+        /// takes care of passing the individual elements in for each instance of <typeparamref name="TImplementation"/>
         /// that it creates.</remarks>
         public static void RegisterProjection<TFrom, TTo, TImplementation>(this IRootTargetContainer targets)
             where TImplementation : TTo
@@ -53,7 +56,7 @@ namespace Rezolver
 
         /// <summary>
         /// Registers an enumerable projection that create an enumerable of type <typeparamref name="TTo"/>
-        /// from elements of an input enumerable of type <typeparamref name="TFrom"/> with the type of each 
+        /// from elements of an input enumerable of type <typeparamref name="TFrom"/> with the type of each
         /// projected element is determined by the result of the <paramref name="implementationTypeSelector"/>
         /// callback for each input target.  The type returned by this callback must be able to be created via
         /// automatic constructor injection.
@@ -93,7 +96,9 @@ namespace Rezolver
         public static void RegisterProjection(this IRootTargetContainer targets, Type fromType, Type toType, Type implementationType)
         {
             if (implementationType == null)
+            {
                 throw new ArgumentNullException(nameof(implementationType));
+            }
 
             RegisterProjection(targets, fromType, toType, (r, t) => implementationType);
         }
@@ -109,22 +114,38 @@ namespace Rezolver
         public static void RegisterProjection(this IRootTargetContainer targets, Type fromType, Type toType, Func<IRootTargetContainer, ITarget, Type> implementationTypeSelector)
         {
             if (targets == null)
+            {
                 throw new ArgumentNullException(nameof(targets));
+            }
+
             if (fromType == null)
+            {
                 throw new ArgumentNullException(nameof(fromType));
+            }
+
             if (toType == null)
+            {
                 throw new ArgumentNullException(nameof(toType));
+            }
+
             if (fromType == toType)
-                throw new ArgumentException($"The output enumerable type ({ toType }) cannot be the same as the input enumerable type ({ fromType })", nameof(toType));
+            {
+                throw new ArgumentException($"The output enumerable type ({toType}) cannot be the same as the input enumerable type ({fromType})", nameof(toType));
+            }
 
             if (implementationTypeSelector == null)
+            {
                 implementationTypeSelector = (r, t) => toType;
+            }
 
             RegisterProjectionInternal(targets, fromType, toType, (r, t) =>
             {
                 var implementationType = implementationTypeSelector(r, t);
                 if (implementationType == null)
-                    throw new InvalidOperationException($"Implementation type returned for projection from { fromType } to { toType } for target { t } returned null");
+                {
+                    throw new InvalidOperationException($"Implementation type returned for projection from {fromType} to {toType} for target {t} returned null");
+                }
+
                 // REVIEW: Cache the .ForType result on a per-type basis? It's container-agnostic.
                 var target = r.Fetch(implementationType);
                 return new TargetProjection(target != null && !target.UseFallback ? target : Target.ForType(implementationType), implementationType);
@@ -132,8 +153,8 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/> 
-        /// from elements of an input enumerable of type <typeparamref name="TFrom"/> using targets produced by the 
+        /// Registers an enumerable projection that will create an enumerable of type <typeparamref name="TTo"/>
+        /// from elements of an input enumerable of type <typeparamref name="TFrom"/> using targets produced by the
         /// <paramref name="implementationTargetFactory"/> for each input element.
         /// </summary>
         /// <typeparam name="TFrom">The type of the enumerable that provides the source of the projection</typeparam>
@@ -173,7 +194,10 @@ namespace Rezolver
                 {
                     var target = implementationTargetFactory(r, t);
                     if (target == null)
+                    {
                         throw new InvalidOperationException("Implementation target factory returned a null target");
+                    }
+
                     return new TargetProjection(target, target.DeclaredType);
                 });
         }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -7,7 +10,7 @@ namespace Rezolver.Compilation.Expressions
 {
     /// <summary>
     /// Special compiler for <see cref="ITarget"/> instances which are also <see cref="ICompiledTarget"/> instances.
-    /// 
+    ///
     /// This build is only used when no 'better' builder is available for the target's type.  So, the <see cref="ObjectTargetBuilder"/>
     /// will be used for <see cref="Rezolver.Targets.ObjectTarget"/> instead of this one, even though that class also implements
     /// <see cref="ICompiledTarget"/>.
@@ -33,7 +36,6 @@ namespace Rezolver.Compilation.Expressions
                     Methods.CallResolveContext_New(context.ResolveContextParameterExpression,
                         Expression.Constant(context.TargetType))
                 );
-
         }
     }
 }

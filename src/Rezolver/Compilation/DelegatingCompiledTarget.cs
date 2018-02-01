@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -26,19 +29,19 @@ namespace Rezolver.Compilation
         /// <see cref="DelegatingCompiledTarget"/> is constructed.</param>
         public DelegatingCompiledTarget(Func<IResolveContext, object> callback, ITarget sourceTarget)
         {
-            _callback = callback ?? throw new ArgumentNullException(nameof(callback));
-            SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
+            this._callback = callback ?? throw new ArgumentNullException(nameof(callback));
+            this.SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
         }
 
         /// <summary>
-        /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)" /> - simply 
+        /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)" /> - simply
         /// executes the delegate passed on construction.
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
         public object GetObject(IResolveContext context)
         {
-            return _callback(context);
+            return this._callback(context);
         }
     }
 }

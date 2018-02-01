@@ -1,23 +1,22 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
-using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Extension methods for the <see cref="ITargetContainer"/> interface which simplify the registration of singletons.
-	/// </summary>
-	public static class SingletonTargetContainerExtensions
-	{
+    /// <summary>
+    /// Extension methods for the <see cref="ITargetContainer"/> interface which simplify the registration of singletons.
+    /// </summary>
+    public static class SingletonTargetContainerExtensions
+    {
         /// <summary>
         /// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container.
-        /// 
+        ///
         /// The instance will be built automatically with constructor injection by leveraging either the <see cref="ConstructorTarget"/> or
         /// <see cref="GenericConstructorTarget"/>, depending on whether <typeparamref name="TObject"/> is a generic type or not.
         /// </summary>
@@ -26,14 +25,14 @@ namespace Rezolver
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton<TObject>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
-		{
-			RegisterSingleton(targetContainer, typeof(TObject), memberBinding: memberBinding);
-		}
+        {
+            RegisterSingleton(targetContainer, typeof(TObject), memberBinding: memberBinding);
+        }
 
         /// <summary>
         /// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container
         /// for the service type <typeparamref name="TService"/>.
-        /// 
+        ///
         /// The instance will be built automatically with constructor injection by leveraging either the <see cref="ConstructorTarget"/> or
         /// <see cref="GenericConstructorTarget"/>, depending on whether <typeparamref name="TObject"/> is a generic type or not.
         /// </summary>
@@ -43,14 +42,14 @@ namespace Rezolver
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton<TObject, TService>(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
-		{
-			RegisterSingleton(targetContainer, typeof(TObject), typeof(TService), memberBinding: memberBinding);
-		}
+        {
+            RegisterSingleton(targetContainer, typeof(TObject), typeof(TService), memberBinding: memberBinding);
+        }
 
         /// <summary>
         /// Registers the type <paramref name="objectType"/> as a singleton (<see cref="SingletonTarget"/>) in the target container,
         /// either for the same service type, or for the service type passed to the <paramref name="serviceType"/> parameter (if provided).
-        /// 
+        ///
         /// The instance will be built automatically with constructor injection by leveraging either the <see cref="ConstructorTarget"/> or
         /// <see cref="GenericConstructorTarget"/>, depending on whether <paramref name="objectType"/> is a generic type or not.
         /// </summary>
@@ -60,16 +59,16 @@ namespace Rezolver
         /// <param name="memberBinding">Optional - provides an explicit member injection behaviour to be used when creating the instance,
         /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
-		{
-			targetContainer.MustNotBeNull(nameof(targetContainer));
-			objectType.MustNotBeNull(nameof(targetContainer));
+        {
+            targetContainer.MustNotBeNull(nameof(targetContainer));
+            objectType.MustNotBeNull(nameof(targetContainer));
 
-			RegisterSingletonInternal(targetContainer, objectType, serviceType, memberBinding);
-		}
+            RegisterSingletonInternal(targetContainer, objectType, serviceType, memberBinding);
+        }
 
-		internal static void RegisterSingletonInternal(ITargetContainer builder, Type objectType, Type serviceType, IMemberBindingBehaviour memberBinding)
-		{
-			builder.Register(Target.ForType(objectType, memberBinding).Singleton(), serviceType: serviceType);
-		}
-	}
+        internal static void RegisterSingletonInternal(ITargetContainer builder, Type objectType, Type serviceType, IMemberBindingBehaviour memberBinding)
+        {
+            builder.Register(Target.ForType(objectType, memberBinding).Singleton(), serviceType: serviceType);
+        }
+    }
 }

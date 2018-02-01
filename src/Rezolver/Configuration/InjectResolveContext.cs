@@ -1,20 +1,24 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Rezolver.Configuration
 {
     /// <summary>
-    /// An <see cref="ITargetContainerConfig"/> that enables automatic resolving of the 
+    /// An <see cref="ITargetContainerConfig"/> that enables automatic resolving of the
     /// <see cref="IResolveContext"/> created for a <see cref="IContainer.Resolve(IResolveContext)"/> operation.
     /// </summary>
-    /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/> 
+    /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/>
     /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method</remarks>
     public sealed class InjectResolveContext : ITargetContainerConfig
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget
         {
             public Guid Id { get; } = Guid.NewGuid();
+
             public bool UseFallback => false;
 
             public Type DeclaredType => typeof(IResolveContext);
@@ -39,7 +43,7 @@ namespace Rezolver.Configuration
         private readonly ResolveContextTarget _target = new ResolveContextTarget();
 
         private InjectResolveContext() { }
-        
+
         /// <summary>
         /// The one and only instance of <see cref="InjectResolveContext"/>
         /// </summary>
@@ -47,7 +51,7 @@ namespace Rezolver.Configuration
         /// <summary>
         /// Attaches this behaviour to the target container, adding a registration to the <paramref name="targets"/>
         /// for the type <see cref="IResolveContext"/>.
-        /// 
+        ///
         /// Note - if the <paramref name="targets"/> already has a registration for <see cref="IResolveContext"/>,
         /// then the behaviour DOES NOT overwrite it.
         /// </summary>
@@ -56,7 +60,9 @@ namespace Rezolver.Configuration
         {
             var existing = targets.Fetch(typeof(IResolveContext));
             if (existing == null || existing.UseFallback)
-                targets.Register(_target);
+            {
+                targets.Register(this._target);
+            }
         }
     }
 }

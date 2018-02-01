@@ -120,7 +120,7 @@
   </h3>
       <h4><a class="xref" href="Rezolver.Configuration.Configure.html">Configure</a></h4>
       <section><p>Provides factory methods for the <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a> generic class for when you need to
-create a configuration object for a specific option outside of the functionality provided by the 
+create a configuration object for a specific option outside of the functionality provided by the
 <a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a> function and
 its various overloads.</p>
 </section>
@@ -131,7 +131,7 @@ its various overloads.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.ExpressionCompilation.html">ExpressionCompilation</a></h4>
       <section><p>Implementation of <a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a> which configures expression-based compilation for targets in containers.</p>
-<p>The implementation sets all options and registers all the targets necessary to use the expression tree-based compilation provided by 
+<p>The implementation sets all options and registers all the targets necessary to use the expression tree-based compilation provided by
 the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a></p>
 <p>This is included in the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a>, meaning that all containers
 created without a specific config will automatically be configured to use the <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompiler.html">ExpressionCompiler</a>.</p>
@@ -142,7 +142,7 @@ which enables the automatic injection of arrays by converting automatically inje
 instances via the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb298736(v=vs.110).aspx">ToArray&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</a> method from Linq.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></h4>
-      <section><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as 
+      <section><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as
 <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a>
 and <a class="xref" href="https://msdn.microsoft.com/en-us/library/hh881542(v=vs.110).aspx">IReadOnlyCollection&lt;T&gt;</a> (so long as there are no registrations for these types in the target container when the configuration is applied).</p>
 <p>Out of the box, such collections will be seeded by any objects that have been registered against the element type.</p>
@@ -157,7 +157,7 @@ in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, <em>so long as there aren&apos;t already registrations for those types</em>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectResolveContext.html">InjectResolveContext</a></h4>
-      <section><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that enables automatic resolving of the 
+      <section><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that enables automatic resolving of the
 <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> created for a <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> operation.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a></h4>
@@ -170,10 +170,10 @@ that target container.</p>
 a specific type for configuration (<code data-dev-comment-type="typeparamref" class="typeparamref">T</code>)</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a></h4>
-      <section><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to 
+      <section><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to
 enable automatically injected enumerables (via the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration callback and the
-<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option), then this will extend enumerable support in the 
-<a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> to construct enumerables made up of a combination of all services in the 
+<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option), then this will extend enumerable support in the
+<a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> to construct enumerables made up of a combination of all services in the
 overriden container AND those from the overriding container.</p>
 </section>
 </article>

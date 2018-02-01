@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +17,8 @@ namespace Rezolver
         /// <summary>
         /// Registers a decorator container which will cause all instances of <typeparamref name="TDecorated"/> to be decorated with
         /// the type <typeparamref name="TDecorator"/>.
-        /// 
-        /// Any existing registrations for <typeparamref name="TDecorated"/> will be decorated correctly, and subsequent registrations 
+        ///
+        /// Any existing registrations for <typeparamref name="TDecorated"/> will be decorated correctly, and subsequent registrations
         /// of <typeparamref name="TDecorated"/> will also be decorated as expected.
         /// </summary>
         /// <typeparam name="TDecorator">The type to be used as the decorator implementation</typeparam>
@@ -31,7 +30,7 @@ namespace Rezolver
                 typeof(TDecorated));
 
         /// <summary>
-        /// Registers a decorator container which will cause all instances of the type <typeparamref name="TDecorated"/> produced by the 
+        /// Registers a decorator container which will cause all instances of the type <typeparamref name="TDecorated"/> produced by the
         /// container to be intercepted and replaced by the result of calling the passed <paramref name="decoratorDelegate"/> with the
         /// original instance.
         /// </summary>
@@ -42,10 +41,10 @@ namespace Rezolver
         /// <remarks>
         /// Whilst this overload uses the term 'Decorator' in its name, it is of course entirely possible that the delegate won't actually
         /// create a decorating instance for the input object.
-        /// 
+        ///
         /// As a result, it's better to think of this as decorating Rezolver's own process of getting an object, which may or may not result in
         /// a decorated instance - depending on what the delegate actually does.
-        /// 
+        ///
         /// What this *does* allow, however, is decorating objects which otherwise can't be decorated by constructor injection - e.g. Arrays,
         /// delegate types, primitive objects (e.g. <see cref="int"/>) and so on.
         /// </remarks>
@@ -55,7 +54,7 @@ namespace Rezolver
                 typeof(TDecorated));
 
         /// <summary>
-        /// Registers a decorator container which will cause all instances of the type <typeparamref name="TDecorated"/> produced by the 
+        /// Registers a decorator container which will cause all instances of the type <typeparamref name="TDecorated"/> produced by the
         /// container to be intercepted and replaced by the result of calling the passed <paramref name="decoratorDelegate"/> with the
         /// original instance.
         /// </summary>
@@ -66,10 +65,10 @@ namespace Rezolver
         /// <remarks>
         /// Whilst this overload uses the term 'Decorator' in its name, it is of course entirely possible that the delegate won't actually
         /// create a decorating instance for the input object.
-        /// 
+        ///
         /// As a result, it's better to think of this as decorating Rezolver's own process of getting an object, which may or may not result in
         /// a decorated instance - depending on what the delegate actually does.
-        /// 
+        ///
         /// What this *does* allow, however, is decorating objects which otherwise can't be decorated by constructor injection - e.g. Arrays,
         /// delegate types, primitive objects (e.g. <see cref="int"/>) and so on.
         /// </remarks>
@@ -80,10 +79,10 @@ namespace Rezolver
 
         /// <summary>
         /// Registers a delegate to be executed every time an instance of <paramref name="decoratedType"/> is produced by the container.
-        /// 
+        ///
         /// This is ultimately the same as the <see cref="RegisterDecorator{TDecorated}(IRootTargetContainer, Func{TDecorated, TDecorated})"/> method
         /// except this allows you to pass delegates with more parameters than the one that that overload provides.
-        /// 
+        ///
         /// The delegate's return type must be equal to <paramref name="decoratedType"/>
         /// </summary>
         /// <param name="targetContainer">The container into which the decorator will be registered.</param>
@@ -98,8 +97,8 @@ namespace Rezolver
         /// <summary>
         /// Registers a decorator container which will cause all instances of <paramref name="decoratedType" /> to be decorated with
         /// the type <paramref name="decoratorType" />.
-        /// 
-        /// Any existing registrations for <paramref name="decoratedType" /> will be decorated correctly, and subsequent registrations 
+        ///
+        /// Any existing registrations for <paramref name="decoratedType" /> will be decorated correctly, and subsequent registrations
         /// of <paramref name="decoratedType" /> will also be decorated as expected.
         /// </summary>
         /// <param name="targetContainer">The container into which the decorator will be registered.</param>

@@ -114,7 +114,7 @@
   
   <h1 id="Rezolver_OverridingContainer" data-uid="Rezolver.OverridingContainer" class="text-break">Class OverridingContainer
   </h1>
-  <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which can override the resolve operations of another.  This is useful when you have a 
+  <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which can override the resolve operations of another.  This is useful when you have a
 core application-wide container, with some objects being customised based on some ambient information,
 e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.</p>
 </div>
@@ -230,16 +230,16 @@ e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application fo
   <div class="markdown level0 remarks"><p>When overriding another <a class="xref" href="Rezolver.IContainer.html">IContainer</a>, you are overriding the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects that
 will be returned when <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_GetCompiledTarget_Rezolver_IResolveContext_">GetCompiledTarget(IResolveContext)</a> is called on that container and, therefore,
 the compiled target which is executed when the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method is called.</p>
-<p>This has the side effect of overriding automatically resolved arguments (bound to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>) compiled 
+<p>This has the side effect of overriding automatically resolved arguments (bound to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>) compiled
 in the overridden container by virtue of the fact that the overriding container is a different reference, because the
-<a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> is typically compiled with a check, at resolve-time, that the 
+<a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> is typically compiled with a check, at resolve-time, that the
 <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> is the same container as the one that was active when it was originally compiled.</p>
 <p>In essence, when resolving an instance as a dependency the <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> does something like this:</p>
 <pre><code>resolveContext.Container == compileContext.Container ? (execute compile-time target) : resolveContext.Container.Resolve(type)</code></pre>
 
 <hr>
 <h2 id="behaviour-of-enumerables">Behaviour of enumerables</h2>
-<p>The behaviour of enumerables depends on whether enumerables are enabled via the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option 
+<p>The behaviour of enumerables depends on whether enumerables are enabled via the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option
 (<code>true</code> by default) and whether the <a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a> is applied to the container
 (which it is, also by default, via the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a>).</p>
 <p>If so, then any request for <code>IEnumerable&lt;T&gt;</code> will result in an enumerable which combines the one resolved by the <a class="xref" href="Rezolver.OverridingContainer.html#Rezolver_OverridingContainer_Inner">Inner</a>
@@ -256,7 +256,7 @@ in this container will override that of the <a class="xref" href="Rezolver.Overr
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.%23ctor(Rezolver.IContainer%2CRezolver.IRootTargetContainer%2CRezolver.IContainerConfig)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L68">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L67">View Source</a>
   </span>
   <a id="Rezolver_OverridingContainer__ctor_" data-uid="Rezolver.OverridingContainer.#ctor*"></a>
   <h4 id="Rezolver_OverridingContainer__ctor_Rezolver_IContainer_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_" data-uid="Rezolver.OverridingContainer.#ctor(Rezolver.IContainer,Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)">OverridingContainer(IContainer, IRootTargetContainer, IContainerConfig)</h4>
@@ -297,7 +297,7 @@ their dependencies from this container.</p>
       <tr>
         <td><a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a></td>
         <td><span class="parametername">config</span></td>
-        <td><p>Can be null.  A configuration to apply to this container (and, potentially its 
+        <td><p>Can be null.  A configuration to apply to this container (and, potentially its
 <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a>).  If not provided, then the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a> will be used</p>
 </td>
       </tr>
@@ -310,7 +310,7 @@ their dependencies from this container.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OverridingContainer_Inner.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.Inner%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L53">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L52">View Source</a>
   </span>
   <a id="Rezolver_OverridingContainer_Inner_" data-uid="Rezolver.OverridingContainer.Inner*"></a>
   <h4 id="Rezolver_OverridingContainer_Inner" data-uid="Rezolver.OverridingContainer.Inner">Inner</h4>
@@ -343,7 +343,7 @@ their dependencies from this container.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L83">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L82">View Source</a>
   </span>
   <a id="Rezolver_OverridingContainer_CanResolve_" data-uid="Rezolver.OverridingContainer.CanResolve*"></a>
   <h4 id="Rezolver_OverridingContainer_CanResolve_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.CanResolve(Rezolver.IResolveContext)">CanResolve(IResolveContext)</h4>
@@ -383,7 +383,7 @@ their dependencies from this container.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-        <td><p><code>true</code> if either this container or the inner container can resolve the 
+        <td><p><code>true</code> if either this container or the inner container can resolve the
 <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a>; otherwise <code>false</code></p>
 </td>
       </tr>
@@ -396,7 +396,7 @@ their dependencies from this container.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OverridingContainer_GetFallbackCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer.GetFallbackCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L94">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L93">View Source</a>
   </span>
   <a id="Rezolver_OverridingContainer_GetFallbackCompiledTarget_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledTarget*"></a>
   <h4 id="Rezolver_OverridingContainer_GetFallbackCompiledTarget_Rezolver_IResolveContext_" data-uid="Rezolver.OverridingContainer.GetFallbackCompiledTarget(Rezolver.IResolveContext)">GetFallbackCompiledTarget(IResolveContext)</h4>
@@ -693,7 +693,7 @@ is how dependency chaining from this container to the inner container is achieve
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_OverridingContainer.md&amp;value=---%0Auid%3A%20Rezolver.OverridingContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L48" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/OverridingContainer.cs/#L47" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -1,7 +1,10 @@
-﻿using Rezolver;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Rezolver;
 
 namespace System.Reflection
 {
@@ -27,6 +30,7 @@ namespace System.Reflection
                     method.DeclaringType.GetGenericTypeDefinition().TypeHandle);
 #endif
             }
+
             return null;
         }
 
@@ -54,7 +58,6 @@ namespace System.Reflection
             return null;
         }
 
-
         internal static MethodInfo ToGenericTypeMethod(this MethodInfo method, Type targetGenericType)
         {
             if (TypeHelpers.IsGenericType(targetGenericType) && targetGenericType.GetGenericTypeDefinition() == method.DeclaringType)
@@ -74,6 +77,7 @@ namespace System.Reflection
                     targetGenericType.TypeHandle);
 #endif
             }
+
             return null;
         }
 
@@ -96,6 +100,7 @@ namespace System.Reflection
                     targetGenericType.TypeHandle);
 #endif
             }
+
             return null;
         }
     }

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 
 namespace Rezolver.Events
@@ -30,8 +29,8 @@ namespace Rezolver.Events
         /// <param name="type">The type against which the target container was registered</param>
         public TargetContainerRegisteredEventArgs(ITargetContainer container, Type type)
         {
-            Container = container;
-            Type = type;
+            this.Container = container;
+            this.Type = type;
         }
     }
 }

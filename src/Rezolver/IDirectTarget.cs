@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,8 +15,8 @@ namespace Rezolver
     /// this interface guarantee that an object can be obtained (via <see cref="GetValue"/>)
     /// outside the context of a <see cref="IContainer.Resolve(IResolveContext)"/> operation,
     /// without requiring any compilation or other container operations.
-    /// 
-    /// Rezolver uses targets like this extensively for its configuration and container 
+    ///
+    /// Rezolver uses targets like this extensively for its configuration and container
     /// services functionality - which are required to be accessible directly from an <see cref="ITargetContainer"/>
     /// without an <see cref="IContainer"/> being available.  For example, the <see cref="GenericTargetContainer"/> uses
     /// its own registrations (configured by <see cref="ITargetContainerConfig"/> objects) to control how generic
@@ -21,7 +24,7 @@ namespace Rezolver
     internal interface IDirectTarget : ITarget
     {
         /// <summary>
-        /// Gets the object 
+        /// Gets the object
         /// </summary>
         /// <returns></returns>
         object GetValue();

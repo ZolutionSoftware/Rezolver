@@ -1,19 +1,21 @@
-﻿using Rezolver.Options;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Options;
 
 namespace Rezolver
 {
     /// <summary>
     /// Used as a marker service type for GetOption when a service type is any generic.
-    /// 
+    ///
     /// Allows options to be defined for any generic type instead of specific generics.
     /// </summary>
-    public interface IOptionForAnyGeneric
+    internal interface IOptionForAnyGeneric
     {
-
     }
 
     /// <summary>
@@ -23,37 +25,37 @@ namespace Rezolver
     /// <remarks>Options are different to target container behaviours (<see cref="ITargetContainerConfig"/>) in that options
     /// are actively *read* by the various <see cref="ITargetContainer"/>-related types throughout the Rezolver framework to
     /// control how certain standard functionality operates.
-    /// 
+    ///
     /// The <see cref="ITargetContainerConfig"/>, however, can be used both to *configure* those options and to add extra
-    /// registrations (both <see cref="ITarget"/> and, more commonly, other <see cref="ITargetContainer"/>s via the 
+    /// registrations (both <see cref="ITarget"/> and, more commonly, other <see cref="ITargetContainer"/>s via the
     /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method).
-    /// 
+    ///
     /// The automatic building of <see cref="IEnumerable{T}"/> sequences from all the targets registered for a type, for example,
-    /// is enabled by attaching the <see cref="Configuration.InjectEnumerables"/> to the target container.  Whereas, the 
-    /// ability to actually register more than one target for a particular service in the first place is controlled by the 
+    /// is enabled by attaching the <see cref="Configuration.InjectEnumerables"/> to the target container.  Whereas, the
+    /// ability to actually register more than one target for a particular service in the first place is controlled by the
     /// <see cref="Options.AllowMultiple"/> option.
-    /// 
+    ///
     /// **Types of options**
-    /// 
+    ///
     /// Ultimately an option can be of any type, but most of the built-in options use the <see cref="Options.ContainerOption{TOption}"/>
     /// type to wrap simple types (<see cref="bool"/>, <see cref="string"/>, <see cref="int"/> and so on) as a human-readably
     /// named type that differentiates that option from others of the same underlying value type.  Note that the phrase 'value type'
     /// there doesn't mean that all options must be literal value types (i.e. <see cref="ValueType"/>).
-    /// 
+    ///
     /// Rezolver has several built-in option types - including <see cref="Options.AllowMultiple"/>, <see cref="Options.EnableEnumerableInjection"/>,
     /// <see cref="Options.EnableContravariance"/> plus many more.  These use the <see cref="Options.ContainerOption{TOption}"/> type to enable
     /// reading and writing simple boolean-like option values which switch behaviour on and off.
-    /// 
-    /// In addition, the <see cref="Targets.ConstructorTarget"/> and <see cref="Targets.GenericConstructorTarget"/> classes use the options 
-    /// API to discover <see cref="IMemberBindingBehaviour"/> objects to use when deciding whether to bind properties and/or fields when 
+    ///
+    /// In addition, the <see cref="Targets.ConstructorTarget"/> and <see cref="Targets.GenericConstructorTarget"/> classes use the options
+    /// API to discover <see cref="IMemberBindingBehaviour"/> objects to use when deciding whether to bind properties and/or fields when
     /// creating new objects.
-    /// 
+    ///
     /// So you really can use anything you want as an option.</remarks>
     public static class OptionsTargetContainerExtensions
     {
         /// <summary>
         /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container.
-        /// 
+        ///
         /// The value can later be retrieved through a call to <see cref="GetOption{TOption}(ITargetContainer, TOption)"/>
         /// or one of its overloads.
         /// </summary>
@@ -64,8 +66,16 @@ namespace Rezolver
         public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, TOption option)
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (option == null) throw new ArgumentNullException(nameof(option));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            if (option == null)
+            {
+                throw new ArgumentNullException(nameof(option));
+            }
+
             targets.Register(new OptionContainer<TOption>(option), typeof(IOptionContainer<TOption>));
             return targets;
         }
@@ -73,7 +83,7 @@ namespace Rezolver
         /// <summary>
         /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container, associating
         /// it with the given <paramref name="serviceType"/>.
-        /// 
+        ///
         /// The value can later be retrieved through a call to <see cref="GetOption{TOption, TService}(ITargetContainer, TOption)"/>
         /// or <see cref="GetOption{TOption}(ITargetContainer, Type, TOption)"/>, passing the same type, or a derived type.
         /// </summary>
@@ -87,14 +97,25 @@ namespace Rezolver
         public static ITargetContainer SetOption<TOption>(this ITargetContainer targets, TOption option, Type serviceType)
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (option == null) throw new ArgumentNullException(nameof(option));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
 
-            if (serviceType == null) return SetOption<TOption>(targets, option);
+            if (option == null)
+            {
+                throw new ArgumentNullException(nameof(option));
+            }
+
+            if (serviceType == null)
+            {
+                return SetOption<TOption>(targets, option);
+            }
+
             // this is cheeky - we create an instance of OptionContainer<TOption> to service
             // the type OptionContainer<TService, TOption>.  When we retrieve it in the various GetOption
             // methods, we *expect* only an OptionContainer<TOption> despite the fact that we fetch
-            // a target for the <TService, TOption> pair.  That's part of the reason why all this stuff is 
+            // a target for the <TService, TOption> pair.  That's part of the reason why all this stuff is
             // internal.
             targets.Register(new OptionContainer<TOption>(option),
                 typeof(IOptionContainer<,>).MakeGenericType(serviceType, typeof(TOption)));
@@ -105,7 +126,7 @@ namespace Rezolver
         /// <summary>
         /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container, associating
         /// it with the given <typeparamref name="TService"/>.
-        /// 
+        ///
         /// The value can later be retrieved through a call to <see cref="GetOption{TOption, TService}(ITargetContainer, TOption)"/>
         /// or <see cref="GetOption{TOption}(ITargetContainer, Type, TOption)"/>, passing the same type, or a derived type.
         /// </summary>
@@ -117,8 +138,15 @@ namespace Rezolver
         public static ITargetContainer SetOption<TOption, TService>(this ITargetContainer targets, TOption option)
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (option == null) throw new ArgumentNullException(nameof(option));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            if (option == null)
+            {
+                throw new ArgumentNullException(nameof(option));
+            }
 
             // see long comment in method above
             targets.Register(new OptionContainer<TOption>(option),
@@ -129,7 +157,7 @@ namespace Rezolver
 
         /// <summary>
         /// Sets an option which will apply to any service type which is generic (either closed or open).
-        /// 
+        ///
         /// This is a *very* special case which is reserved only for internal functionality at the moment.
         /// </summary>
         /// <typeparam name="TOption">The type of option to be set.</typeparam>
@@ -139,8 +167,15 @@ namespace Rezolver
         internal static ITargetContainer SetGenericServiceOption<TOption>(this ITargetContainer targets, TOption option)
             where TOption: class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (option == null) throw new ArgumentNullException(nameof(option));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            if (option == null)
+            {
+                throw new ArgumentNullException(nameof(option));
+            }
 
             targets.Register(new OptionContainer<TOption>(option),
                 typeof(IAnyGenericOptionContainer<TOption>));
@@ -159,14 +194,18 @@ namespace Rezolver
         public static TOption GetOption<TOption>(this ITargetContainer targets, TOption @default = default(TOption))
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             var optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
             return optionContainer?.Option ?? @default;
         }
 
         /// <summary>
-        /// Gets an option either specific to the <paramref name="serviceType"/>, or a global option (if <see cref="Options.EnableGlobalOptions"/> is 
-        /// enabled), of the type <typeparamref name="TOption"/> 
+        /// Gets an option either specific to the <paramref name="serviceType"/>, or a global option (if <see cref="Options.EnableGlobalOptions"/> is
+        /// enabled), of the type <typeparamref name="TOption"/>
         /// from the <paramref name="targets"/> target container, returning the <paramref name="default"/> if the option has not been explicitly set.
         /// </summary>
         /// <typeparam name="TOption">The type of option to retrieve</typeparam>
@@ -178,24 +217,31 @@ namespace Rezolver
         /// <remarks>Options are frequently used to control how a Rezolver container interprets registrations.  Take, for example, the
         /// <see cref="Options.AllowMultiple"/> option - which is used to control whether a target container accepts multiple registrations
         /// for a given type.
-        /// 
-        /// When defined globally (i.e. without a service type) it determines whether multiple registrations can be performed for all types.  However, 
+        ///
+        /// When defined globally (i.e. without a service type) it determines whether multiple registrations can be performed for all types.  However,
         /// it can also be defined on a per-service basis - so, for example, if you want to restrict an application only to register one target for a
         /// particular service - e.g. <c>IMyApplication</c> - then you can set the <see cref="AllowMultiple"/> option to <c>false</c> specifically against
         /// that type, and multiple registrations will result in a runtime error.
-        /// 
+        ///
         /// When searching for service-specific options, generics are automatically processed in descending order of specificity - i.e. <c>IFoo&lt;Bar&gt;</c>
         /// is more specific than <c>IFoo&lt;&gt;</c> - so you can set options for a specific closed generic, or its open generic.
-        /// 
+        ///
         /// **Global Fallback**
-        /// 
+        ///
         /// In the absence of a service-specific option, a globally-defined option will instead be used if the <see cref="EnableGlobalOptions"/> option
         /// is set to <c>true</c> for the <paramref name="targets"/> target container.  By default, this is enabled.</remarks>
         public static TOption GetOption<TOption>(this ITargetContainer targets, Type serviceType, TOption @default = default(TOption))
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException(nameof(serviceType));
+            }
 
             bool useGlobalFallback = GetOption(targets, EnableGlobalOptions.Default);
 
@@ -204,11 +250,15 @@ namespace Rezolver
 
             // currently internal-only option container which allows us to set options
             // that take effect only for generic types (closed/open classes, structs or interfaces)
-            if(optionContainer == null && TypeHelpers.IsGenericType(serviceType))
+            if (optionContainer == null && TypeHelpers.IsGenericType(serviceType))
+            {
                 optionContainer = targets.FetchDirect<IAnyGenericOptionContainer<TOption>>();
+            }
 
             if (optionContainer == null && useGlobalFallback)
+            {
                 optionContainer = targets.FetchDirect<IOptionContainer<TOption>>();
+            }
 
             return optionContainer?.Option ?? @default;
         }
@@ -224,7 +274,11 @@ namespace Rezolver
         public static TOption GetOption<TOption, TService>(this ITargetContainer targets, TOption @default = default(TOption))
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             return GetOption(targets, typeof(TService), @default);
         }
 
@@ -239,7 +293,10 @@ namespace Rezolver
         public static IEnumerable<TOption> GetOptions<TOption>(this ITargetContainer targets)
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
 
             return targets.FetchAllDirect<IOptionContainer<TOption>>().Select(o => o.Option);
         }
@@ -257,8 +314,15 @@ namespace Rezolver
         public static IEnumerable<TOption> GetOptions<TOption>(this ITargetContainer targets, Type serviceType)
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (serviceType == null) throw new ArgumentNullException(nameof(serviceType));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            if (serviceType == null)
+            {
+                throw new ArgumentNullException(nameof(serviceType));
+            }
 
             // global fallback in this instance causes all options - service-specific or not - to be included
             // in the enumerable.
@@ -268,7 +332,9 @@ namespace Rezolver
                 .MakeGenericType(serviceType, typeof(TOption))).Cast<IOptionContainer<TOption>>();
 
             if (useGlobalFallback)
+            {
                 optionContainers = optionContainers.Concat(targets.FetchAllDirect<IOptionContainer<TOption>>());
+            }
 
             return optionContainers.Select(o => o.Option);
         }
@@ -285,7 +351,11 @@ namespace Rezolver
         public static IEnumerable<TOption> GetOptions<TOption, TService>(this ITargetContainer targets)
             where TOption : class
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             return GetOptions<TOption>(targets, typeof(TService));
         }
     }

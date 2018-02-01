@@ -184,12 +184,12 @@ registration, to see how &#39;normal&#39; objects interact with scopes.</p>
 <p>For these examples, we&#39;re using this type:</p>
 <pre><code class="lang-csharp" name="DisposableType.cs">public class DisposableType : IDisposable
 {
-	public bool Disposed { get; private set; }
-	public void Dispose()
-	{
-		if (Disposed) throw new ObjectDisposedException(nameof(DisposableType));
-		Disposed = true;
-	}
+    public bool Disposed { get; private set; }
+    public void Dispose()
+    {
+        if (Disposed) throw new ObjectDisposedException(nameof(DisposableType));
+        Disposed = true;
+    }
 }
 </code></pre><p>Note that the type throws an exception if attempts are made to dispose of it multiple times - this is a feature of the tests which drive the examples,
 as we want to prevent unnecessary <code>Dispose()</code> calls as much as possible.</p>

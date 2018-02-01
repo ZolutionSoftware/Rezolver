@@ -127,7 +127,7 @@ container implementations within the Rezolver framework.</p>
   </div>
   <h5 id="Rezolver_ICompiledTarget_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>In the standard implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> (e.g. <a class="xref" href="Rezolver.Container.html">Container</a>),
-a <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> creates instances of this from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which are 
+a <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> creates instances of this from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which are
 registered in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>When the container is then called upon to resolve an instance of a particular type, the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> is first
 obtained, and then the responsibility for creating the object is delegated to its <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a>

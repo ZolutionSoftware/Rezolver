@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -17,8 +20,8 @@ namespace Rezolver.Runtime
 
         public TargetProjection(ITarget target, Type implementationType)
         {
-            Target = target;
-            ImplementationType = implementationType;
+            this.Target = target;
+            this.ImplementationType = implementationType;
         }
     }
 }

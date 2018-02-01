@@ -178,7 +178,8 @@ method to create a <a class="xref" href="Rezolver.MemberBindingBuilder-2.html">M
 property or field will be bound.  Calls to that class will return an <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> which then
 allow you to chain further member customisations via a fluent API.</p>
 <p>You can&apos;t create an instance of this class directly - the framework creates an instance for you, either returning it (in the case
-of <a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_For__1">For&lt;TInstance&gt;()</a>) or passing it as an argument to a callback (in the case of <see cref="!:Target."></see></p>
+of <a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_For__1">For&lt;TInstance&gt;()</a>) or passing it as an argument to a callback (in the case of
+<a class="xref" href="Rezolver.Target.html#Rezolver_Target_ForType__1_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">ForType&lt;T&gt;(Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</a>, for example.</p>
 </div>
   <h3 id="methods">Methods
   </h3>
@@ -187,7 +188,7 @@ of <a class="xref" href="Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBin
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviourBuilder_1_Bind__1_System_Linq_Expressions_Expression_System_Func__0___0___.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviourBuilder%601.Bind%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%600%2C%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingsBuilder`1.cs/#L58">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingsBuilder`1.cs/#L66">View Source</a>
   </span>
   <a id="Rezolver_MemberBindingBehaviourBuilder_1_Bind_" data-uid="Rezolver.MemberBindingBehaviourBuilder`1.Bind*"></a>
   <h4 id="Rezolver_MemberBindingBehaviourBuilder_1_Bind__1_System_Linq_Expressions_Expression_System_Func__0___0___" data-uid="Rezolver.MemberBindingBehaviourBuilder`1.Bind``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">Bind&lt;TMember&gt;(Expression&lt;Func&lt;TInstance, TMember&gt;&gt;)</h4>
@@ -213,7 +214,7 @@ can be used to customise the binding; and/or it can be used to continue marking 
         <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;TInstance, TMember&gt;&gt;</td>
         <td><span class="parametername">memberBindingExpression</span></td>
         <td><p>An expression that represents reading the member to be bound.  The body of the
-expression must be a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.memberexpression(v=vs.110).aspx">MemberExpression</a> with the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a> of the 
+expression must be a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.memberexpression(v=vs.110).aspx">MemberExpression</a> with the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a> of the
 <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb299299(v=vs.110).aspx">Expression</a> equal to <code data-dev-comment-type="typeparamref" class="typeparamref">TInstance</code>.</p>
 </td>
       </tr>
@@ -230,7 +231,7 @@ expression must be a <a class="xref" href="https://msdn.microsoft.com/en-us/libr
     <tbody>
       <tr>
         <td><a class="xref" href="Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder</a>&lt;TInstance, TMember&gt;</td>
-        <td><p>A builder that can be used to customise the binding for the member represented by the expression 
+        <td><p>A builder that can be used to customise the binding for the member represented by the expression
 <code data-dev-comment-type="paramref" class="paramref">memberBindingExpression</code></p>
 </td>
       </tr>
@@ -257,7 +258,7 @@ expression must be a <a class="xref" href="https://msdn.microsoft.com/en-us/libr
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviourBuilder_1_BuildBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviourBuilder%601.BuildBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingsBuilder`1.cs/#L46">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingsBuilder`1.cs/#L54">View Source</a>
   </span>
   <a id="Rezolver_MemberBindingBehaviourBuilder_1_BuildBehaviour_" data-uid="Rezolver.MemberBindingBehaviourBuilder`1.BuildBehaviour*"></a>
   <h4 id="Rezolver_MemberBindingBehaviourBuilder_1_BuildBehaviour" data-uid="Rezolver.MemberBindingBehaviourBuilder`1.BuildBehaviour">BuildBehaviour()</h4>
@@ -303,7 +304,7 @@ returned by the <code>Bind</code> method.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_MemberBindingBehaviourBuilder_1.md&amp;value=---%0Auid%3A%20Rezolver.MemberBindingBehaviourBuilder%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingsBuilder`1.cs/#L25" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/MemberBindingsBuilder`1.cs/#L29" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

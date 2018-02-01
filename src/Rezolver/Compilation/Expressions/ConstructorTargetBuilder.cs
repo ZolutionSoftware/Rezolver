@@ -1,56 +1,57 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
-using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using Rezolver.Targets;
 
 namespace Rezolver.Compilation.Expressions
 {
-	/// <summary>
-	/// An <see cref="IExpressionBuilder"/> specialised for building the target <see cref="ConstructorTarget"/>
-	/// </summary>
-	public class ConstructorTargetBuilder : ExpressionBuilderBase<ConstructorTarget>
-	{
-		/// <summary>
-		/// Override of <see cref="ExpressionBuilderBase{TTarget}.Build(TTarget, IExpressionCompileContext, IExpressionCompiler)"/>
-		/// </summary>
-		/// <param name="target">The target whose expression is to be built.</param>
-		/// <param name="context">The compilation context.</param>
-		/// <param name="compiler">The compiler to be used to build the target</param>
-		protected override Expression Build(ConstructorTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
-		{
-			return Build(target.Bind(context), context, compiler);
-		}
+    /// <summary>
+    /// An <see cref="IExpressionBuilder"/> specialised for building the target <see cref="ConstructorTarget"/>
+    /// </summary>
+    public class ConstructorTargetBuilder : ExpressionBuilderBase<ConstructorTarget>
+    {
+        /// <summary>
+        /// Override of <see cref="ExpressionBuilderBase{TTarget}.Build(TTarget, IExpressionCompileContext, IExpressionCompiler)"/>
+        /// </summary>
+        /// <param name="target">The target whose expression is to be built.</param>
+        /// <param name="context">The compilation context.</param>
+        /// <param name="compiler">The compiler to be used to build the target</param>
+        protected override Expression Build(ConstructorTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
+        {
+            return this.Build(target.Bind(context), context, compiler);
+        }
 
-		/// <summary>
-		/// Builds an expression for the specified <see cref="ConstructorBinding" />.
-		/// Called by <see cref="Build(ConstructorTarget, IExpressionCompileContext, IExpressionCompiler)" />
-		/// </summary>
-		/// <param name="binding">The binding.</param>
-		/// <param name="context">The context.</param>
-		/// <param name="compiler">The compiler to be used to build the target.</param>
-		/// <remarks>The returned expression will either be a NewExpression or a MemberInitExpression</remarks>
-		protected virtual Expression Build(ConstructorBinding binding, IExpressionCompileContext context, IExpressionCompiler compiler)
-		{
-			var newExpr = Expression.New(binding.Constructor, 
-				binding.BoundArguments.Select(
-					a => compiler.Build(a.Target, context.NewContext(a.Parameter.ParameterType))));
+        /// <summary>
+        /// Builds an expression for the specified <see cref="ConstructorBinding" />.
+        /// Called by <see cref="Build(ConstructorTarget, IExpressionCompileContext, IExpressionCompiler)" />
+        /// </summary>
+        /// <param name="binding">The binding.</param>
+        /// <param name="context">The context.</param>
+        /// <param name="compiler">The compiler to be used to build the target.</param>
+        /// <remarks>The returned expression will either be a NewExpression or a MemberInitExpression</remarks>
+        protected virtual Expression Build(ConstructorBinding binding, IExpressionCompileContext context, IExpressionCompiler compiler)
+        {
+            var newExpr = Expression.New(binding.Constructor,
+                binding.BoundArguments.Select(
+                    a => compiler.Build(a.Target, context.NewContext(a.Parameter.ParameterType))));
 
             if (binding.MemberBindings.Length == 0)
+            {
                 return newExpr;
+            }
             else
             {
                 ParameterExpression localVar = null;
                 List<MemberAssignment> memberBindings = new List<MemberAssignment>();
                 List<Expression> adHocBindings = new List<Expression>();
 
-                foreach(var mb in binding.MemberBindings)
+                foreach (var mb in binding.MemberBindings)
                 {
                     // as soon as we have one list binding (which we can actually implement
                     // using the list binding expression) we need to capture the locally newed
@@ -58,8 +59,11 @@ namespace Rezolver.Compilation.Expressions
                     if (mb is ListMemberBinding listBinding)
                     {
                         if (localVar == null)
+                        {
                             localVar = Expression.Parameter(newExpr.Type, "toReturn");
-                        adHocBindings.Add(GenerateListBindingExpression(localVar, listBinding, context, compiler));
+                        }
+
+                        adHocBindings.Add(this.GenerateListBindingExpression(localVar, listBinding, context, compiler));
                     }
                     else
                     {
@@ -70,7 +74,9 @@ namespace Rezolver.Compilation.Expressions
                 Expression toReturn = newExpr;
 
                 if (memberBindings.Count != 0)
+                {
                     toReturn = Expression.MemberInit(newExpr, memberBindings);
+                }
 
                 if (adHocBindings.Count != 0)
                 {
@@ -85,11 +91,11 @@ namespace Rezolver.Compilation.Expressions
 
                 return toReturn;
             }
-		}
+        }
 
         internal static void AddToCollection<T>(Action<T> addDelegate, IEnumerable<T> source)
         {
-            foreach(var i in source)
+            foreach (var i in source)
             {
                 addDelegate(i);
             }

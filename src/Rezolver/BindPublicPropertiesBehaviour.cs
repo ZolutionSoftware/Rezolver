@@ -1,26 +1,28 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Rezolver.Compilation;
-using System.Linq;
 
 namespace Rezolver
 {
     /// <summary>
-    /// An <see cref="IMemberBindingBehaviour"/> which binds all non-indexer publicly writeable instance 
+    /// An <see cref="IMemberBindingBehaviour"/> which binds all non-indexer publicly writeable instance
     /// properties on new instances to services from the container.
     /// </summary>
     public class BindPublicPropertiesBehaviour : BindAllMembersBehaviour
     {
         /// <summary>
         /// Creates a new instance of the <see cref="BindPublicPropertiesBehaviour"/> class
-        /// 
+        ///
         /// Can only be created by Rezolver or through inheritance.
         /// </summary>
         protected internal BindPublicPropertiesBehaviour()
         {
-
         }
 
         /// <summary>

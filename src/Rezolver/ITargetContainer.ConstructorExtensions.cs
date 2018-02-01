@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -24,11 +27,15 @@ namespace Rezolver
         /// <remarks>If the <paramref name="constructor"/> belongs to an open generic type, then a <see cref="Targets.GenericConstructorTarget"/>
         /// will be created and registered.</remarks>
         public static void RegisterConstructor(
-            this ITargetContainer targets, 
-            ConstructorInfo constructor, 
+            this ITargetContainer targets,
+            ConstructorInfo constructor,
             IMemberBindingBehaviour memberBindingBehaviour = null)
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             targets.Register(Target.ForConstructor(constructor ?? throw new ArgumentNullException(nameof(constructor)), memberBindingBehaviour));
         }
 
@@ -44,12 +51,16 @@ namespace Rezolver
         /// <remarks>If the <paramref name="constructor"/> belongs to an open generic type, then a <see cref="Targets.GenericConstructorTarget"/>
         /// will be created and registered.</remarks>
         public static void RegisterConstructor(
-            this ITargetContainer targets, 
-            ConstructorInfo constructor, 
-            Type serviceType, 
+            this ITargetContainer targets,
+            ConstructorInfo constructor,
+            Type serviceType,
             IMemberBindingBehaviour memberBindingBehaviour = null)
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             targets.Register(Target.ForConstructor(constructor ?? throw new ArgumentNullException(nameof(constructor)), memberBindingBehaviour), serviceType);
         }
 
@@ -69,10 +80,17 @@ namespace Rezolver
             Expression<Func<TObject>> newExpr,
             IMemberBindingBehaviour memberBindingBehaviour = null)
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             var ctor = Extract.Constructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
             if (ctor == null)
-                throw new ArgumentException($"The expression ${ newExpr } does not represent a NewExpression", nameof(newExpr));
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression", nameof(newExpr));
+            }
+
             targets.Register(Target.ForConstructor(ctor, memberBindingBehaviour));
         }
 
@@ -89,21 +107,32 @@ namespace Rezolver
         /// callback.</param>
         /// <remarks>Note that you can achieve a similar result by simply registering an expression which
         /// represents a call to a type's constructor.
-        /// 
+        ///
         /// **Generic constructors**
         /// If you wish to register an open generic type by constructor through the use of an expression, then you
-        /// need to use the </remarks>
+        /// need to use the <see cref="RegisterGenericConstructor{TObject}(ITargetContainer, Expression{Func{TObject}}, IMemberBindingBehaviour)"/>
+        /// overload.</remarks>
         public static void RegisterConstructor<TObject>(
             this ITargetContainer targets,
             Expression<Func<TObject>> newExpr,
             Action<IMemberBindingBehaviourBuilder<TObject>> configureMemberBinding)
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
-            if (configureMemberBinding == null) throw new ArgumentNullException(nameof(configureMemberBinding));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            if (configureMemberBinding == null)
+            {
+                throw new ArgumentNullException(nameof(configureMemberBinding));
+            }
 
             var ctor = Extract.Constructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
             if (ctor == null)
-                throw new ArgumentException($"The expression ${ newExpr } does not represent a NewExpression", nameof(newExpr));
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression", nameof(newExpr));
+            }
+
             var behaviour = MemberBindingBehaviour.For<TObject>();
             configureMemberBinding(behaviour);
             targets.Register(Target.ForConstructor(ctor, behaviour.BuildBehaviour()));
@@ -129,10 +158,17 @@ namespace Rezolver
             IMemberBindingBehaviour memberBindingBehaviour = null)
             where TObject : TService
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             var ctor = Extract.Constructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
             if (ctor == null)
-                throw new ArgumentException($"The expression ${ newExpr } does not represent a NewExpression", nameof(newExpr));
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression", nameof(newExpr));
+            }
+
             targets.Register(Target.ForConstructor(ctor, memberBindingBehaviour), typeof(TService));
         }
 
@@ -157,10 +193,17 @@ namespace Rezolver
             Action<IMemberBindingBehaviourBuilder<TObject>> configureMemberBinding)
             where TObject : TService
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             var ctor = Extract.Constructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
             if (ctor == null)
-                throw new ArgumentException($"The expression ${ newExpr } does not represent a NewExpression", nameof(newExpr));
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression", nameof(newExpr));
+            }
+
             var behaviour = MemberBindingBehaviour.For<TObject>();
             configureMemberBinding(behaviour);
             targets.Register(Target.ForConstructor(ctor, behaviour), typeof(TService));
@@ -169,8 +212,8 @@ namespace Rezolver
         /// <summary>
         /// Register a generic type by constructor (represented by the model expression <paramref name="newExpr"/>).
         /// Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
-        /// and registered against the open generic of the type you actually invoke this method for; e.g. if 
-        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt;, then a target bound to the equivalent 
+        /// and registered against the open generic of the type you actually invoke this method for; e.g. if
+        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt;, then a target bound to the equivalent
         /// constructor on the open generic MyGeneric&lt;,&gt; will be what is actually registered.
         /// </summary>
         /// <typeparam name="TObject">Must be a generic type.  It doesn't matter what the type arguments are, however,
@@ -187,12 +230,22 @@ namespace Rezolver
             Expression<Func<TObject>> newExpr,
             IMemberBindingBehaviour memberBindingBehaviour = null)
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             if (!TypeHelpers.IsGenericType(typeof(TObject)))
-                throw new ArgumentException($"{ typeof(TObject) } is not a generic type.");
+            {
+                throw new ArgumentException($"{typeof(TObject)} is not a generic type.");
+            }
+
             var ctor = Extract.GenericConstructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
             if (ctor == null)
-                throw new ArgumentException($"The expression ${ newExpr } does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
+            }
+
             targets.Register(Target.ForConstructor(ctor, memberBindingBehaviour));
         }
 
@@ -200,8 +253,8 @@ namespace Rezolver
         /// Register a generic type by constructor (represented by the model expression <paramref name="newExpr"/>)
         /// as an implementation of another open generic based on <typeparamref name="TService"/>.
         /// Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
-        /// and registered against the open generic of the type you actually invoke this method for; e.g. if 
-        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt; , then a target bound to the equivalent 
+        /// and registered against the open generic of the type you actually invoke this method for; e.g. if
+        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt; , then a target bound to the equivalent
         /// constructor on the open generic MyGeneric&lt;,&gt; will be what is actually registered.
         /// Also, if <typeparamref name="TService"/> is IMyGeneric&lt;Foo, Bar&gt;, then the service type that
         /// the new target is registered against will be IMyGeneric&lt;,&gt;.
@@ -222,15 +275,27 @@ namespace Rezolver
             IMemberBindingBehaviour memberBindingBehaviour = null)
             where TObject : TService
         {
-            if (targets == null) throw new ArgumentNullException(nameof(targets));
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
             if (!TypeHelpers.IsGenericType(typeof(TObject)))
-                throw new ArgumentException($"Object type { typeof(TObject) } is not a generic type.", nameof(TObject));
+            {
+                throw new ArgumentException($"Object type {typeof(TObject)} is not a generic type.", nameof(TObject));
+            }
+
             if (!TypeHelpers.IsGenericType(typeof(TService)))
-                throw new ArgumentException($"Service type { typeof(TService) } is not a generic type", nameof(TService));
+            {
+                throw new ArgumentException($"Service type {typeof(TService)} is not a generic type", nameof(TService));
+            }
 
             var ctor = Extract.GenericConstructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
             if (ctor == null)
-                throw new ArgumentException($"The expression ${ newExpr } does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
+            }
+
             targets.Register(Target.ForConstructor(ctor, memberBindingBehaviour), typeof(TService).GetGenericTypeDefinition());
         }
     }

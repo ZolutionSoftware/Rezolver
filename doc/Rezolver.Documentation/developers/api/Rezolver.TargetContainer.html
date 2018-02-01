@@ -183,10 +183,10 @@ unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer
   </div>
   <h5 id="Rezolver_TargetContainer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>This is the type used by default for the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> of all
-the standard containers in the core framework, e.g. <a class="xref" href="Rezolver.Container.html">Container</a>, 
-<a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a> etc, when you don&apos;t supply an instance of an 
+the standard containers in the core framework, e.g. <a class="xref" href="Rezolver.Container.html">Container</a>,
+<a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a> etc, when you don&apos;t supply an instance of an
 <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> explicitly on construction.</p>
-<p>Although you can derive from this class to extend its functionality; it&apos;s also possible to 
+<p>Although you can derive from this class to extend its functionality; it&apos;s also possible to
 extend it via configuration (see <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>) - which is how, for example,
 the framework enables automatic injection of enumerables (see <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a>) and
 lists (see <a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a>).</p>
@@ -199,13 +199,13 @@ lists (see <a class="xref" href="Rezolver.Configuration.InjectLists.html">Inject
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer__ctor.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L112">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L120">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer__ctor_" data-uid="Rezolver.TargetContainer.#ctor*"></a>
   <h4 id="Rezolver_TargetContainer__ctor" data-uid="Rezolver.TargetContainer.#ctor">TargetContainer()</h4>
   <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> class without attaching any
 <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> to it.  This is desirable for derived types as behaviours typically
-will invoke methods on this target container which are declared virtual and which are, therefore, 
+will invoke methods on this target container which are declared virtual and which are, therefore,
 unsafe to be called during construction.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -218,7 +218,7 @@ unsafe to be called during construction.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer__ctor_Rezolver_ITargetContainerConfig_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.%23ctor(Rezolver.ITargetContainerConfig)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L97">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L103">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer__ctor_" data-uid="Rezolver.TargetContainer.#ctor*"></a>
   <h4 id="Rezolver_TargetContainer__ctor_Rezolver_ITargetContainerConfig_" data-uid="Rezolver.TargetContainer.#ctor(Rezolver.ITargetContainerConfig)">TargetContainer(ITargetContainerConfig)</h4>
@@ -260,7 +260,7 @@ constructor.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_DefaultConfig.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.DefaultConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L72">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L78">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_DefaultConfig_" data-uid="Rezolver.TargetContainer.DefaultConfig*"></a>
   <h4 id="Rezolver_TargetContainer_DefaultConfig" data-uid="Rezolver.TargetContainer.DefaultConfig">DefaultConfig</h4>
@@ -305,7 +305,7 @@ constructor when no configuration is explicitly passed.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_Root.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.Root%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L86">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L92">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_Root_" data-uid="Rezolver.TargetContainer.Root*"></a>
   <h4 id="Rezolver_TargetContainer_Root" data-uid="Rezolver.TargetContainer.Root">Root</h4>
@@ -340,11 +340,11 @@ constructor when no configuration is explicitly passed.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_CreateContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.CreateContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L164">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L171">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_CreateContainer_" data-uid="Rezolver.TargetContainer.CreateContainer*"></a>
   <h4 id="Rezolver_TargetContainer_CreateContainer_System_Type_" data-uid="Rezolver.TargetContainer.CreateContainer(System.Type)">CreateContainer(Type)</h4>
-  <div class="markdown level1 summary"><p>Overrides <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_">CreateContainer(Type)</a> to provide special support 
+  <div class="markdown level1 summary"><p>Overrides <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_">CreateContainer(Type)</a> to provide special support
 for open generic types and to support <a class="xref" href="Rezolver.ITargetContainerFactory.html">ITargetContainerFactory</a> options.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -391,7 +391,7 @@ for open generic types and to support <a class="xref" href="Rezolver.ITargetCont
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_GetTargetContainerType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.GetTargetContainerType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L125">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L133">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_GetTargetContainerType_" data-uid="Rezolver.TargetContainer.GetTargetContainerType*"></a>
   <h4 id="Rezolver_TargetContainer_GetTargetContainerType_System_Type_" data-uid="Rezolver.TargetContainer.GetTargetContainerType(System.Type)">GetTargetContainerType(Type)</h4>
@@ -416,7 +416,7 @@ against a given <code data-dev-comment-type="paramref" class="paramref">serviceT
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
-        <td><p>The service type - usually pulled from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of a 
+        <td><p>The service type - usually pulled from the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of a
 <a class="xref" href="Rezolver.ITarget.html">ITarget</a> that is to be registered, or the service type passed to <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">Fetch(Type)</a>.</p>
 </td>
       </tr>
@@ -445,11 +445,11 @@ against a given <code data-dev-comment-type="paramref" class="paramref">serviceT
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.Register(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L177">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L184">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_Register_" data-uid="Rezolver.TargetContainer.Register*"></a>
   <h4 id="Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_" data-uid="Rezolver.TargetContainer.Register(Rezolver.ITarget,System.Type)">Register(ITarget, Type)</h4>
-  <div class="markdown level1 summary"><p>Overrides the base method to block registration if the <code data-dev-comment-type="paramref" class="paramref">target</code> does not support the 
+  <div class="markdown level1 summary"><p>Overrides the base method to block registration if the <code data-dev-comment-type="paramref" class="paramref">target</code> does not support the
 <code data-dev-comment-type="paramref" class="paramref">serviceType</code> (checked by calling the target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a> method).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -489,12 +489,12 @@ target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_Decla
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.RegisterContainer(System.Type%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L139">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L146">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_RegisterContainer_" data-uid="Rezolver.TargetContainer.RegisterContainer*"></a>
   <h4 id="Rezolver_TargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_" data-uid="Rezolver.TargetContainer.RegisterContainer(System.Type,Rezolver.ITargetContainer)">RegisterContainer(Type, ITargetContainer)</h4>
   <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>,
-overriding the base version to extend special support for open generic types and for 
+overriding the base version to extend special support for open generic types and for
 <a class="xref" href="Rezolver.ITargetContainerTypeResolver.html">ITargetContainerTypeResolver</a> options.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -533,10 +533,11 @@ overriding the base version to extend special support for open generic types and
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_TargetContainerRegistered.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.TargetContainerRegistered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L37">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L43">View Source</a>
   </span>
   <h4 id="Rezolver_TargetContainer_TargetContainerRegistered" data-uid="Rezolver.TargetContainer.TargetContainerRegistered">TargetContainerRegistered</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Implementation of the <a class="xref" href="Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetContainerRegistered">TargetContainerRegistered</a> event</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -562,10 +563,11 @@ overriding the base version to extend special support for open generic types and
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_TargetRegistered.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.TargetRegistered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L36">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L38">View Source</a>
   </span>
   <h4 id="Rezolver_TargetContainer_TargetRegistered" data-uid="Rezolver.TargetContainer.TargetRegistered">TargetRegistered</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Implementation of the <a class="xref" href="Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetRegistered">TargetRegistered</a> event</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -593,7 +595,7 @@ overriding the base version to extend special support for open generic types and
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.Rezolver%23ICovariantTypeIndex%23AddKnownType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L39">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L45">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_AddKnownType_" data-uid="Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#AddKnownType*"></a>
   <h4 id="Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_" data-uid="Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#AddKnownType(System.Type)">ICovariantTypeIndex.AddKnownType(Type)</h4>
@@ -625,7 +627,7 @@ overriding the base version to extend special support for open generic types and
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.Rezolver%23ICovariantTypeIndex%23GetKnownCompatibleTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L49">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L55">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_" data-uid="Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes*"></a>
   <h4 id="Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_" data-uid="Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCompatibleTypes(System.Type)">ICovariantTypeIndex.GetKnownCompatibleTypes(Type)</h4>
@@ -672,7 +674,7 @@ overriding the base version to extend special support for open generic types and
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer.Rezolver%23ICovariantTypeIndex%23GetKnownCovariantTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L44">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L50">View Source</a>
   </span>
   <a id="Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_" data-uid="Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes*"></a>
   <h4 id="Rezolver_TargetContainer_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_" data-uid="Rezolver.TargetContainer.Rezolver#ICovariantTypeIndex#GetKnownCovariantTypes(System.Type)">ICovariantTypeIndex.GetKnownCovariantTypes(Type)</h4>
@@ -931,7 +933,7 @@ overriding the base version to extend special support for open generic types and
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_TargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.TargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L32" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/TargetContainer.cs/#L31" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

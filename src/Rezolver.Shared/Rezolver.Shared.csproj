@@ -8,6 +8,7 @@
     <AssemblyName>Rezolver.Shared</AssemblyName>
     <PackageId>Rezolver.Shared</PackageId>
     <PackageTags>rezolver</PackageTags>
+    <RootNamespace>Rezolver</RootNamespace>
   </PropertyGroup>
   
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">

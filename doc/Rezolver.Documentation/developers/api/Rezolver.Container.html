@@ -230,9 +230,9 @@
   </div>
   <h5 id="Rezolver_Container_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>All of this class&apos; functionality is inherited through <a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a> and its base classes.</p>
-<p>Note that it doesn&apos;t implement lifetime scoping (although you can create a lifetime scope from it by calling its 
+<p>Note that it doesn&apos;t implement lifetime scoping (although you can create a lifetime scope from it by calling its
 <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a> method).</p>
-<p>Also note that the class implements <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by wrapping the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> 
+<p>Also note that the class implements <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> by wrapping the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a>
 property inherited from <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a>.</p>
 <p>The reason for this is simplicity: in many applications, you&apos;ll want to simply create a new container, register
 services into it, and then start using it.</p>
@@ -250,11 +250,11 @@ except it focuses specifically on configuring the container itself, rather than 
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Container__ctor_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Container.%23ctor(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L90">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L91">View Source</a>
   </span>
   <a id="Rezolver_Container__ctor_" data-uid="Rezolver.Container.#ctor*"></a>
   <h4 id="Rezolver_Container__ctor_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Container.#ctor(Rezolver.IRootTargetContainer)">Container(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html">Container</a> class using the given target container (or a new 
+  <div class="markdown level1 summary"><p>Constructs a new instance of the <a class="xref" href="Rezolver.Container.html">Container</a> class using the given target container (or a new
 <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> if not provided).  No <a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a> will be used, leaving the deriving class free to do so.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -291,7 +291,7 @@ apply it (or the <a class="xref" href="Rezolver.Container.html#Rezolver_Containe
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Container__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_.md&amp;value=---%0Auid%3A%20Rezolver.Container.%23ctor(Rezolver.IRootTargetContainer%2CRezolver.IContainerConfig)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L70">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L69">View Source</a>
   </span>
   <a id="Rezolver_Container__ctor_" data-uid="Rezolver.Container.#ctor*"></a>
   <h4 id="Rezolver_Container__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_" data-uid="Rezolver.Container.#ctor(Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)">Container(IRootTargetContainer, IContainerConfig)</h4>
@@ -315,9 +315,9 @@ apply it (or the <a class="xref" href="Rezolver.Container.html#Rezolver_Containe
       <tr>
         <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
-        <td><p>Optional.  The target container whose registrations will be used for dependency lookup when 
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> (and other operations) is called.  If not provided, a new 
-<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> instance is constructed.  This will ultimately be available 
+        <td><p>Optional.  The target container whose registrations will be used for dependency lookup when
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> (and other operations) is called.  If not provided, a new
+<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> instance is constructed.  This will ultimately be available
 to derived types, after construction, through the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> property.</p>
 </td>
       </tr>
@@ -332,9 +332,9 @@ If not provided, then the <a class="xref" href="Rezolver.Container.html#Rezolver
   </table>
   <h5 id="Rezolver_Container__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Note to inheritors - this constructor throws an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a> if used by a derived class,
-because the application of configuration to the container will likely cause virtual methods to be called.  Instead, you 
-should declare your own constructor with the same signature which chains instead to the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_IRootTargetContainer_">Container(IRootTargetContainer)</a> 
-protected constructor; and then you should apply the configuration yourself in that constructor (falling back to 
+because the application of configuration to the container will likely cause virtual methods to be called.  Instead, you
+should declare your own constructor with the same signature which chains instead to the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_IRootTargetContainer_">Container(IRootTargetContainer)</a>
+protected constructor; and then you should apply the configuration yourself in that constructor (falling back to
 <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a> if null).</p>
 </div>
   <h3 id="properties">Properties
@@ -344,7 +344,7 @@ protected constructor; and then you should apply the configuration yourself in t
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Container_DefaultConfig.md&amp;value=---%0Auid%3A%20Rezolver.Container.DefaultConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L48">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L47">View Source</a>
   </span>
   <a id="Rezolver_Container_DefaultConfig_" data-uid="Rezolver.Container.DefaultConfig*"></a>
   <h4 id="Rezolver_Container_DefaultConfig" data-uid="Rezolver.Container.DefaultConfig">DefaultConfig</h4>
@@ -627,7 +627,7 @@ enumerables which are made up of targets registered in both the overriding conta
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Container.md&amp;value=---%0Auid%3A%20Rezolver.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L37" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Container.cs/#L36" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

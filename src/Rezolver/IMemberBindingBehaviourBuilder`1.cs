@@ -1,10 +1,13 @@
-﻿using Rezolver.Targets;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
@@ -13,7 +16,7 @@ namespace Rezolver
     /// </summary>
     /// <typeparam name="TInstance">The type of object for which a member binding behaviour is to be built.</typeparam>
     /// <remarks>This interface is part of a fluent API which drastically simplifies the way in which you can configure custom
-    /// member bindings for objects of different types.  The <see cref="MemberBindingBehaviour.For{TInstance}"/> method is 
+    /// member bindings for objects of different types.  The <see cref="MemberBindingBehaviour.For{TInstance}"/> method is
     /// the easiest way to get an instance of this to work with.</remarks>
     public interface IMemberBindingBehaviourBuilder<TInstance>
     {
@@ -29,7 +32,7 @@ namespace Rezolver
         MemberBindingBuilder<TInstance, TMember> Bind<TMember>(Expression<Func<TInstance, TMember>> memberBindingExpression);
         /// <summary>
         /// Builds an <see cref="IMemberBindingBehaviour"/> which, when applied to the object produced by a <see cref="ConstructorTarget"/>, will
-        /// bind the members of the new instance according to the way it has been configured through calls to the 
+        /// bind the members of the new instance according to the way it has been configured through calls to the
         /// <see cref="Bind{TMember}(Expression{Func{TInstance, TMember}})"/> method.
         /// </summary>
         /// <returns></returns>

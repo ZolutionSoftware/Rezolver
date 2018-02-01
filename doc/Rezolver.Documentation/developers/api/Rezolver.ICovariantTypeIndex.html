@@ -127,25 +127,25 @@ by which Rezolver can perform this reverse lookup.</p>
   </div>
   <h5 id="Rezolver_ICovariantTypeIndex_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>In an IOC container, contravariance is signficantly easier to support since the only knowledge
-required is the type you want to retrieve - e.g. <code>Action&amp;lt;Derived&gt;</code>.  To build a list of all
-the generic versions of <code>Action&amp;lt;&gt;</code> which will be assignment-compatible to that type simply
+required is the type you want to retrieve - e.g. Action&lt;Derived&gt;.  To build a list of all
+the generic versions of Action&lt;&gt; which will be assignment-compatible to that type simply
 requires walking &apos;up&apos; the type hierarchy of <code>Derived</code>.</p>
 <p>Covariance, on the other hand, is the opposite problem.  The caller requests a concrete generic
-type - e.g. <code>Func&amp;lt;Base&gt; - where one or more of the arguments is passed to a covariant type 
-parameter.  In this case, there is a theoretically infinite set of types which might be assignment 
-compatible to</code>Base<code>, so how do you determine which versions of</code>Func&lt;&gt;` to search for if there
+type - e.g. Func&lt;Base&gt; - where one or more of the arguments is passed to a covariant type
+parameter.  In this case, there is a theoretically infinite set of types which might be assignment
+compatible to <code>Base</code>, so how do you determine which versions of Func&lt;&gt; to search for if there
 is no registration for the exact type?</p>
 <p>One way would be iterate all the registrations and filter out only those which are compatible, however
-this would take up quite a lot of time.  Rezolver, instead, uses this index, into which you add concrete 
+this would take up quite a lot of time.  Rezolver, instead, uses this index, into which you add concrete
 types that you <em>know</em> have got at least one registered <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.  Later, when a generic type is
-sought, you can call that type up from this index, and it&apos;ll return a list of all the known types that have 
+sought, you can call that type up from this index, and it&apos;ll return a list of all the known types that have
 been added which are assignment compatible to that type by virtue of covariance.</p>
 <p>This index provides two lookups based on types that are registered: pure covariant-compatible types (e.g.
-<code>IEnumerable&amp;lt;Derived&gt;</code> can be assigned to a reference of type <code>IEnumerable&amp;lt;Base&gt;</code>) and 
-assignment-compatible types (e.g <code>IEnumerable&amp;lt;Base&gt;</code> can be assigned to a reference of type <code>IEnumerable</code>.</p>
+IEnumerable&lt;Derived&gt; can be assigned to a reference of type IEnumerable&lt;Base&gt;) and
+assignment-compatible types (e.g IEnumerable&lt;Base&gt; can be assigned to a reference of type <code>IEnumerable</code>.</p>
 <p>When searching for a generic type that matches one in-hand - the covariant compatibility lookup is the one you
 need.  If you are conducting a search for a generic type which has a covariant type parameter (e.g. such as
-<code>IEnumerable&amp;lt;&gt;</code> then you want the full assignment-compatibility lookup which does covariance as well as
+IEnumerable&lt;&gt; then you want the full assignment-compatibility lookup which does covariance as well as
 base/interface compatibility.</p>
 </div>
   <h3 id="methods">Methods
@@ -155,7 +155,7 @@ base/interface compatibility.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L48">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L51">View Source</a>
   </span>
   <a id="Rezolver_ICovariantTypeIndex_AddKnownType_" data-uid="Rezolver.ICovariantTypeIndex.AddKnownType*"></a>
   <h4 id="Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_" data-uid="Rezolver.ICovariantTypeIndex.AddKnownType(System.Type)">AddKnownType(Type)</h4>
@@ -192,15 +192,15 @@ when called with one of these compatible types.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L75">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L78">View Source</a>
   </span>
   <a id="Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes*"></a>
   <h4 id="Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCompatibleTypes(System.Type)">GetKnownCompatibleTypes(Type)</h4>
   <div class="markdown level1 summary"><p>This method returns the same types as <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_">GetKnownCovariantTypes(Type)</a> but also adds any other types which are
-assignment compatible with the <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.  This includes derived types or types which implement the 
+assignment compatible with the <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.  This includes derived types or types which implement the
 interface, or other generics which are covariantly compatible via implemented interfaces.</p>
 <p>This method is suited for use when you are searching for targets for a covariant type parameter - such as looking for
-targets which can be included in an <code>IEnumerable&amp;lt;T&gt;</code> (which is exactly what Rezolver does for enumerables).</p>
+targets which can be included in an IEnumerable&lt;T&gt; (which is exactly what Rezolver does for enumerables).</p>
 <p>In this case, the order is most to least recent covariants, followed by most to least recent
 derived types.</p>
 </div>
@@ -250,14 +250,14 @@ either directly or by inheritance.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L59">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L62">View Source</a>
   </span>
   <a id="Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes*"></a>
   <h4 id="Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_" data-uid="Rezolver.ICovariantTypeIndex.GetKnownCovariantTypes(System.Type)">GetKnownCovariantTypes(Type)</h4>
-  <div class="markdown level1 summary"><p>This method returns all types, in order of most to least recently added - that have been added via the 
-<a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">AddKnownType(Type)</a> method and which are of the same generic type but which have one or 
+  <div class="markdown level1 summary"><p>This method returns all types, in order of most to least recently added - that have been added via the
+<a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">AddKnownType(Type)</a> method and which are of the same generic type but which have one or
 more type arguments that are reference compatible to those in the passed <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.
-So, if you pass <code>Func&amp;lt;Base&gt;</code> then you might get back <code>Func&amp;lt;Derived&gt;</code>
+So, if you pass Func&lt;Base&gt; then you might get back Func&lt;Derived&gt;
 if it has been added.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -311,7 +311,7 @@ via a call to <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_I
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ICovariantTypeIndex.md&amp;value=---%0Auid%3A%20Rezolver.ICovariantTypeIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L38" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ICovariantTypeIndex.cs/#L41" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

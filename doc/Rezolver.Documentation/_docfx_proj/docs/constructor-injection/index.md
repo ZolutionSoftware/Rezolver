@@ -300,4 +300,4 @@ As you can see - using explicitly bound parameters is a little verbose, given th
 # Next steps
 
 - See how [constructor injection works with generic types](generics.md)
-- Learn how to [enable member injection](member-injection.md) (injecting services into properties and/or fields)
+- Learn how to [enable member injection](../member-injection/index.md) (injecting services into properties and/or fields)

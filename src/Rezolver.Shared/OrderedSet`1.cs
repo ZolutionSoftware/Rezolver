@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -24,20 +27,23 @@ namespace Rezolver
 
             public ReverseEnumerator(OrderedSet<T> set)
             {
-                _set = set;
-                _version = set._version;
-                _node = set._linkedList.Last;
-                _current = default(T);
-                _index = 0;
+                this._set = set;
+                this._version = set._version;
+                this._node = set._linkedList.Last;
+                this._current = default(T);
+                this._index = 0;
             }
 
             public T Current
             {
                 get
                 {
-                    if (_index == 0 || _index == _set.Count + 1)
+                    if (this._index == 0 || this._index == this._set.Count + 1)
+                    {
                         throw new InvalidOperationException("Enumeration can't happen");
-                    return _current;
+                    }
+
+                    return this._current;
                 }
             }
 
@@ -45,58 +51,68 @@ namespace Rezolver
             {
                 get
                 {
-                    return Current;
+                    return this.Current;
                 }
             }
 
             public void Dispose()
             {
-
             }
 
             public bool MoveNext()
             {
-                if (_version != _set._version)
-                    throw new InvalidOperationException("OrderedSet has been modified");
-                if(_node == null)
+                if (this._version != this._set._version)
                 {
-                    _index = _set.Count + 1;
+                    throw new InvalidOperationException("OrderedSet has been modified");
+                }
+
+                if (this._node == null)
+                {
+                    this._index = this._set.Count + 1;
                     return false;
                 }
-                _index++;
-                _current = _node.Value;
-                _node = _node.Previous;
-                if(_node == _set._linkedList.Last)
-                    _node = null;
+
+                this._index++;
+                this._current = this._node.Value;
+                this._node = this._node.Previous;
+                if (this._node == this._set._linkedList.Last)
+                {
+                    this._node = null;
+                }
+
                 return true;
             }
 
             public void Reset()
             {
-                if (_version != _set._version)
+                if (this._version != this._set._version)
+                {
                     throw new InvalidOperationException("OrderedSet has been modified");
-                _current = default(T);
-                _node = _set._linkedList.Last;
-                _index = 0;
+                }
+
+                this._current = default(T);
+                this._node = this._set._linkedList.Last;
+                this._index = 0;
             }
         }
 
         private struct ReverseEnumerable : IEnumerable<T>
         {
             private OrderedSet<T> _set;
+
             public ReverseEnumerable(OrderedSet<T> set)
             {
-                _set = set;
+                this._set = set;
             }
 
             public IEnumerator<T> GetEnumerator()
             {
-                return new ReverseEnumerator(_set);
+                return new ReverseEnumerator(this._set);
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return GetEnumerator();
+                return this.GetEnumerator();
             }
         }
         #endregion
@@ -112,8 +128,8 @@ namespace Rezolver
 
         public OrderedSet(IEqualityComparer<T> comparer)
         {
-            _dictionary = new Dictionary<T, LinkedListNode<T>>(comparer);
-            _linkedList = new LinkedList<T>();
+            this._dictionary = new Dictionary<T, LinkedListNode<T>>(comparer);
+            this._linkedList = new LinkedList<T>();
         }
 
         public IEnumerable<T> Reverse()
@@ -123,63 +139,71 @@ namespace Rezolver
 
         public int Count
         {
-            get { return _dictionary.Count; }
+            get { return this._dictionary.Count; }
         }
 
         public virtual bool IsReadOnly
         {
-            get { return _dictionary.IsReadOnly; }
+            get { return this._dictionary.IsReadOnly; }
         }
 
         void ICollection<T>.Add(T item)
         {
-            Add(item);
+            this.Add(item);
         }
 
         public bool Add(T item)
         {
-            if (_dictionary.ContainsKey(item)) return false;
-            LinkedListNode<T> node = _linkedList.AddLast(item);
-            _dictionary.Add(item, node);
-            ++_version;
+            if (this._dictionary.ContainsKey(item))
+            {
+                return false;
+            }
+
+            LinkedListNode<T> node = this._linkedList.AddLast(item);
+            this._dictionary.Add(item, node);
+            ++this._version;
             return true;
         }
 
         public void Clear()
         {
-            _linkedList.Clear();
-            _dictionary.Clear();
-            ++_version;
+            this._linkedList.Clear();
+            this._dictionary.Clear();
+            ++this._version;
         }
 
         public bool Remove(T item)
         {
-            bool found = _dictionary.TryGetValue(item, out var node);
-            if (!found) return false;
-            _dictionary.Remove(item);
-            _linkedList.Remove(node);
-            ++_version;
+            bool found = this._dictionary.TryGetValue(item, out var node);
+            if (!found)
+            {
+                return false;
+            }
+
+            this._dictionary.Remove(item);
+            this._linkedList.Remove(node);
+            ++this._version;
             return true;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _linkedList.GetEnumerator();
+            return this._linkedList.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
         public bool Contains(T item)
         {
-            return _dictionary.ContainsKey(item);
+            return this._dictionary.ContainsKey(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            _linkedList.CopyTo(array, arrayIndex);
+            this._linkedList.CopyTo(array, arrayIndex);
         }
     }
 }

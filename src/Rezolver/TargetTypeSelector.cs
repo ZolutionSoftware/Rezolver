@@ -1,24 +1,27 @@
-﻿using Rezolver.Runtime;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Rezolver.Runtime;
 
 namespace Rezolver
 {
     /// <summary>
     /// Given a type, this produces an enumerable of all types to be sought from an <see cref="ITargetContainer"/>
     /// whose targets might produce a compatible instance.
-    /// 
+    ///
     /// In particular, this class is responsible for handling generic type matching, including variance.
     /// </summary>
     /// <remarks>It's *highly unlikely* that you will ever need to use this type directly in an application.
-    /// 
+    ///
     /// It's public because it could be useful to developers of components which extend Rezolver.
-    /// 
-    /// Internally, the <see cref="GenericTargetContainer"/> uses this exclusively to perform searches for 
+    ///
+    /// Internally, the <see cref="GenericTargetContainer"/> uses this exclusively to perform searches for
     /// compatible target types if a requested type is generic.</remarks>
     public partial class TargetTypeSelector : IEnumerable<Type>
     {
@@ -44,22 +47,22 @@ namespace Rezolver
         /// <param name="rootTargets">The root target container</param>
         public TargetTypeSelector(Type type, IRootTargetContainer rootTargets = null)
         {
-            Type = type;
-            RootTargets = rootTargets;
+            this.Type = type;
+            this.RootTargets = rootTargets;
         }
 
         private IEnumerable<Type> Run(TargetTypeSelectorParams search)
         {
-            //for IFoo<IEnumerable<IBar<in T>>>, this should return something like
-            //IFoo<IEnumerable<IBar<T>>>, 
-            //IFoo<IEnumerable<IBar<T[Base0..n]>>>,    //foreach base and interface of T if contravariant
-            //IFoo<IEnumerable<IBar<>>,
-            //IFoo<IEnumerable<>
-            //IFoo<>
+            // for IFoo<IEnumerable<IBar<in T>>>, this should return something like
+            // IFoo<IEnumerable<IBar<T>>>,
+            // IFoo<IEnumerable<IBar<T[Base0..n]>>>,    //foreach base and interface of T if contravariant
+            // IFoo<IEnumerable<IBar<>>,
+            // IFoo<IEnumerable<>
+            // IFoo<>
 
-            //using an iterator method is not the best for performance, but fetching type
-            //registrations from a container builder is an operation that, so long as a caching
-            //resolver is used, shouldn't be repeated often
+            // using an iterator method is not the best for performance, but fetching type
+            // registrations from a container builder is an operation that, so long as a caching
+            // resolver is used, shouldn't be repeated often
 
             List<Type> toReturn = new List<Type>(20)
             {
@@ -77,14 +80,14 @@ namespace Rezolver
                 // at least one target match.
                 if (search.TypeParameter == null &&
                     !TypeHelpers.IsValueType(search.Type) &&
-                    RootTargets != null)
+                    this.RootTargets != null)
                 {
-                    toReturn.AddRange(RootTargets.GetKnownCovariantTypes(search.Type));
+                    toReturn.AddRange(this.RootTargets.GetKnownCovariantTypes(search.Type));
                 }
 
-                //for every generic type, there is at least two versions - the closed and the open
-                //when you consider, also, that a generic parameter might also be a generic, with multiple
-                //versions - you can see that things can get icky.  
+                // for every generic type, there is at least two versions - the closed and the open
+                // when you consider, also, that a generic parameter might also be a generic, with multiple
+                // versions - you can see that things can get icky.
                 var argSearches = TypeHelpers.GetGenericArguments(search.Type).Zip(
                 TypeHelpers.GetGenericArguments(search.Type.GetGenericTypeDefinition()),
                 (arg, param) => new TargetTypeSelectorParams(
@@ -93,7 +96,7 @@ namespace Rezolver
                     search)
                 );
 
-                var typeParamSearchLists = argSearches.Select(t => Run(t).ToArray()).ToArray();
+                var typeParamSearchLists = argSearches.Select(t => this.Run(t).ToArray()).ToArray();
                 var genericType = search.Type.GetGenericTypeDefinition();
 
                 // Note: the first result will be equal to search.Type, hence Skip(1)
@@ -101,11 +104,11 @@ namespace Rezolver
                 {
                     var compatibleType = genericType.MakeGenericType(combination.ToArray());
                     toReturn.Add(compatibleType);
-                    if(search.TypeParameter == null &&
+                    if (search.TypeParameter == null &&
                         !TypeHelpers.IsValueType(search.Type) &&
-                        RootTargets != null)
+                        this.RootTargets != null)
                     {
-                        toReturn.AddRange(RootTargets.GetKnownCovariantTypes(compatibleType));
+                        toReturn.AddRange(this.RootTargets.GetKnownCovariantTypes(compatibleType));
                     }
                 }
 
@@ -158,30 +161,33 @@ namespace Rezolver
                             if (addArrayBases)
                             {
                                 allArrayTypes.AddRange(search.Type.GetBaseArrayTypes());
-
                             }
                             else if (addElemTypeInterfaces)
                             {
                                 allArrayTypes.AddRange(search.Type.GetInterfaceArrayTypes());
                             }
+
                             // loop through the bases, constructing array types for each and adding them
                             // note we skip the first because it'll be the search type.
                             toReturn.AddRange(allArrayTypes.Skip(1)
-                                .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases)))
+                                .SelectMany(tt => this.Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases)))
                                 .Where(tt => !explicitlyAddedBases.Contains(tt)));
                         }
 
-                        //if it's a class then iterate the bases
+                        // if it's a class then iterate the bases
                         if (!TypeHelpers.IsInterface(search.Type)
                             && !TypeHelpers.IsValueType(search.Type)
                             && search.Type != typeof(object))
                         {
                             if (!explicitlyAddedBases.Contains(typeof(object)))
+                            {
                                 explicitlyAddedBases.Add(typeof(object));
+                            }
+
                             // note - disable interfaces when recursing into the base
                             // note also - ignore 'object'
                             toReturn.AddRange(
-                                Run(new TargetTypeSelectorParams(TypeHelpers.BaseType(search.Type), search.TypeParameter, search.Parent, Contravariance.Bases))
+                                this.Run(new TargetTypeSelectorParams(TypeHelpers.BaseType(search.Type), search.TypeParameter, search.Parent, Contravariance.Bases))
                                 .Where(tt => !explicitlyAddedBases.Contains(tt)));
                         }
                     }
@@ -193,24 +199,26 @@ namespace Rezolver
                         {
                             if (isArray)
                             {
-                                //have to include all the interfaces of all the array types that are compatible per array covariance
+                                // have to include all the interfaces of all the array types that are compatible per array covariance
                                 toReturn.AddRange(allArrayTypes
                                     .SelectMany(t => TypeHelpers.GetInterfaces(t)
-                                    .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
+                                    .SelectMany(tt => this.Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
                                     .OrderBy(t => t, DescendingTypeOrder.Instance)
                                     .Where(tt => !explicitlyAddedBases.Contains(tt)));
                             }
                             else
                             {
                                 toReturn.AddRange(TypeHelpers.GetInterfaces(search.Type)
-                                    .SelectMany(t => Run(new TargetTypeSelectorParams(t, search.TypeParameter, search.Parent, Contravariance.Bases)))
+                                    .SelectMany(t => this.Run(new TargetTypeSelectorParams(t, search.TypeParameter, search.Parent, Contravariance.Bases)))
                                     .Where(tt => !explicitlyAddedBases.Contains(tt)));
                             }
                         }
                     }
+
                     toReturn.AddRange(explicitlyAddedBases);
                 }
             }
+
             return toReturn;
         }
 
@@ -220,13 +228,12 @@ namespace Rezolver
         /// <returns></returns>
         public IEnumerator<Type> GetEnumerator()
         {
-            return Run(new TargetTypeSelectorParams(Type, this)).Distinct().GetEnumerator();
+            return this.Run(new TargetTypeSelectorParams(this.Type, this)).Distinct().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
-
     }
 }

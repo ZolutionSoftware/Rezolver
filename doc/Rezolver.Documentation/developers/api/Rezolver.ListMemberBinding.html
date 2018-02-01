@@ -114,8 +114,8 @@
   
   <h1 id="Rezolver_ListMemberBinding" data-uid="Rezolver.ListMemberBinding" class="text-break">Class ListMemberBinding
   </h1>
-  <div class="markdown level0 summary"><p>Represents a binding (i.e. like that produced by <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>) to a property
-via dynamic collection initialiser.</p>
+  <div class="markdown level0 summary"><p>Represents a binding (i.e. like that produced by <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>) to a collection-like
+property via dynamic collection initialiser.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -173,11 +173,12 @@ via dynamic collection initialiser.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ListMemberBinding__ctor_System_Reflection_MemberInfo_Rezolver_ITarget_System_Type_System_Reflection_MethodInfo_.md&amp;value=---%0Auid%3A%20Rezolver.ListMemberBinding.%23ctor(System.Reflection.MemberInfo%2CRezolver.ITarget%2CSystem.Type%2CSystem.Reflection.MethodInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L20">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L44">View Source</a>
   </span>
   <a id="Rezolver_ListMemberBinding__ctor_" data-uid="Rezolver.ListMemberBinding.#ctor*"></a>
   <h4 id="Rezolver_ListMemberBinding__ctor_System_Reflection_MemberInfo_Rezolver_ITarget_System_Type_System_Reflection_MethodInfo_" data-uid="Rezolver.ListMemberBinding.#ctor(System.Reflection.MemberInfo,Rezolver.ITarget,System.Type,System.Reflection.MethodInfo)">ListMemberBinding(MemberInfo, ITarget, Type, MethodInfo)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.ListMemberBinding.html">ListMemberBinding</a> binding object.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -196,22 +197,30 @@ via dynamic collection initialiser.</p>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.memberinfo(v=vs.110).aspx">MemberInfo</a></td>
         <td><span class="parametername">member</span></td>
-        <td></td>
+        <td><p>Required. The member to be bound with a collection initialiser.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
         <td><span class="parametername">target</span></td>
-        <td></td>
+        <td><p>Required. The target whose elements (it must be an enumerable with element type equal
+to <code data-dev-comment-type="paramref" class="paramref">elementType</code>) will be added to the <code data-dev-comment-type="paramref" class="paramref">member</code> when an instance
+is bound.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">elementType</span></td>
-        <td></td>
+        <td><p>Required. The type of objects to be added to the collection exposed through the
+<code data-dev-comment-type="paramref" class="paramref">member</code></p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
         <td><span class="parametername">addMethod</span></td>
-        <td></td>
+        <td><p>Required. The method to call on the <code data-dev-comment-type="paramref" class="paramref">member</code> that will be used
+to add elements to the collection when initialisation occurs.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -222,11 +231,14 @@ via dynamic collection initialiser.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ListMemberBinding_AddMethod.md&amp;value=---%0Auid%3A%20Rezolver.ListMemberBinding.AddMethod%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L18">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L31">View Source</a>
   </span>
   <a id="Rezolver_ListMemberBinding_AddMethod_" data-uid="Rezolver.ListMemberBinding.AddMethod*"></a>
   <h4 id="Rezolver_ListMemberBinding_AddMethod" data-uid="Rezolver.ListMemberBinding.AddMethod">AddMethod</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The method to be called on the object exposed by the <a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Member">Member</a> which will add
+elements to the collection.  Expected to be a void instance method accepting one parameter of the type
+<a class="xref" href="Rezolver.ListMemberBinding.html#Rezolver_ListMemberBinding_ElementType">ElementType</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -252,11 +264,13 @@ via dynamic collection initialiser.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ListMemberBinding_ElementType.md&amp;value=---%0Auid%3A%20Rezolver.ListMemberBinding.ElementType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L17">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L24">View Source</a>
   </span>
   <a id="Rezolver_ListMemberBinding_ElementType_" data-uid="Rezolver.ListMemberBinding.ElementType*"></a>
   <h4 id="Rezolver_ListMemberBinding_ElementType" data-uid="Rezolver.ListMemberBinding.ElementType">ElementType</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The element type of the enumerable (from the <a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Target">Target</a> whose contents will
+be added to the collection represented by the <a class="xref" href="Rezolver.MemberBinding.html#Rezolver_MemberBinding_Member">Member</a>.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -288,7 +302,7 @@ via dynamic collection initialiser.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ListMemberBinding.md&amp;value=---%0Auid%3A%20Rezolver.ListMemberBinding%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ListMemberBinding.cs/#L18" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

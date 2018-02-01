@@ -1,7 +1,6 @@
 // Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,7 +8,7 @@ using System.Linq.Expressions;
 namespace Rezolver.Compilation
 {
     /// <summary>
-    /// An object that produces <see cref="ICompiledTarget"/>s from <see cref="ITarget"/>s given a 
+    /// An object that produces <see cref="ICompiledTarget"/>s from <see cref="ITarget"/>s given a
     /// particular <see cref="ICompileContext"/> - for which it also acts as a factory.
     /// </summary>
     public interface ITargetCompiler
@@ -25,13 +24,13 @@ namespace Rezolver.Compilation
         ICompiledTarget CompileTarget(ITarget target, ICompileContext context);
 
         /// <summary>
-		/// Creates a compilation context for the given <paramref name="resolveContext"/> - which is used to determine
-		/// the <see cref="IResolveContext.RequestedType"/> that the eventual <see cref="ICompiledTarget"/> should return.
-		/// </summary>
-		/// <param name="resolveContext">The resolve context - used to get the <see cref="IResolveContext.RequestedType"/>
-		/// and the <see cref="IResolveContext.Container"/>, and will be set on the <see cref="ICompileContext.ResolveContext"/>
+        /// Creates a compilation context for the given <paramref name="resolveContext"/> - which is used to determine
+        /// the <see cref="IResolveContext.RequestedType"/> that the eventual <see cref="ICompiledTarget"/> should return.
+        /// </summary>
+        /// <param name="resolveContext">The resolve context - used to get the <see cref="IResolveContext.RequestedType"/>
+        /// and the <see cref="IResolveContext.Container"/>, and will be set on the <see cref="ICompileContext.ResolveContext"/>
         /// property of the returned context.</param>
-		/// <param name="targets">The target container that should be used to lookup other non-compiled targets.</param>
-		ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets);
+        /// <param name="targets">The target container that should be used to lookup other non-compiled targets.</param>
+        ICompileContext CreateContext(IResolveContext resolveContext, ITargetContainer targets);
     }
 }

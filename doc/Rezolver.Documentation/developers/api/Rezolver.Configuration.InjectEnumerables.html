@@ -167,15 +167,15 @@ in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
   <div class="markdown level0 remarks"><p>This behaviour is added to the default configuration for all <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>-derived
 objects via the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>.</p>
 <p>To disable it, you can either remove it from that configuration object (which then disables it for all)
-or you can add an option configuration to it (via 
-<a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a> 
+or you can add an option configuration to it (via
+<a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a>
 or similar) for the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option, setting it to <code>false</code>.</p>
-<p>If this behaviour is not attached to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, or is disabled via the 
+<p>If this behaviour is not attached to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, or is disabled via the
 <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option, then only explicitly
-registered enumerables will be able to be resolved by any <a class="xref" href="Rezolver.IContainer.html">IContainer</a> built from that 
+registered enumerables will be able to be resolved by any <a class="xref" href="Rezolver.IContainer.html">IContainer</a> built from that
 target container.</p>
 <h4 id="lazy-vs-eager-evaluation">Lazy vs Eager evaluation</h4>
-<p>The enumerables created by Rezolver can be lazy or eager.  Lazy enumerables create instances as you 
+<p>The enumerables created by Rezolver can be lazy or eager.  Lazy enumerables create instances as you
 enumerate them, and will create a unique set of instances <em>each time</em> they are enumerated (assuming
 no Singleton or Scoped lifetimes are in play).  Eager enumerables create all their instances up-front,
 and remain constant for the life of that enumerable.</p>
@@ -192,7 +192,7 @@ it at its default of <code>true</code> for all other enumerable types.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Configuration/InjectEnumerables.cs/#L46">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Configuration/InjectEnumerables.cs/#L49">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectEnumerables_Instance_" data-uid="Rezolver.Configuration.InjectEnumerables.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectEnumerables_Instance" data-uid="Rezolver.Configuration.InjectEnumerables.Instance">Instance</h4>
@@ -225,7 +225,7 @@ it at its default of <code>true</code> for all other enumerable types.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Configuration/InjectEnumerables.cs/#L64">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Configuration/InjectEnumerables.cs/#L66">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectEnumerables_Configure_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
@@ -290,7 +290,7 @@ the enumerable resolving behaviour is simply to make sure this configuration obj
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Configuration/InjectEnumerables.cs/#L41" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Configuration/InjectEnumerables.cs/#L44" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

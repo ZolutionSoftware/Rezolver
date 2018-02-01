@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,103 +8,105 @@ using System.Text;
 
 namespace System.Collections.Generic
 {
-	internal static class ReadOnlyEnumerableExtensions
-	{
-		/// <summary>
-		/// readonly wrapper for generic IEnumerables
-		/// </summary>
-		/// <typeparam name="T"></typeparam>
-		private class ReadOnlyCollection<T> : IList<T>
-		{
-			private T[] _range;
-			public ReadOnlyCollection(IEnumerable<T> range)
-			{
-				_range = range.ToArray();
-			}
-			public T this[int index]
-			{
-				get
-				{
-					return _range[index];
-				}
+    internal static class ReadOnlyEnumerableExtensions
+    {
+        /// <summary>
+        /// readonly wrapper for generic IEnumerables
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        private class ReadOnlyCollection<T> : IList<T>
+        {
+            private T[] _range;
 
-				set
-				{
-					throw new NotSupportedException();
-				}
-			}
+            public ReadOnlyCollection(IEnumerable<T> range)
+            {
+                this._range = range.ToArray();
+            }
 
-			public int Count
-			{
-				get
-				{
-					return _range.Length;
-				}
-			}
+            public T this[int index]
+            {
+                get
+                {
+                    return this._range[index];
+                }
 
-			public bool IsReadOnly
-			{
-				get
-				{
-					return true;
-				}
-			}
+                set
+                {
+                    throw new NotSupportedException();
+                }
+            }
 
-			public void Add(T item)
-			{
-				throw new NotSupportedException();
-			}
+            public int Count
+            {
+                get
+                {
+                    return this._range.Length;
+                }
+            }
 
-			public void Clear()
-			{
-				throw new NotSupportedException();
-			}
+            public bool IsReadOnly
+            {
+                get
+                {
+                    return true;
+                }
+            }
 
-			public bool Contains(T item)
-			{
-				return _range.Contains(item);
-			}
+            public void Add(T item)
+            {
+                throw new NotSupportedException();
+            }
 
-			public void CopyTo(T[] array, int arrayIndex)
-			{
-				_range.CopyTo(array, arrayIndex);
-			}
+            public void Clear()
+            {
+                throw new NotSupportedException();
+            }
 
-			public IEnumerator<T> GetEnumerator()
-			{
-				return _range.Cast<T>().GetEnumerator();
-			}
+            public bool Contains(T item)
+            {
+                return this._range.Contains(item);
+            }
 
-			public int IndexOf(T item)
-			{
-				return Array.IndexOf(_range, item, 0, _range.Length);
-			}
+            public void CopyTo(T[] array, int arrayIndex)
+            {
+                this._range.CopyTo(array, arrayIndex);
+            }
 
-			public void Insert(int index, T item)
-			{
-				throw new NotSupportedException();
-			}
+            public IEnumerator<T> GetEnumerator()
+            {
+                return this._range.Cast<T>().GetEnumerator();
+            }
 
-			public bool Remove(T item)
-			{
-				throw new NotSupportedException();
-			}
+            public int IndexOf(T item)
+            {
+                return Array.IndexOf(this._range, item, 0, this._range.Length);
+            }
 
-			public void RemoveAt(int index)
-			{
-				throw new NotSupportedException();
-			}
+            public void Insert(int index, T item)
+            {
+                throw new NotSupportedException();
+            }
 
-			IEnumerator IEnumerable.GetEnumerator()
-			{
-				return GetEnumerator();
-			}
-		}
+            public bool Remove(T item)
+            {
+                throw new NotSupportedException();
+            }
 
-		public static IList<T> AsReadOnly<T>(this IEnumerable<T> range)
-		{
-			range.MustNotBeNull(nameof(range));
-			return new ReadOnlyCollection<T>(range);
-		}
-	}
+            public void RemoveAt(int index)
+            {
+                throw new NotSupportedException();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return this.GetEnumerator();
+            }
+        }
+
+        public static IList<T> AsReadOnly<T>(this IEnumerable<T> range)
+        {
+            range.MustNotBeNull(nameof(range));
+            return new ReadOnlyCollection<T>(range);
+        }
+    }
 }

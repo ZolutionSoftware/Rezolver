@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,20 +25,20 @@ namespace Rezolver.Targets
     internal class PrecompiledListTarget<TElement> : ListTarget, ICompiledTarget
     {
 
-
         private readonly IEnumerable<ICompiledTarget> _compiledTargets;
+
         public ITarget SourceTarget => this;
 
         public PrecompiledListTarget(IEnumerable<ITarget> targets, bool asArray = false)
                 : base(typeof(TElement), targets, asArray)
         {
-            _compiledTargets = targets.Cast<ICompiledTarget>();
+            this._compiledTargets = targets.Cast<ICompiledTarget>();
         }
 
         public object GetObject(IResolveContext context)
         {
-            var elements = _compiledTargets.Select(i => (TElement)i.GetObject(context.New(newRequestedType: typeof(TElement))));
-            return AsArray ? (object)elements.ToArray() : new List<TElement>(elements);
+            var elements = this._compiledTargets.Select(i => (TElement)i.GetObject(context.New(newRequestedType: typeof(TElement))));
+            return this.AsArray ? (object)elements.ToArray() : new List<TElement>(elements);
         }
     }
 
@@ -46,7 +49,7 @@ namespace Rezolver.Targets
 
         internal static ITarget ForTargets(Type elementType, IEnumerable<ITarget> targets, bool asArray)
         {
-            //get or build (and add) a dynamic binding to the generic CompiledTargetListTarget constructor
+            // get or build (and add) a dynamic binding to the generic CompiledTargetListTarget constructor
             return _precompiledListTargetFactories.GetOrAdd(elementType, t =>
             {
                 return new Lazy<CompiledListFactory>(() =>

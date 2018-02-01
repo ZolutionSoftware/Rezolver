@@ -115,7 +115,7 @@
   <h1 id="Rezolver_Targets_ChangeTypeTarget" data-uid="Rezolver.Targets.ChangeTypeTarget" class="text-break">Class ChangeTypeTarget
   </h1>
   <div class="markdown level0 summary"><p>This target is specifically used for explicitly casting the result of one target to another type.
-Its use is rare, since the framework already caters for downcasting the result of targets to 
+Its use is rare, since the framework already caters for downcasting the result of targets to
 base types.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -175,9 +175,9 @@ base types.</p>
   <div class="markdown level0 remarks"><p>A valid use of this target is when you have a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> registered against one
 type, and you want the same singleton (backed by the same instance) to server another type.</p>
 <p>In this case, instead of registering the same singleton target multiple times, you can register it once
-for its primary type, then register one of these for the other type, with a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> 
+for its primary type, then register one of these for the other type, with a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>
 as its inner target.</p>
-<p>When creating this target, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html#Rezolver_Targets_ChangeTypeTarget_InnerTarget">InnerTarget</a> must 
+<p>When creating this target, the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html#Rezolver_Targets_ChangeTypeTarget_InnerTarget">InnerTarget</a> must
 be able to cast up or down to the <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html#Rezolver_Targets_ChangeTypeTarget_DeclaredType">DeclaredType</a> of this target.</p>
 </div>
   <h3 id="constructors">Constructors
@@ -187,7 +187,7 @@ be able to cast up or down to the <a class="xref" href="Rezolver.Targets.ChangeT
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ChangeTypeTarget__ctor_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ChangeTypeTarget.%23ctor(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L54">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L53">View Source</a>
   </span>
   <a id="Rezolver_Targets_ChangeTypeTarget__ctor_" data-uid="Rezolver.Targets.ChangeTypeTarget.#ctor*"></a>
   <h4 id="Rezolver_Targets_ChangeTypeTarget__ctor_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Targets.ChangeTypeTarget.#ctor(Rezolver.ITarget,System.Type)">ChangeTypeTarget(ITarget, Type)</h4>
@@ -229,7 +229,7 @@ be able to cast up or down to the <a class="xref" href="Rezolver.Targets.ChangeT
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ChangeTypeTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ChangeTypeTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L42">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L41">View Source</a>
   </span>
   <a id="Rezolver_Targets_ChangeTypeTarget_DeclaredType_" data-uid="Rezolver.Targets.ChangeTypeTarget.DeclaredType*"></a>
   <h4 id="Rezolver_Targets_ChangeTypeTarget_DeclaredType" data-uid="Rezolver.Targets.ChangeTypeTarget.DeclaredType">DeclaredType</h4>
@@ -262,7 +262,7 @@ be able to cast up or down to the <a class="xref" href="Rezolver.Targets.ChangeT
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ChangeTypeTarget_InnerTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ChangeTypeTarget.InnerTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L47">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L46">View Source</a>
   </span>
   <a id="Rezolver_Targets_ChangeTypeTarget_InnerTarget_" data-uid="Rezolver.Targets.ChangeTypeTarget.InnerTarget*"></a>
   <h4 id="Rezolver_Targets_ChangeTypeTarget_InnerTarget" data-uid="Rezolver.Targets.ChangeTypeTarget.InnerTarget">InnerTarget</h4>
@@ -293,7 +293,7 @@ be able to cast up or down to the <a class="xref" href="Rezolver.Targets.ChangeT
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ChangeTypeTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ChangeTypeTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L31">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L30">View Source</a>
   </span>
   <a id="Rezolver_Targets_ChangeTypeTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.ChangeTypeTarget.ScopeBehaviour*"></a>
   <h4 id="Rezolver_Targets_ChangeTypeTarget_ScopeBehaviour" data-uid="Rezolver.Targets.ChangeTypeTarget.ScopeBehaviour">ScopeBehaviour</h4>
@@ -353,7 +353,7 @@ be able to cast up or down to the <a class="xref" href="Rezolver.Targets.ChangeT
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Targets_ChangeTypeTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ChangeTypeTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L25" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ChangeTypeTarget.cs/#L24" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

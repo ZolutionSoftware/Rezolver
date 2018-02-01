@@ -120,7 +120,7 @@
   </h3>
       <h4><a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></h4>
       <section><p>This target is specifically used for explicitly casting the result of one target to another type.
-Its use is rare, since the framework already caters for downcasting the result of targets to 
+Its use is rare, since the framework already caters for downcasting the result of targets to
 base types.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a></h4>
@@ -130,9 +130,9 @@ binding to the new instance&apos;s writeable properties.</p>
 available services and/or any named arguments which might been provided up front.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a></h4>
-      <section><p>Represents the action of implementing a common <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedType">DecoratedType</a> by decorating one instance 
+      <section><p>Represents the action of implementing a common <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedType">DecoratedType</a> by decorating one instance
 (produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>).</p>
-<p>NOTE - You shouldn&apos;t register or otherwise create instances of this target unless you absolutely 
+<p>NOTE - You shouldn&apos;t register or otherwise create instances of this target unless you absolutely
 know what you&apos;re doing.  Rather, decorators should be registered using the extension method
 <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
 or its non-generic alternative because the target needs a <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>
@@ -159,7 +159,7 @@ as doing default(type) in C#.</p>
 would handle the closed type MyType&lt;int, string&gt;.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a></h4>
-      <section><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose 
+      <section><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose
 individual items are built by ITarget instances.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></h4>
@@ -171,10 +171,13 @@ default value is to be used when binding to it.</p>
 <p>It is highly unlikely you&apos;ll ever create one of these directly.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ProjectionTarget.html">ProjectionTarget</a></h4>
-      <section></section>
+      <section><p>Target that represents the projection of an individual object of type <a class="xref" href="Rezolver.Targets.ProjectionTarget.html#Rezolver_Targets_ProjectionTarget_InputType">InputType</a>
+into an object of type <a class="xref" href="Rezolver.Targets.ProjectionTarget.html#Rezolver_Targets_ProjectionTarget_OutputType">OutputType</a>.</p>
+<p>Created automatically by the <a class="xref" href="Rezolver.ProjectionTargetContainer.html">ProjectionTargetContainer</a>.</p>
+</section>
       <h4><a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a></h4>
-      <section><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically 
-(at &apos;resolve time&apos;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when 
+      <section><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically
+(at &apos;resolve time&apos;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is called.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &apos;I want an
 <code>IService</code> instance - go get it&apos;.</p>

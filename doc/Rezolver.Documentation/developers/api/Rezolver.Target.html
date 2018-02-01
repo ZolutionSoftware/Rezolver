@@ -114,7 +114,7 @@
   
   <h1 id="Rezolver_Target" data-uid="Rezolver.Target" class="text-break">Class Target
   </h1>
-  <div class="markdown level0 summary"><p>Provides static factory methods (including extension methods) for creating numerous types of targets 
+  <div class="markdown level0 summary"><p>Provides static factory methods (including extension methods) for creating numerous types of targets
 from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> namespace.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -154,7 +154,7 @@ from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> names
     <pre><code class="lang-csharp hljs">public static class Target</code></pre>
   </div>
   <h5 id="Rezolver_Target_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Although most of these methods create targets of a known type (e.g. <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Scoped(ITarget)</a> 
+  <div class="markdown level0 remarks"><p>Although most of these methods create targets of a known type (e.g. <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Scoped(ITarget)</a>
 returns a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>), the methods all return <a class="xref" href="Rezolver.ITarget.html">ITarget</a> to allow for
 changes in implementation in the future.</p>
 </div>
@@ -165,12 +165,12 @@ changes in implementation in the future.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_As_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.As(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L69">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L78">View Source</a>
   </span>
   <a id="Rezolver_Target_As_" data-uid="Rezolver.Target.As*"></a>
   <h4 id="Rezolver_Target_As_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Target.As(Rezolver.ITarget,System.Type)">As(ITarget, Type)</h4>
-  <div class="markdown level1 summary"><p>Extension method which creates a new <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> that wraps the 
-<code data-dev-comment-type="paramref" class="paramref">target</code>, changing its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to the 
+  <div class="markdown level1 summary"><p>Extension method which creates a new <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> that wraps the
+<code data-dev-comment-type="paramref" class="paramref">target</code>, changing its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to the
 <code data-dev-comment-type="paramref" class="paramref">targetType</code> passed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -222,12 +222,12 @@ changes in implementation in the future.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_As__1_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.As%60%601(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L86">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L99">View Source</a>
   </span>
   <a id="Rezolver_Target_As_" data-uid="Rezolver.Target.As*"></a>
   <h4 id="Rezolver_Target_As__1_Rezolver_ITarget_" data-uid="Rezolver.Target.As``1(Rezolver.ITarget)">As&lt;T&gt;(ITarget)</h4>
-  <div class="markdown level1 summary"><p>Extension method which creates a new <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> that wraps the 
-<code data-dev-comment-type="paramref" class="paramref">target</code>, changing its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to 
+  <div class="markdown level1 summary"><p>Extension method which creates a new <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> that wraps the
+<code data-dev-comment-type="paramref" class="paramref">target</code>, changing its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to
 <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -288,11 +288,11 @@ changes in implementation in the future.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L391">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L422">View Source</a>
   </span>
   <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
   <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, IMemberBindingBehaviour)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
 constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -345,11 +345,11 @@ if different from the behaviour configured via options on any target container i
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CRezolver.ParameterBinding%5B%5D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L408">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L439">View Source</a>
   </span>
   <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
   <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.ParameterBinding[],Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
 constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -376,7 +376,7 @@ constructor belongs to a generic type definition (&apos;open generic type&apos;)
       <tr>
         <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
         <td><span class="parametername">parameterBindings</span></td>
-        <td><p>Can be null/empty.  An array of <a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a> 
+        <td><p>Can be null/empty.  An array of <a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>
 objects containing targets to be bound to somme or all of the constructor parameters.  <strong>Must not be supplied if <code data-dev-comment-type="paramref" class="paramref">constructor</code>
 is a constructor belonging to an open generic type,</strong></p>
 </td>
@@ -410,11 +410,11 @@ if different from the behaviour configured via options on any target container i
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L436">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L472">View Source</a>
   </span>
   <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
   <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
 constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -475,11 +475,11 @@ if different from the behaviour configured via options on any target container i
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CSystem.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L467">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L507">View Source</a>
   </span>
   <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
   <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,System.Object,Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, Object, IMemberBindingBehaviour)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
 constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -506,8 +506,8 @@ constructor belongs to a generic type definition (&apos;open generic type&apos;)
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
         <td><span class="parametername">namedArgs</span></td>
-        <td><p>Optional.  An object whose publicly readable members which are of the 
-type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the constructor 
+        <td><p>Optional.  An object whose publicly readable members which are of the
+type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the constructor
 by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.  <strong>Must not be supplied if <code data-dev-comment-type="paramref" class="paramref">constructor</code>
 is a constructor belonging to an open generic type,</strong></p>
 </td>
@@ -541,7 +541,7 @@ if different from the behaviour configured via options on any target container i
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate_System_Delegate_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate(System.Delegate%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L161">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L180">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate_System_Delegate_System_Type_" data-uid="Rezolver.Target.ForDelegate(System.Delegate,System.Type)">ForDelegate(Delegate, Type)</h4>
@@ -572,7 +572,7 @@ if different from the behaviour configured via options on any target container i
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
         <td><span class="parametername">declaredType</span></td>
         <td><p>Optional.  If not null, then it will be used as the target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
-which, in turn, is used as the target&apos;s default registration type if not overriden when added to 
+which, in turn, is used as the target&apos;s default registration type if not overriden when added to
 an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  If null, then the return type of the factory will be used.</p>
 </td>
       </tr>
@@ -599,11 +599,11 @@ an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__1_System_Func___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%601(System.Func%7B%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L19">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L17">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__1_System_Func___0__System_Type_" data-uid="Rezolver.Target.ForDelegate``1(System.Func{``0},System.Type)">ForDelegate&lt;TResult&gt;(Func&lt;TResult&gt;, Type)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a parameterless factory delegate 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a parameterless factory delegate
 which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -672,11 +672,11 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%601(System.Func%7BRezolver.IResolveContext%2C%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L33">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L35">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type_" data-uid="Rezolver.Target.ForDelegate``1(System.Func{Rezolver.IResolveContext,``0},System.Type)">ForDelegate&lt;TResult&gt;(Func&lt;IResolveContext, TResult&gt;, Type)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes an 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes an
 <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> and which returns
 an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
 </div>
@@ -749,7 +749,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__2_System_Func___0___1__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%602(System.Func%7B%60%600%2C%60%601%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L46">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L53">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__2_System_Func___0___1__System_Type_" data-uid="Rezolver.Target.ForDelegate``2(System.Func{``0,``1},System.Type)">ForDelegate&lt;T1, TResult&gt;(Func&lt;T1, TResult&gt;, Type)</h4>
@@ -830,7 +830,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__3_System_Func___0___1___2__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%603(System.Func%7B%60%600%2C%60%601%2C%60%602%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L60">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L72">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__3_System_Func___0___1___2__System_Type_" data-uid="Rezolver.Target.ForDelegate``3(System.Func{``0,``1,``2},System.Type)">ForDelegate&lt;T1, T2, TResult&gt;(Func&lt;T1, T2, TResult&gt;, Type)</h4>
@@ -916,7 +916,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__4_System_Func___0___1___2___3__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%604(System.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L75">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L92">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__4_System_Func___0___1___2___3__System_Type_" data-uid="Rezolver.Target.ForDelegate``4(System.Func{``0,``1,``2,``3},System.Type)">ForDelegate&lt;T1, T2, T3, TResult&gt;(Func&lt;T1, T2, T3, TResult&gt;, Type)</h4>
@@ -1007,7 +1007,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__5_System_Func___0___1___2___3___4__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%605(System.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L91">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L113">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__5_System_Func___0___1___2___3___4__System_Type_" data-uid="Rezolver.Target.ForDelegate``5(System.Func{``0,``1,``2,``3,``4},System.Type)">ForDelegate&lt;T1, T2, T3, T4, TResult&gt;(Func&lt;T1, T2, T3, T4, TResult&gt;, Type)</h4>
@@ -1103,7 +1103,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForDelegate__6_System_Func___0___1___2___3___4___5__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%606(System.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L108">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L135">View Source</a>
   </span>
   <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
   <h4 id="Rezolver_Target_ForDelegate__6_System_Func___0___1___2___3___4___5__System_Type_" data-uid="Rezolver.Target.ForDelegate``6(System.Func{``0,``1,``2,``3,``4,``5},System.Type)">ForDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type)</h4>
@@ -1204,7 +1204,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression_System_Linq_Expressions_Expression_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression(System.Linq.Expressions.Expression%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L179">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L202">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression_System_Linq_Expressions_Expression_System_Type_" data-uid="Rezolver.Target.ForExpression(System.Linq.Expressions.Expression,System.Type)">ForExpression(Expression, Type)</h4>
@@ -1237,7 +1237,7 @@ in order to produce an object.</p>
         <td><span class="parametername">declaredType</span></td>
         <td><p>Optional.  If not null, then it will be used as the target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
 which, in turn, is used as the target&apos;s default registration type if not overriden when added to an
-<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  If null, then the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a> will be used, unless 
+<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  If null, then the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a> will be used, unless
 <code data-dev-comment-type="paramref" class="paramref">expression</code> is a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.lambdaexpression(v=vs.110).aspx">LambdaExpression</a>, in which case the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb291819(v=vs.110).aspx">Type</a>
 of its <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343717(v=vs.110).aspx">Body</a> will be used.</p>
 </td>
@@ -1266,11 +1266,11 @@ translated into a runtime operation which creates/obtains an object.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func___0___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L20">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L18">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func___0___System_Type_" data-uid="Rezolver.Target.ForExpression``1(System.Linq.Expressions.Expression{System.Func{``0}},System.Type)">ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;TResult&gt;&gt;, Type)</h4>
-  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a parameterless lambda expression 
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a parameterless lambda expression
 which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1339,7 +1339,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7BRezolver.IResolveContext%2C%60%600%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L34">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L36">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_" data-uid="Rezolver.Target.ForExpression``1(System.Linq.Expressions.Expression{System.Func{Rezolver.IResolveContext,``0}},System.Type)">ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type)</h4>
@@ -1416,7 +1416,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__2_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%602(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L47">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L54">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__2_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_" data-uid="Rezolver.Target.ForExpression``2(System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Type)">ForExpression&lt;T1, TResult&gt;(Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type)</h4>
@@ -1497,7 +1497,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__3_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%603(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L61">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L73">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__3_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_" data-uid="Rezolver.Target.ForExpression``3(System.Linq.Expressions.Expression{System.Func{``0,``1,``2}},System.Type)">ForExpression&lt;T1, T2, TResult&gt;(Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type)</h4>
@@ -1583,7 +1583,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__4_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%604(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L76">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L93">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__4_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_" data-uid="Rezolver.Target.ForExpression``4(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3}},System.Type)">ForExpression&lt;T1, T2, T3, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt;, Type)</h4>
@@ -1674,7 +1674,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__5_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%605(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L92">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L114">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__5_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_" data-uid="Rezolver.Target.ForExpression``5(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3,``4}},System.Type)">ForExpression&lt;T1, T2, T3, T4, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt;, Type)</h4>
@@ -1770,7 +1770,7 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForExpression__6_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%606(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L109">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L136">View Source</a>
   </span>
   <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
   <h4 id="Rezolver_Target_ForExpression__6_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_" data-uid="Rezolver.Target.ForExpression``6(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3,``4,``5}},System.Type)">ForExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type)</h4>
@@ -1871,11 +1871,11 @@ if different from <code data-dev-comment-type="typeparamref" class="typeparamref
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForObject_System_Object_System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForObject(System.Object%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L120">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L135">View Source</a>
   </span>
   <a id="Rezolver_Target_ForObject_" data-uid="Rezolver.Target.ForObject*"></a>
   <h4 id="Rezolver_Target_ForObject_System_Object_System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Target.ForObject(System.Object,System.Type,Rezolver.ScopeBehaviour)">ForObject(Object, Type, ScopeBehaviour)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> for the passed <code data-dev-comment-type="paramref" class="paramref">object</code> whose 
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> for the passed <code data-dev-comment-type="paramref" class="paramref">object</code> whose
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> will either be set to object&apos;s type (obtained by calling
 <span class="xref">System.Object.GetType()</span> or <code data-dev-comment-type="paramref" class="paramref">declaredType</code>, if it is passed non-null.</p>
 </div>
@@ -1910,7 +1910,7 @@ of the target that is created.</p>
       <tr>
         <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
         <td><span class="parametername">scopeBehaviour</span></td>
-        <td><p>The scope behaviour of the target if resolved inside an 
+        <td><p>The scope behaviour of the target if resolved inside an
 <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.</p>
 </td>
       </tr>
@@ -1936,12 +1936,12 @@ of the target that is created.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForObject__1___0_System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForObject%60%601(%60%600%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L105">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L120">View Source</a>
   </span>
   <a id="Rezolver_Target_ForObject_" data-uid="Rezolver.Target.ForObject*"></a>
   <h4 id="Rezolver_Target_ForObject__1___0_System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Target.ForObject``1(``0,System.Type,Rezolver.ScopeBehaviour)">ForObject&lt;T&gt;(T, Type, ScopeBehaviour)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> for the passed <code data-dev-comment-type="paramref" class="paramref">object</code> whose 
-<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> will either be set to <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> or 
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> for the passed <code data-dev-comment-type="paramref" class="paramref">object</code> whose
+<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> will either be set to <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> or
 <code data-dev-comment-type="paramref" class="paramref">declaredType</code>, if it is passed non-null.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1975,7 +1975,7 @@ of the target that is created.</p>
       <tr>
         <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
         <td><span class="parametername">scopeBehaviour</span></td>
-        <td><p>The scope behaviour of the target if resolved inside an 
+        <td><p>The scope behaviour of the target if resolved inside an
 <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.</p>
 </td>
       </tr>
@@ -2017,7 +2017,7 @@ of the target that is created.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L198">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L225">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,Rezolver.IMemberBindingBehaviour)">ForType(Type, IMemberBindingBehaviour)</h4>
@@ -2079,7 +2079,7 @@ is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L218">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L245">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForType(Type, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
@@ -2149,7 +2149,7 @@ is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CSystem.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L333">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L364">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,System.Object,Rezolver.IMemberBindingBehaviour)">ForType(Type, Object, IMemberBindingBehaviour)</h4>
@@ -2180,8 +2180,8 @@ for the type <code data-dev-comment-type="paramref" class="paramref">type</code>
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
         <td><span class="parametername">namedArgs</span></td>
-        <td><p>Optional.  An object whose publicly readable members which are of the 
-type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor 
+        <td><p>Optional.  An object whose publicly readable members which are of the
+type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor
 by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
 <p>If <code data-dev-comment-type="paramref" class="paramref">type</code> is a generic type definition, then
 this parameter must be null, or an <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a> will be thrown.</p>
@@ -2225,7 +2225,7 @@ ConstructorTarget for the type &apos;MyType&apos;:</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType__1_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(Rezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L247">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L278">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType__1_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(IMemberBindingBehaviour)</h4>
@@ -2292,12 +2292,12 @@ if different from the behaviour configured via options on any target container i
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L262">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L293">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType__1_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.Target.ForType``1(System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">ForType&lt;T&gt;(Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</h4>
-  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> with 
-an <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> built from an <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> 
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> with
+an <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> built from an <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a>
 that&apos;s configured by the <code data-dev-comment-type="paramref" class="paramref">configureMemberBinding</code> callback.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2318,7 +2318,7 @@ that&apos;s configured by the <code data-dev-comment-type="paramref" class="para
       <tr>
         <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;T&gt;&gt;</td>
         <td><span class="parametername">configureMemberBinding</span></td>
-        <td><p>Will be called with a new instance of 
+        <td><p>Will be called with a new instance of
 <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> for you to configure any
 member bindings you wish to add to the target.</p>
 </td>
@@ -2362,7 +2362,7 @@ member bindings you wish to add to the target.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L282">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L313">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
@@ -2439,7 +2439,7 @@ if different from the behaviour configured via options on any target container i
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CSystem.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L304">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L335">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.Target.ForType``1(System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">ForType&lt;T&gt;(IDictionary&lt;String, ITarget&gt;, Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</h4>
@@ -2474,7 +2474,7 @@ this parameter must be null, or an <a class="xref" href="https://msdn.microsoft.
       <tr>
         <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;T&gt;&gt;</td>
         <td><span class="parametername">configureMemberBinding</span></td>
-        <td><p>Will be called with a new instance of 
+        <td><p>Will be called with a new instance of
 <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> for you to configure any
 member bindings you wish to add to the target.</p>
 </td>
@@ -2518,7 +2518,7 @@ member bindings you wish to add to the target.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L356">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L387">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(System.Object,Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(Object, IMemberBindingBehaviour)</h4>
@@ -2543,8 +2543,8 @@ for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</
       <tr>
         <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
         <td><span class="parametername">namedArgs</span></td>
-        <td><p>Optional.  An object whose publicly readable members which are of the 
-type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor 
+        <td><p>Optional.  An object whose publicly readable members which are of the
+type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor
 by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
 </td>
       </tr>
@@ -2599,7 +2599,7 @@ ConstructorTarget for the type &apos;MyType&apos;:</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Object_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Object%2CSystem.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L375">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L406">View Source</a>
   </span>
   <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
   <h4 id="Rezolver_Target_ForType__1_System_Object_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.Target.ForType``1(System.Object,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">ForType&lt;T&gt;(Object, Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</h4>
@@ -2632,7 +2632,7 @@ and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">D
       <tr>
         <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;T&gt;&gt;</td>
         <td><span class="parametername">configureMemberBinding</span></td>
-        <td><p>Will be called with a new instance of 
+        <td><p>Will be called with a new instance of
 <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> for you to configure any
 member bindings you wish to add to the target.</p>
 </td>
@@ -2676,7 +2676,7 @@ member bindings you wish to add to the target.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_Resolved_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Resolved(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L133">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L148">View Source</a>
   </span>
   <a id="Rezolver_Target_Resolved_" data-uid="Rezolver.Target.Resolved*"></a>
   <h4 id="Rezolver_Target_Resolved_System_Type_Rezolver_ITarget_" data-uid="Rezolver.Target.Resolved(System.Type,Rezolver.ITarget)">Resolved(Type, ITarget)</h4>
@@ -2707,7 +2707,7 @@ container during the execution of another target.</p>
       <tr>
         <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
         <td><span class="parametername">fallbackTarget</span></td>
-        <td><p>Optional. If provided and the container is unable to resolve the 
+        <td><p>Optional. If provided and the container is unable to resolve the
 <code data-dev-comment-type="paramref" class="paramref">type</code>, then this target is used instead.</p>
 </td>
       </tr>
@@ -2734,7 +2734,7 @@ container during the execution of another target.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_Resolved__1_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Resolved%60%601(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L148">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L167">View Source</a>
   </span>
   <a id="Rezolver_Target_Resolved_" data-uid="Rezolver.Target.Resolved*"></a>
   <h4 id="Rezolver_Target_Resolved__1_Rezolver_ITarget_" data-uid="Rezolver.Target.Resolved``1(Rezolver.ITarget)">Resolved&lt;T&gt;(ITarget)</h4>
@@ -2803,11 +2803,11 @@ target.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_Scoped_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Scoped(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L27">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L30">View Source</a>
   </span>
   <a id="Rezolver_Target_Scoped_" data-uid="Rezolver.Target.Scoped*"></a>
   <h4 id="Rezolver_Target_Scoped_Rezolver_ITarget_" data-uid="Rezolver.Target.Scoped(Rezolver.ITarget)">Scoped(ITarget)</h4>
-  <div class="markdown level1 summary"><p>Extension method which creates a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> from the target on which this 
+  <div class="markdown level1 summary"><p>Extension method which creates a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> from the target on which this
 method is invoked.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2852,11 +2852,11 @@ method is invoked.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_Singleton_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Singleton(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L54">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L61">View Source</a>
   </span>
   <a id="Rezolver_Target_Singleton_" data-uid="Rezolver.Target.Singleton*"></a>
   <h4 id="Rezolver_Target_Singleton_Rezolver_ITarget_" data-uid="Rezolver.Target.Singleton(Rezolver.ITarget)">Singleton(ITarget)</h4>
-  <div class="markdown level1 summary"><p>Extension method which constructs a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the 
+  <div class="markdown level1 summary"><p>Extension method which constructs a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the
 target on which the method is invoked.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2901,11 +2901,11 @@ target on which the method is invoked.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target_Unscoped_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Unscoped(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L40">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Target.cs/#L45">View Source</a>
   </span>
   <a id="Rezolver_Target_Unscoped_" data-uid="Rezolver.Target.Unscoped*"></a>
   <h4 id="Rezolver_Target_Unscoped_Rezolver_ITarget_" data-uid="Rezolver.Target.Unscoped(Rezolver.ITarget)">Unscoped(ITarget)</h4>
-  <div class="markdown level1 summary"><p>Extension method which creates an <a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a> from the target 
+  <div class="markdown level1 summary"><p>Extension method which creates an <a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a> from the target
 on which this method is invoked.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -2957,7 +2957,7 @@ on which this method is invoked.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Target.md&amp;value=---%0Auid%3A%20Rezolver.Target%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L10" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
