@@ -330,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/fluent-api.html",
-          "hash": "3rq46a+DdN3yqjBK0HuHig=="
+          "hash": "Pz4PhYAWdovU/thlzdQ/Zw=="
         }
       },
       "is_incremental": false,
@@ -342,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/index.html",
-          "hash": "0OtxJJ4gUPmK5xHd0V8F8g=="
+          "hash": "SN88jpkFUzUpqwgTWDCLVA=="
         }
       },
       "is_incremental": false,
@@ -841,7 +841,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.BindSpecificMembersBehaviour.html",
-          "hash": "BCQgkcrqu51RERb9Jo7j2w=="
+          "hash": "BahM8xUvbnacS3m/qOuCWg=="
         }
       },
       "is_incremental": false,
@@ -2895,11 +2895,6 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -2911,6 +2906,11 @@
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

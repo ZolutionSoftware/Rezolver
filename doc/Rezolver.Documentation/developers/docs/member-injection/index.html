@@ -174,11 +174,20 @@ in your application, or to specific types of object (or subtypes), such as all i
 an <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to its constructor.  This applies to most of the target creation and registration
 APIs, too.</p>
 <p><a href="per-registration.html">Find out more about configuring member injection on a per-target/per-registration basis</a>.</p>
+<h1 id="injecting-collection-initialisers">Injecting Collection Initialisers</h1>
+<p>As mentioned in the introduction, Rezolver now also supports implicit and explicit collection initialisers - 
+where you can inject elements into a collection member (so long as it is initialised by a type&#39;s constructor 
+as non-null!).</p>
+<p>By default, this occurs automatically for read-only properties whose type is identified as a compliant collection
+type (follows the same rules as for <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers#collection-initializers">C# Collection Initialisation</a>),
+even when that collection is exposed as a read-only property.</p>
+<p>If you want to know more, there&#39;s a <a href="collections.html">whole dedicated section on Collection Initialisation</a> which 
+covers everything you should need to know.</p>
 <hr>
 <p>With its comprehensive support for member injection, Rezolver should be able to support almost any scenario you 
 need for your application.  Whilst it strictly violates the DI pattern, which lies at the heart of IOC-world,
 the reality is that sometimes you just need to do it.</p>
-<p>So now you know thee&#39;s no excuse: need to inject members?  Rezolver has you covered!</p>
+<p>So if you need to inject members, Rezolver has you covered!</p>
 </article>
           </div>
           

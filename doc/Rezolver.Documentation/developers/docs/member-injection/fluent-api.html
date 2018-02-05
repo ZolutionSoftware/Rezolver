@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Markdown File | Rezolver IOC </title>
+  	<title>Using the Fluent API to customise member bindings | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Markdown File | Rezolver IOC ">
+  	<meta name="title" content="Using the Fluent API to customise member bindings | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -108,9 +108,93 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="markdown-file">Markdown File</h1>
+<h1 id="using-the-fluent-api-to-customise-member-bindings">Using the Fluent API to customise member bindings</h1>
 
-<p>TODO</p>
+<p>All of the <a href="index.html#standard-behaviours">standard binding behaviours</a>, except the 
+<a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a> behaviour of course, bind groups of members based on blanket
+rules - i.e. either or both publicly writeable properties and fields.</p>
+<p>But Rezolver also provides a convenient way to customise both which members are customised, but also <em>how</em>.</p>
+<p>Rezolver has another behaviour implementation for this - the <a class="xref" href="../../api/Rezolver.BindSpecificMembersBehaviour.html">BindSpecificMembersBehaviour</a> class - which 
+accepts either <a class="xref" href="../../api/Rezolver.BindSpecificMembersBehaviour.html#Rezolver_BindSpecificMembersBehaviour__ctor_System_Collections_Generic_IEnumerable_System_Reflection_MemberInfo__">an enumerable of members</a> 
+to be auto-injected, or 
+<a class="xref" href="../../api/Rezolver.BindSpecificMembersBehaviour.html#Rezolver_BindSpecificMembersBehaviour__ctor_System_Collections_Generic_IEnumerable_Rezolver_MemberBinding__">a set of member bindings</a>
+(i.e. instances of the <a class="xref" href="../../api/Rezolver.MemberBinding.html">MemberBinding</a> class) containing the members to be bound, along with the bindings that are to be applied to them.</p>
+<p>This behaviour adopts an entirely opt-in approach, meaning that only the properties or fields you tell it about will be
+bound.</p>
+<p>So, if you had a type with two properties, but you only wanted one of them to be bound, you just pass
+that property&#39;s <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.propertyinfo(v=vs.110).aspx">PropertyInfo</a> to the behaviour instance when you build it, and away you go.</p>
+<p>The problem, however, is that all that reflection can be very untidy, slow, and ultimately not terribly
+quick or efficient for you, the developer.</p>
+<p>This is where the fluent member bindings API comes in, which provides an easy way to build a custom 
+<a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> (which will be an instance of the aforementioned <a class="xref" href="../../api/Rezolver.BindSpecificMembersBehaviour.html">BindSpecificMembersBehaviour</a>
+class) for any (concrete) type, which can then be provided when registering or when creating a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>.  </p>
+<h2 id="the-behaviour-builder">The Behaviour &#39;Builder&#39;</h2>
+<p>The backbone of this approach is the interface <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> (and its default implementation 
+<a class="xref" href="../../api/Rezolver.MemberBindingBehaviourBuilder-1.html">MemberBindingBehaviourBuilder&lt;TInstance&gt;</a>) - which provides a way configure and create an <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> 
+(specifically an instance of <a class="xref" href="../../api/Rezolver.BindSpecificMembersBehaviour.html">BindSpecificMembersBehaviour</a>) through two methods:</p>
+<p>1) The <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviourBuilder-1.html#Rezolver_IMemberBindingBehaviourBuilder_1_Bind_">Bind</a> method lets you create per-member instructions for the type 
+whose members are to be bound.  This method returns an <a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a> instance that can then be used
+to customise <em>how</em> that member is bound.</p>
+<p>2) The <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviourBuilder-1.html#Rezolver_IMemberBindingBehaviourBuilder_1_BuildBehaviour">BuildBehaviour()</a> then creates an instance of the behaviour which 
+binds the properties/fields of an instance as previously configured.  This instance can be reused for multiple
+targets and registrations.</p>
+<p>Since the constructor for the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviourBuilder-1.html">MemberBindingBehaviourBuilder&lt;TInstance&gt;</a> is internal, you have to use the 
+<a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_For_">For</a> factory method to create one:</p>
+<pre><code class="lang-cs">var behaviourBuilder = MemberBindingBehaviour.For&lt;MyClass&gt;();
+</code></pre><p>As mentioned above, once created, you can then start adding properties/fields to be bound, by calling the <code>Bind</code> method:</p>
+<pre><code class="lang-cs">// adds an instruction to the behaviour builder to ensure that the member &#39;BindableMember&#39;
+// is bound when an instance is created.  
+behaviourBuilder.Bind(o =&gt; o.BindableMember);
+</code></pre><p>This configures the member to be injected via the equivalent of a <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call for 
+the member&#39;s type from the container that is producing the enclosing instance, but you can use the object 
+returned by that call - <a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a> - to customise how that member will be bound:</p>
+<pre><code class="lang-cs">// Explicitly binds it to the type &#39;SomeOtherType&#39; or &#39;AnotherType&#39;
+// The generic version is strongly-typed - if the specified type is not 
+// reference compatible with the member&#39;s type, it won&#39;t compile.
+behaviourBuilder.Bind(o =&gt; o.BindableMember)
+    .ToType&lt;SomeOtherType&gt;();
+// Or...
+behaviourBuilder.Bind(o =&gt; o.BindableMember)
+    .ToType(typeof(AnotherType));
+
+// Explicitly binds it to a constant service
+behaviourBuilder.Bind(o =&gt; o.BindableMember)
+    .ToObject(new SomeOtherType());
+
+// Explicitly binds to *any* target provided by the Rezolver framework,
+// shown here as a delegate which requires an instance of &#39;HiddenService&#39; 
+// to be auto-injected injected by the container
+behaviourBuilder.Bind(o =&gt; o.BindableMember)
+    .ToTarget(Target.ForDelegate((HiddenService s) =&gt; new ComplexType(s)));
+</code></pre><p>Since this sold as a fluent API, you can chain all of this together to customise and create a new 
+customised behaviour in one line:</p>
+<pre><code class="lang-cs">var behaviour = MemberBindingBehaviour.For&lt;MyClass&gt;()
+    .Bind(o =&gt; o.BindableMember)
+    .Bind(o =&gt; o.AnotherMember)
+        .ToType&lt;SpecificType&gt;()
+    .Bind(o =&gt; o.CollectionMember)
+        .AsCollection()
+    .BuildBehaviour();
+</code></pre><div class="WARNING"><h5>Warning</h5><p>If you specify the same member multiple times, an exception is thrown.</p>
+</div>
+<div class="TIP"><h5>Tip</h5><p>The <code>.AsCollection()</code> call above is covered in the <a href="collections.html">collection member binding topic</a>.  Briefly,
+you will only need to explicitly mark a member as requiring collection binding if it&#39;s exposed through a
+writeable property.  Compliant read-only collection members will automatically be treated as requiring 
+a collection binding.  Read <a href="collections.html">the topic</a> for more.</p>
+</div>
+<hr>
+<h2 id="examples-by-test">Examples by test</h2>
+<p>We&#39;ve covered pretty much everything you need to know about using the fluent API, but here are some formal examples
+in keeping with the rest of the documentataion on the site - in the form of XUnit tests that you can run
+yourself, if you clone the repo.</p>
+<p>Consider the <code>Has2InjectableMembers</code> type that we&#39;ve used in the <a href="options.html">options</a> and 
+<a href="per-registration.html">per-registration</a> examples, which has two writeable properties:</p>
+<pre><code class="lang-csharp" name="Has2InjectableMembers.cs">public class Has2InjectableMembers
+{
+    public MyService1 Service1 { get; set; }
+    public MyService2 Service2 { get; set; }
+}
+</code></pre><h1 id="todo">TODO!</h1>
 </article>
           </div>
           

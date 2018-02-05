@@ -140,5 +140,19 @@ namespace Rezolver.Tests.Examples
             Assert.Null(result.ServiceProp);
             // </example5>
         }
+
+        [Fact]
+        public void ShouldCreateABindingBehaviour()
+        {
+            // <example6>
+            IMemberBindingBehaviour behaviour = 
+                MemberBindingBehaviour.For<Has2InjectableMembers>()
+                    .Bind(o => o.Service1)
+                    .ToTarget(Target.ForDelegate((MyService4 ms) => new RequiresMyService(ms)))
+                    .BuildBehaviour();
+
+
+            // </example6>
+        }
     }
 }
