@@ -29,7 +29,7 @@ There are two main topics to cover:
 - The different types of member binding behaviour
 - How to instruct Rezolver to use a member binding behaviour when creating an instance
 
-# Different types of Member Binding Behaviour
+# Types of Member Binding Behaviour
 
 ## Standard behaviours
 
@@ -98,7 +98,7 @@ By default, this occurs automatically for read-only properties whose type is ide
 type (follows the same rules as for [C# Collection Initialisation](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers#collection-initializers)),
 even when that collection is exposed as a read-only property.
 
-If you want to know more, there's a [whole dedicated section on Collection Initialisation](collections.md) which 
+If you want to know more, [read the dedicated section on Collection Initialisation](collections.md) which 
 covers everything you should need to know.
 
 * * *

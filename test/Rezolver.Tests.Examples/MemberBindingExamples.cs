@@ -142,17 +142,58 @@ namespace Rezolver.Tests.Examples
         }
 
         [Fact]
-        public void ShouldCreateABindingBehaviour()
+        public void Fluent_ShouldRegisterATypeWithEmbeddedBehaviour()
         {
             // <example6>
-            IMemberBindingBehaviour behaviour = 
-                MemberBindingBehaviour.For<Has2InjectableMembers>()
-                    .Bind(o => o.Service1)
-                    .ToTarget(Target.ForDelegate((MyService4 ms) => new RequiresMyService(ms)))
-                    .BuildBehaviour();
+            var container = new Container();
 
+            container.RegisterType<MyService2>();
+            container.RegisterType<Has2InjectableMembers>
+                (b => b.Bind(o => o.Service2));
 
+            var result = container.Resolve<Has2InjectableMembers>();
+
+            Assert.Null(result.Service1);
+            Assert.NotNull(result.Service2);
             // </example6>
+        }
+
+        [Fact]
+        public void Fluent_ShouldCreateATargetWithEmbeddedBehaviour()
+        {
+            // <example7>
+            var container = new Container();
+
+            container.RegisterType<MyService1>();
+            var has2IMTarget = Target.ForType<Has2InjectableMembers>
+                (b => b.Bind(o => o.Service1));
+            container.Register(has2IMTarget);
+
+            var result = container.Resolve<Has2InjectableMembers>();
+
+            Assert.NotNull(result.Service1);
+            Assert.Null(result.Service2);
+            // </example7>
+        }
+
+        [Fact]
+        public void Fluent_ShouldBindIdenticalMembersWithDifferentServices()
+        {
+            // <example8>
+            var container = new Container();
+
+            container.RegisterType<MyService1>();
+            MyService2 constantService2 = new MyService2();
+
+            container.RegisterType<Has2IdenticalMembers>
+                (b => b.Bind(s => s.Service1).ToType<MyService1>()
+                        .Bind(s => s.Service2).ToObject(constantService2));
+
+            var result = container.Resolve<Has2IdenticalMembers>();
+
+            Assert.NotNull(result.Service1);
+            Assert.Same(constantService2, result.Service2);
+            // </example8>
         }
     }
 }

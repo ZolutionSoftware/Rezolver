@@ -110,9 +110,8 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="rezolver-benchmarks">Rezolver Benchmarks</h1>
 
-<div class="NOTE"><h5>Note</h5><p>Daniel Palme has now integrated Rezolver into his benchmarks as standard, so now you can evaluate
-it&#39;s performance independently of our own tests shown here.</p>
-<p>He regularly updates <a href="http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison">this blog post</a> 
+<div class="NOTE"><h5>Note</h5><p>Daniel Palme has now integrated Rezolver into his benchmarks as standard, he regularly updates 
+<a href="http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison">this blog post</a> 
 with in depth comments and analysis on his latest results.</p>
 <hr>
 <p>The current status of Rezolver&#39;s performance is &#39;Average&#39;, which is fair, because of the results
@@ -138,7 +137,7 @@ addition to its performance.</p>
 <p>Excluding Rezolver and the &#39;No&#39; container, which the baseline, there are 31 containers now
 being stress-tested by this application, with the list growing.</p>
 <h1 id="notes">Notes</h1>
-<p>Rezolver performs very well across the board, however where it suffers is in benchmarks which constantly
+<p>Rezolver performs very well across the board, however it suffers in benchmarks which constantly
 destroy and recreate containers.</p>
 <p>In particular, the performance in the &#39;Child Containers&#39; benchmark is particularly poor - caused by 
 the fact that there&#39;s an overhead on the first <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call to a container, 
