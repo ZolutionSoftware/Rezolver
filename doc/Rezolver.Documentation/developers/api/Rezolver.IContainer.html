@@ -137,7 +137,7 @@
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a> methods.</p>
 <p>You can introspect the container to check in advance whether a given type can be resolved through the
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_">CanResolve(IResolveContext)</a> method.</p>
-<p>Lifetime scoping (where <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.idisposable(v=vs.110).aspx">IDisposable</a> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
+<p>Lifetime scoping (where <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
 by obtaining a new scope through the object&apos;s implementatio of the <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a> method; although a container might also implement the
 <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface, in which case the container itself is a lifetime scope.</p>
 <p>Many of the functions which accept a <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> also have alternatives (in the form of extension methods) in the
@@ -195,7 +195,7 @@ If you&apos;re going to be calling <a class="xref" href="Rezolver.IContainer.htm
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p><code>true</code> if this instance can resolve a type for the specified context; otherwise, <code>false</code>.</p>
 </td>
       </tr>
@@ -302,7 +302,7 @@ object that is required, among other things).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td><p>The resolved object, if successful.</p>
 </td>
       </tr>
@@ -318,7 +318,7 @@ object that is required, among other things).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
         <td><p>If the requested type cannot be resolved.</p>
 </td>
       </tr>
@@ -357,7 +357,7 @@ object that is required, among other things).</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td><span class="parametername">result</span></td>
         <td><p>Receives the resultant resolved object if the operation succeeds.</p>
 </td>
@@ -374,7 +374,7 @@ object that is required, among other things).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p><code>true</code> if the operation succeeded (the resolved object will be set into the <code data-dev-comment-type="paramref" class="paramref">result</code>
     parameter); <code>false</code> otherwise.</p>
 </td>

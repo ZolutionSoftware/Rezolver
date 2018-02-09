@@ -119,7 +119,7 @@
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
     <div class="level2"><span class="xref">DelegateTarget</span></div>
   </div>
@@ -208,14 +208,14 @@ method call for which this target is being compiled and/or executed.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.delegate">Delegate</a></td>
         <td><span class="parametername">factory</span></td>
         <td><p>Required - the factory delegate.  Must have a return type and can take
 0 or more parameters.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">declaredType</span></td>
         <td><p>Optional - type that will be set into the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> for the target;
 if not provided, then it will be derived from the <code data-dev-comment-type="paramref" class="paramref">factory</code>&apos;s return type</p>
@@ -233,14 +233,14 @@ if not provided, then it will be derived from the <code data-dev-comment-type="p
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentexception(v=vs.110).aspx">ArgumentException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a></td>
         <td><p>If the <code data-dev-comment-type="paramref" class="paramref">factory</code> represents a void delegate or if
 <code data-dev-comment-type="paramref" class="paramref">declaredType</code> is passed but the type is not compatible with the return type of
 <code data-dev-comment-type="paramref" class="paramref">factory</code>.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.argumentnullexception(v=vs.110).aspx">ArgumentNullException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
         <td><p>If <code data-dev-comment-type="paramref" class="paramref">factory</code> is null</p>
 </td>
       </tr>
@@ -275,7 +275,7 @@ construction or derived from the return type of the <a class="xref" href="Rezolv
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -308,7 +308,7 @@ construction or derived from the return type of the <a class="xref" href="Rezolv
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.delegate">Delegate</a></td>
         <td><p>The factory.</p>
 </td>
       </tr>
@@ -340,14 +340,14 @@ construction or derived from the return type of the <a class="xref" href="Rezolv
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 id="Rezolver_Targets_DelegateTarget_FactoryMethod_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Whilst this can be easily obtained from the delegate yourself (by using the
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/hh875135(v=vs.110).aspx">GetMethodInfo(Delegate)</a> extension method) however, this
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.runtimereflectionextensions.getmethodinfo#System_Reflection_RuntimeReflectionExtensions_GetMethodInfo_System_Delegate_">GetMethodInfo(Delegate)</a> extension method) however, this
 class also uses it to determine the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget_DeclaredType">DeclaredType</a> of the target or whether the delegate
 is actually compatible with the one supplied on construction, therefore if you need to introspect
 the delegate, you might as well use this.</p>

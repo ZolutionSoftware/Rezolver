@@ -49,6 +49,6 @@ With that in place, we can then test:
 
 > [!TIP]
 > You can, of course, then enable member injection for all constructor-injected types (including open generics) simply by registering 
-> this behaviour as a global option, [as shown earlier in this topic](#global-option).
+> this behaviour as a global option, [as shown here](options.md).
 
 Hopefully this example will inspire you to create your own custom binding behaviour :)

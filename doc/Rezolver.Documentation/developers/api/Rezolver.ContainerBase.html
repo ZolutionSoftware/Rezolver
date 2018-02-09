@@ -119,7 +119,7 @@
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ContainerBase</span></div>
       <div class="level2"><a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a></div>
   </div>
@@ -127,7 +127,7 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Rezolver.IContainer.html">IContainer</a></div>
     <div><a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a></div>
-    <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.iserviceprovider(v=vs.110).aspx">IServiceProvider</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></div>
     <div><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></div>
     <div><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></div>
     <div><a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a></div>
@@ -175,7 +175,7 @@ because all the registration extension methods defined in classes like
 <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a>, <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a> (plus many
 more) will be available to developers in code which has a reference to this class, or one derived from it.</p>
 <p>Note also that calling <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">CombineWith(ITargetContainer, Type)</a> on an instance of this
-type will always cause a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notsupportedexception(v=vs.110).aspx">NotSupportedException</a> to be thrown, thus preventing containers from being
+type will always cause a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.notsupportedexception">NotSupportedException</a> to be thrown, thus preventing containers from being
 registered as sub target containers within an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> via its
 <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> method.</p>
 </div>
@@ -311,7 +311,7 @@ if, the <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -469,7 +469,7 @@ true <em>AND</em> the compiled target returned by the fallback method is an <a c
 <p>Before proceeding with compilation, the code checks whether the target can resolve the required object
 directly.</p>
 <p>This means that the target either implements the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> interface (in which case it is
-immediately returned) or the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> is <em>not</em> <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a> and the
+immediately returned) or the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> is <em>not</em> <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a> and the
 target&apos;s type is compatible with it (in which case the target is simply embedded in a new
 <a class="xref" href="Rezolver.Compilation.ConstantCompiledTarget.html">ConstantCompiledTarget</a>, which will later just return the target when its
 <a class="xref" href="Rezolver.Compilation.ConstantCompiledTarget.html#Rezolver_Compilation_ConstantCompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> is called).</p>
@@ -576,7 +576,7 @@ operation where the search for a valid target either fails or is inconclusive (e
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>Type of service to be resolved.</p>
 </td>
@@ -593,7 +593,7 @@ operation where the search for a valid target either fails or is inconclusive (e
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -631,7 +631,7 @@ call to the target container referenced by the <a class="xref" href="Rezolver.Co
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td></td>
       </tr>
@@ -692,7 +692,7 @@ list of class members.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -733,7 +733,7 @@ a reference to the resolved object.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td><span class="parametername">result</span></td>
         <td><p>Receives a reference to the object that was resolved, if successful, or <code>null</code>
 if not.</p>
@@ -751,7 +751,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p>A boolean indicating whether the operation completed successfully.</p>
 </td>
       </tr>
@@ -785,7 +785,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td></td>
       </tr>
@@ -817,7 +817,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td></td>
       </tr>
@@ -833,7 +833,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -864,7 +864,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td></td>
       </tr>
@@ -880,7 +880,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -974,7 +974,7 @@ if not.</p>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td></td>
       </tr>
@@ -1021,7 +1021,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td></td>
       </tr>
@@ -1068,7 +1068,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td></td>
       </tr>
@@ -1115,7 +1115,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td></td>
       </tr>
@@ -1162,7 +1162,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td></td>
       </tr>
@@ -1199,7 +1199,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td></td>
       </tr>
@@ -1215,7 +1215,7 @@ if not.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -1228,7 +1228,7 @@ if not.</p>
       <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>
   </div>
   <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.iserviceprovider(v=vs.110).aspx">IServiceProvider</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">System.IServiceProvider</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>

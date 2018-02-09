@@ -134,7 +134,7 @@ container.RegisterObject(10);
 
 Assert.Equal(20, container.Resolve&lt;int&gt;());
 </code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> is overloaded for the delegate types 
-@System.Func`2 and <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.delegate(v=vs.110).aspx">Delegate</a> - the second of which allows any delegate to be registered as a 
+@System.Func`2 and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.delegate">Delegate</a> - the second of which allows any delegate to be registered as a 
 decorator, subject to parameter and return type checks.  The framework will inject arguments to any 
 parameters the delegate has, with a parameter of the decorated type receiving the undecorated instance.</p>
 </div>

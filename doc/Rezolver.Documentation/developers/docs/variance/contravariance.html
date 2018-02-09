@@ -115,7 +115,7 @@ as a type argument can be assigned to a reference to a the same generic, but wit
 type argument.  Contravariant type parameters are declared using the <code>in</code> modifier in the generic
 declaration.</p>
 <p>Commonly used contravariant generics are any of the <code>System.Action&lt;&gt;</code> delegate derivatives, or interface
-types such as the <a class="xref" href="https://msdn.microsoft.com/en-us/library/8ehhxeaf(v=vs.110).aspx">IComparer&lt;T&gt;</a> interface (used in the examples below).</p>
+types such as the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icomparer-1">IComparer&lt;T&gt;</a> interface (used in the examples below).</p>
 <p>Here are some examples of legal assignments which take advantage of contravariance:</p>
 <pre><code class="lang-cs">Action&lt;string&gt; a
     = new Action&lt;object&gt;(o =&gt; Console.WriteLine(o));
@@ -221,12 +221,12 @@ expect it to work, and it will! <span class="emoji" shortcode="wink">😉</span>
 <h2 id="injecting-icomparert">Injecting <code>IComparer&lt;T&gt;</code></h2>
 <p>Let&#39;s say that in addition to Rezolver&#39;s own enumerables functionality, our application 
 wants to be able to inject explicitly ordered enumerables.  For that, we&#39;ll need the
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/8ehhxeaf(v=vs.110).aspx">IComparer&lt;T&gt;</a> interface, whose type parameter is contravariant.</p>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icomparer-1">IComparer&lt;T&gt;</a> interface, whose type parameter is contravariant.</p>
 <p>Now, the idea is that our application will be able to request an <code>IOrderedEnumerable&lt;T&gt;</code>
 for <em><strong>any</strong></em> type for which it could also request an <code>IEnumerable&lt;T&gt;</code> - this means that
 we&#39;re going to have to have a default comparer that can be used, whilst allowing specific
 comparers for known types to be registered in addition.</p>
-<p>The most natural way to do this is to try to wrap the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb343617(v=vs.110).aspx">OrderBy</a>
+<p>The most natural way to do this is to try to wrap the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.orderby">OrderBy</a>
 extension method, but Rezolver cannot (currently) bind to generic methods</p>
 <p>Instead, we can quite easily write a class which implements <code>IOrderedEnumerable&lt;T&gt;</code> 
 by wrapping around the <code>OrderBy</code> extension method:</p>
@@ -287,7 +287,7 @@ Assert.Equal(Enumerable.Range(0, 10), ordered);
 built-in .Net types that <code>Comparer&lt;T&gt;.Default</code> also works for.  Now we need to extend it
 for custom types.</p>
 <p>Let&#39;s use a similar example to the one used on MSDN for the 
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/cfttsh47(v=vs.110).aspx">Comparer&lt;T&gt;</a> type - and introduce some types which represent 
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.comparer-1">Comparer&lt;T&gt;</a> type - and introduce some types which represent 
 2D geometries:</p>
 <pre><code class="lang-csharp" name="Shapes.cs">public interface I2DShape
 {
@@ -617,7 +617,7 @@ Square square = new Square(7);
 
 var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
 
-Assert.Equal(1, squareResult.Length);
+Assert.Single(squareResult);
 squareResult[0](square, stringBuilder);
 
 Assert.Equal(&quot;Square of size: 7\r\n&quot;, stringBuilder.ToString());
@@ -633,9 +633,9 @@ var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt
 var rectResult = container.Resolve&lt;Action&lt;Rectangle, StringBuilder&gt;[]&gt;();
 var shapeResult = container.Resolve&lt;Action&lt;I2DShape, StringBuilder&gt;[]&gt;();
 
-Assert.Equal(1, squareResult.Length);
-Assert.Equal(1, rectResult.Length);
-Assert.Equal(1, shapeResult.Length);
+Assert.Single(squareResult);
+Assert.Single(rectResult);
+Assert.Single(shapeResult);
 </code></pre><hr>
 <h3 id="disabling-for-type-arguments">Disabling for type arguments</h3>
 <p>The previous two examples show how we can control Rezolver&#39;s contravariance for
@@ -654,7 +654,7 @@ RegisterShapeDelegates(container);
 
 var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
 
-Assert.Equal(1, squareResult.Length);
+Assert.Single(squareResult);
 </code></pre><p>And we can also do the same for <em>any</em> type which has the <code>I2DShape</code> interface:</p>
 <pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
 
@@ -667,9 +667,9 @@ var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt
 var rectResult = container.Resolve&lt;Action&lt;Rectangle, StringBuilder&gt;[]&gt;();
 var shapeResult = container.Resolve&lt;Action&lt;I2DShape, StringBuilder&gt;[]&gt;();
 
-Assert.Equal(1, squareResult.Length);
-Assert.Equal(1, rectResult.Length);
-Assert.Equal(1, shapeResult.Length);
+Assert.Single(squareResult);
+Assert.Single(rectResult);
+Assert.Single(shapeResult);
 </code></pre><h3 id="disabling-globally">Disabling globally</h3>
 <p>Finally, the simplest of all: disabling contravariance for all types:</p>
 <pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
@@ -683,9 +683,9 @@ var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt
 var rectResult = container.Resolve&lt;Action&lt;Rectangle, StringBuilder&gt;[]&gt;();
 var shapeResult = container.Resolve&lt;Action&lt;I2DShape, StringBuilder&gt;[]&gt;();
 
-Assert.Equal(1, squareResult.Length);
-Assert.Equal(1, rectResult.Length);
-Assert.Equal(1, shapeResult.Length);
+Assert.Single(squareResult);
+Assert.Single(rectResult);
+Assert.Single(shapeResult);
 </code></pre><h3 id="caution-changing-to-opt-in">Caution: Changing to &#39;Opt-in&#39;</h3>
 <p>As will have become apparent, Rezolver uses an opt-out model by default for contravariance
 simply because a generic type parameter is either contravariant or it isn&#39;t; and if it 

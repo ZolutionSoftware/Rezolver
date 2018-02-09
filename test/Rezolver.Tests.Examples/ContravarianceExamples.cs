@@ -225,7 +225,7 @@ namespace Rezolver.Tests.Examples
 
             var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
 
-            Assert.Equal(1, squareResult.Length);
+            Assert.Single(squareResult);
             squareResult[0](square, stringBuilder);
 
             Assert.Equal("Square of size: 7\r\n", stringBuilder.ToString());
@@ -247,9 +247,9 @@ namespace Rezolver.Tests.Examples
             var rectResult = container.Resolve<Action<Rectangle, StringBuilder>[]>();
             var shapeResult = container.Resolve<Action<I2DShape, StringBuilder>[]>();
 
-            Assert.Equal(1, squareResult.Length);
-            Assert.Equal(1, rectResult.Length);
-            Assert.Equal(1, shapeResult.Length);
+            Assert.Single(squareResult);
+            Assert.Single(rectResult);
+            Assert.Single(shapeResult);
             // </example7>
         }
 
@@ -266,7 +266,7 @@ namespace Rezolver.Tests.Examples
 
             var squareResult = container.Resolve<Action<Square, StringBuilder>[]>();
             
-            Assert.Equal(1, squareResult.Length);
+            Assert.Single(squareResult);
             // </example8>
         }
 
@@ -285,9 +285,9 @@ namespace Rezolver.Tests.Examples
             var rectResult = container.Resolve<Action<Rectangle, StringBuilder>[]>();
             var shapeResult = container.Resolve<Action<I2DShape, StringBuilder>[]>();
 
-            Assert.Equal(1, squareResult.Length);
-            Assert.Equal(1, rectResult.Length);
-            Assert.Equal(1, shapeResult.Length);
+            Assert.Single(squareResult);
+            Assert.Single(rectResult);
+            Assert.Single(shapeResult);
             // </example9>
         }
 
@@ -306,9 +306,9 @@ namespace Rezolver.Tests.Examples
             var rectResult = container.Resolve<Action<Rectangle, StringBuilder>[]>();
             var shapeResult = container.Resolve<Action<I2DShape, StringBuilder>[]>();
 
-            Assert.Equal(1, squareResult.Length);
-            Assert.Equal(1, rectResult.Length);
-            Assert.Equal(1, shapeResult.Length);
+            Assert.Single(squareResult);
+            Assert.Single(rectResult);
+            Assert.Single(shapeResult);
             // </example10>
         }
 

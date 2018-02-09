@@ -122,7 +122,7 @@ available services and/or any named arguments which might been provided up front
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
     <div class="level2"><span class="xref">ConstructorTarget</span></div>
   </div>
@@ -214,10 +214,10 @@ the other registrations in the <a class="xref" href="Rezolver.ITargetContainer.h
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110).aspx">ConstructorInfo</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
         <td><span class="parametername">ctor</span></td>
         <td><p>Required - the constructor that is to be bound.  The <a class="xref" href="Rezolver.Targets.ConstructorTarget.html#Rezolver_Targets_ConstructorTarget_DeclaredType">DeclaredType</a> of the new instance
-will be set to the <a class="xref" href="https://msdn.microsoft.com/en-us/library/0x9d77ht(v=vs.110).aspx">DeclaringType</a> of this object.</p>
+will be set to the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.memberinfo.declaringtype#System_Reflection_MemberInfo_DeclaringType">DeclaringType</a> of this object.</p>
 </td>
       </tr>
       <tr>
@@ -267,13 +267,13 @@ to the best constructor at compile-time by calling the <a class="xref" href="Rez
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td><p>Required.  The type whose constructor is to bound.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td><span class="parametername">namedArgs</span></td>
         <td><p>Optional.  The named arguments which will be passed to, and used to find, the best-matched constructor.
 These are taken into account when the constructor is sought - with the constructor containing the most matched parameters matched being selected.</p>
@@ -326,7 +326,7 @@ was created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.constructorinfo(v=vs.110).aspx">ConstructorInfo</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -367,7 +367,7 @@ type whose constructor will be bound by this target.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -442,7 +442,7 @@ can bind to overloaded functions based solely on named arguments.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IReadOnlyDictionary</span>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IReadOnlyDictionary</span>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -564,13 +564,13 @@ then the method attempts to resolve an <a class="xref" href="Rezolver.IMemberBin
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.ambiguousmatchexception(v=vs.110).aspx">AmbiguousMatchException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.ambiguousmatchexception">AmbiguousMatchException</a></td>
         <td><p>If more than one constructor can be bound with an equal amount of all-resolved
 arguments or default arguments.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
         <td><p>If no sutiable constructors can be found.</p>
 </td>
       </tr>

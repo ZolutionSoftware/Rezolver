@@ -114,13 +114,13 @@
   
   <h1 id="Rezolver_Configuration_InjectLists" data-uid="Rezolver.Configuration.InjectLists" class="text-break">Class InjectLists
   </h1>
-  <div class="markdown level0 summary"><p>This configuration will enable automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span>
+  <div class="markdown level0 summary"><p>This configuration will enable automatic injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span>
 when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, <em>so long as there aren&apos;t already registrations for those types</em>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableListInjection.html">EnableListInjection</a>&gt;</div>
     <div class="level2"><span class="xref">InjectLists</span></div>
   </div>
@@ -168,7 +168,7 @@ another configuration to set the <a class="xref" href="Rezolver.Options.EnableLi
 the <a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a>
 method (note - the order that the configs are added doesn&apos;t matter).</p>
 <p>The underlying behaviour relies on registrations of <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> to be present when
-the constructor for the list type is bound, as it expects to bind to the <a class="xref" href="https://msdn.microsoft.com/en-us/library/fkbw11z0(v=vs.110).aspx">List&lt;T&gt;(IEnumerable&lt;T&gt;)</a> constructor.</p>
+the constructor for the list type is bound, as it expects to bind to the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1.-ctor#System_Collections_Generic_List_1__ctor_System_Collections_Generic_IEnumerable__0__">List&lt;T&gt;(IEnumerable&lt;T&gt;)</a> constructor.</p>
 <p>The easiest way to achieve this is also to ensure that the
 <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration is enabled (which it is, by default) - which guarantees that any
 <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> can be resolved - even if empty.</p>
@@ -217,9 +217,9 @@ the constructor for the list type is bound, as it expects to bind to the <a clas
   </span>
   <a id="Rezolver_Configuration_InjectLists_Configure_" data-uid="Rezolver.Configuration.InjectLists.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectLists_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectLists.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Configures the passed <code data-dev-comment-type="paramref" class="paramref">targets</code> to enable auto injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span>
+  <div class="markdown level1 summary"><p>Configures the passed <code data-dev-comment-type="paramref" class="paramref">targets</code> to enable auto injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span>
 and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span> by registering a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a> for all three types - so long as none of them already have a registration.</p>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a> for all three types - so long as none of them already have a registration.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

@@ -123,7 +123,7 @@ future date.</p>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ContainerOption&lt;TOption&gt;</span></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableArrayInjection.html">EnableArrayInjection</a></div>
@@ -174,8 +174,8 @@ future date.</p>
     <tbody>
       <tr>
         <td><span class="parametername">TOption</span></td>
-        <td><p>The underlying option value type - e.g. <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>,
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.uri(v=vs.110).aspx">Uri</a> or whatever</p>
+        <td><p>The underlying option value type - e.g. <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>,
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a> or whatever</p>
 </td>
       </tr>
     </tbody>
@@ -185,7 +185,7 @@ future date.</p>
 <p>Options in Rezolver are achieved by using registrations in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that
 is to be configured (and, in turn, which might then configure any <a class="xref" href="Rezolver.IContainer.html">IContainer</a>s built from
 that target container).</p>
-<p>Since options often take the form of primitive types - e.g <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a> etc - this
+<p>Since options often take the form of primitive types - e.g <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a> etc - this
 means it&apos;s impossible to register multiple options which control different things which have the same underlying
 type if we registered them directly.</p>
 <p>This class is offered as a way around this.  Options (e.g. <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a>) are derived from this type,
@@ -278,7 +278,7 @@ you to use it.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><p>A string in the form <pre><code>&quot;{Value} ({typeof(TOption)})&quot;</code></pre></p>
 </td>
       </tr>

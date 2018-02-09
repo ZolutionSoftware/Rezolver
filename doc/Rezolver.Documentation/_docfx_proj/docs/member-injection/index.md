@@ -34,17 +34,26 @@ There are two main topics to cover:
 ## Standard behaviours
 
 Rezolver comes with four basic behaviours which cover the most basic of scenarios, all of which are available
-from the @Rezolver.MemberBindingBehaviour static class as static properties:
+from the @Rezolver.MemberBindingBehaviour static class as static singleton properties:
 
 1. **@Rezolver.MemberBindingBehaviour.BindNone**: prevents binding of any field or properties (implemented by <xref:Rezolver.BindNoMembersBehaviour>).
 This is typically used to prevent member binding of certain types when it has been enabled for a whole group of types (perhaps with a common base)
 via [container options](options.md).
-2. **@Rezolver.MemberBindingBehaviour.BindAll**: binds all publicly writeable properties and fields to values from the container, even
-if the container doesn't have a registration for the member's type.  Implemented by an instance of @Rezolver.BindAllMembersBehaviour.
-3. **@Rezolver.MemberBindingBehaviour.BindProperties**: binds only publicly writeable properties to values from the container.  Fields are
-ignored.  Implemented by an instance of @Rezolver.BindPublicPropertiesBehaviour.
-4. **@Rezolver.MemberBindingBehaviour.BindFields**: binds only public fields to values from the container.  Properties are
-ignored.  Implemented by an instance of @Rezolver.BindPublicFieldsBehaviour.
+2. **@Rezolver.MemberBindingBehaviour.BindAll**: binds all properties and fields. Implemented by @Rezolver.BindAllMembersBehaviour.
+3. **@Rezolver.MemberBindingBehaviour.BindProperties**: binds properties only.  Implemented by @Rezolver.BindPublicPropertiesBehaviour.
+4. **@Rezolver.MemberBindingBehaviour.BindFields**: binds fields only.  Implemented by @Rezolver.BindPublicFieldsBehaviour.
+
+For those behaviours which actually perform some binding (so, not the first one) the definition of a 'bindable
+field or property' is as follows:
+
+1) A property with a public `set` accessor
+2) A public read-only property whose type is a compliant [collection type](collections.md)
+3) A public field
+
+> [!TIP]
+> Rezolver isn't limited to binding members which follow these rules - it's just that are the default 
+> for the standard behaviours.  The other types of member binding behaviour described below allow you to 
+> extend this logic or, indeed, use your own.
 
 ## Custom (via the Fluent API)
 

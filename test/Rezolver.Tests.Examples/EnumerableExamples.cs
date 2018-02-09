@@ -153,7 +153,7 @@ namespace Rezolver.Tests.Examples
             var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
 
             // only the first registration matches IGeneric<string>
-            Assert.Equal(1, anyResult.Length);
+            Assert.Single(anyResult);
             Assert.IsType<GenericAny<string>>(anyResult[0]);
 
             // First and second registrations match IGeneric<MyService>
@@ -189,7 +189,7 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<UsesIMyService>(result[1]);
             Assert.IsType<UsesIMyService2>(result[2]);
 
-            Assert.Equal(1, result2.Length);
+            Assert.Single(result2);
             Assert.IsType<UsesAnyService<MyService>>(result2[0]);
             // </example6>
         }
@@ -240,7 +240,7 @@ namespace Rezolver.Tests.Examples
             var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
 
             Assert.Equal(2, myServiceResult.Length);
-            Assert.Equal(1, myService2Result.Length);
+            Assert.Single(myService2Result);
             // </example6c>
             // NOTE ABOVE - OMITTING THE INDIVIDUAL ITEM CHECKS BECAUSE IT JUST REPEATS THE CONSTRAINTS TEST
         }
@@ -266,8 +266,8 @@ namespace Rezolver.Tests.Examples
             var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
             var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
 
-            Assert.Equal(1, myService1Result.Length);
-            Assert.Equal(1, myService2Result.Length);
+            Assert.Single(myService1Result);
+            Assert.Single(myService2Result);
             Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
             // </example6d>
         }

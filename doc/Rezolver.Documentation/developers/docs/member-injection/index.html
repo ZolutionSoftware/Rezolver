@@ -136,18 +136,24 @@ container.</p>
 <h1 id="types-of-member-binding-behaviour">Types of Member Binding Behaviour</h1>
 <h2 id="standard-behaviours">Standard behaviours</h2>
 <p>Rezolver comes with four basic behaviours which cover the most basic of scenarios, all of which are available
-from the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html">MemberBindingBehaviour</a> static class as static properties:</p>
+from the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html">MemberBindingBehaviour</a> static class as static singleton properties:</p>
 <ol>
 <li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindNone">BindNone</a></strong>: prevents binding of any field or properties (implemented by <a class="xref" href="../../api/Rezolver.BindNoMembersBehaviour.html">BindNoMembersBehaviour</a>).
 This is typically used to prevent member binding of certain types when it has been enabled for a whole group of types (perhaps with a common base)
 via <a href="options.html">container options</a>.</li>
-<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a></strong>: binds all publicly writeable properties and fields to values from the container, even
-if the container doesn&#39;t have a registration for the member&#39;s type.  Implemented by an instance of <a class="xref" href="../../api/Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a>.</li>
-<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindProperties">BindProperties</a></strong>: binds only publicly writeable properties to values from the container.  Fields are
-ignored.  Implemented by an instance of <a class="xref" href="../../api/Rezolver.BindPublicPropertiesBehaviour.html">BindPublicPropertiesBehaviour</a>.</li>
-<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindFields">BindFields</a></strong>: binds only public fields to values from the container.  Properties are
-ignored.  Implemented by an instance of <a class="xref" href="../../api/Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a>.</li>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a></strong>: binds all properties and fields. Implemented by <a class="xref" href="../../api/Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a>.</li>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindProperties">BindProperties</a></strong>: binds properties only.  Implemented by <a class="xref" href="../../api/Rezolver.BindPublicPropertiesBehaviour.html">BindPublicPropertiesBehaviour</a>.</li>
+<li><strong><a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindFields">BindFields</a></strong>: binds fields only.  Implemented by <a class="xref" href="../../api/Rezolver.BindPublicFieldsBehaviour.html">BindPublicFieldsBehaviour</a>.</li>
 </ol>
+<p>For those behaviours which actually perform some binding (so, not the first one) the definition of a &#39;bindable
+field or property&#39; is as follows:</p>
+<p>1) A property with a public <code>set</code> accessor
+2) A public read-only property whose type is a compliant <a href="collections.html">collection type</a>
+3) A public field</p>
+<div class="TIP"><h5>Tip</h5><p>Rezolver isn&#39;t limited to binding members which follow these rules - it&#39;s just that are the default 
+for the standard behaviours.  The other types of member binding behaviour described below allow you to 
+extend this logic or, indeed, use your own.</p>
+</div>
 <h2 id="custom-via-the-fluent-api">Custom (via the Fluent API)</h2>
 <p>For fine-grained control over the members you want bound on a new instance of a given type, you can build a custom member binding behaviour 
 through the fluent API that&#39;s exposed by the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_For_">For</a> static method.  This uses an opt-in approach to member binding, 

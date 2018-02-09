@@ -112,18 +112,18 @@
 
 <p>There are four commonly used generic collection types in .Net, two classes and two interfaces:</p>
 <ul>
-<li><a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a> and the interface type
+<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a> and the interface type
 @System.Collections.Generic.ICollection`1</li>
-<li><a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a> and the interface type
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/hh881542(v=vs.110).aspx">IReadOnlyCollection&lt;T&gt;</a></li>
+<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a> and the interface type
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection&lt;T&gt;</a></li>
 </ul>
 <p>In addition to being able to <a href="../enumerables.html">auto-inject <code>IEnumerable&lt;T&gt;</code></a>, Rezolver
 can also automatically build instances of any of these types, with empty collections being 
 created by default if no registrations are present.</p>
 <div class="WARNING"><h5>Warning</h5><p>Collection injection relies on <a href="lists.html">list injection</a> because, behind the scenes, the
 container is using the <code>IList&lt;T&gt;</code> constructors 
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132401(v=vs.110).aspx">Collection&lt;T&gt;(IList&lt;T&gt;)</a>
-and <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132476(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;(IList&lt;T&gt;)</a>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1.-ctor#System_Collections_ObjectModel_Collection_1__ctor_System_Collections_Generic_IList__0__">Collection&lt;T&gt;(IList&lt;T&gt;)</a>
+and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1.-ctor#System_Collections_ObjectModel_ReadOnlyCollection_1__ctor_System_Collections_Generic_IList__0__">ReadOnlyCollection&lt;T&gt;(IList&lt;T&gt;)</a>
 to create the collection instances.</p>
 <p>Therefore, if you disable automatic list injection, automatic collection injection will only 
 work if you specifically add registrations for the corresponding <code>IList&lt;T&gt;</code> types.</p>
@@ -145,10 +145,10 @@ Assert.NotNull(result1);
 Assert.NotNull(result2);
 Assert.NotNull(result3);
 Assert.NotNull(result4);
-Assert.Equal(0, result1.Count);
-Assert.Equal(0, result2.Count);
-Assert.Equal(0, result3.Count);
-Assert.Equal(0, result4.Count);
+Assert.Empty(result1);
+Assert.Empty(result2);
+Assert.Empty(result3);
+Assert.Empty(result4);
 </code></pre><p>Collections after registrations have been added:</p>
 <pre><code class="lang-csharp" name="CollectionExamples.cs">var container = new Container();
 container.RegisterType&lt;MyService1, IMyService&gt;();

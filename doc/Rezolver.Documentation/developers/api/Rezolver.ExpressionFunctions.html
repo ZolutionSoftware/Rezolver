@@ -117,12 +117,12 @@
   <div class="markdown level0 summary"><p>This type is only used when using expressions as targets(via the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> type) - it&apos;s
 functions serve no actual purpose other than to act as hooks to create specific <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects
 in place of static code.</p>
-<p>All the functions will throw a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a> if called at runtime.</p>
+<p>All the functions will throw a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.notimplementedexception">NotImplementedException</a> if called at runtime.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ExpressionFunctions</span></div>
   </div>
   <div class="inheritedMembers">
@@ -185,7 +185,7 @@ which is active when an expression is compiled and executed when resolving an ob
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">t</span></td>
         <td><p>The type to be resolved.</p>
 </td>
@@ -202,7 +202,7 @@ which is active when an expression is compiled and executed when resolving an ob
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -217,9 +217,9 @@ which is active when an expression is compiled and executed when resolving an ob
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.notimplementedexception">NotImplementedException</a></td>
         <td><p>Always.  The method is not intended to be used outside of an expression, instead
-it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> bound
+it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a> bound
 to the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve_System_Type_">Resolve(Type)</a> method of a <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 </td>
       </tr>
@@ -277,7 +277,7 @@ which is active when an expression is compiled and executed when resolving an ob
   <div class="markdown level1 remarks"><p>Use of this function in a Lambda expression is not required if you can add a <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>
 parameter to the Lambda - since you can simply call its <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve__1">Resolve&lt;TResult&gt;()</a> method in your
 lambda body.  This is primarily provided instead for non-lambda expressions which require services from the
-container (e.g. if manually building a <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.newexpression(v=vs.110).aspx">NewExpression</a> or <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> and you
+container (e.g. if manually building a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a> and you
 want to explicitly inject one or more constructor/method arguments).</p>
 </div>
   <h5 class="exceptions">Exceptions</h5>
@@ -290,9 +290,9 @@ want to explicitly inject one or more constructor/method arguments).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.notimplementedexception(v=vs.110).aspx">NotImplementedException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.notimplementedexception">NotImplementedException</a></td>
         <td><p>Always.  The method is not intended to be used outside of an expression, instead
-it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.methodcallexpression(v=vs.110).aspx">MethodCallExpression</a> bound
+it should be rewritten either to a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> or another <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a> bound
 to the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve__1">Resolve&lt;TResult&gt;()</a> method of a <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
 </td>
       </tr>

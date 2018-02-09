@@ -226,7 +226,7 @@ written as a compile-time lambda (assignments are not allowed).  So in this case
 }
 </code></pre><p>We register that as a singleton (so the counter is shared) and then build an expression by hand to return the result of pre-incrementing
 it and writing the value back to the counter holder.  This example also shows another way to leverage Rezolver&#39;s ability to inject arguments 
-into your expressions, by supplying a hand-built <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.linq.expressions.lambdaexpression(v=vs.110).aspx">LambdaExpression</a> with <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb301383(v=vs.110).aspx">Parameters</a>:</p>
+into your expressions, by supplying a hand-built <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a> with <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression.parameters#System_Linq_Expressions_LambdaExpression_Parameters">Parameters</a>:</p>
 <pre><code class="lang-csharp" name="SingletonExamples.cs">// Similar to the delegate example above,
 // but we&#39;re injecting an instance which holds the counter
 // so we can use a PreIncrementAssign UnaryExpression, which you 

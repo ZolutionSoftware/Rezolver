@@ -113,7 +113,7 @@
 <p>There are three primary types related to generic lists that are commonly used in 
 .Net projects:</p>
 <ul>
-<li><a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a></li>
+<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a></li>
 <li>@System.Collections.Generic.IList`1</li>
 <li>@System.Collections.Generic.IReadOnlyList`1</li>
 </ul>
@@ -122,7 +122,7 @@ types, Rezolver supports the automatic creation and injection of these types in 
 <a href="../enumerables.html">enumerables</a> are also supported.</p>
 <div class="NOTE"><h5>Note</h5><p>For all three types, Rezolver creates/injects an instance of <code>List&lt;T&gt;</code> by 
 binding to the
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/fkbw11z0(v=vs.110).aspx">List&lt;T&gt;(IEnumerable&lt;T&gt;)</a>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1.-ctor#System_Collections_Generic_List_1__ctor_System_Collections_Generic_IEnumerable__0__">List&lt;T&gt;(IEnumerable&lt;T&gt;)</a>
 constructor - which means that <a href="../enumerables.html">enumerable injection</a> must be enabled
 unless you intend to take control of all of your <code>IEnumerable&lt;T&gt;</code> registrations.</p>
 <p>Unfortunately, this also means that an instance of <code>IReadOnlyList&lt;T&gt;</code> can be cross-cast 
@@ -146,7 +146,7 @@ Assert.NotNull(result1);
 Assert.NotNull(result2);
 Assert.NotNull(result3);
 
-Assert.Equal(0, result1.Count);
+Assert.Empty(result1);
 Assert.Equal(0, result2.Count);
 Assert.Equal(0, result3.Count);
 </code></pre><p>And, after adding three registrations for <code>IMyService</code>, any list that is created will contain

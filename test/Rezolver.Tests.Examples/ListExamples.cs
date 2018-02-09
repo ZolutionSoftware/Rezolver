@@ -27,7 +27,7 @@ namespace Rezolver.Tests.Examples
             Assert.NotNull(result2);
             Assert.NotNull(result3);
 
-            Assert.Equal(0, result1.Count);
+            Assert.Empty(result1);
             Assert.Equal(0, result2.Count);
             Assert.Equal(0, result3.Count);
             // </example1>

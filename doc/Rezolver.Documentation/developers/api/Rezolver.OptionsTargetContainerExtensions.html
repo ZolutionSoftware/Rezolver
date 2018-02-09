@@ -120,7 +120,7 @@ of the various well-known <a class="xref" href="Rezolver.ITargetContainer.html">
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">OptionsTargetContainerExtensions</span></div>
   </div>
   <div class="inheritedMembers">
@@ -166,9 +166,9 @@ ability to actually register more than one target for a particular service in th
 <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a> option.</p>
 <p><strong>Types of options</strong></p>
 <p>Ultimately an option can be of any type, but most of the built-in options use the <a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a>
-type to wrap simple types (<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.int32(v=vs.110).aspx">Int32</a> and so on) as a human-readably
+type to wrap simple types (<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a> and so on) as a human-readably
 named type that differentiates that option from others of the same underlying value type.  Note that the phrase &apos;value type&apos;
-there doesn&apos;t mean that all options must be literal value types (i.e. <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.valuetype(v=vs.110).aspx">ValueType</a>).</p>
+there doesn&apos;t mean that all options must be literal value types (i.e. <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype">ValueType</a>).</p>
 <p>Rezolver has several built-in option types - including <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a>, <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>,
 <a class="xref" href="Rezolver.Options.EnableContravariance.html">EnableContravariance</a> plus many more.  These use the <a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a> type to enable
 reading and writing simple boolean-like option values which switch behaviour on and off.</p>
@@ -287,7 +287,7 @@ from the <code data-dev-comment-type="paramref" class="paramref">targets</code> 
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>A type for which the option is to be retrieved.  Note that the default behaviour is to search for
 an option which is specific to this service, and then to search for more generally-defined options.  See the remarks section for more.</p>
@@ -527,7 +527,7 @@ option has been set to <code>false</code> on the <code data-dev-comment-type="pa
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>Required.  The service type for which options are to be retrieved.</p>
 </td>
@@ -756,7 +756,7 @@ or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
         <td><p>The type against which the option is to be set.  It&apos;s called &apos;serviceType&apos; because the majority
 of the time, you will used this method and its generic overload to customise behaviour for specific types.  If <code>null</code>,

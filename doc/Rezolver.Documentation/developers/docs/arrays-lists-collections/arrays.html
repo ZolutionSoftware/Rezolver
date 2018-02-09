@@ -130,7 +130,7 @@ var container = new Container();
 var result = container.Resolve&lt;IMyService[]&gt;();
 
 Assert.NotNull(result);
-Assert.Equal(0, result.Length);
+Assert.Empty(result);
 
 </code></pre><p>And, as you would expect, as soon as you start registering objects of a particular type,
 you can inject an array of that type:</p>

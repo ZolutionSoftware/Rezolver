@@ -24,7 +24,7 @@ namespace Rezolver.Tests.Examples
             var result = container.Resolve<IMyService[]>();
 
             Assert.NotNull(result);
-            Assert.Equal(0, result.Length);
+            Assert.Empty(result);
 
             // </example1>
         }

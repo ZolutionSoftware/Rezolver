@@ -110,7 +110,73 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="collection-initialisation">Collection Initialisation</h1>
 
-<p>todo: topics on collection initialisation</p>
+<h2 id="background">Background</h2>
+<p>Sometimes you might have a class like this:</p>
+<pre><code class="lang-cs">class HasFoos
+{
+    public IList&lt;Foo&gt; FooCollection { get; } = new List&lt;Foo&gt;();
+}
+</code></pre><div class="NOTE"><h5>Note</h5><p>Pay close attention to the way that the <code>FooCollection</code> is declared here - in particular, that it is read-only - 
+this is a key part of Rezolver&#39;s automatic support for collection initialisers.</p>
+</div>
+<p>In C# world, you can create an instance of this class <em>and</em> add elements to that collection by leveraging
+<a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/object-and-collection-initializers#collection-initializers">collection initialisers</a>.</p>
+<p>So, instead of doing this:</p>
+<pre><code class="lang-cs">var hasFoos = new HasFoos();
+hasFoos.FooCollection.Add(new Foo(1));
+hasFoos.FooCollection.Add(new Foo(2));
+hasFoos.FooCollection.Add(new Foo(3));
+</code></pre><p>You can do this:</p>
+<pre><code class="lang-cs">var hasFoos = new HasFoos() {
+    FooCollection = {
+        new Foo(1),
+        new Foo(2),
+        new Foo(3)
+    }
+};
+</code></pre><p>The two approaches, whilst syntactically different, actually perform the same function - a collection initialiser
+binds to a publicly accessible <code>Add</code> method and calls it repeatedly for each item in the initialiser on the newly
+created object before the resulting object is returned to you.</p>
+<p>As the documentation referenced above explains, in addition to a compliant <code>Add</code> method, the other prerequisite 
+is that the type supports <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a>.</p>
+<h2 id="in-rezolver">In Rezolver</h2>
+<p>If you are binding members in Rezolver using one of the <a href="index.html#standard-behaviours">standard behaviours</a>,
+for example the <a class="xref" href="../../api/Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a> behaviour, then the requirements for a member to be considered
+for <em><strong>automatic</strong></em> collection binding are as follows:</p>
+<ol>
+<li>It must be a public read-only property</li>
+<li>It&#39;s type must implement the &lt;xref:System.Collections.Generic.IEnumerable`1&gt; interface</li>
+<li>It&#39;s type must have a publicly accessible <code>Add</code> method which accepts a single parameter whose type is equal to the element type of its <code>IEnumerable&lt;T&gt;</code> interface</li>
+</ol>
+<p>Luckily, this means that all the most common collection types used in .Net applications (<code>List&lt;T&gt;</code>, <code>IList&lt;T&gt;</code>, <code>Collection&lt;T&gt;</code> etc)
+are automatically supported.</p>
+<p>But Rezolver is not limited only to &#39;recognised&#39; collection types - if you write your own custom collection type,
+then, so long as it satisfies requirements 2 &amp; 3 above, Rezolver can also inject items into that as well.</p>
+<h3 id="resolving-ienumerablet-is-required">Resolving <code>IEnumerable&lt;T&gt;</code> is required</h3>
+<p>When Rezolver performs collection injection, it does it by resolving an <code>IEnumerable&lt;T&gt;</code> from the container to
+get the elements that are to be added to the collection.  To determine the element type of the enumerable that
+is resolved, Rezolver simply matches the <code>IEnumerable&lt;T&gt;</code> that is supported by the member&#39;s type.</p>
+<p>Since Rezolver, by default, supports <a href="../enumerables.html">automatic enumerable injection</a>, all you have to do is
+add registrations for that element type and Rezolver will automatically expose those registrations as elements
+in the enumerable which will then be injected into the collection exposed by the member.</p>
+<div class="NOTE"><h5>Note</h5><p>As the enumerable documentation linked above details, Rezolver&#39;s enumerables also match individual 
+registrations covariantly, so requesting an instance of <code>IEnumerable&lt;MyBase&gt;</code>, for example, will actually
+yield an enumerable containing all instances from any registration made against a type that derives from
+<code>MyBase</code>.</p>
+</div>
+<p>By default, also, if you don&#39;t have any registrations for a given element type, Rezolver will simply yield empty
+enumerables for those types instead of throwing an error.</p>
+<div class="TIP"><h5>Tip</h5><p>As detailed in the enumerable documentation - you can still provide explicit registrations for any concrete
+<code>IEnumemrable&lt;T&gt;</code> type if you have an enumerable which must be built in a specific way.</p>
+</div>
+<h3 id="why-only-read-only-properties">Why only read-only properties?</h3>
+<p>When a property is writable, Rezolver&#39;s standard behaviours will assume that you want that property to be injected
+by <em>assignment</em> rather than by modifying it (i.e. by adding to it).  You can still inject them using the standard
+behaviours - but only by ensuring there&#39;s a registration for that member&#39;s type instead.</p>
+<blockquote><p>[TIP]
+Later in this topic, you&#39;ll see how you can use the <a href="fluent-api.html">fluent API</a> to instruct Rezolver to bind
+a writable collection property using collection injection, instead of assignment injection.</p>
+</blockquote>
 </article>
           </div>
           

@@ -139,12 +139,12 @@ created without a specific config will automatically be configured to use the <a
       <h4><a class="xref" href="Rezolver.Configuration.InjectArrays.html">InjectArrays</a></h4>
       <section><p>Configuration (enabled by default in the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> configuration collection)
 which enables the automatic injection of arrays by converting automatically injected enumerables into array
-instances via the <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb298736(v=vs.110).aspx">ToArray&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</a> method from Linq.</p>
+instances via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.toarray#System_Linq_Enumerable_ToArray__1_System_Collections_Generic_IEnumerable___0__">ToArray&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</a> method from Linq.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></h4>
       <section><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132397(v=vs.110).aspx">Collection&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms132474(v=vs.110).aspx">ReadOnlyCollection&lt;T&gt;</a>
-and <a class="xref" href="https://msdn.microsoft.com/en-us/library/hh881542(v=vs.110).aspx">IReadOnlyCollection&lt;T&gt;</a> (so long as there are no registrations for these types in the target container when the configuration is applied).</p>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a>
+and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection&lt;T&gt;</a> (so long as there are no registrations for these types in the target container when the configuration is applied).</p>
 <p>Out of the box, such collections will be seeded by any objects that have been registered against the element type.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></h4>
@@ -153,7 +153,7 @@ targets for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</
 in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a></h4>
-      <section><p>This configuration will enable automatic injection of <a class="xref" href="https://msdn.microsoft.com/en-us/library/6sh2ey19(v=vs.110).aspx">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span>
+      <section><p>This configuration will enable automatic injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span>
 when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, <em>so long as there aren&apos;t already registrations for those types</em>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectResolveContext.html">InjectResolveContext</a></h4>

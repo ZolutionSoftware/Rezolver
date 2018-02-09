@@ -4,9 +4,9 @@
   href: options.md
 - name: Per-registration
   href: per-registration.md
-- name: Collection Initialisation
+- name: Collection Members
   href: collections.md
 - name: Fluent API
   href: fluent-api.md
-- name: Roll your own
+- name: Custom Behaviours
   href: custom.md
