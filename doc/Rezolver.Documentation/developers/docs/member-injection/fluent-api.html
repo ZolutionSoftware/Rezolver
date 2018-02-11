@@ -210,8 +210,8 @@ extension method:</p>
 <pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
 
 container.RegisterType&lt;MyService2&gt;();
-container.RegisterType&lt;Has2InjectableMembers&gt;
-    (b =&gt; b.Bind(o =&gt; o.Service2));
+container.RegisterType&lt;Has2InjectableMembers&gt;(b =&gt; 
+    b.Bind(o =&gt; o.Service2));
 
 var result = container.Resolve&lt;Has2InjectableMembers&gt;();
 
@@ -223,8 +223,8 @@ a new target:</p>
 <pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
 
 container.RegisterType&lt;MyService1&gt;();
-var has2IMTarget = Target.ForType&lt;Has2InjectableMembers&gt;
-    (b =&gt; b.Bind(o =&gt; o.Service1));
+var has2IMTarget = Target.ForType&lt;Has2InjectableMembers&gt;(b =&gt; 
+    b.Bind(o =&gt; o.Service1));
 container.Register(has2IMTarget);
 
 var result = container.Resolve&lt;Has2InjectableMembers&gt;();
@@ -246,9 +246,9 @@ service - so we need to override how those members will be injected:</p>
 container.RegisterType&lt;MyService1&gt;();
 MyService2 constantService2 = new MyService2();
 
-container.RegisterType&lt;Has2IdenticalMembers&gt;
-    (b =&gt; b.Bind(s =&gt; s.Service1).ToType&lt;MyService1&gt;()
-            .Bind(s =&gt; s.Service2).ToObject(constantService2));
+container.RegisterType&lt;Has2IdenticalMembers&gt;(b =&gt; 
+    b.Bind(s =&gt; s.Service1).ToType&lt;MyService1&gt;()
+     .Bind(s =&gt; s.Service2).ToObject(constantService2));
 
 var result = container.Resolve&lt;Has2IdenticalMembers&gt;();
 

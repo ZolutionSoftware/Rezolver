@@ -148,8 +148,8 @@ namespace Rezolver.Tests.Examples
             var container = new Container();
 
             container.RegisterType<MyService2>();
-            container.RegisterType<Has2InjectableMembers>
-                (b => b.Bind(o => o.Service2));
+            container.RegisterType<Has2InjectableMembers>(b => 
+                b.Bind(o => o.Service2));
 
             var result = container.Resolve<Has2InjectableMembers>();
 
@@ -165,8 +165,8 @@ namespace Rezolver.Tests.Examples
             var container = new Container();
 
             container.RegisterType<MyService1>();
-            var has2IMTarget = Target.ForType<Has2InjectableMembers>
-                (b => b.Bind(o => o.Service1));
+            var has2IMTarget = Target.ForType<Has2InjectableMembers>(b => 
+                b.Bind(o => o.Service1));
             container.Register(has2IMTarget);
 
             var result = container.Resolve<Has2InjectableMembers>();
@@ -185,15 +185,86 @@ namespace Rezolver.Tests.Examples
             container.RegisterType<MyService1>();
             MyService2 constantService2 = new MyService2();
 
-            container.RegisterType<Has2IdenticalMembers>
-                (b => b.Bind(s => s.Service1).ToType<MyService1>()
-                        .Bind(s => s.Service2).ToObject(constantService2));
+            container.RegisterType<Has2IdenticalMembers>(b => 
+                b.Bind(s => s.Service1).ToType<MyService1>()
+                 .Bind(s => s.Service2).ToObject(constantService2));
 
             var result = container.Resolve<Has2IdenticalMembers>();
 
             Assert.NotNull(result.Service1);
             Assert.Same(constantService2, result.Service2);
             // </example8>
+        }
+
+        [Fact]
+        public void Collections_ShouldAddSomeServicesToExisting()
+        {
+            // <example9>
+            var container = new Container();
+
+            // this example also shows enumerable covariance in action
+            container.RegisterType<MyService2>();
+            container.RegisterType<MyService3>();
+
+            container.RegisterType<HasInjectableCollection>(MemberBindingBehaviour.BindAll);
+
+            var result = container.Resolve<HasInjectableCollection>();
+
+            Assert.Equal(3, result.Services.Count);
+            Assert.IsType<MyService1>(result.Services[0]);
+            Assert.IsType<MyService2>(result.Services[1]);
+            Assert.IsType<MyService3>(result.Services[2]);
+            // </example9>
+        }
+
+        [Fact]
+        public void Collections_ShouldAddToGenericCustomCollections()
+        {
+            // <example10>
+            var container = new Container();
+
+            container.RegisterObject(1);
+            container.RegisterObject(2);
+            container.RegisterObject(3);
+
+            container.RegisterObject("oh, ");
+            container.RegisterObject("hello");
+            container.RegisterObject("world!");
+
+            container.RegisterType(typeof(HasCustomCollection<>), 
+                memberBinding: MemberBindingBehaviour.BindAll);
+
+            var hasInts = container.Resolve<HasCustomCollection<int>>();
+            var hasStrings = container.Resolve<HasCustomCollection<string>>();
+
+            // remember - a default(T) instance is added on construction
+            Assert.Equal(new[] { 0, 1, 2, 3 }, hasInts.List);
+            Assert.Equal(new[] { null, "oh, ", "hello", "world!" }, hasStrings.List);
+            // </example10>
+        }
+
+        [Fact]
+        public void Fluent_Collections_ShouldUseSuppliedInts()
+        {
+            // <example11>
+            var container = new Container();
+
+            // these will be ignored
+            container.RegisterObject(1);
+            container.RegisterObject(2);
+            container.RegisterObject(3);
+
+            // can't use the fluent API on open generics
+            container.RegisterType<HasCustomCollection<int>>(mb =>
+                mb.Bind(hcc => hcc.List).AsCollection(
+                    Target.ForObject(10),
+                    Target.ForObject(11),
+                    Target.ForObject(12)));
+
+            var result = container.Resolve<HasCustomCollection<int>>();
+
+            Assert.Equal(new[] { 0, 10, 11, 12 }, result.List);
+            // </example11>
         }
     }
 }

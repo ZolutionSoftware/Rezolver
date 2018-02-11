@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Collection Initialisation | Rezolver IOC </title>
+  	<title>Collection Member Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Collection Initialisation | Rezolver IOC ">
+  	<meta name="title" content="Collection Member Injection | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -108,7 +108,7 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="collection-initialisation">Collection Initialisation</h1>
+<h1 id="collection-member-injection">Collection Member Injection</h1>
 
 <h2 id="background">Background</h2>
 <p>Sometimes you might have a class like this:</p>
@@ -139,21 +139,26 @@ binds to a publicly accessible <code>Add</code> method and calls it repeatedly f
 created object before the resulting object is returned to you.</p>
 <p>As the documentation referenced above explains, in addition to a compliant <code>Add</code> method, the other prerequisite 
 is that the type supports <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a>.</p>
-<h2 id="in-rezolver">In Rezolver</h2>
+<h2 id="rezolvers-rules">Rezolver&#39;s rules</h2>
 <p>If you are binding members in Rezolver using one of the <a href="index.html#standard-behaviours">standard behaviours</a>,
 for example the <a class="xref" href="../../api/Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a> behaviour, then the requirements for a member to be considered
 for <em><strong>automatic</strong></em> collection binding are as follows:</p>
 <ol>
 <li>It must be a public read-only property</li>
-<li>It&#39;s type must implement the &lt;xref:System.Collections.Generic.IEnumerable`1&gt; interface</li>
-<li>It&#39;s type must have a publicly accessible <code>Add</code> method which accepts a single parameter whose type is equal to the element type of its <code>IEnumerable&lt;T&gt;</code> interface</li>
+<li>Its type must implement <code>IEnumerable&lt;T&gt;</code></li>
+<li>Its type must have a publicly accessible <code>void Add</code> method which accepts a single parameter whose type is equal to the element type of its <code>IEnumerable&lt;T&gt;</code> interface</li>
 </ol>
+<div class="NOTE"><h5>Note</h5><p>In C#, inherited interface methods, such as <code>ICollection&lt;T&gt;.Add(T)</code> and the like are also considered
+to be candidates for collection initialisation.</p>
+<p>Currently Rezolver doesn&#39;t support this, but <a href="https://github.com/ZolutionSoftware/Rezolver/issues/71">issue #71</a> 
+is tracking that as a bug for future implementation.</p>
+</div>
 <p>Luckily, this means that all the most common collection types used in .Net applications (<code>List&lt;T&gt;</code>, <code>IList&lt;T&gt;</code>, <code>Collection&lt;T&gt;</code> etc)
 are automatically supported.</p>
 <p>But Rezolver is not limited only to &#39;recognised&#39; collection types - if you write your own custom collection type,
-then, so long as it satisfies requirements 2 &amp; 3 above, Rezolver can also inject items into that as well.</p>
-<h3 id="resolving-ienumerablet-is-required">Resolving <code>IEnumerable&lt;T&gt;</code> is required</h3>
-<p>When Rezolver performs collection injection, it does it by resolving an <code>IEnumerable&lt;T&gt;</code> from the container to
+then, so long as it satisfies requirements 2 &amp; 3 above, Rezolver can inject items into that as well.</p>
+<h2 id="resolving-ienumerablet-is-required">Resolving <code>IEnumerable&lt;T&gt;</code> is required</h2>
+<p>When Rezolver performs collection injection, it does so by resolving an <code>IEnumerable&lt;T&gt;</code> from the container to
 get the elements that are to be added to the collection.  To determine the element type of the enumerable that
 is resolved, Rezolver simply matches the <code>IEnumerable&lt;T&gt;</code> that is supported by the member&#39;s type.</p>
 <p>Since Rezolver, by default, supports <a href="../enumerables.html">automatic enumerable injection</a>, all you have to do is
@@ -169,14 +174,131 @@ enumerables for those types instead of throwing an error.</p>
 <div class="TIP"><h5>Tip</h5><p>As detailed in the enumerable documentation - you can still provide explicit registrations for any concrete
 <code>IEnumemrable&lt;T&gt;</code> type if you have an enumerable which must be built in a specific way.</p>
 </div>
-<h3 id="why-only-read-only-properties">Why only read-only properties?</h3>
+<h2 id="why-only-read-only-properties">Why only read-only properties?</h2>
 <p>When a property is writable, Rezolver&#39;s standard behaviours will assume that you want that property to be injected
-by <em>assignment</em> rather than by modifying it (i.e. by adding to it).  You can still inject them using the standard
-behaviours - but only by ensuring there&#39;s a registration for that member&#39;s type instead.</p>
-<blockquote><p>[TIP]
-Later in this topic, you&#39;ll see how you can use the <a href="fluent-api.html">fluent API</a> to instruct Rezolver to bind
+by <em>assignment</em> rather than by adding to it.  You can still inject them using the standard
+behaviours - but any items that might have been automatically placed in the collection when the owning type
+was created will be lost.</p>
+<div class="TIP"><h5>Tip</h5><p>Later in this topic, you&#39;ll see how you can use the <a href="fluent-api.html">fluent API</a> to instruct Rezolver to bind
 a writable collection property using collection injection, instead of assignment injection.</p>
-</blockquote>
+</div>
+<p>Of course, <a href="../arrays-lists-collections/index.html">by default</a>, Rezolver can also build instances of classes such as <code>List&lt;T&gt;</code>, <code>IList&lt;T&gt;</code>, <code>Collection&lt;T&gt;</code> 
+etc, so in many cases, injection-by-assignment will still often work.</p>
+<hr>
+<h1 id="examples">Examples</h1>
+<h2 id="automatic-injection">Automatic Injection</h2>
+<p>We start with a simple class that has a readonly <code>IList&lt;T&gt;</code> member, much like the one introduced at the top of 
+this page, except it initalises its collection with a single item from the get-go:</p>
+<pre><code class="lang-csharp" name="HasInjectableCollection.cs">public class HasInjectableCollection
+{
+    // Collection is exposed through a read-only property
+    // It&#39;s also important that it is initialised, otherwise a
+    // NullReferenceException *will* occur in 1.3.2
+    public IList&lt;IMyService&gt; Services { get; } = new List&lt;IMyService&gt;() { new MyService1() };
+}
+</code></pre><p>Now we can register the types <code>MyService2</code> and <code>MyService3</code> under their native types and, because, by default,
+Rezolver will match registrations for any type compatible with <code>T</code> when resolving an <code>IEnumerable&lt;T&gt;</code>, they will 
+be added into the <code>Services</code> list when a <code>HasInjectableCollection</code> instance is constructed.</p>
+<p>Note that we are using the aforementioned <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindAll">BindAll</a> behaviour when we register the
+type.  We could also have used the <a class="xref" href="../../api/Rezolver.MemberBindingBehaviour.html#Rezolver_MemberBindingBehaviour_BindProperties">BindProperties</a> behaviour to achieve the same
+result.</p>
+<pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
+
+// this example also shows enumerable covariance in action
+container.RegisterType&lt;MyService2&gt;();
+container.RegisterType&lt;MyService3&gt;();
+
+container.RegisterType&lt;HasInjectableCollection&gt;(MemberBindingBehaviour.BindAll);
+
+var result = container.Resolve&lt;HasInjectableCollection&gt;();
+
+Assert.Equal(3, result.Services.Count);
+Assert.IsType&lt;MyService1&gt;(result.Services[0]);
+Assert.IsType&lt;MyService2&gt;(result.Services[1]);
+Assert.IsType&lt;MyService3&gt;(result.Services[2]);
+</code></pre><h2 id="custom-generic-collection-type">Custom Generic Collection Type</h2>
+<p>As mentioned earlier, Rezolver supports custom collection types for member injection, so long as the type 
+<a href="#rezolvers-rules">obeys a few simple rules</a>.  Here&#39;s perhaps the simplest generic collection type we can create:</p>
+<pre><code class="lang-csharp" name="CustomCollection.cs">public class CustomCollection&lt;T&gt; : IEnumerable&lt;T&gt;
+{
+    List&lt;T&gt; innerList = new List&lt;T&gt;();
+
+    public void Add(T item)
+    {
+        innerList.Add(item);
+    }
+
+    public IEnumerator&lt;T&gt; GetEnumerator()
+    {
+        return innerList.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+}
+</code></pre><p>And then we have a generic type which has one of these as a member:</p>
+<pre><code class="lang-csharp" name="HasCustomCollection.cs">public class HasCustomCollection&lt;T&gt;
+{
+    public CustomCollection&lt;T&gt; List { get; } = new CustomCollection&lt;T&gt;() { default(T) };
+}
+</code></pre><p>Now let&#39;s use it to inject some numbers and strings:</p>
+<pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
+
+container.RegisterObject(1);
+container.RegisterObject(2);
+container.RegisterObject(3);
+
+container.RegisterObject(&quot;oh, &quot;);
+container.RegisterObject(&quot;hello&quot;);
+container.RegisterObject(&quot;world!&quot;);
+
+container.RegisterType(typeof(HasCustomCollection&lt;&gt;), 
+    memberBinding: MemberBindingBehaviour.BindAll);
+
+var hasInts = container.Resolve&lt;HasCustomCollection&lt;int&gt;&gt;();
+var hasStrings = container.Resolve&lt;HasCustomCollection&lt;string&gt;&gt;();
+
+// remember - a default(T) instance is added on construction
+Assert.Equal(new[] { 0, 1, 2, 3 }, hasInts.List);
+Assert.Equal(new[] { null, &quot;oh, &quot;, &quot;hello&quot;, &quot;world!&quot; }, hasStrings.List);
+</code></pre><h2 id="explicit-injection-fluent-api">Explicit Injection (fluent API)</h2>
+<p>If you&#39;re reading this documentation in topic-order then you won&#39;t yet have come across the 
+<a href="fluent-api.html">fluent member binding API</a>, so you might want to skip ahead to that topic and then come back - this 
+section is linked from there.</p>
+<p>When using the fluent API - which operates an opt-in approach to member binding - if you mark a read-only collection
+member like those shown above for binding with the <code>Bind()</code> extension method, then it will be bound as a collection:</p>
+<pre><code class="lang-cs">var behaviour = MemberBindingBehaviour.For&lt;MyClass&gt;()
+    .Bind(o =&gt; o.CollectionMember)
+    .BuildBehaviour();
+</code></pre><p>As described earlier, if a collection property is declared as read/write, then collection binding doesn&#39;t happen -
+the container will instead attempt to resolve an instance of the collection type and write the result to the member.</p>
+<p>However, the fluent API allows you to explicitly set a bound member as requiring collection injection, through the
+<code>.AsCollection</code> overload.  This also provides additional customisation options for the collection binding - in that
+you can explicitly provide individual element types to be resolved, or even supply the actual <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a>
+targets that you want to use to create each element when binding occurs.</p>
+<p>So, first, let&#39;s re-do part of the previous <code>CustomCollection</code> example and show how you can inject a specific
+set of values instead of relying on those which are registered in the container:</p>
+<pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
+
+// these will be ignored
+container.RegisterObject(1);
+container.RegisterObject(2);
+container.RegisterObject(3);
+
+// can&#39;t use the fluent API on open generics
+container.RegisterType&lt;HasCustomCollection&lt;int&gt;&gt;(mb =&gt;
+    mb.Bind(hcc =&gt; hcc.List).AsCollection(
+        Target.ForObject(10),
+        Target.ForObject(11),
+        Target.ForObject(12)));
+
+var result = container.Resolve&lt;HasCustomCollection&lt;int&gt;&gt;();
+
+Assert.Equal(new[] { 0, 10, 11, 12 }, result.List);
+</code></pre><p>As you&#39;ll no doubt realise, being able to explicitly provide these targets without having to just rely on what&#39;s
+registered in the container means you have immense flexibility at your disposal.</p>
 </article>
           </div>
           
