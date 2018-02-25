@@ -12,4 +12,11 @@ namespace Rezolver.Tests.Examples.Types
         public CustomCollection<T> List { get; } = new CustomCollection<T>() { default(T) };
     }
     // </example>
+
+    // <example2>
+    public class HasWritableCustomCollection<T>
+    {
+        public CustomCollection<T> List { get; set; } = new CustomCollection<T>() { default(T) };
+    }
+    // </example2>
 }

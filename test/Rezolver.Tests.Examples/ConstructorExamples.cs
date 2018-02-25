@@ -237,5 +237,48 @@ namespace Rezolver.Tests.Examples
             Assert.NotNull(result.Service);
             // </example101>
         }
+
+        [Fact]
+        public void Generic_ShouldBindToSpecificConstructor()
+        {
+            // <example200>
+            var container = new Container();
+
+            container.RegisterObject("will");
+            container.RegisterObject("be");
+            container.RegisterObject("default");
+            container.RegisterObject("message");
+
+            container.RegisterGenericConstructor(() => new HasAmbiguousGenericCtor<object>(null));
+
+            var result = container.Resolve<HasAmbiguousGenericCtor<string>>();
+
+            Assert.Equal(new[] { "will", "be", "default", "message" }, result.Objects);
+            Assert.Equal(HasAmbiguousGenericCtor<string>.DEFAULTMESSAGE, result.Message);
+            // </example200>
+        }
+
+        [Fact]
+        public void Generic_ShouldBindToSpecificConstructor_ForGenericService()
+        {
+            // <example201>
+            var container = new Container();
+
+            container.RegisterObject("will");
+            container.RegisterObject("be");
+            container.RegisterObject("default");
+            container.RegisterObject("message");
+
+            // it's a bit unfortunate we have to use explicit concrete generics here
+            container.RegisterGenericConstructor<HasAmbiguousGenericCtor<object>, IGeneric<object>>(
+                () => new HasAmbiguousGenericCtor<object>(null));
+
+            var result = container.Resolve<IGeneric<string>>();
+
+            var ambiguous = Assert.IsType<HasAmbiguousGenericCtor<string>>(result);
+            Assert.Equal(new[] { "will", "be", "default", "message" }, ambiguous.Objects);
+            Assert.Equal(HasAmbiguousGenericCtor<string>.DEFAULTMESSAGE, ambiguous.Message);
+            // </example201>
+        }
     }
 }

@@ -18,20 +18,20 @@ namespace Rezolver
     public class ListMemberBinding : MemberBinding
     {
         /// <summary>
-        /// The element type of the enumerable (from the <see cref="MemberBinding.Target"/> whose contents will
+        /// Gets the element type of the enumerable (from the <see cref="MemberBinding.Target"/> whose contents will
         /// be added to the collection represented by the <see cref="MemberBinding.Member"/>.
         /// </summary>
         public Type ElementType { get; }
 
         /// <summary>
-        /// The method to be called on the object exposed by the <see cref="MemberBinding.Member"/> which will add
+        /// Gets the method to be called on the object exposed by the <see cref="MemberBinding.Member"/> which will add
         /// elements to the collection.  Expected to be a void instance method accepting one parameter of the type
         /// <see cref="ElementType"/>
         /// </summary>
         public MethodInfo AddMethod { get; }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="ListMemberBinding"/> binding object.
+        /// Initializes a new instance of the <see cref="ListMemberBinding"/> class.
         /// </summary>
         /// <param name="member">Required. The member to be bound with a collection initialiser.</param>
         /// <param name="target">Required. The target whose elements (it must be an enumerable with element type equal

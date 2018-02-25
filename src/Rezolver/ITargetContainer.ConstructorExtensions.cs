@@ -262,7 +262,7 @@ namespace Rezolver
         /// <typeparam name="TObject">Must be a generic type.  It doesn't matter what the type arguments are, however,
         /// as the target that is created will be for the generic type definition of this type.</typeparam>
         /// <typeparam name="TService">Must also be a generic type that is a base or interface of <typeparamref name="TObject"/></typeparam>
-        /// <param name="targets"></param>
+        /// <param name="targets">The target container into which the registration will be made.</param>
         /// <param name="newExpr">A lambda expression whose <see cref="LambdaExpression.Body"/> is a <see cref="NewExpression"/>
         /// which identifies the constructor that is to be used to create the instance of <typeparamref name="TObject"/>.</param>
         /// <param name="memberBindingBehaviour">Optional. If you wish to bind members on the new instance, passing a member binding

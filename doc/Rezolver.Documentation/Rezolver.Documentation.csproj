@@ -585,6 +585,7 @@
     <Content Include="_docfx_proj\docs\member-injection\fluent-api.md" />
     <Content Include="_docfx_proj\docs\member-injection\custom.md" />
     <Content Include="_docfx_proj\docs\member-injection\collections.md" />
+    <Content Include="_docfx_proj\docs\enumerables\projections.md" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />

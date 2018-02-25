@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2D4FCB75-E5DF-4E2D-9A23-BE53FF3B0FB6}"
 	ProjectSection(SolutionItems) = preProject
@@ -78,6 +78,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.IOCScript", "src\I
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.IOCScript.Tests", "test\Rezolver.IOCScript.Tests\Rezolver.IOCScript.Tests.csproj", "{3EB2EE85-37BB-408F-8137-48AB235E62C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stress-test", "stress-test", "{5FA8C5D1-7054-4F2A-A966-2793F05E7F17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.StressTest.NetCoreApp", "test\stress-test\Rezolver.StressTest.NetCoreApp\Rezolver.StressTest.NetCoreApp.csproj", "{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.StressTest.Common", "test\stress-test\Rezolver.StressTest.Common\Rezolver.StressTest.Common.csproj", "{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -197,6 +203,22 @@ Global
 		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
 		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EB2EE85-37BB-408F-8137-48AB235E62C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -220,6 +242,9 @@ Global
 		{1218A304-E417-4E37-8272-6C60703556EA} = {775A6D70-BDA1-465F-AD71-C2B79F0DA31E}
 		{B1063100-5EC8-486E-B6D2-53B2509540B5} = {775A6D70-BDA1-465F-AD71-C2B79F0DA31E}
 		{3EB2EE85-37BB-408F-8137-48AB235E62C9} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
+		{5FA8C5D1-7054-4F2A-A966-2793F05E7F17} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
+		{898D0C30-2ACF-4A24-BA34-EA9AB75AFBFC} = {5FA8C5D1-7054-4F2A-A966-2793F05E7F17}
+		{A6D8D91E-9AA0-4602-807D-5A8DABD81AFE} = {5FA8C5D1-7054-4F2A-A966-2793F05E7F17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0EA3912-4E38-4ACB-AE04-9CA63BD343DE}

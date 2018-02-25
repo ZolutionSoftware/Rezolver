@@ -134,7 +134,9 @@ As mentioned earlier, Rezolver supports custom collection types for member injec
 
 [!code-csharp[CustomCollection.cs](../../../../../test/Rezolver.Tests.Examples/Types/CustomCollection.cs#example)]
 
-And then we have a generic type which has one of these as a member:
+And then we have a generic type which has one of these as a member and which, by default, always adds a default 
+instance of type `T` to that collection (so all our tests will verify that this item is still present after 
+injecting):
 
 [!code-csharp[HasCustomCollection.cs](../../../../../test/Rezolver.Tests.Examples/Types/HasCustomCollection.cs#example)]
 
@@ -161,14 +163,60 @@ As described earlier, if a collection property is declared as read/write, then c
 the container will instead attempt to resolve an instance of the collection type and write the result to the member.
 
 However, the fluent API allows you to explicitly set a bound member as requiring collection injection, through the
-`.AsCollection` overload.  This also provides additional customisation options for the collection binding - in that
-you can explicitly provide individual element types to be resolved, or even supply the actual @Rezolver.ITarget
-targets that you want to use to create each element when binding occurs.
+@Rezolver.MemberBindingBuilder`2.AsCollection* overload:
 
-So, first, let's re-do part of the previous `CustomCollection` example and show how you can inject a specific
+1. @Rezolver.MemberBindingBuilder`2.AsCollection tells Rezolver to use collection injection with no customisation
+2. @Rezolver.MemberBindingBuilder`2.AsCollection(System.Type) lets you specify the element type of the enumerable to resolve
+3. @Rezolver.MemberBindingBuilder`2.AsCollection(System.Type[]) lets you explicitly provide the types to resolve for each element
+4. @Rezolver.MemberBindingBuilder`2.AsCollection(Rezolver.ITarget[]) lets you provide individual targets whose results will be used as elements
+
+So let's re-do part of the previous `CustomCollection` example and show how you to use 4) to inject a specific
 set of values instead of relying on those which are registered in the container:
 
 [!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example11)]
 
-As you'll no doubt realise, being able to explicitly provide these targets without having to just rely on what's
-registered in the container means you have immense flexibility at your disposal.
+> [!TIP]
+> Remember that manually creating targets doesn't necessarily mean that you have to step outside of normal container 
+> operation.  For example, if you provide a @Rezolver.Targets.DelegateTarget which wraps a delegate that has one or 
+> more parameters, then Rezolver will automatically inject arguments to that delegate!
+
+As intimated earlier, however, one of the primary reasons for using the @Rezolver.MemberBindingBuilder`2.AsCollection*
+method is to instruct Rezolver to use collection injection even when the property is writable.  Whether it's a good
+idea for a type to have a writable property exposing a collection that it also creates and initialises by default
+is outside the scope of this documentation.  The point is, it's *possible*, and it might well apply to you.
+
+So, here's a slight reworking of the `HasCustomCollection<T>` type that makes its `List` member writable:
+
+[!code-csharp[HasCustomCollection.cs](../../../../../test/Rezolver.Tests.Examples/Types/HasCustomCollection.cs#example2)]
+
+And here we can see that, by default, this type can no longer be created by the container, when member binding is
+enabled, without a registration for the collection type used by the `List` member, as the `Assert.ThrowsAny(...)` 
+call proves:
+
+[!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example12)]
+
+But this is easily rectified with the fluent API's `AsCollection()` method:
+
+[!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example13)]
+
+## Explicit (`ListMemberBinding`)
+
+If you're writing your own `IMemberBindingBehaviour` implementation, as shown in the 
+['custom behaviours'](custom.md) topic, then you can still leverage collection injection.
+
+Simply create an instance of the @Rezolver.ListMemberBinding class - providing:
+
+- @System.Reflection.MemberInfo of the member to be bound
+- An @Rezolver.ITarget representing the enumerable value whose elements are to be added to the collection
+- A @System.Type representing the element type of the underlying enumerable
+- A @System.Reflection.MethodInfo of the instance method that is to be called to add items to the collection
+
+And Rezolver will do the rest.
+
+We'll add an example to cover this scenario in the future, however, if you're in the position where you need to
+use this API, then you probably don't it, as you're quite a long way down the rezolver rabbit hole already!
+
+* * *
+
+Now you know the support that Rezolver has for collection injection, it's time to look at 
+[to build custom member binding behaviours with the fluent API](fluent-api.md).

@@ -254,7 +254,10 @@ var result = container.Resolve&lt;Has2IdenticalMembers&gt;();
 
 Assert.NotNull(result.Service1);
 Assert.Same(constantService2, result.Service2);
-</code></pre><hr>
+</code></pre><h3 id="explicit-collection-binding">Explicit collection binding</h3>
+<p>As intimated earlier, the <code>.AsCollection</code> overload can be used to control collection member injection.  A thorough 
+example of this can be found <a href="collections.html#explicit-injection-fluent-api">over in the collection binding topic</a>.</p>
+<hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>It might be that this fluent API isn&#39;t enough for what you need, so you might want to check out 

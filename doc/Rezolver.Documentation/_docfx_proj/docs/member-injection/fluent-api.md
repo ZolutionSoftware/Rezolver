@@ -154,6 +154,11 @@ service - so we need to override how those members will be injected:
 
 [!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example8)]
 
+### Explicit collection binding
+
+As intimated earlier, the `.AsCollection` overload can be used to control collection member injection.  A thorough 
+example of this can be found [over in the collection binding topic](collections.md#explicit-injection-fluent-api).
+
 * * *
 
 # Next steps

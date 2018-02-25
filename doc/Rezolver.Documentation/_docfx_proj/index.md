@@ -23,8 +23,12 @@ which provides an implementation of the new .Net Core DI container abstraction.
 For full release notes for each version - [see release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 
 - **1.3.2**
-  - [Generic Covariance](docs/variance/covariance.md) added
-  - [Mixed Variance](docs/variance/mixed.md) supported
+  - [Generic Covariance](docs/variance/covariance.md)
+  - [Mixed Variance](docs/variance/mixed.md)
+  - [Enumerable Projections](docs/enumerables/projections.md)
+  - [Targeting specific constructors of open generics](docs/constructor-injection/generics-manual-constructor.md)
+  - [List member bindings](docs/member-injection/collections.md)
+  - [Per-member bindings (Fluent API)](docs/member-injection/fluent-api.md)
 - **1.3.1**  
   - Added .Net Standard 2.0 support and more.
 
@@ -36,15 +40,17 @@ _Linked topics provide high level overviews and examples in our developer guide 
 
 - [Constructor Injection](docs/constructor-injection/index.md)
   - Multiple constructors supported
-  - 'Intelligent' constructor discovery based on registered services
+  - Up-front constructor selection
+  - Automatic, 'intelligent' constructor discovery based on registered services
   - Named argument binding
   - Parameters with default arguments are supported
 - [Member injection](docs/member-injection/index.md)
   - Automatic public property (and/or) field injection
-  - Collection initialisers (via enumerables)
-  - Fluent API for per-member behaviours
-  - Extensible API for completely custom behaviours
-- [Open Generic Constructor Injection](docs/constructor-injection/generics.md) 
+  - [Collection initialisers](docs/member-injection/collections.md) (via enumerables)
+  - [Fluent API](docs/member-injection/fluent-api.md) for per-member behaviours
+  - [Extensible API](docs/member-injection/custom.md) for completely custom behaviours
+- [Open Generic Constructor Injection](docs/constructor-injection/generics.md)
+  - [Up-front constructor selection](docs/constructor-injection/generics-manual-constructor.md)
   - Specific closed generics take precedence
 - [Factory Delegates](docs/delegates.md)
   - Argument injection
@@ -65,6 +71,7 @@ _Linked topics provide high level overviews and examples in our developer guide 
     - *Configurable on a per-type basis (added in 1.3)*
   - [Enumerables of generics](docs/enumerables/generics.md)
   - [Enumerable covariance support](docs/variance/covariance.md#enumerables)
+  - [Projections](docs/enumerables/projections.md)
 - [Array injection](docs/arrays-lists-collections/arrays.md)
 - [`List<T>` injection](docs/arrays-lists-collections/lists.md)
   - Also `IList<T>` and `IReadOnlyList<T>`

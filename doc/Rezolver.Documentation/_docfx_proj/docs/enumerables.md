@@ -8,7 +8,7 @@ method has been called against the target type `Service`:
 
 - If no target has been registered against the type, then the enumerable will be empty
 - Otherwise, the enumerable will contain instances obtained from each @Rezolver.ITarget that was registered
-against that type, in the order they were registered.
+against that type, or any type compatible with it, in the order they were registered.
 
 > [!NOTE]
 > The functionality described here depends on two target container options: @Rezolver.Options.AllowMultiple 
@@ -27,6 +27,11 @@ own lifetime (scoped/singleton etc).
 > In an Asp.Net Core 2.0 application, however, eager enumerables are the default until the fix for 
 > [this issue in the aspnet/DependencyInjection repo](https://github.com/aspnet/DependencyInjection/issues/589)
 > has been pushed to an official package release.
+
+## Order of enumerables
+
+The order that Rezolver's automatic enumerables return their items is **always** equal to the order in which 
+the underlying registrations were made.
 
 ## Resolving enumerables
 
@@ -210,14 +215,6 @@ the result to the @Rezolver.Container constructor.
 > [automatic collection-type injection behaviour](arrays-lists-collections/index.md) will only work when you 
 > explicitly register the correct `IEnumerable<T>` for it.
 
-# Order of enumerables
-
-> [!NOTE]
-> This is new in 1.3.1
-
-The order that an enumerable returns its items is **always** equal to the order in which the underlying registrations
-were made.
-
 * * *
 
 # Next steps
@@ -225,4 +222,6 @@ were made.
 generic registrations.
 - Learn about Rezolver's support for [lazy and eager enumerables](enumerables/lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
 evaluated by default)
+- **New in 1.3.2** - Learn how to setup [enumerable projections](enumerables/projections.md) which allow you to
+instruct the container to build an enumerable of one type from an enumerable of another type.
 - Rezolver also supports [arrays, lists and collection injection](arrays-lists-collections/index.md)

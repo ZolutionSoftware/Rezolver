@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/constructor-injection/generics-manual-constructor.html",
-          "hash": "ekBCp9QTyatUpeUyEIb4mA=="
+          "hash": "pYmtrA6vVhST6ekjWBkKzg=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/constructor-injection/generics.html",
-          "hash": "R4AsMisB4F1b02lhRxFdGA=="
+          "hash": "ZLXarQ924fH52mU2yv6rig=="
         }
       },
       "is_incremental": false,
@@ -186,7 +186,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/enumerables.html",
-          "hash": "GfLezcwjJNU0OD2c7kzdaQ=="
+          "hash": "c9xLi1CyCZJED5cCc1ZJyw=="
         }
       },
       "is_incremental": false,
@@ -211,6 +211,18 @@
         ".html": {
           "relative_path": "docs/enumerables/lazy-vs-eager.html",
           "hash": "tVi1ikMy12Cc48rIgWoeYQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/enumerables/projections.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/enumerables/projections.html",
+          "hash": "QC1vbWjCVxWVm3inaRM7Mg=="
         }
       },
       "is_incremental": false,
@@ -306,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/collections.html",
-          "hash": "TwGJaXonDfAaet3FcYnt5A=="
+          "hash": "+qR1a1o13PWE4P9bFBbpUw=="
         }
       },
       "is_incremental": false,
@@ -318,7 +330,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/custom.html",
-          "hash": "971S/nRf6VyWApU5Qn55mQ=="
+          "hash": "aFBBl9Vq2rX6uEO/grL05A=="
         }
       },
       "is_incremental": false,
@@ -330,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/fluent-api.html",
-          "hash": "R4V8U5Tgo4CuMl/RCsj5/Q=="
+          "hash": "SeqlrW6fSdR/IjjrbFJ81g=="
         }
       },
       "is_incremental": false,
@@ -354,7 +366,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/options.html",
-          "hash": "mLzBRhflk/EOq7hgR3hAcQ=="
+          "hash": "k5Umn5+7hjkAAmHghWSg6Q=="
         }
       },
       "is_incremental": false,
@@ -366,7 +378,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/member-injection/per-registration.html",
-          "hash": "nr3zieroChaCxzNpG14sog=="
+          "hash": "PyPZQOj/x1nDLPFLSb9Dyw=="
         }
       },
       "is_incremental": false,
@@ -462,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/toc.html",
-          "hash": "PFrnyi/Wx9VNF3zxgrrVHw=="
+          "hash": "KTld+byjnz3j6L2IM/r1sA=="
         }
       },
       "is_incremental": false,
@@ -709,7 +721,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ubOtwhQ0tqpeyaJhjUoNEA=="
+          "hash": "ZycEhsGFoD4iNuXI87LPBg=="
         }
       },
       "is_incremental": false,
@@ -1969,7 +1981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.ListMemberBinding.html",
-          "hash": "U3q9df3tA5CK0SZmAEdwkg=="
+          "hash": "Yo3mHjvOR3fSJW3fXTr4nw=="
         }
       },
       "is_incremental": false,
@@ -2581,7 +2593,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.TargetContainerRegistrationExtensions.html",
-          "hash": "I2p8tV+BFlmvX9/cjd0ohQ=="
+          "hash": "azR1OL/VewWLXhW1p1X3JQ=="
         }
       },
       "is_incremental": false,
@@ -2900,17 +2912,17 @@
           "details": "Processor TocDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build"
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build"
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
+          "incrementalPhase": "build"
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot suppport incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

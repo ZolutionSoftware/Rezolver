@@ -266,5 +266,40 @@ namespace Rezolver.Tests.Examples
             Assert.Equal(new[] { 0, 10, 11, 12 }, result.List);
             // </example11>
         }
+
+        [Fact]
+        public void Collections_ShouldFailToBindWritableCollectionByDefault()
+        {
+            // <example12>
+            var container = new Container();
+
+            // will make no difference
+            container.RegisterObject(1);
+
+            container.RegisterType<HasWritableCustomCollection<int>>(MemberBindingBehaviour.BindAll);
+
+            // if instead we repeated this with HasCustomCollection, we'd just get an instance
+            // whose list only contained the default item that was added in the constructor.
+            Assert.ThrowsAny<InvalidOperationException>(
+                () => container.Resolve<HasWritableCustomCollection<int>>());
+            // </example12>
+        }
+
+        [Fact]
+        public void Fluent_Collections_ShouldTreatWritableProperty_AsCollection()
+        {
+            // <example13>
+            var container = new Container();
+
+            container.RegisterObject(1);
+
+            container.RegisterType<HasWritableCustomCollection<int>>(mb =>
+                mb.Bind(hwcc => hwcc.List).AsCollection());
+
+            var result = container.Resolve<HasWritableCustomCollection<int>>();
+
+            Assert.Equal(new[] { 0, 1 }, result.List);
+            // </example13>
+        }
     }
 }

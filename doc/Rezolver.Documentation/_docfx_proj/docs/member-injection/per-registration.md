@@ -33,3 +33,10 @@ we're creating the target (which will be a @Rezolver.Targets.ConstructorTarget f
 and then registering it separately through the @Rezolver.ITargetContainer.Register* method
 
 [!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example1b)]
+
+* * *
+
+You should now know how to [configure member injection via container options](options.md) as well as on a
+per-registration or per-target basis, as shown here.
+
+Now you might want to take a look at how [collection member injection works](collections.md).

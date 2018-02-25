@@ -238,7 +238,9 @@ Assert.IsType&lt;MyService3&gt;(result.Services[2]);
         return GetEnumerator();
     }
 }
-</code></pre><p>And then we have a generic type which has one of these as a member:</p>
+</code></pre><p>And then we have a generic type which has one of these as a member and which, by default, always adds a default 
+instance of type <code>T</code> to that collection (so all our tests will verify that this item is still present after 
+injecting):</p>
 <pre><code class="lang-csharp" name="HasCustomCollection.cs">public class HasCustomCollection&lt;T&gt;
 {
     public CustomCollection&lt;T&gt; List { get; } = new CustomCollection&lt;T&gt;() { default(T) };
@@ -275,10 +277,14 @@ member like those shown above for binding with the <code>Bind()</code> extension
 </code></pre><p>As described earlier, if a collection property is declared as read/write, then collection binding doesn&#39;t happen -
 the container will instead attempt to resolve an instance of the collection type and write the result to the member.</p>
 <p>However, the fluent API allows you to explicitly set a bound member as requiring collection injection, through the
-<code>.AsCollection</code> overload.  This also provides additional customisation options for the collection binding - in that
-you can explicitly provide individual element types to be resolved, or even supply the actual <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a>
-targets that you want to use to create each element when binding occurs.</p>
-<p>So, first, let&#39;s re-do part of the previous <code>CustomCollection</code> example and show how you can inject a specific
+<a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html#Rezolver_MemberBindingBuilder_2_AsCollection_">AsCollection</a> overload:</p>
+<ol>
+<li><a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html#Rezolver_MemberBindingBuilder_2_AsCollection">AsCollection()</a> tells Rezolver to use collection injection with no customisation</li>
+<li><a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html#Rezolver_MemberBindingBuilder_2_AsCollection_System_Type_">AsCollection(Type)</a> lets you specify the element type of the enumerable to resolve</li>
+<li><a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html#Rezolver_MemberBindingBuilder_2_AsCollection_System_Type___">AsCollection(Type[])</a> lets you explicitly provide the types to resolve for each element</li>
+<li><a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html#Rezolver_MemberBindingBuilder_2_AsCollection_Rezolver_ITarget___">AsCollection(ITarget[])</a> lets you provide individual targets whose results will be used as elements</li>
+</ol>
+<p>So let&#39;s re-do part of the previous <code>CustomCollection</code> example and show how you to use 4) to inject a specific
 set of values instead of relying on those which are registered in the container:</p>
 <pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
 
@@ -297,8 +303,60 @@ container.RegisterType&lt;HasCustomCollection&lt;int&gt;&gt;(mb =&gt;
 var result = container.Resolve&lt;HasCustomCollection&lt;int&gt;&gt;();
 
 Assert.Equal(new[] { 0, 10, 11, 12 }, result.List);
-</code></pre><p>As you&#39;ll no doubt realise, being able to explicitly provide these targets without having to just rely on what&#39;s
-registered in the container means you have immense flexibility at your disposal.</p>
+</code></pre><div class="TIP"><h5>Tip</h5><p>Remember that manually creating targets doesn&#39;t necessarily mean that you have to step outside of normal container 
+operation.  For example, if you provide a <a class="xref" href="../../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> which wraps a delegate that has one or 
+more parameters, then Rezolver will automatically inject arguments to that delegate!</p>
+</div>
+<p>As intimated earlier, however, one of the primary reasons for using the <a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html#Rezolver_MemberBindingBuilder_2_AsCollection_">AsCollection</a>
+method is to instruct Rezolver to use collection injection even when the property is writable.  Whether it&#39;s a good
+idea for a type to have a writable property exposing a collection that it also creates and initialises by default
+is outside the scope of this documentation.  The point is, it&#39;s <em>possible</em>, and it might well apply to you.</p>
+<p>So, here&#39;s a slight reworking of the <code>HasCustomCollection&lt;T&gt;</code> type that makes its <code>List</code> member writable:</p>
+<pre><code class="lang-csharp" name="HasCustomCollection.cs">public class HasWritableCustomCollection&lt;T&gt;
+{
+    public CustomCollection&lt;T&gt; List { get; set; } = new CustomCollection&lt;T&gt;() { default(T) };
+}
+</code></pre><p>And here we can see that, by default, this type can no longer be created by the container, when member binding is
+enabled, without a registration for the collection type used by the <code>List</code> member, as the <code>Assert.ThrowsAny(...)</code> 
+call proves:</p>
+<pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
+
+// will make no difference
+container.RegisterObject(1);
+
+container.RegisterType&lt;HasWritableCustomCollection&lt;int&gt;&gt;(MemberBindingBehaviour.BindAll);
+
+// if instead we repeated this with HasCustomCollection, we&#39;d just get an instance
+// whose list only contained the default item that was added in the constructor.
+Assert.ThrowsAny&lt;InvalidOperationException&gt;(
+    () =&gt; container.Resolve&lt;HasWritableCustomCollection&lt;int&gt;&gt;());
+</code></pre><p>But this is easily rectified with the fluent API&#39;s <code>AsCollection()</code> method:</p>
+<pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
+
+container.RegisterObject(1);
+
+container.RegisterType&lt;HasWritableCustomCollection&lt;int&gt;&gt;(mb =&gt;
+    mb.Bind(hwcc =&gt; hwcc.List).AsCollection());
+
+var result = container.Resolve&lt;HasWritableCustomCollection&lt;int&gt;&gt;();
+
+Assert.Equal(new[] { 0, 1 }, result.List);
+</code></pre><h2 id="explicit-listmemberbinding">Explicit (<code>ListMemberBinding</code>)</h2>
+<p>If you&#39;re writing your own <code>IMemberBindingBehaviour</code> implementation, as shown in the 
+<a href="custom.html">&#39;custom behaviours&#39;</a> topic, then you can still leverage collection injection.</p>
+<p>Simply create an instance of the <a class="xref" href="../../api/Rezolver.ListMemberBinding.html">ListMemberBinding</a> class - providing:</p>
+<ul>
+<li><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.memberinfo">MemberInfo</a> of the member to be bound</li>
+<li>An <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> representing the enumerable value whose elements are to be added to the collection</li>
+<li>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a> representing the element type of the underlying enumerable</li>
+<li>A <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a> of the instance method that is to be called to add items to the collection</li>
+</ul>
+<p>And Rezolver will do the rest.</p>
+<p>We&#39;ll add an example to cover this scenario in the future, however, if you&#39;re in the position where you need to
+use this API, then you probably don&#39;t it, as you&#39;re quite a long way down the rezolver rabbit hole already!</p>
+<hr>
+<p>Now you know the support that Rezolver has for collection injection, it&#39;s time to look at 
+<a href="fluent-api.html">to build custom member binding behaviours with the fluent API</a>.</p>
 </article>
           </div>
           

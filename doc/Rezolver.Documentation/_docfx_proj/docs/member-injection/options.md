@@ -82,3 +82,10 @@ closed variants of that generic type (so long as the registration uses construct
 > will the behaviour kick in for any variant of `MyGeneric<>`, but also any class derived from *any* closed or
 > open variant of `MyGeneric<>`.  In the case of a generic interface, then it kicks in for any type which implements
 > any variant of that interface.
+
+* * *
+
+# Next steps
+
+Now you know how to enable member injection using container options, it's time to take a look at how to
+[configure member injection on a per-registration or per-target basis](per-registration.md).

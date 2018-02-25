@@ -27,7 +27,7 @@ you read that topic, however, you should read through this one first.
 
 However, please note that you cannot provide named arguments to help either with the best-match search, or when specifying which constructor
 to invoke.  To do so would be incredibly difficult, since if the type of a constructor 
-argument is dependant upon a type argument, then there's no reasy way you could supply a binding for it up-front to satisfy all possible types that 
+argument is dependant upon a type argument, then there's no easy way you could supply a binding for it up-front to satisfy all possible types that 
 might be passed to it.
 
 ## Creating/registering <xref:Rezolver.Targets.GenericConstructorTarget>s

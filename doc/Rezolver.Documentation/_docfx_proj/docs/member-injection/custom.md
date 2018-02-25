@@ -14,6 +14,9 @@ The @Rezolver.MemberBinding class describes a member as being bound to the resul
 which means that it's not tied to simply resolving an instance from the container: any of the target 
 implementations can be used and Rezolver will correctly bind it to the result of that target.
 
+If you want to leverage [collection binding](collections.md) from your custom behaviour, then you can return an
+instance of the @Rezolver.ListMemberBinding type instead.
+
 Now you've got an overview of what to do, let's get on with our example.
 
 ## Attribute-based member injection

@@ -121,6 +121,8 @@ to return an array of <a class="xref" href="../../api/Rezolver.MemberBinding.htm
 <p>The <a class="xref" href="../../api/Rezolver.MemberBinding.html">MemberBinding</a> class describes a member as being bound to the result of another <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a>, 
 which means that it&#39;s not tied to simply resolving an instance from the container: any of the target 
 implementations can be used and Rezolver will correctly bind it to the result of that target.</p>
+<p>If you want to leverage <a href="collections.html">collection binding</a> from your custom behaviour, then you can return an
+instance of the <a class="xref" href="../../api/Rezolver.ListMemberBinding.html">ListMemberBinding</a> type instead.</p>
 <p>Now you&#39;ve got an overview of what to do, let&#39;s get on with our example.</p>
 <h2 id="attribute-based-member-injection">Attribute-based member injection</h2>
 <p>A popular implementation of member injection in some IOC containers is to use an attribute on the properties/fields 

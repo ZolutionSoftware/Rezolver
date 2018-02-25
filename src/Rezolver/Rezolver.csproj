@@ -44,12 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Compilation\Reflection\**" />
-    <EmbeddedResource Remove="Compilation\Reflection\**" />
-    <None Remove="Compilation\Reflection\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="stylecop.json" />
   </ItemGroup>
 
@@ -92,10 +86,6 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="CombinedContainerConfig.cs" />
   </ItemGroup>
 
   <ItemGroup>
