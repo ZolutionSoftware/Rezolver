@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
-using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +8,16 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Rezolver.Runtime;
+using Rezolver.Targets;
 
 namespace Rezolver.Compilation.Expressions
 {
-	/// <summary>
-	/// An <see cref="IExpressionBuilder"/> specialised for the building the expression for a <see cref="SingletonTarget"/> target.
-	/// </summary>
-	public class SingletonTargetBuilder : ExpressionBuilderBase<SingletonTarget>
-	{
+    /// <summary>
+    /// An <see cref="IExpressionBuilder"/> specialised for the building the expression for a <see cref="SingletonTarget"/> target.
+    /// </summary>
+    public class SingletonTargetBuilder : ExpressionBuilderBase<SingletonTarget>
+    {
         /// <summary>
         /// Builds an expression for the given <paramref name="target"/>.
         /// </summary>
@@ -29,8 +29,8 @@ namespace Rezolver.Compilation.Expressions
         protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
-
-            return Expression.Constant(holder.GetObject(context, target,
+            var keyTarget = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            return Expression.Constant(holder.GetObject(context, keyTarget ?? target.Id,
                 c => compiler.CompileTarget(
                     target.InnerTarget,
                     c.NewContext(

@@ -21,6 +21,10 @@ The @Rezolver.ITargetContainer interface supplies service registrations when usi
 container types @Rezolver.Container and @Rezolver.ScopedContainer.  All the target container does is to provide a means
 to register and look up @Rezolver.ITarget instances which have been registered against specific types.
 
+> [!NOTE]
+> These two container types actually require an @Rezolver.IRootTargetContainer - an interface which is implemented
+> by the standard target container: @Rezolver.TargetContainer.
+
 ## Registering via extension methods
 
 The majority of your work with the Rezolver framework will use extension methods to create and add targets to
@@ -51,7 +55,7 @@ which that target is to be registered.
 If the optional type is not provided, then the target's @Rezolver.ITarget.DeclaredType is used as the default
 registration type:
 
-> [!NOTE]
+> [!TIP]
 > In the next example, we're using the @Rezolver.Targets.ObjectTarget.
 > We have [more in-depth documentation about `ObjectTarget`](objects.md) if you want to know more.
 
@@ -61,7 +65,7 @@ So, here, the target container defaults to using `System.String` as the registra
 because that's its @Rezolver.ITarget.DeclaredType.  We can also provide any base or interface of the target's type
 as a valid type, too:
 
-> [!NOTE]
+> [!TIP]
 > This time we're creating a @Rezolver.Targets.ConstructorTarget via one of its static factory functions.
 > Again, this target [is covered in more depth here](constructor-injection/index.md).
 
@@ -73,26 +77,10 @@ If you attempt to register a target against a type which the target does not sup
 
 [!code-csharp[TargetContainerExamples.cs](../../../../test/Rezolver.Tests.Examples/TargetContainerExamples.cs#example3)]
 
-### How type compatiblity is verified
+***
 
-The type(s) against which you can register a target is dependant upon the @Rezolver.ITarget.DeclaredType of the target,
-but, instead of performing the compatibility checks itself, the target container uses the @Rezolver.ITarget.SupportsType* 
-method of the target being registered.
-
-Here's just a few example types and the types against which we could register them, given the correct @Rezolver.ITarget 
-implementation:
-
-ITarget.DeclaredType | Can be registered as | With Targets
---- | --- | ---
-`int` | `object` | Any
-`int` | `int?` | Any
-`int` | `IFormattable` | Any
-`string` | `IEnumerable<char>` | Any
-`MyService : IService` | `IService` | Any
-`MyService<int> : IService<int>` | `IService<int>` | Any
-`MyService<T>` | `MyService<T>` | @Rezolver.Targets.GenericConstructorTarget
-`MyService<T>` | `MyService<string>` | @Rezolver.Targets.GenericConstructorTarget
-`MyService<T> : IService<OtherService, T>` | `IService<OtherService, int>` | @Rezolver.Targets.GenericConstructorTarget
+> [!NOTE]
+> **THE DOCUMENTATION AFTER THIS POINT IS PRIMARILY AIMED AT DEVELOPER WHO ARE LOOKING TO EXTEND REZOLVER**
 
 # Retrieving registrations
 
@@ -105,7 +93,9 @@ These same methods are used by the standard container classes when determining h
 a given type.
 
 > [!NOTE]
-> There is currently no way to remove a registration from a @Rezolver.ITargetContainer.
+> There is currently no way to remove a registration from a @Rezolver.ITargetContainer.  You can, however, create
+> an @Rezolver.OverridingTargetContainer to override the registrations of another, and pass *that* as the target
+> container to a new @Rezolver.Container or @Rezolver.ScopedContainer.
 
 # Target types
 

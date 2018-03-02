@@ -8,7 +8,7 @@
   	<title>Container Scopes | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Container Scopes | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../../styles/main.css">
   	<meta property="docfx:navrel" content="../../toc.html">
   	<meta property="docfx:tocrel" content="../toc.html">
+  	
   	<meta property="docfx:rel" content="../../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
@@ -183,12 +184,12 @@ registration, to see how &#39;normal&#39; objects interact with scopes.</p>
 <p>For these examples, we&#39;re using this type:</p>
 <pre><code class="lang-csharp" name="DisposableType.cs">public class DisposableType : IDisposable
 {
-	public bool Disposed { get; private set; }
-	public void Dispose()
-	{
-		if (Disposed) throw new ObjectDisposedException(nameof(DisposableType));
-		Disposed = true;
-	}
+    public bool Disposed { get; private set; }
+    public void Dispose()
+    {
+        if (Disposed) throw new ObjectDisposedException(nameof(DisposableType));
+        Disposed = true;
+    }
 }
 </code></pre><p>Note that the type throws an exception if attempts are made to dispose of it multiple times - this is a feature of the tests which drive the examples,
 as we want to prevent unnecessary <code>Dispose()</code> calls as much as possible.</p>
@@ -291,16 +292,14 @@ dispose of the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">Sc
 <hr>
 <h2 id="mixing-lifetimes-and-scopes">Mixing lifetimes and scopes</h2>
 <p>The previous example throws up a slight problem: what happens when a singleton depends on a non-singleton disposable; and vice versa?</p>
-<p>At the moment (until 1.2 is done), it&#39;s good news and bad news...</p>
 <h3 id="transient-depending-on-a-singleton">Transient depending on a Singleton</h3>
-<p>When a transient object depends on a singleton disposable, then (regardless of whether the transient is Disposable too) then nothing changes, the
+<p>When a transient object depends on a singleton disposable, then (regardless of whether the transient is Disposable too) nothing changes, the
 singleton is still tracked in the root-most scope, and is not disposed until that scope is disposed - there is no difference to the singleton 
 example shown above.</p>
 <h3 id="singleton-depending-on-a-transient">Singleton depending on a Transient</h3>
-<blockquote><p>[!INFO]
-This didn&#39;t work properly prior to v1.2.  If you are still using v1.1, then
+<div class="NOTE"><h5>Note</h5><p>This didn&#39;t work properly prior to v1.2.  If you are still using v1.1, then
 consider upgrading to the latest package</p>
-</blockquote>
+</div>
 <p>If the roles are reversed and a singleton takes a dependency on a transient <code>IDisposable</code>, then that transient (and any other dependencies)
 will also be tracked in the root scope, so that it remains usable for the lifetime of the singleton:</p>
 <pre><code class="lang-csharp" name="ImplicitScopeExamples.cs">var container = new Container();
@@ -318,7 +317,8 @@ using (var scope = container.CreateScope())
 }
 
 Assert.True(result.Disposable.Disposed);
-</code></pre><hr>
+</code></pre><p>In short - an object&#39;s lifetime is determined by the <em>longest</em> lifetime of any object that &#39;owns&#39; that object.</p>
+<hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>Learn how to create per-scope singletons with <a href="scoped.html">scoped objects</a>.</li>
@@ -331,7 +331,7 @@ Assert.True(result.Disposable.Disposed);
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/lifetimes/container-scopes.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/lifetimes/container-scopes.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 
 namespace Rezolver
@@ -18,7 +17,7 @@ namespace Rezolver
         /// parent container for targets whose <see cref="ITarget.DeclaredType"/> is equal, or otherwise related,
         /// to the passed <paramref name="type"/>.
         /// </summary>
-        /// <param name="type">A type that is, in some way, common to all targets or child target containers that will 
+        /// <param name="type">A type that is, in some way, common to all targets or child target containers that will
         /// be registered in the required container.</param>
         /// <param name="targets">The target container into which the returned target container will be registered.</param>
         /// <param name="rootTargetContainer">The rootmost target container (ultimate ancestor of the

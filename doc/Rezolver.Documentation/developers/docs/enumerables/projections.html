@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Enumerable Projections | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Enumerable Projections | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.29.1.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  	<script>
+  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  	
+  	  ga('create', 'UA-92764222-1', 'auto');
+  	  ga('send', 'pageview');
+  	
+  	</script></head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="enumerable-projections">Enumerable Projections</h1>
+
+<p>Projections provide a way to create an enumerable of one type from an enumerable of another type, through a single
+registration in the container.</p>
+<p>For example, let&#39;s say we have a rudimentary pricing object model, in which we have one type responsible for 
+applying a price adjustment, whose parameters are controlled by a configuration object:</p>
+<pre><code class="lang-csharp" name="SimplePriceAdjustment.cs">class SimplePriceAdjustmentConfig
+{
+    public decimal? TriggerPrice { get; set; }
+    public decimal Adjustment { get; set; }
+    public bool IsPercentage { get; set; }
+    public string DisplayName { get; set; }
+}
+
+interface IPriceAdjustment
+{
+    decimal Apply(decimal inputPrice, decimal originalPrice);
+}
+
+class SimplePriceAdjustment : IPriceAdjustment
+{
+    readonly SimplePriceAdjustmentConfig _config;
+    public SimplePriceAdjustment(SimplePriceAdjustmentConfig config)
+    {
+        _config = config;
+    }
+
+    public virtual decimal Apply(decimal inputPrice, decimal originalPrice)
+    {
+        if (originalPrice &gt;= (_config.TriggerPrice ?? originalPrice))
+        {
+            if (_config.IsPercentage)
+                return inputPrice * _config.Adjustment;
+            else
+                return inputPrice + _config.Adjustment;
+        }
+
+        return inputPrice;
+    }
+}
+</code></pre><div class="NOTE"><h5>Note</h5><p>Of course, in a real-world application, we might split fixed/percentage rules into separate
+implementations.  Also, we might have an explicit order to apply to apply them in (e.g. tax rules last).</p>
+<p>So, remember, this example isn&#39;t meant to be used as the template for a real-world pricing calculator!</p>
+</div>
+<p>An application, then, will register one or more configuration objects (or a way to obtain an enumerable 
+programmatically) and then will, at some point, want to turn that into an enumerable of adjustment objects
+when calculating a price for something.</p>
+<p>Now, clearly, the application shouldn&#39;t be depending on those configs, it should be depending on the adjustments
+themselves, in short:</p>
+<pre><code class="lang-csharp" name="SimplePriceCalculator.cs">class SimplePriceCalculator
+{
+    readonly IEnumerable&lt;SimplePriceAdjustment&gt; _adjustments;
+
+    public SimplePriceCalculator(IEnumerable&lt;SimplePriceAdjustment&gt; adjustments)
+    {
+        _adjustments = adjustments;
+    }
+
+    public decimal Calculate(decimal itemPrice)
+    {
+        decimal original = itemPrice;
+        foreach (var adjustment in _adjustments)
+        {
+            itemPrice = adjustment.Apply(itemPrice, original);
+        }
+        return itemPrice;
+    }
+}
+</code></pre><p>What Rezolver&#39;s enumerable projections allow you to do is to register the configs either as individual entries,
+as has already been shown in the <a href="../enumerables.html">initial topic in this section</a>, or as an explicitly 
+registered enumerable, and then to create a single registration for a projection from 
+<code>IEnumerable&lt;SimplePriceAdjustmentConfig&gt;</code> to <code>IEnumerable&lt;SimplePriceAdjustment&gt;</code>.</p>
+<p>When rezolved, Rezolver iterates all items in the input sequence, executing the registered target each time,
+setting the newly created instance into the output sequence.  In effect, it performs a Linq 
+<code>.Select(input =&gt; output)</code> operation on the input sequence.</p>
+<p>For simple cases like this, where the type we are projecting to is always the same and always created by constructor
+injection, we can use the <a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_">RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer)</a>
+extension method:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+
+container.RegisterObject(new SimplePriceAdjustmentConfig()
+{
+    Adjustment = 10M,
+    DisplayName = &quot;Always Add 10&quot;
+});
+
+container.RegisterObject(new SimplePriceAdjustmentConfig()
+{
+    Adjustment = 0.75M,
+    DisplayName = &quot;25% Off&quot;,
+    IsPercentage = true,
+    TriggerPrice = 49.99M
+});
+
+// now register the projection (note: it can be set up
+// at any time, and additional registrations can be made
+// which match the source enumerable after this registration
+// is done)
+container.RegisterProjection&lt;SimplePriceAdjustmentConfig, SimplePriceAdjustment&gt;();
+
+container.RegisterType&lt;SimplePriceCalculator&gt;();
+
+// get our calculator
+var calc = container.Resolve&lt;SimplePriceCalculator&gt;();
+
+Assert.Equal(40 + 10, calc.Calculate(40));
+Assert.Equal((55 + 10) * 0.75M, calc.Calculate(55));
+</code></pre><div class="TIP"><h5>Tip</h5><p>This form can also be used to reuse an existing registration, which is covered in the next section.</p>
+</div>
+<p>One of the key things to note about this is that, by registering a projection, we are creating a specific 
+<code>IEnumerable&lt;T&gt;</code> registration in the container which is <em>tied</em> to the source enumerable.  After doing this, it&#39;s
+no longer possible to create additional registrations for the projected type (i.e. <code>SimplePriceAdjustment</code> in this 
+case) and have them included in the output enumerable.</p>
+<h1 id="more-advanced-projections">More advanced projections</h1>
+<p>The <a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_">RegisterProjection</a> overload supports many more scenarios than just
+automatically generating constructor-injected instances of the same type.</p>
+<h2 id="different-serviceimplementation-types">Different service/implementation types</h2>
+<p>In the same way that we can register a type for constructor injection against a specific service type using the
+form <code>container.RegisterType&lt;Service, IService&gt;()</code> to create an instance of <code>Service</code> whenever <code>IService</code> is required,
+you can also split the service and implementation types for the output enumerable of a projection:</p>
+<pre><code class="lang-cs">container.RegisterProjection&lt;Foo, IBar, Bar&gt;();
+</code></pre><p>This will project an enumerable of <code>IEnumerable&lt;IBar&gt;</code> (the second type argument) by creating instances of <code>Bar</code>
+for every input instance of <code>Foo</code>.</p>
+<h2 id="reusing-an-existing-registration">Reusing an existing registration</h2>
+<p>When registering a projection, Rezolver will only auto-create a constructor-injected target for the implementation
+type if a target isn&#39;t found in the container for the same type.  This means that we can configure the container 
+to create instances of the output type in any way that we want, and that registration will be reused by the 
+projection.</p>
+<p>To demonstrate this, we&#39;ll start moving towards a more sensible design and take advantage of the <code>IPriceAdjustment</code>
+interface that we&#39;ve implemented on <code>SimplePriceAdjustment</code>.  Let&#39;s add a decorator which only applies an adjustment
+if the result is greater than or equal to 50% of the original price:</p>
+<pre><code class="lang-csharp" name="SimplePriceAdjustment.cs">class NeverLessThanHalfPrice : IPriceAdjustment
+{
+    readonly IPriceAdjustment _inner;
+    public NeverLessThanHalfPrice(IPriceAdjustment inner)
+    {
+        _inner = inner;
+    }
+
+    public decimal Apply(decimal inputPrice, decimal originalPrice)
+    {
+        var innerResult = _inner.Apply(inputPrice, originalPrice);
+        if (innerResult &lt; (originalPrice / 2))
+            return inputPrice;
+        return innerResult;
+    }
+}
+</code></pre><p>Pretty standard stuff.</p>
+<p>And now let&#39;s define a new calculator type which depends upon an <code>IEnumerable&lt;IPriceAdjustment&gt;</code> instead of an
+<code>IEnumerable&lt;SimplePriceAdjustment&gt;</code>:</p>
+<pre><code class="lang-csharp" name="SimplePriceCalculator.cs">class PriceCalculator
+{
+    readonly IEnumerable&lt;IPriceAdjustment&gt; _adjustments;
+
+    public PriceCalculator(IEnumerable&lt;IPriceAdjustment&gt; adjustments)
+    {
+        _adjustments = adjustments;
+    }
+
+    public decimal Calculate(decimal itemPrice)
+    {
+        decimal original = itemPrice;
+        foreach (var adjustment in _adjustments)
+        {
+            itemPrice = adjustment.Apply(itemPrice, original);
+        }
+        return itemPrice;
+    }
+}
+</code></pre><p>Now we can use Rezolver&#39;s <a href="../decorators.html">support for decorators</a> to decorate every projected <code>IPriceAdjustment</code>
+with our rule which ensures that no combination of price adjustments will ever result more than a 50% reduction:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+container.RegisterType&lt;SimplePriceAdjustment, IPriceAdjustment&gt;();
+container.RegisterDecorator&lt;NeverLessThanHalfPrice, IPriceAdjustment&gt;();
+container.RegisterType&lt;PriceCalculator&gt;();
+
+// note here - projection targets IPriceAdjustment now
+container.RegisterProjection&lt;SimplePriceAdjustmentConfig, IPriceAdjustment&gt;();
+
+container.RegisterObject(new SimplePriceAdjustmentConfig()
+{
+    Adjustment = -10M,
+    DisplayName = &quot;10 off&quot;
+});
+
+container.RegisterObject(new SimplePriceAdjustmentConfig()
+{
+    Adjustment = 0.75M,
+    IsPercentage = true,
+    DisplayName = &quot;25% off&quot;
+});
+
+var calculator = container.Resolve&lt;PriceCalculator&gt;();
+
+// 25% off will not be applied.
+Assert.Equal(10, calculator.Calculate(20));
+// but it is here
+Assert.Equal(15, calculator.Calculate(30));
+</code></pre><p>This example is worthy of some extra explanation, so let&#39;s take a look at the code line-by-line:</p>
+<blockquote><p>[!INFO]
+You can skip this part if you&#39;re happy to accept that it &#39;just works&#39;.</p>
+</blockquote>
+<ul>
+<li>First, we&#39;re registering the <code>SimplePriceAdjustment</code> type for constructor injection when an <code>IPriceAdjustment</code>
+is requested.</li>
+<li>Then we&#39;re registering a decorator for the <code>IPriceAdjustment</code> interface which will wrap all instances produced
+for that type with an instance of the <code>NeverLessThanHalfPrice</code> decorator.</li>
+<li>Then we register the <code>PriceCalculator</code> type.</li>
+<li>And then we declare the projection from <code>SimplePriceAdjustmentConfig</code> to <code>IPriceAdjustment</code>.  This means that
+when an <code>IEnumerable&lt;IPriceAdjustment&gt;</code> is requested, the container will project a new <code>IPriceAdjustment</code> instance
+for each <code>SimplePriceAdjustmentConfig</code>.</li>
+<li>Finally, some price configs are added</li>
+</ul>
+<p>When the container is building the instances of <code>IPriceAdjustment</code> for the enumerable, it does a couple of things
+behind the scenes:</p>
+<ul>
+<li>Creates a temporary <code>ITargetContainer</code> into which it registers the <code>SimplePriceAdjustmentConfig</code> that it has
+obtained from the input enumerable.  <em><strong>Note</strong></em> - It&#39;s the <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> that is used for this.</li>
+<li>Locates the correct target to execute for the service type <code>IPriceAdjustment</code> (in this case, the decorator)</li>
+<li>When compiling the <code>IPriceAdjustment</code> target for each item in the loop, Rezolver passes the &#39;extra&#39; 
+<code>ITargetContainer</code> through.  Thus, when the <code>SimplePriceAdjustmentConfig</code> dependency is resolved for the 
+<code>SimplePriceAdjustment</code> constructor, it resolves the latest one obtained from the input enumerable.</li>
+</ul>
+<hr>
+<h1 id="other-advanced-projections">Other advanced projections</h1>
+<p>We&#39;ve not yet touched on the strongest features of projections - i.e:</p>
+<ul>
+<li><a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__">RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</a> -
+With this function you register a projection with a callback to select the implementation type to be resolved for 
+each projected element (useful for dynamically chosing generics etc).  The callback is passed an <code>ITarget</code> which 
+represents the value that is to be projected.  </li>
+<li><a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__">RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</a> -
+And with this function you provide a callback to build a specific target for each projected element.</li>
+</ul>
+<p>As suggested above, these really come into their own for scenarios such as projections of generic types.</p>
+<p>We&#39;re not providing in-depth examples for these as we&#39;re probably at example overload by now.  There are tests in the
+main tests projects which you can look at.  We might also add some examples later if there&#39;s enough demand.</p>
+<p>The chances are, though, that most people won&#39;t need this functionality and, if you do, you&#39;re probably of a 
+sufficient level to be able to figure it out for yourself.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/projections.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

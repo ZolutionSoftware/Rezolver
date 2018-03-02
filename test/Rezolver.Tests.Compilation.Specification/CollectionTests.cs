@@ -21,7 +21,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var result = container.Resolve<Collection<int>>();
             
             Assert.NotNull(result);
-            Assert.Equal(0, result.Count);
+            Assert.Empty(result);
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var result = container.Resolve<ReadOnlyCollection<int>>();
 
             Assert.NotNull(result);
-            Assert.Equal(0, result.Count);
+            Assert.Empty(result);
         }
 
         [Fact]

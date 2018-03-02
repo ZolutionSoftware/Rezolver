@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -25,18 +24,20 @@ namespace Rezolver
         {
             public readonly ConcurrentDictionary<Type, ITarget> FetchCache
                 = new ConcurrentDictionary<Type, ITarget>();
+
             public readonly ConcurrentDictionary<Type, IEnumerable<ITarget>> FetchAllCache
                 = new ConcurrentDictionary<Type, IEnumerable<ITarget>>();
 
-            public bool Empty => FetchCache.Count == 0 && FetchAllCache.Count == 0;
+            public bool Empty => this.FetchCache.Count == 0 && this.FetchAllCache.Count == 0;
         }
 
         private Caches _caches = new Caches();
 
         private void InvalidateCaches()
         {
-            _caches = new Caches();
+            this._caches = new Caches();
         }
+
         /// <summary>
         /// Gets the open generic type definition which is common to all targets and containers within this container.
         /// </summary>
@@ -47,17 +48,20 @@ namespace Rezolver
         /// <summary>
         /// Initializes a new instance of the <see cref="GenericTargetContainer"/> class.
         /// </summary>
-        /// <param name="root">Required.  The root <see cref="ITargetContainer"/> in which the new generic target container 
+        /// <param name="root">Required.  The root <see cref="ITargetContainer"/> in which the new generic target container
         /// will be registered.</param>
         /// <param name="genericType">Required. The generic type definition that all targets and subcontainers registered
         /// to the new container will have in common.</param>
-        public GenericTargetContainer(ITargetContainer root, Type genericType)
+        public GenericTargetContainer(IRootTargetContainer root, Type genericType)
             : base(root ?? throw new ArgumentNullException(nameof(root)))
         {
-            GenericType = genericType ?? throw new ArgumentNullException(nameof(genericType));
-            if (!TypeHelpers.IsGenericTypeDefinition(GenericType)) throw new ArgumentException("type must be a generic type definition", nameof(genericType));
+            this.GenericType = genericType ?? throw new ArgumentNullException(nameof(genericType));
+            if (!TypeHelpers.IsGenericTypeDefinition(this.GenericType))
+            {
+                throw new ArgumentException("type must be a generic type definition", nameof(genericType));
+            }
 
-            Targets = new TargetListContainer(Root, genericType);
+            this.Targets = new TargetListContainer(this.Root, genericType);
         }
 
         /// <summary>
@@ -78,30 +82,36 @@ namespace Rezolver
         /// and then chains to its <see cref="ITargetContainer.Register(ITarget, Type)" /> method.</remarks>
         public override void Register(ITarget target, Type serviceType = null)
         {
-            if (serviceType == null) serviceType = target.DeclaredType;
-
-            //if the type we're adding against is equal to this container's generic type definition,
-            //then we add it to the collection of targets that are registered specifically against
-            //this type.
-            if (serviceType == GenericType)
+            if (serviceType == null)
             {
-                Targets.Register(target, serviceType);
-                InvalidateCaches();
+                serviceType = target.DeclaredType;
+            }
+
+            // if the type we're adding against is equal to this container's generic type definition,
+            // then we add it to the collection of targets that are registered specifically against
+            // this type.
+            if (serviceType == this.GenericType)
+            {
+                this.Targets.Register(target, serviceType);
+                this.InvalidateCaches();
             }
             else
             {
-                //the type MUST therefore be a closed generic over the generic type definition,
-                //if it's not, then we must throw an exception
-                if (!TypeHelpers.IsGenericType(serviceType) || serviceType.GetGenericTypeDefinition() != GenericType)
-                    throw new ArgumentException($"Type must be equal to the generic type definition { GenericType } or a closed instance of that type", nameof(serviceType));
+                // the type MUST therefore be a closed generic over the generic type definition,
+                // if it's not, then we must throw an exception
+                if (!TypeHelpers.IsGenericType(serviceType) || serviceType.GetGenericTypeDefinition() != this.GenericType)
+                {
+                    throw new ArgumentException($"Type must be equal to the generic type definition {this.GenericType} or a closed instance of that type", nameof(serviceType));
+                }
+
                 base.Register(target, serviceType);
-                InvalidateCaches();
+                this.InvalidateCaches();
             }
         }
 
         /// <summary>
         /// Override of the <see cref="TargetDictionaryContainer.RegisterContainer(Type, ITargetContainer)"/> method.
-        /// 
+        ///
         /// Doesn't do anything different, except invalidate some internal caches.
         /// </summary>
         /// <param name="type"></param>
@@ -109,7 +119,7 @@ namespace Rezolver
         public override void RegisterContainer(Type type, ITargetContainer container)
         {
             base.RegisterContainer(type, container);
-            InvalidateCaches();
+            this.InvalidateCaches();
         }
 
         /// <summary>
@@ -119,27 +129,29 @@ namespace Rezolver
         /// restrictions placed on the <see cref="ITarget.DeclaredType"/> of the targets that can actually
         /// be registered into this container, the function will only ever return anything if <paramref name="type"/>
         /// is a closed generic type whose definition equals <see cref="GenericType"/>.</param>
-        /// <remarks>Targets which have been registered specifically against the exact closed generic type 
+        /// <remarks>Targets which have been registered specifically against the exact closed generic type
         /// represented by <paramref name="type"/> take precedence over any targets which have been registered
         /// against the open generic type <see cref="GenericType"/>.</remarks>
         public override ITarget Fetch(Type type)
         {
-            //don't bother checking type validity, just find the container entry with the 
-            //given type and return the result of its fetch function.
-            //If we don't find one - then we return the targets that have been registered against the 
-            //open generic type definition.
-            return _caches.FetchCache.GetOrAdd(type, t => 
+            // don't bother checking type validity, just find the container entry with the
+            // given type and return the result of its fetch function.
+            // If we don't find one - then we return the targets that have been registered against the
+            // open generic type definition.
+            return this._caches.FetchCache.GetOrAdd(type, t =>
             {
                 ITarget baseResult = null;
-                foreach (var searchType in new TargetTypeSelector(t, Root))
+                foreach (var searchType in new TargetTypeSelector(t, this.Root))
                 {
                     if ((baseResult = base.Fetch(searchType)) != null)
+                    {
                         return baseResult;
+                    }
                 }
 
-                //no direct match for any of the search types in our dictionary - so resort to the 
-                //targets that have been registered directly against the open generic type.
-                return Targets.Fetch(t);
+                // no direct match for any of the search types in our dictionary - so resort to the
+                // targets that have been registered directly against the open generic type.
+                return this.Targets.Fetch(t);
             });
         }
 
@@ -149,26 +161,34 @@ namespace Rezolver
         /// <param name="type">The type whose targets are to be retrieved.</param>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            return _caches.FetchAllCache.GetOrAdd(type, t => FetchAllWorker(t).ToArray());
+            return this._caches.FetchAllCache.GetOrAdd(type, t => this.FetchAllWorker(t).ToArray());
         }
 
         private IEnumerable<ITarget> FetchAllWorker(Type type)
         {
-            bool matchAll = Root.GetOption(type, Options.FetchAllMatchingGenerics.Default);
+            bool matchAll = this.Root.GetOption(type, Options.FetchAllMatchingGenerics.Default);
             bool foundOne = false;
 
-            //all generics are returned in descending order of specificity
-            foreach (var searchType in new TargetTypeSelector(type, Root).Distinct())
+            // all generics are returned in descending order of specificity
+            foreach (var searchType in new TargetTypeSelector(type, this.Root).Distinct())
             {
                 foreach (var result in base.FetchAll(searchType))
                 {
-                    if (!matchAll && !foundOne) foundOne = true;
+                    if (!matchAll && !foundOne)
+                    {
+                        foundOne = true;
+                    }
+
                     yield return result;
                 }
-                if (!matchAll && foundOne) yield break;
+
+                if (!matchAll && foundOne)
+                {
+                    yield break;
+                }
             }
 
-            foreach (var result in Targets.FetchAll(type))
+            foreach (var result in this.Targets.FetchAll(type))
             {
                 yield return result;
             }

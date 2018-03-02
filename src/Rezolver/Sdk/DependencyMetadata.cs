@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System.Collections.Generic;
 
 namespace Rezolver.Sdk
 {
     /// <summary>
     /// Represents a dependency from an <see cref="IDependant"/> on one or more other objects
     /// in a collection.
-    /// 
+    ///
     /// Note that the current implementations of this class are internal and can only be created
     /// through the various methods in the <see cref="DependantExtensions"/> class.
     /// </summary>
@@ -32,11 +35,12 @@ namespace Rezolver.Sdk
         /// <param name="required"></param>
         public DependencyMetadata(IDependant owner, bool required)
         {
-            Owner = owner;
-            Required = required;
+            this.Owner = owner;
+            this.Required = required;
         }
+
         /// <summary>
-        /// Called to select the dependencies which match this dependency metadata from the 
+        /// Called to select the dependencies which match this dependency metadata from the
         /// <paramref name="objects"/> passed.
         /// </summary>
         /// <typeparam name="T">Type type of objects from which dependencies are sought.</typeparam>
@@ -44,12 +48,12 @@ namespace Rezolver.Sdk
         /// match this dependency metadata.</param>
         /// <returns>A filtered enumerable containing any objects from <paramref name="objects"/> which match
         /// this dependency metadata.</returns>
-        /// <exception cref="DependencyException">Most commonly thrown if a required dependency is not 
+        /// <exception cref="DependencyException">Most commonly thrown if a required dependency is not
         /// present in <paramref name="objects"/>, but other reasons are possible.
-        /// 
+        ///
         /// Basically - if you get one of these, then there's something wrong with the <paramref name="objects"/>
         /// which prevents dependencies from being obtained by this dependency metadata.</exception>
-        public abstract IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects) where T: class;
+        public abstract IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects)
+            where T: class;
     }
-
 }

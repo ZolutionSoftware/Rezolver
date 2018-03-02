@@ -8,7 +8,7 @@
   	<title>Rezolver | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Rezolver | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="favicon.ico">
   	<link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="styles/main.css">
   	<meta property="docfx:navrel" content="toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../apple-touch-icon-57x57.png">
@@ -116,23 +117,73 @@ with Asp.Net Core integration.</p>
 <a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting package</a>,
 supported by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection package</a>
 which provides an implementation of the new .Net Core DI container abstraction.</p>
-<h2 id="131-released">1.3.1 Released!</h2>
-<p>Adds .Net Standard 2.0 and more. See the <a href="https://github.com/ZolutionSoftware/Rezolver/releases">release notes on Github</a>.</p>
-<h2 id="features">Features</h2>
+<h1 id="release-highlights">Release Highlights</h1>
+<p>For full release notes for each version - <a href="https://github.com/ZolutionSoftware/Rezolver/releases">see release notes on Github</a>.</p>
+<ul>
+<li><strong>1.3.2</strong><ul>
+<li><a href="docs/variance/covariance.html">Generic Covariance</a></li>
+<li><a href="docs/variance/mixed.html">Mixed Variance</a></li>
+<li><a href="docs/enumerables/projections.html">Enumerable Projections</a></li>
+<li><a href="docs/constructor-injection/generics-manual-constructor.html">Targeting specific constructors of open generics</a></li>
+<li><a href="docs/member-injection/collections.html">List member bindings</a></li>
+<li><a href="docs/member-injection/fluent-api.html">Per-member bindings (Fluent API)</a></li>
+</ul>
+</li>
+<li><strong>1.3.1</strong>  <ul>
+<li>Added .Net Standard 2.0 support and more.</li>
+</ul>
+</li>
+</ul>
+<h1 id="feature-overview">Feature Overview</h1>
 <p><em>Linked topics provide high level overviews and examples in our developer guide - click on them to find out more! (*)</em></p>
+<h2 id="core-features">Core Features</h2>
 <ul>
 <li><a href="docs/constructor-injection/index.html">Constructor Injection</a><ul>
 <li>Multiple constructors supported</li>
-<li>&#39;Intelligent&#39; constructor discovery based on registered services</li>
+<li>Up-front constructor selection</li>
+<li>Automatic, &#39;intelligent&#39; constructor discovery based on registered services</li>
 <li>Named argument binding</li>
 <li>Parameters with default arguments are supported</li>
-<li><a href="docs/constructor-injection/member-injection.html">Member injection</a> (extensible)</li>
 </ul>
 </li>
-<li><a href="docs/constructor-injection/generics.html">Open Generic Constructor Injection</a> (with specific closed generics taking precedence)</li>
-<li><a href="docs/enumerables.html">Enumerables</a> (empty enumerables returned by default)<ul>
-<li><a href="docs/enumerables/lazy-vs-eager.html">Lazy and eager enumerables</a> - configurable on a per-type basis (new in 1.3)</li>
-<li><a href="docs/enumerables/generics.html">Enumerables of generics</a> - from least generic (e.g. <code>IFoo&lt;Bar&gt;</code>) to most generic (<code>IFoo&lt;&gt;</code>)</li>
+<li><a href="docs/member-injection/index.html">Member injection</a><ul>
+<li>Automatic public property (and/or) field injection</li>
+<li><a href="docs/member-injection/collections.html">Collection initialisers</a> (via enumerables)</li>
+<li><a href="docs/member-injection/fluent-api.html">Fluent API</a> for per-member behaviours</li>
+<li><a href="docs/member-injection/custom.html">Extensible API</a> for completely custom behaviours</li>
+</ul>
+</li>
+<li><a href="docs/constructor-injection/generics.html">Open Generic Constructor Injection</a><ul>
+<li><a href="docs/constructor-injection/generics-manual-constructor.html">Up-front constructor selection</a></li>
+<li>Specific closed generics take precedence</li>
+</ul>
+</li>
+<li><a href="docs/delegates.html">Factory Delegates</a><ul>
+<li>Argument injection</li>
+<li>Explicit resolving supported inside factory bodies</li>
+</ul>
+</li>
+<li><a href="docs/expressions.html">Factory Expressions</a><ul>
+<li>Argument injection</li>
+<li>Explicit resolving as above</li>
+</ul>
+</li>
+<li><a href="docs/lifetimes/singleton.html">Singletons</a></li>
+<li><a href="docs/objects.html">Constant services</a></li>
+<li><a href="docs/lifetimes/container-scopes.html">Hierarchical lifetime scoping</a></li>
+<li><a href="docs/lifetimes/scoped.html">Scoped objects</a> (i.e. &#39;singleton per scope&#39;)</li>
+</ul>
+<h2 id="enumerables-arrays-and-collections">Enumerables, Arrays and Collections</h2>
+<ul>
+<li><a href="docs/enumerables.html">Automatic enumerable injection</a> <ul>
+<li><em>Empty enumerables returned by default</em></li>
+<li><a href="docs/enumerables/lazy-vs-eager.html">Lazy and eager enumerables</a><ul>
+<li><em>Configurable on a per-type basis (added in 1.3)</em></li>
+</ul>
+</li>
+<li><a href="docs/enumerables/generics.html">Enumerables of generics</a></li>
+<li><a href="docs/variance/covariance.html#enumerables">Enumerable covariance support</a></li>
+<li><a href="docs/enumerables/projections.html">Projections</a></li>
 </ul>
 </li>
 <li><a href="docs/arrays-lists-collections/arrays.html">Array injection</a></li>
@@ -144,6 +195,17 @@ which provides an implementation of the new .Net Core DI container abstraction.<
 <li>Also <code>ICollection&lt;T&gt;</code>, <code>ReadOnlyCollection&lt;T&gt;</code> and <code>IReadOnlyCollection&lt;T&gt;</code></li>
 </ul>
 </li>
+</ul>
+<h2 id="advanced">Advanced</h2>
+<ul>
+<li><a href="docs/variance/index.html">Generic Variance</a><ul>
+<li><a href="docs/variance/contravariance.html">Generic Contravariance</a> (<code>Action&lt;IFoo&gt;</code> resolved for <code>Action&lt;Foo&gt;</code>)</li>
+<li><a href="docs/variance/covariance.html">Generic Covariance</a> (<code>Func&lt;Foo&gt;</code> resolved for <code>Func&lt;IFoo&gt;</code>)</li>
+<li><a href="docs/variance/mixed.html">Mixed Variance</a> (<code>Func&lt;IFoo, Bar&gt;</code> resolved for <code>Func&lt;Foo, IBar&gt;</code>)</li>
+<li><em>Can be enabled and disabled globally and per-type</em></li>
+<li><em>(As noted above) Enumerables and collections automatically include all generic variant matches</em></li>
+</ul>
+</li>
 <li><a href="docs/decorators.html">Decorators</a><ul>
 <li>Non-generic &amp; generic constructor injection</li>
 <li>Specialised generic (<em>where a decorator for <code>IFoo&lt;&gt;</code> is redecorated by another decorator for <code>IFoo&lt;Bar&gt;</code> only when
@@ -153,24 +215,14 @@ which provides an implementation of the new .Net Core DI container abstraction.<
 <li>Can decorate any of the built-in enumerable/collection types</li>
 </ul>
 </li>
-<li><a href="docs/contravariance.html">Generic Contravariance</a> (e.g. <code>Action&lt;IFoo&gt;</code> registration automatically used for <code>Action&lt;Foo&gt;</code>)<ul>
-<li>Can be enabled and disabled globally and per-type</li>
-<li>Enumerables and collections automatically include all contravariant matches</li>
-</ul>
-</li>
 <li>Constrained generics</li>
-<li>Child containers (overriding registrations in one container with those of another)<ul>
-<li>Child registration containers (lower-level overriding of registrations for similar but sibling containers)</li>
+<li>Child containers<ul>
+<li>Including child registration containers (lower-level overriding of registrations for similar but sibling containers)</li>
 </ul>
 </li>
-<li><a href="docs/lifetimes/container-scopes.html">Hierarchical lifetime scoping</a></li>
-<li><a href="docs/delegates.html">Delegates</a> and <a href="docs/expressions.html">Expressions</a> as factories, with argument injection<ul>
-<li>Explicit resolving supported inside factory/expression bodies</li>
 </ul>
-</li>
-<li><a href="docs/lifetimes/singleton.html">Singletons</a></li>
-<li><a href="docs/objects.html">Objects as services</a></li>
-<li><a href="docs/lifetimes/scoped.html">Scoped objects</a> (i.e. &#39;singleton per scope&#39;)</li>
+<h2 id="other">Other</h2>
+<ul>
 <li>No &#39;prepare&#39; phase - you can register targets in a container after you start using it<ul>
 <li><em>Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way</em></li>
 </ul>
@@ -200,7 +252,7 @@ which provides an implementation of the new .Net Core DI container abstraction.<
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -1,9 +1,12 @@
-﻿using Rezolver.Targets;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
@@ -18,17 +21,24 @@ namespace Rezolver
         {
             var result = targets.Fetch(objectType);
             if (result != null)
+            {
                 return FetchDirect(result, targets, objectType);
+            }
+
             return result;
         }
 
         private static object FetchDirect(ITarget target, ITargetContainer targets, Type objectType)
         {
             if (TypeHelpers.IsAssignableFrom(objectType, target.GetType()))
+            {
                 return target;
+            }
 
             if (target is IDirectTarget directTarget)
+            {
                 return directTarget.GetValue();
+            }
 
             return null;
         }

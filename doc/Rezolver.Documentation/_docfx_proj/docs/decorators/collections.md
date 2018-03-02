@@ -32,7 +32,7 @@ As with all decorators, they stack and they will honour the order in which they 
 # Decorating `IEnumerable<T>`
 
 Decorating `IEnumerable<T>` can be done in a similar way to that shown in the example in the 
-[contravariance topic in which `IOrderedEnumerable<T>` is configured](../contravariance.md#injecting-icomparert) -
+[contravariance topic in which `IOrderedEnumerable<T>` is configured](../variance/contravariance.md#injecting-icomparert) -
 simply change the registration of the `OrderedEnumerableWrapper<T>` from this:
 
 ```cs

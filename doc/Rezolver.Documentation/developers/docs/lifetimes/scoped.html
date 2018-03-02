@@ -8,7 +8,7 @@
   	<title>Scoped Objects | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Scoped Objects | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../../styles/main.css">
   	<meta property="docfx:navrel" content="../../toc.html">
   	<meta property="docfx:tocrel" content="../toc.html">
+  	
   	<meta property="docfx:rel" content="../../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
@@ -115,7 +116,7 @@ identical), then the <a href="container-scopes.html">container scopes topic</a> 
 <ul>
 <li>A scoped object is a singleton enforced at the scope level</li>
 <li>The <a class="xref" href="../../api/Rezolver.ITarget.html#Rezolver_ITarget_ScopeBehaviour">ScopeBehaviour</a> of an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> that creates a scoped object will be set to <a class="xref" href="../../api/Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_Explicit">Explicit</a>.</li>
-<li>Although often used with objects that support the <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.idisposable(v=vs.110).aspx">IDisposable</a> interface; any object can be registered as &#39;scoped&#39;</li>
+<li>Although often used with objects that support the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> interface; any object can be registered as &#39;scoped&#39;</li>
 <li>Any target can be made to produce a scoped object by wrapping it with a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> (either through its constructor or via the
 <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Scoped_">Scoped</a> extension method)</li>
 <li>You can also register scoped types (i.e. a shortcut for creating a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
@@ -165,7 +166,7 @@ they do for transient object.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/lifetimes/scoped.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/lifetimes/scoped.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

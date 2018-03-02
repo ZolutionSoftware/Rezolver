@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Rezolver.Sdk;
@@ -6,12 +9,12 @@ using Rezolver.Sdk;
 namespace Rezolver
 {
     /// <summary>
-    /// An <see cref="ITargetContainerConfig"/> which contains zero or or more other 
-    /// <see cref="ITargetContainerConfig"/> objects.  Configurations can depend on others, and this 
+    /// An <see cref="ITargetContainerConfig"/> which contains zero or or more other
+    /// <see cref="ITargetContainerConfig"/> objects.  Configurations can depend on others, and this
     /// collection ensures that they are applied in the correct order.
     /// </summary>
     /// <seealso cref="CombinedContainerConfig"/>
-    public class CombinedTargetContainerConfig 
+    public class CombinedTargetContainerConfig
         : DependantCollection<ITargetContainerConfig>, ITargetContainerConfig
     {
         /// <summary>
@@ -19,7 +22,6 @@ namespace Rezolver
         /// </summary>
         public CombinedTargetContainerConfig()
         {
-
         }
 
         /// <summary>
@@ -30,18 +32,16 @@ namespace Rezolver
         public CombinedTargetContainerConfig(IEnumerable<ITargetContainerConfig> configs)
             : base(configs)
         {
-
         }
 
         /// <summary>
-        /// Constructs a new instance of the <see cref="CombinedTargetContainerConfig"/> type, using the passed 
+        /// Constructs a new instance of the <see cref="CombinedTargetContainerConfig"/> type, using the passed
         /// configurations to seed the underlying collection.
         /// </summary>
         /// <param name="configs">The behaviours to be added to the collection on construction.</param>
         public CombinedTargetContainerConfig(params ITargetContainerConfig[] configs)
             : this((IEnumerable<ITargetContainerConfig>)configs)
         {
-
         }
 
         /// <summary>
@@ -55,11 +55,11 @@ namespace Rezolver
         /// Applies each configuration in this collection to the passed <paramref name="targets"/> <see cref="ITargetContainer"/>.
         /// </summary>
         /// <param name="targets">The target container to which the configurations in this collection are to be applied.</param>
-        /// <remarks>The implementation runs through each configuration that has been added to the collection, in dependency 
-        /// order, calling its <see cref="ITargetContainerConfig.Configure(ITargetContainer)"/> method.</remarks>
-        public void Configure(ITargetContainer targets)
+        /// <remarks>The implementation runs through each configuration that has been added to the collection, in dependency
+        /// order, calling its <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> method.</remarks>
+        public void Configure(IRootTargetContainer targets)
         {
-            foreach (var config in Ordered)
+            foreach (var config in this.Ordered)
             {
                 config.Configure(targets);
             }

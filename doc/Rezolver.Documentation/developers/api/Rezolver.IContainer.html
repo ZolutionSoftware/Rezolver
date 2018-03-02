@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface IContainer
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -122,7 +123,7 @@
       <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">IScopeFactory.CreateScope()</a>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/wacy2d1s(v=vs.110).aspx">IServiceProvider.GetService(Type)</a>
+      <span class="xref">System.IServiceProvider.GetService(System.Type)</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
@@ -132,15 +133,15 @@
     <pre><code class="lang-csharp hljs">public interface IContainer : IScopeFactory, IServiceProvider</code></pre>
   </div>
   <h5 id="Rezolver_IContainer_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>Instances of objects (typically known as &apos;services&apos; in IOC-speak) are resolved via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> or 
+  <div class="markdown level0 remarks"><p>Instances of objects (typically known as &apos;services&apos; in IOC-speak) are resolved via the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> or
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a> methods.</p>
-<p>You can introspect the container to check in advance whether a given type can be resolved through the 
+<p>You can introspect the container to check in advance whether a given type can be resolved through the
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_">CanResolve(IResolveContext)</a> method.</p>
-<p>Lifetime scoping (where <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.idisposable(v=vs.110).aspx">IDisposable</a> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
-by obtaining a new scope through the object&apos;s implementatio of the <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a> method; although a container might also implement the 
+<p>Lifetime scoping (where <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
+by obtaining a new scope through the object&apos;s implementatio of the <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a> method; although a container might also implement the
 <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface, in which case the container itself is a lifetime scope.</p>
-<p>Many of the functions which accept a <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> also have alternatives (in the form of extension methods) in the 
-<a class="xref" href="Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a> class.  If you&apos;re looking for the &apos;traditional&apos; IOC container methods 
+<p>Many of the functions which accept a <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> also have alternatives (in the form of extension methods) in the
+<a class="xref" href="Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a> class.  If you&apos;re looking for the &apos;traditional&apos; IOC container methods
 (e.g. <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve__1_Rezolver_IContainer_">Resolve&lt;TObject&gt;(IContainer)</a>, that&apos;s where you&apos;ll find them.</p>
 <p>Note that while the standard implementation of this interface supplied by the framework (<a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> and its derivatives) all utilitise
 the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to actually locate registrations for types which are ultimately requested from the container; the interface
@@ -150,15 +151,15 @@ doesn&apos;t actually mandate that pattern.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.CanResolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainer.cs/#L42">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainer.cs/#L41">View Source</a>
   </span>
   <a id="Rezolver_IContainer_CanResolve_" data-uid="Rezolver.IContainer.CanResolve*"></a>
   <h4 id="Rezolver_IContainer_CanResolve_Rezolver_IResolveContext_" data-uid="Rezolver.IContainer.CanResolve(Rezolver.IResolveContext)">CanResolve(IResolveContext)</h4>
   <div class="markdown level1 summary"><p>Returns true if a resolve operation for the given context will succeed.
-If you&apos;re going to be calling <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> immediately afterwards, consider using the 
+If you&apos;re going to be calling <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> immediately afterwards, consider using the
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a> method instead, which allows you to check and obtain the result at the same time.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -194,7 +195,7 @@ If you&apos;re going to be calling <a class="xref" href="Rezolver.IContainer.htm
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p><code>true</code> if this instance can resolve a type for the specified context; otherwise, <code>false</code>.</p>
 </td>
       </tr>
@@ -202,14 +203,14 @@ If you&apos;re going to be calling <a class="xref" href="Rezolver.IContainer.htm
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainer_GetCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.GetCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainer_GetCompiledTarget_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.GetCompiledTarget(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainer.cs/#L73">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainer.cs/#L72">View Source</a>
   </span>
   <a id="Rezolver_IContainer_GetCompiledTarget_" data-uid="Rezolver.IContainer.GetCompiledTarget*"></a>
   <h4 id="Rezolver_IContainer_GetCompiledTarget_Rezolver_IResolveContext_" data-uid="Rezolver.IContainer.GetCompiledTarget(Rezolver.IResolveContext)">GetCompiledTarget(IResolveContext)</h4>
-  <div class="markdown level1 summary"><p>Fetches the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> for the given context, whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> method 
+  <div class="markdown level1 summary"><p>Fetches the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> for the given context, whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> method
 would ultimately be called if the same context was passed to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -252,20 +253,20 @@ would ultimately be called if the same context was passed to <a class="xref" hre
   </table>
   <h5 id="Rezolver_IContainer_GetCompiledTarget_Rezolver_IResolveContext__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This is not typically a method that you&apos;re likely to use as the consumer of an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.
-It&apos;s more typically used by implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> or <em>implementations</em> 
+It&apos;s more typically used by implementations of <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> or <em>implementations</em>
 of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> when communicating with other containers.</p>
 <p>As such, its use at an application level is limited.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainer_Resolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.Resolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainer_Resolve_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.Resolve(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainer.cs/#L51">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainer.cs/#L50">View Source</a>
   </span>
   <a id="Rezolver_IContainer_Resolve_" data-uid="Rezolver.IContainer.Resolve*"></a>
   <h4 id="Rezolver_IContainer_Resolve_Rezolver_IResolveContext_" data-uid="Rezolver.IContainer.Resolve(Rezolver.IResolveContext)">Resolve(IResolveContext)</h4>
-  <div class="markdown level1 summary"><p>Called to resolve a reference to an object for the given context (which provides the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> of the 
+  <div class="markdown level1 summary"><p>Called to resolve a reference to an object for the given context (which provides the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> of the
 object that is required, among other things).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -301,7 +302,7 @@ object that is required, among other things).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td><p>The resolved object, if successful.</p>
 </td>
       </tr>
@@ -317,7 +318,7 @@ object that is required, among other things).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.invalidoperationexception(v=vs.110).aspx">InvalidOperationException</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
         <td><p>If the requested type cannot be resolved.</p>
 </td>
       </tr>
@@ -325,10 +326,10 @@ object that is required, among other things).</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.TryResolve(Rezolver.IResolveContext%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__.md&amp;value=---%0Auid%3A%20Rezolver.IContainer.TryResolve(Rezolver.IResolveContext%2CSystem.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainer.cs/#L60">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainer.cs/#L59">View Source</a>
   </span>
   <a id="Rezolver_IContainer_TryResolve_" data-uid="Rezolver.IContainer.TryResolve*"></a>
   <h4 id="Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__" data-uid="Rezolver.IContainer.TryResolve(Rezolver.IResolveContext,System.Object@)">TryResolve(IResolveContext, out Object)</h4>
@@ -356,7 +357,7 @@ object that is required, among other things).</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
         <td><span class="parametername">result</span></td>
         <td><p>Receives the resultant resolved object if the operation succeeds.</p>
 </td>
@@ -373,8 +374,8 @@ object that is required, among other things).</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
-        <td><p><code>true</code> if the operation succeeded (the resolved object will be set into the <code data-dev-comment-type="paramref" class="paramref">result</code> 
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if the operation succeeded (the resolved object will be set into the <code data-dev-comment-type="paramref" class="paramref">result</code>
     parameter); <code>false</code> otherwise.</p>
 </td>
       </tr>
@@ -413,10 +414,10 @@ object that is required, among other things).</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainer.md&amp;value=---%0Auid%3A%20Rezolver.IContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainer.md&amp;value=---%0Auid%3A%20Rezolver.IContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainer.cs/#L33" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainer.cs/#L32" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

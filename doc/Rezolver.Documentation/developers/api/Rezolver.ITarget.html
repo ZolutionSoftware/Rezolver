@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface ITarget
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -124,7 +125,7 @@ when the standard implementations of <a class="xref" href="Rezolver.IContainer.h
     <pre><code class="lang-csharp hljs">public interface ITarget</code></pre>
   </div>
   <h5 id="Rezolver_ITarget_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>As mentioned in the summary, the role of this interface is largely determined by the framework&apos;s own standard implementations of the 
+  <div class="markdown level0 remarks"><p>As mentioned in the summary, the role of this interface is largely determined by the framework&apos;s own standard implementations of the
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> interface - all of which use an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to store service registrations which, when
 <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is called, is queried to obtain one or more targets which will have been registered
 for the requested type.</p>
@@ -138,17 +139,17 @@ the target (the type of object that the target will produce) and to determine co
 <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> plus many others - then define the behaviour and any additional data required in order for a compiler
 to produce an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> which matches the target&apos;s intent.  E.g, the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>, which
 represents creating a new instance via a constructor, provides all the necessary information to bind to the correct constructor
-(including parameter bindings etc) - and the compiler&apos;s job is to translate that into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> which 
+(including parameter bindings etc) - and the compiler&apos;s job is to translate that into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> which
 executes that constructor, returning the result.</p>
 </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L55">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L54">View Source</a>
   </span>
   <a id="Rezolver_ITarget_DeclaredType_" data-uid="Rezolver.ITarget.DeclaredType*"></a>
   <h4 id="Rezolver_ITarget_DeclaredType" data-uid="Rezolver.ITarget.DeclaredType">DeclaredType</h4>
@@ -170,17 +171,17 @@ a constructor on a type, then this property should equal the type to which that 
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_Id.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget_Id.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L44">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L43">View Source</a>
   </span>
   <a id="Rezolver_ITarget_Id_" data-uid="Rezolver.ITarget.Id*"></a>
   <h4 id="Rezolver_ITarget_Id" data-uid="Rezolver.ITarget.Id">Id</h4>
@@ -201,17 +202,17 @@ a constructor on a type, then this property should equal the type to which that 
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.guid(v=vs.110).aspx">Guid</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L60">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L59">View Source</a>
   </span>
   <a id="Rezolver_ITarget_ScopeBehaviour_" data-uid="Rezolver.ITarget.ScopeBehaviour*"></a>
   <h4 id="Rezolver_ITarget_ScopeBehaviour" data-uid="Rezolver.ITarget.ScopeBehaviour">ScopeBehaviour</h4>
@@ -240,10 +241,10 @@ a constructor on a type, then this property should equal the type to which that 
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_ScopePreference.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopePreference%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget_ScopePreference.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopePreference%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L64">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L63">View Source</a>
   </span>
   <a id="Rezolver_ITarget_ScopePreference_" data-uid="Rezolver.ITarget.ScopePreference*"></a>
   <h4 id="Rezolver_ITarget_ScopePreference" data-uid="Rezolver.ITarget.ScopePreference">ScopePreference</h4>
@@ -271,10 +272,10 @@ a constructor on a type, then this property should equal the type to which that 
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L50">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L49">View Source</a>
   </span>
   <a id="Rezolver_ITarget_UseFallback_" data-uid="Rezolver.ITarget.UseFallback*"></a>
   <h4 id="Rezolver_ITarget_UseFallback" data-uid="Rezolver.ITarget.UseFallback">UseFallback</h4>
@@ -297,7 +298,7 @@ parameter value.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -306,10 +307,10 @@ parameter value.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_SupportsType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.SupportsType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget_SupportsType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.SupportsType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L89">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L88">View Source</a>
   </span>
   <a id="Rezolver_ITarget_SupportsType_" data-uid="Rezolver.ITarget.SupportsType*"></a>
   <h4 id="Rezolver_ITarget_SupportsType_System_Type_" data-uid="Rezolver.ITarget.SupportsType(System.Type)">SupportsType(Type)</h4>
@@ -332,7 +333,7 @@ that is compatible with, the passed <code data-dev-comment-type="paramref" class
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
         <td><p>The type.</p>
 </td>
@@ -349,7 +350,7 @@ that is compatible with, the passed <code data-dev-comment-type="paramref" class
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><p><code>true</code> if <code data-dev-comment-type="paramref" class="paramref">type</code> is supported, <code>false</code> otherwise.</p>
 </td>
       </tr>
@@ -357,7 +358,7 @@ that is compatible with, the passed <code data-dev-comment-type="paramref" class
   </table>
   <h5 id="Rezolver_ITarget_SupportsType_System_Type__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>It is strongly suggested that you use this method to check whether the target can construct
-an instance of a given type rather than performing any type checking yourself on the 
+an instance of a given type rather than performing any type checking yourself on the
 <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>, because an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> might be able to support a much wider
 range of types other than just those which are directly compatible with its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
 <p>For example, the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> is statically bound to an open generic, so therefore
@@ -395,10 +396,10 @@ because it&apos;s impossible to build an instance of an open generic type.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget.md&amp;value=---%0Auid%3A%20Rezolver.ITarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITarget.md&amp;value=---%0Auid%3A%20Rezolver.ITarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITarget.cs/#L39" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITarget.cs/#L38" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

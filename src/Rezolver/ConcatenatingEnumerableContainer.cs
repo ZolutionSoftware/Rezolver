@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,35 +16,38 @@ namespace Rezolver
 
             public EnumerableConcatenator(IResolveContext context, IEnumerable<T> baseEnumerable, IEnumerable<T> extra)
             {
-                _concatenated = baseEnumerable.Concat(extra);
+                this._concatenated = baseEnumerable.Concat(extra);
             }
 
             public IEnumerator<T> GetEnumerator()
             {
-                return _concatenated.GetEnumerator();
+                return this._concatenated.GetEnumerator();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return GetEnumerator();
+                return this.GetEnumerator();
             }
         }
 
         private readonly OverridingContainer _owner;
-        private readonly ITargetContainer _targets;
+        private readonly IRootTargetContainer _targets;
 
-        public ConcatenatingEnumerableContainer(IContainer owner, ITargetContainer targets)
+        public ConcatenatingEnumerableContainer(IContainer owner, IRootTargetContainer targets)
             : base(targets)
         {
-            if (owner == null) throw new ArgumentNullException(nameof(owner));
+            if (owner == null)
+            {
+                throw new ArgumentNullException(nameof(owner));
+            }
 
-            _owner = owner as OverridingContainer ?? throw new ArgumentException("owner must be an instance of OverridingContainer", nameof(owner));
-            _targets = targets ?? throw new ArgumentNullException(nameof(targets));
+            this._owner = owner as OverridingContainer ?? throw new ArgumentException("owner must be an instance of OverridingContainer", nameof(owner));
+            this._targets = targets ?? throw new ArgumentNullException(nameof(targets));
         }
 
         public override ITarget Fetch(Type type)
         {
-            var baseCompiled = _owner.Inner.GetCompiledTarget(new ResolveContext(_owner.Inner, type));
+            var baseCompiled = this._owner.Inner.GetCompiledTarget(new ResolveContext(this._owner.Inner, type));
             var overrideTarget = base.Fetch(type);
 
             // we know from above that if type is not IEnumerable<T>, then an exception will occur.
@@ -57,7 +59,10 @@ namespace Rezolver
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)
         {
-            if (existing is ConcatenatingEnumerableContainer) return existing;
+            if (existing is ConcatenatingEnumerableContainer)
+            {
+                return existing;
+            }
 
             return this;
         }

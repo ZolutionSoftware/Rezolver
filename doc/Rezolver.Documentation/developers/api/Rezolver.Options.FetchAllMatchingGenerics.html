@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class FetchAllMatchingGenerics
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -114,7 +115,7 @@
   <h1 id="Rezolver_Options_FetchAllMatchingGenerics" data-uid="Rezolver.Options.FetchAllMatchingGenerics" class="text-break">Class FetchAllMatchingGenerics
   </h1>
   <div class="markdown level0 summary"><p>A boolean option for target containers that controls which registrations will be returned
-when <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> is called with a closed generic type, when using the 
+when <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> is called with a closed generic type, when using the
 built in target containers.</p>
 <p>This ultimately affects the objects that are materialised in automatically generated enumerables
 (when the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> is enabled - which it is, by default)
@@ -123,8 +124,8 @@ when the element type is itself a generic type.</p>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
-    <div class="level1"><a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption</a>&lt;<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>&gt;</div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</div>
     <div class="level2"><span class="xref">FetchAllMatchingGenerics</span></div>
   </div>
   <div class="inheritedMembers">
@@ -136,22 +137,22 @@ when the element type is itself a generic type.</p>
       <a class="xref" href="Rezolver.Options.ContainerOption-1.html#Rezolver_Options_ContainerOption_1_ToString">ContainerOption&lt;Boolean&gt;.ToString()</a>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+      <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+      <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+      <span class="xref">System.Object.GetType()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+      <span class="xref">System.Object.MemberwiseClone()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Options.html">Rezolver.Options</a></h6>
@@ -166,18 +167,18 @@ and the targets it returns from its implementation of <a class="xref" href="Rezo
 where the input type is a closed generic.</p>
 <p>When <code>true</code> (the <a class="xref" href="Rezolver.Options.FetchAllMatchingGenerics.html#Rezolver_Options_FetchAllMatchingGenerics_Default">Default</a>), all targets which match <strong>both</strong> the closed generic
 <strong><em>and</em></strong> which have been registered for all applicable open generics will be returned.</p>
-<p>When <code>false</code> then the function will return only the first matching group of targets sharing 
-a common matching type.  So, if there are five registered against the open generic, and one against 
+<p>When <code>false</code> then the function will return only the first matching group of targets sharing
+a common matching type.  So, if there are five registered against the open generic, and one against
 the closed generic; then the one will &apos;beat&apos; the five.</p>
 </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_FetchAllMatchingGenerics_Default.md&amp;value=---%0Auid%3A%20Rezolver.Options.FetchAllMatchingGenerics.Default%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_FetchAllMatchingGenerics_Default.md&amp;value=---%0Auid%3A%20Rezolver.Options.FetchAllMatchingGenerics.Default%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/FetchAllMatchingGenerics.cs/#L31">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/FetchAllMatchingGenerics.cs/#L34">View Source</a>
   </span>
   <a id="Rezolver_Options_FetchAllMatchingGenerics_Default_" data-uid="Rezolver.Options.FetchAllMatchingGenerics.Default*"></a>
   <h4 id="Rezolver_Options_FetchAllMatchingGenerics_Default" data-uid="Rezolver.Options.FetchAllMatchingGenerics.Default">Default</h4>
@@ -207,14 +208,14 @@ the closed generic; then the one will &apos;beat&apos; the five.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_FetchAllMatchingGenerics_op_Implicit_System_Boolean__Rezolver_Options_FetchAllMatchingGenerics.md&amp;value=---%0Auid%3A%20Rezolver.Options.FetchAllMatchingGenerics.op_Implicit(System.Boolean)~Rezolver.Options.FetchAllMatchingGenerics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_FetchAllMatchingGenerics_op_Implicit_System_Boolean__Rezolver_Options_FetchAllMatchingGenerics.md&amp;value=---%0Auid%3A%20Rezolver.Options.FetchAllMatchingGenerics.op_Implicit(System.Boolean)~Rezolver.Options.FetchAllMatchingGenerics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/FetchAllMatchingGenerics.cs/#L38">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/FetchAllMatchingGenerics.cs/#L41">View Source</a>
   </span>
   <a id="Rezolver_Options_FetchAllMatchingGenerics_op_Implicit_" data-uid="Rezolver.Options.FetchAllMatchingGenerics.op_Implicit*"></a>
   <h4 id="Rezolver_Options_FetchAllMatchingGenerics_op_Implicit_System_Boolean__Rezolver_Options_FetchAllMatchingGenerics" data-uid="Rezolver.Options.FetchAllMatchingGenerics.op_Implicit(System.Boolean)~Rezolver.Options.FetchAllMatchingGenerics">Implicit(Boolean to FetchAllMatchingGenerics)</h4>
-  <div class="markdown level1 summary"><p>Implicit conversion operator to <a class="xref" href="Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> from <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a> to simplify 
+  <div class="markdown level1 summary"><p>Implicit conversion operator to <a class="xref" href="Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a> from <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a> to simplify
 reading and writing the option as a boolean.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -233,7 +234,7 @@ reading and writing the option as a boolean.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">value</span></td>
         <td></td>
       </tr>
@@ -262,10 +263,10 @@ reading and writing the option as a boolean.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_FetchAllMatchingGenerics.md&amp;value=---%0Auid%3A%20Rezolver.Options.FetchAllMatchingGenerics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_FetchAllMatchingGenerics.md&amp;value=---%0Auid%3A%20Rezolver.Options.FetchAllMatchingGenerics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/FetchAllMatchingGenerics.cs/#L26" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/FetchAllMatchingGenerics.cs/#L29" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

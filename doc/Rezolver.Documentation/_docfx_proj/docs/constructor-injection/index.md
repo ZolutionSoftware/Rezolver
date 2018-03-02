@@ -90,7 +90,7 @@ So, given this type:
 
 [!code-csharp[RequiresMyServices.cs](../../../../../test/Rezolver.Tests.Examples/Types/RequiresMyServices.cs#example)]
 
-If we register `Service1` & `Service2`, but not `Service3`, the single-parameter constructor will be used:
+If we register `MyService1` & `MyService2`, but not `MyService3`, the single-parameter constructor will be used:
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example4)]
 
@@ -300,4 +300,4 @@ As you can see - using explicitly bound parameters is a little verbose, given th
 # Next steps
 
 - See how [constructor injection works with generic types](generics.md)
-- Learn how to [enable member injection](member-injection.md) (injecting services into properties and/or fields)
+- Learn how to [enable member injection](../member-injection/index.md) (injecting services into properties and/or fields)

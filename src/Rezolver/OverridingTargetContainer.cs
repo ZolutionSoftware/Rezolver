@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +15,13 @@ namespace Rezolver
     /// <remarks>When this class searches for an entry for a type, if it
     /// cannot find one within its own registrations, it falls back to the registrations of
     /// its ancestors (starting with its <see cref="Parent" />).
-    /// 
+    ///
     /// As a result, any dependencies required by registrations in this container can be provided by
     /// any ancestor.
-    /// 
-    /// This fallback logic in the <see cref="Fetch(Type)" /> is triggered by the 
+    ///
+    /// This fallback logic in the <see cref="Fetch(Type)" /> is triggered by the
     /// <see cref="ITarget.UseFallback" /> property.
-    /// 
+    ///
     /// The <see cref="FetchAll(Type)"/> method, however, returns all targets registered directly in this
     /// container and in the parent.</remarks>
     public sealed class OverridingTargetContainer : TargetContainer
@@ -38,9 +37,7 @@ namespace Rezolver
         public OverridingTargetContainer(ITargetContainer parent, ITargetContainerConfig config = null)
                 : base()
         {
-            //note above - the class uses the non-behaviour constructor of TargetContainer to ensure that 
-            parent.MustNotBeNull(nameof(parent));
-            _parent = parent;
+            this._parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
             (config ?? DefaultConfig).Configure(this);
         }
@@ -51,7 +48,7 @@ namespace Rezolver
         /// <value>The parent.</value>
         public ITargetContainer Parent
         {
-            get { return _parent; }
+            get { return this._parent; }
         }
 
         /// <summary>
@@ -65,15 +62,17 @@ namespace Rezolver
         public override ITarget Fetch(Type type)
         {
             var result = base.Fetch(type);
-            //ascend the tree of target containers looking for a type match.
+            // ascend the tree of target containers looking for a type match.
             if ((result == null || result.UseFallback))
-                return _parent.Fetch(type);
+            {
+                return this._parent.Fetch(type);
+            }
+
             return result;
         }
 
-
         /// <summary>
-        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)" /> which returns 
+        /// Implementation of <see cref="ITargetContainer.FetchAll(Type)" /> which returns
         /// an enumerable of targets from both the base target container and this target container.
         /// </summary>
         /// <param name="type">The type whose targets are to be retrieved.</param>
@@ -81,7 +80,7 @@ namespace Rezolver
         /// empty enumerable if the type is not registered.</returns>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            return (_parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
+            return (this._parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
                 base.FetchAll(type) ?? Enumerable.Empty<ITarget>());
         }
     }

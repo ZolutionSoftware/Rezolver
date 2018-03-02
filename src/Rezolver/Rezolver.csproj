@@ -30,23 +30,35 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
 
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'net451'">
+    <PackageReference Include="FastExpressionCompiler">
+      <Version>1.6.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <PackageReference Include="FastExpressionCompiler">
+      <Version>1.6.0</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="FastExpressionCompiler">
+      <Version>1.6.0</Version>
+    </PackageReference>
+  </ItemGroup>-->
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
-    <DefineConstants>$(DefineConstants);DOTNET</DefineConstants>
+    <DefineConstants>$(DefineConstants);MAXCOMPAT</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup>
-    <DebugType>full</DebugType>
+    <DebugType>embedded</DebugType>
     <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <PackageReference Include="System.ComponentModel" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Compilation\Reflection\**" />
-    <EmbeddedResource Remove="Compilation\Reflection\**" />
-    <None Remove="Compilation\Reflection\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,9 +96,5 @@
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="CombinedContainerConfig.cs" />
   </ItemGroup>
 </Project>

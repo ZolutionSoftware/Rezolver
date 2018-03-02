@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface ITargetContainerTypeResolver
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -127,14 +128,14 @@ to identify the container type for targets with a specific <a class="xref" href=
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITargetContainerTypeResolver_GetContainerType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerTypeResolver.GetContainerType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainerTypeResolver_GetContainerType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerTypeResolver.GetContainerType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITargetContainerTypeResolver.cs/#L27">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainerTypeResolver.cs/#L26">View Source</a>
   </span>
   <a id="Rezolver_ITargetContainerTypeResolver_GetContainerType_" data-uid="Rezolver.ITargetContainerTypeResolver.GetContainerType*"></a>
   <h4 id="Rezolver_ITargetContainerTypeResolver_GetContainerType_System_Type_" data-uid="Rezolver.ITargetContainerTypeResolver.GetContainerType(System.Type)">GetContainerType(Type)</h4>
-  <div class="markdown level1 summary"><p>For operations such as <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">Fetch(Type)</a> and 
+  <div class="markdown level1 summary"><p>For operations such as <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Fetch_System_Type_">Fetch(Type)</a> and
 <a class="xref" href="Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_FetchContainer_System_Type_">FetchContainer(Type)</a>, the type requested might sometimes
 need to be redirected to another for the purposes of fetching the correct <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 for a given type of service.  If this method returns a non-null type, then the calling container
@@ -157,9 +158,9 @@ service type.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">serviceType</span></td>
-        <td><p>The service type (equal to the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of 
+        <td><p>The service type (equal to the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of
 any <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects that might have been registered).</p>
 </td>
       </tr>
@@ -175,7 +176,7 @@ any <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects that might 
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><p>A type that should be used to look up a container, if different from the <code data-dev-comment-type="paramref" class="paramref">serviceType</code>,
 otherwise <code>null</code>.</p>
 </td>
@@ -190,10 +191,10 @@ otherwise <code>null</code>.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITargetContainerTypeResolver.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerTypeResolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_ITargetContainerTypeResolver.md&amp;value=---%0Auid%3A%20Rezolver.ITargetContainerTypeResolver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ITargetContainerTypeResolver.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/ITargetContainerTypeResolver.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

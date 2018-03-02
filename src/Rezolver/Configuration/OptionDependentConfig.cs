@@ -1,31 +1,34 @@
-﻿using Rezolver.Sdk;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Rezolver.Sdk;
 
 namespace Rezolver.Configuration
 {
     /// <summary>
     /// Abstract base class for an <see cref="ITargetContainerConfig"/> that is dependent upon a particular type of option
-    /// having been set in an <see cref="ITargetContainer"/> before being able to <see cref="Configure(ITargetContainer)"/>
+    /// having been set in an <see cref="ITargetContainer"/> before being able to <see cref="Configure(IRootTargetContainer)"/>
     /// that target container.
     /// </summary>
-    /// <typeparam name="TOption">The type of option upon which this config object depends.  The default dependency created and 
-    /// returned by this class' implementation of <see cref="Dependencies"/> will actually be dependent upon the config type 
+    /// <typeparam name="TOption">The type of option upon which this config object depends.  The default dependency created and
+    /// returned by this class' implementation of <see cref="Dependencies"/> will actually be dependent upon the config type
     /// <see cref="ITargetContainerConfig{TOption}"/>, which is the standard contract expected by a configuration object that configures
     /// a aprticular option.</typeparam>
-    /// <remarks>If you are developing an <see cref="ITargetContainerConfig"/> that you want to be configurable via the use of 
+    /// <remarks>If you are developing an <see cref="ITargetContainerConfig"/> that you want to be configurable via the use of
     /// a single option type (see the extension methods in the <see cref="OptionsTargetContainerExtensions"/> class), then inheriting from this
     /// abstract class instead of directly implementing <see cref="ITargetContainerConfig"/> and <see cref="IDependant"/> is a good idea.
-    /// 
+    ///
     /// The default implementation of <see cref="Dependencies"/> will return a single dependency on the type <see cref="ITargetContainerConfig{TOption}"/>
     /// specialised for the option type <typeparamref name="TOption"/>.
-    /// 
+    ///
     /// You can also specify that the dependency is not *required* in cases where an option has a reasonable default value - thus allowing
     /// applications to omit any up-front configuration for that option except where absolutely necessary.
-    /// 
-    /// 
-    /// The <see cref="InjectEnumerables"/> config inherits from this class - passing <see cref="Options.EnableEnumerableInjection"/> as 
+    ///
+    ///
+    /// The <see cref="InjectEnumerables"/> config inherits from this class - passing <see cref="Options.EnableEnumerableInjection"/> as
     /// <typeparamref name="TOption"/>, with the constructor marking the dependency as optional. This ensures that it is executed after the option
     /// has been configured by any <see cref="ITargetContainerConfig{T}"/> objects specialised for the option type.</remarks>
     public abstract class OptionDependentConfig<TOption> : ITargetContainerConfig, IDependant
@@ -37,7 +40,7 @@ namespace Rezolver.Configuration
         /// The base implementation returns an enumerable containing a single dependency on the type <see cref="ITargetContainerConfig{T}"/>
         /// specialised for the type <typeparamref name="TOption" />.
         /// </summary>
-        public virtual IEnumerable<DependencyMetadata> Dependencies => _baseDependencies;
+        public virtual IEnumerable<DependencyMetadata> Dependencies => this._baseDependencies;
 
         /// <summary>
         /// Constructs a new instance of the type <see cref="OptionDependentConfig{TOption}"/> which starts off with a required or optional
@@ -46,14 +49,14 @@ namespace Rezolver.Configuration
         /// <param name="optionConfigurationRequired"></param>
         public OptionDependentConfig(bool optionConfigurationRequired)
         {
-            _baseDependencies = new[] { this.CreateTypeDependency<Configure<TOption>>(optionConfigurationRequired) };
+            this._baseDependencies = new[] { this.CreateTypeDependency<Configure<TOption>>(optionConfigurationRequired) };
         }
 
         /// <summary>
         /// Abstract implementation of the <see cref="ITargetContainerConfig"/> interface
         /// </summary>
         /// <param name="targets"></param>
-        public abstract void Configure(ITargetContainer targets);
+        public abstract void Configure(IRootTargetContainer targets);
     }
 
     /// <summary>
@@ -61,8 +64,8 @@ namespace Rezolver.Configuration
     /// a specific type for configuration (<typeparamref name="T"/>)
     /// </summary>
     /// <typeparam name="T">The type of service/behaviour/option being configured</typeparam>
-    /// <typeparam name="TOption">The type of option upon which this config object depends.  The default dependency created and 
-    /// returned by this class' implementation of <see cref="IDependant.Dependencies"/> will actually be dependent upon the config type 
+    /// <typeparam name="TOption">The type of option upon which this config object depends.  The default dependency created and
+    /// returned by this class' implementation of <see cref="IDependant.Dependencies"/> will actually be dependent upon the config type
     /// <see cref="ITargetContainerConfig{TOption}"/>, which is the standard contract expected by a configuration object that configures
     /// a particular option.</typeparam>
     public abstract class OptionDependentConfig<T, TOption> : OptionDependentConfig<TOption>, ITargetContainerConfig<T>
@@ -76,7 +79,6 @@ namespace Rezolver.Configuration
         public OptionDependentConfig(bool optionConfigurationRequired)
             : base(optionConfigurationRequired)
         {
-
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
             var result = container.Resolve<List<int>>();
             Assert.NotNull(result);
-            Assert.Equal(0, result.Count);
+            Assert.Empty(result);
         }
 
         [Fact]

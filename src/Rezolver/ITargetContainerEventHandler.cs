@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +17,7 @@ namespace Rezolver
     public interface ITargetContainerEventHandler<in TEvent>
     {
         /// <summary>
-        /// Fires the event handler for the event <paramref name="e"/> raised from the 
+        /// Fires the event handler for the event <paramref name="e"/> raised from the
         /// target container <paramref name="source"/>.
         /// </summary>
         /// <param name="source">The target container which is raising the event</param>

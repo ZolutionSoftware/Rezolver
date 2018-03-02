@@ -8,7 +8,7 @@
   	<title>Constructor Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Constructor Injection | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../../styles/main.css">
   	<meta property="docfx:navrel" content="../../toc.html">
   	<meta property="docfx:tocrel" content="../toc.html">
+  	
   	<meta property="docfx:rel" content="../../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
@@ -138,23 +139,23 @@ supports binding to types which have multiple constructors.</p>
 </code></pre><p>and</p>
 <pre><code class="lang-csharp" name="RequiresMyService.cs">public class RequiresMyService : IRequiresIMyService
 {
-	public MyService Service { get; }
-	public RequiresMyService(MyService service)
-	{
-		Service = service;
-	}
+    public MyService Service { get; }
+    public RequiresMyService(MyService service)
+    {
+        Service = service;
+    }
 
-	public RequiresMyService(IMyService service)
-	{
-		if (service.GetType() != typeof(MyService))
-		{
-			throw new ArgumentException($&quot;{ service.GetType() } not supported&quot;,
-				nameof(service));
-		}
-		Service = (MyService)service;
-	}
+    public RequiresMyService(IMyService service)
+    {
+        if (service.GetType() != typeof(MyService))
+        {
+            throw new ArgumentException($&quot;{ service.GetType() } not supported&quot;,
+                nameof(service));
+        }
+        Service = (MyService)service;
+    }
 
-	IMyService IRequiresIMyService.Service { get { return Service; } }
+    IMyService IRequiresIMyService.Service { get { return Service; } }
 }
 </code></pre><div class="NOTE"><h5>Note</h5><p>The rather silly explicit implementation and argument checking in the second constructor is purely for 
 illustrative purposes!</p>
@@ -208,37 +209,37 @@ constructor&#39;s parameters can be, then the single-parameter constructor wins.
 <p>So, given this type:</p>
 <pre><code class="lang-csharp" name="RequiresMyServices.cs">public class RequiresMyServices
 {
-	#region Sentinel Instances
-	public static readonly MyService2 Default2 = new MyService2();
-	public static readonly MyService3 Default3 = new MyService3();
-	#endregion
+    #region Sentinel Instances
+    public static readonly MyService2 Default2 = new MyService2();
+    public static readonly MyService3 Default3 = new MyService3();
+    #endregion
 
-	#region Instance Properties
-	public MyService1 Service1 { get; private set; }
-	public MyService2 Service2 { get; private set; }
-	public MyService3 Service3 { get; private set; }
-	#endregion
+    #region Instance Properties
+    public MyService1 Service1 { get; private set; }
+    public MyService2 Service2 { get; private set; }
+    public MyService3 Service3 { get; private set; }
+    #endregion
 
-	public RequiresMyServices(MyService1 service1)
-		: this(service1,
-			  Default2,
-			  Default3)
-	{
+    public RequiresMyServices(MyService1 service1)
+        : this(service1,
+              Default2,
+              Default3)
+    {
 
-	}
+    }
 
-	public RequiresMyServices(MyService1 service1,
-		MyService2 service2,
-		MyService3 service3)
-	{
-		Service1 = service1;
-		Service2 = service2;
-		Service3 = service3;
-	}
+    public RequiresMyServices(MyService1 service1,
+        MyService2 service2,
+        MyService3 service3)
+    {
+        Service1 = service1;
+        Service2 = service2;
+        Service3 = service3;
+    }
 
 
 }
-</code></pre><p>If we register <code>Service1</code> &amp; <code>Service2</code>, but not <code>Service3</code>, the single-parameter constructor will be used:</p>
+</code></pre><p>If we register <code>MyService1</code> &amp; <code>MyService2</code>, but not <code>MyService3</code>, the single-parameter constructor will be used:</p>
 <pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
 // Building ConstructorTargets directly here,
 // and using the batch-registration &#39;RegisterAll&#39; method,
@@ -263,21 +264,21 @@ Assert.Same(RequiresMyServices.Default3, result.Service3);
 if we extend <code>RequiresMyServices</code> with a new class whose 3-parameter constructor specifies default values for parameters 2 &amp; 3:</p>
 <pre><code class="lang-csharp" name="RequiresMyServicesWithDefaults.cs">public class RequiresMyServicesWithDefaults : RequiresMyServices
 {
-	public RequiresMyServicesWithDefaults(MyService1 service1)
-		: base(service1)
-	{
+    public RequiresMyServicesWithDefaults(MyService1 service1)
+        : base(service1)
+    {
 
-	}
+    }
 
-	public RequiresMyServicesWithDefaults(MyService1 service1,
-		MyService2 service2 = null,
-		MyService3 service3 = null)
-		: base(service1,
-			  service2 ?? Default2,
-			  service3 ?? Default3)
-	{
+    public RequiresMyServicesWithDefaults(MyService1 service1,
+        MyService2 service2 = null,
+        MyService3 service3 = null)
+        : base(service1,
+              service2 ?? Default2,
+              service3 ?? Default3)
+    {
 
-	}
+    }
 }
 </code></pre><p>And then we swap <code>RequiresMyServices</code> for <code>RequiresMyServicesWithDefaults</code>, this time, the 3-parameter
 constructor will be executed, with parameters 1 &amp; 2 receiving injected arguments, and parameter 3 receiving the default instance from
@@ -322,21 +323,21 @@ get to that in a moment.</p>
 // constructors use concrete types.
 public class Requires2MyServices
 {
-	public IMyService First { get; }
-	public IMyService Second { get; }
+    public IMyService First { get; }
+    public IMyService Second { get; }
 
-	public Requires2MyServices(MyService1 first)
-	{
-		First = first;
-		Second = null;
-	}
+    public Requires2MyServices(MyService1 first)
+    {
+        First = first;
+        Second = null;
+    }
 
-	public Requires2MyServices(MyService2 first,
-		MyService3 second)
-	{
-		First = first;
-		Second = second;
-	}
+    public Requires2MyServices(MyService2 first,
+        MyService3 second)
+    {
+        First = first;
+        Second = second;
+    }
 }
 </code></pre><p>To force the selection of the second constructor for the test, we&#39;ll only register <code>MyService2</code> in the container and, when we attempt to
 resolve the instance, we should get an <code>InvalidOperationException</code> explaining that <code>MyService3</code> couldn&#39;t be resolved: </p>
@@ -452,20 +453,20 @@ unless you start using overriding containers or child target containers, which m
 dependencies.</p>
 <pre><code class="lang-csharp" name="RequiresIMyServiceAndDateTime.cs">public class RequiresIMyServiceAndDateTime
 {
-	public DateTime StartDate { get; }
-	public IMyService Service { get; }
+    public DateTime StartDate { get; }
+    public IMyService Service { get; }
 
-	public RequiresIMyServiceAndDateTime(IMyService service)
-		: this(service, DateTime.UtcNow)
-	{
+    public RequiresIMyServiceAndDateTime(IMyService service)
+        : this(service, DateTime.UtcNow)
+    {
 
-	}
+    }
 
-	public RequiresIMyServiceAndDateTime(IMyService service, DateTime startDate)
-	{
-		Service = service;
-		StartDate = startDate;
-	}
+    public RequiresIMyServiceAndDateTime(IMyService service, DateTime startDate)
+    {
+        Service = service;
+        StartDate = startDate;
+    }
 }
 </code></pre><p>Note that the single parameter constructor defaults the <code>StartDate</code> to <code>DateTime.UtcNow</code>, but in our test, we&#39;ll explicitly provide a 
 <code>DateTime</code> which is <code>DateTime.UtcNow.AddDays(1)</code> to create a date in the future:</p>
@@ -505,19 +506,19 @@ namespace to supply a value, and they will work as if they were registered in th
 bindings too.  To illustrate, we&#39;ll have a type with a default constructor and one which accepts a service:</p>
 <pre><code class="lang-csharp" name="AcceptsOptionalIMyService.cs">public class AcceptsOptionalIMyService
 {
-	public IMyService Service { get; }
-	public AcceptsOptionalIMyService()
-	{
+    public IMyService Service { get; }
+    public AcceptsOptionalIMyService()
+    {
 
-	}
+    }
 
-	public AcceptsOptionalIMyService(IMyService service)
-	{
-		if (service == null)
-			throw new ArgumentNullException(nameof(service));
+    public AcceptsOptionalIMyService(IMyService service)
+    {
+        if (service == null)
+            throw new ArgumentNullException(nameof(service));
 
-		Service = service;
-	}
+        Service = service;
+    }
 }
 </code></pre><hr>
 <h3 id="example---no-parameter-bindings">Example - No parameter bindings</h3>
@@ -562,7 +563,7 @@ Assert.NotNull(result.Service);
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>See how <a href="generics.html">constructor injection works with generic types</a></li>
-<li>Learn how to <a href="member-injection.html">enable member injection</a> (injecting services into properties and/or fields)</li>
+<li>Learn how to <a href="../member-injection/index.html">enable member injection</a> (injecting services into properties and/or fields)</li>
 </ul>
 </article>
           </div>
@@ -572,7 +573,7 @@ Assert.NotNull(result.Service);
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

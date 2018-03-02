@@ -3,6 +3,7 @@ using Rezolver.Tests.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
@@ -20,25 +21,50 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldNotAllowNullType()
 		{
-			Assert.Throws<ArgumentNullException>(() => new GenericConstructorTarget(null));
+            // Assert
+			Assert.Throws<ArgumentNullException>(() => new GenericConstructorTarget((Type)null));
 		}
 
 		[Fact]
 		public void ShouldNotAllowNonGenericType()
 		{
+            // Assert
 			Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(string)));
 		}
 
 		[Fact]
 		public void ShouldNotAllowGenericInterfaceOrAbstractClass()
 		{
+            // Assert
 			Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(IEqualityComparer<>)));
 			Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(GenericBase<>)));
 		}
 
-		[Fact]
+        [Fact]
+        public void ShouldNotAllowNullConstructorInfo()
+        {
+            // Assert
+            Assert.Throws<ArgumentNullException>(() => new GenericConstructorTarget((ConstructorInfo)null));
+        }
+
+        [Fact]
+        public void ShouldNotAllowNonGenericTypeConstructor()
+        {
+            // Assert
+            Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(Extract.Constructor(() => new Types.BaseClass())));
+        }
+
+        [Fact]
+        public void ShouldNotAllowGenericAbstractClassConstructor()
+        {
+            // Assert
+            Assert.Throws<ArgumentException>(() => new GenericConstructorTarget(typeof(AbstractGeneric<>).GetConstructor(Type.EmptyTypes)));
+        }
+
+        [Fact]
 		public void DeclaredTypeShouldBeEqualToGenericType()
 		{
+            // Assert
 			Assert.Same(typeof(Generic<>), new GenericConstructorTarget(typeof(Generic<>)).DeclaredType);
 		}
 
@@ -87,9 +113,13 @@ namespace Rezolver.Tests.Targets
 		public void ShouldSupportTypeIfMappingIsSuccessful(Type targetType, Type testType, Type implementingType = null)
 		{
 			Output.WriteLine($"Testing target for type { targetType } supports { testType }...");
+            // Arrange
 			var target = new GenericConstructorTarget(targetType);
-			//check mapping first
+            
+            // Act
 			var mapping = target.MapType(testType);
+
+            // Assert
 			Assert.True(mapping.Success);
 			Assert.Equal(implementingType ?? testType, mapping.Type);
 			Assert.True(target.SupportsType(testType));
@@ -99,12 +129,16 @@ namespace Rezolver.Tests.Targets
 		[MemberData(nameof(GetSupportsTypeTheoryData))]
 		public void ShouldBindIfFullyBoundOrErrorIfNot(Type targetType, Type testType, Type implementingType = null)
 		{
-			//similar test to above, but this checks the interaction between SupportsType and Bind -
+			// similar test to above, but this checks the interaction between SupportsType and Bind -
 			// in that some types are supported, but, when bound, will yield an exception because the mapping
 			// cannot be fully bound.
 			Output.WriteLine($"Testing target bound for type { targetType } supports { implementingType ?? testType }...");
+
+            // Arrange
 			var target = new GenericConstructorTarget(targetType);
 			var mapping = target.MapType(testType);
+
+            // Assert (with some 'Act' thrown in too :$)
 			Assert.True(mapping.Success);
 
 			var context = GetCompileContext(target, targetType: testType);
@@ -140,19 +174,33 @@ namespace Rezolver.Tests.Targets
 		public void ShouldNotSupportType(Type targetType, Type testType)
 		{
 			Output.WriteLine($"Testing target for type { targetType } DOES NOT support { testType }");
-			var target = new GenericConstructorTarget(targetType);
-			Assert.False(target.SupportsType(testType));
 
+            // Arrange
+			var target = new GenericConstructorTarget(targetType);
 			//also make sure we get an exception if we try to bind directly
 			var context = GetCompileContext(target, targetType: testType);
+
+            // Assert
+			Assert.False(target.SupportsType(testType));
 			Assert.ThrowsAny<Exception>(() => target.Bind(context));
 		}
 
 		[Fact]
         public void ShouldNotSupportGenericWhichViolatesConstraints()
         {
+            // Arrange
             var target = new GenericConstructorTarget(typeof(ConstrainedGeneric<>));
+
+            // Assert
             Assert.False(target.SupportsType(typeof(IGeneric<string>)));
+        }
+
+        [Fact]
+        public void ShouldAcceptSuppliedConstructor()
+        {
+            // Arrange
+
+            //var target = new GenericConstructorTarget
         }
 	}
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,168 +10,172 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Simple implementation of a locked list - used in situations where random access is required over
-	/// a collection of objects
-	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	internal class LockedList<T> : IList<T>
+    /// <summary>
+    /// Simple implementation of a locked list - used in situations where random access is required over
+    /// a collection of objects
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    internal class LockedList<T> : IList<T>
     {
-		public class ListLock : IDisposable
-		{
-			private LockedList<T> _list;
-			internal ListLock(LockedList<T> list)
-			{
-				_list = list;
-				Monitor.Enter(_list._locker);
-			}
-			public void Dispose()
-			{
-				if (Monitor.IsEntered(_list._locker))
-					Monitor.Exit(_list._locker);
-			}
-		}
+        public class ListLock : IDisposable
+        {
+            private LockedList<T> _list;
 
-		private readonly object _locker = new object();
-		private readonly List<T> _inner;
+            internal ListLock(LockedList<T> list)
+            {
+                this._list = list;
+                Monitor.Enter(this._list._locker);
+            }
 
-		public int Count
-		{
-			get
-			{
-				lock (_locker)
-				{
-					return _inner.Count;
-				}
-			}
-		}
+            public void Dispose()
+            {
+                if (Monitor.IsEntered(this._list._locker))
+                {
+                    Monitor.Exit(this._list._locker);
+                }
+            }
+        }
 
-		public bool IsReadOnly
-		{
-			get
-			{
-				lock (_locker)
-				{
-					return ((IList<T>)_inner).IsReadOnly;
-				}
-			}
-		}
+        private readonly object _locker = new object();
+        private readonly List<T> _inner;
 
-		public T this[int index]
-		{
-			get
-			{
-				lock (_locker)
-				{
-					return _inner[index];
-				}
-			}
+        public int Count
+        {
+            get
+            {
+                lock (this._locker)
+                {
+                    return this._inner.Count;
+                }
+            }
+        }
 
-			set
-			{
-				lock (_locker)
-				{
-					_inner[index] = value;
-				}
-			}
-		}
+        public bool IsReadOnly
+        {
+            get
+            {
+                lock (this._locker)
+                {
+                    return ((IList<T>)this._inner).IsReadOnly;
+                }
+            }
+        }
 
-		public LockedList(IEnumerable<T> enumerable)
-		{
-			_inner = new List<T>(enumerable);
-		}
+        public T this[int index]
+        {
+            get
+            {
+                lock (this._locker)
+                {
+                    return this._inner[index];
+                }
+            }
 
-		public LockedList(int capacity)
-		{
-			_inner = new List<T>(capacity);
-		}
+            set
+            {
+                lock (this._locker)
+                {
+                    this._inner[index] = value;
+                }
+            }
+        }
 
-		public LockedList()
-		{
-			_inner = new List<T>();
-		}
+        public LockedList(IEnumerable<T> enumerable)
+        {
+            this._inner = new List<T>(enumerable);
+        }
 
-		public IDisposable Lock()
-		{
-			return new ListLock(this);
-		}
+        public LockedList(int capacity)
+        {
+            this._inner = new List<T>(capacity);
+        }
 
-		public int IndexOf(T item)
-		{
-			lock (_locker)
-			{
-				return _inner.IndexOf(item);
-			}
-		}
+        public LockedList()
+        {
+            this._inner = new List<T>();
+        }
 
-		public void Insert(int index, T item)
-		{
-			lock (_locker)
-			{
-				_inner.Insert(index, item);
-			}
-		}
+        public IDisposable Lock()
+        {
+            return new ListLock(this);
+        }
 
-		public void RemoveAt(int index)
-		{
-			lock (_locker)
-			{
-				_inner.RemoveAt(index);
-			}
-		}
+        public int IndexOf(T item)
+        {
+            lock (this._locker)
+            {
+                return this._inner.IndexOf(item);
+            }
+        }
 
-		public void Add(T item)
-		{
-			lock (_locker)
-			{
-				_inner.Add(item);
-			}
-		}
+        public void Insert(int index, T item)
+        {
+            lock (this._locker)
+            {
+                this._inner.Insert(index, item);
+            }
+        }
 
-		public void Clear()
-		{
-			lock (_locker)
-			{
-				_inner.Clear();
-			}
-		}
+        public void RemoveAt(int index)
+        {
+            lock (this._locker)
+            {
+                this._inner.RemoveAt(index);
+            }
+        }
 
-		public bool Contains(T item)
-		{
-			lock (_locker)
-			{
-				return _inner.Contains(item);
-			}
-		}
+        public void Add(T item)
+        {
+            lock (this._locker)
+            {
+                this._inner.Add(item);
+            }
+        }
 
-		public void CopyTo(T[] array, int arrayIndex)
-		{
-			lock (_locker)
-			{
-				_inner.CopyTo(array, arrayIndex);
-			}
-		}
+        public void Clear()
+        {
+            lock (this._locker)
+            {
+                this._inner.Clear();
+            }
+        }
 
-		public bool Remove(T item)
-		{
-			lock (_locker)
-			{
-				return _inner.Remove(item);
-			}
-		}
+        public bool Contains(T item)
+        {
+            lock (this._locker)
+            {
+                return this._inner.Contains(item);
+            }
+        }
 
-		public IEnumerator<T> GetEnumerator()
-		{
-			lock (_locker)
-			{
-				var clone = _inner.ToArray();
-				return clone.AsEnumerable().GetEnumerator();
-			}
-		}
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            lock (this._locker)
+            {
+                this._inner.CopyTo(array, arrayIndex);
+            }
+        }
 
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return GetEnumerator();
-		}
-	}
+        public bool Remove(T item)
+        {
+            lock (this._locker)
+            {
+                return this._inner.Remove(item);
+            }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            lock (this._locker)
+            {
+                var clone = this._inner.ToArray();
+                return clone.AsEnumerable().GetEnumerator();
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
+    }
 }

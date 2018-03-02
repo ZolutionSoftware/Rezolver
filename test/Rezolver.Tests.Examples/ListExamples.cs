@@ -1,4 +1,7 @@
-﻿using Rezolver.Tests.Examples.Types;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using Rezolver.Tests.Examples.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +27,7 @@ namespace Rezolver.Tests.Examples
             Assert.NotNull(result2);
             Assert.NotNull(result3);
 
-            Assert.Equal(0, result1.Count);
+            Assert.Empty(result1);
             Assert.Equal(0, result2.Count);
             Assert.Equal(0, result3.Count);
             // </example1>

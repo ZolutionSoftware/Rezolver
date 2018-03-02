@@ -29,8 +29,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Configuration.Json\Rezolver.Configuration.Json.csproj" />
-    <ProjectReference Include="..\..\src\Rezolver.Configuration\Rezolver.Configuration.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
     <ProjectReference Include="..\Rezolver.Tests.Shared\Rezolver.Tests.Shared.csproj" />
   </ItemGroup>

@@ -6,7 +6,7 @@
     <Description>Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)</Description>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    
+
     <PackageId>Rezolver.Microsoft.Extensions.DependencyInjection</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore;aspnetcore</PackageTags>
     <Title>Rezolver MS Dependency Injection Extensions</Title>
@@ -14,11 +14,16 @@
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
-    <VersionPrefix>2.0.0</VersionPrefix>
+    <VersionPrefix>2.0.1</VersionPrefix>
     <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 
   <Import Project="..\Rezolver.Shared.props" />
+
+  <PropertyGroup>
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Rezolver\Rezolver.csproj" />

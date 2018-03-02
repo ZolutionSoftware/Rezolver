@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +13,18 @@ namespace Rezolver.Runtime
     /// one or more registered targets.
     /// </summary>
     /// <typeparam name="T">The type of object enumerated by the enumerable.</typeparam>
-    /// <remarks>Objects are not expected to take a dependency on this type - but <see cref="IEnumerable{T}"/>.  The 
+    /// <remarks>Objects are not expected to take a dependency on this type - but <see cref="IEnumerable{T}"/>.  The
     /// default compiler, <see cref="Compilation.Expressions.ExpressionCompiler"/>, constructs an instance of this
     /// when building an <see cref="Targets.EnumerableTarget"/> (via the <see cref="Compilation.Expressions.EnumerableTargetBuilder"/>
     /// expression builder).
-    /// 
+    ///
     /// ## Lazy vs Eager enumerables
-    /// 
-    /// The default enumerable produced by Rezolver containers is lazily evaluated - via this type.  You can disable this entirely 
+    ///
+    /// The default enumerable produced by Rezolver containers is lazily evaluated - via this type.  You can disable this entirely
     /// (i.e. switching to eagerly loaded enumerables implemented via the <see cref="EagerEnumerable{T}"/> type)
     /// by setting the <see cref="Options.LazyEnumerables"/> option to <c>false</c> in the underlying <see cref="ITargetContainer"/>
     /// used by the container.
-    /// 
+    ///
     /// You can also switch to eagerly loaded enumerables on a per-type basis - by setting the <see cref="Options.LazyEnumerables"/>
     /// option to <c>false</c> against the specific type of enumerable you want to be eagerly loaded - e.g. for an eagerly loaded <see cref="IEnumerable{T}"/> of
     /// type <see cref="string"/>, then you would set the <see cref="Options.LazyEnumerables"/> to <c>false</c> for the type <c>IEnumerable&lt;string&gt;</c>
@@ -39,8 +42,8 @@ namespace Rezolver.Runtime
         /// <param name="factories"></param>
         public LazyEnumerable(IResolveContext context, IEnumerable<Func<IResolveContext, object>> factories)
         {
-            _context = context;
-            _factories = factories;
+            this._context = context;
+            this._factories = factories;
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return _factories.Select(f => (T)f(_context.New(typeof(T)))).GetEnumerator();
+            return this._factories.Select(f => (T)f(this._context.New(typeof(T)))).GetEnumerator();
         }
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
     }
 }

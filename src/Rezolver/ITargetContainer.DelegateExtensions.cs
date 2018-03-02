@@ -1,20 +1,19 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
-using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Rezolver.Targets;
 
 namespace Rezolver
 {
-	/// <summary>
-	/// Extension methods for ITargetContainer designed to simplify the registration of <see cref="DelegateTarget"/> and its
-	/// numerous generic variants.
-	/// </summary>
+    /// <summary>
+    /// Extension methods for ITargetContainer designed to simplify the registration of <see cref="DelegateTarget"/> and its
+    /// numerous generic variants.
+    /// </summary>
     public static partial class DelegateTargetContainerExtensions
     {
         /// <summary>
@@ -29,19 +28,30 @@ namespace Rezolver
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the factory delegate will be
         /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
         public static void RegisterDelegate(this ITargetContainer targetContainer, Delegate factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
-		{
-			targetContainer.MustNotBeNull(nameof(targetContainer));
-			factory.MustNotBeNull(nameof(factory));
+        {
+            targetContainer.MustNotBeNull(nameof(targetContainer));
+            factory.MustNotBeNull(nameof(factory));
 
             ITarget toRegister = null;
             if (factory.GetMethodInfo().GetParameters()?.Length > 0)
+            {
                 toRegister = new DelegateTarget(factory, declaredType);
+            }
             else
+            {
                 toRegister = new NullaryDelegateTarget(factory, declaredType);
+            }
 
-            if (scopeBehaviour == ScopeBehaviour.Explicit) toRegister = toRegister.Scoped();
-            else if (scopeBehaviour == ScopeBehaviour.None) toRegister = toRegister.Unscoped();
+            if (scopeBehaviour == ScopeBehaviour.Explicit)
+            {
+                toRegister = toRegister.Scoped();
+            }
+            else if (scopeBehaviour == ScopeBehaviour.None)
+            {
+                toRegister = toRegister.Unscoped();
+            }
+
             targetContainer.Register(toRegister);
-		}
+        }
     }
 }

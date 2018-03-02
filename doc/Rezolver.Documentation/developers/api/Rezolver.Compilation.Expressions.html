@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Compilation.Expressions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -118,7 +119,7 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html">ChangeTypeTargetBuilder</a></h4>
-      <section><p>Implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the 
+      <section><p>Implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the
 <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></p>
 <p>This always produces a conversion expression (i.e. cast or box/unbox)</p>
 </section>
@@ -136,7 +137,7 @@ will be used for <a class="xref" href="Rezolver.Targets.ObjectTarget.html">Objec
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.DefaultTargetBuilder.html">DefaultTargetBuilder</a></h4>
       <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a> target.</p>
-<p>Essentially, it just calls <a class="xref" href="https://msdn.microsoft.com/en-us/library/dd402751(v=vs.110).aspx">Default(Type)</a> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
+<p>Essentially, it just calls <span class="xref">System.Linq.Expressions.Expression.Default(System.Type)</span> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.DelegateTargetBuilder.html">DelegateTargetBuilder</a></h4>
       <section><p>Specialised builder for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class and all its derivatives.</p>
@@ -146,17 +147,17 @@ will be used for <a class="xref" href="Rezolver.Targets.ObjectTarget.html">Objec
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html">ExpressionBuilderBase</a></h4>
       <section><p>Abstract starting point for implementing <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a>.</p>
-<p>Note that the interface is implemented explicitly; but exposes protected abstract or virtual 
+<p>Note that the interface is implemented explicitly; but exposes protected abstract or virtual
 methods for inheritors to extend.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.Methods.html">ExpressionBuilderBase.Methods</a></h4>
-      <section><p>Provides access to a set of <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.reflection.methodinfo(v=vs.110).aspx">MethodInfo</a> objects for common functions required
+      <section><p>Provides access to a set of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.methodinfo">MethodInfo</a> objects for common functions required
 by code produced from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s.  Also contains some factory methods for building
 expressions which bind to those methods.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html">ExpressionBuilderBase&lt;TTarget&gt;</a></h4>
       <section><p>Abstract base class for implementations of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder-1.html">IExpressionBuilder&lt;TTarget&gt;</a>.</p>
-<p>Provide an implementation of <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</a> and then register 
+<p>Provide an implementation of <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(TTarget, IExpressionCompileContext, IExpressionCompiler)</a> and then register
 an instance in an <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> in the active container.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionCompileContext.html">ExpressionCompileContext</a></h4>
@@ -172,8 +173,8 @@ by building and compiling expression trees from the <a class="xref" href="Rezolv
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html">ExpressionTargetBuilder</a></h4>
       <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression trees for the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a>
 target type.</p>
-<p>This builder takes care of all expressions, including lambdas (where additional parameters beyond the standard 
-<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> are turned into local variables with injected values), producing an expression which can 
+<p>This builder takes care of all expressions, including lambdas (where additional parameters beyond the standard
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> are turned into local variables with injected values), producing an expression which can
 be compiled by an <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a> after a <span class="xref">Rezolver.Compilation.Expressions.TargetExpressionRewriter</span> has been used to
 expand any targets embedded in the expression.</p>
 </section>
@@ -188,6 +189,9 @@ expand any targets embedded in the expression.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html">OptionalParameterTargetBuilder</a></h4>
       <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building an expression for the <a class="xref" href="Rezolver.Targets.OptionalParameterTarget.html">OptionalParameterTarget</a> target.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.ProjectionTargetBuilder.html">ProjectionTargetBuilder</a></h4>
+      <section><p>Specialised expression builder for the <a class="xref" href="Rezolver.Targets.ProjectionTarget.html">ProjectionTarget</a> target type.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.RedundantConvertRewriter.html">RedundantConvertRewriter</a></h4>
       <section><p>Removes unnecessary convert expressions from an expression.</p>

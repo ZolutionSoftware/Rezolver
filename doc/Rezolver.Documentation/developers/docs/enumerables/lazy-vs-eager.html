@@ -8,7 +8,7 @@
   	<title>Lazy vs. Eager Enumerables | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Lazy vs. Eager Enumerables | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../../styles/main.css">
   	<meta property="docfx:navrel" content="../../toc.html">
   	<meta property="docfx:tocrel" content="../toc.html">
+  	
   	<meta property="docfx:rel" content="../../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
@@ -116,7 +117,7 @@ container to build enumerables differently for different types.</p>
 <h2 id="what-is-a-lazy-enumerable">What is a Lazy enumerable?</h2>
 <p>A lazy enumerable is simply one which produces results <em>as you enumerate it</em> rather than being backed by an array or collection
 which already contains the objects.</p>
-<p>As an example, the .Net function <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb341264(v=vs.110).aspx">Range</a> function generates a lazy enumerable which, when enumerated,
+<p>As an example, the .Net function <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.range">Range</a> function generates a lazy enumerable which, when enumerated,
 provides a range of <em>n</em> integer values starting from a given lower bound:</p>
 <pre><code class="lang-cs">// an enumerable which starts at 0 and keeps returning values up to, and including, 9
 var enumerable = Enumerable.Range(0, 10);
@@ -161,7 +162,7 @@ foreach(var o in a)
 </code></pre><p>In this case, all the objects produced by the enumerable are already in memory, and the enumerator is merely walking an array,
 linked list or whatever.</p>
 <div class="TIP"><h5>Tip</h5><p>Most .Net developers will already be familiar with the idea of &#39;realising&#39; an enumerable to force it to become &#39;eager&#39;, using the
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/bb298736(v=vs.110).aspx">ToArray</a> or <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb342261(v=vs.110).aspx">ToList</a> extension methods.  These functions simply enumerate their
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.toarray">ToArray</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.tolist">ToList</a> extension methods.  These functions simply enumerate their
 input enumerable once, storing the results into an array/list or similar structure.</p>
 </div>
 <hr>
@@ -350,7 +351,7 @@ you don&#39;t have to do it later.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/lazy-vs-eager.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/lazy-vs-eager.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

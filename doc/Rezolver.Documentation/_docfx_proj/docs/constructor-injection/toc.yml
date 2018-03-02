@@ -1,6 +1,6 @@
 ﻿- name: Basic Usage
   href: index.md
-- name: Member Injection
-  href: member-injection.md
-- name: Generics
+- name: Open Generics (best-match)
   href: generics.md
+- name: Open Generics (manual)
+  href: generics-manual-constructor.md

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +11,11 @@ using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {
-	//code below is disbaled at build time until I've got expression compilation working properly again
-	//after which time, I will then derive this compiler from the expression generating one, throw away
-	//a lot of the code found here and just hook in the core expression generation stuff with the assembly
-	//generation stuff.
-#if SUSPENDED && !DOTNET
+    // code below is disbaled at build time until I've got expression compilation working properly again
+    // after which time, I will then derive this compiler from the expression generating one, throw away
+    // a lot of the code found here and just hook in the core expression generation stuff with the assembly
+    // generation stuff.
+#if SUSPENDED && !MAXCOMPAT
 	/// <summary>
 	/// Implementation of the <see cref="ITargetCompiler"/> which compiles dynamic code to an assembly (which can, potentially, be saved to disk).
 	/// 

@@ -32,7 +32,7 @@ namespace Rezolver.Examples.AspNetCore._2._0
 
         // Adding this method (even if empty) is enough to trigger the use of Rezolver
         // as the Asp.Net Core 2 Application's DI container.
-        public void ConfigureContainer(ITargetContainer targets)
+        public void ConfigureContainer(IRootTargetContainer targets)
         {
             // The targets passed here will be used to create the ScopedContainer.
 

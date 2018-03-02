@@ -1,4 +1,7 @@
-﻿using Rezolver.Tests.Examples.Types;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using Rezolver.Tests.Examples.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -150,7 +153,7 @@ namespace Rezolver.Tests.Examples
             var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
 
             // only the first registration matches IGeneric<string>
-            Assert.Equal(1, anyResult.Length);
+            Assert.Single(anyResult);
             Assert.IsType<GenericAny<string>>(anyResult[0]);
 
             // First and second registrations match IGeneric<MyService>
@@ -186,7 +189,7 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<UsesIMyService>(result[1]);
             Assert.IsType<UsesIMyService2>(result[2]);
 
-            Assert.Equal(1, result2.Length);
+            Assert.Single(result2);
             Assert.IsType<UsesAnyService<MyService>>(result2[0]);
             // </example6>
         }
@@ -237,7 +240,7 @@ namespace Rezolver.Tests.Examples
             var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
 
             Assert.Equal(2, myServiceResult.Length);
-            Assert.Equal(1, myService2Result.Length);
+            Assert.Single(myService2Result);
             // </example6c>
             // NOTE ABOVE - OMITTING THE INDIVIDUAL ITEM CHECKS BECAUSE IT JUST REPEATS THE CONSTRAINTS TEST
         }
@@ -263,8 +266,8 @@ namespace Rezolver.Tests.Examples
             var myService1Result = container.ResolveMany<IGeneric<MyService1>>().ToArray();
             var myService2Result = container.ResolveMany<IGeneric<MyService2>>().ToArray();
 
-            Assert.Equal(1, myService1Result.Length);
-            Assert.Equal(1, myService2Result.Length);
+            Assert.Single(myService1Result);
+            Assert.Single(myService2Result);
             Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
             // </example6d>
         }
@@ -446,6 +449,76 @@ namespace Rezolver.Tests.Examples
 
             Assert.Throws<InvalidOperationException>(() => container.ResolveMany<int>());
             // </example12>
+        }
+
+        [Fact]
+        public void ShouldProjectSimplePriceAdjustments()
+        {
+            // <example100>
+            var container = new Container();
+
+            container.RegisterObject(new SimplePriceAdjustmentConfig()
+            {
+                Adjustment = 10M,
+                DisplayName = "Always Add 10"
+            });
+
+            container.RegisterObject(new SimplePriceAdjustmentConfig()
+            {
+                Adjustment = 0.75M,
+                DisplayName = "25% Off",
+                IsPercentage = true,
+                TriggerPrice = 49.99M
+            });
+
+            // now register the projection (note: it can be set up
+            // at any time, and additional registrations can be made
+            // which match the source enumerable after this registration
+            // is done)
+            container.RegisterProjection<SimplePriceAdjustmentConfig, SimplePriceAdjustment>();
+
+            container.RegisterType<SimplePriceCalculator>();
+
+            // get our calculator
+            var calc = container.Resolve<SimplePriceCalculator>();
+
+            Assert.Equal(40 + 10, calc.Calculate(40));
+            Assert.Equal((55 + 10) * 0.75M, calc.Calculate(55));
+            // </example100>
+        }
+
+        [Fact]
+        public void ShouldProjectDecoratedAdjustments()
+        {
+            // <example101>
+            var container = new Container();
+            container.RegisterType<SimplePriceAdjustment, IPriceAdjustment>();
+            container.RegisterDecorator<NeverLessThanHalfPrice, IPriceAdjustment>();
+            container.RegisterType<PriceCalculator>();
+            
+            // note here - projection targets IPriceAdjustment now
+            container.RegisterProjection<SimplePriceAdjustmentConfig, IPriceAdjustment>();
+
+            container.RegisterObject(new SimplePriceAdjustmentConfig()
+            {
+                Adjustment = -10M,
+                DisplayName = "10 off"
+            });
+
+            container.RegisterObject(new SimplePriceAdjustmentConfig()
+            {
+                Adjustment = 0.75M,
+                IsPercentage = true,
+                DisplayName = "25% off"
+            });
+
+            var calculator = container.Resolve<PriceCalculator>();
+
+            // 25% off will not be applied.
+            Assert.Equal(10, calculator.Calculate(20));
+            // but it is here
+            Assert.Equal(15, calculator.Calculate(30));
+            // </example101>
         }
     }
 }

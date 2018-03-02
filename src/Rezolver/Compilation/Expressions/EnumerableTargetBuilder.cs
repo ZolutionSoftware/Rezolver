@@ -1,12 +1,15 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using Rezolver.Targets;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 using Rezolver.Runtime;
+using Rezolver.Targets;
 
 namespace Rezolver.Compilation.Expressions
 {
@@ -16,7 +19,7 @@ namespace Rezolver.Compilation.Expressions
     public class EnumerableTargetBuilder : ExpressionBuilderBase<EnumerableTarget>
     {
         /// <summary>
-        /// Builds an expression which represents an instance of <see cref="IEnumerable{T}"/> whose elements are created by the 
+        /// Builds an expression which represents an instance of <see cref="IEnumerable{T}"/> whose elements are created by the
         /// <see cref="EnumerableTarget.Targets"/> of the passed <paramref name="target"/>.
         /// </summary>
         /// <param name="target">The target for which an expression is to be built.</param>
@@ -28,14 +31,14 @@ namespace Rezolver.Compilation.Expressions
         /// <remarks>
         /// The compiler is capable of producing both lazy-loaded and eager-loaded enumerables, which can be controlled via
         /// target container options.
-        /// 
+        ///
         /// ## Lazy vs Eager loading
-        /// 
-        /// The option <see cref="Options.LazyEnumerables"/> is read from the <paramref name="context"/> for the 
-        /// <see cref="EnumerableTarget.ElementType"/> of the <paramref name="target"/>.  If it is equivalent to <c>true</c> 
+        ///
+        /// The option <see cref="Options.LazyEnumerables"/> is read from the <paramref name="context"/> for the
+        /// <see cref="EnumerableTarget.ElementType"/> of the <paramref name="target"/>.  If it is equivalent to <c>true</c>
         /// (the <see cref="Options.LazyEnumerables.Default"/>), then a lazily-loaded enumerable is constructed which will
         /// create new instances of each object in the enumerable each time it is enumerated.
-        /// 
+        ///
         /// If the option is instead equivalent to <c>false</c>, then all instances will be created in advance, and an already-materialised
         /// enumerable is constructed.</remarks>
         protected override Expression Build(EnumerableTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)

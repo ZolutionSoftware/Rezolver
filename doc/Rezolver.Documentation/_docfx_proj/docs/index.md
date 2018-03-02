@@ -1,12 +1,7 @@
 # Rezolver Dev Guide
 
-Welcome to the Rezolver developer guide!
-
-This site is always under development, and right now we're doing everything we can to get all high-level
-documentation in place so that even novice users of DI containers can get up and running with Rezolver.
-
-Something missing?  Please open an issue [over on Github](http://github.com/zolutionsoftware/rezolver)
-with your question.
+Welcome to the Rezolver developer guide - the best resource to learn about all the features of Rezolver, and
+tips and tricks to get the most out of it.
 
 # Getting started
 
@@ -45,18 +40,26 @@ for the ['Objects as Services' documentation](objects.md):
 You'll notice that the body of each test method looks like this:
 
 ```cs
-//<example_n>
+//<examplen>
 
 ... (code) ...
 
-//</example_n>
+//</examplen>
 ```
 
 > [!NOTE]
 > This is a facet of the code snippet feature of [docfx](https://dotnet.github.io/docfx/)
 
-Each example is numbered sequentially, so it shouldn't be too hard to marry up the example in the documentation to the 
+Each example is numbered sequentially (the *`n`*), so it shouldn't be too hard to marry up the example in the documentation to the 
 test in the tests file.
+
+# Something missing?
+
+This site is always under development, and we're doing everything we can to get all high-level
+documentation in place so that even novice users of DI containers can get up and running with Rezolver.
+
+If you have a question about something that's not covered here, please feel free to 
+[open an issue over on Github](http://github.com/zolutionsoftware/rezolver/issues).
 
 # Next Steps
 

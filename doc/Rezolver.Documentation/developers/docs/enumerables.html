@@ -8,7 +8,7 @@
   	<title>Automatic Enumerable Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Automatic Enumerable Injection | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -116,7 +117,7 @@ method has been called against the target type <code>Service</code>:</p>
 <ul>
 <li>If no target has been registered against the type, then the enumerable will be empty</li>
 <li>Otherwise, the enumerable will contain instances obtained from each <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> that was registered
-against that type, in the order they were registered.</li>
+against that type, or any type compatible with it, in the order they were registered.</li>
 </ul>
 <div class="NOTE"><h5>Note</h5><p>The functionality described here depends on two target container options: <a class="xref" href="../api/Rezolver.Options.AllowMultiple.html">AllowMultiple</a> 
 and <a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> - which are both configured to be equivalent to <code>true</code> by 
@@ -132,6 +133,9 @@ more on this, read the topic <a href="enumerables/lazy-vs-eager.html">Lazy vs Ea
 <a href="https://github.com/aspnet/DependencyInjection/issues/589">this issue in the aspnet/DependencyInjection repo</a>
 has been pushed to an official package release.</p>
 </div>
+<h2 id="order-of-enumerables">Order of enumerables</h2>
+<p>The order that Rezolver&#39;s automatic enumerables return their items is <strong>always</strong> equal to the order in which 
+the underlying registrations were made.</p>
 <h2 id="resolving-enumerables">Resolving enumerables</h2>
 <p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
 type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
@@ -277,6 +281,13 @@ using (var childScope = container.CreateScope())
 <li><code>[2]</code> is created once per call</li>
 </ul>
 <hr>
+<h2 id="automatic-covariance">Automatic Covariance</h2>
+<p>Since the <code>T</code> type parameter in <code>IEnumerable&lt;T&gt;</code> is a covariant, Rezolver automatically resolves all types
+which are reference compatible with the <code>T</code> that you specify.  So, resolving an <code>IEnumerable&lt;IFoo&gt;</code> will 
+result in an enumerable containing <em>all</em> objects produced from registrations made against types which 
+implement <code>IFoo</code> (the registrations do not need to have been made explicitly against the <code>IFoo</code> interface).</p>
+<p>A concrete example of this can be found in the <a href="variance/covariance.html#enumerables">section on covariance</a>.</p>
+<hr>
 <h2 id="decorators-and-enumerables">Decorators and Enumerables</h2>
 <p><a href="decorators.html">Decorators</a> that have been registered against the <strong>element type</strong> of an enumerable will be applied to all 
 instances that the container produces for the enumerable.  This also applies to stacked decorators (where multiple 
@@ -387,11 +398,6 @@ option and, if it&#39;s <code>false</code> it disables itself.</p>
 <a href="arrays-lists-collections/index.html">automatic collection-type injection behaviour</a> will only work when you 
 explicitly register the correct <code>IEnumerable&lt;T&gt;</code> for it.</p>
 </div>
-<h1 id="order-of-enumerables">Order of enumerables</h1>
-<div class="NOTE"><h5>Note</h5><p>This is new in 1.3.1</p>
-</div>
-<p>The order that an enumerable returns its items is <strong>always</strong> equal to the order in which the underlying registrations
-were made.</p>
 <hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
@@ -399,6 +405,8 @@ were made.</p>
 generic registrations.</li>
 <li>Learn about Rezolver&#39;s support for <a href="enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> (note: all auto-generated enumerables are lazily 
 evaluated by default)</li>
+<li><strong>New in 1.3.2</strong> - Learn how to setup <a href="enumerables/projections.html">enumerable projections</a> which allow you to
+instruct the container to build an enumerable of one type from an enumerable of another type.</li>
 <li>Rezolver also supports <a href="arrays-lists-collections/index.html">arrays, lists and collection injection</a></li>
 </ul>
 </article>
@@ -409,7 +417,7 @@ evaluated by default)</li>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

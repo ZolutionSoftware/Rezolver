@@ -17,7 +17,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void Alias_ShouldWorkForBaseTypes()
 		{
-			ITargetContainer targets = CreateTargetContainer();
+			var targets = CreateTargetContainer();
 			targets.RegisterObject(1);
 			targets.RegisterAlias<object, int>();
 
@@ -31,7 +31,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void Alias_ShouldWorkForDerivedTypes()
 		{
-			ITargetContainer targets = CreateTargetContainer();
+			var targets = CreateTargetContainer();
 			targets.RegisterObject(1, typeof(object));
 			targets.RegisterAlias<int, object>();
 
@@ -46,7 +46,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		{
 			//this test can fail if the compiler is not working properly for singletons, too
 
-			ITargetContainer targets = CreateTargetContainer();
+			var targets = CreateTargetContainer();
 			targets.RegisterSingleton<InstanceCountingType>();
 			targets.RegisterAlias<IInstanceCountingType, InstanceCountingType>();
 

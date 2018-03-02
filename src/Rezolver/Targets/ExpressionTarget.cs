@@ -1,7 +1,6 @@
 // Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -11,27 +10,27 @@ namespace Rezolver.Targets
 {
     /// <summary>
     /// A generic target for all expressions not explicitly supported by a particular target.
-    /// 
+    ///
     /// Enables more complex behaviours to be registered and used with the more formal
     /// <see cref="ITarget"/> implementations.
     /// </summary>
     /// <remarks>Note to compiler implementers: This class can be used to represent simple
     /// expressions such as constants, constructor calls and so on; but can also contain whole
     /// lambda expressions with parameters.
-    /// 
-    /// In the latter case, expression parameters are expected to receive injected arguments and, 
+    ///
+    /// In the latter case, expression parameters are expected to receive injected arguments and,
     /// therefore, some rewriting of the expression is likely to be required.</remarks>
     public partial class ExpressionTarget : TargetBase
     {
         /// <summary>
-        /// Gets the static expression represented by this target - if <c>null</c>, then 
+        /// Gets the static expression represented by this target - if <c>null</c>, then
         /// a factory is being used to produce the expression, which is available from
         /// the <see cref="ExpressionFactory"/> property.
         /// </summary>
         public Expression Expression { get; }
 
         /// <summary>
-        /// Gets the type of <see cref="Expression"/> or the type that all expressions returned by the 
+        /// Gets the type of <see cref="Expression"/> or the type that all expressions returned by the
         /// <see cref="ExpressionFactory"/> are expected to be equal to.
         /// </summary>
         public override Type DeclaredType
@@ -39,10 +38,9 @@ namespace Rezolver.Targets
             get;
         }
 
-
         /// <summary>
         /// Gets a factory which will be executed to obtain an expression given a particular <see cref="ICompileContext"/>.
-        /// 
+        ///
         /// If <c>null</c>, then a static expression will be used instead and is available
         /// from the <see cref="Expression"/> property.
         /// </summary>
@@ -61,18 +59,20 @@ namespace Rezolver.Targets
         public ExpressionTarget(Expression expression, Type declaredType = null)
         {
             expression.MustNotBeNull(nameof(expression));
-            Expression = expression;
+            this.Expression = expression;
             var expressionType = (expression.NodeType == ExpressionType.Lambda ? ((LambdaExpression)expression).Body.Type : expression.Type);
-            DeclaredType = declaredType ?? expressionType;
+            this.DeclaredType = declaredType ?? expressionType;
 
-            if (!TypeHelpers.IsAssignableFrom(DeclaredType, expressionType))
-                throw new ArgumentException($"{ nameof(declaredType) } must be compatible with the type of the expression", nameof(declaredType));
+            if (!TypeHelpers.IsAssignableFrom(this.DeclaredType, expressionType))
+            {
+                throw new ArgumentException($"{nameof(declaredType)} must be compatible with the type of the expression", nameof(declaredType));
+            }
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ExpressionTarget"/> class.
         /// </summary>
-        /// <param name="expressionFactory">Required. The factory delegate that a compiler should call to get the expression to use when 
+        /// <param name="expressionFactory">Required. The factory delegate that a compiler should call to get the expression to use when
         /// compiling this target.</param>
         /// <param name="declaredType">Required. Static type of all expressions that will be
         /// returned by <paramref name="expressionFactory"/>.</param>
@@ -80,11 +80,11 @@ namespace Rezolver.Targets
         {
             expressionFactory.MustNotBeNull(nameof(expressionFactory));
             declaredType.MustNotBeNull(nameof(declaredType));
-            ExpressionFactory = expressionFactory;
-            DeclaredType = declaredType;
+            this.ExpressionFactory = expressionFactory;
+            this.DeclaredType = declaredType;
         }
 
-        //TODO: Consider adding a Bind() function to this class to carry out the complex lambda rewriting etc, as it's
-        //going to be needed by other compilers, not just the ExpressionCompiler.
+        // TODO: Consider adding a Bind() function to this class to carry out the complex lambda rewriting etc, as it's
+        // going to be needed by other compilers, not just the ExpressionCompiler.
     }
 }

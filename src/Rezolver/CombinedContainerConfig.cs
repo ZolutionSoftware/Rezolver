@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +22,6 @@ namespace Rezolver
         /// </summary>
         public CombinedContainerConfig()
         {
-
         }
 
         /// <summary>
@@ -30,7 +32,6 @@ namespace Rezolver
         public CombinedContainerConfig(CombinedContainerConfig collection)
             : this((IEnumerable<IContainerConfig>)collection)
         {
-
         }
 
         /// <summary>
@@ -41,7 +42,6 @@ namespace Rezolver
         public CombinedContainerConfig(IEnumerable<IContainerConfig> behaviours)
             : base(behaviours)
         {
-
         }
 
         /// <summary>
@@ -51,27 +51,26 @@ namespace Rezolver
         /// <param name="behaviours">The behaviours to be added to the collection on construction.</param>
         public CombinedContainerConfig(params IContainerConfig[] behaviours)
             : this((IEnumerable<IContainerConfig>)behaviours)
-        { 
-
+        {
         }
 
         /// <summary>
-        /// Clones the configuration in this instance into a new instance of the <see cref="CombinedContainerConfig"/> 
+        /// Clones the configuration in this instance into a new instance of the <see cref="CombinedContainerConfig"/>
         /// type.
         /// </summary>
         public CombinedContainerConfig Clone() => base.Clone<CombinedContainerConfig>();
 
         /// <summary>
-        /// Applies the behaviours in this collection to the passed <paramref name="container"/> and 
+        /// Applies the behaviours in this collection to the passed <paramref name="container"/> and
         /// <paramref name="targets"/>.
         /// </summary>
         /// <param name="container">The container to which the behaviours are being attached.</param>
         /// <param name="targets">The target container used by the <paramref name="container"/> for its registrations.</param>
-        /// <remarks>The implementation runs through each behaviour that has been added to the collection, in dependency 
-        /// order, calling its <see cref="IContainerConfig.Configure(IContainer, ITargetContainer)"/> method.</remarks>
-        public void Configure(IContainer container, ITargetContainer targets)
+        /// <remarks>The implementation runs through each behaviour that has been added to the collection, in dependency
+        /// order, calling its <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method.</remarks>
+        public void Configure(IContainer container, IRootTargetContainer targets)
         {
-            foreach(var behaviour in Ordered)
+            foreach (var behaviour in this.Ordered)
             {
                 behaviour.Configure(container, targets);
             }

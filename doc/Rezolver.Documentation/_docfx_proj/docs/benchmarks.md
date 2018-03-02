@@ -1,10 +1,8 @@
 ﻿# Rezolver Benchmarks
 
 > [!NOTE]
-> Daniel Palme has now integrated Rezolver into his benchmarks as standard, so now you can evaluate
-> it's performance independently of our own tests shown here.
-> 
-> He regularly updates [this blog post](http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison) 
+> Daniel Palme has now integrated Rezolver into his benchmarks as standard, he regularly updates 
+> [this blog post](http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison) 
 > with in depth comments and analysis on his latest results.
 > * * *
 > The current status of Rezolver's performance is 'Average', which is fair, because of the results
@@ -37,7 +35,7 @@ being stress-tested by this application, with the list growing.
 
 # Notes
 
-Rezolver performs very well across the board, however where it suffers is in benchmarks which constantly
+Rezolver performs very well across the board, however it suffers in benchmarks which constantly
 destroy and recreate containers.
 
 In particular, the performance in the 'Child Containers' benchmark is particularly poor - caused by 

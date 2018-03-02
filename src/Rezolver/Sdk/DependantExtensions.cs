@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,7 +35,7 @@ namespace Rezolver.Sdk
 
         /// <summary>
         /// Adds a required dependency from the object on which this is called to <paramref name="dep"/>
-        /// 
+        ///
         /// The object <paramref name="dep"/> must be present in the input collection when dependencies are resolved.
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
@@ -44,15 +47,22 @@ namespace Rezolver.Sdk
             where T : IMutableDependant
             where TDependency : class
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-            if (dep == null) throw new ArgumentNullException(nameof(dep));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            if (dep == null)
+            {
+                throw new ArgumentNullException(nameof(dep));
+            }
 
             return AddObjectDependency(obj, dep, true);
         }
 
         /// <summary>
         /// Adds a required dependency from the object on which this is called to all the objects in <paramref name="deps"/>
-        /// 
+        ///
         /// Every object in <paramref name="deps"/> must be present in the input collection when dependencies are resolved.
         /// </summary>
         /// <typeparam name="T">The type of object on which this is called.</typeparam>
@@ -64,8 +74,15 @@ namespace Rezolver.Sdk
             where T : IMutableDependant
             where TDependency : class
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-            if (deps == null) throw new ArgumentNullException(nameof(deps));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            if (deps == null)
+            {
+                throw new ArgumentNullException(nameof(deps));
+            }
 
             return AddObjectDependencies(obj, deps, true);
         }
@@ -82,15 +99,22 @@ namespace Rezolver.Sdk
         public static T RequiresAny<T>(this T obj, Type dependencyType)
             where T : IMutableDependant
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
             if (TypeHelpers.IsValueType(dependencyType))
-                throw new ArgumentException($"{ dependencyType } is a value type - only reference types are allowed", nameof(dependencyType));
+            {
+                throw new ArgumentException($"{dependencyType} is a value type - only reference types are allowed", nameof(dependencyType));
+            }
+
             return AddTypeDependency(obj, dependencyType, true);
         }
 
         /// <summary>
         /// Adds an optional dependency from the object on which this is called to <paramref name="dep"/>.
-        /// 
+        ///
         /// If the object <paramref name="dep"/> is present in the input collection when dependencies are resolved, then it
         /// will be identified.
         /// </summary>
@@ -103,15 +127,22 @@ namespace Rezolver.Sdk
             where T : IMutableDependant
             where TDependency : class
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-            if (dep == null) throw new ArgumentNullException(nameof(dep));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            if (dep == null)
+            {
+                throw new ArgumentNullException(nameof(dep));
+            }
 
             return AddObjectDependency(obj, dep, false);
         }
 
         /// <summary>
         /// Adds an optional dependency from the object on which this is called to all the objects in <paramref name="deps"/>.
-        /// 
+        ///
         /// Any objects in <paramref name="deps"/> which are present in the input collection when dependencies are resolved will
         /// be identified as dependencies.  None of them will be required.
         /// </summary>
@@ -124,8 +155,15 @@ namespace Rezolver.Sdk
             where T : IMutableDependant
             where TDependency : class
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-            if (deps == null) throw new ArgumentNullException(nameof(deps));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            if (deps == null)
+            {
+                throw new ArgumentNullException(nameof(deps));
+            }
 
             return AddObjectDependencies(obj, deps, true);
         }
@@ -142,15 +180,22 @@ namespace Rezolver.Sdk
         public static T AfterAny<T>(this T obj, Type dependencyType)
             where T : IMutableDependant
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
             if (TypeHelpers.IsValueType(dependencyType))
-                throw new ArgumentException($"{ dependencyType } is a value type - only reference types are allowed", nameof(dependencyType));
+            {
+                throw new ArgumentException($"{dependencyType} is a value type - only reference types are allowed", nameof(dependencyType));
+            }
+
             return AddTypeDependency(obj, dependencyType, true);
         }
 
         /// <summary>
         /// Shortcut method for resolving the dependencies for an <see cref="IDependant"/> from a set of objects.
-        /// 
+        ///
         /// All the method does is forward the call to the <see cref="DependencyEnumerableExtensions.GetDependencies{T}(IEnumerable{DependencyMetadata}, IEnumerable{T})"/>
         /// method of the <see cref="DependencyMetadataCollection"/> belonging to the passed <see cref="IDependant"/> - <paramref name="obj"/>
         /// </summary>
@@ -158,15 +203,23 @@ namespace Rezolver.Sdk
         /// <typeparam name="TDependency">The common dependency type</typeparam>
         /// <param name="obj">Required - the object whose dependencies are to be resolved.</param>
         /// <param name="objects">Required - the range of objects from which dependencies are to be located.
-        /// 
+        ///
         /// Generally speaking, it's typical for <paramref name="obj"/> to be a member of this range.</param>
         /// <returns></returns>
         public static IEnumerable<TDependency> GetDependencies<T, TDependency>(this T obj, IEnumerable<TDependency> objects)
             where T : IDependant
             where TDependency : class
         {
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-            if (objects == null) throw new ArgumentNullException(nameof(objects));
+            if (obj == null)
+            {
+                throw new ArgumentNullException(nameof(obj));
+            }
+
+            if (objects == null)
+            {
+                throw new ArgumentNullException(nameof(objects));
+            }
+
             return obj.Dependencies.GetDependencies(objects);
         }
 
@@ -178,12 +231,12 @@ namespace Rezolver.Sdk
         /// <param name="required"><c>true</c> to make the dependency required; <c>false</c> to make it optional.</param>
         /// <returns>A new <see cref="DependencyMetadata"/> object representing a dependency from <paramref name="obj"/> to
         /// objects of type <typeparamref name="TDependency"/>.</returns>
-        /// <remarks>As with <see cref="CreateObjectDependency{TDependency}(IDependant, TDependency, bool)"/>, this method creates a 
+        /// <remarks>As with <see cref="CreateObjectDependency{TDependency}(IDependant, TDependency, bool)"/>, this method creates a
         /// new <see cref="DependencyMetadata"/> object and returns it, as opposed to the methods
         /// <see cref="RequiresAny{T}(T, Type)"/> or <see cref="AfterAny{T}(T, Type)"/>, which create and add the dependency directly
         /// to an <see cref="IMutableDependant"/> object.
-        /// 
-        /// This method is used most often by <see cref="IDependant"/> objects (i.e. those with read-only dependencies) which have a 
+        ///
+        /// This method is used most often by <see cref="IDependant"/> objects (i.e. those with read-only dependencies) which have a
         /// fixed set of required or optional dependencies that are known at construction-time.</remarks>
         public static DependencyMetadata CreateTypeDependency<TDependency>(this IDependant obj, bool required = true)
             where TDependency : class
@@ -201,12 +254,12 @@ namespace Rezolver.Sdk
         /// <param name="required"><c>true</c> to make the dependency required; <c>false</c> to make it optional.</param>
         /// <returns>A new <see cref="DependencyMetadata"/> object representing a dependency from <paramref name="obj"/> to
         /// the object <paramref name="dependency"/>.</returns>
-        /// <remarks>As with <see cref="CreateTypeDependency{TDependency}(IDependant, bool)"/>, this method creates a 
+        /// <remarks>As with <see cref="CreateTypeDependency{TDependency}(IDependant, bool)"/>, this method creates a
         /// new <see cref="DependencyMetadata"/> object and returns it, as opposed to the methods
-        /// <see cref="Requires{T, TDependency}(T, TDependency)"/> or <see cref="After{T, TDependency}(T, TDependency)"/>, 
+        /// <see cref="Requires{T, TDependency}(T, TDependency)"/> or <see cref="After{T, TDependency}(T, TDependency)"/>,
         /// which create and add the dependency directly to an <see cref="IMutableDependant"/> object.
-        /// 
-        /// This method is used most often by <see cref="IDependant"/> objects (i.e. those with read-only dependencies) which have a 
+        ///
+        /// This method is used most often by <see cref="IDependant"/> objects (i.e. those with read-only dependencies) which have a
         /// fixed set of required or optional dependencies that are known at construction-time.</remarks>
         public static DependencyMetadata CreateObjectDependency<TDependency>(this IDependant obj, TDependency dependency, bool required = true)
             where TDependency : class

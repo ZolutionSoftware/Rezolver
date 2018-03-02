@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Interface IContainerConfig
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -127,30 +128,30 @@ as the source of their registrations).</p>
   <div class="markdown level0 remarks"><p>While similar to <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>, this is specifically used
 for new container instances - since some configuration (setting of options etc) only applies to
 <a class="xref" href="Rezolver.IContainer.html">IContainer</a> and not <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
-<p>A configuration instance can be passed to any of the provided <a class="xref" href="Rezolver.Container.html">Container</a>-derived types on 
-construction (see the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_ITargetContainer_Rezolver_IContainerConfig_">Container(ITargetContainer, IContainerConfig)</a> 
+<p>A configuration instance can be passed to any of the provided <a class="xref" href="Rezolver.Container.html">Container</a>-derived types on
+construction (see the <a class="xref" href="Rezolver.Container.html#Rezolver_Container__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_">Container(IRootTargetContainer, IContainerConfig)</a>
 constructor).  If one is not passed then the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">DefaultConfig</a> is used.</p>
 <p>The built-in config implementations register services or set options in the target container passed
-to <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_">Configure(IContainer, ITargetContainer)</a>.</p>
+to <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_">Configure(IContainer, IRootTargetContainer)</a>.</p>
 </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig.Configure(Rezolver.IContainer%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig.Configure(Rezolver.IContainer%2CRezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerConfig.cs/#L33">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainerConfig.cs/#L36">View Source</a>
   </span>
   <a id="Rezolver_IContainerConfig_Configure_" data-uid="Rezolver.IContainerConfig.Configure*"></a>
-  <h4 id="Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_ITargetContainer_" data-uid="Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.ITargetContainer)">Configure(IContainer, ITargetContainer)</h4>
+  <h4 id="Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_" data-uid="Rezolver.IContainerConfig.Configure(Rezolver.IContainer,Rezolver.IRootTargetContainer)">Configure(IContainer, IRootTargetContainer)</h4>
   <div class="markdown level1 summary"><p>Performs the configuration represented by this insteance on the <code data-dev-comment-type="paramref" class="paramref">container</code> and its
 <code data-dev-comment-type="paramref" class="paramref">targets</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void Configure(IContainer container, ITargetContainer targets)</code></pre>
+    <pre><code class="lang-csharp hljs">void Configure(IContainer container, IRootTargetContainer targets)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -169,7 +170,7 @@ to <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfi
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
         <td><p>The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that is being used by the <code data-dev-comment-type="paramref" class="paramref">container</code>
 for its registrations and options.</p>
@@ -191,10 +192,10 @@ for its registrations and options.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IContainerConfig.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_IContainerConfig.md&amp;value=---%0Auid%3A%20Rezolver.IContainerConfig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerConfig.cs/#L24" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/IContainerConfig.cs/#L27" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -165,17 +165,15 @@ root-most scope (i.e. one which does not have a parent):
 
 The previous example throws up a slight problem: what happens when a singleton depends on a non-singleton disposable; and vice versa?
 
-At the moment (until 1.2 is done), it's good news and bad news...
-
 ### Transient depending on a Singleton
 
-When a transient object depends on a singleton disposable, then (regardless of whether the transient is Disposable too) then nothing changes, the
+When a transient object depends on a singleton disposable, then (regardless of whether the transient is Disposable too) nothing changes, the
 singleton is still tracked in the root-most scope, and is not disposed until that scope is disposed - there is no difference to the singleton 
 example shown above.
 
 ### Singleton depending on a Transient
 
-> [!INFO]
+> [!NOTE]
 > This didn't work properly prior to v1.2.  If you are still using v1.1, then
 > consider upgrading to the latest package
 
@@ -184,7 +182,7 @@ will also be tracked in the root scope, so that it remains usable for the lifeti
 
 [!code-csharp[ImplicitScopeExamples.cs](../../../../../test/Rezolver.Tests.Examples/ImplicitScopeExamples.cs#example5)]
 
-
+In short - an object's lifetime is determined by the *longest* lifetime of any object that 'owns' that object.
 
 * * *
 

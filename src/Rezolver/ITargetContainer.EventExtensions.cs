@@ -1,14 +1,17 @@
-﻿using System;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Rezolver
 {
     /// <summary>
-    /// Contains the extension <see cref="RegisterEventHandler{TEvent}(ITargetContainer, ITargetContainerEventHandler{TEvent})"/> 
+    /// Contains the extension <see cref="RegisterEventHandler{TEvent}(ITargetContainer, ITargetContainerEventHandler{TEvent})"/>
     /// which allows a caller to receive notifications about events happening inside a particular target container.
     /// </summary>
-    public static class TargetContainerEventExtensions
+    internal static class TargetContainerEventExtensions
     {
         /// <summary>
         /// Adds an event handler to the target container for the event type <typeparamref name="TEvent"/>
@@ -19,7 +22,7 @@ namespace Rezolver
         /// target container raises an event of type <typeparamref name="TEvent"/></param>
         /// <remarks>Event handlers are implemented as registrations inside the <paramref name="targets"/> target
         /// container behind the scenes; as such it is not possible to remove an event handler after adding it.</remarks>
-        public static void RegisterEventHandler<TEvent>(this ITargetContainer targets, ITargetContainerEventHandler<TEvent> handler)
+        internal static void RegisterEventHandler<TEvent>(this ITargetContainer targets, ITargetContainerEventHandler<TEvent> handler)
         {
             (targets ?? throw new ArgumentNullException(nameof(targets)))
                 .SetOption(handler ?? throw new ArgumentNullException(nameof(handler)));
@@ -32,7 +35,7 @@ namespace Rezolver
 
         internal static void RaiseEvent<TEvent>(this ITargetContainer container, TEvent e)
         {
-            foreach(var handler in GetEventHandlers(container, e))
+            foreach (var handler in GetEventHandlers(container, e))
             {
                 handler.Handle(container, e);
             }

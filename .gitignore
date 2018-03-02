@@ -6,6 +6,7 @@
 *.user
 *.sln.docstates
 applicationhost.config
+.vs/
 
 # Build results
 [Dd]ebug/
@@ -144,7 +145,7 @@ AppPackages/
 sql/
 *.Cache
 ClientBin/
-[Ss]tyle[Cc]op.*
+# [Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
@@ -192,3 +193,5 @@ test/Rezolver.Tests/_TestAssemblies
 test/artifacts/
 src/artifacts/
 *.dgml
+.vs/Rezolver/v15/Browse.VC.db
+.vs/VSWorkspaceState.json

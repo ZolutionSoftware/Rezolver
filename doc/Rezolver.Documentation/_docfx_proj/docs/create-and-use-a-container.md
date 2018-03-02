@@ -16,6 +16,12 @@ two interfaces:
 
 ## @Rezolver.ITargetContainer
 
+> [!NOTE]
+> You'll notice that the constructors for the @Rezolver.Container and @Rezolver.ScopedContainer types (see next)
+> actually accept an instance of @Rezolver.IRootTargetContainer.  This is a new interface added in v1.3.2 which
+> marks a target container as a 'top-level' one - and supports functionality such as 
+> [covariance](variance/covariance.md).  `IRootTargetContainer` also implies the `ITargetContainer` interface.
+
 This interface describes a registry of @Rezolver.ITarget objects, keyed by type, describing the type of object 
 that is to be created (and how) when a given type is requested.
 
@@ -32,7 +38,7 @@ This is the interface through which we resolve objects.  The interface does not 
 mechanisms at all (even if the classes providing the 'standard' implementations all do) - only the ability
 to request objects from the container.
 
-This interface does not mandate that a container has an `ITargetContainer`, it's simply the case
+This interface does not mandate that a container has an `IRootTargetContainer`, it's simply the case
 that all the provided implementations which we will discuss in the rest of this documentation do
 use that interface as the source of their service registrations.
 
@@ -202,8 +208,8 @@ configuration collection) - but you can also control whether enumerable injectio
 configuration from that collection, [as is shown in the last enumerable example](enumerables.md#disabling-enumerable-injection).
 
 There is much more to be covered about configuration and options.  For now - use them where this guide shows you can
-(e.g. to [control contravariance](contravariance.md#disabling-contravariance-advanced) or 
-[member binding behaviour](constructor-injection/member-injection.md) etc), and if you want to be able to control
+(e.g. to [control contravariance](variance/contravariance.md#disabling-contravariance-advanced) or 
+[member binding behaviour](member-injection/index.md) etc), and if you want to be able to control
 something else this way, and can't, then just open an issue on Github.
 
 * * *

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Runtime
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -118,12 +119,24 @@
     <h3 id="classes">Classes
   </h3>
       <h4><a class="xref" href="Rezolver.Runtime.EagerEnumerable-1.html">EagerEnumerable&lt;T&gt;</a></h4>
-      <section><p>Direct implementation of <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> for eagerly loaded enumerables when <a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a>
+      <section><p>Direct implementation of <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> for eagerly loaded enumerables when <a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a>
 has been disabled either globally, or for a specific enumerable&apos;s element type.</p>
 <p>Rezolver uses this type instead of an array to prevent casting and modifying the contents of the enumerable.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html">GenericTypeMapping</a></h4>
+      <section><p>Result returned from the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_MapType_System_Type_">MapType(Type)</a> function.  Represents various levels of success -
+from a completely incompatible mapping (<a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>false</code>), or a successful mapping from
+an open generic type to a closed generic type which can then be constructed (<a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>true</code>
+and <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>true</code>) or, a successful mapping from an open generic type to another open
+generic type (<a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> = <code>true</code> but <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_IsFullyBound">IsFullyBound</a> = <code>false</code>).</p>
+<p>This mapping is then used by both the <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> and
+<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a>
+functions.  Only fully bound mappings are supported by <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_Bind_Rezolver_Compilation_ICompileContext_">Bind(ICompileContext)</a>, whereas
+<a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_SupportsType_System_Type_">SupportsType(Type)</a> will return <code>true</code> so long as the <a class="xref" href="Rezolver.Runtime.GenericTypeMapping.html#Rezolver_Runtime_GenericTypeMapping_Success">Success</a> is true.</p>
+<p>The caller, therefore, must ensure it is aware of the difference between open and closed generics.</p>
+</section>
       <h4><a class="xref" href="Rezolver.Runtime.LazyEnumerable-1.html">LazyEnumerable&lt;T&gt;</a></h4>
-      <section><p>Can be used as an implementation of <a class="xref" href="https://msdn.microsoft.com/en-us/library/9eekhta0(v=vs.110).aspx">IEnumerable&lt;T&gt;</a> when injecting enumerables from
+      <section><p>Can be used as an implementation of <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> when injecting enumerables from
 one or more registered targets.</p>
 </section>
 </article>

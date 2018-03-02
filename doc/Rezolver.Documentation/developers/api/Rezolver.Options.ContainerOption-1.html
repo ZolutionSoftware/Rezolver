@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class ContainerOption&lt;TOption&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -18,6 +18,7 @@
   	<link rel="stylesheet" href="../styles/main.css">
   	<meta property="docfx:navrel" content="../toc.html">
   	<meta property="docfx:tocrel" content="toc.html">
+  	
   	<meta property="docfx:rel" content="../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
@@ -113,46 +114,47 @@
   
   <h1 id="Rezolver_Options_ContainerOption_1" data-uid="Rezolver.Options.ContainerOption`1" class="text-break">Class ContainerOption&lt;TOption&gt;
   </h1>
-  <div class="markdown level0 summary"><p>A suggested base class to use for custom container options to be read/written through the 
+  <div class="markdown level0 summary"><p>A suggested base class to use for custom container options to be read/written through the
 <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> extension methods.</p>
 <p>The type of the option value is the argument to the <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> type parameter.</p>
-<p>Options must currently be objects - the ability to use callbacks to get options might be added at a 
+<p>Options must currently be objects - the ability to use callbacks to get options might be added at a
 future date.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
-    <div class="level0"><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.object(v=vs.110).aspx">Object</a></div>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ContainerOption&lt;TOption&gt;</span></div>
-  </div>
       <div class="level2"><a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableArrayInjection.html">EnableArrayInjection</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableCollectionInjection.html">EnableCollectionInjection</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableContravariance.html">EnableContravariance</a></div>
+      <div class="level2"><a class="xref" href="Rezolver.Options.EnableEnumerableCovariance.html">EnableEnumerableCovariance</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableGlobalOptions.html">EnableGlobalOptions</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.EnableListInjection.html">EnableListInjection</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.FetchAllMatchingGenerics.html">FetchAllMatchingGenerics</a></div>
       <div class="level2"><a class="xref" href="Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/bsc2ak47(v=vs.110).aspx">Object.Equals(Object)</a>
+      <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/w4hkze5k(v=vs.110).aspx">Object.Equals(Object, Object)</a>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/zdee4b3y(v=vs.110).aspx">Object.GetHashCode()</a>
+      <span class="xref">System.Object.GetHashCode()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/dfwy45w9(v=vs.110).aspx">Object.GetType()</a>
+      <span class="xref">System.Object.GetType()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/57ctke0a(v=vs.110).aspx">Object.MemberwiseClone()</a>
+      <span class="xref">System.Object.MemberwiseClone()</span>
     </div>
     <div>
-      <a class="xref" href="https://msdn.microsoft.com/en-us/library/hz2a0b8x(v=vs.110).aspx">Object.ReferenceEquals(Object, Object)</a>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Options.html">Rezolver.Options</a></h6>
@@ -172,18 +174,18 @@ future date.</p>
     <tbody>
       <tr>
         <td><span class="parametername">TOption</span></td>
-        <td><p>The underlying option value type - e.g. <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a>,
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/system.uri(v=vs.110).aspx">Uri</a> or whatever</p>
+        <td><p>The underlying option value type - e.g. <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>,
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uri">Uri</a> or whatever</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Rezolver_Options_ContainerOption_1_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p><strong>This type is creatable only through inheritance.</strong></p>
-<p>Options in Rezolver are achieved by using registrations in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that 
+<p>Options in Rezolver are achieved by using registrations in the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that
 is to be configured (and, in turn, which might then configure any <a class="xref" href="Rezolver.IContainer.html">IContainer</a>s built from
 that target container).</p>
-<p>Since options often take the form of primitive types - e.g <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.boolean(v=vs.110).aspx">Boolean</a>, <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a> etc - this
+<p>Since options often take the form of primitive types - e.g <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a> etc - this
 means it&apos;s impossible to register multiple options which control different things which have the same underlying
 type if we registered them directly.</p>
 <p>This class is offered as a way around this.  Options (e.g. <a class="xref" href="Rezolver.Options.AllowMultiple.html">AllowMultiple</a>) are derived from this type,
@@ -192,7 +194,7 @@ with the argument to the <code data-dev-comment-type="typeparamref" class="typep
 between them.</p>
 <hr>
 <h3 id="note">Note:</h3>
-<p>Whilst Rezolver uses this type for most of its configurable options, the options API implemented by the extension methods 
+<p>Whilst Rezolver uses this type for most of its configurable options, the options API implemented by the extension methods
 (e.g. <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_">GetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>
 or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_">SetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>) do <strong>not</strong> require
 you to use it.</p>
@@ -201,10 +203,10 @@ you to use it.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_ContainerOption_1__ctor.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_ContainerOption_1__ctor.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/ContainerOption`1.cs/#L57">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/ContainerOption`1.cs/#L60">View Source</a>
   </span>
   <a id="Rezolver_Options_ContainerOption_1__ctor_" data-uid="Rezolver.Options.ContainerOption`1.#ctor*"></a>
   <h4 id="Rezolver_Options_ContainerOption_1__ctor" data-uid="Rezolver.Options.ContainerOption`1.#ctor">ContainerOption()</h4>
@@ -219,10 +221,10 @@ you to use it.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_ContainerOption_1_Value.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_ContainerOption_1_Value.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/ContainerOption`1.cs/#L52">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/ContainerOption`1.cs/#L55">View Source</a>
   </span>
   <a id="Rezolver_Options_ContainerOption_1_Value_" data-uid="Rezolver.Options.ContainerOption`1.Value*"></a>
   <h4 id="Rezolver_Options_ContainerOption_1_Value" data-uid="Rezolver.Options.ContainerOption`1.Value">Value</h4>
@@ -252,10 +254,10 @@ you to use it.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_ContainerOption_1_ToString.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_ContainerOption_1_ToString.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/ContainerOption`1.cs/#L77">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/ContainerOption`1.cs/#L80">View Source</a>
   </span>
   <a id="Rezolver_Options_ContainerOption_1_ToString_" data-uid="Rezolver.Options.ContainerOption`1.ToString*"></a>
   <h4 id="Rezolver_Options_ContainerOption_1_ToString" data-uid="Rezolver.Options.ContainerOption`1.ToString">ToString()</h4>
@@ -276,22 +278,22 @@ you to use it.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://msdn.microsoft.com/en-us/library/system.string(v=vs.110).aspx">String</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><p>A string in the form <pre><code>&quot;{Value} ({typeof(TOption)})&quot;</code></pre></p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="https://msdn.microsoft.com/en-us/library/7bxwbwt2(v=vs.110).aspx">Object.ToString()</a></div>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h3 id="operators">Operators
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_ContainerOption_1_op_Implicit_Rezolver_Options_ContainerOption__0____0.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.op_Implicit(Rezolver.Options.ContainerOption%7B%600%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_ContainerOption_1_op_Implicit_Rezolver_Options_ContainerOption__0____0.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601.op_Implicit(Rezolver.Options.ContainerOption%7B%600%7D)~%600%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/ContainerOption`1.cs/#L68">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/ContainerOption`1.cs/#L71">View Source</a>
   </span>
   <a id="Rezolver_Options_ContainerOption_1_op_Implicit_" data-uid="Rezolver.Options.ContainerOption`1.op_Implicit*"></a>
   <h4 id="Rezolver_Options_ContainerOption_1_op_Implicit_Rezolver_Options_ContainerOption__0____0" data-uid="Rezolver.Options.ContainerOption`1.op_Implicit(Rezolver.Options.ContainerOption{`0})~`0">Implicit(ContainerOption&lt;TOption&gt; to TOption)</h4>
@@ -346,10 +348,10 @@ you to use it.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Options_ContainerOption_1.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/covariance-and-more/apiSpec/new?filename=Rezolver_Options_ContainerOption_1.md&amp;value=---%0Auid%3A%20Rezolver.Options.ContainerOption%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Options/ContainerOption`1.cs/#L46" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/src/Rezolver/Options/ContainerOption`1.cs/#L49" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

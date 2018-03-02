@@ -1,21 +1,24 @@
-﻿using Rezolver.Configuration;
-using Rezolver.Compilation;
-using Rezolver.Compilation.Expressions;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Rezolver.Compilation;
+using Rezolver.Compilation.Expressions;
+using Rezolver.Configuration;
 using Rezolver.Sdk;
 
 namespace Rezolver
 {
     /// <summary>
-    /// Contains extension methods for the <see cref="CombinedContainerConfig"/> class which simplify the process of 
+    /// Contains extension methods for the <see cref="CombinedContainerConfig"/> class which simplify the process of
     /// adding and replacing <see cref="IContainerConfig"/> objects which set options and register well-known container services.
     /// </summary>
     public static class CombinedContainerConfigExtensions
     {
         /// <summary>
-        /// Replaces any existing <see cref="IContainerConfig{ITargetCompiler}" /> in the collection with the 
+        /// Replaces any existing <see cref="IContainerConfig{ITargetCompiler}" /> in the collection with the
         /// <see cref="ExpressionCompilation.Instance"/> from <see cref="ExpressionCompilation"/> so that
         /// any container to which the config collection will be applied will use the <see cref="ExpressionCompiler"/>.
         /// </summary>
@@ -27,9 +30,9 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Replaces any existing <see cref="IContainerConfig{ITargetCompiler}"/> with the passed <paramref name="configuration"/> - 
+        /// Replaces any existing <see cref="IContainerConfig{ITargetCompiler}"/> with the passed <paramref name="configuration"/> -
         /// thus ensuring that any <see cref="IContainer"/> objects which are initialised with the config collection will use whichever
-        /// compiler that is configured when the configuration's <see cref="IContainerConfig.Configure(IContainer, ITargetContainer)"/> method
+        /// compiler that is configured when the configuration's <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method
         /// is called.
         /// </summary>
         /// <param name="collection"></param>
@@ -37,8 +40,15 @@ namespace Rezolver
         /// <returns></returns>
         public static CombinedContainerConfig UseCompiler(this CombinedContainerConfig collection, IContainerConfig<ITargetCompiler> configuration)
         {
-            if (collection == null) throw new ArgumentNullException(nameof(collection));
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (collection == null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
 
             collection.ReplaceAnyOrAdd<IContainerConfig<ITargetCompiler>>(configuration);
             return collection;

@@ -8,7 +8,7 @@
   	<title>Enumerables of Generics | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Enumerables of Generics | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../../styles/main.css">
   	<meta property="docfx:navrel" content="../../toc.html">
   	<meta property="docfx:tocrel" content="../toc.html">
+  	
   	<meta property="docfx:rel" content="../../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
@@ -186,7 +187,7 @@ var myServiceResult = container.ResolveMany&lt;IGeneric&lt;MyService&gt;&gt;().T
 var myService1Result = container.ResolveMany&lt;IGeneric&lt;MyService1&gt;&gt;().ToArray();
 
 // only the first registration matches IGeneric&lt;string&gt;
-Assert.Equal(1, anyResult.Length);
+Assert.Single(anyResult);
 Assert.IsType&lt;GenericAny&lt;string&gt;&gt;(anyResult[0]);
 
 // First and second registrations match IGeneric&lt;MyService&gt;
@@ -265,7 +266,7 @@ Assert.IsType&lt;UsesAnyService&lt;IMyService&gt;&gt;(result[0]);
 Assert.IsType&lt;UsesIMyService&gt;(result[1]);
 Assert.IsType&lt;UsesIMyService2&gt;(result[2]);
 
-Assert.Equal(1, result2.Length);
+Assert.Single(result2);
 Assert.IsType&lt;UsesAnyService&lt;MyService&gt;&gt;(result2[0]);
 </code></pre><p>In the simplest terms, what we&#39;re seeing here is the container walking through all the possible generic service types
 that could apply for the requested type, and returning all the instances produced by all those registrations, in
@@ -328,7 +329,7 @@ var myServiceResult = container.ResolveMany&lt;IGeneric&lt;MyService&gt;&gt;().T
 var myService2Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;().ToArray();
 
 Assert.Equal(2, myServiceResult.Length);
-Assert.Equal(1, myService2Result.Length);
+Assert.Single(myService2Result);
 </code></pre><p>You can also set this against an open generic - which then has the same effect but for all generics based on the same
 open generic (here we&#39;re disabling it for <code>IGeneric&lt;&gt;</code>)</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
@@ -348,25 +349,63 @@ container.RegisterType(typeof(GenericMyService2), typeof(IGeneric&lt;MyService2&
 var myService1Result = container.ResolveMany&lt;IGeneric&lt;MyService1&gt;&gt;().ToArray();
 var myService2Result = container.ResolveMany&lt;IGeneric&lt;MyService2&gt;&gt;().ToArray();
 
-Assert.Equal(1, myService1Result.Length);
-Assert.Equal(1, myService2Result.Length);
+Assert.Single(myService1Result);
+Assert.Single(myService2Result);
 Assert.NotEqual(myService1Result[0].GetType(), myService2Result[0].GetType());
 </code></pre><hr>
-<h1 id="contravariance">Contravariance</h1>
-<p>Rezolver also supports generic contravariance which, in the case of 
-enumerables, means getting multiple results from any and all registrations that 
-match a particular type argument&#39;s bases or interfaces, in descending order of &#39;distance&#39;
-from the requested type.</p>
-<p>For more on this, including concrete examples, see the <a href="#next-steps">next steps</a> section
-below.</p>
+<h1 id="generic-variance">Generic Variance</h1>
+<p>Rezolver&#39;s support for <a href="../variance/index.html">generic variance</a> means that enumerables of generics will 
+automatically include all concrete-generic registrations (i.e. <code>T&lt;A&gt;</code> as opposed to <code>T&lt;&gt;</code>) which are 
+reference compatible with the element type of the enumerable by way of generic covariance or contravariance.</p>
+<h2 id="covariance">Covariance</h2>
+<p>Say you have a series of <code>Func&lt;out T&gt;</code> registrations for concrete types - e.g. <code>Func&lt;Foo1&gt;</code>, <code>Func&lt;Foo2&gt;</code> and 
+so on, with <code>Foo1</code> and <code>Foo2</code> and the rest all supporting the <code>IFoo</code> interface.</p>
+<p>Rezolver will automatically be able to resolve an <code>IEnumerable&lt;Func&lt;IFoo&gt;&gt;</code> containing <em>all</em> matching 
+registrations, since each of those registrations is compatible with <code>Func&lt;IFoo&gt;</code> via generic covariance:</p>
+<pre><code class="lang-cs">interface IFoo {}
+
+class Foo1 : IFoo {}
+class Foo2 : IFoo {}
+
+// ...
+
+container.RegisterObject&lt;Func&lt;Foo1&gt;&gt;(() =&gt; new Foo1());
+container.RegisterObject&lt;Func&lt;Foo2&gt;&gt;(() =&gt; new Foo2());
+
+var funcs = container.ResolveMany&lt;Func&lt;IFoo&gt;&gt;();
+// will contain the two delegates registered above
+</code></pre><p>You can read more about this, including examples, in the 
+<a href="../variance/covariance.html#enumerables">dedicated section on covariance</a>.</p>
+<h3 id="disabling-enumerable-covariance">Disabling Enumerable Covariance</h3>
+<p>As with much of Rezolver&#39;s functionality, you can control whether the automatically generated enumerables
+handle covariance as described above with a simple option - the <a class="xref" href="../../api/Rezolver.Options.EnableEnumerableCovariance.html">EnableEnumerableCovariance</a>
+option.</p>
+<p>It can be used to disable enumerable covariance for all enumerables, or for enumerables of specific types:</p>
+<div class="TIP"><h5>Tip</h5><p>Both these snippets assume the <code>Rezolver.Options</code> namespace has been imported into the current file via
+a <code>using</code> directive (<code>imports</code> in VB).</p>
+</div>
+<pre><code class="lang-cs">container.SetOption&lt;EnableEnumerableCovariance&gt;(false);
+</code></pre><p>Disables it globally, while:</p>
+<pre><code class="lang-cs">container.SetOption&lt;EnableEnumerableCovariance, IFoo&gt;(false);
+</code></pre><p>Disables it only for enumerables of the type <code>IFoo</code>.</p>
+<h2 id="contravariance">Contravariance</h2>
+<p>Generic types which are compatible with each other via contravariance will also be included in any 
+<code>IEnumerable&lt;T&gt;</code> with which they&#39;d usually be compatible.  For example:</p>
+<pre><code class="lang-cs">container.RegisterObject&lt;Action&lt;IFoo&gt;&gt;(o =&gt; Console.WriteLine(&quot;interface&quot;));
+container.RegisterObject&lt;Action&lt;object&gt;&gt;(o =&gt; Console.WriteLine(&quot;object&quot;));
+
+var actions = container.ResolveMany&lt;Action&lt;Foo1&gt;&gt;();
+// will contain the two delegates registered above
+</code></pre><p>Again, this is covered in more depth in the <a href="../variance/covariance.html#enumerables">section on covariance</a>.</p>
 <hr>
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>Learn about Rezolver&#39;s support for <a href="lazy-vs-eager.html">lazy and eager enumerables</a> (note: all auto-generated enumerables are lazily 
 evaluated by default)</li>
-<li>As <a href="#contravariance">mentioned above</a>, by default, Rezolver handles contravariant 
-generic type parameters - see this in action with enumerables 
-<a href="../contravariance.html">in the section dedicated to generic contravariance</a></li>
+<li>The <a href="../variance/covariance.html">covariance</a> section includes examples of how covariance works within Rezolver&#39;s
+enumerable support.</li>
+<li>By default, also, Rezolver handles contravariant generic type parameters - see this in action with enumerables 
+<a href="../variance/contravariance.html">in the section dedicated to generic contravariance</a></li>
 </ul>
 </article>
           </div>
@@ -376,7 +415,7 @@ generic type parameters - see this in action with enumerables
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/generics.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/enumerables/generics.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

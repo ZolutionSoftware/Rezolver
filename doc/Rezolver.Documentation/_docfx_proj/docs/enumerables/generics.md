@@ -122,15 +122,76 @@ open generic (here we're disabling it for `IGeneric<>`)
 
 ***
 
-# Contravariance
+# Generic Variance
 
-Rezolver also supports generic contravariance which, in the case of 
-enumerables, means getting multiple results from any and all registrations that 
-match a particular type argument's bases or interfaces, in descending order of 'distance'
-from the requested type.
+Rezolver's support for [generic variance](../variance/index.md) means that enumerables of generics will 
+automatically include all concrete-generic registrations (i.e. `T<A>` as opposed to `T<>`) which are 
+reference compatible with the element type of the enumerable by way of generic covariance or contravariance.
 
-For more on this, including concrete examples, see the [next steps](#next-steps) section
-below.
+## Covariance
+
+Say you have a series of `Func<out T>` registrations for concrete types - e.g. `Func<Foo1>`, `Func<Foo2>` and 
+so on, with `Foo1` and `Foo2` and the rest all supporting the `IFoo` interface.
+
+Rezolver will automatically be able to resolve an `IEnumerable<Func<IFoo>>` containing *all* matching 
+registrations, since each of those registrations is compatible with `Func<IFoo>` via generic covariance:
+
+```cs
+interface IFoo {}
+
+class Foo1 : IFoo {}
+class Foo2 : IFoo {}
+
+// ...
+
+container.RegisterObject<Func<Foo1>>(() => new Foo1());
+container.RegisterObject<Func<Foo2>>(() => new Foo2());
+
+var funcs = container.ResolveMany<Func<IFoo>>();
+// will contain the two delegates registered above
+```
+
+You can read more about this, including examples, in the 
+[dedicated section on covariance](../variance/covariance.md#enumerables).
+
+### Disabling Enumerable Covariance
+
+As with much of Rezolver's functionality, you can control whether the automatically generated enumerables
+handle covariance as described above with a simple option - the @Rezolver.Options.EnableEnumerableCovariance
+option.
+
+It can be used to disable enumerable covariance for all enumerables, or for enumerables of specific types:
+
+> [!TIP]
+> Both these snippets assume the `Rezolver.Options` namespace has been imported into the current file via
+> a `using` directive (`imports` in VB).
+
+```cs
+container.SetOption<EnableEnumerableCovariance>(false);
+``` 
+
+Disables it globally, while:
+
+```cs
+container.SetOption<EnableEnumerableCovariance, IFoo>(false);
+```
+
+Disables it only for enumerables of the type `IFoo`.
+
+## Contravariance
+
+Generic types which are compatible with each other via contravariance will also be included in any 
+`IEnumerable<T>` with which they'd usually be compatible.  For example:
+
+```cs
+container.RegisterObject<Action<IFoo>>(o => Console.WriteLine("interface"));
+container.RegisterObject<Action<object>>(o => Console.WriteLine("object"));
+
+var actions = container.ResolveMany<Action<Foo1>>();
+// will contain the two delegates registered above
+```
+
+Again, this is covered in more depth in the [section on covariance](../variance/covariance.md#enumerables).
 
 ***
 
@@ -138,6 +199,7 @@ below.
 
 - Learn about Rezolver's support for [lazy and eager enumerables](lazy-vs-eager.md) (note: all auto-generated enumerables are lazily 
 evaluated by default)
-- As [mentioned above](#contravariance), by default, Rezolver handles contravariant 
-generic type parameters - see this in action with enumerables 
-[in the section dedicated to generic contravariance](../contravariance.md)
+- The [covariance](../variance/covariance.md) section includes examples of how covariance works within Rezolver's
+enumerable support.
+- By default, also, Rezolver handles contravariant generic type parameters - see this in action with enumerables 
+[in the section dedicated to generic contravariance](../variance/contravariance.md)

@@ -13,6 +13,9 @@
 - name: Constructor Injection
   href: constructor-injection/toc.yml
   homepage: constructor-injection/index.md
+- name: Member Injection
+  href: member-injection/toc.yml
+  homepage: member-injection/index.md
 - name: Enumerables
   href: enumerables/toc.yml
   homepage: enumerables.md
@@ -25,8 +28,9 @@
   href: delegates.md
 - name: Expression Trees
   href: expressions.md
-- name: Generic Contravariance
-  href: contravariance.md
+- name: Generic Variance
+  href: variance/toc.yml
+  homepage: variance/index.md
 - name: Decorators
   href: decorators/toc.yml
   homepage: decorators.md

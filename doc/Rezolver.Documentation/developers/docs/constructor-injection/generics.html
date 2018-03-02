@@ -8,7 +8,7 @@
   	<title>Open Generic Constructor Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Open Generic Constructor Injection | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.24.0.0">
+  	<meta name="generator" content="docfx 2.29.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -16,6 +16,7 @@
   	<link rel="stylesheet" href="../../styles/main.css">
   	<meta property="docfx:navrel" content="../../toc.html">
   	<meta property="docfx:tocrel" content="../toc.html">
+  	
   	<meta property="docfx:rel" content="../../">
   	
   		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
@@ -112,7 +113,7 @@
 <div class="TIP"><h5>Tip</h5><p>Before reading this you should read through the section on <a href="index.html">constructor injection</a></p>
 <p>Also, generic types - especially in IOC-world - are an advanced concept that&#39;s easy to get very confused over, so if this is entirely new to you
 and you find you don&#39;t understand it fully, then don&#39;t worry: this isn&#39;t easy!</p>
-<p>It&#39;s probably a good idea to read the MSDN documentation about the <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms131514(v=vs.110).aspx">IsGenericType</a> property on <a class="xref" href="https://msdn.microsoft.com/en-us/library/system.type(v=vs.110).aspx">Type</a> for more about &#39;open&#39; 
+<p>It&#39;s probably a good idea to read the MSDN documentation about the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.isgenerictype#System_Type_IsGenericType">IsGenericType</a> property on <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a> for more about &#39;open&#39; 
 generics.</p>
 </div>
 <p>In Rezolver, binding open generic types, such as <code>IFoo&lt;T&gt;</code> or <code>IBar&lt;T, U, V&gt;</code>, to constructors of generics, e.g. <code>Foo&lt;T&gt;</code> or <code>Bar&lt;T, U, V&gt;</code>
@@ -120,12 +121,15 @@ is done via the <a class="xref" href="../../api/Rezolver.Targets.GenericConstruc
 <p>This class knows how to map to a closed generic - i.e.
 <code>Foo&lt;IMyService&gt;</code> or <code>IBar&lt;MyService1, MyService2, MyService3&gt;</code> - from an open generic and then subsequently bind
 to the constructor of the closed version of that generic when requested from the container.</p>
-<h2 id="best-match-only-for-now">&#39;Best-match&#39; only for now</h2>
-<p>The <a href="index.html#best-match-examples">best-match algorithm</a> described in the <a href="index.html">constructor injection</a> is the only option currently available
-to you when using <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>.  Theoretically, it&#39;s possible to specify the <code>ConstructorInfo</code> for the constructor you
-want bound on the concrete generic type that Rezolver eventually decides to build for you, but we have not implemented that functionality yet.</p>
-<p>You also cannot provide named arguments to help in the best-match search - to do so would be incredibly difficult, since if the type of a constructor 
-argument is dependant upon a type argument, then there&#39;s no way you could supply a binding for it up-front to satisfy all possible types that 
+<h2 id="best-match-vs-specific">&#39;Best-match&#39; vs &#39;specific&#39;</h2>
+<p>Most of the time when you register an open generic type, you will simply rely on Rezolver to find the <a href="index.html#best-match-examples">best-matched</a>
+constructor when it created an instance of a closed generic from that registration.</p>
+<p>The documentation presented here deals exclusively with this type of open generic registration, but - starting with
+v1.3.2 - it is now possible to instruct Rezolver to <a href="generics-manual-constructor.html">bind to a particular constructor</a> on the generic type.  Before
+you read that topic, however, you should read through this one first.</p>
+<p>However, please note that you cannot provide named arguments to help either with the best-match search, or when specifying which constructor
+to invoke.  To do so would be incredibly difficult, since if the type of a constructor 
+argument is dependant upon a type argument, then there&#39;s no easy way you could supply a binding for it up-front to satisfy all possible types that 
 might be passed to it.</p>
 <h2 id="creatingregistering-xrefrezolvertargetsgenericconstructortargets">Creating/registering <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>s</h2>
 <p>You can, of course, simply use the constructors to build a new instance of this target - e.g: <code>new GenericConstructorTarget(typeof(Foo&lt;&gt;))</code>.</p>
@@ -137,14 +141,14 @@ then those functions automatically create a <a class="xref" href="../../api/Rezo
 <p>Lets get on with some examples, the first few of which use these types:</p>
 <pre><code class="lang-csharp" name="IDataFormatter`1.cs">public interface IDataFormatter&lt;TData&gt;
 {
-	string FormatData(TData data);
+    string FormatData(TData data);
 }
 </code></pre><pre><code class="lang-csharp" name="DataFormatter`1.cs">public class DataFormatter&lt;TData&gt; : IDataFormatter&lt;TData&gt;
 {
-	public string FormatData(TData data)
-	{
-		return data.ToString();
-	}
+    public string FormatData(TData data)
+    {
+        return data.ToString();
+    }
 }
 </code></pre><hr>
 <h1 id="basic-examples">Basic examples</h1>
@@ -173,12 +177,12 @@ Assert.NotNull(container.Resolve&lt;IDataFormatter&lt;IMyService&gt;&gt;());
 generic argument:</p>
 <pre><code class="lang-csharp" name="RequiresIDataFormatter`1.cs">public class RequiresIDataFormatter&lt;T&gt;
 {
-	public IDataFormatter&lt;T&gt; Formatter { get; }
+    public IDataFormatter&lt;T&gt; Formatter { get; }
 
-	public RequiresIDataFormatter(IDataFormatter&lt;T&gt; formatter)
-	{
-		Formatter = formatter;
-	}
+    public RequiresIDataFormatter(IDataFormatter&lt;T&gt; formatter)
+    {
+        Formatter = formatter;
+    }
 }
 </code></pre><pre><code class="lang-csharp" name="Example.cs">var container = new Container();
 container.RegisterType(typeof(RequiresIDataFormatter&lt;&gt;));
@@ -253,7 +257,7 @@ that the registered target is not compatible with that type.  Which leads us on 
 <p>With our container configured as above, it is now <em>impossible</em> to resolve <code>BaseGeneric&lt;T1, T2, T3&gt;</code> because the only implementation we have for 
 <code>BaseGeneric&lt;,,&gt;</code> is one where the first type argument <strong><em>must</em></strong> be <code>string</code>.  If we were to register another, more general, type for 
 <code>BaseGeneric&lt;,,&gt;</code> it would overwrite our specialised version, wiping it out.</p>
-<p>It&#39;s also impossible for us to specify the type <code>BaseGeneric&lt;string,,&gt;</code> either in a <code>typeof</code>, or via the <a class="xref" href="https://msdn.microsoft.com/en-us/library/ms131508(v=vs.110).aspx">MakeGenericType</a> API, so we&#39;re
+<p>It&#39;s also impossible for us to specify the type <code>BaseGeneric&lt;string,,&gt;</code> either in a <code>typeof</code>, or via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.makegenerictype">MakeGenericType</a> API, so we&#39;re
 stuck.</p>
 <h3 id="were-working-on-it">We&#39;re working on it!</h3>
 <p>This is a limitation of Rezolver right now, but there are plans to implement partially specialised registrations, so that the container would, when
@@ -269,14 +273,14 @@ all other variants of <code>BaseGeneric&lt;,,&gt;</code>.</p>
 
 }
 public class GenericEnumerableService&lt;T&gt;
-	: IGenericService&lt;IEnumerable&lt;T&gt;&gt;
+    : IGenericService&lt;IEnumerable&lt;T&gt;&gt;
 {
 
 }
 
 public class GenericEnumerableNullableService&lt;T&gt;
-	: IGenericService&lt;IEnumerable&lt;Nullable&lt;T&gt;&gt;&gt;
-	where T : struct
+    : IGenericService&lt;IEnumerable&lt;Nullable&lt;T&gt;&gt;&gt;
+    where T : struct
 {
 
 }
@@ -296,7 +300,7 @@ var result = Assert.IsType&lt;GenericEnumerableService&lt;string&gt;&gt;(
 this registration against <code>IGenericService&lt;&gt;</code>, but if we do, then we wipe out
 the possibility of being able to register other services - so, we
 register against <code>IGenericService&lt;IEnumerable&lt;&gt;&gt;</code>, which requires some 
-<a class="xref" href="https://msdn.microsoft.com/en-us/library/ms131508(v=vs.110).aspx">MakeGenericType</a> jiggery pokery.  When we&#39;ve got partially closed generics
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.makegenerictype">MakeGenericType</a> jiggery pokery.  When we&#39;ve got partially closed generics
 working, you will be able to register against <code>IGenericService&lt;&gt;</code>.</p>
 </div>
 <hr>
@@ -319,16 +323,20 @@ var result = Assert.IsType&lt;GenericEnumerableNullableService&lt;int&gt;&gt;(
 );
 </code></pre><hr>
 <h1 id="member-injection-with-generics">Member Injection with Generics</h1>
-<p>The same techniques that are shown in our <a href="member-injection.html">member injection documentation</a> also work for generic types - if you supply an
+<p>The same techniques that are shown in our <a href="../member-injection/index.html">member injection documentation</a> also work for generic types - if you supply an
 <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> to the <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> when it is created (either by the constructors or the 
 aforementioned factory methods), then that behaviour will be used when the constructor is bound.</p>
 <p>Equally, container-specific <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>s that are set through the options API will 
 also be used automatically.</p>
+<p>That said, there is no way, at this time, to generate a custom member binding behaviour using the APIs built into the library.  So, you can&#39;t
+explicitly target a member declared on the open generic type and then have that member bound automatically when instance of a closed generic
+version of that type is constructed.</p>
 <p>Refer to the topic for detailed examples on how to use member binding.</p>
 <hr>
 <h1 id="next-steps">Next Steps</h1>
-<p>Assuming you&#39;ve read the previous topics on <a href="index.html">constructor injection</a> and <a href="member-injection.html">member injection</a>,
-then that&#39;s it for constructor injection for now.</p>
+<ul>
+<li>The <a href="../member-injection/index.html">member injection documentation</a> might be of interest if you&#39;ve not already read it.</li>
+</ul>
 <div class="NOTE"><h5>Note</h5><p>A separate topic will be added in the future regarding Generic Specialisation in the container, but that covers all target types, 
 not just the <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> - so that will go elsewhere.</p>
 </div>
@@ -342,7 +350,7 @@ more features of Rezolver.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/generics.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/constructor-injection/generics.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

@@ -15,7 +15,8 @@ namespace Rezolver
     /// Implementation of the <see cref="IServiceProviderFactory{TContainerBuilder}"/> interface.
     /// Providing a more flexible way to configure your web application to use Rezolver.
     /// </summary>
-	internal class RezolverServiceProviderFactory : IServiceProviderFactory<ITargetContainer>
+	internal class RezolverServiceProviderFactory 
+        : IServiceProviderFactory<IRootTargetContainer>, IServiceProviderFactory<ITargetContainer>
 	{
 		private RezolverOptions _options;
 
@@ -26,20 +27,32 @@ namespace Rezolver
 		public RezolverServiceProviderFactory(IOptions<RezolverOptions> options) 
             => _options = options.Value;
 
-        public ITargetContainer CreateBuilder(IServiceCollection services)
+        public IRootTargetContainer CreateBuilder(IServiceCollection services)
 		{
 			var toReturn = CreateTargetContainer(services);
 			toReturn.Populate(services);
 			return toReturn;
 		}
 		
-		public IServiceProvider CreateServiceProvider(ITargetContainer containerBuilder) 
-            => CreateDefaultContainer(containerBuilder);
+		public IServiceProvider CreateServiceProvider(IRootTargetContainer targets) 
+            => CreateDefaultContainer(targets);
 
-		protected ITargetContainer CreateTargetContainer(IServiceCollection services) 
+		protected IRootTargetContainer CreateTargetContainer(IServiceCollection services) 
             => new TargetContainer(_options.TargetContainerConfig);
 
-		protected IContainer CreateDefaultContainer(ITargetContainer targetContainer)
-            => new ScopedContainer(targetContainer, _options.ContainerConfig);
-	}
+		protected IContainer CreateDefaultContainer(IRootTargetContainer targets)
+            => new ScopedContainer(targets, _options.ContainerConfig);
+
+        ITargetContainer IServiceProviderFactory<ITargetContainer>.CreateBuilder(IServiceCollection services)
+        {
+            return CreateBuilder(services);
+        }
+
+        public IServiceProvider CreateServiceProvider(ITargetContainer containerBuilder)
+        {
+            if (!(containerBuilder is IRootTargetContainer rootTargets))
+                throw new ArgumentException($"ITargetContainer of type { containerBuilder.GetType() } is not supported.  Type must implement IRootTargetContainer", nameof(containerBuilder));
+            return CreateServiceProvider(rootTargets);
+        }
+    }
 }

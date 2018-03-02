@@ -21,7 +21,7 @@ namespace Rezolver.Tests.Targets
             public TestTarget(Type type)
             {
                 if (type == null) throw new ArgumentNullException(nameof(type));
-                if (type.IsGenericTypeDefinition || type.ContainsGenericParameters)
+                if (TypeHelpers.IsGenericTypeDefinition(type) || TypeHelpers.ContainsGenericParameters(type))
                     throw new ArgumentException("TargetBase is not expected to be able to handle generic type definitions or open generic types", nameof(type));
                 DeclaredType = type;
             }
