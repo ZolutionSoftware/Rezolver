@@ -250,7 +250,8 @@ namespace Rezolver.Compilation.Expressions
             // an exception if it is null :)
 
             // this will automatically be of type object and will be optimised.
-            var lambda = compiler.BuildResolveLambda(builtExpression, context).Compile();
+            var lambda = compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver();
+
             // use a shared expression for the scope check so we can optimise away all the nested scope calls
             // we're likely to be generating.
             var compareExpr = context.GetOrAddSharedExpression(typeof(bool), "isScoped", () =>

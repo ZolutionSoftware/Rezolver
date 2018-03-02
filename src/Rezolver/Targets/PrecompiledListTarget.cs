@@ -65,7 +65,8 @@ namespace Rezolver.Targets
                         ),
                         targetsParam,
                         asArrayParam
-                    ).Compile();
+                    )
+                .CompileForRezolver();
                 });
             }).Value(targets, asArray);
         }

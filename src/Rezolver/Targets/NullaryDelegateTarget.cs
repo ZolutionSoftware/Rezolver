@@ -26,7 +26,7 @@ namespace Rezolver.Targets
             }
 
             this._strongDelegate = Expression.Lambda<Func<object>>(Expression.Convert(
-                Expression.Invoke(Expression.Constant(factory)), typeof(object))).Compile();
+                Expression.Invoke(Expression.Constant(factory)), typeof(object))).CompileForRezolver();
         }
 
         object IDirectTarget.GetValue()

@@ -125,10 +125,6 @@ namespace Rezolver.Compilation.Expressions
             context.MustNotBeNull(nameof(context));
 
             return context.GetOption<IExpressionBuilder>(target.GetType());
-
-            // var expressionBuilder =
-            // var cache = context.ResolveContext.Resolve<ExpressionBuilderCache>();
-            // return cache.ResolveBuilder(target);
         }
 
         /// <summary>
@@ -141,7 +137,7 @@ namespace Rezolver.Compilation.Expressions
         /// <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> implementation.</param>
         protected virtual ICompiledTarget BuildCompiledTargetForLambda(ITarget target, Expression<Func<IResolveContext, object>> lambda)
         {
-            return new CompiledLambdaTarget(target, lambda.Compile());
+            return new CompiledLambdaTarget(target, lambda.CompileForRezolver());
         }
 
         /// <summary>

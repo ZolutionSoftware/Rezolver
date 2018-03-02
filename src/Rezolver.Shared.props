@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)\Rezolver.Shared\**\*.cs" 
+    <Compile Include="$(MSBuildThisFileDirectory)\Rezolver.Shared\**\*.cs"
              Exclude="$(MSBuildThisFileDirectory)\Rezolver.Shared\obj\**\*.cs">
       <Link>Rezolver.Shared\%(RecursiveDir)%(Filename)%(Extension)</Link>
     </Compile>

@@ -102,6 +102,7 @@ namespace Rezolver.Compilation.Expressions
             var finalExpr = Expression.Condition(checkContainer,
                 staticExpr,
                 useContextRezolverIfCanExpr);
+            //var finalExpr = staticExpr;
 
             return finalExpr;
         }

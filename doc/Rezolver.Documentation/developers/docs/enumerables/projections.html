@@ -306,7 +306,48 @@ var calculator = container.Resolve&lt;PriceCalculator&gt;();
 Assert.Equal(10, calculator.Calculate(20));
 // but it is here
 Assert.Equal(15, calculator.Calculate(30));
-</code></pre></article>
+</code></pre><p>This example is worthy of some extra explanation, so let&#39;s take a look at the code line-by-line:</p>
+<blockquote><p>[!INFO]
+You can skip this part if you&#39;re happy to accept that it &#39;just works&#39;.</p>
+</blockquote>
+<ul>
+<li>First, we&#39;re registering the <code>SimplePriceAdjustment</code> type for constructor injection when an <code>IPriceAdjustment</code>
+is requested.</li>
+<li>Then we&#39;re registering a decorator for the <code>IPriceAdjustment</code> interface which will wrap all instances produced
+for that type with an instance of the <code>NeverLessThanHalfPrice</code> decorator.</li>
+<li>Then we register the <code>PriceCalculator</code> type.</li>
+<li>And then we declare the projection from <code>SimplePriceAdjustmentConfig</code> to <code>IPriceAdjustment</code>.  This means that
+when an <code>IEnumerable&lt;IPriceAdjustment&gt;</code> is requested, the container will project a new <code>IPriceAdjustment</code> instance
+for each <code>SimplePriceAdjustmentConfig</code>.</li>
+<li>Finally, some price configs are added</li>
+</ul>
+<p>When the container is building the instances of <code>IPriceAdjustment</code> for the enumerable, it does a couple of things
+behind the scenes:</p>
+<ul>
+<li>Creates a temporary <code>ITargetContainer</code> into which it registers the <code>SimplePriceAdjustmentConfig</code> that it has
+obtained from the input enumerable.  <em><strong>Note</strong></em> - It&#39;s the <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> that is used for this.</li>
+<li>Locates the correct target to execute for the service type <code>IPriceAdjustment</code> (in this case, the decorator)</li>
+<li>When compiling the <code>IPriceAdjustment</code> target for each item in the loop, Rezolver passes the &#39;extra&#39; 
+<code>ITargetContainer</code> through.  Thus, when the <code>SimplePriceAdjustmentConfig</code> dependency is resolved for the 
+<code>SimplePriceAdjustment</code> constructor, it resolves the latest one obtained from the input enumerable.</li>
+</ul>
+<hr>
+<h1 id="other-advanced-projections">Other advanced projections</h1>
+<p>We&#39;ve not yet touched on the strongest features of projections - i.e:</p>
+<ul>
+<li><a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__">RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</a> -
+With this function you register a projection with a callback to select the implementation type to be resolved for 
+each projected element (useful for dynamically chosing generics etc).  The callback is passed an <code>ITarget</code> which 
+represents the value that is to be projected.  </li>
+<li><a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__">RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</a> -
+And with this function you provide a callback to build a specific target for each projected element.</li>
+</ul>
+<p>As suggested above, these really come into their own for scenarios such as projections of generic types.</p>
+<p>We&#39;re not providing in-depth examples for these as we&#39;re probably at example overload by now.  There are tests in the
+main tests projects which you can look at.  We might also add some examples later if there&#39;s enough demand.</p>
+<p>The chances are, though, that most people won&#39;t need this functionality and, if you do, you&#39;re probably of a 
+sufficient level to be able to figure it out for yourself.</p>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

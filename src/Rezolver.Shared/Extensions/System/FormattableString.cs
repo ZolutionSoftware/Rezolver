@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-#if NET451 || MAXCOMPAT
+#if NET451
 // SHIM FOR FormattableStringFactory and FormattableString for Net451 builds
 // Courtesy of http://stackoverflow.com/a/32077216/157701
 namespace System.Runtime.CompilerServices

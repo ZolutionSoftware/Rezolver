@@ -35,7 +35,7 @@ namespace Rezolver.Targets
                     Expression.Convert(
                         Expression.Field(null, tDefault.GetStaticFields().Single(f => f.Name == "Value")), typeof(object)
                     )
-                ).Compile();
+                ).CompileForRezolver();
             })();
         }
 

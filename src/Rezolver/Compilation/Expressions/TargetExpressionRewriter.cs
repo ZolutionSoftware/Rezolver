@@ -24,13 +24,9 @@ namespace Rezolver.Compilation.Expressions
         {
             if (node != null)
             {
-                if (node.NodeType == ExpressionType.Extension)
+                if (node.NodeType == ExpressionType.Extension && node is TargetExpression te)
                 {
-                    TargetExpression te = node as TargetExpression;
-                    if (te != null)
-                    {
-                        return this._compiler.Build(te.Target, this._sourceCompileContext.NewContext(te.Type));
-                    }
+                    return this._compiler.Build(te.Target, this._sourceCompileContext.NewContext(te.Type));
                 }
             }
 

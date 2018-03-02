@@ -137,7 +137,7 @@ an enumerable of `Action<T>`, for example, can still match covariantly:
 > 
 > Remember that variance is all about _**reference-compatibility**_, not specifically about whether two types share
 > a common base or interface.  So, since an instance of `Action<MyService>` is reference compatible with a
-> variable of type `Action<IMyService>`, this means that an `IEnumerable<MyService>` can also contain an
+> variable of type `Action<IMyService>`, an `IEnumerable<Action<MyService>>` can also contain an
 > instance of `Action<IMyService>`.
 > ***
 > If you're already familiar with the term 'reference compatible' then this will be of no surprise to you
