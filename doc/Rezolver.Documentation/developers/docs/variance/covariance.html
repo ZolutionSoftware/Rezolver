@@ -243,7 +243,7 @@ In this case, try not to be distracted by the fact that the types in the <code>A
 going the &#39;wrong way&#39; up or down a type hierarchy.</p>
 <p>Remember that variance is all about <em><strong>reference-compatibility</strong></em>, not specifically about whether two types share
 a common base or interface.  So, since an instance of <code>Action&lt;MyService&gt;</code> is reference compatible with a
-variable of type <code>Action&lt;IMyService&gt;</code>, this means that an <code>IEnumerable&lt;MyService&gt;</code> can also contain an
+variable of type <code>Action&lt;IMyService&gt;</code>, an <code>IEnumerable&lt;Action&lt;MyService&gt;&gt;</code> can also contain an
 instance of <code>Action&lt;IMyService&gt;</code>.</p>
 <hr>
 <p>If you&#39;re already familiar with the term &#39;reference compatible&#39; then this will be of no surprise to you
@@ -257,7 +257,7 @@ after learning that Rezolver supports generic variance <span class="emoji" short
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/variance/covariance.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Documentation/_docfx_proj/docs/variance/covariance.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

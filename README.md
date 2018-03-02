@@ -16,15 +16,27 @@ For more information, including API reference and developer how-tos, head on ove
 [![Work in Progress](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ZolutionSoftware/Rezolver) 
 [![Items ready to go](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready)](http://waffle.io/ZolutionSoftware/Rezolver)
 
-## 1.3 & 1.3.1 Features
+## 1.3.2 Features
+> As always, for the full list of changes, check out [the version history](https://github.com/ZolutionSoftware/Rezolver/releases).
 
-> For the full list of changes, check out [the version history](https://github.com/ZolutionSoftware/Rezolver/releases).
+- Generic covariance
+- Mixed variance
+- Enumerable Projections
+- List member bindings (collection initialisation)
+- Selection of constructors on open generics
+- Fluent API to build per-member bindings
+
+<small>
+
+## 1.3 & 1.3.1 Features
 
 - Support for Asp.Net Core 2.0
 - Contravariance
 - Decorator Delegates
 - List, Collection and Array injection
 - ... Plus loads of bug fixes and other enhancements :)
+</small>
+
 
 All these features are documented [on our website](http://rezolver.co.uk).
 
@@ -34,7 +46,7 @@ Rezolver has now been incorporated into @DanielPalme's [excellent IOCPerformance
 
 Read [our own notes on Rezolver's performance in this benchmark](http://rezolver.co.uk/developers/docs/benchmarks.html), which provide some context on the areas where it can be improved.
 
-> Hint: Unless you're regularly using child containers, Rezolver's performance is right up there with the fastest.
+> Hint: Unless you're creating child containers with additional registrations, Rezolver's performance is right up there with the fastest.
 
 # Contributing
 
