@@ -193,3 +193,5 @@ test/Rezolver.Tests/_TestAssemblies
 test/artifacts/
 src/artifacts/
 *.dgml
+.vs/Rezolver/v15/Browse.VC.db
+.vs/VSWorkspaceState.json
