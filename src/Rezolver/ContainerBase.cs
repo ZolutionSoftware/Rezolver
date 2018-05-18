@@ -327,45 +327,23 @@ namespace Rezolver
         }
 
         #region ITargetContainer explicit implementation
-        ITarget ITargetContainer.Fetch(Type type)
-        {
-            return this.Targets.Fetch(type);
-        }
+        ITarget ITargetContainer.Fetch(Type type) => this.Targets.Fetch(type);
 
-        IEnumerable<ITarget> ITargetContainer.FetchAll(Type type)
-        {
-            return this.Targets.FetchAll(type);
-        }
+        IEnumerable<ITarget> ITargetContainer.FetchAll(Type type) => this.Targets.FetchAll(type);
 
-        ITargetContainer ITargetContainer.CombineWith(ITargetContainer existing, Type type)
-        {
-            throw new NotSupportedException();
-        }
+        ITargetContainer ITargetContainer.CombineWith(ITargetContainer existing, Type type) => throw new NotSupportedException();
 
-        ITargetContainer ITargetContainer.FetchContainer(Type type)
-        {
-            return this.Targets.FetchContainer(type);
-        }
+        ITargetContainer ITargetContainer.FetchContainer(Type type) => this.Targets.FetchContainer(type);
 
-        void ITargetContainer.RegisterContainer(Type type, ITargetContainer container)
-        {
-            this.Targets.RegisterContainer(type, container);
-        }
+        void ITargetContainer.RegisterContainer(Type type, ITargetContainer container) => this.Targets.RegisterContainer(type, container);
 
-        void ICovariantTypeIndex.AddKnownType(Type serviceType)
-        {
-            this.Targets.AddKnownType(serviceType);
-        }
+        void ICovariantTypeIndex.AddKnownType(Type serviceType) => this.Targets.AddKnownType(serviceType);
 
-        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType)
-        {
-            return this.Targets.GetKnownCovariantTypes(serviceType);
-        }
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType) => Targets.GetKnownCovariantTypes(serviceType);
 
-        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType)
-        {
-            return this.Targets.GetKnownCompatibleTypes(serviceType);
-        }
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType) => Targets.GetKnownCompatibleTypes(serviceType);
+
+        TargetTypeSelector ICovariantTypeIndex.SelectTypes(Type type) => Targets.SelectTypes(type);
 
         #endregion
     }

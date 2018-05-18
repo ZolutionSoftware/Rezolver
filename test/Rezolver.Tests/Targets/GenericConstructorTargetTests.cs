@@ -202,5 +202,22 @@ namespace Rezolver.Tests.Targets
 
             //var target = new GenericConstructorTarget
         }
+
+        private interface ISingleGeneric<T> { }
+        private interface IDoubleGeneric<T1, T2> { }
+        private class DoubleGeneric<T1, T2> : ISingleGeneric<IDoubleGeneric<T1, T2>> { }
+
+        [Fact]
+        public void ShouldMapMultipleParametersThroughNonGenericBase()
+        {
+            var target = new GenericConstructorTarget(typeof(DoubleGeneric<,>));
+
+            var result = target.MapType(typeof(ISingleGeneric<IDoubleGeneric<int, float>>));
+
+            Assert.True(result.Success);
+            Assert.True(result.IsFullyBound);
+
+            Assert.Equal(typeof(DoubleGeneric<int, float>), result.Type);
+        }
 	}
 }

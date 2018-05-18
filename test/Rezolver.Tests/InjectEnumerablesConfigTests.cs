@@ -48,7 +48,7 @@ namespace Rezolver.Tests
 
             var result = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<NoCtor>)));
             Assert.False(result.UseFallback);
-            Assert.Equal(1, result.Targets.Count());
+            Assert.Single(result.Targets);
         }
 
         [Fact]

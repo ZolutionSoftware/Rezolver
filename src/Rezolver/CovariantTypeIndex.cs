@@ -2,8 +2,10 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Rezolver.Events;
 using Rezolver.Runtime;
 
@@ -15,13 +17,23 @@ namespace Rezolver
     /// </summary>
     public class CovariantTypeIndex : ICovariantTypeIndex
     {
+        private class CachedTargetTypeSelector
+        {
+            public long Version;
+            public TargetTypeSelector Selector;
+        }
+
+        private IRootTargetContainer _root;
         private readonly Dictionary<Type, OrderedSet<Type>> CovariantLookup = new Dictionary<Type, OrderedSet<Type>>();
         private readonly Dictionary<Type, OrderedSet<Type>> CompatibleLookup = new Dictionary<Type, OrderedSet<Type>>();
         private readonly HashSet<Type> KnownTypes = new HashSet<Type>();
+        private readonly ConcurrentDictionary<Type, CachedTargetTypeSelector> _cachedSearches = new ConcurrentDictionary<Type, CachedTargetTypeSelector>();
+        private long _version = 0;
 
         internal CovariantTypeIndex(IRootTargetContainer root)
         {
-            root.TargetRegistered += this.Root_TargetRegistered;
+            _root = root;
+            _root.TargetRegistered += this.Root_TargetRegistered;
         }
 
         private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
@@ -40,7 +52,7 @@ namespace Rezolver
             {
                 return;
             }
-
+            Interlocked.Increment(ref _version);
             if (this.KnownTypes.Add(serviceType))
             {
                 Stack<Type> derivedTypeStack = new Stack<Type>(new[] { serviceType });
@@ -159,7 +171,7 @@ namespace Rezolver
                                 return null;
                             }
                         })
-                        .Where(t => t != null);
+                        .Where(t => t != null && t != type);
             }
 
             return Enumerable.Empty<Type>();
@@ -246,6 +258,34 @@ namespace Rezolver
             }
 
             typeList.Add(type);
+        }
+
+        public TargetTypeSelector SelectTypes(Type type)
+        {
+            // this function is complicated by the fact that searching and registering types are asymmetrically parallel.
+            // in theory most applications will register first and then start searching.  However, the searching part is parallelised
+            // equally, if registrations continue whilst searching is being performed, then we'd have a problem.  So this is written to
+            // ensure that the cached type selectors stay up to date as extra registrations are made.
+            var result = _cachedSearches.GetOrAdd(type,
+                t => new CachedTargetTypeSelector() { Version = Interlocked.Read(ref _version), Selector = new TargetTypeSelector(type, _root) });
+            long resultVersion = Interlocked.Read(ref result.Version);
+            long currentVersion = Interlocked.Read(ref _version);
+            long oldResultVersion = resultVersion;
+            // it's fresh enough
+            if (resultVersion == currentVersion)
+                return result.Selector;
+
+            while (true)
+            {
+                resultVersion = Interlocked.Read(ref result.Version);
+                currentVersion = Interlocked.Read(ref _version);
+                var newSelector = new TargetTypeSelector(type, _root);
+                result.Selector = newSelector;
+                if (Interlocked.CompareExchange(ref result.Version, currentVersion, resultVersion) == resultVersion)
+                    break;
+            }
+
+            return result.Selector;
         }
     }
 }

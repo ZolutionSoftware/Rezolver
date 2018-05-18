@@ -73,6 +73,22 @@ namespace Rezolver
             this.Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
         }
 
+        private class CovariantMatch
+        {
+            public Type RequestedType { get; set; }
+            public ITarget Target { get; set; }
+            public static IEqualityComparer<CovariantMatch> Comparer => TargetIDComparer.Instance;
+            private class TargetIDComparer : IEqualityComparer<CovariantMatch>
+            {
+                public static TargetIDComparer Instance { get; } = new TargetIDComparer();
+                private TargetIDComparer() { }
+
+                public bool Equals(CovariantMatch x, CovariantMatch y) => TargetIdentityComparer.Instance.Equals(x.Target, y.Target);
+
+                public int GetHashCode(CovariantMatch obj) => TargetIdentityComparer.Instance.GetHashCode(obj.Target);
+            }
+        }
+
         public override ITarget Fetch(Type type)
         {
             if (!TypeHelpers.IsGenericType(type))
@@ -122,13 +138,12 @@ namespace Rezolver
 
             if (enableCovariance)
             {
-                // we need to find all the targets which have types which compatible with elementType
-                // for that we use the ICovariantTypeIndex implementation of the Root target container.
-                return new EnumerableTarget(new[] { elementType }
-                    .Concat(this.Root.GetKnownCompatibleTypes(elementType))
-                    .SelectMany(t => this.Root.FetchAll(t))
-                    .Distinct(TargetIdentityComparer.Instance) // don't duplicate targets
-                    .OrderBy(t => this._tracker.GetOrder(t) ?? int.MaxValue), elementType);
+                return new EnumerableTarget(Root.FetchAll(elementType)
+                    .Concat(Root.GetKnownCompatibleTypes(elementType)
+                        .SelectMany(compatibleType => Root.FetchAll(compatibleType)
+                            .Select(t => VariantMatchTarget.Wrap(t, elementType, compatibleType))
+                        )).Distinct(TargetIdentityComparer.Instance)
+                        .OrderBy(t => (t is VariantMatchTarget variant ? _tracker.GetOrder(variant.Target) : _tracker.GetOrder(t)) ?? int.MaxValue), elementType);
             }
             else
             {

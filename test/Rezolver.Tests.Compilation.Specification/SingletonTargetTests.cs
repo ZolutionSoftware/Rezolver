@@ -134,5 +134,57 @@ namespace Rezolver.Tests.Compilation.Specification
             //and then re fetch the first type to make sure that it's not getting confused
             Assert.Same(r1, container.Resolve<Generic<int>>());
         }
+
+        [Fact]
+        public void SingletonTarget_ShouldCreateOneInstanceForCovariantEnumerableAndSingle()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterSingleton<InstanceCountingType>();
+
+            var container = CreateContainer(targets);
+
+            using(var session = InstanceCountingType.NewSession())
+            {
+                var enumerable = container.ResolveMany<IInstanceCountingType>().ToArray();
+                var single = container.Resolve<InstanceCountingType>();
+
+                Assert.Equal(1, session.InstanceCount);
+                Assert.Same(enumerable[0], single);
+            }
+        }
+
+        [Fact]
+        public void SingletonTarget_ContravariantShouldCreateOnlyOneInstance()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterSingleton<Contravariant<BaseClass>, IContravariant<BaseClass>>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var contravariantMatch1 = container.Resolve<IContravariant<BaseClassChild>>();
+            var contravariantMatch2 = container.Resolve<IContravariant<BaseClassGrandchild>>();
+            var directMatch = container.Resolve<IContravariant<BaseClass>>();
+
+            Assert.Same(contravariantMatch1, contravariantMatch2);
+            Assert.Same(directMatch, contravariantMatch1);
+        }
+
+        [Fact]
+        public void SingletonTarget_CovariantShouldCreateOnlyOneInstance()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterSingleton<Covariant<BaseClassGrandchild>, ICovariant<BaseClassGrandchild>>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var covariantMatch1 = container.Resolve<ICovariant<BaseClass>>();
+            var covariantMatch2 = container.Resolve<ICovariant<BaseClassChild>>();
+            var directMatch = container.Resolve<ICovariant<BaseClassGrandchild>>();
+
+            Assert.Same(covariantMatch1, covariantMatch2);
+            Assert.Same(directMatch, covariantMatch1);
+        }
     }
 }

@@ -412,7 +412,9 @@ namespace Rezolver.Targets
         {
             if (baseTypeParameter == targetTypeParameter)
             {
-                return previousTypeParameterPositions.ToArray();
+                var result = previousTypeParameterPositions.ToArray();
+                Array.Reverse(result);
+                return result;
             }
 
             if (previousTypeParameterPositions == null)

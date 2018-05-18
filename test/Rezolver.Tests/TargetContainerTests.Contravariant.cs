@@ -44,7 +44,7 @@ namespace Rezolver.Tests
             var fetched = targets.Fetch(toFetch);
 
             // Assert
-            Assert.Same(target, fetched);
+            Assert.Equal(target.Id, fetched.Id);
         }
     }
 }

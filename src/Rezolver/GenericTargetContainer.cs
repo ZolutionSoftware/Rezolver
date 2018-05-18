@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -141,11 +142,15 @@ namespace Rezolver
             return this._caches.FetchCache.GetOrAdd(type, t =>
             {
                 ITarget baseResult = null;
-                foreach (var searchType in new TargetTypeSelector(t, this.Root))
+                var typeSelector = Root.SelectTypes(t);
+                foreach (var searchType in typeSelector)
                 {
                     if ((baseResult = base.Fetch(searchType)) != null)
                     {
-                        return baseResult;
+                        if (typeSelector.IsVariantMatch(type, searchType))
+                            return VariantMatchTarget.Wrap(baseResult, type, searchType);
+                        else
+                            return baseResult;
                     }
                 }
 
@@ -168,9 +173,9 @@ namespace Rezolver
         {
             bool matchAll = this.Root.GetOption(type, Options.FetchAllMatchingGenerics.Default);
             bool foundOne = false;
-
+            var typeSelector = Root.SelectTypes(type);
             // all generics are returned in descending order of specificity
-            foreach (var searchType in new TargetTypeSelector(type, this.Root).Distinct())
+            foreach (var searchType in typeSelector)
             {
                 foreach (var result in base.FetchAll(searchType))
                 {
@@ -179,7 +184,7 @@ namespace Rezolver
                         foundOne = true;
                     }
 
-                    yield return result;
+                    yield return typeSelector.IsVariantMatch(type, searchType) ? VariantMatchTarget.Wrap(result, type, searchType) : result;
                 }
 
                 if (!matchAll && foundOne)

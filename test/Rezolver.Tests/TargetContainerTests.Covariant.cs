@@ -31,7 +31,7 @@ namespace Rezolver.Tests
             var fetched = targets.Fetch(toFetch);
 
             // Assert
-            Assert.Same(target, fetched);
+            Assert.Equal(target.Id, fetched.Id);
         }
 
         [Fact]
@@ -130,7 +130,7 @@ namespace Rezolver.Tests
             //Act
             var match = targets.Fetch(typeof(ICovariant<BaseClass>));
 
-            Assert.Same(nestedgrandChildTarget, match);
+            Assert.Equal(nestedgrandChildTarget.Id, match.Id);
         }
 
         [Fact]
@@ -149,7 +149,8 @@ namespace Rezolver.Tests
             var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<BaseClass>)));
 
             // Assert
-            Assert.Equal(new[] { baseTarget, childTarget, grandChildTarget }, enumerableTarget.Targets);
+            // (can't compare targets because 
+            Assert.Equal(new[] { typeof(BaseClass), typeof(BaseClassChild), typeof(BaseClassGrandchild) }, enumerableTarget.Targets.Select(t => t.DeclaredType));
         }
 
         [Fact]
@@ -168,7 +169,7 @@ namespace Rezolver.Tests
             var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<ICovariant<BaseClass>>)));
 
             // Assert
-            Assert.Equal(new[] { baseTarget, childTarget, grandChildTarget }, enumerableTarget.Targets);
+            Assert.Equal(new[] { baseTarget.Id, childTarget.Id, grandChildTarget.Id }, enumerableTarget.Targets.Select(t => t.Id));
         }
 
         [Fact]
@@ -214,16 +215,9 @@ namespace Rezolver.Tests
             var enumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<BaseClass>)));
             var nestedEnumerableTarget = Assert.IsType<EnumerableTarget>(targets.Fetch(typeof(IEnumerable<ICovariant<BaseClass>>)));
 
-            // NEW PROBLEM!
-            // This test fails on 161 because the new derived type tracking in the covariant type index is not mapping
-            // Covariant<BaseClassChild> (for example) to ICovariant<BaseClass> - but it should be.  It has *nothing* to 
-            // do with the EnableEnumerableCovariance option being set to false (try taking out line 135) and running - 
-            // the nestedEnumerableTarget Targets enumerable still only contains one item, when it should contain three.
-            // The problem is fixed if we move the registration of the ICovariant targets BEFORE the non-generic ones!
-
             // Assert
-            Assert.Equal(new[] { baseTarget }, enumerableTarget.Targets);
-            Assert.Equal(new[] { nestedbaseTarget, nestedchildTarget, nestedgrandChildTarget }, nestedEnumerableTarget.Targets);
+            Assert.Equal(new[] { baseTarget.Id }, enumerableTarget.Targets.Select(t => t.Id));
+            Assert.Equal(new[] { nestedbaseTarget.Id, nestedchildTarget.Id, nestedgrandChildTarget.Id }, nestedEnumerableTarget.Targets.Select(t => t.Id));
         }
     }
 }

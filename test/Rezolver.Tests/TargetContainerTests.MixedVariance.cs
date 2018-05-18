@@ -21,7 +21,7 @@ namespace Rezolver.Tests
             var result = targets.Fetch(typeof(Func<string, object>));
 
             // Assert
-            Assert.Same(expected, result);
+            Assert.Equal(expected.Id, result.Id);
         }
     }
 }

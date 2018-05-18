@@ -158,7 +158,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void Enumerable_ShouldCreateUniqueSingletons()
+        public void Enumerable_ShouldCreateSameSingletons()
         {
             var container = new Container();
             container.RegisterSingleton<BaseClass>();
@@ -174,7 +174,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void Enumerable_ShouldCreateUniqueScopeds()
+        public void Enumerable_ShouldCreateSameScopeds()
         {
             var container = new ScopedContainer();
             container.RegisterScoped<BaseClass>();

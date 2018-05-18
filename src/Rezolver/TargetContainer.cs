@@ -42,20 +42,13 @@ namespace Rezolver
         /// </summary>
         public event EventHandler<TargetContainerRegisteredEventArgs> TargetContainerRegistered;
 
-        void ICovariantTypeIndex.AddKnownType(Type serviceType)
-        {
-            this._typeIndex.AddKnownType(serviceType);
-        }
+        void ICovariantTypeIndex.AddKnownType(Type serviceType) => this._typeIndex.AddKnownType(serviceType);
 
-        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType)
-        {
-            return this._typeIndex.GetKnownCovariantTypes(serviceType);
-        }
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType) => this._typeIndex.GetKnownCovariantTypes(serviceType);
 
-        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType)
-        {
-            return this._typeIndex.GetKnownCompatibleTypes(serviceType);
-        }
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType) => this._typeIndex.GetKnownCompatibleTypes(serviceType);
+
+        TargetTypeSelector ICovariantTypeIndex.SelectTypes(Type type) => _typeIndex.SelectTypes(type);
 
         /// <summary>
         /// The default configuration used for <see cref="TargetContainer"/> objects created via the <see cref="TargetContainer.TargetContainer(ITargetContainerConfig)"/>
