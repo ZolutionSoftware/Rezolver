@@ -119,12 +119,21 @@ namespace Rezolver
                 var typeParamSearchLists = argSearches.Select(t => this.Run(t).ToArray()).ToArray();
                 var genericType = search.Type.GetGenericTypeDefinition();
                 Type[] combinationArray = null;
+                Type compatibleType = null;
 
                 // Note: the first result will be equal to search.Type, hence Skip(1)
                 foreach (var combination in typeParamSearchLists.Permutate().Skip(1))
                 {
                     combinationArray = combination.ToArray();
-                    var compatibleType = genericType.MakeGenericType(combinationArray);
+                    try
+                    {
+                        compatibleType = genericType.MakeGenericType(combinationArray);
+                    }
+                    catch (Exception) {
+                        // ignore things like constraints etc because it could easily happen and
+                        // it's actually very hard to check up front.
+                        continue;
+                    }
                     // check if this combination counts as a variant match
                     if (!TypeHelpers.ContainsGenericParameters(compatibleType))
                     {
