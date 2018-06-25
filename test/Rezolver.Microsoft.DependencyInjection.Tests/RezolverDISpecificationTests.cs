@@ -20,7 +20,7 @@ namespace Rezolver.Microsoft.Extensions.DependencyInjection.Tests
 
             var container = new ScopedContainer(
                 new TargetContainer(config));
-
+            //var container = new ScopedContainer();
             container.Populate(serviceCollection);
             return container;
         }
