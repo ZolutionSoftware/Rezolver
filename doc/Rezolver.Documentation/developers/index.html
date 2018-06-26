@@ -8,7 +8,7 @@
   	<title>Rezolver | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Rezolver | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.29.1.0">
+  	<meta name="generator" content="docfx 2.36.2.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="favicon.ico">
   	<link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -47,7 +47,7 @@
   	  ga('send', 'pageview');
   	
   	</script></head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -93,7 +93,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -109,17 +111,28 @@ with Asp.Net Core integration.</p>
 <ul>
 <li>.Net Standard 2.0</li>
 <li>.Net Standard 1.1</li>
-<li>.Net 4.5.1</li>
-<li>.Net 4.6</li>
+<li>.Net 4.5</li>
 </ul>
 <h2 id="aspnet-core-support">Asp.Net Core Support</h2>
-<p>Asp.Net Core Support (v2.0 and v1.1) is provided by the 
+<p>Asp.Net Core Support (v2.1 and below, on .Net Core or Full Framework) is provided by the 
 <a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting package</a>,
 supported by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection package</a>
 which provides an implementation of the new .Net Core DI container abstraction.</p>
+<blockquote><p>The major/minor version number of these packages indicates the version of Asp.Net Core they support.
+So, Rezolver.Microsoft.AspNetCore.Hosting v2.1 is for Asp.Net Core v2.1.</p>
+</blockquote>
 <h1 id="release-highlights">Release Highlights</h1>
 <p>For full release notes for each version - <a href="https://github.com/ZolutionSoftware/Rezolver/releases">see release notes on Github</a>.</p>
 <ul>
+<li><strong>1.3.4</strong><ul>
+<li>Added <a href="https://github.com/dotnet/sourcelink">Sourcelink</a> to the packaged assemblies.</li>
+<li>Bumped Asp.Net Core integration packages to 2.1</li>
+</ul>
+</li>
+<li><strong>1.3.3</strong><ul>
+<li>Bugfix release - see the release notes linked above for more</li>
+</ul>
+</li>
 <li><strong>1.3.2</strong><ul>
 <li><a href="docs/variance/covariance.html">Generic Covariance</a></li>
 <li><a href="docs/variance/mixed.html">Mixed Variance</a></li>
@@ -252,7 +265,7 @@ which provides an implementation of the new .Net Core DI container abstraction.<
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/netcore21/doc/Rezolver.Documentation/_docfx_proj/index.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

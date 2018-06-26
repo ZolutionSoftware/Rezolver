@@ -9,9 +9,9 @@ Rezolver integration is available for both Asp.Net Core 1.1 and 2.0, with the As
 integration offering more flexibility as it allows you to perform configuration on the container(s) that
 are created before any registrations are made.
 
-# Asp.Net Core 2.0
+# Asp.Net Core 2.1/2.0
 
-Version `2.0` of the package supports Asp.Net Core 2.0.
+Version `2.1` of the package supports Asp.Net Core 2.1; `2.0` supports Asp.Net Core 2.0.
 
 ## Program.cs changes
 
@@ -22,6 +22,8 @@ After adding the package, change your `program.cs` file so it looks like this:
 So, at the most basic level you just call the 
 @Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver* method, and that's
 enough.
+
+### Configuration call-back
 
 If you've been reading some of the topics on this site - say, about [contravariance](../variance/contravariance.md)
 or [lazy and eager enumerables](../enumerables/lazy-vs-eager.md) then you'll have seen how we can use options

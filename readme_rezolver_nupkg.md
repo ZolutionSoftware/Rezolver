@@ -1,6 +1,6 @@
 ## What is Rezolver?
 
-Rezolver is an IOC container built from day one for .Net Core.
+Rezolver is an IOC container built from day one for .Net Core and .Net framework.
 
 It's fast, feature-rich and works the way *you* want.
 
@@ -10,4 +10,6 @@ It's fast, feature-rich and works the way *you* want.
 
 ## Asp.Net Core integration
 
-Version 2.0+ of [the Rezolver.Microsoft.AspNetCore.Hosting package](https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting/) provides integration with Asp.Net Core 2, whilst version 1.3.0 provides integration with Asp.Net Core 1.1.
+- Version 2.1 of [the Rezolver.Microsoft.AspNetCore.Hosting package](https://www.nuget.org/packages/Rezolver.Microsoft.AspNetCore.Hosting/) provides integration with Asp.Net Core 2.1
+- Version 2.0 is for Asp.Net Core 2.0
+- Version 1.3 provides integration with Asp.Net Core 1.1.

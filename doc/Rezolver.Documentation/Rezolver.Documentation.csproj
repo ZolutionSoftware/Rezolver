@@ -95,6 +95,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="api\.gitignore" />
     <Content Include="Content\rz_square_white_on_orange_128x128.png" />
     <Content Include="Content\rz_square_white_on_orange_16x16.png" />
     <Content Include="Content\rz_square_white_on_orange_24x24.png" />
@@ -158,6 +159,7 @@
     <Content Include="developers\api\Rezolver.Compilation.Expressions.SingletonTargetBuilder.html" />
     <Content Include="developers\api\Rezolver.Compilation.Expressions.TargetExpression.html" />
     <Content Include="developers\api\Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html" />
+    <Content Include="developers\api\Rezolver.Compilation.Expressions.VariantMatchTargetBuilder.html" />
     <Content Include="developers\api\Rezolver.Compilation.html" />
     <Content Include="developers\api\Rezolver.Compilation.ICompileContext.html" />
     <Content Include="developers\api\Rezolver.Compilation.ITargetCompiler.html" />
@@ -284,6 +286,7 @@
     <Content Include="developers\api\Rezolver.Targets.SingletonTarget.html" />
     <Content Include="developers\api\Rezolver.Targets.TargetBase.html" />
     <Content Include="developers\api\Rezolver.Targets.UnscopedTarget.html" />
+    <Content Include="developers\api\Rezolver.Targets.VariantMatchTarget.html" />
     <Content Include="developers\api\Rezolver.TargetTypeSelector.html" />
     <Content Include="developers\api\Rezolver.UnresolvedICompiledTargetExtensions.html" />
     <Content Include="developers\api\toc.html" />
@@ -578,7 +581,6 @@
     <Content Include="_docfx_proj\docs\variance\contravariance.md" />
     <Content Include="_docfx_proj\docs\decorators\collections.md" />
     <Content Include="_docfx_proj\docs\variance\covariance.md" />
-    <Content Include="toc.yml" />
     <Content Include="_docfx_proj\docs\constructor-injection\generics-manual-constructor.md" />
     <Content Include="_docfx_proj\docs\member-injection\toc.yml" />
     <Content Include="_docfx_proj\docs\member-injection\options.md" />
@@ -587,6 +589,7 @@
     <Content Include="_docfx_proj\docs\member-injection\custom.md" />
     <Content Include="_docfx_proj\docs\member-injection\collections.md" />
     <Content Include="_docfx_proj\docs\enumerables\projections.md" />
+    <Content Include="toc.yml" />
     <None Include="_docfx_proj\docs\nuget-packages\rezolver.md" />
     <Content Include="styles\bootstrap-rezolver.less" />
     <Content Include="styles\bootstrap-variables-rezolver.less" />
@@ -765,9 +768,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\..\packages\docfx.console.2.29.1\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.29.1\build\docfx.console.targets'))" />
+    <Error Condition="!Exists('..\..\packages\docfx.console.2.36.2\build\docfx.console.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\docfx.console.2.36.2\build\docfx.console.targets'))" />
   </Target>
-  <Import Project="..\..\packages\docfx.console.2.29.1\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.29.1\build\docfx.console.targets')" />
+  <Import Project="..\..\packages\docfx.console.2.36.2\build\docfx.console.targets" Condition="Exists('..\..\packages\docfx.console.2.36.2\build\docfx.console.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

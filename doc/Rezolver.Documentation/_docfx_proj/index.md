@@ -7,21 +7,27 @@ The nuget package has binaries specifically targeted to these .Net versions/stan
 
 - .Net Standard 2.0
 - .Net Standard 1.1
-- .Net 4.5.1
-- .Net 4.6
+- .Net 4.5
 
 ## Asp.Net Core Support
 
-Asp.Net Core Support (v2.0 and v1.1) is provided by the 
+Asp.Net Core Support (v2.1 and below, on .Net Core or Full Framework) is provided by the 
 [Rezolver.Microsoft.AspNetCore.Hosting package](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md),
 supported by the [Rezolver.Microsoft.Extensions.DependencyInjection package](docs/nuget-packages/Rezolver.Microsoft.Extensions.DependencyInjection.md)
 which provides an implementation of the new .Net Core DI container abstraction.
 
+> The major/minor version number of these packages indicates the version of Asp.Net Core they support.
+> So, Rezolver.Microsoft.AspNetCore.Hosting v2.1 is for Asp.Net Core v2.1.
 
 # Release Highlights
 
 For full release notes for each version - [see release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 
+- **1.3.4**
+  - Added [Sourcelink](https://github.com/dotnet/sourcelink) to the packaged assemblies.
+  - Bumped Asp.Net Core integration packages to 2.1
+- **1.3.3**
+  - Bugfix release - see the release notes linked above for more
 - **1.3.2**
   - [Generic Covariance](docs/variance/covariance.md)
   - [Mixed Variance](docs/variance/mixed.md)

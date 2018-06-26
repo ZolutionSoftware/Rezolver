@@ -8,7 +8,7 @@
   	<title>Rezolver.Microsoft.AspNetCore.Hosting Package | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Rezolver.Microsoft.AspNetCore.Hosting Package | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.29.1.0">
+  	<meta name="generator" content="docfx 2.36.2.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
@@ -47,7 +47,7 @@
   	  ga('send', 'pageview');
   	
   	</script></head>
-  <body data-spy="scroll" data-target="#affix">
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
         
@@ -93,7 +93,9 @@
         
         <div id="search-results">
           <div class="search-list"></div>
-          <div class="sr-items"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
           <ul id="pagination"></ul>
         </div>
       </div>
@@ -116,8 +118,8 @@ package to enable the integration of Rezolver into your Asp.Net Core site somewh
 <p>Rezolver integration is available for both Asp.Net Core 1.1 and 2.0, with the Asp.Net Core 2.0 
 integration offering more flexibility as it allows you to perform configuration on the container(s) that
 are created before any registrations are made.</p>
-<h1 id="aspnet-core-20">Asp.Net Core 2.0</h1>
-<p>Version <code>2.0</code> of the package supports Asp.Net Core 2.0.</p>
+<h1 id="aspnet-core-2120">Asp.Net Core 2.1/2.0</h1>
+<p>Version <code>2.1</code> of the package supports Asp.Net Core 2.1; <code>2.0</code> supports Asp.Net Core 2.0.</p>
 <h2 id="programcs-changes">Program.cs changes</h2>
 <p>After adding the package, change your <code>program.cs</code> file so it looks like this:</p>
 <pre><code class="lang-csharp" name="Example.cs">public class Program
@@ -149,6 +151,7 @@ are created before any registrations are made.</p>
 </code></pre><p>So, at the most basic level you just call the 
 <a class="xref" href="../../api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_">UseRezolver</a> method, and that&#39;s
 enough.</p>
+<h3 id="configuration-call-back">Configuration call-back</h3>
 <p>If you&#39;ve been reading some of the topics on this site - say, about <a href="../variance/contravariance.html">contravariance</a>
 or <a href="../enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> then you&#39;ll have seen how we can use options
 to control complex behaviours in Rezolver containers.  That&#39;s what is shown in the alternative call
@@ -269,7 +272,7 @@ and then Rezolver will be used as the container for your application.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/covariance-and-more/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/netcore21/doc/Rezolver.Documentation/_docfx_proj/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

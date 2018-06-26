@@ -16,8 +16,37 @@ For more information, including API reference and developer how-tos, head on ove
 [![Work in Progress](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ZolutionSoftware/Rezolver) 
 [![Items ready to go](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready)](http://waffle.io/ZolutionSoftware/Rezolver)
 
-## 1.3.2 Features
+---
+
+# Version Highlights
+
+## 1.3.4
+
+Primary purpose of this release was to have a build that's been built and tested explicitly against the .Net Core 2.1
+runtime and Asp.Net Core 2.1.
+
+- Added [SourceLink](https://github.com/dotnet/sourcelink) Support
+- Core library now targets `.NetStandard1.1`, `.NetStandard2.0` and `net45` (Removed `net461` as it was pointless)
+
+### Asp.Net Core 2.1 Integration
+
+- Rezolver.Microsoft.AspNetCore.Hosting updated dependency to Asp.Net Core 2.1
+- Rezolver.Microsoft.Extensions.DependencyInjection updated dependency to Asp.Net Core 2.1
+
+---
+
+## 1.3.3
+
 > As always, for the full list of changes, check out [the version history](https://github.com/ZolutionSoftware/Rezolver/releases).
+
+Bugfixes for generics handling, specifically:
+
+- Singletons matched contravariantly or covariantly did not honour the pattern
+- Registering `Foo<T, U> : IFoo<IBar<T, U>>` against `<IFoo<IBar<,>>` caused an `IndexOutOfRangeException` 
+
+---
+
+## 1.3.2
 
 - Generic covariance
 - Mixed variance
@@ -26,21 +55,21 @@ For more information, including API reference and developer how-tos, head on ove
 - Selection of constructors on open generics
 - Fluent API to build per-member bindings
 
-<small>
+---
 
-## 1.3 & 1.3.1 Features
+## 1.3 & 1.3.1
 
 - Support for Asp.Net Core 2.0
 - Contravariance
 - Decorator Delegates
 - List, Collection and Array injection
 - ... Plus loads of bug fixes and other enhancements :)
-</small>
-
 
 All these features are documented [on our website](http://rezolver.co.uk).
 
-## Performance
+---
+
+# Performance
 
 Rezolver has now been incorporated into @DanielPalme's [excellent IOCPerformance benchmark](http://www.palmmedia.de/Blog/2011/8/30/ioc-container-benchmark-performance-comparison).
 
