@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using BenchmarkDotNet.Running;
 using McMaster.Extensions.CommandLineUtils;
 using Rezolver.Benchmark.Benchmarks;
 
@@ -11,12 +12,20 @@ namespace Rezolver.Benchmark
 {
     class Program
     {
+        static int BenchDotNetMain(string[] args)
+        {
+            var summary = BenchmarkRunner.Run<CreationBenches>();
+            return 0;
+        }
+
         const int DEFAULT_COUNT = 50000;
         const int DEFAULT_TIMEOUT = 10;
         static int Main(string[] args)
         {
             var app = new CommandLineApplication();
             app.HelpOption();
+            app.ThrowOnUnexpectedArgument = false;
+            var fullBench = app.Option("-f|--full", "If specified, then a full benchmark will be run using Benchmark.Net", CommandOptionType.NoValue);
             var listArg = app.Option("-l|--list", "Lists the available benchmarks and containers which run them", CommandOptionType.NoValue);
             var optCount = app.Option("-c|--count <INT>", $"Number of loops each benchmark should run (default={DEFAULT_COUNT})", CommandOptionType.SingleValue);
             var optTimeOut = app.Option("-t|--timeout <INT>", $"Maximum number seconds a benchmark is allowed to run for (default={DEFAULT_TIMEOUT}", CommandOptionType.SingleValue);
@@ -25,10 +34,12 @@ namespace Rezolver.Benchmark
             var optExcludeExtended = app.Option("-xx|--excludeextended", "If provided, extended benchmarks will not be included", CommandOptionType.NoValue);
             var optIncludeCont = app.Option("-iC|--includeCont <INCLUDE>", "Specific container types to include.  Cannot be used with -xC", CommandOptionType.MultipleValue);
             var optExcludeCont = app.Option("-xC|--excludeCont <EXCLUDE>", "Specific container types to exclude.  Cannot be used with -iC", CommandOptionType.MultipleValue);
-            // TODO: plug in some custom validation to clean up the branching below.
 
             var appExe = new Func<Task<int>>(async () =>
             {
+                if (fullBench.HasValue())
+                    return BenchDotNetMain(app.RemainingArguments.ToArray());
+
                 var benches = LoadBenchmarks();
 
                 if (listArg.HasValue())

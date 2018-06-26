@@ -22,8 +22,8 @@ namespace Rezolver
     /// for a particular type is made, the resultant <see cref="ICompiledTarget"/> is fixed until the container is thrown away.</remarks>
     public class CachingContainerBase : ContainerBase
     {
-        private readonly ConcurrentDictionary<Type, Lazy<ICompiledTarget>> _entries
-            = new ConcurrentDictionary<Type, Lazy<ICompiledTarget>>();
+        private readonly IConcurrentPerTypeCache<ICompiledTarget> _cache;
+
         /// <summary>
         /// Creates a new instance of the <see cref="CachingContainerBase"/> class.
         /// </summary>
@@ -34,7 +34,12 @@ namespace Rezolver
         protected CachingContainerBase(IRootTargetContainer targets = null)
             : base(targets)
         {
+            _cache = new DefaultConcurrentPerTypeCache<ICompiledTarget>();
+            //_cache = new ReadWriteLockedConcurrentPerTypeCache<ICompiledTarget>();
+            //_cache = new LockedConcurrentPerTypeCache<ICompiledTarget>();
         }
+
+        
 
         /// <summary>
         /// Obtains an <see cref="ICompiledTarget"/> for the given <paramref name="context"/>.
@@ -50,18 +55,12 @@ namespace Rezolver
         /// </remarks>
         protected override ICompiledTarget GetCompiledTargetVirtual(IResolveContext context)
         {
-            // Implementation note: after extensive testing, we found that this approach is faster in the best
-            // case than always using GetOrAdd - that is: once a compiled target is built and cached, TryGetValue
-            // performs better than GetOrAdd.
+            return _cache.Get(context.RequestedType, CallBase);
 
-            if (this._entries.TryGetValue(context.RequestedType, out Lazy<ICompiledTarget> myLazy))
+            ICompiledTarget CallBase()
             {
-                return myLazy.Value;
+                return base.GetCompiledTargetVirtual(context);
             }
-
-            return this._entries.GetOrAdd(
-                context.RequestedType,
-                c => new Lazy<ICompiledTarget>(() => base.GetCompiledTargetVirtual(context))).Value;
         }
     }
 }

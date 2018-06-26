@@ -77,6 +77,7 @@ namespace Rezolver.Benchmark.Benchmarks
                 var container = new Container();
                 container.RegisterType<RequiresSimpleType>();
                 container.RegisterType<SimpleType>();
+                var a = container.Resolve<RequiresSimpleType>();
                 return container;
             }
 
@@ -129,6 +130,7 @@ namespace Rezolver.Benchmark.Benchmarks
                 container.RegisterType<RequiresLots>();
                 container.RegisterSingleton<Singleton>();
                 container.RegisterType<Types.RequiresLotsAndSingleton>();
+                var a = container.Resolve<Types.RequiresLotsAndSingleton>();
                 return container;
             }
 

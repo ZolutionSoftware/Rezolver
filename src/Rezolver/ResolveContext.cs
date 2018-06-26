@@ -12,7 +12,7 @@ namespace Rezolver
     /// <summary>
     /// Standard implementation of <see cref="Rezolver.IResolveContext"/>
     /// </summary>
-    public class ResolveContext : IResolveContext
+    public sealed class ResolveContext : IResolveContext
     {
         /// <summary>
         /// A reference to the context from which this one was created.
