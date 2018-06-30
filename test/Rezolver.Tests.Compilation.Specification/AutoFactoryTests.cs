@@ -13,16 +13,22 @@ namespace Rezolver.Tests.Compilation.Specification
 {
     public partial class CompilerTestsBase
     {
+        private IRootTargetContainer CreateAutoFactoryTargetContainer()
+        {
+            var targets = CreateTargetContainer();
+            targets.RegisterContainer(typeof(Func<>), new Func0TargetContainer(targets));
+            targets.SetOption((IExpressionBuilder)new AutoFactoryTargetBuilder(), typeof(AutoFactoryTarget));
+            return targets;
+        }
+
         [Fact]
-        public void ShouldAutoCreateFactory()
+        public void AutoFactory_ShouldCreateSimple()
         {
             // simplest scenario - auto-creating a Func<T> instead of producing a T
 
             // Arrange
-            var targets = CreateTargetContainer();
-            targets.RegisterContainer(typeof(Func<>), new Func0TargetContainer(targets));
+            var targets = CreateAutoFactoryTargetContainer();
             targets.RegisterType<NoCtor>();
-            targets.SetOption((IExpressionBuilder)new AutoFactoryTargetBuilder(), typeof(AutoFactoryTarget));
             var container = CreateContainer(targets);
 
             // Act
@@ -35,6 +41,68 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.NotNull(instance);
             Assert.NotNull(instance2);
             Assert.NotSame(instance, instance2);
+        }
+
+        [Fact]
+        public void AutoFactory_ShouldHonourScope()
+        {
+            // Arrange
+            var targets = CreateAutoFactoryTargetContainer();
+            targets.RegisterScoped<Disposable>();
+            var container = CreateContainer(targets);
+
+            // When a factory is created, it is *bound* to the scope from which you created it.
+
+            Disposable outer, inner;
+            using (var outerScope = container.CreateScope())
+            {
+                // Act
+                var outerFactory = outerScope.Resolve<Func<Disposable>>();
+                outer = outerFactory();
+                using(var innerScope = outerScope.CreateScope())
+                {
+                    var innerFactory = innerScope.Resolve<Func<Disposable>>();
+                    inner = innerFactory();
+
+                    // Assert
+                    Assert.NotSame(outer, inner);
+                }
+                Assert.True(inner.Disposed);
+                Assert.False(outer.Disposed);
+            }
+            Assert.True(outer.Disposed);
+            Assert.Equal(1, outer.DisposedCount);
+            Assert.Equal(1, inner.DisposedCount);
+        }
+
+        [Fact]
+        public void AutoFactory_SingletonShouldHonourRootScope()
+        {
+            // Arrange
+            var targets = CreateAutoFactoryTargetContainer();
+            
+            targets.RegisterSingleton<Disposable>();
+            var container = CreateContainer(targets);
+
+            // this time, different factories should bind to the same singleton
+
+            Disposable outer, inner;
+            using (var outerScope = container.CreateScope())
+            {
+                // Act
+                var outerFactory = outerScope.Resolve<Func<Disposable>>();
+                outer = outerFactory();
+                using (var innerScope = outerScope.CreateScope())
+                {
+                    var innerFactory = innerScope.Resolve<Func<Disposable>>();
+                    inner = innerFactory();
+
+                    // Assert
+                    Assert.Same(outer, inner);
+                }
+                Assert.False(outer.Disposed);
+            }
+            Assert.True(outer.Disposed);
         }
     }
 
@@ -52,7 +120,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public override ITarget Fetch(Type type)
         {
             Type genericType;
-            if (!TypeHelpers.IsGenericType(type) ||(genericType = type.GetGenericTypeDefinition())!=GenericType)
+            if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericType)
             {
                 throw new ArgumentException($"Only {GenericType} is supported by this container", nameof(type));
             }
@@ -69,7 +137,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
             var innerTarget = Root.Fetch(requiredReturnType);
 
-            if(innerTarget == null)
+            if (innerTarget == null)
                 return null;
 
             // create a func target (new type) which wraps the inner target
@@ -86,7 +154,13 @@ namespace Rezolver.Tests.Compilation.Specification
         {
             var baseExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(target.ReturnType));
 
-            var lambda = Expression.Lambda(target.DelegateType, Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), target.ReturnType));
+            // if there are parameters, we have to replace any Resolve calls in the inner expression with
+            // parameter expressions on the inner lambda, and feed them through from the outer lambda.
+
+
+
+            var lambda = Expression.Lambda(target.DelegateType, 
+                Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), target.ReturnType));
             return lambda;
         }
     }
