@@ -7,20 +7,14 @@ using System.Text;
 
 namespace Rezolver.Runtime
 {
-    internal class TargetIdentityComparer : IEqualityComparer<ITarget>
+    internal sealed class TargetIdentityComparer : IEqualityComparer<ITarget>
     {
         internal static TargetIdentityComparer Instance { get; } = new TargetIdentityComparer();
 
         private TargetIdentityComparer() { }
 
-        public bool Equals(ITarget x, ITarget y)
-        {
-            return x?.Id == y?.Id;
-        }
+        public bool Equals(ITarget x, ITarget y) => EqualityComparer<Guid?>.Default.Equals(x?.Id, y?.Id);
 
-        public int GetHashCode(ITarget obj)
-        {
-            return ((obj?.Id) ?? Guid.Empty).GetHashCode();
-        }
+        public int GetHashCode(ITarget obj) => EqualityComparer<Guid?>.Default.GetHashCode(obj?.Id);
     }
 }
