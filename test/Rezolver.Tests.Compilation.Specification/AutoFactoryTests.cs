@@ -17,6 +17,13 @@ namespace Rezolver.Tests.Compilation.Specification
         {
             var targets = CreateTargetContainer();
             targets.RegisterContainer(typeof(Func<>), new Func0TargetContainer(targets));
+            targets.RegisterContainer(typeof(Func<,>), new Func1TargetContainer(targets));
+            targets.RegisterContainer(typeof(Func<,,>), new Func2TargetContainer(targets));
+            targets.RegisterContainer(typeof(Func<,,,>), new Func3TargetContainer(targets));
+            targets.RegisterContainer(typeof(Func<,,,,>), new Func4TargetContainer(targets));
+            targets.RegisterContainer(typeof(Func<,,,,,>), new Func5TargetContainer(targets));
+            targets.RegisterContainer(typeof(Func<,,,,,,>), new Func6TargetContainer(targets));
+
             targets.SetOption((IExpressionBuilder)new AutoFactoryTargetBuilder(), typeof(AutoFactoryTarget));
             return targets;
         }
@@ -59,7 +66,7 @@ namespace Rezolver.Tests.Compilation.Specification
                 // Act
                 var outerFactory = outerScope.Resolve<Func<Disposable>>();
                 outer = outerFactory();
-                using(var innerScope = outerScope.CreateScope())
+                using (var innerScope = outerScope.CreateScope())
                 {
                     var innerFactory = innerScope.Resolve<Func<Disposable>>();
                     inner = innerFactory();
@@ -80,7 +87,7 @@ namespace Rezolver.Tests.Compilation.Specification
         {
             // Arrange
             var targets = CreateAutoFactoryTargetContainer();
-            
+
             targets.RegisterSingleton<Disposable>();
             var container = CreateContainer(targets);
 
@@ -103,6 +110,29 @@ namespace Rezolver.Tests.Compilation.Specification
                 Assert.False(outer.Disposed);
             }
             Assert.True(outer.Disposed);
+        }
+
+        [Fact]
+        public void AutoFactory_ShouldAcceptResolvedDependencyAsArgument()
+        {
+            // Arrange
+            var targets = CreateAutoFactoryTargetContainer();
+
+            targets.RegisterType<RequiresInt>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var factory = container.Resolve<Func<int, RequiresInt>>();
+
+            // Assert
+            var instance = factory(10);
+
+            Assert.NotNull(instance);
+            Assert.Equal(10, instance.IntValue);
+            var instance2 = factory(20);
+            Assert.NotSame(instance, instance2);
+            Assert.NotNull(instance2);
+            Assert.Equal(20, instance2.IntValue);
         }
     }
 
@@ -152,18 +182,38 @@ namespace Rezolver.Tests.Compilation.Specification
     {
         protected override Expression Build(AutoFactoryTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            var baseExpression = compiler.BuildResolveLambda(target.InnerTarget, context.NewContext(target.ReturnType));
+            var newContext = context.NewContext(target.ReturnType);
+            ParameterExpression[] parameters = new ParameterExpression[0];
+            // if there are parameters, we have to replace any Resolve calls for the parameter types in 
+            // the inner expression with parameter expressions fed from the outer lambda
+            if(target.ParameterTypes.Length != 0)
+            {
+                parameters = target.ParameterTypes.Select((pt, i) => Expression.Parameter(pt, $"p{i}")).ToArray();
+                Dictionary<Type, ParameterExpression> lookup = parameters.ToDictionary(pe => pe.Type);
+                // we're going to add a compilation filter.  The correct way to do this is to grab any existing compilation filter
+                // from the context and then set a new one with the new filters in it, and the original filter as the last entry
+                var newFilters = new ExpressionCompilationFilters(
+                    target.ParameterTypes.Select(t => 
+                        new Func<ITarget, IExpressionCompileContext, IExpressionCompiler, Expression>((ta, ctx, cmp) => {
+                            if (ta is ResolvedTarget && ta.DeclaredType == t && lookup.TryGetValue(ta.DeclaredType, out ParameterExpression replacement))
+                                return replacement;
+                            return null;
+                        })
+                    ).ToArray()
+                );
+                var existingFilter = newContext.GetOption<IExpressionCompilationFilter>();
+                if (existingFilter != null)
+                    newFilters.Add(existingFilter);
+                newContext.SetOption<IExpressionCompilationFilter>(newFilters);
+            }
 
-            // if there are parameters, we have to replace any Resolve calls in the inner expression with
-            // parameter expressions on the inner lambda, and feed them through from the outer lambda.
-
-
-
-            var lambda = Expression.Lambda(target.DelegateType, 
-                Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), target.ReturnType));
+            var baseExpression = compiler.BuildResolveLambda(target.InnerTarget, newContext);
+            var lambda = Expression.Lambda(target.DelegateType,
+                Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), target.ReturnType), parameters);
             return lambda;
         }
     }
+
 
     internal class AutoFactoryTarget : TargetBase
     {
@@ -181,6 +231,8 @@ namespace Rezolver.Tests.Compilation.Specification
             DelegateType = delegateType ?? throw new ArgumentNullException(nameof(delegateType));
             ReturnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
             ParameterTypes = parameterTypes ?? Type.EmptyTypes;
+            if (ParameterTypes.Distinct().Count() != ParameterTypes.Length)
+                throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(parameterTypes));
         }
     }
 
@@ -206,6 +258,42 @@ namespace Rezolver.Tests.Compilation.Specification
     {
         internal Func2TargetContainer(IRootTargetContainer root)
             : base(root, typeof(Func<,,>))
+        {
+
+        }
+    }
+
+    internal class Func3TargetContainer : FuncTargetContainerBase
+    {
+        internal Func3TargetContainer(IRootTargetContainer root)
+            : base(root, typeof(Func<,,,>))
+        {
+
+        }
+    }
+
+    internal class Func4TargetContainer : FuncTargetContainerBase
+    {
+        internal Func4TargetContainer(IRootTargetContainer root)
+            : base(root, typeof(Func<,,,,>))
+        {
+
+        }
+    }
+
+    internal class Func5TargetContainer : FuncTargetContainerBase
+    {
+        internal Func5TargetContainer(IRootTargetContainer root)
+            : base(root, typeof(Func<,,,,,>))
+        {
+
+        }
+    }
+
+    internal class Func6TargetContainer : FuncTargetContainerBase
+    {
+        internal Func6TargetContainer(IRootTargetContainer root)
+            : base(root, typeof(Func<,,,,,,>))
         {
 
         }

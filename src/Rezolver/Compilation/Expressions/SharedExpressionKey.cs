@@ -77,7 +77,7 @@ namespace Rezolver.Compilation.Expressions
         public bool Equals(SharedExpressionKey other)
         {
             return object.ReferenceEquals(this, other) ||
-              (this.RequestingType == other.RequestingType && this.TargetType == other.TargetType && this.Name == other.Name);
+              (this.Name == other.Name && this.RequestingType == other.RequestingType && this.TargetType == other.TargetType);
         }
     }
 }

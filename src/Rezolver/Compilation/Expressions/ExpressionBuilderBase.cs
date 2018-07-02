@@ -250,7 +250,7 @@ namespace Rezolver.Compilation.Expressions
             // an exception if it is null :)
 
             // this will automatically be of type object and will be optimised.
-            var lambda = compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver();
+            //var lambda = compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver();
 
             // use a shared expression for the scope check so we can optimise away all the nested scope calls
             // we're likely to be generating.
@@ -280,7 +280,9 @@ namespace Rezolver.Compilation.Expressions
                         Methods.ResolveContextExtensions_Resolve_Method,
                         newContextExpr,
                         Expression.Constant(@override ?? target.Id),
-                        Expression.Constant(lambda),
+                        compiler.BuildResolveLambda(builtExpression, context),
+                        // we used to do this - but this doesn't work when we'rdoing the auto factories
+                        // Expression.Constant(compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver()),
                         Expression.Constant(scopeBehaviour)
                     ),
                     originalType
