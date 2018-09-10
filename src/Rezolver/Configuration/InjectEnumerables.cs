@@ -73,9 +73,6 @@ namespace Rezolver.Configuration
                 return;
             }
 
-            // we can make an IDependant config which is specialised to be dependant on a particular boolean option
-            // then we can make a reusable 'ConfigureOption' configuration object, which can be wrapped up behind an
-            // extension method on ITargetContainerConfigCollection.
             if (targets.FetchContainer(typeof(IEnumerable<>)) == null)
             {
                 targets.RegisterContainer(typeof(IEnumerable<>), new EnumerableTargetContainer(targets));
