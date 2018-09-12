@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Rezolver.Targets
 {
     /// <summary>
-    /// Target used to wrap another when match contravariantly or covariantly
+    /// Target used to wrap another when matched contravariantly or covariantly
     /// </summary>
     public class VariantMatchTarget : ITarget
     {

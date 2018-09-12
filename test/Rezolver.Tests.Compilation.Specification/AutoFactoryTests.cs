@@ -16,12 +16,16 @@ namespace Rezolver.Tests.Compilation.Specification
         private IRootTargetContainer CreateAutoFactoryTargetContainer()
         {
             var targets = CreateTargetContainer();
+
+            // common funcs
             targets.RegisterContainer(typeof(Func<>), new Func0TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,>), new Func1TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,,>), new Func2TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,,,>), new Func3TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,,,,>), new Func4TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,,,,,>), new Func5TargetContainer(targets));
+
+            // extended funcs
             targets.RegisterContainer(typeof(Func<,,,,,,>), new Func6TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,,,,,,,>), new Func7TargetContainer(targets));
             targets.RegisterContainer(typeof(Func<,,,,,,,,>), new Func8TargetContainer(targets));
@@ -274,8 +278,11 @@ namespace Rezolver.Tests.Compilation.Specification
         [Fact]
         public void AutoFactory_ShouldBeAbleToResolveAnEnumerableOfAutoFactoriesViaCovariance()
         {
-            // similar to above, but here we're registering the individual types and then
-            // getting an IEnumerable<Func<BaseClass>>
+            // Similar to above, but the implementation here we're registering the individual types and then
+            // getting an IEnumerable<Func<BaseClass>>.
+            // Key things being tested here are:
+            // 1) That the implementation honours the covariance required by IEnumerable<out T>
+            // 2) That the order of the generated delegates reflects the registration order of the underlying targets
 
             // Arrange
             var targets = CreateAutoFactoryTargetContainer();
@@ -292,6 +299,29 @@ namespace Rezolver.Tests.Compilation.Specification
             // Assert
             Assert.Collection(instances, i => Assert.IsType<BaseClass>(i), i => Assert.IsType<BaseClassChild>(i), i => Assert.IsType<BaseClassGrandchild>(i));
         }
+
+        [Fact]
+        public void AutoFactory_ShouldBeAbleToResolveAnEumerableOfParameterisedAutoFactoriesViaCovariance()
+        {
+            // this time, it's like above, but we're also doing an enumerable of automatic 
+            // parameterised factories, and we want to test that the parameters work correctly
+
+            // Arrange
+            var targets = CreateAutoFactoryTargetContainer();
+            targets.RegisterType<OneCtor>();
+            targets.RegisterType<OneCtorAlt1>();
+            targets.RegisterType<OneCtorAlt2>();
+
+            var container = CreateContainer(targets);
+
+            // Act
+            var factories = container.ResolveMany<Func<int, NoCtor>>();
+            var instances = factories.Select(f => f(50));
+
+            // Assert
+            Assert.Collection(instances, i => Assert.IsType<OneCtor>(i), i => Assert.IsType<OneCtorAlt1>(i), i => Assert.IsType<OneCtorAlt2>(i));
+            Assert.Equal(new[] { 50, 50, 50 }, instances.Select(i => i.Value));
+        }
     }
 
     /// <summary>
@@ -299,10 +329,30 @@ namespace Rezolver.Tests.Compilation.Specification
     /// </summary>
     internal class FuncTargetContainerBase : GenericTargetContainer
     {
+        private Type[] _objectArgsForFunc;
         internal FuncTargetContainerBase(IRootTargetContainer root, Type funcType)
             : base(root, funcType)
         {
+            root.TargetRegistered += Root_TargetRegistered;
 
+            // prepare the type arguments needed to cover the func's argument types (which will
+            // all be set to object) for when adding known types for any which receive specific 
+            // registrations.  E.g. when a caller registers IFoo, we mark Func<IFoo> as known,
+            // but also Func<object, object, IFoo> etc.
+            var genericTypeParameters = TypeHelpers.GetGenericArguments(funcType);
+            _objectArgsForFunc = new Type[genericTypeParameters.Length - 1];
+            for(var f = 0; f < _objectArgsForFunc.Length; f++)
+            {
+                _objectArgsForFunc[f] = typeof(object);
+            }
+        }
+
+        private void Root_TargetRegistered(object sender, Events.TargetRegisteredEventArgs e)
+        {
+            // bit squeaky, this - will slow up registrations, hence why the configuration will split the auto 
+            // func registration between 'common' funcs and 'extended' funcs.
+            var type = GenericType.MakeGenericType(_objectArgsForFunc.Concat(new[] { e.Type }).ToArray());
+            Root.AddKnownType(type);
         }
 
         public override ITarget Fetch(Type type)
@@ -324,7 +374,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var requiredReturnType = typeArgs[typeArgs.Length - 1];
 
             var innerTarget = Root.Fetch(requiredReturnType);
-
+            // returning NULL above for AutoFactory_ShouldBeAbleToResolveAnEumerableOfParameterisedAutoFactoriesViaCovariance
             if (innerTarget == null)
                 return null;
 
@@ -332,6 +382,16 @@ namespace Rezolver.Tests.Compilation.Specification
             // TODO: if the target is not found, then emit one which wraps a late-bound resolve operation
             // -- unless parameters are required on the delegate type.
             return new AutoFactoryTarget(innerTarget, type, requiredReturnType, typeArgs.Take(typeArgs.Length - 1).ToArray());
+        }
+
+        public override IEnumerable<ITarget> FetchAll(Type type)
+        {
+            // required to allow interoperability with the FetchAll() functionality; because the targets we return are
+            // not in the underlying dictionary, so we have to 
+            var baseResult = base.FetchAll(type);
+            if (!baseResult.Any())
+                return new[] { Fetch(type) };
+            return baseResult;
         }
     }
 
@@ -384,6 +444,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public Type[] ParameterTypes { get; }
 
         public AutoFactoryTarget(ITarget innerTarget, Type delegateType, Type returnType, Type[] parameterTypes)
+            : base(innerTarget.Id) // note here - passing the ID in from the inner target to preserve the order.
         {
             InnerTarget = innerTarget ?? throw new ArgumentNullException(nameof(innerTarget));
             DelegateType = delegateType ?? throw new ArgumentNullException(nameof(delegateType));
@@ -399,13 +460,13 @@ namespace Rezolver.Tests.Compilation.Specification
         internal Func0TargetContainer(IRootTargetContainer root)
             : base(root, typeof(Func<>))
         {
-            root.TargetRegistered += Root_TargetRegistered;
+            //root.TargetRegistered += Root_TargetRegistered;
         }
 
-        private void Root_TargetRegistered(object sender, Events.TargetRegisteredEventArgs e)
-        {
-            this.Root.AddKnownType(typeof(Func<>).MakeGenericType(e.Type));
-        }
+        //private void Root_TargetRegistered(object sender, Events.TargetRegisteredEventArgs e)
+        //{
+        //    this.Root.AddKnownType(typeof(Func<>).MakeGenericType(e.Type));
+        //}
     }
 
     internal class Func1TargetContainer : FuncTargetContainerBase

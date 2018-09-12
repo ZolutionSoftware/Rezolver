@@ -14,27 +14,27 @@ namespace Rezolver
     {
         private class TargetOrderTracker
         {
-            private Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(ReferenceComparer<ITarget>.Instance);
+            private readonly Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(TargetIdentityComparer.Instance); //new Dictionary<ITarget, int>(ReferenceComparer<ITarget>.Instance);
             private int _counter = 0;
 
             public TargetOrderTracker(IRootTargetContainer root)
             {
-                root.TargetRegistered += this.Root_TargetRegistered1;
+                root.TargetRegistered += this.Root_TargetRegistered;
             }
 
-            private void Root_TargetRegistered1(object sender, TargetRegisteredEventArgs e)
+            private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
             {
                 this.Track(e.Target);
             }
 
-            public int? GetOrder(ITarget target)
+            public int GetOrder(ITarget target)
             {
                 if (this._dictionary.TryGetValue(target, out var order))
                 {
                     return order;
                 }
 
-                return null;
+                return int.MaxValue;
             }
 
             public int Track(ITarget target)
@@ -143,13 +143,13 @@ namespace Rezolver
                         .SelectMany(compatibleType => Root.FetchAll(compatibleType)
                             .Select(t => VariantMatchTarget.Wrap(t, elementType, compatibleType))
                         )).Distinct(TargetIdentityComparer.Instance)
-                        .OrderBy(t => (t is VariantMatchTarget variant ? _tracker.GetOrder(variant.Target) : _tracker.GetOrder(t)) ?? int.MaxValue), elementType);
+                        .OrderBy(t => _tracker.GetOrder(t)), elementType);
             }
             else
             {
-                return new EnumerableTarget(this.Root.FetchAll(elementType)
+                return new EnumerableTarget(Root.FetchAll(elementType)
                     .Distinct(TargetIdentityComparer.Instance) // don't duplicate targets
-                    .OrderBy(t => this._tracker.GetOrder(t) ?? int.MaxValue), elementType);
+                    .OrderBy(t => this._tracker.GetOrder(t)), elementType);
             }
         }
 

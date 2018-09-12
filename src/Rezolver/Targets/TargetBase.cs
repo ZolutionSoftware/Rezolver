@@ -18,7 +18,7 @@ namespace Rezolver.Targets
         ///
         /// Always initialised to a new <see cref="Guid"/> using <see cref="Guid.NewGuid"/>
         /// </summary>
-        public Guid Id { get; } = Guid.NewGuid();
+        public Guid Id { get; private set; }
 
         /// <summary>
         /// Implementation of <see cref="ITarget.UseFallback"/>
@@ -97,6 +97,25 @@ namespace Rezolver.Targets
         public override string ToString()
         {
             return $"<{this.GetType().Name}, DeclaredType={this.DeclaredType}>";
+        }
+
+        /// <summary>
+        /// Default constructor for derived types
+        /// </summary>
+        protected TargetBase()
+            : this(Guid.NewGuid())
+        {
+
+        }
+
+        /// <summary>
+        /// Can be used by derived types to initialise the base with a specific ID.  Specifically used by targets which 'proxy' others,
+        /// such as with the <see cref="VariantMatchTarget"/> etc.
+        /// </summary>
+        /// <param name="id"></param>
+        protected TargetBase(Guid id)
+        {
+            Id = id;
         }
     }
 }
