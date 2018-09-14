@@ -18,6 +18,20 @@ namespace Rezolver
     /// </summary>
     internal static class TypeHelpers
     {
+#if MAXCOMPAT
+        private static readonly _emptyTypes = new Type[0];
+#endif
+        public static Type[] EmptyTypes
+        {
+            get
+            {
+#if MAXCOMPAT
+                return _emptyTypes;
+#else
+                return Type.EmptyTypes;
+#endif
+            }
+        }
         internal static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type, bool inherit=false)
             where TAttribute : Attribute
         {

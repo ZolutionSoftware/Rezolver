@@ -10,33 +10,80 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace Rezolver.Tests.Compilation.Specification
-{
+{ 
     public partial class CompilerTestsBase
     {
+
+
+        /// <summary>
+        /// Global option which enables the registration methods of the 
+        /// </summary>
+        //public class EnableAutoFactorySupport : Options.ContainerOption<bool>
+        //{
+        //    public static EnableAutoFactorySupport Default { get; } = true;
+
+        //    public static implicit operator EnableAutoFactorySupport(bool value)
+        //    {
+        //        return new EnableAutoFactorySupport() { Value = value };
+        //    }
+        //}
+
+        //public class AutoFactorySupport : Rezolver.Configuration.OptionDependentConfig<EnableAutoFactorySupport>
+        //{
+        //    public AutoFactorySupport() : base(false) { }
+
+        //    public override void Configure(IRootTargetContainer targets)
+        //    {
+        //        if (!targets.GetOption(EnableAutoFactorySupport.Default))
+        //            return;
+
+        //        targets.RegisterContainer(typeof(Func<>), new AutoFactory0TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,>), new AutoFactory1TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,>), new AutoFactory2TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,>), new AutoFactory3TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,>), new AutoFactory4TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,>), new AutoFactory5TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,>), new AutoFactory6TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,>), new AutoFactory7TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,>), new AutoFactory8TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,>), new AutoFactory9TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,>), new AutoFactory10TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,>), new AutoFactory11TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,>), new AutoFactory12TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,>), new AutoFactory13TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,>), new AutoFactory14TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,>), new AutoFactory15TargetContainer(targets));
+        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,,>), new AutoFactory16TargetContainer(targets));
+        //    }
+        //}
+
         private IRootTargetContainer CreateAutoFactoryTargetContainer()
         {
+            //var config = GetDefaultTargetContainerConfig();
+            //config.ConfigureOption(EnableAutoFactorySupport.Default);
+            //config.Add(new AutoFactorySupport());
             var targets = CreateTargetContainer();
 
-            // common funcs
-            targets.RegisterContainer(typeof(Func<>), new Func0TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,>), new Func1TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,>), new Func2TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,>), new Func3TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,>), new Func4TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,>), new Func5TargetContainer(targets));
+            //// common funcs
+            //targets.RegisterContainer(typeof(Func<>), new AutoFactory0TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,>), new AutoFactory1TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,>), new AutoFactory2TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,>), new AutoFactory3TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,>), new AutoFactory4TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,>), new AutoFactory5TargetContainer(targets));
 
-            // extended funcs
-            targets.RegisterContainer(typeof(Func<,,,,,,>), new Func6TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,>), new Func7TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,>), new Func8TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,>), new Func9TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,>), new Func10TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,,>), new Func11TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,>), new Func12TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,>), new Func13TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,>), new Func14TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,>), new Func15TargetContainer(targets));
-            targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,,>), new Func16TargetContainer(targets));
+            //// extended funcs
+            //targets.RegisterContainer(typeof(Func<,,,,,,>), new AutoFactory6TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,>), new AutoFactory7TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,>), new AutoFactory8TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,>), new AutoFactory9TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,>), new AutoFactory10TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,>), new AutoFactory11TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,>), new AutoFactory12TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,>), new AutoFactory13TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,>), new AutoFactory14TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,>), new AutoFactory15TargetContainer(targets));
+            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,,>), new AutoFactory16TargetContainer(targets));
 
             targets.SetOption((IExpressionBuilder)new AutoFactoryTargetBuilder(), typeof(AutoFactoryTarget));
             return targets;
@@ -50,6 +97,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateAutoFactoryTargetContainer();
             targets.RegisterType<NoCtor>();
+            targets.EnableAutoFactory<NoCtor>();
             var container = CreateContainer(targets);
 
             // Act
@@ -308,6 +356,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
             // Arrange
             var targets = CreateAutoFactoryTargetContainer();
+            targets.RegisterObject(1);
             targets.RegisterType<OneCtor>();
             targets.RegisterType<OneCtorAlt1>();
             targets.RegisterType<OneCtorAlt2>();
@@ -315,301 +364,12 @@ namespace Rezolver.Tests.Compilation.Specification
             var container = CreateContainer(targets);
 
             // Act
-            var factories = container.ResolveMany<Func<int, NoCtor>>();
-            var instances = factories.Select(f => f(50));
+            var factories = container.ResolveMany<Func<BaseClass, NoCtor>>();
+            var instances = factories.Select(f => f(null));
 
             // Assert
             Assert.Collection(instances, i => Assert.IsType<OneCtor>(i), i => Assert.IsType<OneCtorAlt1>(i), i => Assert.IsType<OneCtorAlt2>(i));
             Assert.Equal(new[] { 50, 50, 50 }, instances.Select(i => i.Value));
-        }
-    }
-
-    /// <summary>
-    /// Target dictionary container which provides support for automatic production of Func<> delegates
-    /// </summary>
-    internal class FuncTargetContainerBase : GenericTargetContainer
-    {
-        private Type[] _objectArgsForFunc;
-        internal FuncTargetContainerBase(IRootTargetContainer root, Type funcType)
-            : base(root, funcType)
-        {
-            root.TargetRegistered += Root_TargetRegistered;
-
-            // prepare the type arguments needed to cover the func's argument types (which will
-            // all be set to object) for when adding known types for any which receive specific 
-            // registrations.  E.g. when a caller registers IFoo, we mark Func<IFoo> as known,
-            // but also Func<object, object, IFoo> etc.
-            var genericTypeParameters = TypeHelpers.GetGenericArguments(funcType);
-            _objectArgsForFunc = new Type[genericTypeParameters.Length - 1];
-            for(var f = 0; f < _objectArgsForFunc.Length; f++)
-            {
-                _objectArgsForFunc[f] = typeof(object);
-            }
-        }
-
-        private void Root_TargetRegistered(object sender, Events.TargetRegisteredEventArgs e)
-        {
-            // bit squeaky, this - will slow up registrations, hence why the configuration will split the auto 
-            // func registration between 'common' funcs and 'extended' funcs.
-            var type = GenericType.MakeGenericType(_objectArgsForFunc.Concat(new[] { e.Type }).ToArray());
-            Root.AddKnownType(type);
-        }
-
-        public override ITarget Fetch(Type type)
-        {
-            Type genericType;
-            if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericType)
-            {
-                throw new ArgumentException($"Only {GenericType} is supported by this container", nameof(type));
-            }
-
-            // just like EnumerableTargetContainer, we allow for specific Func<T> registrations
-            var result = base.Fetch(type);
-
-            if (result != null)
-                return result;
-
-            var typeArgs = TypeHelpers.GetGenericArguments(type);
-
-            var requiredReturnType = typeArgs[typeArgs.Length - 1];
-
-            var innerTarget = Root.Fetch(requiredReturnType);
-            // returning NULL above for AutoFactory_ShouldBeAbleToResolveAnEumerableOfParameterisedAutoFactoriesViaCovariance
-            if (innerTarget == null)
-                return null;
-
-            // create a func target (new type) which wraps the inner target
-            // TODO: if the target is not found, then emit one which wraps a late-bound resolve operation
-            // -- unless parameters are required on the delegate type.
-            return new AutoFactoryTarget(innerTarget, type, requiredReturnType, typeArgs.Take(typeArgs.Length - 1).ToArray());
-        }
-
-        public override IEnumerable<ITarget> FetchAll(Type type)
-        {
-            // required to allow interoperability with the FetchAll() functionality; because the targets we return are
-            // not in the underlying dictionary, so we have to 
-            var baseResult = base.FetchAll(type);
-            if (!baseResult.Any())
-                return new[] { Fetch(type) };
-            return baseResult;
-        }
-    }
-
-    internal class AutoFactoryTargetBuilder : ExpressionBuilderBase<AutoFactoryTarget>
-    {
-        protected override Expression Build(AutoFactoryTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
-        {
-            var newContext = context.NewContext(target.ReturnType);
-            ParameterExpression[] parameters = new ParameterExpression[0];
-            // if there are parameters, we have to replace any Resolve calls for the parameter types in 
-            // the inner expression with parameter expressions fed from the outer lambda
-            if (target.ParameterTypes.Length != 0)
-            {
-                parameters = target.ParameterTypes.Select((pt, i) => Expression.Parameter(pt, $"p{i}")).ToArray();
-                Dictionary<Type, ParameterExpression> lookup = parameters.ToDictionary(pe => pe.Type);
-                // we're going to add a compilation filter.  The correct way to do this is to grab any existing compilation filter
-                // from the context and then set a new one with the new filters in it, and the original filter as the last entry
-                var newFilters = new ExpressionCompilationFilters(
-                    target.ParameterTypes.Select(t =>
-                        new Func<ITarget, IExpressionCompileContext, IExpressionCompiler, Expression>((ta, ctx, cmp) =>
-                        {
-                            if (ta is ResolvedTarget && ta.DeclaredType == t && lookup.TryGetValue(ta.DeclaredType, out ParameterExpression replacement))
-                                return replacement;
-                            return null;
-                        })
-                    ).ToArray()
-                );
-                var existingFilter = newContext.GetOption<IExpressionCompilationFilter>();
-                if (existingFilter != null)
-                    newFilters.Add(existingFilter);
-                newContext.SetOption<IExpressionCompilationFilter>(newFilters);
-            }
-
-            var baseExpression = compiler.BuildResolveLambda(target.InnerTarget, newContext);
-            var lambda = Expression.Lambda(target.DelegateType,
-                Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), target.ReturnType), parameters);
-            return lambda;
-        }
-    }
-
-
-    internal class AutoFactoryTarget : TargetBase
-    {
-        public override Type DeclaredType => DelegateType;
-
-        public ITarget InnerTarget { get; }
-        public Type DelegateType { get; }
-        public Type ReturnType { get; }
-
-        public Type[] ParameterTypes { get; }
-
-        public AutoFactoryTarget(ITarget innerTarget, Type delegateType, Type returnType, Type[] parameterTypes)
-            : base(innerTarget.Id) // note here - passing the ID in from the inner target to preserve the order.
-        {
-            InnerTarget = innerTarget ?? throw new ArgumentNullException(nameof(innerTarget));
-            DelegateType = delegateType ?? throw new ArgumentNullException(nameof(delegateType));
-            ReturnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
-            ParameterTypes = parameterTypes ?? Type.EmptyTypes;
-            if (ParameterTypes.Distinct().Count() != ParameterTypes.Length)
-                throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(parameterTypes));
-        }
-    }
-
-    internal class Func0TargetContainer : FuncTargetContainerBase
-    {
-        internal Func0TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<>))
-        {
-            //root.TargetRegistered += Root_TargetRegistered;
-        }
-
-        //private void Root_TargetRegistered(object sender, Events.TargetRegisteredEventArgs e)
-        //{
-        //    this.Root.AddKnownType(typeof(Func<>).MakeGenericType(e.Type));
-        //}
-    }
-
-    internal class Func1TargetContainer : FuncTargetContainerBase
-    {
-        internal Func1TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,>))
-        {
-
-        }
-    }
-
-    internal class Func2TargetContainer : FuncTargetContainerBase
-    {
-        internal Func2TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,>))
-        {
-
-        }
-    }
-
-    internal class Func3TargetContainer : FuncTargetContainerBase
-    {
-        internal Func3TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,>))
-        {
-
-        }
-    }
-
-    internal class Func4TargetContainer : FuncTargetContainerBase
-    {
-        internal Func4TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func5TargetContainer : FuncTargetContainerBase
-    {
-        internal Func5TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func6TargetContainer : FuncTargetContainerBase
-    {
-        internal Func6TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func7TargetContainer : FuncTargetContainerBase
-    {
-        internal Func7TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func8TargetContainer : FuncTargetContainerBase
-    {
-        internal Func8TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func9TargetContainer : FuncTargetContainerBase
-    {
-        internal Func9TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func10TargetContainer : FuncTargetContainerBase
-    {
-        internal Func10TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func11TargetContainer : FuncTargetContainerBase
-    {
-        internal Func11TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func12TargetContainer : FuncTargetContainerBase
-    {
-        internal Func12TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func13TargetContainer : FuncTargetContainerBase
-    {
-        internal Func13TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func14TargetContainer : FuncTargetContainerBase
-    {
-        internal Func14TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func15TargetContainer : FuncTargetContainerBase
-    {
-        internal Func15TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,,,,,,>))
-        {
-
-        }
-    }
-
-    internal class Func16TargetContainer : FuncTargetContainerBase
-    {
-        internal Func16TargetContainer(IRootTargetContainer root)
-            : base(root, typeof(Func<,,,,,,,,,,,,,,,,>))
-        {
-
         }
     }
 }
