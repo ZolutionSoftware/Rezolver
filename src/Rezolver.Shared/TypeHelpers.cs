@@ -19,7 +19,7 @@ namespace Rezolver
     internal static class TypeHelpers
     {
 #if MAXCOMPAT
-        private static readonly _emptyTypes = new Type[0];
+        private static readonly Type[] _emptyTypes = new Type[0];
 #endif
         public static Type[] EmptyTypes
         {

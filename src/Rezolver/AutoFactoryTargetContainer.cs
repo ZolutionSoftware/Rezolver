@@ -18,6 +18,10 @@ namespace Rezolver
         {
             if (targets == null)
                 throw new ArgumentNullException(nameof(targets));
+
+            Type funcType = typeof(Func<>).MakeGenericType(typeof(TService));
+
+            var existingContainer = targets.FetchContainer(funcType);
         }
     }
 
@@ -83,7 +87,7 @@ namespace Rezolver
         //    }
         //}
 
-        public override ITarget Fetch(Type type)
+        public ITarget Fetch(Type type)
         {
             Type genericType;
             if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericFactoryTypeDefinition)
@@ -97,6 +101,8 @@ namespace Rezolver
             if (result != null)
                 return result;
 
+
+
             var typeArgs = TypeHelpers.GetGenericArguments(type);
 
             var requiredReturnType = typeArgs[typeArgs.Length - 1];
@@ -109,11 +115,11 @@ namespace Rezolver
             return new AutoFactoryTarget(innerTarget, type, requiredReturnType, typeArgs.Take(typeArgs.Length - 1).ToArray());
         }
 
-        public override IEnumerable<ITarget> FetchAll(Type type)
+        public IEnumerable<ITarget> FetchAll(Type type)
         {
             // required to allow interoperability with the FetchAll() functionality; because the targets we return are
             // not in the underlying dictionary, so we have to 
-            var baseResult = base.FetchAll(type);
+            var baseResult = Inner.FetchAll(type);
             if (!baseResult.Any())
             {
                 var individual = Fetch(type);
