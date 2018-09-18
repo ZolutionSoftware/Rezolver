@@ -15,7 +15,7 @@ namespace Rezolver.Tests.Compilation.Specification
         private IRootTargetContainer CreateAutoLazyAndAutoFactoryContainer()
         {
             // requires the Func functionality
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterContainer(typeof(Lazy<>), new LazyTargetContainer(targets));
             return targets;
         }

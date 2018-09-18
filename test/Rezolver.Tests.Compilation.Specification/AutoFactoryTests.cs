@@ -12,90 +12,14 @@ using Xunit;
 namespace Rezolver.Tests.Compilation.Specification
 { 
     public partial class CompilerTestsBase
-    {
-
-
-        /// <summary>
-        /// Global option which enables the registration methods of the 
-        /// </summary>
-        //public class EnableAutoFactorySupport : Options.ContainerOption<bool>
-        //{
-        //    public static EnableAutoFactorySupport Default { get; } = true;
-
-        //    public static implicit operator EnableAutoFactorySupport(bool value)
-        //    {
-        //        return new EnableAutoFactorySupport() { Value = value };
-        //    }
-        //}
-
-        //public class AutoFactorySupport : Rezolver.Configuration.OptionDependentConfig<EnableAutoFactorySupport>
-        //{
-        //    public AutoFactorySupport() : base(false) { }
-
-        //    public override void Configure(IRootTargetContainer targets)
-        //    {
-        //        if (!targets.GetOption(EnableAutoFactorySupport.Default))
-        //            return;
-
-        //        targets.RegisterContainer(typeof(Func<>), new AutoFactory0TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,>), new AutoFactory1TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,>), new AutoFactory2TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,>), new AutoFactory3TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,>), new AutoFactory4TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,>), new AutoFactory5TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,>), new AutoFactory6TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,>), new AutoFactory7TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,>), new AutoFactory8TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,>), new AutoFactory9TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,>), new AutoFactory10TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,>), new AutoFactory11TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,>), new AutoFactory12TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,>), new AutoFactory13TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,>), new AutoFactory14TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,>), new AutoFactory15TargetContainer(targets));
-        //        targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,,>), new AutoFactory16TargetContainer(targets));
-        //    }
-        //}
-
-        private IRootTargetContainer CreateAutoFactoryTargetContainer()
-        {
-            //var config = GetDefaultTargetContainerConfig();
-            //config.ConfigureOption(EnableAutoFactorySupport.Default);
-            //config.Add(new AutoFactorySupport());
-            var targets = CreateTargetContainer();
-
-            //// common funcs
-            //targets.RegisterContainer(typeof(Func<>), new AutoFactory0TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,>), new AutoFactory1TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,>), new AutoFactory2TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,>), new AutoFactory3TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,>), new AutoFactory4TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,>), new AutoFactory5TargetContainer(targets));
-
-            //// extended funcs
-            //targets.RegisterContainer(typeof(Func<,,,,,,>), new AutoFactory6TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,>), new AutoFactory7TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,>), new AutoFactory8TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,>), new AutoFactory9TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,>), new AutoFactory10TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,>), new AutoFactory11TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,>), new AutoFactory12TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,>), new AutoFactory13TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,>), new AutoFactory14TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,>), new AutoFactory15TargetContainer(targets));
-            //targets.RegisterContainer(typeof(Func<,,,,,,,,,,,,,,,,>), new AutoFactory16TargetContainer(targets));
-
-            targets.SetOption((IExpressionBuilder)new AutoFactoryTargetBuilder(), typeof(AutoFactoryTarget));
-            return targets;
-        }
-
+    { 
         [Fact]
         public void AutoFactory_ShouldCreateSimple()
         {
             // simplest scenario - auto-creating a Func<T> instead of producing a T
 
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterType<NoCtor>();
             targets.EnableAutoFactory<NoCtor>();
             var container = CreateContainer(targets);
@@ -116,7 +40,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_DisposableShouldHonourImplicitScope()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterType<Disposable>();
             var container = CreateContainer(targets);
 
@@ -158,7 +82,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_DisposableShouldHonourExplicitScope()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterScoped<Disposable>();
             var container = CreateContainer(targets);
 
@@ -200,7 +124,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_SingletonShouldHonourRootScope()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
 
             targets.RegisterSingleton<Disposable>();
             var container = CreateContainer(targets);
@@ -230,7 +154,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_MultipleFactoriesShouldStillHonourExplicitScoping()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
 
             // this time we'll register a scoped object and create one scope,
             // then we'll resolve multiple factories (verifying that they are different instances)
@@ -267,7 +191,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_ShouldAcceptResolvedDependencyAsArgument()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
 
             targets.RegisterType<RequiresInt>();
             var container = CreateContainer(targets);
@@ -290,7 +214,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_ShouldUseArgumentEvenWhenDependencyRegistered()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterType<RequiresInt>();
             targets.RegisterObject(10);
             var container = CreateContainer(targets);
@@ -308,7 +232,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoFactory_ShouldSupportEnumerableViaEnumerableContainer()
         {
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
@@ -333,7 +257,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // 2) That the order of the generated delegates reflects the registration order of the underlying targets
 
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
@@ -355,7 +279,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // parameterised factories, and we want to test that the parameters work correctly
 
             // Arrange
-            var targets = CreateAutoFactoryTargetContainer();
+            var targets = CreateTargetContainer();
             targets.RegisterObject(1);
             targets.RegisterType<OneCtor>();
             targets.RegisterType<OneCtorAlt1>();

@@ -12,7 +12,10 @@ namespace Rezolver.Configuration
     /// <see cref="IResolveContext"/> created for a <see cref="IContainer.Resolve(IResolveContext)"/> operation.
     /// </summary>
     /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/>
-    /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method</remarks>
+    /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method.
+    /// 
+    /// This configuration is applied to the <see cref="TargetContainer.DefaultConfig"/> automatically, and cannot be disabled
+    /// through the use of options.  Either it's in the configuration, or its not.</remarks>
     public sealed class InjectResolveContext : ITargetContainerConfig
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget

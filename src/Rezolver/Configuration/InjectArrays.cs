@@ -36,7 +36,7 @@ namespace Rezolver.Configuration
             }
         }
 
-        private IEnumerable<DependencyMetadata> _dependencies;
+        private readonly IEnumerable<DependencyMetadata> _dependencies;
 
         /// <summary>
         /// Overrides the <see cref="OptionDependentConfig{TOption}"/> implementation to include a required dependency

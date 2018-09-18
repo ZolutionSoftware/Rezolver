@@ -67,6 +67,15 @@ namespace Rezolver
         /// - <see cref="Configuration.InjectLists"/>
         /// - <see cref="Configuration.InjectCollections"/>
         /// - <see cref="Configuration.InjectResolveContext"/>
+        /// - <see cref="Configuration.InjectAutoFactories"/>
+        /// 
+        /// In most cases, these are controllable through the use of global properties such as:
+        /// 
+        /// - <see cref="Options.EnableEnumerableInjection"/>
+        /// - <see cref="Options.EnableArrayInjection"/>
+        /// - <see cref="Options.EnableListInjection"/>
+        /// - <see cref="Options.EnableCollectionInjection"/>
+        /// - <see cref="Options.EnableAutoFactoryInjection"/>
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
@@ -76,7 +85,8 @@ namespace Rezolver
             Configuration.InjectArrays.Instance,
             Configuration.InjectLists.Instance,
             Configuration.InjectCollections.Instance,
-            Configuration.InjectResolveContext.Instance
+            Configuration.InjectResolveContext.Instance,
+            Configuration.InjectAutoFactories.Instance
         });
 
         /// <summary>

@@ -89,19 +89,17 @@ namespace Rezolver
 
         public ITarget Fetch(Type type)
         {
+            // just like EnumerableTargetContainer, we allow for specific Func<T> registrations
+            var result = EnsureInner().Fetch(type);
+
+            if (result != null)
+                return result;
+
             Type genericType;
             if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericFactoryTypeDefinition)
             {
                 throw new ArgumentException($"Only {GenericFactoryTypeDefinition} is supported by this container", nameof(type));
             }
-
-            // just like EnumerableTargetContainer, we allow for specific Func<T> registrations
-            var result = Inner.Fetch(type);
-
-            if (result != null)
-                return result;
-
-
 
             var typeArgs = TypeHelpers.GetGenericArguments(type);
 
@@ -134,17 +132,17 @@ namespace Rezolver
 
         public ITargetContainer FetchContainer(Type type)
         {
-            throw new NotImplementedException();
+            return EnsureInner().FetchContainer(type);
         }
 
         public void Register(ITarget target, Type serviceType = null)
         {
-            throw new NotImplementedException();
+            EnsureInner().Register(target, serviceType);
         }
 
         public void RegisterContainer(Type type, ITargetContainer container)
         {
-            throw new NotImplementedException();
+            EnsureInner().RegisterContainer(type, container);
         }
     }
 }
