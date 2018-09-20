@@ -10,18 +10,36 @@ namespace Rezolver
     public static class AutoFactoryRegistrationExtensions
     {
         /// <summary>
-        /// 
+        /// Enables the automatic injection of a <see cref="Func{TResult}"/> for the given
+        /// <typeparamref name="TService"/>.
         /// </summary>
-        /// <typeparam name="TService"></typeparam>
-        /// <param name="targets"></param>
+        /// <typeparam name="TService">The service type which is to be enabled for automatic factory injection.</typeparam>
+        /// <param name="targets">The target container on which the registration is to be performed.</param>
         public static void EnableAutoFactory<TService>(this IRootTargetContainer targets)
+        {
+            EnableAutoFactoryInternal(targets, typeof(Func<>).MakeGenericType(typeof(TService)));
+        }
+
+        /// <summary>
+        /// Enables the automatic injection of a <see cref="Func{T, TResult}"/> for the given 
+        /// <typeparamref name="TService"/>
+        /// </summary>
+        /// <typeparam name="TArg">The argument type to accepted by the factory.  Will be used to replace auto-resolved
+        /// dependencies of the same type with the argument supplied by the caller at runtime - with caveats (see remarks).</typeparam>
+        /// <typeparam name="TService">The service type which it to be enabled for automatic factory injection.</typeparam>
+        /// <param name="targets"></param>
+        public static void EnableAutoFactory<TArg, TService>(this IRootTargetContainer targets)
+        {
+            EnableAutoFactoryInternal(targets, typeof(Func<,>).MakeGenericType(typeof(TArg), typeof(TService)));
+        }
+
+        private static void EnableAutoFactoryInternal(IRootTargetContainer targets, Type funcType)
         {
             if (targets == null)
                 throw new ArgumentNullException(nameof(targets));
 
-            Type funcType = typeof(Func<>).MakeGenericType(typeof(TService));
-
-            var existingContainer = targets.FetchContainer(funcType);
+            targets.AddKnownType(funcType);
+            targets.SetOption<Options.EnableSpecificAutoFactory>(true, funcType);
         }
     }
 
@@ -95,6 +113,11 @@ namespace Rezolver
             if (result != null)
                 return result;
 
+            // don't return anything if autofactory injection has not been enabled for the
+            // type, or one compatible with it.
+            if (!Root.GetOption(type, Options.EnableSpecificAutoFactory.Default))
+                return null;
+
             Type genericType;
             if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericFactoryTypeDefinition)
             {
@@ -105,6 +128,7 @@ namespace Rezolver
 
             var requiredReturnType = typeArgs[typeArgs.Length - 1];
 
+            // allow late-bound delegate implementation
             var innerTarget = Root.Fetch(requiredReturnType);
             if (innerTarget == null)
                 innerTarget = new ResolvedTarget(requiredReturnType);
@@ -117,7 +141,7 @@ namespace Rezolver
         {
             // required to allow interoperability with the FetchAll() functionality; because the targets we return are
             // not in the underlying dictionary, so we have to 
-            var baseResult = Inner.FetchAll(type);
+            var baseResult = EnsureInner().FetchAll(type);
             if (!baseResult.Any())
             {
                 var individual = Fetch(type);
