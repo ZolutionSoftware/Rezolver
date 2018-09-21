@@ -91,19 +91,12 @@ namespace Rezolver
             return this;
         }
 
-        //private void Root_TargetRegistered(object sender, Events.TargetRegisteredEventArgs e)
-        //{
+        private (Type returnType, Type[] argTypes) DecomposeFuncType(Type funcType)
+        {
+            var typeArgs = TypeHelpers.GetGenericArguments(funcType);
 
-        //    if (!(e.Target is AutoFactoryTarget))
-        //    {
-        //        // bit squeaky, this - will slow up registrations, hence why the configuration will split the auto 
-        //        // func registration between 'common' funcs and 'extended' funcs.
-        //        var type = GenericType.MakeGenericType(_objectArgsForFunc.Concat(new[] { e.Type }).ToArray());
-        //        var newTarget = new AutoFactoryTarget(e.Target, type, e.Type, _objectArgsForFunc);
-        //        this.Register(newTarget);
-        //        //Root.AddKnownType(type);
-        //    }
-        //}
+            return (typeArgs[typeArgs.Length - 1], typeArgs.Take(typeArgs.Length - 1).ToArray());
+        }
 
         public ITarget Fetch(Type type)
         {
@@ -124,17 +117,15 @@ namespace Rezolver
                 throw new ArgumentException($"Only {GenericFactoryTypeDefinition} is supported by this container", nameof(type));
             }
 
-            var typeArgs = TypeHelpers.GetGenericArguments(type);
-
-            var requiredReturnType = typeArgs[typeArgs.Length - 1];
+            (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
 
             // allow late-bound delegate implementation
-            var innerTarget = Root.Fetch(requiredReturnType);
+            var innerTarget = Root.Fetch(returnType);
             if (innerTarget == null)
-                innerTarget = new ResolvedTarget(requiredReturnType);
+                innerTarget = new ResolvedTarget(returnType);
 
             // create a func target (new type) which wraps the inner target
-            return new AutoFactoryTarget(innerTarget, type, requiredReturnType, typeArgs.Take(typeArgs.Length - 1).ToArray());
+            return new AutoFactoryTarget(innerTarget, type, returnType, argTypes);
         }
 
         public IEnumerable<ITarget> FetchAll(Type type)
@@ -144,11 +135,12 @@ namespace Rezolver
             var baseResult = EnsureInner().FetchAll(type);
             if (!baseResult.Any())
             {
-                var individual = Fetch(type);
-                if (individual != null)
-                    return new[] { individual };
+                // now it's a similar trick to the EnumerableTargetContainer, we have to perform
+                // a covariant search for the result type and then project the targets.
+                (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
 
-                return Enumerable.Empty<ITarget>();
+                return Root.FetchAllCompatibleTargetsInternal(returnType)
+                    .Select(t => new AutoFactoryTarget(t, type, returnType, argTypes));
             }
 
             return baseResult;

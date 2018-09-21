@@ -268,8 +268,6 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
             targets.EnableAutoFactory<BaseClass>();
-            targets.EnableAutoFactory<BaseClassChild>();
-            targets.EnableAutoFactory<BaseClassGrandchild>();
             var container = CreateContainer(targets);
 
             // Act
@@ -293,8 +291,6 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<OneCtorAlt1>();
             targets.RegisterType<OneCtorAlt2>();
             targets.EnableAutoFactory<int, OneCtor>();
-            targets.EnableAutoFactory<int, OneCtorAlt1>();
-            targets.EnableAutoFactory<int, OneCtorAlt2>();
             var container = CreateContainer(targets);
 
             // Act

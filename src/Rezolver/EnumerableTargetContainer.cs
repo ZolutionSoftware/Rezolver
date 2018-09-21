@@ -14,7 +14,7 @@ namespace Rezolver
     {
         private class TargetOrderTracker
         {
-            private readonly Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(TargetIdentityComparer.Instance); //new Dictionary<ITarget, int>(ReferenceComparer<ITarget>.Instance);
+            private readonly Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(TargetIdentityComparer.Instance);
             private int _counter = 0;
 
             public TargetOrderTracker(IRootTargetContainer root)
@@ -73,22 +73,6 @@ namespace Rezolver
             this.Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
         }
 
-        private class CovariantMatch
-        {
-            public Type RequestedType { get; set; }
-            public ITarget Target { get; set; }
-            public static IEqualityComparer<CovariantMatch> Comparer => TargetIDComparer.Instance;
-            private class TargetIDComparer : IEqualityComparer<CovariantMatch>
-            {
-                public static TargetIDComparer Instance { get; } = new TargetIDComparer();
-                private TargetIDComparer() { }
-
-                public bool Equals(CovariantMatch x, CovariantMatch y) => TargetIdentityComparer.Instance.Equals(x.Target, y.Target);
-
-                public int GetHashCode(CovariantMatch obj) => TargetIdentityComparer.Instance.GetHashCode(obj.Target);
-            }
-        }
-
         public override ITarget Fetch(Type type)
         {
             if (!TypeHelpers.IsGenericType(type))
@@ -138,11 +122,7 @@ namespace Rezolver
 
             if (enableCovariance)
             {
-                return new EnumerableTarget(Root.FetchAll(elementType)
-                    .Concat(Root.GetKnownCompatibleTypes(elementType)
-                        .SelectMany(compatibleType => Root.FetchAll(compatibleType)
-                            .Select(t => VariantMatchTarget.Wrap(t, elementType, compatibleType))
-                        )).Distinct(TargetIdentityComparer.Instance)
+                return new EnumerableTarget(Root.FetchAllCompatibleTargetsInternal(elementType)
                         .OrderBy(t => _tracker.GetOrder(t)), elementType);
             }
             else

@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 namespace Rezolver.Targets
 {
     /// <summary>
-    /// Target used to wrap another when matched contravariantly or covariantly
+    /// Target used to wrap another when matched against a service type contravariantly or covariantly.
     /// </summary>
+    /// <remarks>This target is produced automatically by functionality such as 
+    /// <see cref="RootTargetContainerExtensions.FetchAllCompatibleTargets(IRootTargetContainer, Type)"/> for any target
+    /// whose registered type is not exactly the same as the type requested.  The target's identity (chiefly determined by 
+    /// its <see cref="Id"/>) is always equal to the <see cref="Target"/> that it wraps, thus allowing it to masquerade as
+    /// the wrapped target.</remarks>
     public class VariantMatchTarget : ITarget
     {
         public Guid Id => Target.Id;
