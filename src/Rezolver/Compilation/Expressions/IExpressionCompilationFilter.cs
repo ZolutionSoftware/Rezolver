@@ -14,7 +14,8 @@ namespace Rezolver.Compilation.Expressions
     /// If one is set, then it will be consulted to see if it can offer up an expression for the given target
     /// instead of the compiler doing its normal process.
     /// </summary>
-    public interface IExpressionCompilationFilter
+    [Obsolete("See also ExpressionCompilationFilters", true)]
+    internal interface IExpressionCompilationFilter
     {
         Expression Intercept(ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler);
     }

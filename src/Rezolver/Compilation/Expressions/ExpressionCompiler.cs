@@ -209,14 +209,14 @@ namespace Rezolver.Compilation.Expressions
             target.MustNotBeNull(nameof(target));
             context.MustNotBeNull(nameof(context));
 
-            var filter = context.GetOption<IExpressionCompilationFilter>();
+            //var filter = context.GetOption<IExpressionCompilationFilter>();
 
-            if(filter != null)
-            {
-                var interceptExpr = filter.Intercept(target, context, this);
-                if (interceptExpr != null)
-                    return interceptExpr;
-            }
+            //if(filter != null)
+            //{
+            //    var interceptExpr = filter.Intercept(target, context, this);
+            //    if (interceptExpr != null)
+            //        return interceptExpr;
+            //}
 
             var builder = this.ResolveBuilder(target, context)
                 ?? throw new ArgumentException($"Unable to find an IExpressionBuilder for the target {target}", nameof(target));

@@ -11,7 +11,8 @@ namespace Rezolver.Compilation.Expressions
     /// Delegate-based implementation of <see cref="IExpressionCompilationFilter"/> allowing multiple
     /// filters to be combined into one.
     /// </summary>
-    public class ExpressionCompilationFilters : IExpressionCompilationFilter
+    [Obsolete("Not technically obsolete, just might not be required for what I originally intended it for; so I'm suspending it", true)]
+    internal class ExpressionCompilationFilters : IExpressionCompilationFilter
     {
         private class DelegatedFilter : IExpressionCompilationFilter
         {
