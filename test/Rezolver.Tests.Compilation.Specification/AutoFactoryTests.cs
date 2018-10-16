@@ -301,50 +301,5 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.Collection(instances, i => Assert.IsType<OneCtor>(i), i => Assert.IsType<OneCtorAlt1>(i), i => Assert.IsType<OneCtorAlt2>(i));
             Assert.Equal(new[] { 50, 50, 50 }, instances.Select(i => i.Value));
         }
-
-
-        [Fact]
-        public void AutoFactory_ShouldBeAbleToDecorateSuppliedInstance()
-        {
-            // Arrange
-            var targets = CreateTargetContainer();
-            targets.RegisterType<Decorated, IDecorated>();
-            targets.RegisterDecorator<Decorator, IDecorated>();
-            targets.EnableAutoFactory<IDecorated, IDecorated>();
-
-            var container = CreateContainer(targets);
-            var instanceOverride = new Decorated2();
-
-            // Act
-            var factory = container.Resolve<Func<IDecorated, IDecorated>>();
-            var instance = factory(instanceOverride);
-
-            // Assert
-            var decorator = Assert.IsType<Decorator>(instance);
-            Assert.Same(instanceOverride, decorator.Decorated);
-        }
-
-        [Fact]
-        public void AutoFactory_ShouldBeAbleToDoubleDecorateSuppliedInstance()
-        {
-            // Arrange
-            var targets = CreateTargetContainer();
-            targets.RegisterType<Decorated, IDecorated>();
-            targets.RegisterDecorator<Decorator, IDecorated>();
-            targets.RegisterDecorator<Decorator2, IDecorated>();
-            targets.EnableAutoFactory<IDecorated, IDecorated>();
-
-            var container = CreateContainer(targets);
-            var instanceOverride = new Decorated2();
-
-            // Act
-            var factory = container.Resolve<Func<IDecorated, IDecorated>>();
-            var instance = factory(instanceOverride);
-
-            // Assert
-            var outerDecorator = Assert.IsType<Decorator2>(instance);
-            var innerDecorator = Assert.IsType<Decorator>(outerDecorator.Decorated);
-            Assert.Same(instanceOverride, innerDecorator.Decorated);
-        }
     }
 }

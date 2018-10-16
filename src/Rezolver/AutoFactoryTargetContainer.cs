@@ -2,47 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Rezolver
 {
-    // TODO: move to shared extensions class
-    public static class AutoFactoryRegistrationExtensions
-    {
-        /// <summary>
-        /// Enables the automatic injection of a <see cref="Func{TResult}"/> for the given
-        /// <typeparamref name="TService"/>.
-        /// </summary>
-        /// <typeparam name="TService">The service type which is to be enabled for automatic factory injection.</typeparam>
-        /// <param name="targets">The target container on which the registration is to be performed.</param>
-        public static void EnableAutoFactory<TService>(this IRootTargetContainer targets)
-        {
-            EnableAutoFactoryInternal(targets, typeof(Func<>).MakeGenericType(typeof(TService)));
-        }
-
-        /// <summary>
-        /// Enables the automatic injection of a <see cref="Func{T, TResult}"/> for the given 
-        /// <typeparamref name="TService"/>
-        /// </summary>
-        /// <typeparam name="TArg">The argument type to accepted by the factory.  Will be used to replace auto-resolved
-        /// dependencies of the same type with the argument supplied by the caller at runtime - with caveats (see remarks).</typeparam>
-        /// <typeparam name="TService">The service type which it to be enabled for automatic factory injection.</typeparam>
-        /// <param name="targets"></param>
-        public static void EnableAutoFactory<TArg, TService>(this IRootTargetContainer targets)
-        {
-            EnableAutoFactoryInternal(targets, typeof(Func<,>).MakeGenericType(typeof(TArg), typeof(TService)));
-        }
-
-        private static void EnableAutoFactoryInternal(IRootTargetContainer targets, Type funcType)
-        {
-            if (targets == null)
-                throw new ArgumentNullException(nameof(targets));
-
-            targets.AddKnownType(funcType);
-            targets.SetOption<Options.EnableSpecificAutoFactory>(true, funcType);
-        }
-    }
-
     /// <summary>
     /// Target dictionary container which provides support for automatic production of delegates
     /// based on the <see cref="Func{TResult}"/> generic delegate type and its non-unary variants (i.e.
