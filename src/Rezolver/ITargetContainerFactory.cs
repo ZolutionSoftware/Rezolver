@@ -24,6 +24,6 @@ namespace Rezolver
         /// <paramref name="targets"/> target container).</param>
         /// <returns>An <see cref="ITargetContainer"/> to be added to the <paramref name="targets"/> into which targets
         /// will be registered.  Or <c>null</c> if this factory doesn't handle the passed <paramref name="type"/>.</returns>
-        ITargetContainer CreateContainer(Type type, ITargetContainer targets, ITargetContainer rootTargetContainer);
+        ITargetContainer CreateContainer(Type type, ITargetContainer targets, IRootTargetContainer rootTargetContainer);
     }
 }

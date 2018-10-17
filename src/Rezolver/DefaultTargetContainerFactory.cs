@@ -15,8 +15,11 @@ namespace Rezolver
         {
         }
 
-        public ITargetContainer CreateContainer(Type type, ITargetContainer targets, ITargetContainer rootTargetContainer)
+        public ITargetContainer CreateContainer(Type type, ITargetContainer targets, IRootTargetContainer rootTargetContainer)
         {
+            if (TypeHelpers.IsGenericTypeDefinition(type))
+                return new GenericTargetContainer(rootTargetContainer, type);
+
             return new TargetListContainer(rootTargetContainer, type);
         }
     }

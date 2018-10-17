@@ -13,8 +13,18 @@ namespace Rezolver
 
         private DefaultTargetContainerTypeResolver() { }
 
+        internal static bool ShouldUseGenericTypeDef(Type serviceType)
+        {
+            return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
+        }
+
         public Type GetContainerType(Type serviceType)
         {
+            if (ShouldUseGenericTypeDef(serviceType))
+            {
+                return serviceType.GetGenericTypeDefinition();
+            }
+
             return serviceType;
         }
     }

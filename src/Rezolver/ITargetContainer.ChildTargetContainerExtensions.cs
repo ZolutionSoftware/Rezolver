@@ -11,18 +11,8 @@ namespace Rezolver
 {
     internal static class ChildTargetContainerExtensions
     {
-        internal static bool ShouldUseGenericTypeDef(this ITargetContainer targets, Type serviceType)
-        {
-            return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
-        }
-
         internal static Type GetChildContainerType(this ITargetContainer targets, Type serviceType, IRootTargetContainer root)
         {
-            if (ShouldUseGenericTypeDef(targets, serviceType))
-            {
-                return serviceType.GetGenericTypeDefinition();
-            }
-
             return root.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType);
         }
 
@@ -33,11 +23,6 @@ namespace Rezolver
 
         internal static ITargetContainer CreateChildContainer(this ITargetContainer targets, Type targetContainerType, IRootTargetContainer root)
         {
-            if (TypeHelpers.IsGenericTypeDefinition(targetContainerType))
-            {
-                return new GenericTargetContainer(root, targetContainerType);
-            }
-
             return root.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, targets, root);
         }
 
