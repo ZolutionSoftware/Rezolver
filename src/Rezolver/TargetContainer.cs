@@ -92,7 +92,7 @@ namespace Rezolver
         /// <summary>
         /// Always returns this instance.
         /// </summary>
-        protected override IRootTargetContainer Root => this;
+        public override IRootTargetContainer Root => this;
 
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class.
@@ -136,7 +136,7 @@ namespace Rezolver
         protected override Type GetTargetContainerType(Type serviceType)
         {
             // NOTE - shouldn't require descending to the base class because of the default type resolver option
-            return this.GetChildContainerType(serviceType, this.Root) ?? base.GetTargetContainerType(serviceType);
+            return this.GetChildContainerType(serviceType) ?? base.GetTargetContainerType(serviceType);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Rezolver
         protected override ITargetContainer CreateContainer(Type targetContainerType)
         {
             // NOTE - shouldn't require descending to the base class because of the default target factory option
-            return this.CreateChildContainer(targetContainerType, this.Root) ?? base.CreateContainer(targetContainerType);
+            return this.CreateChildContainer(targetContainerType) ?? base.CreateContainer(targetContainerType);
         }
 
         /// <summary>

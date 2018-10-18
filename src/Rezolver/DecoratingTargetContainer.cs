@@ -39,7 +39,10 @@ namespace Rezolver
 
         private ITargetContainer Inner { get; set; }
 
-        private IRootTargetContainer Root { get; }
+        /// <summary>
+        /// Implementation of <see cref="ITargetContainer.Root"/>
+        /// </summary>
+        public IRootTargetContainer Root { get; }
 
         private DecoratingTargetFactory DecoratorFactory { get; }
 
@@ -105,8 +108,7 @@ namespace Rezolver
             // This reuses the same logic that TargetContainer employs via these extension methods
             return this.Inner ??
                 (this.Inner = this.Root.CreateChildContainer(
-                            this.Root.GetChildContainerType(this.DecoratedType),
-                            this.Root));
+                            this.Root.GetChildContainerType(this.DecoratedType)));
         }
 
         private DecoratorTarget CreateDecoratorTarget(ITarget decorated, Type type)

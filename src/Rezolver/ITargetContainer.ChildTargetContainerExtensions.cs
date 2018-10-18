@@ -11,24 +11,20 @@ namespace Rezolver
 {
     internal static class ChildTargetContainerExtensions
     {
-        internal static Type GetChildContainerType(this ITargetContainer targets, Type serviceType, IRootTargetContainer root)
+        internal static Type GetChildContainerType(this ITargetContainer targets, Type serviceType)
         {
-            return root.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType);
+            var attr = TypeHelpers.GetCustomAttributes<ContainerTypeAttribute>(serviceType, true).FirstOrDefault();
+            if (attr != null)
+            {
+                return attr.Type;
+            }
+
+            return targets.Root.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType);
         }
 
-        internal static Type GetChildContainerType(this IRootTargetContainer targets, Type serviceType)
+        internal static ITargetContainer CreateChildContainer(this ITargetContainer targets, Type targetContainerType)
         {
-            return GetChildContainerType(targets, serviceType, targets);
-        }
-
-        internal static ITargetContainer CreateChildContainer(this ITargetContainer targets, Type targetContainerType, IRootTargetContainer root)
-        {
-            return root.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, targets, root);
-        }
-
-        internal static ITargetContainer CreateChildContainer(this IRootTargetContainer targets, Type targetContainerType)
-        {
-            return CreateChildContainer(targets, targetContainerType, targets);
+            return targets.Root.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, targets);
         }
     }
 }

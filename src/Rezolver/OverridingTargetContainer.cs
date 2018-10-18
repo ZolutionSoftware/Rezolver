@@ -26,7 +26,17 @@ namespace Rezolver
     /// container and in the parent.</remarks>
     public sealed class OverridingTargetContainer : TargetContainer
     {
-        private readonly ITargetContainer _parent;
+        /// <summary>
+        /// Gets the parent target container.
+        /// </summary>
+        /// <value>The parent.</value>
+        public ITargetContainer Parent { get; private set; }
+
+        /// <summary>
+        /// Overrides the base implementation so that the root is derived from the <see cref="Parent"/>.
+        /// </summary>
+        public override IRootTargetContainer Root => Parent.Root;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OverridingTargetContainer"/> class.
         /// </summary>
@@ -37,19 +47,11 @@ namespace Rezolver
         public OverridingTargetContainer(ITargetContainer parent, ITargetContainerConfig config = null)
                 : base()
         {
-            this._parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            this.Parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
             (config ?? DefaultConfig).Configure(this);
         }
 
-        /// <summary>
-        /// Gets the parent target container.
-        /// </summary>
-        /// <value>The parent.</value>
-        public ITargetContainer Parent
-        {
-            get { return this._parent; }
-        }
 
         /// <summary>
         /// Fetches the registered target for the given <paramref name="type"/>, if found, or
@@ -65,7 +67,7 @@ namespace Rezolver
             // ascend the tree of target containers looking for a type match.
             if ((result == null || result.UseFallback))
             {
-                return this._parent.Fetch(type);
+                return this.Parent.Fetch(type);
             }
 
             return result;
@@ -80,7 +82,7 @@ namespace Rezolver
         /// empty enumerable if the type is not registered.</returns>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            return (this._parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
+            return (this.Parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
                 base.FetchAll(type) ?? Enumerable.Empty<ITarget>());
         }
     }

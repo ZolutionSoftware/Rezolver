@@ -191,7 +191,7 @@ namespace Rezolver
         /// <param name="targets">Required. The target container from which the option is to be read.</param>
         /// <param name="default">The default value to return if the option has not been set.</param>
         /// <returns>An option value which was either previously set, or the <paramref name="default"/> if not</returns>
-        public static TOption GetOption<TOption>(this ITargetContainer targets, TOption @default = default(TOption))
+        public static TOption GetOption<TOption>(this ITargetContainer targets, TOption @default = default)
             where TOption : class
         {
             if (targets == null)
@@ -230,7 +230,7 @@ namespace Rezolver
         ///
         /// In the absence of a service-specific option, a globally-defined option will instead be used if the <see cref="EnableGlobalOptions"/> option
         /// is set to <c>true</c> for the <paramref name="targets"/> target container.  By default, this is enabled.</remarks>
-        public static TOption GetOption<TOption>(this ITargetContainer targets, Type serviceType, TOption @default = default(TOption))
+        public static TOption GetOption<TOption>(this ITargetContainer targets, Type serviceType, TOption @default = default)
             where TOption : class
         {
             if (targets == null)
@@ -271,7 +271,7 @@ namespace Rezolver
         /// <param name="targets">That target container from which the option is to be read.</param>
         /// <param name="default">The default value to be returned if the option is not set.</param>
         /// <returns>An option value which was either previously set, or the <paramref name="default"/> if not</returns>
-        public static TOption GetOption<TOption, TService>(this ITargetContainer targets, TOption @default = default(TOption))
+        public static TOption GetOption<TOption, TService>(this ITargetContainer targets, TOption @default = default)
             where TOption : class
         {
             if (targets == null)

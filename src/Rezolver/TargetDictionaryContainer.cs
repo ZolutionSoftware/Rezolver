@@ -31,12 +31,7 @@ namespace Rezolver
         /// <summary>
         /// Never null.  Returns the root target container.
         /// </summary>
-        /// <value>If this instance is created with a root
-        /// passed to the <see cref="TargetDictionaryContainer(IRootTargetContainer)"/>
-        /// constructor, then it will be returned by this property.
-        ///
-        /// Otherwise it will return this instance.</value>
-        protected virtual IRootTargetContainer Root { get; }
+        public virtual IRootTargetContainer Root { get; }
 
         /// <summary>
         /// Constructs a new <see cref="TargetDictionaryContainer"/> optionally setting the <see cref="Root"/> target container.

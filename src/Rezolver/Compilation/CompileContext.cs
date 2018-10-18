@@ -72,7 +72,7 @@ namespace Rezolver.Compilation
         /// </summary>
         public ScopeBehaviour? ScopeBehaviourOverride { get; }
 
-        private ScopePreference? _scopePreferenceOverride;
+        private readonly ScopePreference? _scopePreferenceOverride;
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ScopePreferenceOverride"/>
         /// </summary>
@@ -171,6 +171,8 @@ namespace Rezolver.Compilation
         {
             return new CompileContext(this, targetType, scopeBehaviourOverride, scopePreferenceOverride ?? this.ScopePreferenceOverride);
         }
+
+        IRootTargetContainer ITargetContainer.Root => DependencyTargetContainer.Root;
 
         /// <summary>
         /// Adds the target to the compilation stack if it doesn't already exist.

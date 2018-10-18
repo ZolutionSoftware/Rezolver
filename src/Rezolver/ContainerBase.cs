@@ -17,7 +17,7 @@ namespace Rezolver
     /// <summary>
     /// Starting point for implementations of <see cref="IContainer"/> - only creatable through inheritance.
     /// </summary>
-    /// <remarks>This class also implements <see cref="ITargetContainer"/> by proxying the <see cref="Targets"/> that are
+    /// <remarks>This class also implements <see cref="IRootTargetContainer"/> by proxying the <see cref="Targets"/> that are
     /// provided to it on construction (or created anew if not supplied).  All of those interface methods are implemented
     /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public
     /// API.
@@ -326,7 +326,9 @@ namespace Rezolver
             this.Targets.Register(target, serviceType);
         }
 
-        #region ITargetContainer explicit implementation
+        #region IRootTargetContainer explicit implementation
+        IRootTargetContainer ITargetContainer.Root => this.Targets;
+
         ITarget ITargetContainer.Fetch(Type type) => this.Targets.Fetch(type);
 
         IEnumerable<ITarget> ITargetContainer.FetchAll(Type type) => this.Targets.FetchAll(type);

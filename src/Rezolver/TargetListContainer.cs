@@ -21,7 +21,7 @@ namespace Rezolver
     /// </remarks>
     public class TargetListContainer : ITargetContainer, IList<ITarget>
     {
-        private List<ITarget> _targets;
+        private readonly List<ITarget> _targets;
 
         /// <summary>
         /// Gets the type against which this list container is registered in its <see cref="ITargetContainer"/>.
@@ -55,7 +55,7 @@ namespace Rezolver
 
         ITarget IList<ITarget>.this[int index] { get => ((IList<ITarget>)this._targets)[index]; set => ((IList<ITarget>)this._targets)[index] = value; }
 
-        private ITargetContainer Root { get; }
+        public IRootTargetContainer Root { get; }
 
         private bool AllowMultiple { get; }
 
@@ -67,7 +67,7 @@ namespace Rezolver
         /// <param name="root">The root target container in which this container is registered.</param>
         /// <param name="registeredType">Required - the type against which this list will be registered.</param>
         /// <param name="targets">Optional array of targets with which to initialise the list.</param>
-        public TargetListContainer(ITargetContainer root, Type registeredType, params ITarget[] targets)
+        public TargetListContainer(IRootTargetContainer root, Type registeredType, params ITarget[] targets)
         {
             this.Root = root ?? throw new ArgumentNullException(nameof(root));
             this.RegisteredType = registeredType ?? throw new ArgumentNullException(nameof(registeredType));

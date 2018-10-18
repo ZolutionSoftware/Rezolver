@@ -23,7 +23,7 @@ namespace Rezolver
 
         private ITargetContainer Inner { get; set; }
 
-        private IRootTargetContainer Root { get; }
+        public IRootTargetContainer Root { get; }
 
 
         //private Type[] _objectArgsForFunc;

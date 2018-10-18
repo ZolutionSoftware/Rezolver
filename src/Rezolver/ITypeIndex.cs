@@ -38,7 +38,7 @@ namespace Rezolver
     /// IEnumerable&lt;&gt; then you want the full assignment-compatibility lookup which does covariance as well as
     /// base/interface compatibility.
     /// </remarks>
-    public interface ICovariantTypeIndex
+    public interface ICovariantTypeIndex //TODO: Change this (see https://github.com/ZolutionSoftware/Rezolver/issues/76)
     {
         /// <summary>
         /// Called to add a new known service type to the index which is then mapped back to all the types with which it
