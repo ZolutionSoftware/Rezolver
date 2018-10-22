@@ -24,7 +24,7 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="compiler">The compiler to be used to build the target</param>
         protected override Expression Build(ConstructorTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            return this.Build(target.Bind(context), context, compiler);
+            return Build(target.Bind(context), context, compiler);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Rezolver.Compilation.Expressions
                             localVar = Expression.Parameter(newExpr.Type, "toReturn");
                         }
 
-                        adHocBindings.Add(this.GenerateListBindingExpression(localVar, listBinding, context, compiler));
+                        adHocBindings.Add(GenerateListBindingExpression(localVar, listBinding, context, compiler));
                     }
                     else
                     {

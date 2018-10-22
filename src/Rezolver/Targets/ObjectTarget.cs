@@ -51,8 +51,8 @@ namespace Rezolver.Targets
         /// to ensure you dispose of it.</remarks>
         public ObjectTarget(object obj, Type declaredType = null, ScopeBehaviour scopeBehaviour = Rezolver.ScopeBehaviour.None)
         {
-            this.Value = obj;
-            this.ScopeBehaviour = scopeBehaviour;
+            Value = obj;
+            ScopeBehaviour = scopeBehaviour;
             // if the caller provides a declared type we check
             // also that, if the object is null, the target type
             // can accept nulls.  Otherwise we're simply checking
@@ -60,23 +60,23 @@ namespace Rezolver.Targets
             // type that is being declared.
             if (declaredType != null)
             {
-                if (this.Value == null)
+                if (Value == null)
                 {
                     if (!declaredType.CanBeNull())
                     {
                         throw new ArgumentException(string.Format(ExceptionResources.TargetIsNullButTypeIsNotNullable_Format, declaredType), "declaredType");
                     }
                 }
-                else if (!TypeHelpers.AreCompatible(this.Value.GetType(), declaredType))
+                else if (!TypeHelpers.AreCompatible(Value.GetType(), declaredType))
                 {
-                    throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, this.Value.GetType()), "declaredType");
+                    throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, Value.GetType()), "declaredType");
                 }
 
-                this.DeclaredType = declaredType;
+                DeclaredType = declaredType;
             }
             else // an untyped null is typed as Object
             {
-                this.DeclaredType = this.Value == null ? typeof(object) : this.Value.GetType();
+                DeclaredType = Value == null ? typeof(object) : Value.GetType();
             }
         }
 
@@ -85,16 +85,16 @@ namespace Rezolver.Targets
             // when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
             if (context.Scope == null)
             {
-                return this.Value;
+                return Value;
             }
             else
             {
                 // whatever scoping we're doing, we MUST use the root scope.
-                return context.Scope.GetRootScope().Resolve(context, this.Id, r => this.Value, this.ScopeBehaviour);
+                return context.Scope.GetRootScope().Resolve(context, Id, r => Value, ScopeBehaviour);
             }
         }
 
-        object IDirectTarget.GetValue() => this.Value;
+        object IDirectTarget.GetValue() => Value;
 
         ITarget ICompiledTarget.SourceTarget => this;
     }

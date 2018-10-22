@@ -68,9 +68,9 @@ namespace Rezolver
             : base(targets)
         {
             inner.MustNotBeNull("inner");
-            this.Inner = inner;
+            Inner = inner;
 
-            (config ?? DefaultConfig).Configure(this, this.Targets);
+            (config ?? DefaultConfig).Configure(this, Targets);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Rezolver
         /// <see cref="IResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
         public override bool CanResolve(IResolveContext context)
         {
-            return base.CanResolve(context) || this.Inner.CanResolve(context);
+            return base.CanResolve(context) || Inner.CanResolve(context);
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Rezolver
         /// <returns></returns>
         protected override ICompiledTarget GetFallbackCompiledTarget(IResolveContext context)
         {
-            return this.Inner.GetCompiledTarget(context);
+            return Inner.GetCompiledTarget(context);
         }
     }
 }

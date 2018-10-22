@@ -19,12 +19,12 @@ namespace Rezolver
 
             public TargetOrderTracker(IRootTargetContainer root)
             {
-                root.TargetRegistered += this.Root_TargetRegistered;
+                root.TargetRegistered += Root_TargetRegistered;
             }
 
             private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
             {
-                this.Track(e.Target);
+                Track(e.Target);
             }
 
             public int GetOrder(ITarget target)
@@ -59,8 +59,8 @@ namespace Rezolver
                 // this is the first enumerable container in the root
                 // so create the tracker and register our own event handler
                 // for adding enumerable types.
-                root.SetOption(this._tracker = new TargetOrderTracker(this.Root));
-                this.Root.TargetRegistered += this.Root_TargetRegistered;
+                root.SetOption(this._tracker = new TargetOrderTracker(Root));
+                Root.TargetRegistered += Root_TargetRegistered;
             }
         }
 
@@ -70,7 +70,7 @@ namespace Rezolver
             // targets are registered (and indeed empty enumerables for those which aren't).
             // So, every time a target is registered we make sure to its IEnumerable variant
             // as a known type.
-            this.Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
+            Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
         }
 
         public override ITarget Fetch(Type type)
@@ -101,7 +101,7 @@ namespace Rezolver
             // the target container is an OverridingTargetContainer.
 
             // if the root is an OverridingTargetContainer, then
-            if (this.Root is OverridingTargetContainer overridingContainer)
+            if (Root is OverridingTargetContainer overridingContainer)
             {
                 result = overridingContainer.Parent.Fetch(type);
                 // if the root result is an enumerable target; then we won't use it, because
@@ -118,7 +118,7 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            bool enableCovariance = this.Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
+            bool enableCovariance = Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
 
             if (enableCovariance)
             {

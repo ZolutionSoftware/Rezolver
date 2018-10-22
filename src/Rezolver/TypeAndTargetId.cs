@@ -15,14 +15,14 @@ namespace Rezolver
 
         public TypeAndTargetId(Type type, ITarget target)
         {
-            this.Type = type;
-            this.Id = target.Id;
+            Type = type;
+            Id = target.Id;
         }
 
         public TypeAndTargetId(Type type, Guid id)
         {
-            this.Type = type;
-            this.Id = id;
+            Type = type;
+            Id = id;
         }
 
         public override bool Equals(object obj)
@@ -37,17 +37,17 @@ namespace Rezolver
                 return false;
             }
 
-            return this.Equals(ttObj);
+            return Equals(ttObj);
         }
 
         public bool Equals(TypeAndTargetId other)
         {
-            return this.Type == other.Type && this.Id == other.Id;
+            return Type == other.Type && Id == other.Id;
         }
 
         public override int GetHashCode()
         {
-            return this.Type.GetHashCode() ^ this.Id.GetHashCode();
+            return Type.GetHashCode() ^ Id.GetHashCode();
         }
     }
 }

@@ -58,9 +58,9 @@ namespace Rezolver
         /// <param name="rootTargets">The root target container</param>
         public TargetTypeSelector(Type type, IRootTargetContainer rootTargets = null)
         {
-            this.Type = type;
-            this.RootTargets = rootTargets;
-            _results = Run(new TargetTypeSelectorParams(this.Type, this)).Distinct().ToArray();
+            Type = type;
+            RootTargets = rootTargets;
+            _results = Run(new TargetTypeSelectorParams(Type, this)).Distinct().ToArray();
         }
 
         /// <summary>
@@ -98,9 +98,9 @@ namespace Rezolver
                 // at least one target match.
                 if (search.TypeParameter == null &&
                     !TypeHelpers.IsValueType(search.Type) &&
-                    this.RootTargets != null)
+                    RootTargets != null)
                 {
-                    temp = this.RootTargets.GetKnownCovariantTypes(search.Type).ToArray();
+                    temp = RootTargets.GetKnownCovariantTypes(search.Type).ToArray();
                     variantMatches.UnionWith(temp);
                     toReturn.AddRange(temp);
                 }
@@ -116,7 +116,7 @@ namespace Rezolver
                     search)
                 ).ToArray();
 
-                var typeParamSearchLists = argSearches.Select(t => this.Run(t).ToArray()).ToArray();
+                var typeParamSearchLists = argSearches.Select(t => Run(t).ToArray()).ToArray();
                 var genericType = search.Type.GetGenericTypeDefinition();
                 Type[] combinationArray = null;
                 Type compatibleType = null;
@@ -150,9 +150,9 @@ namespace Rezolver
                     toReturn.Add(compatibleType);
                     if (search.TypeParameter == null &&
                         !TypeHelpers.IsValueType(search.Type) &&
-                        this.RootTargets != null)
+                        RootTargets != null)
                     {
-                        temp = this.RootTargets.GetKnownCovariantTypes(compatibleType).ToArray();
+                        temp = RootTargets.GetKnownCovariantTypes(compatibleType).ToArray();
                         variantMatches.UnionWith(temp);
                         toReturn.AddRange(temp);
                     }
@@ -216,7 +216,7 @@ namespace Rezolver
                             // loop through the bases, constructing array types for each and adding them
                             // note we skip the first because it'll be the search type.
                             temp = allArrayTypes.Skip(1)
-                                .SelectMany(tt => this.Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases)))
+                                .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases)))
                                 .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                             variantMatches.UnionWith(temp);
                             toReturn.AddRange(temp);
@@ -234,7 +234,7 @@ namespace Rezolver
 
                             // note - disable interfaces when recursing into the base
                             // note also - ignore 'object'
-                            temp = this.Run(new TargetTypeSelectorParams(TypeHelpers.BaseType(search.Type), search.TypeParameter, search.Parent, Contravariance.Bases))
+                            temp = Run(new TargetTypeSelectorParams(TypeHelpers.BaseType(search.Type), search.TypeParameter, search.Parent, Contravariance.Bases))
                                 .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                             variantMatches.UnionWith(temp);
                             toReturn.AddRange(temp);
@@ -251,7 +251,7 @@ namespace Rezolver
                                 // have to include all the interfaces of all the array types that are compatible per array covariance
                                 temp = allArrayTypes
                                     .SelectMany(t => TypeHelpers.GetInterfaces(t)
-                                    .SelectMany(tt => this.Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
+                                    .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
                                     .OrderBy(t => t, DescendingTypeOrder.Instance)
                                     .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                                 variantMatches.UnionWith(temp);
@@ -260,7 +260,7 @@ namespace Rezolver
                             else
                             {
                                 temp = TypeHelpers.GetInterfaces(search.Type)
-                                    .SelectMany(t => this.Run(new TargetTypeSelectorParams(t, search.TypeParameter, search.Parent, Contravariance.Bases)))
+                                    .SelectMany(t => Run(new TargetTypeSelectorParams(t, search.TypeParameter, search.Parent, Contravariance.Bases)))
                                     .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                                 variantMatches.UnionWith(temp);
                                 toReturn.AddRange(temp);
@@ -286,7 +286,7 @@ namespace Rezolver
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

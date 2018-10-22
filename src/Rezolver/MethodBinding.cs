@@ -43,8 +43,8 @@ namespace Rezolver
                     .Must(pbs => pbs.All(pb => parameters.Contains(pb.Parameter)), "All parameter bindings must be for parameters declared on the method", nameof(boundArgs));
             }
 
-            this.Method = method;
-            this.BoundArguments = boundArgs ?? ParameterBinding.None;
+            Method = method;
+            BoundArguments = boundArgs ?? ParameterBinding.None;
         }
     }
 }

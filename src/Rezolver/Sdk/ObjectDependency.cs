@@ -18,21 +18,21 @@ namespace Rezolver.Sdk
         public ObjectDependency(object obj, IDependant owner, bool required)
             : base(owner, required)
         {
-            this.Obj = obj;
+            Obj = obj;
         }
 
         public override IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects)
         {
             bool found = false;
-            foreach (var result in objects.Where(o => object.ReferenceEquals(this.Obj, o)))
+            foreach (var result in objects.Where(o => object.ReferenceEquals(Obj, o)))
             {
                 found = true;
                 yield return result;
             }
 
-            if (this.Required && !found)
+            if (Required && !found)
             {
-                throw new DependencyException($"{this.Owner} has a required dependency on {this.Obj} which was not found");
+                throw new DependencyException($"{Owner} has a required dependency on {Obj} which was not found");
             }
         }
     }

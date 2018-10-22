@@ -54,13 +54,13 @@ namespace Rezolver
         {
             get
             {
-                if (this.Member is PropertyInfo p)
+                if (Member is PropertyInfo p)
                 {
                     return p.PropertyType;
                 }
                 else
                 {
-                    return ((FieldInfo)this.Member).FieldType;
+                    return ((FieldInfo)Member).FieldType;
                 }
             }
         }
@@ -73,8 +73,8 @@ namespace Rezolver
         /// <param name="target">The target whose value will be written to the member.</param>
         public MemberBinding(MemberInfo member, ITarget target)
         {
-            this.Member = member ?? throw new ArgumentNullException(nameof(member));
-            this.Target = target ?? throw new ArgumentNullException(nameof(target));
+            Member = member ?? throw new ArgumentNullException(nameof(member));
+            Target = target ?? throw new ArgumentNullException(nameof(target));
         }
 
         /// <summary>
@@ -88,8 +88,8 @@ namespace Rezolver
         /// container.</param>
         public MemberBinding(MemberInfo member, Type resolveType = null)
         {
-            this.Member = member ?? throw new ArgumentNullException(nameof(member));
-            this.Target = Rezolver.Target.Resolved(resolveType ?? this.MemberType);
+            Member = member ?? throw new ArgumentNullException(nameof(member));
+            Target = Rezolver.Target.Resolved(resolveType ?? MemberType);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Rezolver
     {
         internal ExpressionExtractor(Expression e)
         {
-            this.Visit(e);
+            Visit(e);
         }
 
         internal MethodCallExpression CallExpression { get; private set; }
@@ -29,11 +29,11 @@ namespace Rezolver
 
         internal MemberExpression MemberExpression { get; private set; }
 
-        internal MethodInfo CalledMethod => this.CallExpression?.Method;
+        internal MethodInfo CalledMethod => CallExpression?.Method;
 
-        internal ConstructorInfo CalledConstructor => this.NewExpression?.Constructor;
+        internal ConstructorInfo CalledConstructor => NewExpression?.Constructor;
 
-        internal MemberInfo Member => this.MemberExpression?.Member;
+        internal MemberInfo Member => MemberExpression?.Member;
 
         /// <summary>
         /// Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />.
@@ -41,9 +41,9 @@ namespace Rezolver
         /// <param name="node">The expression to visit.</param>
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (this.CallExpression == null)
+            if (CallExpression == null)
             {
-                this.CallExpression = node;
+                CallExpression = node;
             }
 
             return base.VisitMethodCall(node);
@@ -55,9 +55,9 @@ namespace Rezolver
         /// <param name="node">The expression to visit.</param>
         protected override Expression VisitNew(NewExpression node)
         {
-            if (this.NewExpression == null)
+            if (NewExpression == null)
             {
-                this.NewExpression = node;
+                NewExpression = node;
             }
 
             return base.VisitNew(node);
@@ -65,9 +65,9 @@ namespace Rezolver
 
         protected override Expression VisitMember(MemberExpression node)
         {
-            if (this.MemberExpression == null)
+            if (MemberExpression == null)
             {
-                this.MemberExpression = node;
+                MemberExpression = node;
             }
 
             return base.VisitMember(node);

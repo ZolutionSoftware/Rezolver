@@ -32,7 +32,7 @@ namespace Rezolver.Compilation.Expressions
             return this._cache.GetOrAdd(target.GetType(), t => new Lazy<IExpressionBuilder>(() =>
             {
                 List<Type> builderTypes =
-                    this.TargetSearchTypes(t)
+                    TargetSearchTypes(t)
                     .Distinct()
                     .Select(tt => typeof(IExpressionBuilder<>).MakeGenericType(tt)).ToList();
 

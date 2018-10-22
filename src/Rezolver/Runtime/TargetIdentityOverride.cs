@@ -11,7 +11,7 @@ namespace Rezolver.Runtime
     {
         public TargetIdentityOverride(Guid targetId)
         {
-            this.TargetId = targetId;
+            TargetId = targetId;
         }
 
         public Guid TargetId { get; }

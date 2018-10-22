@@ -56,7 +56,7 @@ namespace Rezolver.Compilation
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ResolveContext"/>
         /// </summary>
-        public IResolveContext ResolveContext => this._resolveContext ?? this.ParentContext?.ResolveContext;
+        public IResolveContext ResolveContext => this._resolveContext ?? ParentContext?.ResolveContext;
 
         private readonly Type _targetType;
         /// <summary>
@@ -65,7 +65,7 @@ namespace Rezolver.Compilation
         /// </summary>
         /// <remarks>Note that when creating a child context with a null <c>targetType</c> argument, this property will be inherited
         /// from the <see cref="ParentContext"/>.</remarks>
-        public Type TargetType { get { return this._targetType ?? this.ParentContext?.TargetType; } }
+        public Type TargetType { get { return this._targetType ?? ParentContext?.TargetType; } }
 
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ScopeBehaviourOverride"/>
@@ -76,7 +76,7 @@ namespace Rezolver.Compilation
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ScopePreferenceOverride"/>
         /// </summary>
-        public ScopePreference? ScopePreferenceOverride { get { return this._scopePreferenceOverride ?? this.ParentContext?.ScopePreferenceOverride; } }
+        public ScopePreference? ScopePreferenceOverride { get { return this._scopePreferenceOverride ?? ParentContext?.ScopePreferenceOverride; } }
         /// <summary>
         /// This is the <see cref="ITargetContainer"/> through which dependencies are resolved by this context in its
         /// implementation of <see cref="ITargetContainer"/>.
@@ -92,7 +92,7 @@ namespace Rezolver.Compilation
         /// related to this one - both up and down the hierarchy.
         /// </summary>
         /// <value>The compile stack.</value>
-        public IEnumerable<CompileStackEntry> CompileStack => this._compileStack?.AsReadOnly() ?? this.ParentContext?.CompileStack;
+        public IEnumerable<CompileStackEntry> CompileStack => this._compileStack?.AsReadOnly() ?? ParentContext?.CompileStack;
 
         /// <summary>
         /// Creates a new <see cref="CompileContext"/> as a child of another.
@@ -112,11 +112,11 @@ namespace Rezolver.Compilation
             ScopePreference? scopePreferenceOverride = null)
         {
             parentContext.MustNotBeNull(nameof(parentContext));
-            this.ParentContext = parentContext;
-            this.DependencyTargetContainer = new OverridingTargetContainer(parentContext, _emptyConfig);
+            ParentContext = parentContext;
+            DependencyTargetContainer = new OverridingTargetContainer(parentContext, _emptyConfig);
             this._targetType = targetType;
             this._resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
-            this.ScopeBehaviourOverride = scopeBehaviourOverride;
+            ScopeBehaviourOverride = scopeBehaviourOverride;
             this._scopePreferenceOverride = scopePreferenceOverride;
             // note - many of the other members are inherited in the property getters or interface implementations
         }
@@ -142,7 +142,7 @@ namespace Rezolver.Compilation
         {
             resolveContext.MustNotBeNull(nameof(resolveContext));
             dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
-            this.DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer, _emptyConfig);
+            DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer, _emptyConfig);
             this._resolveContext = resolveContext;
             this._targetType = targetType;
             this._compileStack = new Stack<CompileStackEntry>(30);
@@ -152,7 +152,7 @@ namespace Rezolver.Compilation
             ScopeBehaviour? scopeBehaviourOverride,
             ScopePreference? scopePreferenceOverride)
         {
-            return this.NewContext(targetType, scopeBehaviourOverride);
+            return NewContext(targetType, scopeBehaviourOverride);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Rezolver.Compilation
             ScopeBehaviour? scopeBehaviourOverride = null,
             ScopePreference? scopePreferenceOverride = null)
         {
-            return new CompileContext(this, targetType, scopeBehaviourOverride, scopePreferenceOverride ?? this.ScopePreferenceOverride);
+            return new CompileContext(this, targetType, scopeBehaviourOverride, scopePreferenceOverride ?? ScopePreferenceOverride);
         }
 
         IRootTargetContainer ITargetContainer.Root => DependencyTargetContainer.Root;
@@ -185,9 +185,9 @@ namespace Rezolver.Compilation
         bool ICompileContext.PushCompileStack(ITarget toCompile, Type targetType)
         {
             // when referring this call up to the parent, we either use the targetType passed, or default to our target type
-            if (this.ParentContext != null)
+            if (ParentContext != null)
             {
-                return this.ParentContext.PushCompileStack(toCompile, targetType ?? this.TargetType);
+                return ParentContext.PushCompileStack(toCompile, targetType ?? TargetType);
             }
 
             toCompile.MustNotBeNull("toCompile");
@@ -211,9 +211,9 @@ namespace Rezolver.Compilation
         /// the compilation stack is always shared between all contexts spawned from the same root.</remarks>
         CompileStackEntry ICompileContext.PopCompileStack()
         {
-            if (this.ParentContext != null)
+            if (ParentContext != null)
             {
-                return this.ParentContext.PopCompileStack();
+                return ParentContext.PopCompileStack();
             }
 
             return this._compileStack.Pop();
@@ -226,7 +226,7 @@ namespace Rezolver.Compilation
         /// <param name="serviceType">See <see cref="ITargetContainer.Register(ITarget, Type)"/> for more</param>
         void ITargetContainer.Register(ITarget target, Type serviceType)
         {
-            this.DependencyTargetContainer.Register(target, serviceType);
+            DependencyTargetContainer.Register(target, serviceType);
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Rezolver.Compilation
         /// <param name="type">See <see cref="ITargetContainer.Fetch(Type)"/> for more.</param>
         ITarget ITargetContainer.Fetch(Type type)
         {
-            return this.DependencyTargetContainer.Fetch(type);
+            return DependencyTargetContainer.Fetch(type);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Rezolver.Compilation
         /// <param name="type">See <see cref="ITargetContainer.FetchAll(Type)"/> for more</param>
         IEnumerable<ITarget> ITargetContainer.FetchAll(Type type)
         {
-            return this.DependencyTargetContainer.FetchAll(type);
+            return DependencyTargetContainer.FetchAll(type);
         }
 
         /// <summary>
@@ -260,12 +260,12 @@ namespace Rezolver.Compilation
 
         ITargetContainer ITargetContainer.FetchContainer(Type type)
         {
-            return this.DependencyTargetContainer.FetchContainer(type);
+            return DependencyTargetContainer.FetchContainer(type);
         }
 
         void ITargetContainer.RegisterContainer(Type type, ITargetContainer container)
         {
-            this.DependencyTargetContainer.RegisterContainer(type, container);
+            DependencyTargetContainer.RegisterContainer(type, container);
         }
     }
 }

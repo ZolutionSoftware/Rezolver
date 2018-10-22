@@ -65,8 +65,8 @@ namespace Rezolver.Targets
                 throw new ArgumentException($"The type {targetType} is not compatible with the target's DeclaredType {innerTarget.DeclaredType}", nameof(targetType));
             }
 
-            this.InnerTarget = innerTarget;
-            this.DeclaredType = targetType;
+            InnerTarget = innerTarget;
+            DeclaredType = targetType;
         }
     }
 }

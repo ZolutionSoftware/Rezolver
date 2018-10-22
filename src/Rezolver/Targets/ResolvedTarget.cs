@@ -89,8 +89,8 @@ namespace Rezolver.Targets
                 throw new ArgumentException($"The fallback target must support the passed type {type}", nameof(fallbackTarget));
             }
 
-            this.DeclaredType = type;
-            this.FallbackTarget = fallbackTarget;
+            DeclaredType = type;
+            FallbackTarget = fallbackTarget;
         }
 
         /// <summary>
@@ -108,14 +108,14 @@ namespace Rezolver.Targets
         {
             context.MustNotBeNull(nameof(context));
 
-            var fromContext = context.Fetch(this.DeclaredType);
+            var fromContext = context.Fetch(DeclaredType);
             if (fromContext == null)
             {
-                return this.FallbackTarget; // might still be null of course
+                return FallbackTarget; // might still be null of course
             }
             else if (fromContext.UseFallback)
             {
-                return this.FallbackTarget ?? fromContext;
+                return FallbackTarget ?? fromContext;
             }
 
             return fromContext;

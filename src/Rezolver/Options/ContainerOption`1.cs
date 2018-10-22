@@ -79,7 +79,7 @@ namespace Rezolver.Options
         /// <returns>A string in the form <code>"{Value} ({typeof(TOption)})"</code></returns>
         public override string ToString()
         {
-            return $"{this.Value} ({typeof(TOption)})";
+            return $"{Value} ({typeof(TOption)})";
         }
     }
 }

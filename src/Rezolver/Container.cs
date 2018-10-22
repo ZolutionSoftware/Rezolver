@@ -69,12 +69,12 @@ namespace Rezolver
         public Container(IRootTargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
-            if (this.GetType() != typeof(Container))
+            if (GetType() != typeof(Container))
             {
                 throw new InvalidOperationException("This constructor must not be used by derived types because applying configuration will most likely trigger calls to virtual methods on this instance.  Please use the protected constructor and apply configuration explicitly in your derived class");
             }
 
-            (config ?? DefaultConfig).Configure(this, this.Targets);
+            (config ?? DefaultConfig).Configure(this, Targets);
         }
 
         /// <summary>

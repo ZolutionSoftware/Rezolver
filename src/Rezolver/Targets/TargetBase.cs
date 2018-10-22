@@ -87,7 +87,7 @@ namespace Rezolver.Targets
         {
             type.MustNotBeNull("type");
             // removed generic type test here because it's a blunt instrument.
-            return TypeHelpers.AreCompatible(this.DeclaredType, type);
+            return TypeHelpers.AreCompatible(DeclaredType, type);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Rezolver.Targets
         /// <returns></returns>
         public override string ToString()
         {
-            return $"<{this.GetType().Name}, DeclaredType={this.DeclaredType}>";
+            return $"<{GetType().Name}, DeclaredType={DeclaredType}>";
         }
 
         /// <summary>

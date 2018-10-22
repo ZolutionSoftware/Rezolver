@@ -4,7 +4,7 @@
     <Description>Shared source for Rezolver projects</Description>
     <VersionPrefix>1.3.4</VersionPrefix>
     <Authors>Zolution Software Ltd</Authors>
-    <TargetFrameworks>netstandard1.1;net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net461;netstandard2.0</TargetFrameworks>
     <AssemblyName>Rezolver.Shared</AssemblyName>
     <PackageId>Rezolver.Shared</PackageId>
     <PackageTags>rezolver</PackageTags>

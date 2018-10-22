@@ -162,14 +162,14 @@ namespace Rezolver.Targets
             IDictionary<string, ITarget> suppliedArgs)
         {
             this._ctor = ctor;
-            this.DeclaredType = type ?? ctor?.DeclaringType;
+            DeclaredType = type ?? ctor?.DeclaringType;
             if (type != null)
             {
                 type.MustNot(t => TypeHelpers.IsInterface(t) || TypeHelpers.IsAbstract(t), "Type must not be an interface or an abstract class", nameof(type));
             }
 
             this._parameterBindings = parameterBindings ?? ParameterBinding.None;
-            this.MemberBindingBehaviour = memberBinding;
+            MemberBindingBehaviour = memberBinding;
             this._namedArgs = suppliedArgs ?? new Dictionary<string, ITarget>();
         }
 
@@ -201,7 +201,7 @@ namespace Rezolver.Targets
             {
                 // have to go searching for the best constructor match for the current context,
                 // which will also give us our arguments
-                var publicCtorGroups = GetPublicConstructorGroups(this.DeclaredType);
+                var publicCtorGroups = GetPublicConstructorGroups(DeclaredType);
                 // var possibleBindingsGrouped = publicCtorGroups.Select(g => g.Select(ci => new BoundConstructorTarget(ci, ParameterBinding.BindMethod(ci))));
                 var ctorsWithBindingsGrouped = publicCtorGroups.Select(g =>
                   g.Select(ci => new
@@ -245,7 +245,7 @@ namespace Rezolver.Targets
                             }
                             else
                             {
-                                throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneConstructorFormat, this.DeclaredType, string.Join(", ", mostGreedy.AsEnumerable())));
+                                throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneConstructorFormat, DeclaredType, string.Join(", ", mostGreedy.AsEnumerable())));
                             }
                         }
                         else
@@ -256,7 +256,7 @@ namespace Rezolver.Targets
                     }
                     else
                     {
-                        throw new InvalidOperationException(string.Format(ExceptionResources.NoApplicableConstructorForContextFormat, this.DeclaredType));
+                        throw new InvalidOperationException(string.Format(ExceptionResources.NoApplicableConstructorForContextFormat, DeclaredType));
                     }
                 }
                 else
@@ -275,7 +275,7 @@ namespace Rezolver.Targets
                         var fewestFallback = mostBound.GroupBy(a => a.bindings.Count(b => b.RezolvedArg.UseFallback)).FirstOrDefault().ToArray();
                         if (fewestFallback.Length > 1)
                         {
-                            throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneBestConstructorFormat, this.DeclaredType, string.Join(", ", fewestFallback.Select(a => a.ctor))));
+                            throw new AmbiguousMatchException(string.Format(ExceptionResources.MoreThanOneBestConstructorFormat, DeclaredType, string.Join(", ", fewestFallback.Select(a => a.ctor))));
                         }
 
                         toBind = fewestFallback[0];
@@ -302,10 +302,10 @@ namespace Rezolver.Targets
 
             // use either the member binding behaviour that was passed on construction, or locate the
             // option from the compile context's target container.
-            var memberBindingBehaviour = this.MemberBindingBehaviour
+            var memberBindingBehaviour = MemberBindingBehaviour
                 ?? context.GetOption(ctor.DeclaringType, Rezolver.MemberBindingBehaviour.BindNone);
 
-            return new ConstructorBinding(ctor, boundArgs, memberBindingBehaviour?.GetMemberBindings(context, this.DeclaredType));
+            return new ConstructorBinding(ctor, boundArgs, memberBindingBehaviour?.GetMemberBindings(context, DeclaredType));
         }
 
         private static IGrouping<int, ConstructorInfo>[] GetPublicConstructorGroups(Type declaredType)

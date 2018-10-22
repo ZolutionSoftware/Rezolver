@@ -15,7 +15,7 @@ namespace Rezolver
     /// </summary>
     public class BindSpecificMembersBehaviour : BindAllMembersBehaviour
     {
-        private Dictionary<MemberInfoKey, MemberBinding> members;
+        private readonly Dictionary<MemberInfoKey, MemberBinding> members;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BindSpecificMembersBehaviour"/> class
@@ -116,22 +116,22 @@ namespace Rezolver
         {
             public MemberInfoKey(MemberInfo member)
             {
-                this.Member = member;
+                Member = member;
             }
 
             public MemberInfo Member { get; }
 
             public bool Equals(MemberInfoKey other)
             {
-                return this.Member == other.Member ||
-                    (this.Member.DeclaringType == other.Member.DeclaringType && this.Member.Name == other.Member.Name);
+                return Member == other.Member ||
+                    (Member.DeclaringType == other.Member.DeclaringType && Member.Name == other.Member.Name);
             }
 
             public override bool Equals(object obj)
             {
                 if (obj is MemberInfoKey key)
                 {
-                    return this.Equals(key);
+                    return Equals(key);
                 }
 
                 return false;
@@ -140,7 +140,7 @@ namespace Rezolver
             public override int GetHashCode()
             {
                 // cheap and nasty
-                return this.Member.DeclaringType.GetHashCode() ^ this.Member.Name.GetHashCode();
+                return Member.DeclaringType.GetHashCode() ^ Member.Name.GetHashCode();
             }
         }
     }

@@ -30,7 +30,7 @@ namespace Rezolver.Compilation
         public DelegatingCompiledTarget(Func<IResolveContext, object> callback, ITarget sourceTarget)
         {
             this._callback = callback ?? throw new ArgumentNullException(nameof(callback));
-            this.SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
+            SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
         }
 
         /// <summary>

@@ -24,7 +24,7 @@ namespace Rezolver.Sdk
         {
             if (!this.Map.TryGetValue(obj, out HashSet<T> toReturn))
             {
-                this.Map[obj] = toReturn = this.BuildDependencies(obj);
+                this.Map[obj] = toReturn = BuildDependencies(obj);
             }
 
             return toReturn;
@@ -51,7 +51,7 @@ namespace Rezolver.Sdk
                     // dependencies of my dependency are my dependencies
                     // (note we don't bother marking transitive dependencies because
                     // they're not relevant to the algorithm)
-                    foreach (var dep in this.GetDependencyMap(dependency))
+                    foreach (var dep in GetDependencyMap(dependency))
                     {
                         entry.Add(dep);
                     }
@@ -75,8 +75,8 @@ namespace Rezolver.Sdk
 
             // do this before checking reference equality - ensures the dependency maps are built
             // for all objects
-            var xdeps = this.GetDependencyMap(x);
-            var ydeps = this.GetDependencyMap(y);
+            var xdeps = GetDependencyMap(x);
+            var ydeps = GetDependencyMap(y);
             if (object.ReferenceEquals(x, y))
             {
                 return 0;
@@ -109,14 +109,14 @@ namespace Rezolver.Sdk
             // enumerable
             foreach (var result in this.Objects.OrderBy(b => b, this))
             {
-                this.GetDependencyMap(result);
+                GetDependencyMap(result);
                 yield return result;
             }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

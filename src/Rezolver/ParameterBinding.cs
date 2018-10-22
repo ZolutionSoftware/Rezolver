@@ -35,7 +35,7 @@ namespace Rezolver
         ///
         /// Ultimately, this returns true if <see cref="Target"/> is non-null.
         /// </summary>
-        public bool IsValid { get { return this.Target != null; } }
+        public bool IsValid { get { return Target != null; } }
 
         /// <summary>
         /// Constructs a new instance of the <see cref="ParameterBinding"/> class.
@@ -44,8 +44,8 @@ namespace Rezolver
         /// <param name="target">Optional - the argument supplied for the parameter.</param>
         public ParameterBinding(ParameterInfo parameter, ITarget target = null)
         {
-            this.Parameter = parameter;
-            this.Target = target ?? BindRezolvedArgument(parameter);
+            Parameter = parameter;
+            Target = target ?? BindRezolvedArgument(parameter);
         }
 
         /// <summary>
@@ -61,12 +61,12 @@ namespace Rezolver
         /// part of your expression tree - you should </remarks>
         public virtual ITarget Resolve(ICompileContext context)
         {
-            if (this.Target is ResolvedTarget rezolvedTarget)
+            if (Target is ResolvedTarget rezolvedTarget)
             {
-                return rezolvedTarget.Bind(context.NewContext(this.Parameter.ParameterType));
+                return rezolvedTarget.Bind(context.NewContext(Parameter.ParameterType));
             }
 
-            return this.Target;
+            return Target;
         }
 
         /// <summary>

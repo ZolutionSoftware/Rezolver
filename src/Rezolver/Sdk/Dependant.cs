@@ -16,8 +16,8 @@ namespace Rezolver.Sdk
     {
         private DependencyMetadataCollection Dependencies { get; } = new DependencyMetadataCollection();
 
-        DependencyMetadataCollection IMutableDependant.Dependencies => this.Dependencies;
+        DependencyMetadataCollection IMutableDependant.Dependencies => Dependencies;
 
-        IEnumerable<DependencyMetadata> IDependant.Dependencies => this.Dependencies;
+        IEnumerable<DependencyMetadata> IDependant.Dependencies => Dependencies;
     }
 }

@@ -31,15 +31,13 @@ namespace Rezolver
         {
             Root = root;
             GenericFactoryTypeDefinition = factoryType;
-
         }
 
         private ITargetContainer EnsureInner()
         {
             // This reuses the same logic that TargetContainer employs via these extension methods
-            return this.Inner ??
-                (this.Inner = this.Root.CreateChildContainer(
-                            this.Root.GetChildContainerType(this.GenericFactoryTypeDefinition)));
+            return Inner ??
+                (Inner = Root.CreateTargetContainerForServiceTypeInternal(GenericFactoryTypeDefinition));
         }
 
         public ITargetContainer CombineWith(ITargetContainer existing, Type type)

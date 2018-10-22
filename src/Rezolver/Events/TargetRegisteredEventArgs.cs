@@ -28,8 +28,8 @@ namespace Rezolver.Events
         /// <param name="type"></param>
         public TargetRegisteredEventArgs(ITarget target, Type type)
         {
-            this.Target = target;
-            this.Type = type;
+            Target = target;
+            Type = type;
         }
     }
 }

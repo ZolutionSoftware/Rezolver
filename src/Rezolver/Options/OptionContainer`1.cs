@@ -21,7 +21,7 @@ namespace Rezolver.Options
 
         public OptionContainer(TOption option)
         {
-            this.Option = option;
+            Option = option;
         }
 
         object IDirectTarget.GetValue() => this;

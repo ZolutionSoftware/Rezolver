@@ -17,8 +17,8 @@ namespace Rezolver.Compilation.Expressions
 
         public ExpressionReplacement(Expression original, Expression replacement)
         {
-            this.Original = original;
-            this.Replacement = replacement;
+            Original = original;
+            Replacement = replacement;
         }
     }
 }

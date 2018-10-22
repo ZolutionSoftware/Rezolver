@@ -51,7 +51,7 @@ namespace Rezolver.Targets
         /// will be constructed.
         /// </summary>
         /// <remarks></remarks>
-        public Type GenericType { get => this.GenericTypeConstructor?.DeclaringType ?? this._genericType; }
+        public Type GenericType { get => GenericTypeConstructor?.DeclaringType ?? this._genericType; }
 
         /// <summary>
         /// If supplied on construction, then this is a constructor declared on the <see cref="GenericType"/> which is to be
@@ -72,7 +72,7 @@ namespace Rezolver.Targets
         /// </summary>
         public override System.Type DeclaredType
         {
-            get { return this.GenericType; }
+            get { return GenericType; }
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Rezolver.Targets
             }
 
             this._genericType = genericType;
-            this.MemberBindingBehaviour = memberBinding;
+            MemberBindingBehaviour = memberBinding;
         }
 
         /// <summary>
@@ -127,8 +127,8 @@ namespace Rezolver.Targets
                 throw new ArgumentException($"The type which owns the given constructor ({genericConstructor}) must be a generic type definition of either a non-abstract class or value type.");
             }
 
-            this.GenericTypeConstructor = genericConstructor;
-            this.MemberBindingBehaviour = memberBinding;
+            GenericTypeConstructor = genericConstructor;
+            MemberBindingBehaviour = memberBinding;
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Rezolver.Targets
                 return true;
             }
 
-            return this.MapType(type).Success;
+            return MapType(type).Success;
         }
 
         /// <summary>
@@ -162,30 +162,30 @@ namespace Rezolver.Targets
         {
             if (!TypeHelpers.IsGenericType(targetType))
             {
-                return new GenericTypeMapping(targetType, GetMappingError_DeclaredTypeCannotBeMapped(this.DeclaredType, targetType));
+                return new GenericTypeMapping(targetType, GetMappingError_DeclaredTypeCannotBeMapped(DeclaredType, targetType));
             }
 
             var genericType = TypeHelpers.IsGenericTypeDefinition(targetType) ? targetType : targetType.GetGenericTypeDefinition();
             Type[] suppliedTypeArguments = EmptyTypes;
             Type[] finalTypeArguments = EmptyTypes;
-            if (genericType == this.DeclaredType)
+            if (genericType == DeclaredType)
             {
                 finalTypeArguments = TypeHelpers.GetGenericArguments(targetType);
             }
             else
             {
-                finalTypeArguments = this.MapGenericParameters(targetType);
+                finalTypeArguments = MapGenericParameters(targetType);
 
                 if (finalTypeArguments == null)
                 {
-                    return new GenericTypeMapping(targetType, GetMappingError_NotABaseOrInterface(this.DeclaredType, targetType));
+                    return new GenericTypeMapping(targetType, GetMappingError_NotABaseOrInterface(DeclaredType, targetType));
                 }
 
                 var genericMismatches = finalTypeArguments.Where(a => TypeHelpers.IsAssignableFrom(typeof(ITypeArgGenericMismatch), a)).ToArray();
 
                 if (genericMismatches.Length != 0)
                 {
-                    return new GenericTypeMapping(targetType, GetMappingError_ArgumentsLessGeneric(this.DeclaredType, targetType, genericMismatches));
+                    return new GenericTypeMapping(targetType, GetMappingError_ArgumentsLessGeneric(DeclaredType, targetType, genericMismatches));
                 }
 
                 if (finalTypeArguments.Length == 0 || finalTypeArguments.Any(t => t == null) || finalTypeArguments.Any(t => t.IsGenericParameter))
@@ -197,11 +197,11 @@ namespace Rezolver.Targets
                     // TODO: change dis to deep search for *ANY* open generics
                     if (TypeHelpers.ContainsGenericParameters(targetType))
                     {
-                        return new GenericTypeMapping(targetType, this.DeclaredType, bindErrorMessage: GetMappingError_OpenGenericResult(this.DeclaredType, targetType));
+                        return new GenericTypeMapping(targetType, DeclaredType, bindErrorMessage: GetMappingError_OpenGenericResult(DeclaredType, targetType));
                     }
                     else
                     {
-                        return new GenericTypeMapping(targetType, GetMappingError_NotEnoughTypeInformation(this.DeclaredType, targetType));
+                        return new GenericTypeMapping(targetType, GetMappingError_NotEnoughTypeInformation(DeclaredType, targetType));
                     }
                 }
             }
@@ -211,24 +211,24 @@ namespace Rezolver.Targets
             try
             {
                 // make the generic type
-                targetGeneric = this.DeclaredType.MakeGenericType(finalTypeArguments);
+                targetGeneric = DeclaredType.MakeGenericType(finalTypeArguments);
             }
             catch (TypeLoadException tlex)
             {
-                return new GenericTypeMapping(targetType, GetMappingError_TypeLoadException(this.DeclaredType, finalTypeArguments, tlex));
+                return new GenericTypeMapping(targetType, GetMappingError_TypeLoadException(DeclaredType, finalTypeArguments, tlex));
             }
             catch (ArgumentException aex)
             {
-                return new GenericTypeMapping(targetType, GetMappingError_InvalidTypeArguments(this.DeclaredType, finalTypeArguments, aex));
+                return new GenericTypeMapping(targetType, GetMappingError_InvalidTypeArguments(DeclaredType, finalTypeArguments, aex));
             }
 
             // now, if we have a constructor, we have to get the correct version for this generic type
-            if (this.GenericTypeConstructor != null)
+            if (GenericTypeConstructor != null)
             {
-                mappedConstructor = this.GenericTypeConstructor.ToGenericTypeCtor(targetGeneric);
+                mappedConstructor = GenericTypeConstructor.ToGenericTypeCtor(targetGeneric);
                 if (mappedConstructor == null)
                 {
-                    return new GenericTypeMapping(targetType, targetGeneric, bindErrorMessage: $"Could not map the constructor {this.GenericTypeConstructor} from the type {this.GenericType} to the type {targetGeneric}");
+                    return new GenericTypeMapping(targetType, targetGeneric, bindErrorMessage: $"Could not map the constructor {GenericTypeConstructor} from the type {GenericType} to the type {targetGeneric}");
                 }
             }
 
@@ -287,7 +287,7 @@ namespace Rezolver.Targets
                 throw new ArgumentException("GenericConstructorTarget requires a concrete TargetType to be passed in the CompileContext.", nameof(context));
             }
 
-            var mapTypeResult = this.MapType(context.TargetType);
+            var mapTypeResult = MapType(context.TargetType);
             // if the mapping fails, or the mapping is not fully bound to a closed generic, throw an exception
             if (!mapTypeResult.Success || !mapTypeResult.IsFullyBound)
             {
@@ -297,29 +297,29 @@ namespace Rezolver.Targets
             // construct the constructortarget
             if (mapTypeResult.Constructor != null)
             {
-                return Target.ForConstructor(mapTypeResult.Constructor, this.MemberBindingBehaviour);
+                return Target.ForConstructor(mapTypeResult.Constructor, MemberBindingBehaviour);
             }
             else
             {
-                return Target.ForType(mapTypeResult.Type, this.MemberBindingBehaviour);
+                return Target.ForType(mapTypeResult.Type, MemberBindingBehaviour);
             }
         }
 
         private Type[] MapGenericParameters(Type requestedType)
         {
             var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
-            Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(this.DeclaredType);
+            Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(DeclaredType);
             // check whether it's a base or an interface
             var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
-                TypeHelpers.GetInterfaces(this.DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-                : this.DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+                TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
+                : DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
             if (mappedBase != null)
             {
                 var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);
-                var typeParamPositions = TypeHelpers.GetGenericArguments(this.DeclaredType)
+                var typeParamPositions = TypeHelpers.GetGenericArguments(DeclaredType)
                     .Select(t =>
                     {
-                        var mapping = this.DeepSearchTypeParameterMapping(null, mappedBase, t);
+                        var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
 
                         // todo: if mapping is null, then we need to examine the generic constraints on t (or possibly its base or interfaces), which also works
                         // - there's currently a GenericConstructorTargets test containing the ValidWideningGeneric type - which should be able to be supported.  If we're clever.
@@ -429,7 +429,7 @@ namespace Rezolver.Targets
                 for (int f = 0; f < args.Length; f++)
                 {
                     previousTypeParameterPositions.Push(new GenericParameterMapping() { BaseType = baseTypeParameter, BaseTypeArgument = args[f], Index = f, TargetParameter = targetTypeParameter });
-                    result = this.DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
+                    result = DeepSearchTypeParameterMapping(previousTypeParameterPositions, args[f], targetTypeParameter);
                     previousTypeParameterPositions.Pop();
                     if (result != null)
                     {

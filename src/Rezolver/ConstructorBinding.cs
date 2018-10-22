@@ -28,7 +28,7 @@ namespace Rezolver
         /// base <see cref="MethodBinding.Method"/> property cast to <see cref="ConstructorInfo"/>.
         /// </summary>
         /// <value>The constructor.</value>
-        public ConstructorInfo Constructor { get { return (ConstructorInfo)this.Method; } }
+        public ConstructorInfo Constructor { get { return (ConstructorInfo)Method; } }
 
         /// <summary>
         /// Gets the member bindings to be applied to the new instance created by the <see cref="Constructor"/>
@@ -49,7 +49,7 @@ namespace Rezolver
             MemberBinding[] memberBindings = null)
             : base(constructor, boundArgs)
         {
-            this.MemberBindings = memberBindings ?? NoBoundMembers;
+            MemberBindings = memberBindings ?? NoBoundMembers;
         }
     }
 }

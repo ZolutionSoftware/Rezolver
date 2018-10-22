@@ -32,7 +32,7 @@ namespace Rezolver.Targets
             private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext: ICompileContext
             {
-                return this.GetCompiled(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
+                return GetCompiled(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
             }
 
             private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, TypeAndTargetId key, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
@@ -43,7 +43,7 @@ namespace Rezolver.Targets
 
             private Lazy<object> GetLazy(IResolveContext context, Guid targetId, Func<IResolveContext, object> lazyFactory)
             {
-                return this.GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
+                return GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
             }
 
             private Lazy<object> GetLazy(IResolveContext context, TypeAndTargetId key, Func<IResolveContext, object> lazyFactory)
@@ -54,7 +54,7 @@ namespace Rezolver.Targets
             public object GetObject<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
-                return this.GetObject(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
+                return GetObject(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
             }
 
             public object GetObject<TCompileContext>(TCompileContext context, TypeAndTargetId key, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
@@ -62,8 +62,8 @@ namespace Rezolver.Targets
             {
                 return this._cachedObjects.GetOrAdd(key, k =>
                 {
-                    var compiled = this.GetCompiled(context, key, compiledTargetFactory);
-                    return this.GetLazy(context.ResolveContext, key, rc => compiled.GetObject(rc)).Value;
+                    var compiled = GetCompiled(context, key, compiledTargetFactory);
+                    return GetLazy(context.ResolveContext, key, rc => compiled.GetObject(rc)).Value;
                 });
             }
         }
@@ -72,7 +72,7 @@ namespace Rezolver.Targets
         /// Override of <see cref="TargetBase.DeclaredType"/> - always returns the DeclaredType of the <see cref="InnerTarget"/>
         /// </summary>
         /// <value>The type of the declared.</value>
-        public override Type DeclaredType => this.InnerTarget.DeclaredType;
+        public override Type DeclaredType => InnerTarget.DeclaredType;
 
         /// <summary>
         /// Always returns <see cref="ScopeBehaviour.Explicit"/>.
@@ -97,7 +97,7 @@ namespace Rezolver.Targets
             innerTarget.MustNotBeNull("innerTarget");
             innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
 
-            this.InnerTarget = innerTarget;
+            InnerTarget = innerTarget;
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Rezolver.Targets
         /// <param name="type">Required</param>
         public override bool SupportsType(Type type)
         {
-            return this.InnerTarget.SupportsType(type);
+            return InnerTarget.SupportsType(type);
         }
     }
 }

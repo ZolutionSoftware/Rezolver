@@ -46,7 +46,7 @@ namespace Rezolver
             // TODO: see also EnumerableTargetContainer's Fetch method
             // TODO: look at subclassing a version of this which 'knows' about the
             // overriding container so that we can get rid of the forking here.
-            if (this.Root is OverridingTargetContainer overridingContainer)
+            if (Root is OverridingTargetContainer overridingContainer)
             {
                 // if the
                 result = overridingContainer.Parent.Fetch(type);

@@ -59,7 +59,7 @@ namespace Rezolver
         /// order, calling its <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/> method.</remarks>
         public void Configure(IRootTargetContainer targets)
         {
-            foreach (var config in this.Ordered)
+            foreach (var config in Ordered)
             {
                 config.Configure(targets);
             }

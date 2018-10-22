@@ -196,7 +196,7 @@ namespace Rezolver.Compilation.Expressions
 
             try
             {
-                var result = this.Build(target, context, compiler);
+                var result = Build(target, context, compiler);
                 Type convertType = context.TargetType ?? target.DeclaredType;
 
                 // expands targets which have baked into expressions
@@ -208,7 +208,7 @@ namespace Rezolver.Compilation.Expressions
                     result = Expression.Convert(result, convertType);
                 }
 
-                result = this.ApplyScoping(result, target, context, compiler);
+                result = ApplyScoping(result, target, context, compiler);
 
                 return result;
             }
@@ -311,14 +311,14 @@ namespace Rezolver.Compilation.Expressions
 
             if (compiler == null)
             {
-                compiler = this.GetContextCompiler(context);
+                compiler = GetContextCompiler(context);
                 if (compiler == null)
                 {
                     throw new InvalidOperationException("Unable to identify the IExpressionCompiler for the current context");
                 }
             }
 
-            return this.BuildCore(target, context, compiler);
+            return BuildCore(target, context, compiler);
         }
 
         /// <summary>

@@ -91,7 +91,7 @@ namespace Rezolver.Compilation.Expressions
 
             var checkContainer = context.GetOrAddSharedExpression(typeof(bool),
                 "IsSameRezolver",
-                () => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), this.GetType());
+                () => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), GetType());
 
             Expression useContextRezolverIfCanExpr = Expression.Condition(
                 Methods.CallIContainer_CanResolve(context.ContextContainerPropertyExpression, newContext),

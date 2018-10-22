@@ -56,13 +56,13 @@ namespace Rezolver
         public GenericTargetContainer(IRootTargetContainer root, Type genericType)
             : base(root ?? throw new ArgumentNullException(nameof(root)))
         {
-            this.GenericType = genericType ?? throw new ArgumentNullException(nameof(genericType));
-            if (!TypeHelpers.IsGenericTypeDefinition(this.GenericType))
+            GenericType = genericType ?? throw new ArgumentNullException(nameof(genericType));
+            if (!TypeHelpers.IsGenericTypeDefinition(GenericType))
             {
                 throw new ArgumentException("type must be a generic type definition", nameof(genericType));
             }
 
-            this.Targets = new TargetListContainer(this.Root, genericType);
+            Targets = new TargetListContainer(Root, genericType);
         }
 
         /// <summary>
@@ -91,22 +91,22 @@ namespace Rezolver
             // if the type we're adding against is equal to this container's generic type definition,
             // then we add it to the collection of targets that are registered specifically against
             // this type.
-            if (serviceType == this.GenericType)
+            if (serviceType == GenericType)
             {
-                this.Targets.Register(target, serviceType);
-                this.InvalidateCaches();
+                Targets.Register(target, serviceType);
+                InvalidateCaches();
             }
             else
             {
                 // the type MUST therefore be a closed generic over the generic type definition,
                 // if it's not, then we must throw an exception
-                if (!TypeHelpers.IsGenericType(serviceType) || serviceType.GetGenericTypeDefinition() != this.GenericType)
+                if (!TypeHelpers.IsGenericType(serviceType) || serviceType.GetGenericTypeDefinition() != GenericType)
                 {
-                    throw new ArgumentException($"Type must be equal to the generic type definition {this.GenericType} or a closed instance of that type", nameof(serviceType));
+                    throw new ArgumentException($"Type must be equal to the generic type definition {GenericType} or a closed instance of that type", nameof(serviceType));
                 }
 
                 base.Register(target, serviceType);
-                this.InvalidateCaches();
+                InvalidateCaches();
             }
         }
 
@@ -120,7 +120,7 @@ namespace Rezolver
         public override void RegisterContainer(Type type, ITargetContainer container)
         {
             base.RegisterContainer(type, container);
-            this.InvalidateCaches();
+            InvalidateCaches();
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Rezolver
 
                 // no direct match for any of the search types in our dictionary - so resort to the
                 // targets that have been registered directly against the open generic type.
-                return this.Targets.Fetch(t);
+                return Targets.Fetch(t);
             });
         }
 
@@ -166,12 +166,12 @@ namespace Rezolver
         /// <param name="type">The type whose targets are to be retrieved.</param>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            return this._caches.FetchAllCache.GetOrAdd(type, t => this.FetchAllWorker(t).ToArray());
+            return this._caches.FetchAllCache.GetOrAdd(type, t => FetchAllWorker(t).ToArray());
         }
 
         private IEnumerable<ITarget> FetchAllWorker(Type type)
         {
-            bool matchAll = this.Root.GetOption(type, Options.FetchAllMatchingGenerics.Default);
+            bool matchAll = Root.GetOption(type, Options.FetchAllMatchingGenerics.Default);
             bool foundOne = false;
             var typeSelector = Root.SelectTypes(type);
             // all generics are returned in descending order of specificity
@@ -193,7 +193,7 @@ namespace Rezolver
                 }
             }
 
-            foreach (var result in this.Targets.FetchAll(type))
+            foreach (var result in Targets.FetchAll(type))
             {
                 yield return result;
             }

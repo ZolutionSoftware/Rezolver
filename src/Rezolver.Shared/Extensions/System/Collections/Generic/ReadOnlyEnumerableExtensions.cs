@@ -16,7 +16,7 @@ namespace System.Collections.Generic
         /// <typeparam name="T"></typeparam>
         private class ReadOnlyCollection<T> : IList<T>
         {
-            private T[] _range;
+            private readonly T[] _range;
 
             public ReadOnlyCollection(IEnumerable<T> range)
             {
@@ -99,7 +99,7 @@ namespace System.Collections.Generic
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return this.GetEnumerator();
+                return GetEnumerator();
             }
         }
 

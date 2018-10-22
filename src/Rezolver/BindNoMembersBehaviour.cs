@@ -14,7 +14,7 @@ namespace Rezolver
     /// </summary>
     public sealed class BindNoMembersBehaviour : IMemberBindingBehaviour
     {
-        private static MemberBinding[] NoBindings = new MemberBinding[0];
+        private static readonly MemberBinding[] NoBindings = new MemberBinding[0];
 
         internal BindNoMembersBehaviour() { }
 

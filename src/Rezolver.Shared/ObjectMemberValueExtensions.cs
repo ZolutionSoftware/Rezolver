@@ -40,31 +40,31 @@ namespace Rezolver
 
             public ObjectMemberValue(object obj, MemberInfo member)
             {
-                this.Name = member.Name;
+                Name = member.Name;
                 // initialise it to *something*!
-                this.Type = typeof(object);
+                Type = typeof(object);
                 Func<object, MemberInfo, object> accessor = null;
                 if (member is FieldInfo)
                 {
                     accessor = GetValueFromField;
-                    this.Type = ((FieldInfo)member).FieldType;
+                    Type = ((FieldInfo)member).FieldType;
                 }
                 else if (member is PropertyInfo)
                 {
                     accessor = GetValueFromProperty;
-                    this.Type = ((PropertyInfo)member).PropertyType;
+                    Type = ((PropertyInfo)member).PropertyType;
                 }
 
                 if (accessor != null)
                 {
                     try
                     {
-                        this.Value = accessor(obj, member);
+                        Value = accessor(obj, member);
                     }
                     catch (Exception ex)
                     {
-                        this.ValueError = true;
-                        this.Value = ex;
+                        ValueError = true;
+                        Value = ex;
                     }
                 }
             }

@@ -33,7 +33,7 @@ namespace Rezolver.Targets
         {
             get
             {
-                return this.Inner.DeclaredType;
+                return Inner.DeclaredType;
             }
         }
 
@@ -45,7 +45,7 @@ namespace Rezolver.Targets
         {
             get
             {
-                return this.Inner.UseFallback;
+                return Inner.UseFallback;
             }
         }
 
@@ -61,7 +61,7 @@ namespace Rezolver.Targets
         public UnscopedTarget(ITarget inner)
         {
             inner.MustNotBeNull(nameof(inner));
-            this.Inner = inner;
+            Inner = inner;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Rezolver.Targets
         /// <param name="type">The type.</param>
         public override bool SupportsType(Type type)
         {
-            return this.Inner.SupportsType(type);
+            return Inner.SupportsType(type);
         }
     }
 }

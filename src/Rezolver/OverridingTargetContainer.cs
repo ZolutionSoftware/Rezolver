@@ -47,7 +47,7 @@ namespace Rezolver
         public OverridingTargetContainer(ITargetContainer parent, ITargetContainerConfig config = null)
                 : base()
         {
-            this.Parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            Parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
             (config ?? DefaultConfig).Configure(this);
         }
@@ -67,7 +67,7 @@ namespace Rezolver
             // ascend the tree of target containers looking for a type match.
             if ((result == null || result.UseFallback))
             {
-                return this.Parent.Fetch(type);
+                return Parent.Fetch(type);
             }
 
             return result;
@@ -82,7 +82,7 @@ namespace Rezolver
         /// empty enumerable if the type is not registered.</returns>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            return (this.Parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
+            return (Parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
                 base.FetchAll(type) ?? Enumerable.Empty<ITarget>());
         }
     }

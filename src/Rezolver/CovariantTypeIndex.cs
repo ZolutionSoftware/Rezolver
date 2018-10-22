@@ -33,12 +33,12 @@ namespace Rezolver
         internal CovariantTypeIndex(IRootTargetContainer root)
         {
             _root = root;
-            _root.TargetRegistered += this.Root_TargetRegistered;
+            _root.TargetRegistered += Root_TargetRegistered;
         }
 
         private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
         {
-            this.AddKnownType(e.Type);
+            AddKnownType(e.Type);
         }
 
         /// <summary>
@@ -60,28 +60,28 @@ namespace Rezolver
                 {
                     var elementType = TypeHelpers.GetElementType(serviceType);
 
-                    foreach (var type in this.GetGenericCovariants(elementType, derivedTypeStack)
+                    foreach (var type in GetGenericCovariants(elementType, derivedTypeStack)
                         .Select(t => TypeHelpers.MakeArrayType(t)))
                     {
-                        this.AddCovariantEntry(serviceType, type);
+                        AddCovariantEntry(serviceType, type);
                     }
 
-                    foreach (var type in this.GetTypeHierarchy(elementType)
+                    foreach (var type in GetTypeHierarchy(elementType)
                         .Select(t => TypeHelpers.MakeArrayType(t)))
                     {
-                        this.AddCompatibleTypeEntry(serviceType, type);
+                        AddCompatibleTypeEntry(serviceType, type);
                     }
                 }
                 else
                 {
-                    foreach (var type in this.GetGenericCovariants(serviceType, derivedTypeStack))
+                    foreach (var type in GetGenericCovariants(serviceType, derivedTypeStack))
                     {
-                        this.AddCovariantEntry(serviceType, type);
+                        AddCovariantEntry(serviceType, type);
                     }
 
-                    foreach (var type in this.GetTypeHierarchy(serviceType))
+                    foreach (var type in GetTypeHierarchy(serviceType))
                     {
-                        this.AddCompatibleTypeEntry(serviceType, type);
+                        AddCompatibleTypeEntry(serviceType, type);
                     }
                 }
             }
@@ -153,7 +153,7 @@ namespace Rezolver
                             // when a type argument is passed to a covariant parameter, then we can
                             // safely include all its bases and interfaces so long as it's not a type
                             // that is a sub type (or implementer)
-                            tap.typeParam.IsCovariantTypeParameter() && !derivedTypeStack.Contains(tap.typeArg) ? this.GetAllCompatibleTypes(tap.typeArg, derivedTypeStack) : new[] { tap.typeArg }
+                            tap.typeParam.IsCovariantTypeParameter() && !derivedTypeStack.Contains(tap.typeArg) ? GetAllCompatibleTypes(tap.typeArg, derivedTypeStack) : new[] { tap.typeArg }
                         )
                         .Permutate()
                         .Select(typeArgs =>
@@ -207,7 +207,7 @@ namespace Rezolver
 
             if (TypeHelpers.IsArray(type))
             {
-                foreach (var t in this.GetAllCompatibleTypes(TypeHelpers.GetElementType(type), derivedTypeStack))
+                foreach (var t in GetAllCompatibleTypes(TypeHelpers.GetElementType(type), derivedTypeStack))
                 {
                     toReturn.Add(TypeHelpers.MakeArrayType(t));
                 }
@@ -215,7 +215,7 @@ namespace Rezolver
 
             // if the type is generic, then this will generate any covariant
             // permutations of its type arguments.
-            foreach (var t in this.GetGenericCovariants(type, derivedTypeStack)) // <-- HERE pass the stack and prevent covariants being generated when type arg is equal to one in the stack
+            foreach (var t in GetGenericCovariants(type, derivedTypeStack)) // <-- HERE pass the stack and prevent covariants being generated when type arg is equal to one in the stack
             {
                 toReturn.Add(t);
             }
@@ -223,11 +223,11 @@ namespace Rezolver
             // HERE - Need to push the source type into a stack (which might be passed in) which will prevent us from using any
             // derived type as a type argument to any covariant type parameters.
             derivedTypeStack.Push(type);
-            foreach (var t in this.GetTypeHierarchy(type))
+            foreach (var t in GetTypeHierarchy(type))
             {
                 toReturn.Add(t);
                 derivedTypeStack.Push(t);
-                foreach (var tco in this.GetGenericCovariants(t, derivedTypeStack))
+                foreach (var tco in GetGenericCovariants(t, derivedTypeStack))
                 {
                     toReturn.Add(tco);
                 }
@@ -259,9 +259,12 @@ namespace Rezolver
 
             typeList.Add(type);
         }
-
+        private int _rebuildCount = 0;
         public TargetTypeSelector SelectTypes(Type type)
         {
+            // TODO: implement a 'stability' calculator for this function which disables caching until the _version
+            // local has not changed for a certain number of successive calls.
+
             // this function is complicated by the fact that searching and registering types are asymmetrically parallel.
             // in theory most applications will register first and then start searching.  However, the searching part is parallelised
             // equally, if registrations continue whilst searching is being performed, then we'd have a problem.  So this is written to
@@ -279,6 +282,7 @@ namespace Rezolver
             {
                 resultVersion = Interlocked.Read(ref result.Version);
                 currentVersion = Interlocked.Read(ref _version);
+                ++_rebuildCount;
                 var newSelector = new TargetTypeSelector(type, _root);
                 result.Selector = newSelector;
                 if (Interlocked.CompareExchange(ref result.Version, currentVersion, resultVersion) == resultVersion)

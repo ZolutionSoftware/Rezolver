@@ -66,7 +66,7 @@ namespace Rezolver.Compilation.Expressions
 
             public CompiledLambdaTarget(ITarget sourceTarget, Func<IResolveContext, object> getObjectDelegate)
             {
-                this.SourceTarget = sourceTarget;
+                SourceTarget = sourceTarget;
                 this._getObjectDelegate = getObjectDelegate;
             }
 
@@ -97,7 +97,7 @@ namespace Rezolver.Compilation.Expressions
 
             if (context is IExpressionCompileContext exprContext)
             {
-                return this.BuildCompiledTargetForLambda(target, this.BuildResolveLambda(target, exprContext));
+                return BuildCompiledTargetForLambda(target, this.BuildResolveLambda(target, exprContext));
             }
             else
             {
@@ -218,7 +218,7 @@ namespace Rezolver.Compilation.Expressions
             //        return interceptExpr;
             //}
 
-            var builder = this.ResolveBuilder(target, context)
+            var builder = ResolveBuilder(target, context)
                 ?? throw new ArgumentException($"Unable to find an IExpressionBuilder for the target {target}", nameof(target));
 
             return builder.Build(target, context);

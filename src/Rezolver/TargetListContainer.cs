@@ -59,7 +59,7 @@ namespace Rezolver
 
         private bool AllowMultiple { get; }
 
-        private bool CanAdd => this.AllowMultiple || this.Count == 0;
+        private bool CanAdd => AllowMultiple || Count == 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TargetListContainer"/> class.
@@ -69,11 +69,11 @@ namespace Rezolver
         /// <param name="targets">Optional array of targets with which to initialise the list.</param>
         public TargetListContainer(IRootTargetContainer root, Type registeredType, params ITarget[] targets)
         {
-            this.Root = root ?? throw new ArgumentNullException(nameof(root));
-            this.RegisteredType = registeredType ?? throw new ArgumentNullException(nameof(registeredType));
-            this.AllowMultiple = this.Root.GetOption(registeredType, Options.AllowMultiple.Default);
+            Root = root ?? throw new ArgumentNullException(nameof(root));
+            RegisteredType = registeredType ?? throw new ArgumentNullException(nameof(registeredType));
+            AllowMultiple = Root.GetOption(registeredType, Options.AllowMultiple.Default);
 
-            if (this.AllowMultiple || targets?.Length <= 1)
+            if (AllowMultiple || targets?.Length <= 1)
             {
                 this._targets = new List<ITarget>(targets ?? new ITarget[0]);
             }
@@ -91,7 +91,7 @@ namespace Rezolver
         /// <param name="registeredType">Ignored.</param>
         public virtual void Register(ITarget target, Type registeredType = null)
         {
-            this.Add(target ?? throw new ArgumentNullException(nameof(target)));
+            Add(target ?? throw new ArgumentNullException(nameof(target)));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Rezolver
             // registered first.
             // TODO: allow caching of per-type lookups.  Throw cache away if the list changes.
             ITarget temp;
-            for (var f = this.Count; f != 0; f--)
+            for (var f = Count; f != 0; f--)
             {
                 temp = this._targets[f-1];
                 if (temp.SupportsType(type))
@@ -161,13 +161,13 @@ namespace Rezolver
 
         private void IfCanAdd(Action action)
         {
-            if (this.CanAdd)
+            if (CanAdd)
             {
                 action();
             }
             else
             {
-                throw new InvalidOperationException($"Only one target can be registered for the type {this.RegisteredType}");
+                throw new InvalidOperationException($"Only one target can be registered for the type {RegisteredType}");
             }
         }
 
@@ -188,7 +188,7 @@ namespace Rezolver
         /// <param name="item"></param>
         public void Insert(int index, ITarget item)
         {
-            this.IfCanAdd(() => ((IList<ITarget>)this._targets).Insert(index, item));
+            IfCanAdd(() => ((IList<ITarget>)this._targets).Insert(index, item));
         }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace Rezolver
         /// <param name="item"></param>
         public void Add(ITarget item)
         {
-            this.IfCanAdd(() => ((IList<ITarget>)this._targets).Add(item));
+            IfCanAdd(() => ((IList<ITarget>)this._targets).Add(item));
         }
 
         /// <summary>

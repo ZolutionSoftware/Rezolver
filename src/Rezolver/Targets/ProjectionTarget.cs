@@ -19,7 +19,7 @@ namespace Rezolver.Targets
         /// <summary>
         /// Always returns <see cref="OutputType"/>
         /// </summary>
-        public override Type DeclaredType => this.OutputType;
+        public override Type DeclaredType => OutputType;
         /// <summary>
         /// The type of object that is to be created by the <see cref="OutputTarget"/>
         /// </summary>
@@ -55,20 +55,20 @@ namespace Rezolver.Targets
         /// <param name="implementationType">The type of object that is to be created by the <paramref name="outputTarget"/></param>
         public ProjectionTarget(ITarget inputTarget, ITarget outputTarget, Type inputType, Type outputType, Type implementationType)
         {
-            this.InputTarget = inputTarget ?? throw new ArgumentNullException(nameof(inputTarget));
-            this.OutputTarget = outputTarget ?? throw new ArgumentNullException(nameof(outputTarget));
-            this.InputType = inputType ?? throw new ArgumentNullException(nameof(inputType));
-            this.OutputType = outputType ?? throw new ArgumentNullException(nameof(outputType));
-            this.ImplementationType = implementationType ?? throw new ArgumentNullException(nameof(implementationType));
+            InputTarget = inputTarget ?? throw new ArgumentNullException(nameof(inputTarget));
+            OutputTarget = outputTarget ?? throw new ArgumentNullException(nameof(outputTarget));
+            InputType = inputType ?? throw new ArgumentNullException(nameof(inputType));
+            OutputType = outputType ?? throw new ArgumentNullException(nameof(outputType));
+            ImplementationType = implementationType ?? throw new ArgumentNullException(nameof(implementationType));
         }
 
         internal ProjectionTarget(ITarget inputTarget, Type inputType, Type outputType, TargetProjection projection)
         {
-            this.InputTarget = inputTarget;
-            this.InputType = inputType;
-            this.OutputType = outputType;
-            this.OutputTarget = projection.Target;
-            this.ImplementationType = projection.ImplementationType;
+            InputTarget = inputTarget;
+            InputType = inputType;
+            OutputType = outputType;
+            OutputTarget = projection.Target;
+            ImplementationType = projection.ImplementationType;
         }
     }
 }

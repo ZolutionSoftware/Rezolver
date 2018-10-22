@@ -20,8 +20,8 @@ namespace Rezolver.Runtime
 
         public TargetProjection(ITarget target, Type implementationType)
         {
-            this.Target = target;
-            this.ImplementationType = implementationType;
+            Target = target;
+            ImplementationType = implementationType;
         }
     }
 }

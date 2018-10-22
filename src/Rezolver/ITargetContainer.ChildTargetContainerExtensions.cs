@@ -11,20 +11,6 @@ namespace Rezolver
 {
     internal static class ChildTargetContainerExtensions
     {
-        internal static Type GetChildContainerType(this ITargetContainer targets, Type serviceType)
-        {
-            var attr = TypeHelpers.GetCustomAttributes<ContainerTypeAttribute>(serviceType, true).FirstOrDefault();
-            if (attr != null)
-            {
-                return attr.Type;
-            }
 
-            return targets.Root.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType);
-        }
-
-        internal static ITargetContainer CreateChildContainer(this ITargetContainer targets, Type targetContainerType)
-        {
-            return targets.Root.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, targets);
-        }
     }
 }
