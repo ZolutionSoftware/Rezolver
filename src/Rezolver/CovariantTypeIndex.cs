@@ -259,7 +259,6 @@ namespace Rezolver
 
             typeList.Add(type);
         }
-        private int _rebuildCount = 0;
         public TargetTypeSelector SelectTypes(Type type)
         {
             // TODO: implement a 'stability' calculator for this function which disables caching until the _version
@@ -282,7 +281,6 @@ namespace Rezolver
             {
                 resultVersion = Interlocked.Read(ref result.Version);
                 currentVersion = Interlocked.Read(ref _version);
-                ++_rebuildCount;
                 var newSelector = new TargetTypeSelector(type, _root);
                 result.Selector = newSelector;
                 if (Interlocked.CompareExchange(ref result.Version, currentVersion, resultVersion) == resultVersion)
