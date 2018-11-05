@@ -242,7 +242,7 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
-            targets.EnableAutoFactory<IEnumerable<BaseClass>>();
+            //targets.EnableAutoFactory<IEnumerable<BaseClass>>();
             var container = CreateContainer(targets);
 
             // Act

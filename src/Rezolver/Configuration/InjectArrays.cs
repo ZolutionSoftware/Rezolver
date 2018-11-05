@@ -25,6 +25,10 @@ namespace Rezolver.Configuration
 
         internal class ArrayTypeResolver : ITargetContainerTypeResolver
         {
+            public static ArrayTypeResolver Instance { get; } = new ArrayTypeResolver();
+
+            private ArrayTypeResolver() { }
+
             public Type GetContainerType(Type serviceType)
             {
                 if (TypeHelpers.IsArray(serviceType))
@@ -74,7 +78,7 @@ namespace Rezolver.Configuration
             }
 
             targets.RegisterContainer(typeof(Array), new ArrayTargetContainer(targets));
-            targets.SetOption<ITargetContainerTypeResolver, Array>(new ArrayTypeResolver());
+            targets.SetOption<ITargetContainerTypeResolver, Array>(ArrayTypeResolver.Instance);
         }
     }
 }

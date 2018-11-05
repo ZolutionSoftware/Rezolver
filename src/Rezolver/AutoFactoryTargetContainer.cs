@@ -14,67 +14,66 @@ namespace Rezolver
     /// The container binds to the open generic delegate type, effectively decorating the container's own
     /// GenericTargetContainer for that type.
     /// </remarks>
-    internal class AutoFactoryTargetContainer : ITargetContainer
+    internal class AutoFactoryTargetContainer : TargetDictionaryContainer
     {
         /// <summary>
         /// Will be an open generic delegate type (such as <see cref="Func{TResult}"/>)
         /// </summary>
         public Type GenericFactoryTypeDefinition { get; }
 
-        private ITargetContainer Inner { get; set; }
-
-        public IRootTargetContainer Root { get; }
-
 
         //private Type[] _objectArgsForFunc;
         internal AutoFactoryTargetContainer(IRootTargetContainer root, Type factoryType)
-        {
-            Root = root;
+            : base(root)
+        { 
             GenericFactoryTypeDefinition = factoryType;
         }
 
-        private ITargetContainer EnsureInner()
+        internal AutoFactoryTargetContainer(IRootTargetContainer root)
+            : base(root)
         {
-            // This reuses the same logic that TargetContainer employs via these extension methods
-            return Inner ??
-                (Inner = Root.CreateTargetContainerForServiceTypeInternal(GenericFactoryTypeDefinition));
+
         }
 
-        public ITargetContainer CombineWith(ITargetContainer existing, Type type)
-        {
-            if (existing is AutoFactoryTargetContainer)
-                return existing;
-            else if (Inner != null)
-                throw new NotSupportedException("This target container has already been combined with another");
+        //private ITargetContainer EnsureInner()
+        //{
+        //    // This reuses the same logic that TargetContainer employs via these extension methods
+        //    return Inner ??
+        //        (Inner = Root.CreateTargetContainerForServiceTypeInternal(GenericFactoryTypeDefinition));
+        //}
 
-            Inner = existing ?? throw new ArgumentNullException(nameof(existing));
-            return this;
-        }
+        //public ITargetContainer CombineWith(ITargetContainer existing, Type type)
+        //{
+        //    if (existing is AutoFactoryTargetContainer)
+        //        return existing;
+        //    else if (Inner != null)
+        //        throw new NotSupportedException("This target container has already been combined with another");
 
+        //    Inner = existing ?? throw new ArgumentNullException(nameof(existing));
+        //    return this;
+        //}
         private (Type returnType, Type[] argTypes) DecomposeFuncType(Type funcType)
         {
-            var typeArgs = TypeHelpers.GetGenericArguments(funcType);
+            var method = TypeHelpers.GetMethod(funcType, "Invoke");
 
-            return (typeArgs[typeArgs.Length - 1], typeArgs.Take(typeArgs.Length - 1).ToArray());
+            return (method.ReturnType, method.GetParameters().Select(p => p.ParameterType).ToArray());
+            
+            //var typeArgs = TypeHelpers.GetGenericArguments(funcType);
+
+            //return (typeArgs[typeArgs.Length - 1], typeArgs.Take(typeArgs.Length - 1).ToArray());
         }
 
-        public ITarget Fetch(Type type)
+        public override ITarget Fetch(Type type)
         {
-            // just like EnumerableTargetContainer, we allow for specific Func<T> registrations
-            var result = EnsureInner().Fetch(type);
-
-            if (result != null)
-                return result;
-
-            // don't return anything if autofactory injection has not been enabled for the
-            // type, or one compatible with it.
-            if (!Root.GetOption(type, Options.EnableSpecificAutoFactory.Default))
-                return null;
-
-            Type genericType;
-            if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericFactoryTypeDefinition)
+            if (!TypeHelpers.IsAssignableFrom(typeof(Delegate), type))
             {
-                throw new ArgumentException($"Only {GenericFactoryTypeDefinition} is supported by this container", nameof(type));
+                throw new ArgumentException($"This target container only supports delegate types - {type} is not a delegate type");
+            }
+
+            var result = base.Fetch(type);
+            if (result != null && !result.UseFallback)
+            {
+                return result;
             }
 
             (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
@@ -88,37 +87,37 @@ namespace Rezolver
             return new AutoFactoryTarget(innerTarget, type, returnType, argTypes);
         }
 
-        public IEnumerable<ITarget> FetchAll(Type type)
-        {
-            // required to allow interoperability with the FetchAll() functionality; because the targets we return are
-            // not in the underlying dictionary, so we have to 
-            var baseResult = EnsureInner().FetchAll(type);
-            if (!baseResult.Any())
-            {
-                // now it's a similar trick to the EnumerableTargetContainer, we have to perform
-                // a covariant search for the result type and then project the targets.
-                (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
+        //public IEnumerable<ITarget> FetchAll(Type type)
+        //{
+        //    // required to allow interoperability with the FetchAll() functionality; because the targets we return are
+        //    // not in the underlying dictionary, so we have to 
+        //    var baseResult = EnsureInner().FetchAll(type);
+        //    if (!baseResult.Any())
+        //    {
+        //        // now it's a similar trick to the EnumerableTargetContainer, we have to perform
+        //        // a covariant search for the result type and then project the targets.
+        //        (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
 
-                return Root.FetchAllCompatibleTargetsInternal(returnType)
-                    .Select(t => new AutoFactoryTarget(t, type, returnType, argTypes));
-            }
+        //        return Root.FetchAllCompatibleTargetsInternal(returnType)
+        //            .Select(t => new AutoFactoryTarget(t, type, returnType, argTypes));
+        //    }
 
-            return baseResult;
-        }
+        //    return baseResult;
+        //}
 
-        public ITargetContainer FetchContainer(Type type)
-        {
-            return EnsureInner().FetchContainer(type);
-        }
+        //public ITargetContainer FetchContainer(Type type)
+        //{
+        //    return EnsureInner().FetchContainer(type);
+        //}
 
-        public void Register(ITarget target, Type serviceType = null)
-        {
-            EnsureInner().Register(target, serviceType);
-        }
+        //public void Register(ITarget target, Type serviceType = null)
+        //{
+        //    EnsureInner().Register(target, serviceType);
+        //}
 
-        public void RegisterContainer(Type type, ITargetContainer container)
-        {
-            EnsureInner().RegisterContainer(type, container);
-        }
+        //public void RegisterContainer(Type type, ITargetContainer container)
+        //{
+        //    EnsureInner().RegisterContainer(type, container);
+        //}
     }
 }

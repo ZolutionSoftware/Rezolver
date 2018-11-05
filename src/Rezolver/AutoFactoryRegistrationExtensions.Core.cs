@@ -10,7 +10,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(targets));
 
             targets.AddKnownType(funcType);
-            targets.SetOption<Options.EnableSpecificAutoFactory>(true, funcType);
+            //targets.SetOption<Options.EnableSpecificAutoFactory>(true, funcType);
         }
     }
 }

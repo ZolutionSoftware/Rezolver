@@ -174,18 +174,30 @@ namespace Rezolver
         /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
         protected override Type GetRegisteredContainerType(Type serviceType)
         {
+            Type toReturn;
             var attr = TypeHelpers.GetCustomAttributes<ContainerTypeAttribute>(serviceType, true).FirstOrDefault();
             if (attr != null)
             {
-                return attr.Type;
+                toReturn = attr.Type;
             }
-
-            if (ShouldUseGenericTypeDef(serviceType))
+            else
             {
-                return serviceType.GetGenericTypeDefinition();
+                var option = this.GetOption<ITargetContainerTypeResolver>(serviceType);
+                if(option != null)
+                {
+                    toReturn = option.GetContainerType(serviceType) ?? serviceType;
+                }
+                else if(ShouldUseGenericTypeDef(serviceType))
+                {
+                    toReturn = serviceType.GetGenericTypeDefinition();
+                }
+                else
+                {
+                    toReturn = base.GetRegisteredContainerType(serviceType);
+                }
             }
 
-            return this.GetOption<ITargetContainerTypeResolver>(serviceType)?.GetContainerType(serviceType) ?? base.GetRegisteredContainerType(serviceType);
+            return toReturn;
         }
 
         /// <summary>

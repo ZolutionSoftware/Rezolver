@@ -22,6 +22,23 @@ namespace Rezolver.Configuration
         /// </summary>
         public static InjectAutoFactories Instance { get; } = new InjectAutoFactories();
 
+        private class DelegateTypeResolver : ITargetContainerTypeResolver
+        {
+            public static DelegateTypeResolver Instance { get; } = new DelegateTypeResolver();
+
+            private DelegateTypeResolver() { }
+
+            public Type GetContainerType(Type serviceType)
+            {
+                if(TypeHelpers.IsAssignableFrom(typeof(Delegate), serviceType))
+                {
+                    return typeof(Delegate);
+                }
+
+                return null;
+            }
+        }
+
         private static readonly Type[] FuncTypes =
         {
             typeof(Func<>),
@@ -62,13 +79,15 @@ namespace Rezolver.Configuration
             if (targets == null)
                 throw new ArgumentNullException(nameof(targets));
 
-            if (!targets.GetOption(Options.EnableAutoFactoryInjection.Default))
-                return;
+            //if (!targets.GetOption(Options.EnableAutoFactoryInjection.Default))
+            //    return;
+            targets.RegisterContainer(typeof(Delegate), new AutoFactoryTargetContainer(targets));
+            targets.SetOption<ITargetContainerTypeResolver, Delegate>(DelegateTypeResolver.Instance);
 
-            foreach(var type in FuncTypes)
-            {
-                targets.RegisterContainer(type, new AutoFactoryTargetContainer(targets, type));
-            }
+            //foreach(var type in FuncTypes)
+            //{
+            //    targets.RegisterContainer(type, new AutoFactoryTargetContainer(targets, type));
+            //}
         }
     }
 }
