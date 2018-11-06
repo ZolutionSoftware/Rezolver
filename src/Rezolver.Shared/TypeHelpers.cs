@@ -51,6 +51,16 @@ namespace Rezolver
 #endif
         }
 
+        internal static bool IsDelegateType(Type type) => IsAssignableFrom(typeof(Delegate), type);
+
+        private delegate int _DummyDelegate_(int a);
+        internal static (Type returnType, Type[] argTypes) DecomposeDelegateType(Type delegateType)
+        {
+            var method = GetMethod(delegateType, nameof(_DummyDelegate_.Invoke));
+
+            return (method.ReturnType, method.GetParameters().Select(p => p.ParameterType).ToArray());
+        }
+
         internal static int GetArrayRank(Type type)
         {
 #if MAXCOMPAT

@@ -21,7 +21,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<NoCtor>();
-            targets.EnableAutoFactory<NoCtor>();
+            targets.EnableAutoFunc<NoCtor>();
             var container = CreateContainer(targets);
 
             // Act
@@ -42,7 +42,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<Disposable>();
-            targets.EnableAutoFactory<Disposable>();
+            targets.EnableAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // When a factory is created, it is *bound* to the scope from which you created it,
@@ -85,7 +85,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterScoped<Disposable>();
-            targets.EnableAutoFactory<Disposable>();
+            targets.EnableAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // When a factory is created, it is *bound* to the scope from which you created it,
@@ -129,7 +129,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
 
             targets.RegisterSingleton<Disposable>();
-            targets.EnableAutoFactory<Disposable>();
+            targets.EnableAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // this time, different factories should bind to the same singleton
@@ -164,7 +164,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // then try to resolve instances from them.  Each factory should produce the same instance.
 
             targets.RegisterScoped<Disposable>();
-            targets.EnableAutoFactory<Disposable>();
+            targets.EnableAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // Act
@@ -198,7 +198,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
 
             targets.RegisterType<RequiresInt>();
-            targets.EnableAutoFactory<int, RequiresInt>();
+            targets.EnableAutoFunc<int, RequiresInt>();
             var container = CreateContainer(targets);
 
             // Act
@@ -222,7 +222,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
             targets.RegisterType<RequiresInt>();
             targets.RegisterObject(10);
-            targets.EnableAutoFactory<int, RequiresInt>();
+            targets.EnableAutoFunc<int, RequiresInt>();
             var container = CreateContainer(targets);
 
             // Act
@@ -267,7 +267,7 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
-            targets.EnableAutoFactory<BaseClass>();
+            targets.EnableAutoFunc<BaseClass>();
             var container = CreateContainer(targets);
 
             // Act
@@ -290,7 +290,7 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<OneCtor>();
             targets.RegisterType<OneCtorAlt1>();
             targets.RegisterType<OneCtorAlt2>();
-            targets.EnableAutoFactory<int, OneCtor>();
+            targets.EnableAutoFunc<int, OneCtor>();
             var container = CreateContainer(targets);
 
             // Act

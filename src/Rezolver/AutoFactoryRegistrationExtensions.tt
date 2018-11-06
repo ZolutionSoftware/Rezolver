@@ -85,11 +85,11 @@ void TypeParamRef(GenericSpecArg arg)
 
 void RegisterTargetGroup(GenericSpec spec)
 {
-	//generates the EnableAutoFactory extension method for the spec
-	ForSignatures(spec, EnableAutoFactory);
+	//generates the RegisterAutoFunc extension method for the spec
+	ForSignatures(spec, RegisterAutoFunc);
 }
 
-void EnableAutoFactory(Signature sig)
+void RegisterAutoFunc(Signature sig)
 {	
 if(sig.Args.Length > 1)
 	{
@@ -119,13 +119,27 @@ if(sig.Args.Length > 1)
 		/// for it.
 		///
 		/// Note that scoping is honoured for the delegate call; with an injected auto-factory being bound to the scope from which
-		/// it is resolved.</remarks>
+		/// it is resolved.
+		/// 
+		/// This methods ensures that enumerables of the delegate type are also injectable.</remarks>
+<#+
+		}
+		else
+		{
+#>
+		/// <remarks>
+		/// Note that scoping is honoured for the delegate call; with an injected auto-factory being bound to the scope from which
+		/// it is resolved.
+		/// 
+		/// This methods ensures that enumerables of the delegate type are also injectable.
+		/// </remarks>
 <#+
 		}
 #>
-		public static void EnableAutoFactory<<#= sig.Spec.Args #>>(this IRootTargetContainer targets)
+		public static void RegisterAutoFunc<<#= sig.Spec.Args #>>(this IRootTargetContainer targets)
 		{
-			EnableAutoFactoryInternal(targets, typeof(Func<<#= new string(',', sig.Args.Length - 1) #>>).MakeGenericType(<#= string.Join(", ", sig.Args.Select(s => $"typeof({s})")) #>));
+			// typeof(Func<<#= new string(',', sig.Args.Length - 1) #>>).MakeGenericType(<#= string.Join(", ", sig.Args.Select(s => $"typeof({s})")) #>)
+			RegisterAutoFactory<Func<<#= sig.Spec.Args #>>>(targets);
 		}
 <#+
 }

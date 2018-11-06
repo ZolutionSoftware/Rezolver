@@ -10,7 +10,15 @@
     <PackageTags>rezolver</PackageTags>
     <RootNamespace>Rezolver</RootNamespace>
   </PropertyGroup>
-  
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);MAXCOMPAT</DefineConstants>
   </PropertyGroup>
