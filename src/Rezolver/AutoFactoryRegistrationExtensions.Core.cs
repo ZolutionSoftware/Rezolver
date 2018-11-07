@@ -11,10 +11,15 @@ namespace Rezolver
             if (targets == null)
                 throw new ArgumentNullException(nameof(targets));
 
-            // TODO: validate the delegate type's return value.
+            var (returnType, parameterTypes) = TypeHelpers.DecomposeDelegateType(typeof(TDelegate));
+
+            if (returnType == typeof(void))
+                throw new ArgumentException($"Type argument {nameof(TDelegate)} is invalid - must be a delegate with a non-void return type.", nameof(TDelegate));
+
+            RegisterAutoFactoryInternal(targets, typeof(TDelegate), returnType, parameterTypes);
         }
 
-        private static void RegisterAutoFactory(IRootTargetContainer targets, Type delegateType)
+        public static void RegisterAutoFactory(this IRootTargetContainer targets, Type delegateType)
         {
             if (targets == null)
                 throw new ArgumentNullException(nameof(targets));
@@ -23,12 +28,12 @@ namespace Rezolver
             var (returnType, parameterTypes) = TypeHelpers.DecomposeDelegateType(delegateType);
 
             if (returnType == null || returnType == typeof(void))
-                throw new ArgumentException("Delegate type must have a non-void return value", nameof(delegateType));
+                throw new ArgumentException($"{delegateType} is invalid - must be a delegate with a non-void return value", nameof(delegateType));
 
-            EnableAutoFactoryInternal(targets, delegateType, returnType, parameterTypes);
+            RegisterAutoFactoryInternal(targets, delegateType, returnType, parameterTypes);
         }
 
-        private static void EnableAutoFactoryInternal(IRootTargetContainer targets, Type delegateType, Type returnType, Type[] parameterTypes)
+        private static void RegisterAutoFactoryInternal(IRootTargetContainer targets, Type delegateType, Type returnType, Type[] parameterTypes)
         {
             targets.AddKnownType(delegateType);
             // we need this to support auto-producing of enumerables of factories

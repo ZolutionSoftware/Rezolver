@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Tests.Types
 {
-    public class NoCtor
+    public class NoCtor : IHasIntValue
     {
 		public int Value { get; protected set; }
 	}

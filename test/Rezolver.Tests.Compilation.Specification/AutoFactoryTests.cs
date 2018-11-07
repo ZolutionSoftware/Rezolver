@@ -21,7 +21,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<NoCtor>();
-            targets.EnableAutoFunc<NoCtor>();
+            targets.RegisterAutoFunc<NoCtor>();
             var container = CreateContainer(targets);
 
             // Act
@@ -37,12 +37,34 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
+        public void AutoFactory_ShouldSupportCustomDelegateType()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<BaseClass>();
+            targets.RegisterAutoFactory<BaseClassFactory>();
+
+            var container = CreateContainer(targets);
+
+            // Act
+            var factory = container.Resolve<BaseClassFactory>();
+
+            // Assert
+            Assert.NotNull(factory);
+            var instance = factory();
+            Assert.NotNull(instance);
+            var instance2 = factory();
+            Assert.NotNull(instance2);
+            Assert.NotSame(instance, instance2);
+        }
+
+        [Fact]
         public void AutoFactory_DisposableShouldHonourImplicitScope()
         {
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<Disposable>();
-            targets.EnableAutoFunc<Disposable>();
+            targets.RegisterAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // When a factory is created, it is *bound* to the scope from which you created it,
@@ -85,7 +107,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterScoped<Disposable>();
-            targets.EnableAutoFunc<Disposable>();
+            targets.RegisterAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // When a factory is created, it is *bound* to the scope from which you created it,
@@ -129,7 +151,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
 
             targets.RegisterSingleton<Disposable>();
-            targets.EnableAutoFunc<Disposable>();
+            targets.RegisterAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // this time, different factories should bind to the same singleton
@@ -164,7 +186,7 @@ namespace Rezolver.Tests.Compilation.Specification
             // then try to resolve instances from them.  Each factory should produce the same instance.
 
             targets.RegisterScoped<Disposable>();
-            targets.EnableAutoFunc<Disposable>();
+            targets.RegisterAutoFunc<Disposable>();
             var container = CreateContainer(targets);
 
             // Act
@@ -198,11 +220,35 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
 
             targets.RegisterType<RequiresInt>();
-            targets.EnableAutoFunc<int, RequiresInt>();
+            targets.RegisterAutoFunc<int, RequiresInt>();
             var container = CreateContainer(targets);
 
             // Act
             var factory = container.Resolve<Func<int, RequiresInt>>();
+            
+            // Assert
+            var instance = factory(10);
+
+            Assert.NotNull(instance);
+            Assert.Equal(10, instance.IntValue);
+            var instance2 = factory(20);
+            Assert.NotSame(instance, instance2);
+            Assert.NotNull(instance2);
+            Assert.Equal(20, instance2.IntValue);
+        }
+
+        [Fact]
+        public void AutoFactory_ShouldAcceptResolvedDependencyAsArgumentForCustomFactory()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+
+            targets.RegisterType<RequiresInt>();
+            targets.RegisterAutoFactory<RequiresIntFactory>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var factory = container.Resolve<RequiresIntFactory>();
 
             // Assert
             var instance = factory(10);
@@ -222,7 +268,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
             targets.RegisterType<RequiresInt>();
             targets.RegisterObject(10);
-            targets.EnableAutoFunc<int, RequiresInt>();
+            targets.RegisterAutoFunc<int, RequiresInt>();
             var container = CreateContainer(targets);
 
             // Act
@@ -267,7 +313,7 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
-            targets.EnableAutoFunc<BaseClass>();
+            targets.RegisterAutoFunc<BaseClass>();
             var container = CreateContainer(targets);
 
             // Act
@@ -279,7 +325,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldBeAbleToResolveAnEumerableOfParameterisedAutoFactoriesViaCovariance()
+        public void AutoFactory_ShouldBeAbleToResolveAnEnumerableOfParameterisedAutoFactoriesViaCovariance()
         {
             // this time, it's like above, but we're also doing an enumerable of automatic 
             // parameterised factories, and we want to test that the parameters work correctly
@@ -290,11 +336,54 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<OneCtor>();
             targets.RegisterType<OneCtorAlt1>();
             targets.RegisterType<OneCtorAlt2>();
-            targets.EnableAutoFunc<int, OneCtor>();
+            targets.RegisterAutoFunc<int, IHasIntValue>();
             var container = CreateContainer(targets);
 
             // Act
-            var factories = container.ResolveMany<Func<int, NoCtor>>();
+            var factories = container.ResolveMany<Func<int, IHasIntValue>>();
+            var instances = factories.Select(f => f(50));
+
+            // Assert
+            Assert.Collection(instances, i => Assert.IsType<OneCtor>(i), i => Assert.IsType<OneCtorAlt1>(i), i => Assert.IsType<OneCtorAlt2>(i));
+            Assert.Equal(new[] { 50, 50, 50 }, instances.Select(i => i.Value));
+        }
+
+        [Fact]
+        public void AutoFactory_ShouldSupportCovarianceForCustomDelegate()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<BaseClass>();
+            targets.RegisterType<BaseClassChild>();
+            targets.RegisterType<BaseClassGrandchild>();
+            targets.RegisterAutoFactory<BaseClassFactory>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var factories = container.ResolveMany<BaseClassFactory>();
+            var instances = factories.Select(f => f());
+
+            // Assert
+            Assert.Collection(instances, i => Assert.IsType<BaseClass>(i), i => Assert.IsType<BaseClassChild>(i), i => Assert.IsType<BaseClassGrandchild>(i));
+        }
+
+        [Fact]
+        public void AutoFactory_ShouldSupportCovarianceForCustomParameterisedDelegate()
+        {
+            // this time, it's like above, but we're also doing an enumerable of automatic 
+            // parameterised factories, and we want to test that the parameters work correctly
+
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterObject(1);
+            targets.RegisterType<OneCtor>();
+            targets.RegisterType<OneCtorAlt1>();
+            targets.RegisterType<OneCtorAlt2>();
+            targets.RegisterAutoFactory<HasIntValueParameterisedFactory>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var factories = container.ResolveMany<HasIntValueParameterisedFactory>();
             var instances = factories.Select(f => f(50));
 
             // Assert

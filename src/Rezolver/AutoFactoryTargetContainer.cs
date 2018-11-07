@@ -40,7 +40,7 @@ namespace Rezolver
                 return result;
             }
 
-            (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
+            var (returnType, argTypes) = TypeHelpers.DecomposeDelegateType(type);
 
             // allow late-bound delegate implementation
             var innerTarget = Root.Fetch(returnType);
@@ -49,59 +49,6 @@ namespace Rezolver
 
             // create a func target (new type) which wraps the inner target
             return new AutoFactoryTarget(innerTarget, type, returnType, argTypes);
-        }
-
-        public override IEnumerable<ITarget> FetchAll(Type type)
-        {
-            // required to allow interoperability with the FetchAll() functionality; because the targets we return are
-            // not in the underlying dictionary, so we have to 
-            var baseResult = base.FetchAll(type);
-            if (!baseResult.Any())
-            {
-                // now it's a similar trick to the EnumerableTargetContainer, we have to perform
-                // a covariant search for the result type and then project the targets.
-                (Type returnType, Type[] argTypes) = DecomposeFuncType(type);
-
-                return Root.FetchAllCompatibleTargetsInternal(returnType)
-                    .Select(t => new AutoFactoryTarget(t, type, returnType, argTypes));
-            }
-
-            return baseResult;
-        }
-    }
-
-    internal class AutoFactoriesTargetContainer : ITargetContainer
-    {
-        public IRootTargetContainer Root { get; }
-
-        public ITargetContainer CombineWith(ITargetContainer existing, Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ITarget Fetch(Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ITarget> FetchAll(Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ITargetContainer FetchContainer(Type type)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Register(ITarget target, Type serviceType = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RegisterContainer(Type type, ITargetContainer container)
-        {
-            throw new NotImplementedException();
         }
     }
 }
