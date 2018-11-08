@@ -65,7 +65,7 @@ namespace Rezolver.Targets
         {
             factory.MustNotBeNull(nameof(factory));
             FactoryMethod = factory.GetMethodInfo();
-            FactoryMethod.MustNot(m => FactoryMethod.ReturnType == null || FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
+            FactoryMethod.MustNot(m => FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
             FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
 
             if (declaredType != null)

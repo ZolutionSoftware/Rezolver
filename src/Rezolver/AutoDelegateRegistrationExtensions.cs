@@ -5,7 +5,7 @@ namespace Rezolver
 {
 	using System;
 
-	public static partial class AutoFactoryRegistrationExtensions
+	public static partial class AutoDelegateRegistrationExtensions
 	{
 		/// <summary>Enables the automatic injection of a <see cref="Func{TResult}" /> for the given <typeparamref="TResult" /></summary>
 		/// <typeparam name="TResult">The return type of the delegate - equivalent to the service type that is to be resolved from the container when the delegate is called.</typeparam>
@@ -19,7 +19,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<>).MakeGenericType(typeof(TResult))
-			RegisterAutoFactory<Func<TResult>>(targets);
+			RegisterAutoDelegate<Func<TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, TResult}" /> auto-factory for the given 
@@ -39,7 +39,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,>).MakeGenericType(typeof(T1), typeof(TResult))
-			RegisterAutoFactory<Func<T1, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, TResult}" /> auto-factory for the given 
@@ -60,7 +60,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, TResult}" /> auto-factory for the given 
@@ -82,7 +82,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, TResult}" /> auto-factory for the given 
@@ -105,7 +105,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, TResult}" /> auto-factory for the given 
@@ -129,7 +129,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, TResult}" /> auto-factory for the given 
@@ -154,7 +154,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, TResult}" /> auto-factory for the given 
@@ -180,7 +180,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, TResult}" /> auto-factory for the given 
@@ -207,7 +207,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult}" /> auto-factory for the given 
@@ -235,7 +235,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult}" /> auto-factory for the given 
@@ -264,7 +264,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult}" /> auto-factory for the given 
@@ -294,7 +294,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult}" /> auto-factory for the given 
@@ -325,7 +325,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult}" /> auto-factory for the given 
@@ -357,7 +357,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult}" /> auto-factory for the given 
@@ -390,7 +390,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), typeof(T14), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult}" /> auto-factory for the given 
@@ -424,7 +424,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), typeof(T14), typeof(T15), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>>(targets);
 		}
 
 		/// <summary>Enables the automatic injection of a <see cref="Func{T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult}" /> auto-factory for the given 
@@ -459,7 +459,7 @@ namespace Rezolver
 		public static void RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<,,,,,,,,,,,,,,,,>).MakeGenericType(typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8), typeof(T9), typeof(T10), typeof(T11), typeof(T12), typeof(T13), typeof(T14), typeof(T15), typeof(T16), typeof(TResult))
-			RegisterAutoFactory<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>>(targets);
+			RegisterAutoDelegate<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>>(targets);
 		}
 	}
 }

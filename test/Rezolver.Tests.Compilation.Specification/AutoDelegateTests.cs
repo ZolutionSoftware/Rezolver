@@ -14,7 +14,7 @@ namespace Rezolver.Tests.Compilation.Specification
     public partial class CompilerTestsBase
     { 
         [Fact]
-        public void AutoFactory_ShouldCreateSimple()
+        public void AutoDelegate_ShouldCreateSimple()
         {
             // simplest scenario - auto-creating a Func<T> instead of producing a T
 
@@ -37,12 +37,12 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldSupportCustomDelegateType()
+        public void AutoDelegate_ShouldSupportCustomDelegateType()
         {
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<BaseClass>();
-            targets.RegisterAutoFactory<BaseClassFactory>();
+            targets.RegisterAutoDelegate<BaseClassFactory>();
 
             var container = CreateContainer(targets);
 
@@ -59,7 +59,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_DisposableShouldHonourImplicitScope()
+        public void AutoDelegate_DisposableShouldHonourImplicitScope()
         {
             // Arrange
             var targets = CreateTargetContainer();
@@ -102,7 +102,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
 
         [Fact]
-        public void AutoFactory_DisposableShouldHonourExplicitScope()
+        public void AutoDelegate_DisposableShouldHonourExplicitScope()
         {
             // Arrange
             var targets = CreateTargetContainer();
@@ -145,7 +145,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_SingletonShouldHonourRootScope()
+        public void AutoDelegate_SingletonShouldHonourRootScope()
         {
             // Arrange
             var targets = CreateTargetContainer();
@@ -176,7 +176,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_MultipleFactoriesShouldStillHonourExplicitScoping()
+        public void AutoDelegate_MultipleFactoriesShouldStillHonourExplicitScoping()
         {
             // Arrange
             var targets = CreateTargetContainer();
@@ -214,7 +214,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldAcceptResolvedDependencyAsArgument()
+        public void AutoDelegate_ShouldAcceptResolvedDependencyAsArgument()
         {
             // Arrange
             var targets = CreateTargetContainer();
@@ -238,13 +238,13 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldAcceptResolvedDependencyAsArgumentForCustomFactory()
+        public void AutoDelegate_ShouldAcceptResolvedDependencyAsArgumentForCustomFactory()
         {
             // Arrange
             var targets = CreateTargetContainer();
 
             targets.RegisterType<RequiresInt>();
-            targets.RegisterAutoFactory<RequiresIntFactory>();
+            targets.RegisterAutoDelegate<RequiresIntFactory>();
             var container = CreateContainer(targets);
 
             // Act
@@ -262,7 +262,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldUseArgumentEvenWhenDependencyRegistered()
+        public void AutoDelegate_ShouldUseArgumentEvenWhenDependencyRegistered()
         {
             // Arrange
             var targets = CreateTargetContainer();
@@ -281,14 +281,14 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldSupportEnumerableViaEnumerableContainer()
+        public void AutoDelegate_ShouldSupportEnumerableViaEnumerableContainer()
         {
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
-            //targets.EnableAutoFactory<IEnumerable<BaseClass>>();
+            targets.RegisterAutoFunc<IEnumerable<BaseClass>>();
             var container = CreateContainer(targets);
 
             // Act
@@ -300,7 +300,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldBeAbleToResolveAnEnumerableOfAutoFactoriesViaCovariance()
+        public void AutoDelegate_ShouldSupportEnumerableCovarianceForAutoFunc()
         {
             // Similar to above, but the implementation here we're registering the individual types and then
             // getting an IEnumerable<Func<BaseClass>>.
@@ -325,7 +325,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldBeAbleToResolveAnEnumerableOfParameterisedAutoFactoriesViaCovariance()
+        public void AutoDelegate_ShouldSupportEnumerableCovarianceForParameterisedAutoFunc()
         {
             // this time, it's like above, but we're also doing an enumerable of automatic 
             // parameterised factories, and we want to test that the parameters work correctly
@@ -349,14 +349,14 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldSupportCovarianceForCustomDelegate()
+        public void AutoDelegate_ShouldSupportEnumerableCovarianceForCustomDelegate()
         {
             // Arrange
             var targets = CreateTargetContainer();
             targets.RegisterType<BaseClass>();
             targets.RegisterType<BaseClassChild>();
             targets.RegisterType<BaseClassGrandchild>();
-            targets.RegisterAutoFactory<BaseClassFactory>();
+            targets.RegisterAutoDelegate<BaseClassFactory>();
             var container = CreateContainer(targets);
 
             // Act
@@ -368,7 +368,7 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void AutoFactory_ShouldSupportCovarianceForCustomParameterisedDelegate()
+        public void AutoDelegate_ShouldSupportEnumerableCovarianceForCustomParameterisedDelegate()
         {
             // this time, it's like above, but we're also doing an enumerable of automatic 
             // parameterised factories, and we want to test that the parameters work correctly
@@ -379,7 +379,7 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<OneCtor>();
             targets.RegisterType<OneCtorAlt1>();
             targets.RegisterType<OneCtorAlt2>();
-            targets.RegisterAutoFactory<HasIntValueParameterisedFactory>();
+            targets.RegisterAutoDelegate<HasIntValueParameterisedFactory>();
             var container = CreateContainer(targets);
 
             // Act

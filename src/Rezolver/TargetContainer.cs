@@ -52,14 +52,13 @@ namespace Rezolver
         ///
         /// #### Default configurations
         ///
-        /// In addition to some internal configurations, the configurations applied by default are:
+        /// The configurations applied by default are:
         ///
         /// - <see cref="Configuration.InjectEnumerables"/>
         /// - <see cref="Configuration.InjectArrays"/>
         /// - <see cref="Configuration.InjectLists"/>
         /// - <see cref="Configuration.InjectCollections"/>
         /// - <see cref="Configuration.InjectResolveContext"/>
-        /// - <see cref="Configuration.InjectAutoFactories"/>
         /// 
         /// In most cases, these are controllable through the use of global properties such as:
         /// 
@@ -67,18 +66,14 @@ namespace Rezolver
         /// - <see cref="Options.EnableArrayInjection"/>
         /// - <see cref="Options.EnableListInjection"/>
         /// - <see cref="Options.EnableCollectionInjection"/>
-        /// - <see cref="Options.EnableAutoFactoryInjection"/>
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
-            //new Configuration.Configure<ITargetContainerFactory>(DefaultTargetContainerFactory.Instance),
-            //new Configuration.Configure<ITargetContainerTypeResolver>(DefaultTargetContainerTypeResolver.Instance),
             Configuration.InjectEnumerables.Instance,
             Configuration.InjectArrays.Instance,
             Configuration.InjectLists.Instance,
             Configuration.InjectCollections.Instance,
             Configuration.InjectResolveContext.Instance,
-            Configuration.InjectAutoFactories.Instance
         });
 
         /// <summary>
@@ -162,6 +157,12 @@ namespace Rezolver
             }
 
             base.Register(target, serviceType);
+
+            if(target is INotifyRegistrationTarget notifiableTarget)
+            {
+                notifiableTarget.OnRegistration(Root, serviceType ?? notifiableTarget.DeclaredType);
+            }
+
             TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
         }
 

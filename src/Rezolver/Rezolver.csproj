@@ -45,9 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="AutoFactoryRegistrationExtensions.tt">
+    <None Update="AutoDelegateRegistrationExtensions.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AutoFactoryRegistrationExtensions.cs</LastGenOutput>
+      <LastGenOutput>AutoDelegateRegistrationExtensions.cs</LastGenOutput>
     </None>
     <None Update="GenericGenerator.t4">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -64,10 +64,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AutoFactoryRegistrationExtensions.cs">
+    <Compile Update="AutoDelegateRegistrationExtensions.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AutoFactoryRegistrationExtensions.tt</DependentUpon>
+      <DependentUpon>AutoDelegateRegistrationExtensions.tt</DependentUpon>
     </Compile>
     <Compile Update="GenericGenerator.cs">
       <DesignTime>True</DesignTime>
