@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Rezolver.Compilation.Expressions
 {
-    public class AutoDelegateargetBuilder : ExpressionBuilderBase<AutoDelegateTarget>
+    public class AutoFactoryTargetBuilder : ExpressionBuilderBase<AutoFactoryTarget>
     {
-        protected override Expression Build(AutoDelegateTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
+        protected override Expression Build(AutoFactoryTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var newContext = context.NewContext(target.ReturnType);
             ParameterExpression[] parameters = new ParameterExpression[0];

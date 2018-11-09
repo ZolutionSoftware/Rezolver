@@ -64,7 +64,7 @@ var specs = new []{
 {
 	using System;
 
-	public static partial class AutoDelegateRegistrationExtensions
+	public static partial class AutoFactoryRegistrationExtensions
 	{
 <#
 	ForSpecs(specs, RegisterTargetGroup);
@@ -139,7 +139,7 @@ if(sig.Args.Length > 1)
 		public static void RegisterAutoFunc<<#= sig.Spec.Args #>>(this IRootTargetContainer targets)
 		{
 			// typeof(Func<<#= new string(',', sig.Args.Length - 1) #>>).MakeGenericType(<#= string.Join(", ", sig.Args.Select(s => $"typeof({s})")) #>)
-			RegisterAutoDelegate<Func<<#= sig.Spec.Args #>>>(targets);
+			RegisterAutoFactory<Func<<#= sig.Spec.Args #>>>(targets);
 		}
 <#+
 }

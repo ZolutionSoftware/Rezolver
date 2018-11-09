@@ -262,7 +262,8 @@ namespace Rezolver
         public TargetTypeSelector SelectTypes(Type type)
         {
             // TODO: implement a 'stability' calculator for this function which disables caching until the _version
-            // local has not changed for a certain number of successive calls.
+            // local has not changed for a certain number of successive calls. 
+            // -- UPDATE to above.  I tried it - it made no difference.
 
             // this function is complicated by the fact that searching and registering types are asymmetrically parallel.
             // in theory most applications will register first and then start searching.  However, the searching part is parallelised

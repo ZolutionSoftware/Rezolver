@@ -4,9 +4,9 @@ using System.Linq;
 
 namespace Rezolver
 {
-    public static partial class AutoDelegateRegistrationExtensions
+    public static partial class AutoFactoryRegistrationExtensions
     {
-        public static void RegisterAutoDelegate<TDelegate>(this IRootTargetContainer targets)
+        public static void RegisterAutoFactory<TDelegate>(this IRootTargetContainer targets)
             where TDelegate : Delegate
         {
             if (targets == null)
@@ -20,10 +20,10 @@ namespace Rezolver
             if (!AreValidParameterTypes(parameterTypes))
                 throw new ArgumentException($"The parameter types for {typeof(TDelegate)} are invalid - they must all be unique", nameof(TDelegate));
 
-            RegisterAutoDelegateInternal(targets, typeof(TDelegate), returnType, parameterTypes);
+            RegisterAutoFactoryInternal(targets, typeof(TDelegate), returnType, parameterTypes);
         }
 
-        public static void RegisterAutoDelegate(this IRootTargetContainer targets, Type delegateType)
+        public static void RegisterAutoFactory(this IRootTargetContainer targets, Type delegateType)
         {
             if (targets == null)
                 throw new ArgumentNullException(nameof(targets));
@@ -37,7 +37,7 @@ namespace Rezolver
             if (!AreValidParameterTypes(parameterTypes))
                 throw new ArgumentException($"The parameter types for {delegateType} are invalid - they must all be unique non ref/out types", nameof(delegateType));
 
-            RegisterAutoDelegateInternal(targets, delegateType, returnType, parameterTypes);
+            RegisterAutoFactoryInternal(targets, delegateType, returnType, parameterTypes);
         }
 
         private static bool IsValidReturnType(Type returnType)
@@ -59,12 +59,12 @@ namespace Rezolver
             return true;
         }
 
-        private static void RegisterAutoDelegateInternal(IRootTargetContainer targets, Type delegateType, Type returnType, Type[] parameterTypes)
+        private static void RegisterAutoFactoryInternal(IRootTargetContainer targets, Type delegateType, Type returnType, Type[] parameterTypes)
         {
             // create an unbound AutoFactoryTarget and register it.
             // this will also trigger a projection to be registered from IEnumerable<ReturnType> to IEnumerable<DelegateType>
             // since the newly created & registered target is unbound.
-            targets.Register(new AutoDelegateTarget(delegateType, returnType, parameterTypes));
+            targets.Register(new AutoFactoryTarget(delegateType, returnType, parameterTypes));
         }
     }
 }

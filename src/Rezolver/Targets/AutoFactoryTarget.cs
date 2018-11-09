@@ -16,7 +16,7 @@ namespace Rezolver.Targets
     /// to build components to use Rezolver containers as the mechanism for doing this directly instead of having
     /// to resort to mechanisms such as <see cref="IServiceProvider"/> etc.
     /// </summary>
-    public class AutoDelegateTarget : TargetBase, INotifyRegistrationTarget
+    public class AutoFactoryTarget : TargetBase, INotifyRegistrationTarget
     {
         /// <summary>
         /// The delegate type that will be built by this target.
@@ -40,7 +40,7 @@ namespace Rezolver.Targets
         /// <param name="returnType"></param>
         /// <param name="parameterTypes"></param>
         /// <param name="boundTarget">Optional - the target whose result will be produced by the factory, if known.</param>
-        public AutoDelegateTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
+        public AutoFactoryTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
             : base(boundTarget?.Id ?? Guid.NewGuid()) // note here - passing the ID in from the inner target to preserve the order.
         {
             DelegateType = delegateType ?? throw new ArgumentNullException(nameof(delegateType));
@@ -71,13 +71,13 @@ namespace Rezolver.Targets
             return compileContext.Fetch(ReturnType) ?? new ResolvedTarget(ReturnType, BoundTarget);
         }
 
-        // when registering an unbound AutoDelegateTarget, we also automatically register
+        // when registering an unbound target, we also automatically register
         // a projection for the delegate type which is fed by an enumerable of the return
         // type of the delegate.  So IEnumerable<Func<Foo>> <== IEnumerable<Foo>
         void INotifyRegistrationTarget.OnRegistration(IRootTargetContainer root, Type registeredType)
         {
             if (this.BoundTarget == null) {
-                root.RegisterProjection(ReturnType, registeredType, (root2, source) => new AutoDelegateTarget(registeredType, ReturnType, ParameterTypes, source));
+                root.RegisterProjection(ReturnType, registeredType, (root2, source) => new AutoFactoryTarget(registeredType, ReturnType, ParameterTypes, source));
             }
         }
     }
