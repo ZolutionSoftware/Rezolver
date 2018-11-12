@@ -49,6 +49,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="serviceType">The type to be added to the index.</param>
         void AddKnownType(Type serviceType);
+
         /// <summary>
         /// This method returns all types, in order of most to least recently added - that have been added via the
         /// <see cref="AddKnownType(Type)"/> method and which are of the same generic type but which have one or

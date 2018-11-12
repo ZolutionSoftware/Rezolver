@@ -390,5 +390,23 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.Collection(instances, i => Assert.IsType<OneCtor>(i), i => Assert.IsType<OneCtorAlt1>(i), i => Assert.IsType<OneCtorAlt2>(i));
             Assert.Equal(new[] { 50, 50, 50 }, instances.Select(i => i.Value));
         }
+
+        [Fact]
+        public void AutoFactory_ShouldWorkWithDecorators()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<Decorated, IDecorated>();
+            targets.RegisterDecorator<Decorator, IDecorated>();
+            targets.RegisterAutoFunc<IDecorated>();
+            var container = CreateContainer(targets);
+
+            // Act
+            var factory = container.Resolve<Func<IDecorated>>();
+
+            // Assert
+            var decorator = Assert.IsType<Decorator>(factory());
+            Assert.IsType<Decorated>(decorator.Decorated);
+        }
     }
 }

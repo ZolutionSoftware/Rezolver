@@ -18,6 +18,8 @@ namespace Rezolver.Targets
     /// </summary>
     public class AutoFactoryTarget : TargetBase, INotifyRegistrationTarget
     {
+        private readonly bool _isOpenGenericReturnType;
+
         /// <summary>
         /// The delegate type that will be built by this target.
         /// </summary>
@@ -50,6 +52,46 @@ namespace Rezolver.Targets
                 throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(parameterTypes));
 
             BoundTarget = boundTarget;
+            _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
+        }
+
+        public override bool SupportsType(Type type)
+        {
+            if (base.SupportsType(type))
+                return true;
+
+            // if it doesn't match, then we could be dealing with a scenario
+            // where the target type is Func<T<Foo>> and where this is bound to
+            // Func<T<>> (or something similar).  In this case, we have to check the
+            // return
+
+            if (!TypeHelpers.IsGenericType(type))
+                return false;
+
+            if (TypeHelpers.ContainsGenericParameters(type))
+                return false;   //we don't bind to open generics
+
+            if (type.GetGenericTypeDefinition() != typeof(Func<>))
+                return false;
+
+            // get the desired return type
+            var expectedReturnType = TypeHelpers.GetGenericArguments(type)[0];
+
+            if (TypeHelpers.IsAssignableFrom(expectedReturnType, ReturnType))
+                return true;
+
+            if (!_isOpenGenericReturnType)
+                return false;
+
+            // if we have an open generic return type, then we're compatible if
+            // the desired return type is a generic that's based on that open generic,
+            // or another which inherits from it.
+            if (!TypeHelpers.IsGenericType(expectedReturnType))
+                return false;
+
+            var expectedReturnGenericType = expectedReturnType.GetGenericTypeDefinition();
+
+            return TypeHelpers.IsAssignableFrom(expectedReturnGenericType, ReturnType);
         }
 
         /// <summary>

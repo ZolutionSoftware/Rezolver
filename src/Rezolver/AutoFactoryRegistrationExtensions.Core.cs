@@ -14,7 +14,7 @@ namespace Rezolver
 
             var (returnType, parameterTypes) = TypeHelpers.DecomposeDelegateType(typeof(TDelegate));
 
-            if (IsValidReturnType(returnType))
+            if (!IsValidReturnType(returnType))
                 throw new ArgumentException($"Type argument {typeof(TDelegate)} for {nameof(TDelegate)} is invalid - must be a delegate with a non-void return type.", nameof(TDelegate));
 
             if (!AreValidParameterTypes(parameterTypes))
@@ -42,7 +42,7 @@ namespace Rezolver
 
         private static bool IsValidReturnType(Type returnType)
         {
-            return returnType == typeof(void);
+            return returnType != typeof(void);
         }
 
         private static bool AreValidParameterTypes(Type[] parameterTypes)

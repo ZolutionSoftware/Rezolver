@@ -12,7 +12,9 @@ namespace Rezolver.Compilation.Expressions
     {
         protected override Expression Build(AutoFactoryTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            var newContext = context.NewContext(target.ReturnType);
+            var (returnType, parameterTypes) = TypeHelpers.DecomposeDelegateType(context.TargetType);
+            var compileReturnType = TypeHelpers.ContainsGenericParameters(target.ReturnType) ? returnType : target.ReturnType;
+            var newContext = context.NewContext(compileReturnType);
             ParameterExpression[] parameters = new ParameterExpression[0];
             // if there are parameters, we have to replace any Resolve calls for the parameter types in 
             // the inner expression with parameter expressions fed from the outer lambda
@@ -25,8 +27,8 @@ namespace Rezolver.Compilation.Expressions
                 }
             }
             var baseExpression = compiler.BuildResolveLambda(target.Bind(newContext), newContext);
-            var lambda = Expression.Lambda(target.DelegateType,
-                Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), target.ReturnType), parameters);
+            var lambda = Expression.Lambda(context.TargetType,
+                Expression.Convert(Expression.Invoke(baseExpression, context.ResolveContextParameterExpression), compileReturnType), parameters);
             return lambda;
         }
     }
