@@ -59,6 +59,24 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
+        public void AutoInjectedFunc_ShouldResolveAnEnumerable()
+        {
+            // Arrange
+            var instances = new NoCtor[] { new NoCtor(), new NoCtor(), new NoCtor() };
+            var targets = CreateAutoFuncTargetContainer();
+            targets.RegisterObject(instances[0]);
+            targets.RegisterObject(instances[1]);
+            targets.RegisterObject(instances[2]);
+            var container = CreateContainer(targets);
+
+            // Act
+            var func = container.Resolve<Func<IEnumerable<NoCtor>>>();
+
+            // Assert
+            Assert.Equal(instances, func());
+        }
+
+        [Fact]
         public void AutoInjectedFunc_ShouldCreateGeneric()
         {
             // Arrange

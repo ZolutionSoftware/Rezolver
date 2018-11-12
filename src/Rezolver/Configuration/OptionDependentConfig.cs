@@ -8,6 +8,24 @@ using Rezolver.Sdk;
 
 namespace Rezolver.Configuration
 {
+    public abstract class OptionDependentConfigBase : ITargetContainerConfig, IDependant
+    {
+        private IEnumerable<DependencyMetadata> _dependencies;
+        public IEnumerable<DependencyMetadata> Dependencies
+        {
+            get
+            {
+                if (_dependencies == null)
+                    return _dependencies = GetDependenciesBase();
+                return _dependencies;
+            }
+        }
+
+        protected abstract IEnumerable<DependencyMetadata> GetDependenciesBase();
+
+        public abstract void Configure(IRootTargetContainer targets);
+    }
+
     /// <summary>
     /// Abstract base class for an <see cref="ITargetContainerConfig"/> that is dependent upon a particular type of option
     /// having been set in an <see cref="ITargetContainer"/> before being able to <see cref="Configure(IRootTargetContainer)"/>
@@ -31,16 +49,10 @@ namespace Rezolver.Configuration
     /// The <see cref="InjectEnumerables"/> config inherits from this class - passing <see cref="Options.EnableEnumerableInjection"/> as
     /// <typeparamref name="TOption"/>, with the constructor marking the dependency as optional. This ensures that it is executed after the option
     /// has been configured by any <see cref="ITargetContainerConfig{T}"/> objects specialised for the option type.</remarks>
-    public abstract class OptionDependentConfig<TOption> : ITargetContainerConfig, IDependant
+    public abstract class OptionDependentConfig<TOption> : OptionDependentConfigBase
         where TOption : class
     {
-        private readonly DependencyMetadata[] _baseDependencies;
-
-        /// <summary>
-        /// The base implementation returns an enumerable containing a single dependency on the type <see cref="ITargetContainerConfig{T}"/>
-        /// specialised for the type <typeparamref name="TOption" />.
-        /// </summary>
-        public virtual IEnumerable<DependencyMetadata> Dependencies => this._baseDependencies;
+        private bool _dependencyRequired;
 
         /// <summary>
         /// Constructs a new instance of the type <see cref="OptionDependentConfig{TOption}"/> which starts off with a required or optional
@@ -49,14 +61,14 @@ namespace Rezolver.Configuration
         /// <param name="optionConfigurationRequired"></param>
         public OptionDependentConfig(bool optionConfigurationRequired)
         {
-            this._baseDependencies = new[] { this.CreateTypeDependency<Configure<TOption>>(optionConfigurationRequired) };
+            _dependencyRequired = optionConfigurationRequired;
         }
 
         /// <summary>
-        /// Abstract implementation of the <see cref="ITargetContainerConfig"/> interface
+        /// The base implementation returns an enumerable containing a single dependency on the type <see cref="ITargetContainerConfig{T}"/>
+        /// specialised for the type <typeparamref name="TOption" />.
         /// </summary>
-        /// <param name="targets"></param>
-        public abstract void Configure(IRootTargetContainer targets);
+        protected override IEnumerable<DependencyMetadata> GetDependenciesBase() => new[] { this.CreateTypeDependency<Configure<TOption>>(_dependencyRequired) };
     }
 
     /// <summary>

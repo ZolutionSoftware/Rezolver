@@ -1,4 +1,5 @@
 ﻿using Rezolver.Options;
+using Rezolver.Sdk;
 using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace Rezolver.Configuration
     /// option has been configured to be <c>true</c>, then whenever a target is registered against a particular service type,
     /// a second registration will automatically be made against a <see cref="Func{TResult}"/> type with TResult equal
     /// to the registered service type.</remarks>
-    public class InjectAutoFuncs : OptionDependentConfig<Options.EnableAutoFuncInjection>
+    public class InjectAutoFuncs : OptionDependentConfigBase
     {
         private static readonly HashSet<Type> FuncTypes = new HashSet<Type>(new[]
         {
@@ -43,7 +44,7 @@ namespace Rezolver.Configuration
 
         public static InjectAutoFuncs Instance { get; } = new InjectAutoFuncs();
 
-        private InjectAutoFuncs() : base(false)
+        private InjectAutoFuncs() 
         {
         }
 
@@ -79,6 +80,12 @@ namespace Rezolver.Configuration
                 // decorators from working.
                 root.Register(new AutoFactoryTarget(funcType, e.Type, TypeHelpers.EmptyTypes));
             }
+        }
+
+        protected override IEnumerable<DependencyMetadata> GetDependenciesBase()
+        {
+            // we also support enumerable injection...
+            return new[] { this.CreateTypeDependency<Configure<EnableAutoFuncInjection>>(false), this.CreateTypeDependency<Configure<EnableEnumerableInjection>>(false) };
         }
     }
 }
