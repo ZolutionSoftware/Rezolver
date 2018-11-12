@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Options;
 using Rezolver.Sdk;
 
 namespace Rezolver.Configuration
@@ -16,7 +17,7 @@ namespace Rezolver.Configuration
     /// </summary>
     /// <remarks>Note that this configuration requires that the <see cref="InjectEnumerables"/> configuration is
     /// also applied.</remarks>
-    public class InjectArrays : OptionDependentConfig<Options.EnableArrayInjection>
+    public class InjectArrays : OptionDependentConfigBase
     {
         /// <summary>
         /// The one and only instance of the <see cref="InjectArrays"/> configuration object
@@ -40,17 +41,23 @@ namespace Rezolver.Configuration
             }
         }
 
-        private readonly IEnumerable<DependencyMetadata> _dependencies;
+        private InjectArrays()
+        {
+
+        }
 
         /// <summary>
-        /// Overrides the <see cref="OptionDependentConfig{TOption}"/> implementation to include a required dependency
-        /// on the <see cref="InjectEnumerables"/> configuration.
+        /// Overrides the abstract base method to return dependencies on the <see cref="Options.EnableArrayInjection"/> option
+        /// and the 
         /// </summary>
-        public override IEnumerable<DependencyMetadata> Dependencies => this._dependencies;
-
-        private InjectArrays() : base(false)
+        /// <returns></returns>
+        protected override IEnumerable<DependencyMetadata> GetDependenciesBase()
         {
-            this._dependencies = base.Dependencies.Concat(new[] { this.CreateTypeDependency<InjectEnumerables>(true) }).ToArray();
+            return new[]
+            {
+                this.CreateOptionDependency<EnableArrayInjection>(false),
+                this.CreateTypeDependency<InjectEnumerables>(true)
+            };
         }
 
         /// <summary>
