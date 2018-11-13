@@ -16,11 +16,9 @@ namespace Rezolver.Tests.Compilation.Specification
         // already covered by the AutoFactoryTests.
 
         protected IRootTargetContainer CreateAutoFuncTargetContainer([CallerMemberName]string testName = null)
-        {
-            var config = GetDefaultTargetContainerConfig();
-            config.ConfigureOption<Options.EnableAutoFuncInjection>(true);
-            config.Add(Configuration.InjectAutoFuncs.Instance);
-            return new TargetContainer(config);
+        { 
+            return new TargetContainer(GetDefaultTargetContainerConfig()
+                .ConfigureOption<Options.EnableAutoFuncInjection>(true));
         }
 
         [Fact]

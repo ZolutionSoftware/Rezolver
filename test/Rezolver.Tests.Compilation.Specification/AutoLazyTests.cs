@@ -1,4 +1,6 @@
-﻿using Rezolver.Targets;
+﻿using Rezolver.Configuration;
+using Rezolver.Options;
+using Rezolver.Targets;
 using Rezolver.Tests.Types;
 using System;
 using System.Collections.Concurrent;
@@ -15,7 +17,9 @@ namespace Rezolver.Tests.Compilation.Specification
         private IRootTargetContainer CreateAutoLazyAndAutoFactoryContainer()
         {
             // requires the Func functionality
-            var targets = CreateTargetContainer();
+            var targets = CreateTargetContainer(
+                GetDefaultTargetContainerConfig()
+                    .ConfigureOption<Options.EnableAutoFuncInjection>(true));
             targets.RegisterContainer(typeof(Lazy<>), new LazyTargetContainer(targets));
             return targets;
         }
@@ -159,6 +163,24 @@ namespace Rezolver.Tests.Compilation.Specification
                 Assert.Same(instance2, instance3);
             }
             Assert.True(instance1.Disposed);
+        }
+
+        internal class EnableAutoLazyInjection : ContainerOption<bool>
+        {
+            public static EnableAutoLazyInjection Default { get; } = false;
+
+            public static implicit operator EnableAutoLazyInjection(bool value)
+            {
+                return new EnableAutoLazyInjection() { Value = value };
+            }
+        }
+
+        internal class InjectAutoLazies : OptionDependentConfig<EnableAutoLazyInjection>
+        {
+            public override void Configure(IRootTargetContainer targets)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         internal class LazyTargetContainer : GenericTargetContainer
