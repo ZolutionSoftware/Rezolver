@@ -7,7 +7,7 @@ namespace Rezolver
 
 	public static partial class AutoFactoryRegistrationExtensions
 	{
-		/// <summary>Enables the automatic injection of a <see cref="Func{TResult}" /> for the given <typeparamref="TResult" /></summary>
+		/// <summary>Enables the automatic injection of a <see cref="Func{TResult}" /> for the given <typeparamref name="TResult" /></summary>
 		/// <typeparam name="TResult">The return type of the delegate - equivalent to the service type that is to be resolved from the container when the delegate is called.</typeparam>
 		/// <param name="targets">Required.  The <see cref="IRootTargetContainer" /> into which the newly created target will be registered</param>
 		/// <remarks>

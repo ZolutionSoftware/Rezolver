@@ -123,6 +123,194 @@ references:
   fullName.vb: Rezolver.AliasTargetContainerExtensions.RegisterAlias(Of TAlias, TOriginal)(Rezolver.ITargetContainer)
   nameWithType: AliasTargetContainerExtensions.RegisterAlias<TAlias, TOriginal>(ITargetContainer)
   nameWithType.vb: AliasTargetContainerExtensions.RegisterAlias(Of TAlias, TOriginal)(ITargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions
+  name: AutoFactoryRegistrationExtensions
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html
+  commentId: T:Rezolver.AutoFactoryRegistrationExtensions
+  fullName: Rezolver.AutoFactoryRegistrationExtensions
+  nameWithType: AutoFactoryRegistrationExtensions
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory(Rezolver.IRootTargetContainer,System.Type)
+  name: RegisterAutoFactory(IRootTargetContainer, Type)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_Rezolver_IRootTargetContainer_System_Type_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory(Rezolver.IRootTargetContainer,System.Type)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory(Rezolver.IRootTargetContainer, System.Type)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFactory(IRootTargetContainer, Type)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory*
+  name: RegisterAutoFactory
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_
+  commentId: Overload:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory
+  isSpec: "True"
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFactory
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory``1(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFactory<TDelegate>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory__1_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory``1(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFactory(Of TDelegate)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory<TDelegate>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory(Of TDelegate)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFactory<TDelegate>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFactory(Of TDelegate)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc*
+  name: RegisterAutoFunc
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc_
+  commentId: Overload:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc
+  isSpec: "True"
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``1(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``1(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``10(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__10_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``10(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``11(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__11_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``11(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``12(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__12_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``12(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``13(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__13_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``13(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``14(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__14_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``14(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``15(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__15_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``15(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``16(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__16_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``16(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``17(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__17_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``17(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``2(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__2_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``2(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``3(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__3_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``3(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``4(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__4_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``4(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``5(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__5_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``5(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``6(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__6_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``6(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``7(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__7_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``7(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``8(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__8_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``8(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, TResult)(IRootTargetContainer)
+- uid: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``9(Rezolver.IRootTargetContainer)
+  name: RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(IRootTargetContainer)
+  href: api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__9_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc``9(Rezolver.IRootTargetContainer)
+  name.vb: RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(IRootTargetContainer)
+  fullName: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(Rezolver.IRootTargetContainer)
+  fullName.vb: Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(Rezolver.IRootTargetContainer)
+  nameWithType: AutoFactoryRegistrationExtensions.RegisterAutoFunc<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(IRootTargetContainer)
+  nameWithType.vb: AutoFactoryRegistrationExtensions.RegisterAutoFunc(Of T1, T2, T3, T4, T5, T6, T7, T8, TResult)(IRootTargetContainer)
 - uid: Rezolver.BindAllMembersBehaviour
   name: BindAllMembersBehaviour
   href: api/Rezolver.BindAllMembersBehaviour.html
@@ -925,6 +1113,23 @@ references:
   fullName: Rezolver.Compilation.CompileContext.Rezolver.ITargetContainer.RegisterContainer
   nameWithType: CompileContext.ITargetContainer.RegisterContainer
   nameWithType.vb: CompileContext.Rezolver.ITargetContainer.RegisterContainer
+- uid: Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Root
+  name: ITargetContainer.Root
+  href: api/Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Root
+  commentId: P:Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Root
+  name.vb: Rezolver.ITargetContainer.Root
+  fullName: Rezolver.Compilation.CompileContext.Rezolver.ITargetContainer.Root
+  nameWithType: CompileContext.ITargetContainer.Root
+  nameWithType.vb: CompileContext.Rezolver.ITargetContainer.Root
+- uid: Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Root*
+  name: ITargetContainer.Root
+  href: api/Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_Rezolver_ITargetContainer_Root_
+  commentId: Overload:Rezolver.Compilation.CompileContext.Rezolver#ITargetContainer#Root
+  isSpec: "True"
+  name.vb: Rezolver.ITargetContainer.Root
+  fullName: Rezolver.Compilation.CompileContext.Rezolver.ITargetContainer.Root
+  nameWithType: CompileContext.ITargetContainer.Root
+  nameWithType.vb: CompileContext.Rezolver.ITargetContainer.Root
 - uid: Rezolver.Compilation.CompileContext.ScopeBehaviourOverride
   name: ScopeBehaviourOverride
   href: api/Rezolver.Compilation.CompileContext.html#Rezolver_Compilation_CompileContext_ScopeBehaviourOverride
@@ -1140,6 +1345,25 @@ references:
   commentId: N:Rezolver.Compilation.Expressions
   fullName: Rezolver.Compilation.Expressions
   nameWithType: Rezolver.Compilation.Expressions
+- uid: Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder
+  name: AutoFactoryTargetBuilder
+  href: api/Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.html
+  commentId: T:Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder
+  fullName: Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder
+  nameWithType: AutoFactoryTargetBuilder
+- uid: Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build(Rezolver.Targets.AutoFactoryTarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)
+  name: Build(AutoFactoryTarget, IExpressionCompileContext, IExpressionCompiler)
+  href: api/Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.html#Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder_Build_Rezolver_Targets_AutoFactoryTarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_
+  commentId: M:Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build(Rezolver.Targets.AutoFactoryTarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)
+  fullName: Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build(Rezolver.Targets.AutoFactoryTarget, Rezolver.Compilation.Expressions.IExpressionCompileContext, Rezolver.Compilation.Expressions.IExpressionCompiler)
+  nameWithType: AutoFactoryTargetBuilder.Build(AutoFactoryTarget, IExpressionCompileContext, IExpressionCompiler)
+- uid: Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build*
+  name: Build
+  href: api/Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.html#Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder_Build_
+  commentId: Overload:Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build
+  isSpec: "True"
+  fullName: Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build
+  nameWithType: AutoFactoryTargetBuilder.Build
 - uid: Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder
   name: ChangeTypeTargetBuilder
   href: api/Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html
@@ -2933,19 +3157,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.Configuration.InjectArrays.Configure
   nameWithType: InjectArrays.Configure
-- uid: Rezolver.Configuration.InjectArrays.Dependencies
-  name: Dependencies
-  href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_Dependencies
-  commentId: P:Rezolver.Configuration.InjectArrays.Dependencies
-  fullName: Rezolver.Configuration.InjectArrays.Dependencies
-  nameWithType: InjectArrays.Dependencies
-- uid: Rezolver.Configuration.InjectArrays.Dependencies*
-  name: Dependencies
-  href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_Dependencies_
-  commentId: Overload:Rezolver.Configuration.InjectArrays.Dependencies
+- uid: Rezolver.Configuration.InjectArrays.GetDependenciesBase
+  name: GetDependenciesBase()
+  href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_GetDependenciesBase
+  commentId: M:Rezolver.Configuration.InjectArrays.GetDependenciesBase
+  fullName: Rezolver.Configuration.InjectArrays.GetDependenciesBase()
+  nameWithType: InjectArrays.GetDependenciesBase()
+- uid: Rezolver.Configuration.InjectArrays.GetDependenciesBase*
+  name: GetDependenciesBase
+  href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_GetDependenciesBase_
+  commentId: Overload:Rezolver.Configuration.InjectArrays.GetDependenciesBase
   isSpec: "True"
-  fullName: Rezolver.Configuration.InjectArrays.Dependencies
-  nameWithType: InjectArrays.Dependencies
+  fullName: Rezolver.Configuration.InjectArrays.GetDependenciesBase
+  nameWithType: InjectArrays.GetDependenciesBase
 - uid: Rezolver.Configuration.InjectArrays.Instance
   name: Instance
   href: api/Rezolver.Configuration.InjectArrays.html#Rezolver_Configuration_InjectArrays_Instance
@@ -2959,6 +3183,96 @@ references:
   isSpec: "True"
   fullName: Rezolver.Configuration.InjectArrays.Instance
   nameWithType: InjectArrays.Instance
+- uid: Rezolver.Configuration.InjectAutoFuncs
+  name: InjectAutoFuncs
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html
+  commentId: T:Rezolver.Configuration.InjectAutoFuncs
+  fullName: Rezolver.Configuration.InjectAutoFuncs
+  nameWithType: InjectAutoFuncs
+- uid: Rezolver.Configuration.InjectAutoFuncs.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html#Rezolver_Configuration_InjectAutoFuncs_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectAutoFuncs.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectAutoFuncs.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectAutoFuncs.Configure(IRootTargetContainer)
+- uid: Rezolver.Configuration.InjectAutoFuncs.Configure*
+  name: Configure
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html#Rezolver_Configuration_InjectAutoFuncs_Configure_
+  commentId: Overload:Rezolver.Configuration.InjectAutoFuncs.Configure
+  isSpec: "True"
+  fullName: Rezolver.Configuration.InjectAutoFuncs.Configure
+  nameWithType: InjectAutoFuncs.Configure
+- uid: Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase
+  name: GetDependenciesBase()
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html#Rezolver_Configuration_InjectAutoFuncs_GetDependenciesBase
+  commentId: M:Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase
+  fullName: Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase()
+  nameWithType: InjectAutoFuncs.GetDependenciesBase()
+- uid: Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase*
+  name: GetDependenciesBase
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html#Rezolver_Configuration_InjectAutoFuncs_GetDependenciesBase_
+  commentId: Overload:Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase
+  isSpec: "True"
+  fullName: Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase
+  nameWithType: InjectAutoFuncs.GetDependenciesBase
+- uid: Rezolver.Configuration.InjectAutoFuncs.Instance
+  name: Instance
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html#Rezolver_Configuration_InjectAutoFuncs_Instance
+  commentId: P:Rezolver.Configuration.InjectAutoFuncs.Instance
+  fullName: Rezolver.Configuration.InjectAutoFuncs.Instance
+  nameWithType: InjectAutoFuncs.Instance
+- uid: Rezolver.Configuration.InjectAutoFuncs.Instance*
+  name: Instance
+  href: api/Rezolver.Configuration.InjectAutoFuncs.html#Rezolver_Configuration_InjectAutoFuncs_Instance_
+  commentId: Overload:Rezolver.Configuration.InjectAutoFuncs.Instance
+  isSpec: "True"
+  fullName: Rezolver.Configuration.InjectAutoFuncs.Instance
+  nameWithType: InjectAutoFuncs.Instance
+- uid: Rezolver.Configuration.InjectAutoLazies
+  name: InjectAutoLazies
+  href: api/Rezolver.Configuration.InjectAutoLazies.html
+  commentId: T:Rezolver.Configuration.InjectAutoLazies
+  fullName: Rezolver.Configuration.InjectAutoLazies
+  nameWithType: InjectAutoLazies
+- uid: Rezolver.Configuration.InjectAutoLazies.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.InjectAutoLazies.html#Rezolver_Configuration_InjectAutoLazies_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.InjectAutoLazies.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.InjectAutoLazies.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: InjectAutoLazies.Configure(IRootTargetContainer)
+- uid: Rezolver.Configuration.InjectAutoLazies.Configure*
+  name: Configure
+  href: api/Rezolver.Configuration.InjectAutoLazies.html#Rezolver_Configuration_InjectAutoLazies_Configure_
+  commentId: Overload:Rezolver.Configuration.InjectAutoLazies.Configure
+  isSpec: "True"
+  fullName: Rezolver.Configuration.InjectAutoLazies.Configure
+  nameWithType: InjectAutoLazies.Configure
+- uid: Rezolver.Configuration.InjectAutoLazies.GetDependenciesBase
+  name: GetDependenciesBase()
+  href: api/Rezolver.Configuration.InjectAutoLazies.html#Rezolver_Configuration_InjectAutoLazies_GetDependenciesBase
+  commentId: M:Rezolver.Configuration.InjectAutoLazies.GetDependenciesBase
+  fullName: Rezolver.Configuration.InjectAutoLazies.GetDependenciesBase()
+  nameWithType: InjectAutoLazies.GetDependenciesBase()
+- uid: Rezolver.Configuration.InjectAutoLazies.GetDependenciesBase*
+  name: GetDependenciesBase
+  href: api/Rezolver.Configuration.InjectAutoLazies.html#Rezolver_Configuration_InjectAutoLazies_GetDependenciesBase_
+  commentId: Overload:Rezolver.Configuration.InjectAutoLazies.GetDependenciesBase
+  isSpec: "True"
+  fullName: Rezolver.Configuration.InjectAutoLazies.GetDependenciesBase
+  nameWithType: InjectAutoLazies.GetDependenciesBase
+- uid: Rezolver.Configuration.InjectAutoLazies.Instance
+  name: Instance
+  href: api/Rezolver.Configuration.InjectAutoLazies.html#Rezolver_Configuration_InjectAutoLazies_Instance
+  commentId: P:Rezolver.Configuration.InjectAutoLazies.Instance
+  fullName: Rezolver.Configuration.InjectAutoLazies.Instance
+  nameWithType: InjectAutoLazies.Instance
+- uid: Rezolver.Configuration.InjectAutoLazies.Instance*
+  name: Instance
+  href: api/Rezolver.Configuration.InjectAutoLazies.html#Rezolver_Configuration_InjectAutoLazies_Instance_
+  commentId: Overload:Rezolver.Configuration.InjectAutoLazies.Instance
+  isSpec: "True"
+  fullName: Rezolver.Configuration.InjectAutoLazies.Instance
+  nameWithType: InjectAutoLazies.Instance
 - uid: Rezolver.Configuration.InjectCollections
   name: InjectCollections
   href: api/Rezolver.Configuration.InjectCollections.html
@@ -3113,40 +3427,23 @@ references:
   fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).OptionDependentConfig
   nameWithType: OptionDependentConfig<TOption>.OptionDependentConfig
   nameWithType.vb: OptionDependentConfig(Of TOption).OptionDependentConfig
-- uid: Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.IRootTargetContainer)
-  name: Configure(IRootTargetContainer)
-  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_
-  commentId: M:Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.IRootTargetContainer)
-  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Configure(Rezolver.IRootTargetContainer)
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Configure(Rezolver.IRootTargetContainer)
-  nameWithType: OptionDependentConfig<TOption>.Configure(IRootTargetContainer)
-  nameWithType.vb: OptionDependentConfig(Of TOption).Configure(IRootTargetContainer)
-- uid: Rezolver.Configuration.OptionDependentConfig`1.Configure*
-  name: Configure
-  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_
-  commentId: Overload:Rezolver.Configuration.OptionDependentConfig`1.Configure
+- uid: Rezolver.Configuration.OptionDependentConfig`1.GetDependenciesBase
+  name: GetDependenciesBase()
+  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase
+  commentId: M:Rezolver.Configuration.OptionDependentConfig`1.GetDependenciesBase
+  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.GetDependenciesBase()
+  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).GetDependenciesBase()
+  nameWithType: OptionDependentConfig<TOption>.GetDependenciesBase()
+  nameWithType.vb: OptionDependentConfig(Of TOption).GetDependenciesBase()
+- uid: Rezolver.Configuration.OptionDependentConfig`1.GetDependenciesBase*
+  name: GetDependenciesBase
+  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase_
+  commentId: Overload:Rezolver.Configuration.OptionDependentConfig`1.GetDependenciesBase
   isSpec: "True"
-  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Configure
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Configure
-  nameWithType: OptionDependentConfig<TOption>.Configure
-  nameWithType.vb: OptionDependentConfig(Of TOption).Configure
-- uid: Rezolver.Configuration.OptionDependentConfig`1.Dependencies
-  name: Dependencies
-  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies
-  commentId: P:Rezolver.Configuration.OptionDependentConfig`1.Dependencies
-  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Dependencies
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Dependencies
-  nameWithType: OptionDependentConfig<TOption>.Dependencies
-  nameWithType.vb: OptionDependentConfig(Of TOption).Dependencies
-- uid: Rezolver.Configuration.OptionDependentConfig`1.Dependencies*
-  name: Dependencies
-  href: api/Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies_
-  commentId: Overload:Rezolver.Configuration.OptionDependentConfig`1.Dependencies
-  isSpec: "True"
-  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.Dependencies
-  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).Dependencies
-  nameWithType: OptionDependentConfig<TOption>.Dependencies
-  nameWithType.vb: OptionDependentConfig(Of TOption).Dependencies
+  fullName: Rezolver.Configuration.OptionDependentConfig<TOption>.GetDependenciesBase
+  fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of TOption).GetDependenciesBase
+  nameWithType: OptionDependentConfig<TOption>.GetDependenciesBase
+  nameWithType.vb: OptionDependentConfig(Of TOption).GetDependenciesBase
 - uid: Rezolver.Configuration.OptionDependentConfig`2
   name: OptionDependentConfig<T, TOption>
   href: api/Rezolver.Configuration.OptionDependentConfig-2.html
@@ -3173,6 +3470,67 @@ references:
   fullName.vb: Rezolver.Configuration.OptionDependentConfig(Of T, TOption).OptionDependentConfig
   nameWithType: OptionDependentConfig<T, TOption>.OptionDependentConfig
   nameWithType.vb: OptionDependentConfig(Of T, TOption).OptionDependentConfig
+- uid: Rezolver.Configuration.OptionDependentConfigBase
+  name: OptionDependentConfigBase
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html
+  commentId: T:Rezolver.Configuration.OptionDependentConfigBase
+  fullName: Rezolver.Configuration.OptionDependentConfigBase
+  nameWithType: OptionDependentConfigBase
+- uid: Rezolver.Configuration.OptionDependentConfigBase.Configure(Rezolver.IRootTargetContainer)
+  name: Configure(IRootTargetContainer)
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_
+  commentId: M:Rezolver.Configuration.OptionDependentConfigBase.Configure(Rezolver.IRootTargetContainer)
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.Configure(Rezolver.IRootTargetContainer)
+  nameWithType: OptionDependentConfigBase.Configure(IRootTargetContainer)
+- uid: Rezolver.Configuration.OptionDependentConfigBase.Configure*
+  name: Configure
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_
+  commentId: Overload:Rezolver.Configuration.OptionDependentConfigBase.Configure
+  isSpec: "True"
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.Configure
+  nameWithType: OptionDependentConfigBase.Configure
+- uid: Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency*
+  name: CreateOptionDependency
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency_
+  commentId: Overload:Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency
+  isSpec: "True"
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency
+  nameWithType: OptionDependentConfigBase.CreateOptionDependency
+- uid: Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency``1(System.Boolean)
+  name: CreateOptionDependency<TOption>(Boolean)
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_
+  commentId: M:Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency``1(System.Boolean)
+  name.vb: CreateOptionDependency(Of TOption)(Boolean)
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency<TOption>(System.Boolean)
+  fullName.vb: Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency(Of TOption)(System.Boolean)
+  nameWithType: OptionDependentConfigBase.CreateOptionDependency<TOption>(Boolean)
+  nameWithType.vb: OptionDependentConfigBase.CreateOptionDependency(Of TOption)(Boolean)
+- uid: Rezolver.Configuration.OptionDependentConfigBase.Dependencies
+  name: Dependencies
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies
+  commentId: P:Rezolver.Configuration.OptionDependentConfigBase.Dependencies
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.Dependencies
+  nameWithType: OptionDependentConfigBase.Dependencies
+- uid: Rezolver.Configuration.OptionDependentConfigBase.Dependencies*
+  name: Dependencies
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies_
+  commentId: Overload:Rezolver.Configuration.OptionDependentConfigBase.Dependencies
+  isSpec: "True"
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.Dependencies
+  nameWithType: OptionDependentConfigBase.Dependencies
+- uid: Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase
+  name: GetDependenciesBase()
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase
+  commentId: M:Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase()
+  nameWithType: OptionDependentConfigBase.GetDependenciesBase()
+- uid: Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase*
+  name: GetDependenciesBase
+  href: api/Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase_
+  commentId: Overload:Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase
+  isSpec: "True"
+  fullName: Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase
+  nameWithType: OptionDependentConfigBase.GetDependenciesBase
 - uid: Rezolver.Configuration.OverridingEnumerables
   name: OverridingEnumerables
   href: api/Rezolver.Configuration.OverridingEnumerables.html
@@ -3488,6 +3846,40 @@ references:
   fullName: Rezolver.ContainerBase.Rezolver.ICovariantTypeIndex.SelectTypes
   nameWithType: ContainerBase.ICovariantTypeIndex.SelectTypes
   nameWithType.vb: ContainerBase.Rezolver.ICovariantTypeIndex.SelectTypes
+- uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#CreateTargetContainer(System.Type)
+  name: IRootTargetContainer.CreateTargetContainer(Type)
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_
+  commentId: M:Rezolver.ContainerBase.Rezolver#IRootTargetContainer#CreateTargetContainer(System.Type)
+  name.vb: Rezolver.IRootTargetContainer.CreateTargetContainer(Type)
+  fullName: Rezolver.ContainerBase.Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)
+  nameWithType: ContainerBase.IRootTargetContainer.CreateTargetContainer(Type)
+  nameWithType.vb: ContainerBase.Rezolver.IRootTargetContainer.CreateTargetContainer(Type)
+- uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#CreateTargetContainer*
+  name: IRootTargetContainer.CreateTargetContainer
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_CreateTargetContainer_
+  commentId: Overload:Rezolver.ContainerBase.Rezolver#IRootTargetContainer#CreateTargetContainer
+  isSpec: "True"
+  name.vb: Rezolver.IRootTargetContainer.CreateTargetContainer
+  fullName: Rezolver.ContainerBase.Rezolver.IRootTargetContainer.CreateTargetContainer
+  nameWithType: ContainerBase.IRootTargetContainer.CreateTargetContainer
+  nameWithType.vb: ContainerBase.Rezolver.IRootTargetContainer.CreateTargetContainer
+- uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#GetContainerRegistrationType(System.Type)
+  name: IRootTargetContainer.GetContainerRegistrationType(Type)
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_
+  commentId: M:Rezolver.ContainerBase.Rezolver#IRootTargetContainer#GetContainerRegistrationType(System.Type)
+  name.vb: Rezolver.IRootTargetContainer.GetContainerRegistrationType(Type)
+  fullName: Rezolver.ContainerBase.Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)
+  nameWithType: ContainerBase.IRootTargetContainer.GetContainerRegistrationType(Type)
+  nameWithType.vb: ContainerBase.Rezolver.IRootTargetContainer.GetContainerRegistrationType(Type)
+- uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#GetContainerRegistrationType*
+  name: IRootTargetContainer.GetContainerRegistrationType
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_GetContainerRegistrationType_
+  commentId: Overload:Rezolver.ContainerBase.Rezolver#IRootTargetContainer#GetContainerRegistrationType
+  isSpec: "True"
+  name.vb: Rezolver.IRootTargetContainer.GetContainerRegistrationType
+  fullName: Rezolver.ContainerBase.Rezolver.IRootTargetContainer.GetContainerRegistrationType
+  nameWithType: ContainerBase.IRootTargetContainer.GetContainerRegistrationType
+  nameWithType.vb: ContainerBase.Rezolver.IRootTargetContainer.GetContainerRegistrationType
 - uid: Rezolver.ContainerBase.Rezolver#IRootTargetContainer#TargetContainerRegistered
   name: IRootTargetContainer.TargetContainerRegistered
   href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetContainerRegistered
@@ -3589,6 +3981,23 @@ references:
   fullName: Rezolver.ContainerBase.Rezolver.ITargetContainer.RegisterContainer
   nameWithType: ContainerBase.ITargetContainer.RegisterContainer
   nameWithType.vb: ContainerBase.Rezolver.ITargetContainer.RegisterContainer
+- uid: Rezolver.ContainerBase.Rezolver#ITargetContainer#Root
+  name: ITargetContainer.Root
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_Root
+  commentId: P:Rezolver.ContainerBase.Rezolver#ITargetContainer#Root
+  name.vb: Rezolver.ITargetContainer.Root
+  fullName: Rezolver.ContainerBase.Rezolver.ITargetContainer.Root
+  nameWithType: ContainerBase.ITargetContainer.Root
+  nameWithType.vb: ContainerBase.Rezolver.ITargetContainer.Root
+- uid: Rezolver.ContainerBase.Rezolver#ITargetContainer#Root*
+  name: ITargetContainer.Root
+  href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_Root_
+  commentId: Overload:Rezolver.ContainerBase.Rezolver#ITargetContainer#Root
+  isSpec: "True"
+  name.vb: Rezolver.ITargetContainer.Root
+  fullName: Rezolver.ContainerBase.Rezolver.ITargetContainer.Root
+  nameWithType: ContainerBase.ITargetContainer.Root
+  nameWithType.vb: ContainerBase.Rezolver.ITargetContainer.Root
 - uid: Rezolver.ContainerBase.System#IServiceProvider#GetService(System.Type)
   name: IServiceProvider.GetService(Type)
   href: api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_
@@ -4119,6 +4528,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.DecoratingTargetContainer.RegisterContainer
   nameWithType: DecoratingTargetContainer.RegisterContainer
+- uid: Rezolver.DecoratingTargetContainer.Root
+  name: Root
+  href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Root
+  commentId: P:Rezolver.DecoratingTargetContainer.Root
+  fullName: Rezolver.DecoratingTargetContainer.Root
+  nameWithType: DecoratingTargetContainer.Root
+- uid: Rezolver.DecoratingTargetContainer.Root*
+  name: Root
+  href: api/Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Root_
+  commentId: Overload:Rezolver.DecoratingTargetContainer.Root
+  isSpec: "True"
+  fullName: Rezolver.DecoratingTargetContainer.Root
+  nameWithType: DecoratingTargetContainer.Root
 - uid: Rezolver.DecoratorTargetContainerExtensions
   name: DecoratorTargetContainerExtensions
   href: api/Rezolver.DecoratorTargetContainerExtensions.html
@@ -4970,6 +5392,32 @@ references:
   commentId: T:Rezolver.IRootTargetContainer
   fullName: Rezolver.IRootTargetContainer
   nameWithType: IRootTargetContainer
+- uid: Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)
+  name: CreateTargetContainer(Type)
+  href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_
+  commentId: M:Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)
+  fullName: Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)
+  nameWithType: IRootTargetContainer.CreateTargetContainer(Type)
+- uid: Rezolver.IRootTargetContainer.CreateTargetContainer*
+  name: CreateTargetContainer
+  href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_CreateTargetContainer_
+  commentId: Overload:Rezolver.IRootTargetContainer.CreateTargetContainer
+  isSpec: "True"
+  fullName: Rezolver.IRootTargetContainer.CreateTargetContainer
+  nameWithType: IRootTargetContainer.CreateTargetContainer
+- uid: Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)
+  name: GetContainerRegistrationType(Type)
+  href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_
+  commentId: M:Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)
+  fullName: Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)
+  nameWithType: IRootTargetContainer.GetContainerRegistrationType(Type)
+- uid: Rezolver.IRootTargetContainer.GetContainerRegistrationType*
+  name: GetContainerRegistrationType
+  href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_GetContainerRegistrationType_
+  commentId: Overload:Rezolver.IRootTargetContainer.GetContainerRegistrationType
+  isSpec: "True"
+  fullName: Rezolver.IRootTargetContainer.GetContainerRegistrationType
+  nameWithType: IRootTargetContainer.GetContainerRegistrationType
 - uid: Rezolver.IRootTargetContainer.TargetContainerRegistered
   name: TargetContainerRegistered
   href: api/Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_TargetContainerRegistered
@@ -5188,6 +5636,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.ITargetContainer.RegisterContainer
   nameWithType: ITargetContainer.RegisterContainer
+- uid: Rezolver.ITargetContainer.Root
+  name: Root
+  href: api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Root
+  commentId: P:Rezolver.ITargetContainer.Root
+  fullName: Rezolver.ITargetContainer.Root
+  nameWithType: ITargetContainer.Root
+- uid: Rezolver.ITargetContainer.Root*
+  name: Root
+  href: api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Root_
+  commentId: Overload:Rezolver.ITargetContainer.Root
+  isSpec: "True"
+  fullName: Rezolver.ITargetContainer.Root
+  nameWithType: ITargetContainer.Root
 - uid: Rezolver.ITargetContainerConfig
   name: ITargetContainerConfig
   href: api/Rezolver.ITargetContainerConfig.html
@@ -5248,12 +5709,12 @@ references:
   commentId: T:Rezolver.ITargetContainerFactory
   fullName: Rezolver.ITargetContainerFactory
   nameWithType: ITargetContainerFactory
-- uid: Rezolver.ITargetContainerFactory.CreateContainer(System.Type,Rezolver.ITargetContainer,Rezolver.ITargetContainer)
-  name: CreateContainer(Type, ITargetContainer, ITargetContainer)
-  href: api/Rezolver.ITargetContainerFactory.html#Rezolver_ITargetContainerFactory_CreateContainer_System_Type_Rezolver_ITargetContainer_Rezolver_ITargetContainer_
-  commentId: M:Rezolver.ITargetContainerFactory.CreateContainer(System.Type,Rezolver.ITargetContainer,Rezolver.ITargetContainer)
-  fullName: Rezolver.ITargetContainerFactory.CreateContainer(System.Type, Rezolver.ITargetContainer, Rezolver.ITargetContainer)
-  nameWithType: ITargetContainerFactory.CreateContainer(Type, ITargetContainer, ITargetContainer)
+- uid: Rezolver.ITargetContainerFactory.CreateContainer(System.Type,Rezolver.ITargetContainer)
+  name: CreateContainer(Type, ITargetContainer)
+  href: api/Rezolver.ITargetContainerFactory.html#Rezolver_ITargetContainerFactory_CreateContainer_System_Type_Rezolver_ITargetContainer_
+  commentId: M:Rezolver.ITargetContainerFactory.CreateContainer(System.Type,Rezolver.ITargetContainer)
+  fullName: Rezolver.ITargetContainerFactory.CreateContainer(System.Type, Rezolver.ITargetContainer)
+  nameWithType: ITargetContainerFactory.CreateContainer(Type, ITargetContainer)
 - uid: Rezolver.ITargetContainerFactory.CreateContainer*
   name: CreateContainer
   href: api/Rezolver.ITargetContainerFactory.html#Rezolver_ITargetContainerFactory_CreateContainer_
@@ -6006,6 +6467,82 @@ references:
   fullName.vb: Rezolver.Options.EnableArrayInjection.Widening
   nameWithType: EnableArrayInjection.Implicit
   nameWithType.vb: EnableArrayInjection.Widening
+- uid: Rezolver.Options.EnableAutoFuncInjection
+  name: EnableAutoFuncInjection
+  href: api/Rezolver.Options.EnableAutoFuncInjection.html
+  commentId: T:Rezolver.Options.EnableAutoFuncInjection
+  fullName: Rezolver.Options.EnableAutoFuncInjection
+  nameWithType: EnableAutoFuncInjection
+- uid: Rezolver.Options.EnableAutoFuncInjection.Default
+  name: Default
+  href: api/Rezolver.Options.EnableAutoFuncInjection.html#Rezolver_Options_EnableAutoFuncInjection_Default
+  commentId: P:Rezolver.Options.EnableAutoFuncInjection.Default
+  fullName: Rezolver.Options.EnableAutoFuncInjection.Default
+  nameWithType: EnableAutoFuncInjection.Default
+- uid: Rezolver.Options.EnableAutoFuncInjection.Default*
+  name: Default
+  href: api/Rezolver.Options.EnableAutoFuncInjection.html#Rezolver_Options_EnableAutoFuncInjection_Default_
+  commentId: Overload:Rezolver.Options.EnableAutoFuncInjection.Default
+  isSpec: "True"
+  fullName: Rezolver.Options.EnableAutoFuncInjection.Default
+  nameWithType: EnableAutoFuncInjection.Default
+- uid: Rezolver.Options.EnableAutoFuncInjection.op_Implicit(System.Boolean)~Rezolver.Options.EnableAutoFuncInjection
+  name: Implicit(Boolean to EnableAutoFuncInjection)
+  href: api/Rezolver.Options.EnableAutoFuncInjection.html#Rezolver_Options_EnableAutoFuncInjection_op_Implicit_System_Boolean__Rezolver_Options_EnableAutoFuncInjection
+  commentId: M:Rezolver.Options.EnableAutoFuncInjection.op_Implicit(System.Boolean)~Rezolver.Options.EnableAutoFuncInjection
+  name.vb: Widening(Boolean to EnableAutoFuncInjection)
+  fullName: Rezolver.Options.EnableAutoFuncInjection.Implicit(System.Boolean to Rezolver.Options.EnableAutoFuncInjection)
+  fullName.vb: Rezolver.Options.EnableAutoFuncInjection.Widening(System.Boolean to Rezolver.Options.EnableAutoFuncInjection)
+  nameWithType: EnableAutoFuncInjection.Implicit(Boolean to EnableAutoFuncInjection)
+  nameWithType.vb: EnableAutoFuncInjection.Widening(Boolean to EnableAutoFuncInjection)
+- uid: Rezolver.Options.EnableAutoFuncInjection.op_Implicit*
+  name: Implicit
+  href: api/Rezolver.Options.EnableAutoFuncInjection.html#Rezolver_Options_EnableAutoFuncInjection_op_Implicit_
+  commentId: Overload:Rezolver.Options.EnableAutoFuncInjection.op_Implicit
+  isSpec: "True"
+  name.vb: Widening
+  fullName: Rezolver.Options.EnableAutoFuncInjection.Implicit
+  fullName.vb: Rezolver.Options.EnableAutoFuncInjection.Widening
+  nameWithType: EnableAutoFuncInjection.Implicit
+  nameWithType.vb: EnableAutoFuncInjection.Widening
+- uid: Rezolver.Options.EnableAutoLazyInjection
+  name: EnableAutoLazyInjection
+  href: api/Rezolver.Options.EnableAutoLazyInjection.html
+  commentId: T:Rezolver.Options.EnableAutoLazyInjection
+  fullName: Rezolver.Options.EnableAutoLazyInjection
+  nameWithType: EnableAutoLazyInjection
+- uid: Rezolver.Options.EnableAutoLazyInjection.Default
+  name: Default
+  href: api/Rezolver.Options.EnableAutoLazyInjection.html#Rezolver_Options_EnableAutoLazyInjection_Default
+  commentId: P:Rezolver.Options.EnableAutoLazyInjection.Default
+  fullName: Rezolver.Options.EnableAutoLazyInjection.Default
+  nameWithType: EnableAutoLazyInjection.Default
+- uid: Rezolver.Options.EnableAutoLazyInjection.Default*
+  name: Default
+  href: api/Rezolver.Options.EnableAutoLazyInjection.html#Rezolver_Options_EnableAutoLazyInjection_Default_
+  commentId: Overload:Rezolver.Options.EnableAutoLazyInjection.Default
+  isSpec: "True"
+  fullName: Rezolver.Options.EnableAutoLazyInjection.Default
+  nameWithType: EnableAutoLazyInjection.Default
+- uid: Rezolver.Options.EnableAutoLazyInjection.op_Implicit(System.Boolean)~Rezolver.Options.EnableAutoLazyInjection
+  name: Implicit(Boolean to EnableAutoLazyInjection)
+  href: api/Rezolver.Options.EnableAutoLazyInjection.html#Rezolver_Options_EnableAutoLazyInjection_op_Implicit_System_Boolean__Rezolver_Options_EnableAutoLazyInjection
+  commentId: M:Rezolver.Options.EnableAutoLazyInjection.op_Implicit(System.Boolean)~Rezolver.Options.EnableAutoLazyInjection
+  name.vb: Widening(Boolean to EnableAutoLazyInjection)
+  fullName: Rezolver.Options.EnableAutoLazyInjection.Implicit(System.Boolean to Rezolver.Options.EnableAutoLazyInjection)
+  fullName.vb: Rezolver.Options.EnableAutoLazyInjection.Widening(System.Boolean to Rezolver.Options.EnableAutoLazyInjection)
+  nameWithType: EnableAutoLazyInjection.Implicit(Boolean to EnableAutoLazyInjection)
+  nameWithType.vb: EnableAutoLazyInjection.Widening(Boolean to EnableAutoLazyInjection)
+- uid: Rezolver.Options.EnableAutoLazyInjection.op_Implicit*
+  name: Implicit
+  href: api/Rezolver.Options.EnableAutoLazyInjection.html#Rezolver_Options_EnableAutoLazyInjection_op_Implicit_
+  commentId: Overload:Rezolver.Options.EnableAutoLazyInjection.op_Implicit
+  isSpec: "True"
+  name.vb: Widening
+  fullName: Rezolver.Options.EnableAutoLazyInjection.Implicit
+  fullName.vb: Rezolver.Options.EnableAutoLazyInjection.Widening
+  nameWithType: EnableAutoLazyInjection.Implicit
+  nameWithType.vb: EnableAutoLazyInjection.Widening
 - uid: Rezolver.Options.EnableCollectionInjection
   name: EnableCollectionInjection
   href: api/Rezolver.Options.EnableCollectionInjection.html
@@ -6527,6 +7064,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.OverridingTargetContainer.Parent
   nameWithType: OverridingTargetContainer.Parent
+- uid: Rezolver.OverridingTargetContainer.Root
+  name: Root
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Root
+  commentId: P:Rezolver.OverridingTargetContainer.Root
+  fullName: Rezolver.OverridingTargetContainer.Root
+  nameWithType: OverridingTargetContainer.Root
+- uid: Rezolver.OverridingTargetContainer.Root*
+  name: Root
+  href: api/Rezolver.OverridingTargetContainer.html#Rezolver_OverridingTargetContainer_Root_
+  commentId: Overload:Rezolver.OverridingTargetContainer.Root
+  isSpec: "True"
+  fullName: Rezolver.OverridingTargetContainer.Root
+  nameWithType: OverridingTargetContainer.Root
 - uid: Rezolver.ParameterBinding
   name: ParameterBinding
   href: api/Rezolver.ParameterBinding.html
@@ -7076,6 +7626,32 @@ references:
   commentId: T:Rezolver.RootTargetContainerExtensions
   fullName: Rezolver.RootTargetContainerExtensions
   nameWithType: RootTargetContainerExtensions
+- uid: Rezolver.RootTargetContainerExtensions.CreateTargetContainerForServiceType(Rezolver.IRootTargetContainer,System.Type)
+  name: CreateTargetContainerForServiceType(IRootTargetContainer, Type)
+  href: api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_CreateTargetContainerForServiceType_Rezolver_IRootTargetContainer_System_Type_
+  commentId: M:Rezolver.RootTargetContainerExtensions.CreateTargetContainerForServiceType(Rezolver.IRootTargetContainer,System.Type)
+  fullName: Rezolver.RootTargetContainerExtensions.CreateTargetContainerForServiceType(Rezolver.IRootTargetContainer, System.Type)
+  nameWithType: RootTargetContainerExtensions.CreateTargetContainerForServiceType(IRootTargetContainer, Type)
+- uid: Rezolver.RootTargetContainerExtensions.CreateTargetContainerForServiceType*
+  name: CreateTargetContainerForServiceType
+  href: api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_CreateTargetContainerForServiceType_
+  commentId: Overload:Rezolver.RootTargetContainerExtensions.CreateTargetContainerForServiceType
+  isSpec: "True"
+  fullName: Rezolver.RootTargetContainerExtensions.CreateTargetContainerForServiceType
+  nameWithType: RootTargetContainerExtensions.CreateTargetContainerForServiceType
+- uid: Rezolver.RootTargetContainerExtensions.FetchAllCompatibleTargets(Rezolver.IRootTargetContainer,System.Type)
+  name: FetchAllCompatibleTargets(IRootTargetContainer, Type)
+  href: api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_FetchAllCompatibleTargets_Rezolver_IRootTargetContainer_System_Type_
+  commentId: M:Rezolver.RootTargetContainerExtensions.FetchAllCompatibleTargets(Rezolver.IRootTargetContainer,System.Type)
+  fullName: Rezolver.RootTargetContainerExtensions.FetchAllCompatibleTargets(Rezolver.IRootTargetContainer, System.Type)
+  nameWithType: RootTargetContainerExtensions.FetchAllCompatibleTargets(IRootTargetContainer, Type)
+- uid: Rezolver.RootTargetContainerExtensions.FetchAllCompatibleTargets*
+  name: FetchAllCompatibleTargets
+  href: api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_FetchAllCompatibleTargets_
+  commentId: Overload:Rezolver.RootTargetContainerExtensions.FetchAllCompatibleTargets
+  isSpec: "True"
+  fullName: Rezolver.RootTargetContainerExtensions.FetchAllCompatibleTargets
+  nameWithType: RootTargetContainerExtensions.FetchAllCompatibleTargets
 - uid: Rezolver.RootTargetContainerExtensions.RegisterProjection(Rezolver.IRootTargetContainer,System.Type,System.Type)
   name: RegisterProjection(IRootTargetContainer, Type, Type)
   href: api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_
@@ -8553,6 +9129,22 @@ references:
   fullName.vb: Rezolver.Target.ForExpression(Of T1, T2, T3, T4, T5, TResult)(System.Linq.Expressions.Expression(Of System.Func(Of T1, T2, T3, T4, T5, TResult)), System.Type)
   nameWithType: Target.ForExpression<T1, T2, T3, T4, T5, TResult>(Expression<Func<T1, T2, T3, T4, T5, TResult>>, Type)
   nameWithType.vb: Target.ForExpression(Of T1, T2, T3, T4, T5, TResult)(Expression(Of Func(Of T1, T2, T3, T4, T5, TResult)), Type)
+- uid: Rezolver.Target.ForGenericConstructor*
+  name: ForGenericConstructor
+  href: api/Rezolver.Target.html#Rezolver_Target_ForGenericConstructor_
+  commentId: Overload:Rezolver.Target.ForGenericConstructor
+  isSpec: "True"
+  fullName: Rezolver.Target.ForGenericConstructor
+  nameWithType: Target.ForGenericConstructor
+- uid: Rezolver.Target.ForGenericConstructor``1(System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
+  name: ForGenericConstructor<TExample>(Expression<Func<TExample>>, IMemberBindingBehaviour)
+  href: api/Rezolver.Target.html#Rezolver_Target_ForGenericConstructor__1_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_
+  commentId: M:Rezolver.Target.ForGenericConstructor``1(System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
+  name.vb: ForGenericConstructor(Of TExample)(Expression(Of Func(Of TExample)), IMemberBindingBehaviour)
+  fullName: Rezolver.Target.ForGenericConstructor<TExample>(System.Linq.Expressions.Expression<System.Func<TExample>>, Rezolver.IMemberBindingBehaviour)
+  fullName.vb: Rezolver.Target.ForGenericConstructor(Of TExample)(System.Linq.Expressions.Expression(Of System.Func(Of TExample)), Rezolver.IMemberBindingBehaviour)
+  nameWithType: Target.ForGenericConstructor<TExample>(Expression<Func<TExample>>, IMemberBindingBehaviour)
+  nameWithType.vb: Target.ForGenericConstructor(Of TExample)(Expression(Of Func(Of TExample)), IMemberBindingBehaviour)
 - uid: Rezolver.Target.ForObject(System.Object,System.Type,Rezolver.ScopeBehaviour)
   name: ForObject(Object, Type, ScopeBehaviour)
   href: api/Rezolver.Target.html#Rezolver_Target_ForObject_System_Object_System_Type_Rezolver_ScopeBehaviour_
@@ -8743,19 +9335,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.TargetContainer.TargetContainer
   nameWithType: TargetContainer.TargetContainer
-- uid: Rezolver.TargetContainer.CreateContainer(System.Type)
-  name: CreateContainer(Type)
-  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateContainer_System_Type_
-  commentId: M:Rezolver.TargetContainer.CreateContainer(System.Type)
-  fullName: Rezolver.TargetContainer.CreateContainer(System.Type)
-  nameWithType: TargetContainer.CreateContainer(Type)
-- uid: Rezolver.TargetContainer.CreateContainer*
-  name: CreateContainer
-  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateContainer_
-  commentId: Overload:Rezolver.TargetContainer.CreateContainer
+- uid: Rezolver.TargetContainer.CreateTargetContainer(System.Type)
+  name: CreateTargetContainer(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateTargetContainer_System_Type_
+  commentId: M:Rezolver.TargetContainer.CreateTargetContainer(System.Type)
+  fullName: Rezolver.TargetContainer.CreateTargetContainer(System.Type)
+  nameWithType: TargetContainer.CreateTargetContainer(Type)
+- uid: Rezolver.TargetContainer.CreateTargetContainer*
+  name: CreateTargetContainer
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_CreateTargetContainer_
+  commentId: Overload:Rezolver.TargetContainer.CreateTargetContainer
   isSpec: "True"
-  fullName: Rezolver.TargetContainer.CreateContainer
-  nameWithType: TargetContainer.CreateContainer
+  fullName: Rezolver.TargetContainer.CreateTargetContainer
+  nameWithType: TargetContainer.CreateTargetContainer
 - uid: Rezolver.TargetContainer.DefaultConfig
   name: DefaultConfig
   href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig
@@ -8769,19 +9361,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.TargetContainer.DefaultConfig
   nameWithType: TargetContainer.DefaultConfig
-- uid: Rezolver.TargetContainer.GetTargetContainerType(System.Type)
-  name: GetTargetContainerType(Type)
-  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_GetTargetContainerType_System_Type_
-  commentId: M:Rezolver.TargetContainer.GetTargetContainerType(System.Type)
-  fullName: Rezolver.TargetContainer.GetTargetContainerType(System.Type)
-  nameWithType: TargetContainer.GetTargetContainerType(Type)
-- uid: Rezolver.TargetContainer.GetTargetContainerType*
-  name: GetTargetContainerType
-  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_GetTargetContainerType_
-  commentId: Overload:Rezolver.TargetContainer.GetTargetContainerType
+- uid: Rezolver.TargetContainer.GetRegisteredContainerType(System.Type)
+  name: GetRegisteredContainerType(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_GetRegisteredContainerType_System_Type_
+  commentId: M:Rezolver.TargetContainer.GetRegisteredContainerType(System.Type)
+  fullName: Rezolver.TargetContainer.GetRegisteredContainerType(System.Type)
+  nameWithType: TargetContainer.GetRegisteredContainerType(Type)
+- uid: Rezolver.TargetContainer.GetRegisteredContainerType*
+  name: GetRegisteredContainerType
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_GetRegisteredContainerType_
+  commentId: Overload:Rezolver.TargetContainer.GetRegisteredContainerType
   isSpec: "True"
-  fullName: Rezolver.TargetContainer.GetTargetContainerType
-  nameWithType: TargetContainer.GetTargetContainerType
+  fullName: Rezolver.TargetContainer.GetRegisteredContainerType
+  nameWithType: TargetContainer.GetRegisteredContainerType
 - uid: Rezolver.TargetContainer.Register(Rezolver.ITarget,System.Type)
   name: Register(ITarget, Type)
   href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Register_Rezolver_ITarget_System_Type_
@@ -8876,6 +9468,40 @@ references:
   fullName: Rezolver.TargetContainer.Rezolver.ICovariantTypeIndex.SelectTypes
   nameWithType: TargetContainer.ICovariantTypeIndex.SelectTypes
   nameWithType.vb: TargetContainer.Rezolver.ICovariantTypeIndex.SelectTypes
+- uid: Rezolver.TargetContainer.Rezolver#IRootTargetContainer#CreateTargetContainer(System.Type)
+  name: IRootTargetContainer.CreateTargetContainer(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_
+  commentId: M:Rezolver.TargetContainer.Rezolver#IRootTargetContainer#CreateTargetContainer(System.Type)
+  name.vb: Rezolver.IRootTargetContainer.CreateTargetContainer(Type)
+  fullName: Rezolver.TargetContainer.Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)
+  nameWithType: TargetContainer.IRootTargetContainer.CreateTargetContainer(Type)
+  nameWithType.vb: TargetContainer.Rezolver.IRootTargetContainer.CreateTargetContainer(Type)
+- uid: Rezolver.TargetContainer.Rezolver#IRootTargetContainer#CreateTargetContainer*
+  name: IRootTargetContainer.CreateTargetContainer
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_IRootTargetContainer_CreateTargetContainer_
+  commentId: Overload:Rezolver.TargetContainer.Rezolver#IRootTargetContainer#CreateTargetContainer
+  isSpec: "True"
+  name.vb: Rezolver.IRootTargetContainer.CreateTargetContainer
+  fullName: Rezolver.TargetContainer.Rezolver.IRootTargetContainer.CreateTargetContainer
+  nameWithType: TargetContainer.IRootTargetContainer.CreateTargetContainer
+  nameWithType.vb: TargetContainer.Rezolver.IRootTargetContainer.CreateTargetContainer
+- uid: Rezolver.TargetContainer.Rezolver#IRootTargetContainer#GetContainerRegistrationType(System.Type)
+  name: IRootTargetContainer.GetContainerRegistrationType(Type)
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_
+  commentId: M:Rezolver.TargetContainer.Rezolver#IRootTargetContainer#GetContainerRegistrationType(System.Type)
+  name.vb: Rezolver.IRootTargetContainer.GetContainerRegistrationType(Type)
+  fullName: Rezolver.TargetContainer.Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)
+  nameWithType: TargetContainer.IRootTargetContainer.GetContainerRegistrationType(Type)
+  nameWithType.vb: TargetContainer.Rezolver.IRootTargetContainer.GetContainerRegistrationType(Type)
+- uid: Rezolver.TargetContainer.Rezolver#IRootTargetContainer#GetContainerRegistrationType*
+  name: IRootTargetContainer.GetContainerRegistrationType
+  href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Rezolver_IRootTargetContainer_GetContainerRegistrationType_
+  commentId: Overload:Rezolver.TargetContainer.Rezolver#IRootTargetContainer#GetContainerRegistrationType
+  isSpec: "True"
+  name.vb: Rezolver.IRootTargetContainer.GetContainerRegistrationType
+  fullName: Rezolver.TargetContainer.Rezolver.IRootTargetContainer.GetContainerRegistrationType
+  nameWithType: TargetContainer.IRootTargetContainer.GetContainerRegistrationType
+  nameWithType.vb: TargetContainer.Rezolver.IRootTargetContainer.GetContainerRegistrationType
 - uid: Rezolver.TargetContainer.Root
   name: Root
   href: api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_Root
@@ -8970,23 +9596,23 @@ references:
   fullName: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor
   nameWithType: TargetContainerRegistrationExtensions.RegisterGenericConstructor
 - uid: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
-  name: RegisterGenericConstructor<TObject>(ITargetContainer, Expression<Func<TObject>>, IMemberBindingBehaviour)
+  name: RegisterGenericConstructor<TExample>(ITargetContainer, Expression<Func<TExample>>, IMemberBindingBehaviour)
   href: api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_
   commentId: M:Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
-  name.vb: RegisterGenericConstructor(Of TObject)(ITargetContainer, Expression(Of Func(Of TObject)), IMemberBindingBehaviour)
-  fullName: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor<TObject>(Rezolver.ITargetContainer, System.Linq.Expressions.Expression<System.Func<TObject>>, Rezolver.IMemberBindingBehaviour)
-  fullName.vb: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TObject)(Rezolver.ITargetContainer, System.Linq.Expressions.Expression(Of System.Func(Of TObject)), Rezolver.IMemberBindingBehaviour)
-  nameWithType: TargetContainerRegistrationExtensions.RegisterGenericConstructor<TObject>(ITargetContainer, Expression<Func<TObject>>, IMemberBindingBehaviour)
-  nameWithType.vb: TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TObject)(ITargetContainer, Expression(Of Func(Of TObject)), IMemberBindingBehaviour)
+  name.vb: RegisterGenericConstructor(Of TExample)(ITargetContainer, Expression(Of Func(Of TExample)), IMemberBindingBehaviour)
+  fullName: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor<TExample>(Rezolver.ITargetContainer, System.Linq.Expressions.Expression<System.Func<TExample>>, Rezolver.IMemberBindingBehaviour)
+  fullName.vb: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TExample)(Rezolver.ITargetContainer, System.Linq.Expressions.Expression(Of System.Func(Of TExample)), Rezolver.IMemberBindingBehaviour)
+  nameWithType: TargetContainerRegistrationExtensions.RegisterGenericConstructor<TExample>(ITargetContainer, Expression<Func<TExample>>, IMemberBindingBehaviour)
+  nameWithType.vb: TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TExample)(ITargetContainer, Expression(Of Func(Of TExample)), IMemberBindingBehaviour)
 - uid: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
-  name: RegisterGenericConstructor<TObject, TService>(ITargetContainer, Expression<Func<TObject>>, IMemberBindingBehaviour)
+  name: RegisterGenericConstructor<TExample, TExampleService>(ITargetContainer, Expression<Func<TExample>>, IMemberBindingBehaviour)
   href: api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_
   commentId: M:Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
-  name.vb: RegisterGenericConstructor(Of TObject, TService)(ITargetContainer, Expression(Of Func(Of TObject)), IMemberBindingBehaviour)
-  fullName: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor<TObject, TService>(Rezolver.ITargetContainer, System.Linq.Expressions.Expression<System.Func<TObject>>, Rezolver.IMemberBindingBehaviour)
-  fullName.vb: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TObject, TService)(Rezolver.ITargetContainer, System.Linq.Expressions.Expression(Of System.Func(Of TObject)), Rezolver.IMemberBindingBehaviour)
-  nameWithType: TargetContainerRegistrationExtensions.RegisterGenericConstructor<TObject, TService>(ITargetContainer, Expression<Func<TObject>>, IMemberBindingBehaviour)
-  nameWithType.vb: TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TObject, TService)(ITargetContainer, Expression(Of Func(Of TObject)), IMemberBindingBehaviour)
+  name.vb: RegisterGenericConstructor(Of TExample, TExampleService)(ITargetContainer, Expression(Of Func(Of TExample)), IMemberBindingBehaviour)
+  fullName: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor<TExample, TExampleService>(Rezolver.ITargetContainer, System.Linq.Expressions.Expression<System.Func<TExample>>, Rezolver.IMemberBindingBehaviour)
+  fullName.vb: Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TExample, TExampleService)(Rezolver.ITargetContainer, System.Linq.Expressions.Expression(Of System.Func(Of TExample)), Rezolver.IMemberBindingBehaviour)
+  nameWithType: TargetContainerRegistrationExtensions.RegisterGenericConstructor<TExample, TExampleService>(ITargetContainer, Expression<Func<TExample>>, IMemberBindingBehaviour)
+  nameWithType.vb: TargetContainerRegistrationExtensions.RegisterGenericConstructor(Of TExample, TExampleService)(ITargetContainer, Expression(Of Func(Of TExample)), IMemberBindingBehaviour)
 - uid: Rezolver.TargetDictionaryContainer
   name: TargetDictionaryContainer
   href: api/Rezolver.TargetDictionaryContainer.html
@@ -9032,19 +9658,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.TargetDictionaryContainer.CombineWith
   nameWithType: TargetDictionaryContainer.CombineWith
-- uid: Rezolver.TargetDictionaryContainer.CreateContainer(System.Type)
-  name: CreateContainer(Type)
-  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_System_Type_
-  commentId: M:Rezolver.TargetDictionaryContainer.CreateContainer(System.Type)
-  fullName: Rezolver.TargetDictionaryContainer.CreateContainer(System.Type)
-  nameWithType: TargetDictionaryContainer.CreateContainer(Type)
-- uid: Rezolver.TargetDictionaryContainer.CreateContainer*
-  name: CreateContainer
-  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateContainer_
-  commentId: Overload:Rezolver.TargetDictionaryContainer.CreateContainer
+- uid: Rezolver.TargetDictionaryContainer.CreateTargetContainer(System.Type)
+  name: CreateTargetContainer(Type)
+  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateTargetContainer_System_Type_
+  commentId: M:Rezolver.TargetDictionaryContainer.CreateTargetContainer(System.Type)
+  fullName: Rezolver.TargetDictionaryContainer.CreateTargetContainer(System.Type)
+  nameWithType: TargetDictionaryContainer.CreateTargetContainer(Type)
+- uid: Rezolver.TargetDictionaryContainer.CreateTargetContainer*
+  name: CreateTargetContainer
+  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_CreateTargetContainer_
+  commentId: Overload:Rezolver.TargetDictionaryContainer.CreateTargetContainer
   isSpec: "True"
-  fullName: Rezolver.TargetDictionaryContainer.CreateContainer
-  nameWithType: TargetDictionaryContainer.CreateContainer
+  fullName: Rezolver.TargetDictionaryContainer.CreateTargetContainer
+  nameWithType: TargetDictionaryContainer.CreateTargetContainer
 - uid: Rezolver.TargetDictionaryContainer.EnsureContainer(System.Type)
   name: EnsureContainer(Type)
   href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_EnsureContainer_System_Type_
@@ -9097,19 +9723,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.TargetDictionaryContainer.FetchContainer
   nameWithType: TargetDictionaryContainer.FetchContainer
-- uid: Rezolver.TargetDictionaryContainer.GetTargetContainerType(System.Type)
-  name: GetTargetContainerType(Type)
-  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_GetTargetContainerType_System_Type_
-  commentId: M:Rezolver.TargetDictionaryContainer.GetTargetContainerType(System.Type)
-  fullName: Rezolver.TargetDictionaryContainer.GetTargetContainerType(System.Type)
-  nameWithType: TargetDictionaryContainer.GetTargetContainerType(Type)
-- uid: Rezolver.TargetDictionaryContainer.GetTargetContainerType*
-  name: GetTargetContainerType
-  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_GetTargetContainerType_
-  commentId: Overload:Rezolver.TargetDictionaryContainer.GetTargetContainerType
+- uid: Rezolver.TargetDictionaryContainer.GetRegisteredContainerType(System.Type)
+  name: GetRegisteredContainerType(Type)
+  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_GetRegisteredContainerType_System_Type_
+  commentId: M:Rezolver.TargetDictionaryContainer.GetRegisteredContainerType(System.Type)
+  fullName: Rezolver.TargetDictionaryContainer.GetRegisteredContainerType(System.Type)
+  nameWithType: TargetDictionaryContainer.GetRegisteredContainerType(Type)
+- uid: Rezolver.TargetDictionaryContainer.GetRegisteredContainerType*
+  name: GetRegisteredContainerType
+  href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_GetRegisteredContainerType_
+  commentId: Overload:Rezolver.TargetDictionaryContainer.GetRegisteredContainerType
   isSpec: "True"
-  fullName: Rezolver.TargetDictionaryContainer.GetTargetContainerType
-  nameWithType: TargetDictionaryContainer.GetTargetContainerType
+  fullName: Rezolver.TargetDictionaryContainer.GetRegisteredContainerType
+  nameWithType: TargetDictionaryContainer.GetRegisteredContainerType
 - uid: Rezolver.TargetDictionaryContainer.Register(Rezolver.ITarget,System.Type)
   name: Register(ITarget, Type)
   href: api/Rezolver.TargetDictionaryContainer.html#Rezolver_TargetDictionaryContainer_Register_Rezolver_ITarget_System_Type_
@@ -9155,15 +9781,15 @@ references:
   commentId: T:Rezolver.TargetListContainer
   fullName: Rezolver.TargetListContainer
   nameWithType: TargetListContainer
-- uid: Rezolver.TargetListContainer.#ctor(Rezolver.ITargetContainer,System.Type,Rezolver.ITarget[])
-  name: TargetListContainer(ITargetContainer, Type, ITarget[])
-  href: api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer__ctor_Rezolver_ITargetContainer_System_Type_Rezolver_ITarget___
-  commentId: M:Rezolver.TargetListContainer.#ctor(Rezolver.ITargetContainer,System.Type,Rezolver.ITarget[])
-  name.vb: TargetListContainer(ITargetContainer, Type, ITarget())
-  fullName: Rezolver.TargetListContainer.TargetListContainer(Rezolver.ITargetContainer, System.Type, Rezolver.ITarget[])
-  fullName.vb: Rezolver.TargetListContainer.TargetListContainer(Rezolver.ITargetContainer, System.Type, Rezolver.ITarget())
-  nameWithType: TargetListContainer.TargetListContainer(ITargetContainer, Type, ITarget[])
-  nameWithType.vb: TargetListContainer.TargetListContainer(ITargetContainer, Type, ITarget())
+- uid: Rezolver.TargetListContainer.#ctor(Rezolver.IRootTargetContainer,System.Type,Rezolver.ITarget[])
+  name: TargetListContainer(IRootTargetContainer, Type, ITarget[])
+  href: api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer__ctor_Rezolver_IRootTargetContainer_System_Type_Rezolver_ITarget___
+  commentId: M:Rezolver.TargetListContainer.#ctor(Rezolver.IRootTargetContainer,System.Type,Rezolver.ITarget[])
+  name.vb: TargetListContainer(IRootTargetContainer, Type, ITarget())
+  fullName: Rezolver.TargetListContainer.TargetListContainer(Rezolver.IRootTargetContainer, System.Type, Rezolver.ITarget[])
+  fullName.vb: Rezolver.TargetListContainer.TargetListContainer(Rezolver.IRootTargetContainer, System.Type, Rezolver.ITarget())
+  nameWithType: TargetListContainer.TargetListContainer(IRootTargetContainer, Type, ITarget[])
+  nameWithType.vb: TargetListContainer.TargetListContainer(IRootTargetContainer, Type, ITarget())
 - uid: Rezolver.TargetListContainer.#ctor*
   name: TargetListContainer
   href: api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer__ctor_
@@ -9408,6 +10034,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.TargetListContainer.RemoveAt
   nameWithType: TargetListContainer.RemoveAt
+- uid: Rezolver.TargetListContainer.Root
+  name: Root
+  href: api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer_Root
+  commentId: P:Rezolver.TargetListContainer.Root
+  fullName: Rezolver.TargetListContainer.Root
+  nameWithType: TargetListContainer.Root
+- uid: Rezolver.TargetListContainer.Root*
+  name: Root
+  href: api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer_Root_
+  commentId: Overload:Rezolver.TargetListContainer.Root
+  isSpec: "True"
+  fullName: Rezolver.TargetListContainer.Root
+  nameWithType: TargetListContainer.Root
 - uid: Rezolver.TargetListContainer.System#Collections#Generic#ICollection{Rezolver#ITarget}#IsReadOnly
   name: ICollection<ITarget>.IsReadOnly
   href: api/Rezolver.TargetListContainer.html#Rezolver_TargetListContainer_System_Collections_Generic_ICollection_Rezolver_ITarget__IsReadOnly
@@ -9466,6 +10105,103 @@ references:
   commentId: N:Rezolver.Targets
   fullName: Rezolver.Targets
   nameWithType: Rezolver.Targets
+- uid: Rezolver.Targets.AutoFactoryTarget
+  name: AutoFactoryTarget
+  href: api/Rezolver.Targets.AutoFactoryTarget.html
+  commentId: T:Rezolver.Targets.AutoFactoryTarget
+  fullName: Rezolver.Targets.AutoFactoryTarget
+  nameWithType: AutoFactoryTarget
+- uid: Rezolver.Targets.AutoFactoryTarget.#ctor(System.Type,Rezolver.ITarget)
+  name: AutoFactoryTarget(Type, ITarget)
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget__ctor_System_Type_Rezolver_ITarget_
+  commentId: M:Rezolver.Targets.AutoFactoryTarget.#ctor(System.Type,Rezolver.ITarget)
+  fullName: Rezolver.Targets.AutoFactoryTarget.AutoFactoryTarget(System.Type, Rezolver.ITarget)
+  nameWithType: AutoFactoryTarget.AutoFactoryTarget(Type, ITarget)
+- uid: Rezolver.Targets.AutoFactoryTarget.#ctor*
+  name: AutoFactoryTarget
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget__ctor_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.#ctor
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.AutoFactoryTarget
+  nameWithType: AutoFactoryTarget.AutoFactoryTarget
+- uid: Rezolver.Targets.AutoFactoryTarget.Bind(Rezolver.Compilation.ICompileContext)
+  name: Bind(ICompileContext)
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_Bind_Rezolver_Compilation_ICompileContext_
+  commentId: M:Rezolver.Targets.AutoFactoryTarget.Bind(Rezolver.Compilation.ICompileContext)
+  fullName: Rezolver.Targets.AutoFactoryTarget.Bind(Rezolver.Compilation.ICompileContext)
+  nameWithType: AutoFactoryTarget.Bind(ICompileContext)
+- uid: Rezolver.Targets.AutoFactoryTarget.Bind*
+  name: Bind
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_Bind_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.Bind
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.Bind
+  nameWithType: AutoFactoryTarget.Bind
+- uid: Rezolver.Targets.AutoFactoryTarget.BoundTarget
+  name: BoundTarget
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_BoundTarget
+  commentId: P:Rezolver.Targets.AutoFactoryTarget.BoundTarget
+  fullName: Rezolver.Targets.AutoFactoryTarget.BoundTarget
+  nameWithType: AutoFactoryTarget.BoundTarget
+- uid: Rezolver.Targets.AutoFactoryTarget.BoundTarget*
+  name: BoundTarget
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_BoundTarget_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.BoundTarget
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.BoundTarget
+  nameWithType: AutoFactoryTarget.BoundTarget
+- uid: Rezolver.Targets.AutoFactoryTarget.DeclaredType
+  name: DeclaredType
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_DeclaredType
+  commentId: P:Rezolver.Targets.AutoFactoryTarget.DeclaredType
+  fullName: Rezolver.Targets.AutoFactoryTarget.DeclaredType
+  nameWithType: AutoFactoryTarget.DeclaredType
+- uid: Rezolver.Targets.AutoFactoryTarget.DeclaredType*
+  name: DeclaredType
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_DeclaredType_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.DeclaredType
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.DeclaredType
+  nameWithType: AutoFactoryTarget.DeclaredType
+- uid: Rezolver.Targets.AutoFactoryTarget.ParameterTypes
+  name: ParameterTypes
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_ParameterTypes
+  commentId: P:Rezolver.Targets.AutoFactoryTarget.ParameterTypes
+  fullName: Rezolver.Targets.AutoFactoryTarget.ParameterTypes
+  nameWithType: AutoFactoryTarget.ParameterTypes
+- uid: Rezolver.Targets.AutoFactoryTarget.ParameterTypes*
+  name: ParameterTypes
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_ParameterTypes_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.ParameterTypes
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.ParameterTypes
+  nameWithType: AutoFactoryTarget.ParameterTypes
+- uid: Rezolver.Targets.AutoFactoryTarget.ReturnType
+  name: ReturnType
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_ReturnType
+  commentId: P:Rezolver.Targets.AutoFactoryTarget.ReturnType
+  fullName: Rezolver.Targets.AutoFactoryTarget.ReturnType
+  nameWithType: AutoFactoryTarget.ReturnType
+- uid: Rezolver.Targets.AutoFactoryTarget.ReturnType*
+  name: ReturnType
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_ReturnType_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.ReturnType
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.ReturnType
+  nameWithType: AutoFactoryTarget.ReturnType
+- uid: Rezolver.Targets.AutoFactoryTarget.SupportsType(System.Type)
+  name: SupportsType(Type)
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_SupportsType_System_Type_
+  commentId: M:Rezolver.Targets.AutoFactoryTarget.SupportsType(System.Type)
+  fullName: Rezolver.Targets.AutoFactoryTarget.SupportsType(System.Type)
+  nameWithType: AutoFactoryTarget.SupportsType(Type)
+- uid: Rezolver.Targets.AutoFactoryTarget.SupportsType*
+  name: SupportsType
+  href: api/Rezolver.Targets.AutoFactoryTarget.html#Rezolver_Targets_AutoFactoryTarget_SupportsType_
+  commentId: Overload:Rezolver.Targets.AutoFactoryTarget.SupportsType
+  isSpec: "True"
+  fullName: Rezolver.Targets.AutoFactoryTarget.SupportsType
+  nameWithType: AutoFactoryTarget.SupportsType
 - uid: Rezolver.Targets.ChangeTypeTarget
   name: ChangeTypeTarget
   href: api/Rezolver.Targets.ChangeTypeTarget.html
@@ -10772,6 +11508,25 @@ references:
   commentId: T:Rezolver.Targets.TargetBase
   fullName: Rezolver.Targets.TargetBase
   nameWithType: TargetBase
+- uid: Rezolver.Targets.TargetBase.#ctor
+  name: TargetBase()
+  href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase__ctor
+  commentId: M:Rezolver.Targets.TargetBase.#ctor
+  fullName: Rezolver.Targets.TargetBase.TargetBase()
+  nameWithType: TargetBase.TargetBase()
+- uid: Rezolver.Targets.TargetBase.#ctor(System.Guid)
+  name: TargetBase(Guid)
+  href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase__ctor_System_Guid_
+  commentId: M:Rezolver.Targets.TargetBase.#ctor(System.Guid)
+  fullName: Rezolver.Targets.TargetBase.TargetBase(System.Guid)
+  nameWithType: TargetBase.TargetBase(Guid)
+- uid: Rezolver.Targets.TargetBase.#ctor*
+  name: TargetBase
+  href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase__ctor_
+  commentId: Overload:Rezolver.Targets.TargetBase.#ctor
+  isSpec: "True"
+  fullName: Rezolver.Targets.TargetBase.TargetBase
+  nameWithType: TargetBase.TargetBase
 - uid: Rezolver.Targets.TargetBase.DeclaredType
   name: DeclaredType
   href: api/Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType

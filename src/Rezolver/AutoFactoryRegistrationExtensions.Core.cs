@@ -4,8 +4,20 @@ using System.Linq;
 
 namespace Rezolver
 {
+    /// <summary>
+    /// Extensions for registering auto factories
+    /// </summary>
     public static partial class AutoFactoryRegistrationExtensions
     {
+        /// <summary>
+        /// Registers an <see cref="AutoFactoryTarget"/> for the given delegate type <typeparamref name="TDelegate"/>, enabling 
+        /// the container to automatically build and inject a delegate which uses the container to produce a result.
+        /// 
+        /// This method and its overload can be used for any delegate type.
+        /// </summary>
+        /// <typeparam name="TDelegate">The type of delegate to be injected. Must have a non-void return type
+        /// and all its parameters must be of distinct types.</typeparam>
+        /// <param name="targets">Required. The target container in which the registration is to be made.</param>
         public static void RegisterAutoFactory<TDelegate>(this IRootTargetContainer targets)
             where TDelegate : Delegate
         {
@@ -23,6 +35,14 @@ namespace Rezolver
             RegisterAutoFactoryInternal(targets, typeof(TDelegate), returnType, parameterTypes);
         }
 
+        /// <summary>
+        /// Registers an <see cref="AutoFactoryTarget"/> for the given <paramref name="delegateType"/>, enabling 
+        /// the container to automatically build and inject a delegate which uses the container to produce a result.
+        /// 
+        /// This method and its overload can be used for any delegate type.
+        /// </summary>
+        /// <param name="targets">Required. The target container in which the registration is to be made.</param>
+        /// <param name="delegateType">Required. Must have a non-void return type and all its parameters must be of distinct types.</param>
         public static void RegisterAutoFactory(this IRootTargetContainer targets, Type delegateType)
         {
             if (targets == null)
@@ -35,7 +55,7 @@ namespace Rezolver
                 throw new ArgumentException($"{delegateType} is invalid - must be a delegate with a non-void return value", nameof(delegateType));
 
             if (!AreValidParameterTypes(parameterTypes))
-                throw new ArgumentException($"The parameter types for {delegateType} are invalid - they must all be unique non ref/out types", nameof(delegateType));
+                throw new ArgumentException($"The parameter types for {delegateType} are invalid - they must all be unique, non ref/out types", nameof(delegateType));
 
             RegisterAutoFactoryInternal(targets, delegateType, returnType, parameterTypes);
         }

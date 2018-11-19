@@ -59,6 +59,7 @@ namespace Rezolver
         /// - <see cref="Configuration.InjectLists"/>
         /// - <see cref="Configuration.InjectCollections"/>
         /// - <see cref="Configuration.InjectAutoFuncs"/>
+        /// - <see cref="Configuration.InjectAutoLazies"/>
         /// - <see cref="Configuration.InjectResolveContext"/>
         /// 
         /// In most cases, these are controllable through the use of global properties such as:
@@ -68,6 +69,7 @@ namespace Rezolver
         /// - <see cref="Options.EnableListInjection"/>
         /// - <see cref="Options.EnableCollectionInjection"/>
         /// - <see cref="Options.EnableAutoFuncInjection"/> (**NOTE:** defaults to <c>false</c>)
+        /// - <see cref="Options.EnableAutoLazyInjection"/> (**NOTE:** defaults to <c>false</c>)
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
@@ -76,6 +78,7 @@ namespace Rezolver
             Configuration.InjectLists.Instance,
             Configuration.InjectCollections.Instance,
             Configuration.InjectAutoFuncs.Instance,
+            Configuration.InjectAutoLazies.Instance,
             Configuration.InjectResolveContext.Instance,
         });
 

@@ -1,13 +1,7 @@
 ﻿using Rezolver.Configuration;
 using Rezolver.Options;
-using Rezolver.Targets;
 using Rezolver.Tests.Types;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Rezolver.Tests.Compilation.Specification
@@ -16,19 +10,21 @@ namespace Rezolver.Tests.Compilation.Specification
     {
         private IRootTargetContainer CreateAutoLazyAndAutoFactoryContainer()
         {
-            // requires the Func functionality
-            var targets = CreateTargetContainer(
-                GetDefaultTargetContainerConfig()
-                    .ConfigureOption<Options.EnableAutoFuncInjection>(true));
-            targets.RegisterContainer(typeof(Lazy<>), new LazyTargetContainer(targets));
-            return targets;
+            // requires the Func functionality if we're not going to be registering
+            // the factories ourselves.
+            var config = GetDefaultTargetContainerConfig()
+                    .ConfigureOption<EnableAutoFuncInjection>(true)
+                    .ConfigureOption<EnableAutoLazyInjection>(true);
+            config.Add(InjectAutoLazies.Instance);
+            return CreateTargetContainer(config);
         }
 
         private IRootTargetContainer CreateAutoLazyContainer()
         {
-            var targets = CreateTargetContainer();
-            targets.RegisterContainer(typeof(Lazy<>), new LazyTargetContainer(targets));
-            return targets;
+            var config = GetDefaultTargetContainerConfig()
+                    .ConfigureOption<EnableAutoLazyInjection>(true);
+            config.Add(InjectAutoLazies.Instance);
+            return CreateTargetContainer(config);
         }
 
         [Fact]
@@ -163,66 +159,6 @@ namespace Rezolver.Tests.Compilation.Specification
                 Assert.Same(instance2, instance3);
             }
             Assert.True(instance1.Disposed);
-        }
-
-        internal class EnableAutoLazyInjection : ContainerOption<bool>
-        {
-            public static EnableAutoLazyInjection Default { get; } = false;
-
-            public static implicit operator EnableAutoLazyInjection(bool value)
-            {
-                return new EnableAutoLazyInjection() { Value = value };
-            }
-        }
-
-        internal class InjectAutoLazies : OptionDependentConfig<EnableAutoLazyInjection>
-        {
-            public override void Configure(IRootTargetContainer targets)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        internal class LazyTargetContainer : GenericTargetContainer
-        {
-            private ConcurrentDictionary<Type, ConstructorTarget> _cachedTargets = new ConcurrentDictionary<Type, ConstructorTarget>();
-            internal LazyTargetContainer(IRootTargetContainer root)
-                : base(root, typeof(Lazy<>))
-            {
-
-            }
-
-            public override ITarget Fetch(Type type)
-            {
-                Type genericType;
-                if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericType)
-                {
-                    throw new ArgumentException($"Only {GenericType} is supported by this container", nameof(type));
-                }
-
-                // just like EnumerableTargetContainer, we allow for specific registrations
-                var result = base.Fetch(type);
-
-                if (result != null)
-                    return result;
-
-
-                return _cachedTargets.GetOrAdd(type, BuildTarget);
-
-                ConstructorTarget BuildTarget(Type t)
-                {
-                    // we need a ConstructorTarget that binds to the correct Lazy<T> constructor (for the specific type 
-                    // passed as the generic type argument)
-                    // for that, we need the generic type argument
-                    var innerLazyType = TypeHelpers.GetGenericArguments(t)[0];
-                    var constructor = TypeHelpers.GetConstructor(t, new[] { typeof(Func<>).MakeGenericType(innerLazyType) });
-
-                    if (constructor == null)
-                        throw new InvalidOperationException($"Could not get Func callback constructor for {t}");
-
-                    return new ConstructorTarget(constructor);
-                }
-            }
         }
     }
 }

@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class InjectAutoFuncs
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class InjectAutoFuncs
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.1.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Rezolver.Configuration.InjectAutoFuncs">
+  
+  
+  <h1 id="Rezolver_Configuration_InjectAutoFuncs" data-uid="Rezolver.Configuration.InjectAutoFuncs" class="text-break">Class InjectAutoFuncs
+  </h1>
+  <div class="markdown level0 summary"><p>Controls whether the injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> will automatically be
+available <em>without</em> having to use the <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_">RegisterAutoFunc&lt;TResult&gt;(IRootTargetContainer)</a>
+method or explicitly register <a class="xref" href="Rezolver.Targets.AutoFactoryTarget.html">AutoFactoryTarget</a> targets.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></div>
+    <div class="level2"><span class="xref">InjectAutoFuncs</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a></div>
+    <div><a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies">OptionDependentConfigBase.Dependencies</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_">OptionDependentConfigBase.CreateOptionDependency&lt;TOption&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Configuration.html">Rezolver.Configuration</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Configuration_InjectAutoFuncs_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class InjectAutoFuncs : OptionDependentConfigBase, ITargetContainerConfig, IDependant</code></pre>
+  </div>
+  <h5 id="Rezolver_Configuration_InjectAutoFuncs_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>If this is applied to an <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> and the <a class="xref" href="Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a>
+option has been configured to be <code>true</code> (<strong>NOTE</strong>: The default is <code>false</code>), then whenever a target is 
+registered against a particular service type, a second registration will automatically be made against 
+a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> type with TResult equal to the registered service type.</p>
+<p>Also, if the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option is <code>true</code>, then an additional registration
+will be made for the same type for <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> where TResult is equal to <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>
+specialised for the registered type.</p>
+</div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectAutoFuncs_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectAutoFuncs.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectAutoFuncs.cs/#L52">View Source</a>
+  </span>
+  <a id="Rezolver_Configuration_InjectAutoFuncs_Instance_" data-uid="Rezolver.Configuration.InjectAutoFuncs.Instance*"></a>
+  <h4 id="Rezolver_Configuration_InjectAutoFuncs_Instance" data-uid="Rezolver.Configuration.InjectAutoFuncs.Instance">Instance</h4>
+  <div class="markdown level1 summary"><p>The one and only <a class="xref" href="Rezolver.Configuration.InjectAutoFuncs.html">InjectAutoFuncs</a> instance.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static InjectAutoFuncs Instance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Configuration.InjectAutoFuncs.html">InjectAutoFuncs</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectAutoFuncs_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectAutoFuncs.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectAutoFuncs.cs/#L62">View Source</a>
+  </span>
+  <a id="Rezolver_Configuration_InjectAutoFuncs_Configure_" data-uid="Rezolver.Configuration.InjectAutoFuncs.Configure*"></a>
+  <h4 id="Rezolver_Configuration_InjectAutoFuncs_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectAutoFuncs.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
+  <div class="markdown level1 summary"><p>Called to apply this configuration to the passed <code data-dev-comment-type="paramref" class="paramref">targets</code> target container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Configure(IRootTargetContainer targets)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">OptionDependentConfigBase.Configure(IRootTargetContainer)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectAutoFuncs_GetDependenciesBase.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectAutoFuncs.cs/#L115">View Source</a>
+  </span>
+  <a id="Rezolver_Configuration_InjectAutoFuncs_GetDependenciesBase_" data-uid="Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase*"></a>
+  <h4 id="Rezolver_Configuration_InjectAutoFuncs_GetDependenciesBase" data-uid="Rezolver.Configuration.InjectAutoFuncs.GetDependenciesBase">GetDependenciesBase()</h4>
+  <div class="markdown level1 summary"><p>Overrides <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase">GetDependenciesBase()</a> by returning dependencies on:</p>
+<ul>
+<li><a class="xref" href="Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a> (via <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a>)</li>
+<li><a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> (also via <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a>)</li>
+</ul>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override IEnumerable&lt;DependencyMetadata&gt; GetDependenciesBase()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase">OptionDependentConfigBase.GetDependenciesBase()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_GetDependencies__2___0_System_Collections_Generic_IEnumerable___1__">DependantExtensions.GetDependencies&lt;T, TDependency&gt;(T, IEnumerable&lt;TDependency&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_CreateTypeDependency__1_Rezolver_Sdk_IDependant_System_Boolean_">DependantExtensions.CreateTypeDependency&lt;TDependency&gt;(IDependant, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Sdk.DependantExtensions.html#Rezolver_Sdk_DependantExtensions_CreateObjectDependency__1_Rezolver_Sdk_IDependant___0_System_Boolean_">DependantExtensions.CreateObjectDependency&lt;TDependency&gt;(IDependant, TDependency, Boolean)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectAutoFuncs.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectAutoFuncs%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectAutoFuncs.cs/#L26" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

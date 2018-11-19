@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class InjectArrays
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -124,7 +115,7 @@ instances via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/sy
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableArrayInjection.html">EnableArrayInjection</a>&gt;</div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></div>
     <div class="level2"><span class="xref">InjectArrays</span></div>
   </div>
   <div classs="implements">
@@ -135,32 +126,38 @@ instances via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/sy
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies">OptionDependentConfigBase.Dependencies</a>
     </div>
     <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_">OptionDependentConfigBase.CreateOptionDependency&lt;TOption&gt;(Boolean)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetHashCode()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetType()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ToString()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Configuration.html">Rezolver.Configuration</a></h6>
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_Configuration_InjectArrays_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class InjectArrays : OptionDependentConfig&lt;EnableArrayInjection&gt;, ITargetContainerConfig, IDependant</code></pre>
+    <pre><code class="lang-csharp hljs">public class InjectArrays : OptionDependentConfigBase, ITargetContainerConfig, IDependant</code></pre>
   </div>
   <h5 id="Rezolver_Configuration_InjectArrays_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Note that this configuration requires that the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration is
@@ -170,44 +167,10 @@ also applied.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectArrays_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays.Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectArrays_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectArrays.cs/#L45">View Source</a>
-  </span>
-  <a id="Rezolver_Configuration_InjectArrays_Dependencies_" data-uid="Rezolver.Configuration.InjectArrays.Dependencies*"></a>
-  <h4 id="Rezolver_Configuration_InjectArrays_Dependencies" data-uid="Rezolver.Configuration.InjectArrays.Dependencies">Dependencies</h4>
-  <div class="markdown level1 summary"><p>Overrides the <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a> implementation to include a required dependency
-on the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override IEnumerable&lt;DependencyMetadata&gt; Dependencies { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableArrayInjection&gt;.Dependencies</span></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectArrays_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectArrays.cs/#L24">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectArrays.cs/#L25">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectArrays_Instance_" data-uid="Rezolver.Configuration.InjectArrays.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectArrays_Instance" data-uid="Rezolver.Configuration.InjectArrays.Instance">Instance</h4>
@@ -237,14 +200,14 @@ on the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">Inje
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectArrays_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectArrays_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectArrays.cs/#L60">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectArrays.cs/#L71">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectArrays_Configure_" data-uid="Rezolver.Configuration.InjectArrays.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectArrays_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectArrays.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Implements the <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a> abstract method
+  <div class="markdown level1 summary"><p>Implements the <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a> abstract method
 by configuring the passed <code data-dev-comment-type="paramref" class="paramref">targets</code> so it can produce targets for any array type, regardless
 of whether a single object has been registered for the array&apos;s element type.</p>
 <p>After enabling, the ability to register specific targets for concrete array types will still be present.</p>
@@ -272,7 +235,41 @@ of whether a single object has been registered for the array&apos;s element type
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableArrayInjection&gt;.Configure(Rezolver.IRootTargetContainer)</span></div>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">OptionDependentConfigBase.Configure(IRootTargetContainer)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectArrays_GetDependenciesBase.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays.GetDependenciesBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectArrays.cs/#L54">View Source</a>
+  </span>
+  <a id="Rezolver_Configuration_InjectArrays_GetDependenciesBase_" data-uid="Rezolver.Configuration.InjectArrays.GetDependenciesBase*"></a>
+  <h4 id="Rezolver_Configuration_InjectArrays_GetDependenciesBase" data-uid="Rezolver.Configuration.InjectArrays.GetDependenciesBase">GetDependenciesBase()</h4>
+  <div class="markdown level1 summary"><p>Overrides the abstract base method to return dependencies on the <a class="xref" href="Rezolver.Options.EnableArrayInjection.html">EnableArrayInjection</a> option
+and the </p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override IEnumerable&lt;DependencyMetadata&gt; GetDependenciesBase()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase">OptionDependentConfigBase.GetDependenciesBase()</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
@@ -298,10 +295,10 @@ of whether a single object has been registered for the array&apos;s element type
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectArrays.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectArrays.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectArrays%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectArrays.cs/#L19" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectArrays.cs/#L20" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -53,7 +53,7 @@ namespace Rezolver.Configuration
         }
 
         /// <summary>
-        /// Implementation of <see cref="OptionDependentConfig{TOption}.Configure(IRootTargetContainer)"/>
+        /// Implementation of <see cref="OptionDependentConfigBase.Configure(IRootTargetContainer)"/>
         /// </summary>
         /// <param name="targets"></param>
         /// <remarks>

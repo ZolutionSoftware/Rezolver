@@ -104,7 +104,7 @@ if(sig.Args.Length > 1)
 	else
 	{
 #>
-		/// <summary>Enables the automatic injection of a <see cref="Func{<#=sig.Spec.Args#>}" /> for the given <typeparamref="TResult" /></summary>
+		/// <summary>Enables the automatic injection of a <see cref="Func{<#=sig.Spec.Args#>}" /> for the given <typeparamref name="TResult" /></summary>
 <#+
 	}
 	ForArgs(sig.Spec, TypeParamRef);

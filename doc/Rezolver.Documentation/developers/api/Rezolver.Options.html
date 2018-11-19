@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Options
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -138,6 +129,14 @@ future date.</p>
       <section><p>Controls whether Rezolver&apos;s built-in array injection (which is also dependent upon the
 built-in IEnumerable injection) is enabled.</p>
 <p>If not defined the <a class="xref" href="Rezolver.Options.EnableArrayInjection.html#Rezolver_Options_EnableArrayInjection_Default">Default</a> is equivalent to <code>true</code>.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a></h4>
+      <section><p>Option which controls whether the <a class="xref" href="Rezolver.Configuration.InjectAutoFuncs.html">InjectAutoFuncs</a> configuration is applied, which
+enables the automatic registration of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> whenever a target is registered.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Options.EnableAutoLazyInjection.html">EnableAutoLazyInjection</a></h4>
+      <section><p>Boolean option used to control whether <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a> injection will automatically
+work.  Used by </p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.EnableCollectionInjection.html">EnableCollectionInjection</a></h4>
       <section><p>Boolean option which, if configured before the <a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a> configuration is applied,

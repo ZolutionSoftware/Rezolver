@@ -1,9 +1,6 @@
 ﻿using Rezolver.Compilation;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezolver.Targets
 {
@@ -20,33 +17,66 @@ namespace Rezolver.Targets
     {
         private readonly bool _isOpenGenericReturnType;
 
+        private readonly Type _delegateType;
         /// <summary>
-        /// The delegate type that will be built by this target.
+        /// The delegate type that will be built by this target - always equal to <see cref="DeclaredType"/>
         /// </summary>
-        public override Type DeclaredType => DelegateType;
+        public override Type DeclaredType => _delegateType;
 
         /// <summary>
-        /// If the factory is already bound to another target (e.g. <see cref="ConstructorTarget"/>), then this
-        /// will be it.  If not, then a compiler should use the <see cref="Bind"/>
+        /// If the target is already bound to another target (e.g. <see cref="ConstructorTarget"/>), then this
+        /// will be it.  
+        /// 
+        /// Note that the compiler should always call the <see cref="Bind(ICompileContext)"/> method
+        /// in any case to get the inner target.
         /// </summary>
         public ITarget BoundTarget { get; }
-        public Type DelegateType { get; }
+
+        /// <summary>
+        /// The return type of the <see cref="DeclaredType"/>
+        /// </summary>
         public Type ReturnType { get; }
 
+        /// <summary>
+        /// An array of types of the arguments that are accepted by delegates of the type <see cref="DeclaredType"/>,
+        /// or, an empty array if the the delegate is nullary.
+        /// </summary>
         public Type[] ParameterTypes { get; }
 
         /// <summary>
-        /// 
+        /// Creates a new <see cref="AutoFactoryTarget"/> for the given <paramref name="delegateType"/>, optionally already bound
+        /// to the given <paramref name="boundTarget"/>.
         /// </summary>
-        /// <param name="delegateType"></param>
-        /// <param name="returnType"></param>
-        /// <param name="parameterTypes"></param>
-        /// <param name="boundTarget">Optional - the target whose result will be produced by the factory, if known.</param>
-        public AutoFactoryTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
+        /// <param name="delegateType">Required.  The type of delegate that is to be produced by this target.  It MUST have a non-void return type.</param>
+        /// <param name="boundTarget">Optional.  The target whose result is to be wrapped by the delegate.</param>
+        public AutoFactoryTarget(Type delegateType, ITarget boundTarget = null)
+            : base(boundTarget?.Id ?? Guid.NewGuid())
+        {
+            if (delegateType == null)
+                throw new ArgumentNullException(nameof(delegateType));
+            if (!TypeHelpers.IsAssignableFrom(typeof(Delegate), delegateType))
+                throw new ArgumentException("Must be a delegate type with a non-void return type", nameof(delegateType));
+
+            var (returnType, paramTypes) = TypeHelpers.DecomposeDelegateType(delegateType);
+
+            if (returnType == typeof(void))
+                throw new ArgumentException("Delegate return type must be non-void", nameof(delegateType));
+
+            if(paramTypes.Distinct().Count() != paramTypes.Length)
+                throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(delegateType));
+
+            _delegateType = delegateType;
+            ReturnType = returnType;
+            ParameterTypes = paramTypes;
+            BoundTarget = boundTarget;
+            _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
+        }
+
+        internal AutoFactoryTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
             : base(boundTarget?.Id ?? Guid.NewGuid()) // note here - passing the ID in from the inner target to preserve the order.
         {
-            DelegateType = delegateType ?? throw new ArgumentNullException(nameof(delegateType));
-            ReturnType = returnType ?? throw new ArgumentNullException(nameof(returnType));
+            _delegateType = delegateType;
+            ReturnType = returnType;
             ParameterTypes = parameterTypes ?? TypeHelpers.EmptyTypes;
             if (ParameterTypes.Distinct().Count() != ParameterTypes.Length)
                 throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(parameterTypes));
@@ -55,6 +85,12 @@ namespace Rezolver.Targets
             _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
         }
 
+        /// <summary>
+        /// Overrides the base implementation to enhance support for closed generics where
+        /// the <see cref="DeclaredType"/> is an open generic.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns><c>true</c> if this target can build an instance of the <paramref name="type"/>, otherwise <c>false</c></returns>
         public override bool SupportsType(Type type)
         {
             if (base.SupportsType(type))

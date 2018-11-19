@@ -9,16 +9,15 @@ namespace Rezolver.Configuration
     /// <summary>
     /// Abstract base class for <see cref="ITargetContainerConfig"/> implementations which are dependent upon
     /// one or more configuration objects having been applied before being applied themselves.
-    /// 
-    /// Implement this type directly if your config object has dependencies on multiple config types/objects.
+    /// </summary>
+    /// <remarks>Implement this type directly if your config object has dependencies on multiple config types/objects.
     /// 
     /// Your implementation of <see cref="GetDependenciesBase"/> should return metadata which describes those
     /// dependencies.  The easiest way to create these is through one of:
     /// 
     /// - <see cref="CreateOptionDependency{TOption}(bool)"/>
     /// - <see cref="DependantExtensions.CreateTypeDependency{TDependency}(IDependant, bool)"/>
-    /// - <see cref="DependantExtensions.CreateObjectDependency{TDependency}(IDependant, TDependency, bool)"/>
-    /// </summary>
+    /// - <see cref="DependantExtensions.CreateObjectDependency{TDependency}(IDependant, TDependency, bool)"/></remarks>
     public abstract class OptionDependentConfigBase : ITargetContainerConfig, IDependant
     {
         private IEnumerable<DependencyMetadata> _dependencies;

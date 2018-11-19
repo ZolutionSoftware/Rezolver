@@ -1,0 +1,182 @@
+/* navbar-default */
+/* inverted navbar */
+/*darken(@brand-primary, 15%);*/
+/* Included after docfx.vendor (incorporating bootstrap) and the base docfx.css styles */
+a #logo {
+  padding: 1px;
+}
+.navbar-inverse {
+  border-bottom: none;
+}
+button,
+a {
+  color: #e27633;
+}
+button:hover,
+a:hover,
+button:focus,
+a:focus {
+  color: #efb28c;
+}
+.affix ul > li > a {
+  color: #afafaf;
+}
+.affix ul > li > a:hover,
+.affix ul > li > a:focus {
+  color: #bcccf7;
+}
+.affix ul > li.active > a {
+  color: #bcccf7;
+}
+.affix ul > li.active > a:before {
+  color: #bcccf7;
+}
+.affix ul > li.active > a:hover,
+.affix ul > li.active > a:focus {
+  color: #8ea9f2;
+}
+.sideaffix > div.contribution > ul > li > a.contribution-link:hover {
+  color: #040c21;
+}
+.navbar-default.subnav {
+  background: #061438;
+  border-bottom: none;
+}
+.github-link {
+  font-size: 30px;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+.github-link a {
+  color: white;
+  text-decoration: none;
+}
+.sidefilter,
+.sidetoc {
+  border-left: none;
+  border-right: none;
+}
+.toc-filter {
+  /* search box in the toc */
+  border: solid 1px #d5d5d5;
+}
+body .toc,
+.sidenav,
+.sidefilter,
+.sidetoc,
+.fixed-header {
+  background: #040c21;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* remove header breaking - looks v.silly for long titles and narrow screens */
+  word-wrap: normal;
+  /* break-word;*/
+  word-break: normal;
+  /* break-all;*/
+}
+blockquote {
+  border-left-color: #0b2466;
+  background: #091c4f;
+  font-size: 14px;
+  color: #c8c8c8;
+}
+blockquote h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.toc .nav > li > a {
+  color: #afafaf;
+}
+.toc .nav > li > a:hover,
+.toc .nav > li > a:focus {
+  color: #bcccf7;
+}
+.toc .nav > li.active > a {
+  color: #bcccf7;
+}
+.toc .nav > li.active > a:hover,
+.toc .nav > li.active > a:focus {
+  color: #8ea9f2;
+}
+.toc .level1 > li {
+  font-size: 14px;
+  font-weight: normal;
+}
+.toc .level2 {
+  font-size: 12px;
+  margin-left: 5px;
+}
+pre {
+  position: relative;
+}
+@media only screen and (max-width: 768px) {
+  pre code[name] {
+    margin-top: 2em;
+    display: inline-block;
+  }
+  pre code[name]::before {
+    content: attr(name);
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 5px;
+    /*border: 1px solid;
+			border-color: darken(@pre-border-color, 30%);
+			border-top: none;*/
+    background: #313131;
+    color: white;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  pre code[name] {
+    margin-top: 2em;
+    display: inline-block;
+  }
+  pre code[name]::before {
+    content: attr(name);
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 5px;
+    /*border: 1px solid;
+			border-color: darken(@pre-border-color, 30%);
+			border-top: none;*/
+    background: #313131;
+    color: white;
+  }
+}
+.hljs {
+  background: none;
+}
+.footer {
+  border-top: none;
+  background: #0b2466;
+  color: white;
+}
+.footer a {
+  color: #f15c00;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+@media only screen and (max-width: 768px) {
+  .toc .level2 > li {
+    display: inline-block;
+    min-width: 20em;
+  }
+  .toc .level2 > li:after {
+    content: none;
+  }
+  .toc .nav > .li > a {
+    display: inline-block;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
