@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var minify = require('gulp-minify-css');
+var cleancss = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var less = require('gulp-less');
@@ -34,18 +35,18 @@ var fontawesome = {
 //built
 var rezolverBootstrap = {
     src: 'site.less',
-    cwd: 'wwwroot/styles/'
+    cwd: './wwwroot/css/'
 };
 var rezolverDocFXMain = {
     src: 'main.less',
     dest: ['main.*'],
-    cwd: '_docfx_themes/rezolver/styles/'
+    cwd: './_docfx_themes/rezolver/styles/'
 };
 
 //bundling and minification of the docfx custom template theme - the
 //files which replace the default docfx.vendor.* files.
 var vendor = {
-    css: ['wwwroot/styles/site.css' //built from site.less in less task after copy
+    css: ['wwwroot/css/site.css' //built from site.less in less task after copy
         //includes: custom bootstrap, 
         //custom highlightjs theme and font-awesome
     ],
@@ -86,18 +87,18 @@ gulp.task('cleanDocFXOutput', function () {
 gulp.task('copy', function () {
     return merge(
         gulp.src(bootstrap.src, { cwd: bootstrap.cwd })
-            .pipe(gulp.dest('./wwwroot/styles/bootstrap/')),
+            .pipe(gulp.dest('./wwwroot/css/bootstrap/')),
         gulp.src(fontawesome.src, { cwd: fontawesome.cwd })
-            .pipe(gulp.dest('./wwwroot/styles/fontawesome/')),
+            .pipe(gulp.dest('./wwwroot/css/fontawesome/')),
         //fonts are copied to two places to satisfy both the main site's
         //styles and the Rezolver docfx theme's styles.
         gulp.src(bootstrap.font.src, { cwd: bootstrap.font.cwd })
-            .pipe(gulp.dest('./wwwroot/styles/fonts'))
+            .pipe(gulp.dest('./wwwroot/css/fonts'))
             .pipe(gulp.dest('./_docfx_themes/rezolver/styles/fonts/')),
         gulp.src(fontawesome.font.src, { cwd: fontawesome.font.cwd })
             //fonts are copied to two places to satisfy both the main site's
             //styles and the Rezolver docfx theme's styles.
-            .pipe(gulp.dest('./wwwroot/styles/fonts'))
+            .pipe(gulp.dest('./wwwroot/css/fonts'))
             .pipe(gulp.dest('./_docfx_themes/rezolver/styles/fonts/'))
     );
 });
@@ -127,10 +128,7 @@ gulp.task('bundles', ['less'], function () {
     return merge(
         gulp.src(vendor.css)
             .pipe(sourcemaps.init())
-            .pipe(minify({ keepBreaks: true }))
-            .pipe(rename({
-                suffix: '.min'
-            }))
+            .pipe(cleancss())
             .pipe(concat('docfx.vendor.css'))
             .pipe(sourcemaps.write('.'))
             .pipe(gulp.dest(rezolverDocFXMain.cwd)),

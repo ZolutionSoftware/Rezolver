@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="_docfx_themes\**" />
     <None Include="_docfx_proj\**" />
     <None Include="_docfx_themes\**" />
     <Compile Remove="_docfx_proj\obj\**" />
