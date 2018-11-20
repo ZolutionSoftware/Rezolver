@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Lazy vs. Eager Enumerables | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Lazy vs. Eager Enumerables | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.2.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="lazy-vs-eager-enumerables">Lazy vs. Eager Enumerables</h1>
+
+<p>As described in the <a href="../enumerables.html">main enumerables topic</a>, Rezolver builds lazy enumerables by default, but can also
+generate eager enumerables.  This topic describes the difference between the two and also shows how you can configure your
+container to build enumerables differently for different types.</p>
+<h1 id="background">Background</h1>
+<h2 id="what-is-a-lazy-enumerable">What is a Lazy enumerable?</h2>
+<p>A lazy enumerable is simply one which produces results <em>as you enumerate it</em> rather than being backed by an array or collection
+which already contains the objects.</p>
+<p>As an example, the .Net function <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.range">Range</a> function generates a lazy enumerable which, when enumerated,
+provides a range of <em>n</em> integer values starting from a given lower bound:</p>
+<pre><code class="lang-cs">// an enumerable which starts at 0 and keeps returning values up to, and including, 9
+var enumerable = Enumerable.Range(0, 10);
+
+// an enumerable which starts at 100 and keeps returning values up to, and including, 199
+var enumerable2 = Enumerable.Range(100, 100);
+</code></pre><p>When you <code>foreach</code> these enumerables (or call the <code>.GetEnumerator()</code>) function, these lazy enumerables will
+continue generating new results (via the <code>IEnumerator&lt;int&gt;.MoveNext</code> implementation) until <em>n</em> results have been returned.</p>
+<p>Crucially, if you then <code>foreach</code> these enumerables a second time, you will get a new sequence - with the code that generates each
+result being executed again each time.  The side effect of this being that if you do something like this:</p>
+<pre><code class="lang-cs">var enumerable = Enumerable.Range(0, 10).Select(i =&gt; new Foo(i));
+
+foreach(var o in enumerable)
+{
+
+}
+
+//and then a second time
+
+foreach(var o in enumerable)
+{
+
+}
+</code></pre><p>The objects produced by the <code>Select</code> method are <em>always</em> new instances whenever you enumerate - so in the above example
+<strong>20</strong> new instances of <code>Foo</code> are created - <em>not</em> 10.</p>
+<h2 id="what-is-an-eager-enumerable">What is an eager enumerable?</h2>
+<p>Typically, an eager enumerable is one which has been created from a data structure which already contains all the objects which
+will be enumerated.  The simplest example of this being an array:</p>
+<pre><code class="lang-cs">var a = new[] { new Foo(), new Foo(), new Foo() };
+
+foreach(var o in a)
+{
+
+}
+
+// enumerating the same instances again
+
+foreach(var o in a)
+{
+
+}
+</code></pre><p>In this case, all the objects produced by the enumerable are already in memory, and the enumerator is merely walking an array,
+linked list or whatever.</p>
+<div class="TIP"><h5>Tip</h5><p>Most .Net developers will already be familiar with the idea of &#39;realising&#39; an enumerable to force it to become &#39;eager&#39;, using the
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.toarray">ToArray</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.tolist">ToList</a> extension methods.  These functions simply enumerate their
+input enumerable once, storing the results into an array/list or similar structure.</p>
+</div>
+<hr>
+<h1 id="examples">Examples</h1>
+<h2 id="lazy-enumerable">Lazy enumerable</h2>
+<p>To demonstrate Rezolver&#39;s default behaviour of creating lazy enumerables, we&#39;ll get it to construct an enumerable of the
+first of these two (contrived) classes:</p>
+<pre><code class="lang-csharp" name="CallsYouBackOnCreate.cs">public class CallsYouBackOnCreate
+{
+    public CallsYouBackOnCreate(Action&lt;CallsYouBackOnCreate&gt; callback)
+    {
+        callback(this);
+    }
+}
+
+public class CallsYouBackOnCreate2
+{
+    public CallsYouBackOnCreate2(Action&lt;CallsYouBackOnCreate2&gt; callback)
+    {
+        callback(this);
+    }
+}
+</code></pre><p>The example registers an <code>Action&lt;CallsYouBackOnCreate&gt;</code> callback, in addition to three entries for the <code>CallsYouBackOnCreate</code>
+type, which increments a local counter - meaning that we can monitor how many times the constructor for that type is called.</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+var instanceCounter = 0;
+
+// ensures we get an enumerable with three items
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+
+container.RegisterObject&lt;Action&lt;CallsYouBackOnCreate&gt;&gt;(
+    o =&gt; ++instanceCounter);
+
+var items = container.ResolveMany&lt;CallsYouBackOnCreate&gt;();
+
+// start by asserting that no instances have been created yet
+Assert.Equal(0, instanceCounter);
+
+var lastCounter = instanceCounter;
+foreach(var item in items)
+{
+    // every time we move next, a new item should be created,
+    // which, in turn, fires the delegate which increments the 
+    // counter
+    Assert.Equal(lastCounter + 1, instanceCounter);
+    lastCounter = instanceCounter;
+}
+
+// more importantly - if we enumerate it again, then the 
+// objects are created again
+foreach (var item in items)
+{
+    Assert.Equal(lastCounter + 1, instanceCounter);
+    lastCounter = instanceCounter;
+}
+</code></pre><p>There are a few takeaways from this example:</p>
+<ul>
+<li>Immediately after resolving an instance of the enumerable, we assert that no instances of <code>CallsYouBackOnCreate</code> have been created</li>
+<li>The two <code>foreach</code> loops verify that each instance produced from the enumerable is created <em>just-in-time</em></li>
+<li>The instances produced by the enumerable are not retained by the underlying enumerator.  New instances are being created
+every time enumeration occurs.</li>
+</ul>
+<p>In the context of this example, clearly it seems odd that we&#39;d want an enumerable that keeps generating new instances every
+time we enumerate it.  In the real-world, however, most of the time we inject enumerables, the receiving object will 
+enumerate once.  Equally, if the receiver does expect to enumerate multiple times and wants to <em>guarantee</em> that only the 
+correct number of items will ever be produced exactly once, then a simple <code>.ToArray()</code> call will do the trick.</p>
+<h2 id="eager-enumerable-global">Eager enumerable (global)</h2>
+<p>As with many other Rezolver behaviours, lazy/eager enumerable creation is controlled by an option which can be set 
+on an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> either globally (which affects all enumerables) or on a per-type basis (see next).</p>
+<p>The option that controls this behaviour is <a class="xref" href="../../api/Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> - which of course has a 
+<a class="xref" href="../../api/Rezolver.Options.LazyEnumerables.html#Rezolver_Options_LazyEnumerables_Default">Default</a> value of <code>true</code> (thus when it&#39;s not explicitly set on a target container, lazy
+enumerables are enabled).</p>
+<p>This example is very similar to the <a href="#lazy-enumerable">lazy enumerable example above</a> - but this time we&#39;re going to 
+disable all lazy enumerables on the <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which underpins the container:</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">var container = new Container();
+var instanceCounter = 0;
+
+// set this option to disable lazy enumerables globally
+container.SetOption&lt;Options.LazyEnumerables&gt;(false);
+
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+
+container.RegisterObject&lt;Action&lt;CallsYouBackOnCreate&gt;&gt;(
+    o =&gt; ++instanceCounter);
+
+var items = container.ResolveMany&lt;CallsYouBackOnCreate&gt;();
+
+// this time all instances will be created immediately.
+Assert.Equal(3, instanceCounter);
+
+// and we&#39;ll just assert that the instance count never changes
+foreach(var item in items)
+{
+    Assert.Equal(3, instanceCounter);
+}
+
+foreach (var item in items)
+{
+    Assert.Equal(3, instanceCounter);
+}
+</code></pre><p>In contrast to the previous example, then, note that all the instances within the enumerable are created as soon as
+the container returns it to the caller (or injects it as a constructor/delegate argument) - and also note that the 
+number of instances created doesn&#39;t change on repeated enumerations.</p>
+<div class="WARNING"><h5>Warning</h5><p>Do not confuse this behaviour with that of a singleton.  If we were to fetch two eager enumerables from the container,
+then both would create their instances up-front, independent of each other.</p>
+</div>
+<h2 id="eager-enumerable-per-service">Eager enumerable (per-service)</h2>
+<p>Obviously, being able to switch <em>all</em> enumerables to eager is likely to be a bit of a sledgehammer in many cases.  So
+Rezolver also lets you control the production of lazy or eager enumerables on a per-type basis.</p>
+<p>To do this, when setting the <a class="xref" href="../../api/Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> options to <code>false</code>, you also include the type of service
+whose enumerables are to be affected (see the <a class="xref" href="../../api/Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption_">SetOption</a> overload for more):</p>
+<pre><code class="lang-csharp" name="EnumerableExamples.cs">// for this test we&#39;ll drop the two foreach loops and just use .ToArray()
+var container = new Container();
+var instanceCounter1 = 0;
+var instanceCounter2 = 0;
+
+// set this option to disable lazy enumerables only for 
+// the type &#39;CallsYouBackOnCreate2&#39;
+container.SetOption&lt;Options.LazyEnumerables, CallsYouBackOnCreate2&gt;(false);
+
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate&gt;();
+container.RegisterObject&lt;Action&lt;CallsYouBackOnCreate&gt;&gt;(
+    o =&gt; ++instanceCounter1);
+
+container.RegisterType&lt;CallsYouBackOnCreate2&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate2&gt;();
+container.RegisterType&lt;CallsYouBackOnCreate2&gt;();
+container.RegisterObject&lt;Action&lt;CallsYouBackOnCreate2&gt;&gt;(
+    o =&gt; ++instanceCounter2);
+
+// will be lazy
+var items1 = container.ResolveMany&lt;CallsYouBackOnCreate&gt;();
+Assert.Equal(0, instanceCounter1);
+
+// will be eager
+var items2 = container.ResolveMany&lt;CallsYouBackOnCreate2&gt;();
+Assert.Equal(3, instanceCounter2);
+
+var array1a = items1.ToArray();
+var array1b = items1.ToArray();
+var array2a = items2.ToArray();
+var array2b = items2.ToArray();
+
+Assert.Equal(6, instanceCounter1);
+Assert.Equal(3, instanceCounter2);
+</code></pre><hr>
+<div class="TIP"><h5>Tip</h5><p>Remember - per-service options can also be defined for open generics and for common bases or interfaces of a given
+type.</p>
+<p>This means you can set it for <code>BaseClass</code> and it will apply to any type derived from it (unless you also set it 
+specifically for that derived type).  Equally, setting it for the open generic <code>IGeneric&lt;&gt;</code> will apply to any 
+closed generic built from it (again - unless you expressly set it differently for that closed generic).</p>
+</div>
+<div class="TIP"><h5>Tip</h5><p>Although it should be obvious by now - you can very easily invert the lazy enumerable behaviour to opt-in instead of
+opt-out by setting the <a class="xref" href="../../api/Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> to <code>false</code> globally, which then allows you to set it to
+<code>true</code> for specific services.</p>
+</div>
+<h1 id="benefits-of-being-lazy">Benefits of being lazy</h1>
+<p>The reasons why Rezolver defaults to lazy enumerables are the same as why you&#39;d use them in any .Net project: </p>
+<ul>
+<li>Lazy enumerables are generally faster to create than an eager enumerable containing the same results, because
+typically the enumerable just wraps a function.  The eager version of the same enumerable will still use that function 
+to produce the instances, but must also execute it and capture the results on creation.</li>
+<li>Lazy enumerables generally have a lower memory overhead.  The pathological case (and, admittedly, not necessarily 
+relevant in the IOC world) is an enumerable that produces a theoretically infinite series.  Such enumerables can
+clearly never be evaluated eagerly, because they require more storage than the machine (or in most theories of reality,
+the universe itself!) has available.  The more realistic case is where you might have 100s of registrations for a given 
+type, all the implementations of which consume big chunks of memory - creating an eager enumerable of these will 
+instantly grab a chunk of memory for those instances, whereas a lazily evaluated enumerable would not.</li>
+</ul>
+<p>That said, there are of course reasons why you&#39;d still want to use an eager enumerable.  Perhaps the objects are singletons
+and/or are &#39;hard&#39; to create - in which case you might as well expend a bit of extra effort up front to create them so
+you don&#39;t have to do it later.</p>
+<hr>
+<p><a href="../enumerables.html">Back to the root enumerables documentation</a></p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/enumerables/lazy-vs-eager.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Specific Constructors for Open Generics | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Specific Constructors for Open Generics | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.2.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="specific-constructors-for-open-generics">Specific Constructors for Open Generics</h1>
+
+<p>As described in the <a href="generics.html">main open generic constructor injection topic</a>, Rezolver is able to bind
+dynamically to the best-matched constructor for a particular closed generic when built from an open generic
+registration.</p>
+<p>However, it&#39;s also possible (starting from 1.3.2) to instruct Rezolver to use a <em>specific</em> constructor when
+creating an instance from an open generic registration.</p>
+<p>Use cases for this are, of course, pretty niche - especially if your own classes typically stick to the standard
+pattern of only having a single constructor (as is enforced by some IOC containers).  But the reality is there will
+always be types which legitimately have multiple constructors (take a lot of .Net collection types, for example)
+which you might also want to create via constructor injection.</p>
+<h2 id="when-you-might-need-to-use-this">When you might need to use this</h2>
+<p>The most likely scenario for needing to be able to provide a specific constructor to be used when creating an
+instance from an open generic is to disambiguate between constructors when a generic type argument might 
+can cause a conflict with the concrete type of an argument on one or more constructors.</p>
+<p>For example, consider the <code>List&lt;T&gt;</code> type, which has the following constructors:</p>
+<ul>
+<li><code>List&lt;T&gt;()</code></li>
+<li><code>List&lt;T&gt;(IEnumerable&lt;T&gt;)</code></li>
+<li><code>List&lt;T&gt;(int)</code></li>
+</ul>
+<div class="TIP"><h5>Tip</h5><p><code>List&lt;T&gt;</code> is a type that, by default, Rezolver <a href="../arrays-lists-collections/lists.html">can build automatically for you</a>
+by extending its own support for <a href="../enumerables.html">enumerables</a>.</p>
+<hr>
+<p>In fact, the scenario described here is taken specifically from how Rezolver handles the <code>List&lt;T&gt;</code> type.</p>
+</div>
+<p>Now, if you were to explicitly register the <code>List&lt;T&gt;</code> type for constructor injection (after disabling Rezolver&#39;s
+own support for it of course), Rezolver will happily bind to the <code>IEnumerable&lt;T&gt;</code> constructor for all types of <code>T</code>
+except one: <code>int</code>.</p>
+<p>When you request a <code>List&lt;int&gt;</code>, Rezolver immediately hits a problem - unless you&#39;ve not got any <code>int</code> registrations
+(which presumably you would have if you&#39;re requesting a list of <code>int</code>!) - because it sees <em>two</em> constructors that 
+could be satisfied.  It doesn&#39;t <em>know</em> that you could only ever want the <code>IEnumerable&lt;T&gt;</code> one - how could it? - so
+instead of getting a shiny new list to play with, you get an exception.</p>
+<p>So how do we get around it?</p>
+<p>What we need to be able to do, of course, is to instruct Rezolver to use the <code>IEnumerable&lt;T&gt;</code> constructor for all 
+<code>T</code>.</p>
+<p>Thankfully, there are a couple of ways to do that.</p>
+<h2 id="the-registergenericconstructor-overload">The <code>RegisterGenericConstructor</code> overload</h2>
+<p>When registering targets into the <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, you can use one of these two methods:</p>
+<ul>
+<li><a class="xref" href="../../api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">RegisterGenericConstructor&lt;TExample&gt;(ITargetContainer, Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</a></li>
+<li><a class="xref" href="../../api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">RegisterGenericConstructor&lt;TExample, TExampleService&gt;(ITargetContainer, Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</a></li>
+</ul>
+<p>Both functions expect an expression in which you provide a &#39;model&#39; constructor call to the generic type whose
+constructor you want to bind.  The actual constructor arguments you pass are not important - only that the
+expression binds to the correct constructor.</p>
+<p>Now, clearly, if you try to do this over the <em>open</em> generic, your code won&#39;t compile - e.g:</p>
+<pre><code class="lang-cs">class MyGeneric&lt;T, U&gt; { 
+    public MyGeneric(T t) { }
+    public MyGeneric(T t, U u) { }
+    public MyGeneric(T t, U u, string s) { }
+}
+
+// ...
+
+targets.RegisterGenericConstructor(() =&gt; new MyGeneric&lt;,&gt;(null, null));
+</code></pre><p>Because using the <code>MyGeneric&lt;&gt;</code> type in this way requires the type arguments to be provided.</p>
+<p>Instead, you stub out the type arguments with any types you want, and Rezolver will match the constructor with its
+definition on the open generic type:</p>
+<pre><code class="lang-cs">targets.RegisterGenericConstructor(() =&gt; new MyGeneric&lt;object, object&gt;(null, null))
+</code></pre><p>This will create a registration in the container which, for any closed <code>MyGeneric&lt;,&gt;</code> will explicitly bind to 
+the two-parameter constructor, even if registrations exist which satisfy the <code>s</code> parameter on the 3-parameter 
+version.</p>
+<h3 id="example-1">Example 1</h3>
+<p>Here&#39;s a tested example with a type which extends the <code>List&lt;T&gt;</code> scenario:</p>
+<pre><code class="lang-csharp" name="HasAmbiguousGenericCtor.cs">public class HasAmbiguousGenericCtor&lt;T&gt; : IGeneric&lt;T&gt;
+{
+    public const string DEFAULTMESSAGE = &quot;Default Message&quot;;
+    public IEnumerable&lt;T&gt; Objects { get; }
+    public string Message { get; }
+
+    public HasAmbiguousGenericCtor(IEnumerable&lt;T&gt; objects)
+        : this(objects, DEFAULTMESSAGE)
+    {
+
+    }
+
+    public HasAmbiguousGenericCtor(IEnumerable&lt;T&gt; objects, string message)
+    {
+        Objects = objects;
+        Message = message;
+    }
+}
+</code></pre><p>In this case, if we want to resolve an <code>HasAmbiguousGenericCtor&lt;string&gt;</code>, Rezolver will, by default, use the
+<a href="index.html#best-match-examples">best-match rule</a>, meaning that the last <code>string</code> we registered will be used both
+as the last item in the enumerable but also as the argument for the single <code>string</code> parameter.  </p>
+<p>But that&#39;s not a problem with the <code>RegisterGenericConstructor</code> function:</p>
+<pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
+
+container.RegisterObject(&quot;will&quot;);
+container.RegisterObject(&quot;be&quot;);
+container.RegisterObject(&quot;default&quot;);
+container.RegisterObject(&quot;message&quot;);
+
+container.RegisterGenericConstructor(() =&gt; new HasAmbiguousGenericCtor&lt;object&gt;(null));
+
+var result = container.Resolve&lt;HasAmbiguousGenericCtor&lt;string&gt;&gt;();
+
+Assert.Equal(new[] { &quot;will&quot;, &quot;be&quot;, &quot;default&quot;, &quot;message&quot; }, result.Objects);
+Assert.Equal(HasAmbiguousGenericCtor&lt;string&gt;.DEFAULTMESSAGE, result.Message);
+</code></pre><h3 id="example-2---different-service-type">Example 2 - Different &#39;service&#39; type</h3>
+<p>When we register a type for constructor injection normally, we can also tell the container to create an instance
+of one type when another type is requested - e.g:</p>
+<pre><code class="lang-cs">// construct a Foo whenever we want an IFoo
+container.RegisterType&lt;Foo, IFoo&gt;();
+
+// construct a Foo&lt;T&gt; whenever we want an IFoo&lt;T&gt;
+container.RegisterType(typeof(Foo&lt;&gt;), typeof(IFoo&lt;&gt;));
+</code></pre><p>We can do the same with the other <code>RegisterGenericConstructor</code> overload which accepts two type arguments.  In 
+this case, you&#39;ll have noticed that our <code>HasAmbiguousGenericCtor&lt;T&gt;</code> generic also implements <code>IGeneric&lt;T&gt;</code> - so
+let&#39;s bind a specific constructor <em>and</em> register it to be used for a generic service type:</p>
+<pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
+
+container.RegisterObject(&quot;will&quot;);
+container.RegisterObject(&quot;be&quot;);
+container.RegisterObject(&quot;default&quot;);
+container.RegisterObject(&quot;message&quot;);
+
+// it&#39;s a bit unfortunate we have to use explicit concrete generics here
+container.RegisterGenericConstructor&lt;HasAmbiguousGenericCtor&lt;object&gt;, IGeneric&lt;object&gt;&gt;(
+    () =&gt; new HasAmbiguousGenericCtor&lt;object&gt;(null));
+
+var result = container.Resolve&lt;IGeneric&lt;string&gt;&gt;();
+
+var ambiguous = Assert.IsType&lt;HasAmbiguousGenericCtor&lt;string&gt;&gt;(result);
+Assert.Equal(new[] { &quot;will&quot;, &quot;be&quot;, &quot;default&quot;, &quot;message&quot; }, ambiguous.Objects);
+Assert.Equal(HasAmbiguousGenericCtor&lt;string&gt;.DEFAULTMESSAGE, ambiguous.Message);
+</code></pre><p>As the comment says, it&#39;s somewhat unfortunate that we have to use specify those generic arguments - just remember
+that the <code>RegisterGenericConstructor</code> method is specifically looking to bind an open generic.</p>
+<h2 id="alternatives">Alternatives</h2>
+<p>The <code>RegisterGenericConstructor</code> overload is merely a wrapper for one of the many overloads
+of the <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_ForConstructor_">ForConstructor</a> factory method, which creates targets from a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a>.</p>
+<p>This overload will create a <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the <code>ConstructorInfo</code> passed belongs to 
+an open generic type.  After creating the target, you can then register it directly into the container using the
+normal <a class="xref" href="../../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a> function or one of its overloads.</p>
+<p>The same is also true of the <a class="xref" href="../../api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_">RegisterConstructor</a> overload.</p>
+<p>Be aware, though - in all cases, it&#39;s not possible to provide named constructor argument bindings, either by dictionary
+or as an object, because of the inherent difficulty of providing a single target for one or more arguments whose type
+comes from a generic type argument.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/constructor-injection/generics-manual-constructor.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

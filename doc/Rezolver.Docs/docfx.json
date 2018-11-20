@@ -87,7 +87,7 @@
         "src": "_docfx_proj"
       }
     ],
-    "dest": "developers",
+    "dest": "wwwroot/developers",
     "template": [
       "_docfx_themes/default",
       "_docfx_themes/rezolver"

@@ -1,0 +1,752 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Generic Contravariance | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Generic Contravariance | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.2.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="generic-contravariance">Generic Contravariance</h1>
+
+<p>Generic contravariance in .Net is where an instance of a generic type featuring a less derived type 
+as a type argument can be assigned to a reference to a the same generic, but with a more derived
+type argument.  Contravariant type parameters are declared using the <code>in</code> modifier in the generic
+declaration.</p>
+<p>Commonly used contravariant generics are any of the <code>System.Action&lt;&gt;</code> delegate derivatives, or interface
+types such as the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icomparer-1">IComparer&lt;T&gt;</a> interface (used in the examples below).</p>
+<p>Here are some examples of legal assignments which take advantage of contravariance:</p>
+<pre><code class="lang-cs">Action&lt;string&gt; a
+    = new Action&lt;object&gt;(o =&gt; Console.WriteLine(o));
+IComparer&lt;string&gt; b
+    = Comparer&lt;object&gt;.Default;
+</code></pre><p>When a generic interface or delegate declares a contravariant type parameter, it restricts that
+type to being used as a method <em>parameter</em> - i.e. it becomes an &#39;input&#39; type, hence the <code>in</code> modifier.</p>
+<h1 id="in-rezolver">In Rezolver</h1>
+<p>When a generic type is requested from the container, Rezolver builds a search list of all 
+the possible instances of that generic type which could satisfy that request, returning an 
+instance produced by the registration that was made against the best-matching version of
+that generic (and, in the case of <a href="../enumerables.html">enumerables</a>, potentially more instances
+in registration order).</p>
+<p>The same is also true when the requested type has one or more contravariant type parameters - 
+in which case bases or interfaces of the corresponding type argument are also sought.</p>
+<p>The important thing to note here is that, just as with <a href="covariance.html">covariance</a>, it&#39;s the 
+type that an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> is <em>registered</em> against that matters - not the implementing type.</p>
+<p>So, given these types:</p>
+<pre><code class="lang-cs">interface IContravariant&lt;in T&gt;
+{
+  void Foo(T t);
+}
+
+class MyBase {}
+
+class MyDerived : MyBase {}
+
+class AcceptsMyBase : IContravariant&lt;MyBase&gt;
+{
+  void Foo(MyBase t)
+  {
+
+  }
+}
+</code></pre><p><code>AcceptsMyBase</code> will be used to create instances of <code>IContravariant&lt;MyDerived&gt;</code> if it is registered
+against the contravariant interface type <code>IContravariant&lt;MyBase&gt;</code>:</p>
+<pre><code class="lang-cs">container.RegisterType&lt;AcceptsMyBase, IContravariant&lt;MyBase&gt;&gt;();
+
+// gets an instance of AcceptsMyBase
+var result = container.Resolve&lt;IContravariant&lt;MyDerived&gt;();
+</code></pre><h2 id="type-precedence-is-king">Type Precedence is King</h2>
+<p>In nearly all cases (including for <a href="covariance.html">covariance</a>), Rezolver uses the 
+<em>most recently registered</em> target to provide the result for a particular service type.  </p>
+<p>For requests for generic types which have one or more contravariant type parameters, however, 
+this is not the case.</p>
+<p>For these, Rezolver instead looks for an exact match and, if it doesn&#39;t find one,
+it then walks &#39;up&#39; the type hierarchies of each contravariant type parameter looking for a hit,
+prioritising non-<code>object</code> base types over interfaces, and interfaces over the <code>object</code> base
+type.</p>
+<p>So, given a type hierarchy like this:</p>
+<pre><code class="lang-cs">interface IBase
+{
+}
+
+class Base : IBase
+{
+}
+
+interface IDerived : IBase
+{
+}
+
+class Derived : Base, IDerived
+{
+}
+</code></pre><p>If a request is made for an <code>Action&lt;Derived&gt;</code>, Rezolver will search for registrations for these types:</p>
+<ul>
+<li><code>Action&lt;Derived&gt;</code></li>
+<li><code>Action&lt;Base&gt;</code></li>
+<li><code>Action&lt;IDerived&gt;</code></li>
+<li><code>Action&lt;IBase&gt;</code></li>
+<li><code>Action&lt;object&gt;</code></li>
+<li><code>Action&lt;&gt;</code> <em>I.e. an &#39;open&#39; generic registration</em></li>
+</ul>
+<p>The first <code>ITarget</code> to be retrieved from the container&#39;s <code>ITargetContainer</code> for one of these types will &#39;win&#39;.</p>
+<p>Also, generic interfaces are given precedence over non-generic interfaces; with consideration given 
+to interfaces which &#39;inherit&#39; other interfaces (not a technically correct phrase, but we all know what 
+it means).</p>
+<h3 id="array-types">Array Types</h3>
+<p>For generic types to which an array type is passed to a contravariant type argument, the picture gets more
+complicated - as the dynamically built <code>Array</code> type for a given element type also brings with it several interfaces.</p>
+<p>The search list for an array type, like the one above, then, starts getting very complex very quickly, e.g:</p>
+<ul>
+<li><code>Action&lt;Derived[]&gt;</code></li>
+<li><code>Action&lt;IList&lt;Derived&gt;&gt;</code></li>
+<li><code>Action&lt;IEnumerable&lt;Derived&gt;&gt;</code></li>
+<li><code>...</code></li>
+<li><code>Action&lt;Base[]&gt;</code></li>
+<li><code>Action&lt;IList&lt;Base&gt;&gt;</code></li>
+<li><code>...</code></li>
+<li><code>Action&lt;IEnumerable&gt;</code></li>
+<li><code>Action&lt;Array&gt;</code></li>
+<li><code>Action&lt;object&gt;</code></li>
+</ul>
+<p>The above list is, by no means, exhaustive - but you should be able to get the picture.  Notice that the <code>Array</code> base
+type, like the <code>object</code> type before, is included as one of the last types, since it is ubiquitous to all arrays.</p>
+<h1 id="examples">Examples</h1>
+<p>Contravariance is a tricky subject at the best of times and contriving examples for how
+to take advantage of it when using a DI container is even trickier.  That said, you&#39;ll know
+when <em>you</em> need it, so hopefully what&#39;s presented here will help you.</p>
+<p>Hopefully, when you get to the stage of wanting to use it, you should just naturally
+expect it to work, and it will! <span class="emoji" shortcode="wink">😉</span></p>
+<h2 id="injecting-icomparert">Injecting <code>IComparer&lt;T&gt;</code></h2>
+<p>Let&#39;s say that in addition to Rezolver&#39;s own enumerables functionality, our application 
+wants to be able to inject explicitly ordered enumerables.  For that, we&#39;ll need the
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icomparer-1">IComparer&lt;T&gt;</a> interface, whose type parameter is contravariant.</p>
+<p>Now, the idea is that our application will be able to request an <code>IOrderedEnumerable&lt;T&gt;</code>
+for <em><strong>any</strong></em> type for which it could also request an <code>IEnumerable&lt;T&gt;</code> - this means that
+we&#39;re going to have to have a default comparer that can be used, whilst allowing specific
+comparers for known types to be registered in addition.</p>
+<p>The most natural way to do this is to try to wrap the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.orderby">OrderBy</a>
+extension method, but Rezolver cannot (currently) bind to generic methods</p>
+<p>Instead, we can quite easily write a class which implements <code>IOrderedEnumerable&lt;T&gt;</code> 
+by wrapping around the <code>OrderBy</code> extension method:</p>
+<pre><code class="lang-csharp" name="OrderedEnumerableWrapper.cs">public class OrderedEnumerableWrapper&lt;T&gt; : IOrderedEnumerable&lt;T&gt;
+{
+    private readonly IOrderedEnumerable&lt;T&gt; _orderedEnumerable;
+
+    // note - key selector and ascending/descending might also be desirable - but we&#39;ll
+    // leave this out
+    public OrderedEnumerableWrapper(IEnumerable&lt;T&gt; enumerable, IComparer&lt;T&gt; comparer)
+    {
+        _orderedEnumerable = enumerable.OrderBy(t =&gt; t, comparer);
+    }
+
+    IOrderedEnumerable&lt;T&gt; IOrderedEnumerable&lt;T&gt;.CreateOrderedEnumerable&lt;TKey1&gt;(
+        Func&lt;T, TKey1&gt; keySelector, 
+        IComparer&lt;TKey1&gt; comparer, 
+        bool descending)
+    {
+        return _orderedEnumerable.CreateOrderedEnumerable(keySelector, comparer, descending);
+    }
+
+    IEnumerator&lt;T&gt; IEnumerable&lt;T&gt;.GetEnumerator()
+    {
+        return _orderedEnumerable.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return _orderedEnumerable.GetEnumerator();
+    }
+}
+</code></pre><p>The generic class accepts an enumerable (automatically injected by Rezolver) and an 
+<code>IComparer&lt;T&gt;</code> - the default version of which will wrap around the <code>Comparer&lt;T&gt;.Default</code>
+property:</p>
+<pre><code class="lang-csharp" name="DefaultComparerWrapper`1.cs">public class DefaultComparerWrapper&lt;T&gt; : IComparer&lt;T&gt;
+{
+    int IComparer&lt;T&gt;.Compare(T x, T y)
+    {
+        return Comparer&lt;T&gt;.Default.Compare(x, y);
+    }
+}
+</code></pre><p>Now - if we configure the container correctly and resolve the correct types, getting an 
+ordered enumerable is pretty simple:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+container.RegisterType(typeof(DefaultComparerWrapper&lt;&gt;), typeof(IComparer&lt;&gt;));
+container.RegisterType(typeof(OrderedEnumerableWrapper&lt;&gt;), typeof(IOrderedEnumerable&lt;&gt;));
+// explicit registration for IEnumerable&lt;int&gt;
+container.RegisterObject(Enumerable.Range(0, 10).Reverse());
+
+var unordered = container.ResolveMany&lt;int&gt;();
+var ordered = container.Resolve&lt;IOrderedEnumerable&lt;int&gt;&gt;();
+
+Assert.NotEqual(unordered, ordered);
+
+Assert.Equal(Enumerable.Range(0, 10), ordered);
+</code></pre><p>So far, so &#39;open generic&#39; - we can now get ordered enumerables which work for any of the
+built-in .Net types that <code>Comparer&lt;T&gt;.Default</code> also works for.  Now we need to extend it
+for custom types.</p>
+<p>Let&#39;s use a similar example to the one used on MSDN for the 
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.comparer-1">Comparer&lt;T&gt;</a> type - and introduce some types which represent 
+2D geometries:</p>
+<pre><code class="lang-csharp" name="Shapes.cs">public interface I2DShape
+{
+    double CalcArea();
+}
+
+public class Rectangle : I2DShape
+{
+    public double Length { get; }
+    public double Height { get; }
+
+    public Rectangle(double length, double height)
+    {
+        Length = length;
+        Height = height;
+    }
+
+    public double CalcArea()
+    {
+        return Length * Height;
+    }
+}
+
+public class Square : Rectangle
+{
+    public Square(double size)
+        : base(size, size)
+    {
+
+    }
+}
+
+public class Circle : I2DShape
+{
+    public double Radius { get; }
+
+    public Circle(double radius)
+    {
+        Radius = radius;
+    }
+
+    public double CalcArea()
+    {
+        return Math.PI * Math.Pow(Radius, 2);
+    }
+}
+</code></pre><p>And let&#39;s introduce an <code>IComparer&lt;T&gt;</code> which sorts these objects by their area:</p>
+<pre><code class="lang-csharp" name="ShapeAreaComparer.cs">public class ShapeAreaComparer : IComparer&lt;I2DShape&gt;
+{
+    private readonly IComparer&lt;double&gt; _doubleComparer;
+
+    public ShapeAreaComparer(IComparer&lt;double&gt; doubleComparer)
+    {
+        _doubleComparer = doubleComparer;
+    }
+    public int Compare(I2DShape x, I2DShape y)
+    {
+        return _doubleComparer.Compare(x.CalcArea(), y.CalcArea());
+    }
+}
+</code></pre><p>Clearly, with this in place it would be trivial to register shape instances as <code>I2DShape</code> 
+and register the <code>ShapeAreaComparer</code> as the comparer for the type <code>IComparer&lt;I2DShape&gt;</code> -
+thus allowing us to request an <code>IOrderedEnumerable&lt;I2DShape&gt;</code>, we don&#39;t need a
+contravariance-aware DI container to be able to do that.</p>
+<p>But what if we want to inject an <code>IOrderedEnumerable&lt;T&gt;</code> where <code>T</code> is one of the 
+<em>concrete</em> shape types:</p>
+<ul>
+<li><code>Rectangle</code></li>
+<li><code>Square</code></li>
+<li><code>Circle</code> </li>
+</ul>
+<p>Meaning that our <code>OrderedEnumerableWrapper&lt;T&gt;</code> will be looking for one of these, 
+respectively:</p>
+<ul>
+<li><code>IComparer&lt;Rectangle&gt;</code></li>
+<li><code>IComparer&lt;Square&gt;</code></li>
+<li><code>IComparer&lt;Circle&gt;</code></li>
+</ul>
+<p>Without a contravariance-aware container, this would cause us a problem, because we&#39;d
+need to register the <code>ShapeAreaComparer</code> type for each and every specialisation of 
+<code>IComparer&lt;T&gt;</code> applicable for every <code>I2DShape</code>-implementation present in our application.</p>
+<p>Thankfully, Rezolver is aware of the contravariance of <code>T</code> in <code>IComparer&lt;T&gt;</code>, which 
+means that all we have to do is to register the type <code>ShapeAreaComparer</code> as 
+<code>IComparer&lt;I2DShape&gt;</code>, and Rezolver will automatically use it whenever it is compatible 
+with a given <code>T</code>.</p>
+<p>The following example breaks this into two demonstrations - one explicit set of 
+assertions which verify the <code>ShapeAreaComparer</code> is being used for any compatible comparer
+type, and another which verifies that ordered enumerables of concrete shape types are being
+created correctly:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// use the same two wrapper registrations as before.  We need the default
+// comparer to inject IComparer&lt;double&gt; into our ShapeAreaComparer
+container.RegisterType(typeof(DefaultComparerWrapper&lt;&gt;), typeof(IComparer&lt;&gt;));
+container.RegisterType(typeof(OrderedEnumerableWrapper&lt;&gt;), typeof(IOrderedEnumerable&lt;&gt;));
+// now register our shape comparer
+container.RegisterType&lt;ShapeAreaComparer, IComparer&lt;I2DShape&gt;&gt;();
+
+
+// ## TEST 1: Check contravariance is working for the comparer types:
+var rectangleComparer =
+    Assert.IsType&lt;ShapeAreaComparer&gt;(container.Resolve&lt;IComparer&lt;Rectangle&gt;&gt;());
+var squareComparer =
+    Assert.IsType&lt;ShapeAreaComparer&gt;(container.Resolve&lt;IComparer&lt;Square&gt;&gt;());
+var circleComparer =
+    Assert.IsType&lt;ShapeAreaComparer&gt;(container.Resolve&lt;IComparer&lt;Circle&gt;&gt;());
+
+
+// ## TEST 2: Add some shapes and make sure they get sorted correctly:
+container.RegisterObject&lt;IEnumerable&lt;Rectangle&gt;&gt;(
+    new Rectangle[] { new Rectangle(3, 1), new Rectangle(1, 2), new Rectangle(1, 1) });
+container.RegisterObject&lt;IEnumerable&lt;Square&gt;&gt;(
+    new Square[] { new Square(3), new Square(2), new Square(1) });
+container.RegisterObject&lt;IEnumerable&lt;Circle&gt;&gt;(
+    new Circle[] { new Circle(3), new Circle(2), new Circle(1) });
+
+var sortedRectangles = container.Resolve&lt;IOrderedEnumerable&lt;Rectangle&gt;&gt;();
+var sortedSquares = container.Resolve&lt;IOrderedEnumerable&lt;Square&gt;&gt;();
+var sortedCircles = container.Resolve&lt;IOrderedEnumerable&lt;Circle&gt;&gt;();
+
+Assert.Equal(
+    Enumerable.Range(1, 3).Select(i =&gt; (double)i),
+    sortedRectangles.Select(r =&gt; r.CalcArea()));
+
+Assert.Equal(
+    Enumerable.Range(1, 3).Select(i=&gt; (double)i * i),
+    sortedSquares.Select(s =&gt; s.CalcArea()));
+
+Assert.Equal(
+    Enumerable.Range(1, 3).Select(i =&gt; Math.PI * Math.Pow(i, 2)),
+    sortedCircles.Select(c =&gt; c.CalcArea()));
+</code></pre><div class="NOTE"><h5>Note</h5><p>In the example, it would make sense for <code>ShapeAreaComparer</code> to be registered as a singleton,
+the idea being that one single instance is used for all <code>IComparer&lt;I2DShape&gt;</code>-compatible
+requests.  While this will work at the moment, Rezolver incorrectly creates one instance 
+per unique <code>IComparer&lt;T&gt;</code> type instead of one &#39;master&#39; instance for all.</p>
+<p>This bug is being tracked on <a href="https://github.com/ZolutionSoftware/Rezolver/issues/53">issue #53</a></p>
+</div>
+<hr>
+<h2 id="overriding-contravariant-registrations">Overriding Contravariant Registrations</h2>
+<p>As described in the opening paragraph above, Rezolver conducts searches for compatible 
+registrations in the order of best-to-worst match which, for contravariant type parameters,
+means that registrations which target a derived type are used in preference to a 
+registration which targets a base or interface.</p>
+<p>So, extending our above example, let&#39;s say we want to sort rectangles by area and 
+<em>then by length</em> if their areas are the same, and <em>then by height</em> if their lengths 
+are the same.</p>
+<p>For this we need a new <code>RectangleComparer</code>:</p>
+<pre><code class="lang-csharp" name="RectangleComparer.cs">public class RectangleComparer : IComparer&lt;Rectangle&gt;
+{
+    private readonly IComparer&lt;I2DShape&gt; _shapeComparer;
+    private readonly IComparer&lt;double&gt; _dimensionComparer;
+
+    public RectangleComparer(
+        IComparer&lt;I2DShape&gt; shapeComparer,
+        IComparer&lt;double&gt; dimensionComparer)
+    {
+        _shapeComparer = shapeComparer;
+        _dimensionComparer = dimensionComparer;
+    }
+
+    public int Compare(Rectangle x, Rectangle y)
+    {
+        var result = _shapeComparer.Compare(x, y);
+        if (result == 0)
+        {
+            result = _dimensionComparer.Compare(x.Length, y.Length);
+            if(result == 0)
+            {
+                result = _dimensionComparer.Compare(x.Height, y.Height);
+            }
+        }
+
+        return result;
+    }
+}
+</code></pre><p>Note that it has a dependency on two other comparers: <code>IComparer&lt;I2DShape&gt;</code> - which explicitly targets our
+catch-all <code>ShapeAreaComparer</code> as per the original setup - and <code>IComparer&lt;double&gt;</code>  so we can compare lengths
+and highlights (which will use the &#39;catch-all&#39; <code>DefaultComparerWrapper&lt;T&gt;</code>).</p>
+<p>Now we just add the registration (shown in the example being added <em>before</em> our catch-all
+just to highlight the fact that the order in which these registrations are added doesn&#39;t 
+affect the logic) and use it.</p>
+<div class="NOTE"><h5>Note</h5><p>As the comments in the next example point out - the enumerable that&#39;s added in this 
+example is deliberately ordered such that a stable sort by area <em><strong>alone</strong></em> would 
+yield the wrong result (as would be the case if we only used our original 
+<code>ShapeAreaComparer</code>)</p>
+</div>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+container.RegisterType(typeof(DefaultComparerWrapper&lt;&gt;), typeof(IComparer&lt;&gt;));
+container.RegisterType(typeof(OrderedEnumerableWrapper&lt;&gt;), typeof(IOrderedEnumerable&lt;&gt;));
+// register the comparers
+container.RegisterType&lt;RectangleComparer, IComparer&lt;Rectangle&gt;&gt;();
+container.RegisterType&lt;ShapeAreaComparer, IComparer&lt;I2DShape&gt;&gt;();
+
+// Requesting either IComparer&lt;Rectangle&gt; *or* IComparer&lt;Square&gt; now
+// resolves to the RectangleComparer - because Rectangle is Square&#39;s base.
+Assert.IsType&lt;RectangleComparer&gt;(container.Resolve&lt;IComparer&lt;Rectangle&gt;&gt;());
+Assert.IsType&lt;RectangleComparer&gt;(container.Resolve&lt;IComparer&lt;Square&gt;&gt;());
+
+// This array is written in the exact opposite order to the one we desire
+// And a stable sort by area would leave objects 1 + 2 in the same order, 
+// and 3, 4 + 5 in the same order.
+IEnumerable&lt;Rectangle&gt; rectangles = new[]
+{
+    new Rectangle(20, 1), //╗
+    new Rectangle(1, 20), //╩ Area = 20
+    new Rectangle(8, 2),  //╗
+    new Square(4),        //╠ Area = 16
+    new Rectangle(2, 8),  //╝
+};
+
+container.RegisterObject(rectangles);
+
+Assert.Equal(
+    rectangles.Reverse(),
+    container.Resolve&lt;IOrderedEnumerable&lt;Rectangle&gt;&gt;());
+</code></pre><div class="WARNING"><h5>Warning</h5><p>Eager readers will have noticed that the <code>RectangleComparer</code> is effectively a 
+decorator and, while it&#39;s certainly possible to implement it and register it as such 
+(with some tweaks), there is currently a bug affecting contravariant Decorators 
+which prevents them being used for more derived types unless they are specifically
+registered for those types.</p>
+<p>The bug is being tracked on <a href="https://github.com/ZolutionSoftware/Rezolver/issues/54">issue #54</a></p>
+</div>
+<p>So note that we are creating an explicit registration for <code>IComparer&lt;Rectangle&gt;</code> which then
+supersedes our <code>IComparer&lt;I2DShape&gt;</code> registration for <code>Rectangle</code>, but it also kicks
+in for <code>Square</code> as well - because <code>Rectangle</code> is &#39;closer&#39; to <code>Square</code> than <code>I2DShape</code> is.</p>
+<h2 id="contravariance-with-enumerables">Contravariance with Enumerables</h2>
+<p>If you have read through the <a href="../enumerables/generics.html">documentation on enumerables of generics</a>
+then you will already be aware of Rezolver&#39;s powerful auto-enumerable functionality, and you
+can probably already guess how it works when requesting enumerables of contravariant generics.</p>
+<p>For an enumerable of a generic with one or more contravariant type parameters, <em>every</em> registration 
+that matches the given type will be returned - in registration order, as demonstrated by this example
+which builds on our <code>I2DShape</code> types to configure the container to write shape information
+to a <code>StringBuilder</code>:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+container.RegisterObject&lt;Action&lt;Rectangle, StringBuilder&gt;&gt;(
+    (r, sb) =&gt; sb.AppendLine($&quot;Length: { r.Length }, Height: { r.Height }&quot;));
+container.RegisterObject&lt;Action&lt;I2DShape, StringBuilder&gt;&gt;(
+    (s, sb) =&gt; sb.AppendLine($&quot;Area: { s.CalcArea() }&quot;));
+container.RegisterObject&lt;Action&lt;object, StringBuilder&gt;&gt;(
+    (o, sb) =&gt; sb.AppendLine($&quot;Type: { o.GetType() }&quot;));
+
+StringBuilder stringBuilder = new StringBuilder();
+Square square = new Square(7);
+int count = 0;
+foreach(var action in container.ResolveMany&lt;Action&lt;Square, StringBuilder&gt;&gt;())
+{
+    action(square, stringBuilder);
+    count++;
+}
+
+Assert.Equal(3, count);
+Assert.Equal(
+    &quot;Length: 7, Height: 7\r\nArea: 49\r\nType: Rezolver.Tests.Examples.Types.Square\r\n&quot;,
+    stringBuilder.ToString());
+</code></pre><h2 id="disabling-contravariance-advanced">Disabling Contravariance (Advanced)</h2>
+<div class="WARNING"><h5>Warning</h5><p>If you need to start playing around with how contravariance works naturally within the
+container to make things work for your application then, assuming it&#39;s not to avoid
+a bug in Rezolver, you should consider instead whether your design is correct.</p>
+<p>Generally, if you&#39;ve written a delegate or interface type with a contravariant parameter
+and are subsequently injecting instances of it, then the way that Rezolver will locate
+registrations for that type should be correct as per the registrations you add to
+the container.  So, in most cases, if you&#39;re getting unexpected results it&#39;s likely you&#39;ve
+missed something in your registrations.</p>
+</div>
+<p>As with much of the rest of the built-in functionality in Rezolver, it&#39;s possible to disable
+contravariance by setting an option on the <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which underpins your
+<a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> (which, if you&#39;re using either <a class="xref" href="../../api/Rezolver.Container.html">Container</a> or 
+<a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> is the container itself).</p>
+<p>The option is <a class="xref" href="../../api/Rezolver.Options.EnableContravariance.html">EnableContravariance</a>, which has a 
+<a class="xref" href="../../api/Rezolver.Options.EnableContravariance.html#Rezolver_Options_EnableContravariance_Default">Default</a> value that is, unsurprisingly, equivalent 
+to <code>true</code>.</p>
+<p>You can set the option to <code>true</code> or <code>false</code>:</p>
+<ul>
+<li>Globally</li>
+<li>Against a specific closed generic, e.g. <code>Foo&lt;Bar&gt;</code>, to control contravariance for that 
+specific type</li>
+<li>Against an open generic, e.g. <code>Foo&lt;&gt;</code>, to control contravariance for <em>any</em> generic type
+based on it</li>
+<li>Against a non-generic type, e.g. <code>Bar</code>, to control contravariance when that type, or any
+of its derivatives, is supplied as a type argument to <em>any</em> contravariant type parameter.</li>
+</ul>
+<div class="NOTE"><h5>Note</h5><p>When you disable contravariance using any of the following methods, Rezolver will expect
+registrations for the associated concrete generic types that your application requests.</p>
+</div>
+<p>Disabling contravariance is something you might do when resolving 
+multiple instances of a contravariant type, as in the previous delegate example, so we&#39;ll
+build on that with additional delegates for the <code>Square</code> type.</p>
+<p>We&#39;ll show five different ways to disable contravariance such that we only get one delegate
+when we request an array of <code>Action&lt;Square, StringBuilder&gt;</code> (which simply reuses the container&#39;s
+<code>IEnumerable&lt;&gt;</code> functionality.</p>
+<p><strong>Note</strong>: We&#39;re using this method in these examples:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">private static void RegisterShapeDelegates(Container container)
+{
+    container.RegisterObject&lt;Action&lt;Square, StringBuilder&gt;&gt;(
+        (sq, sb) =&gt; sb.AppendLine($&quot;Square of size: { sq.Height }&quot;));
+    container.RegisterObject&lt;Action&lt;Rectangle, StringBuilder&gt;&gt;(
+        (r, sb) =&gt; sb.AppendLine($&quot;Length: { r.Length }, Height: { r.Height }&quot;));
+    container.RegisterObject&lt;Action&lt;I2DShape, StringBuilder&gt;&gt;(
+        (s, sb) =&gt; sb.AppendLine($&quot;Area: { s.CalcArea() }&quot;));
+    container.RegisterObject&lt;Action&lt;object, StringBuilder&gt;&gt;(
+        (o, sb) =&gt; sb.AppendLine($&quot;Type: { o.GetType() }&quot;));
+}
+</code></pre><hr>
+<h3 id="disabling-for-generics">Disabling for generics</h3>
+<p>When you disable per-generic, if that type has one or more contravariant type parameters,
+then you are instructing Rezolver to suspend contravariant searches for any of those type
+parameters either for a specific closed version of that generic, or for any.</p>
+<div class="TIP"><h5>Tip</h5><p>If a generic type doesn&#39;t have contravariant parameters, and you disable 
+contravariance for it, you are telling Rezolver to suspend contravariance when that type
+is passed as an argument to <em>another generic&#39;s</em> contravariant type parameter - as
+shown in the <a href="#disabling-for-type-arguments">next section</a>.</p>
+</div>
+<p>In the first example, we&#39;ll disable contravariance for 
+<code>Action&lt;Square, StringBuilder&gt;</code> - which means we only get one delegate in our array:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// set the option to disable contravariance
+container.SetOption&lt;Options.EnableContravariance, Action&lt;Square, StringBuilder&gt;&gt;(false);
+
+RegisterShapeDelegates(container);
+
+// this time we&#39;ll just resolve an array, which uses the enumerable functionality
+// behind the scenes.
+StringBuilder stringBuilder = new StringBuilder();
+Square square = new Square(7);
+
+var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
+
+Assert.Single(squareResult);
+squareResult[0](square, stringBuilder);
+
+Assert.Equal(&quot;Square of size: 7\r\n&quot;, stringBuilder.ToString());
+</code></pre><p>We can also disable it for all <code>Action&lt;,&gt;</code> delegates:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// set the option to disable contravariance for all Action&lt;,&gt; types
+container.SetOption&lt;Options.EnableContravariance&gt;(false, typeof(Action&lt;,&gt;));
+
+RegisterShapeDelegates(container);
+
+var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
+var rectResult = container.Resolve&lt;Action&lt;Rectangle, StringBuilder&gt;[]&gt;();
+var shapeResult = container.Resolve&lt;Action&lt;I2DShape, StringBuilder&gt;[]&gt;();
+
+Assert.Single(squareResult);
+Assert.Single(rectResult);
+Assert.Single(shapeResult);
+</code></pre><hr>
+<h3 id="disabling-for-type-arguments">Disabling for type arguments</h3>
+<p>The previous two examples show how we can control Rezolver&#39;s contravariance for
+specific generic types.  But sometimes you might want to suspend contravariance for
+a type, or any of its derivatives or implementations, for <em>any</em> generic to which they are
+passed as type arguments.</p>
+<p>So, the next example shows how we can disable contravariance for the <code>Square</code> type, which 
+means that when <em>any</em> concrete generic is requested, if <code>Square</code> is passed as the type argument
+to a contravariant type parameter, the contravariance for that parameter will be ignored:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// set the option to disable contravariance for the Square type only
+container.SetOption&lt;Options.EnableContravariance, Square&gt;(false);
+
+RegisterShapeDelegates(container);
+
+var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
+
+Assert.Single(squareResult);
+</code></pre><p>And we can also do the same for <em>any</em> type which has the <code>I2DShape</code> interface:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// set the option to disable contravariance for any type which implements I2DShape
+container.SetOption&lt;Options.EnableContravariance, I2DShape&gt;(false);
+
+RegisterShapeDelegates(container);
+
+var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
+var rectResult = container.Resolve&lt;Action&lt;Rectangle, StringBuilder&gt;[]&gt;();
+var shapeResult = container.Resolve&lt;Action&lt;I2DShape, StringBuilder&gt;[]&gt;();
+
+Assert.Single(squareResult);
+Assert.Single(rectResult);
+Assert.Single(shapeResult);
+</code></pre><h3 id="disabling-globally">Disabling globally</h3>
+<p>Finally, the simplest of all: disabling contravariance for all types:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// set the option to disable contravariance completely
+container.SetOption&lt;Options.EnableContravariance&gt;(false);
+
+RegisterShapeDelegates(container);
+
+var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
+var rectResult = container.Resolve&lt;Action&lt;Rectangle, StringBuilder&gt;[]&gt;();
+var shapeResult = container.Resolve&lt;Action&lt;I2DShape, StringBuilder&gt;[]&gt;();
+
+Assert.Single(squareResult);
+Assert.Single(rectResult);
+Assert.Single(shapeResult);
+</code></pre><h3 id="caution-changing-to-opt-in">Caution: Changing to &#39;Opt-in&#39;</h3>
+<p>As will have become apparent, Rezolver uses an opt-out model by default for contravariance
+simply because a generic type parameter is either contravariant or it isn&#39;t; and if it 
+<em><strong>is</strong></em> then the container should adapt accordingly.</p>
+<p>If you want <em>selective</em> contravariance for only certain types in your application,
+then you will typically switch it off globally and then start setting the 
+<a class="xref" href="../../api/Rezolver.Options.EnableContravariance.html">EnableContravariance</a> option to <code>true</code> for those types you want to 
+have opted in.</p>
+<p>But, in almost all cases, you will need to set it to <code>true</code> for more types than you 
+initially thought - as contravariance has been switched off not only for the generics
+but also for all the types which are being passed as type arguments.</p>
+<p>So, our final example shows how we can re-enable contravariance <em>only</em> for the 
+<code>Action&lt;Square, StringBuilder&gt;</code> delegate type - which actually involves re-enabling it
+for the <code>Square</code> type also:</p>
+<pre><code class="lang-csharp" name="ContravarianceExamples.cs">var container = new Container();
+
+// set the option to disable contravariance completely
+container.SetOption&lt;Options.EnableContravariance&gt;(false);
+
+//re-enable for the Action&lt;Square, StringBuilder&gt; type *AND* the Square type
+container.SetOption&lt;Options.EnableContravariance, Action&lt;Square, StringBuilder&gt;&gt;(true);
+container.SetOption&lt;Options.EnableContravariance, Square&gt;(true);
+
+RegisterShapeDelegates(container);
+
+var squareResult = container.Resolve&lt;Action&lt;Square, StringBuilder&gt;[]&gt;();
+
+Assert.Equal(4, squareResult.Length);
+</code></pre><h1 id="summary">Summary</h1>
+<p>Rezolver&#39;s support for contravariance is comprehensive - including support for nesting 
+contravariant types within others (examples not included because it gets very complicated
+very quickly, but you can see the test cases for this in the standard Rezolver test suite).</p>
+<p>So if you start working with contravariant types, then you should find Rezolver <em>just works</em>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/variance/contravariance.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

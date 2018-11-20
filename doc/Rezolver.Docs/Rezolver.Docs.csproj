@@ -14,43 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="android-chrome-144x144.png" />
-    <Content Include="android-chrome-192x192.png" />
-    <Content Include="android-chrome-36x36.png" />
-    <Content Include="android-chrome-48x48.png" />
-    <Content Include="android-chrome-72x72.png" />
-    <Content Include="android-chrome-96x96.png" />
-    <Content Include="apple-touch-icon-114x114.png" />
-    <Content Include="apple-touch-icon-120x120.png" />
-    <Content Include="apple-touch-icon-144x144.png" />
-    <Content Include="apple-touch-icon-152x152.png" />
-    <Content Include="apple-touch-icon-180x180.png" />
-    <Content Include="apple-touch-icon-57x57.png" />
-    <Content Include="apple-touch-icon-60x60.png" />
-    <Content Include="apple-touch-icon-72x72.png" />
-    <Content Include="apple-touch-icon-76x76.png" />
-    <Content Include="apple-touch-icon-precomposed.png" />
-    <Content Include="apple-touch-icon.png" />
-    <Content Include="favicon-16x16.png" />
-    <Content Include="favicon-32x32.png" />
-    <Content Include="favicon-96x96.png" />
-    <Content Include="favicon.ico" />
     <None Include="gulpfile.js" />
     <None Include="index.md" />
-    <Content Include="mstile-144x144.png" />
-    <Content Include="mstile-150x150.png" />
-    <Content Include="mstile-310x150.png" />
-    <Content Include="mstile-310x310.png" />
-    <Content Include="mstile-70x70.png" />
-    <Content Include="safari-pinned-tab.svg" />
     <None Include="toc.yml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="docfx.json" />
-  </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="docfx.console" Version="2.40.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>

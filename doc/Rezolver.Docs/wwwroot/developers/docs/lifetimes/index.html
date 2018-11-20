@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Object Lifetimes | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Object Lifetimes | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.2.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="object-lifetimes">Object Lifetimes</h1>
+
+<p>As with most IOC containers, Rezolver understands three primary lifetimes for the objects it produces, including 
+support for automatic disposal of <code>IDisposable</code> objects when an <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> is used.</p>
+<h1 id="transient-objects">Transient Objects</h1>
+<p>This is what&#39;s ultimately produced by a Rezolver <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> most of the time - a transient object is created when
+needed and thrown away when no longer required.  It&#39;s the same as using <code>new</code> to create an instance inside a function and then allowing 
+it to go out of scope when that function returns.</p>
+<p><a href="transient.html">Read more about transient objects</a>.</p>
+<h1 id="singletons">Singletons</h1>
+<p>Most developers will be familiar with the singleton pattern - an object created only once per process (often created lazily - i.e. on
+demand) and which is frequently accessed via <code>static</code> accessors or similar.  Specifically, an application will usually enforce
+rules at the code level to ensure that it&#39;s impossible to create more than one instance of the type.</p>
+<p>Rezolver lets you change any registration into a singleton by simply wrapping an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> inside a <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>.</p>
+<p><a href="singleton.html">Read more about singletons</a>.</p>
+<h1 id="scoped-objects">Scoped Objects</h1>
+<p>Unsurprisingly, understanding scoped objects requires an understanding of scopes.</p>
+<p>At its most fundamental level, a scope is simply a disposable &#39;bag&#39; of objects which is created at the start of a particular process 
+(e.g when a web request is received, or when a job is pulled off a job queue) and which is then disposed when that process completes.</p>
+<p>Most IOC containers refer to these as <em>lifetime scopes</em> (<em><strong>note:</strong> &#39;container scopes&#39; in Rezolver, implemented by the <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> interface</em>) 
+and they are most often used (but not exclusively) to track objects that implement the <code>IDisposable</code> interface in order that they can be 
+disposed without the developer explicitly having to do so themselves - often because the developer can never really be sure that she has 
+<em>definitely</em> finished with that object.</p>
+<p>But the presence of a scope at the point where an object is produced/obtained by the container does not <em>automatically</em> mean that that object 
+is itself &#39;scoped&#39;.  Indeed, transients and singletons can be used inside a scope in exactly the same way as outside.</p>
+<p>Instead, a scoped object has a special lifetime behaviour such that it behaves like a singleton, except you get one instance 
+<em>per scope</em> instead of one per-process.  A scoped object also <em>requires</em> a scope to be available in order for it to be resolved.</p>
+<p>Scopes are also hierarchical - one scope can contain zero or more other child scopes whose scoped objects are independent of each other 
+(and those of the parent) - but each child scope will be disposed when the parent scope is disposed.</p>
+<p>Rezolver allows you to change any registration into a scoped object by wrapping an <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> inside a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>.</p>
+<p><a href="container-scopes.html">Read more about container scopes</a> (particularly if you will be using <code>IDisposable</code> objects in your application).</p>
+<p><a href="scoped.html">Read more about scoped objects</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/index.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

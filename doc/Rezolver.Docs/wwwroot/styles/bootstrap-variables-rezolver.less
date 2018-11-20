@@ -1,0 +1,114 @@
+﻿@import "bootstrap/variables.less";
+
+@icon-font-path: './fonts/';
+
+@main-color: #f15c00;
+@main-color-lighter: lighten(@main-color, 45%);
+@main-color-darker: darken(@main-color, 25%);
+
+@alt-color: #1239A2;
+@alt-color-lighter: lighten(@alt-color, 50%);
+@alt-color-darker: darken(@alt-color, 13%);
+
+@brand-primary: @main-color;
+@state-info-bg: fade(@gray-lighter, 50%);
+@link-color: darken(@main-color, 10%);
+
+@body-bg: darken(@alt-color-darker, 15%);
+@text-color: rgb(200,200,200);
+
+@link-color: lighten(desaturate(@main-color, 25%), 7%);
+@link-hover-color: lighten(@link-color, 20%);
+@link-hover-decoration: underline;
+
+@headings-color: white;
+
+@component-active-color: white;
+@component-active-bg: transparent;
+
+@table-bg: lighten(@body-bg, 3%);
+@table-bg-accent: lighten(@table-bg, 3%);
+@table-bg-hover: lighten(@table-bg, 12%);
+@table-bg-active: @table-bg-hover;
+@table-border-color: lighten(@body-bg, 6%);
+
+@btn-default-color: white;
+@btn-default-bg: @alt-color; 
+@btn-default-border: @alt-color-darker;
+
+/* navbar-default */
+
+@navbar-default-color:             #777;
+@navbar-default-bg:                @main-color-lighter;
+@navbar-default-border:            darken(@navbar-default-bg, 10%);
+
+// Navbar links
+@navbar-default-link-color:                #777;
+@navbar-default-link-hover-color:          #333;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         #555;
+@navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
+@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-hover-color:         darken(@navbar-default-brand-color, 10%);
+@navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+@navbar-default-toggle-hover-bg:           #ddd;
+@navbar-default-toggle-icon-bar-bg:        #888;
+@navbar-default-toggle-border-color:       #ddd;
+
+/* inverted navbar */
+
+@navbar-inverse-color:                      white;
+@navbar-inverse-bg:                         @alt-color-darker; /*darken(@brand-primary, 15%);*/
+@navbar-inverse-border:                     darken(@navbar-inverse-bg, 10%);
+
+// Inverted navbar links
+@navbar-inverse-link-color:                 @gray-lighter;
+@navbar-inverse-link-hover-color:           #fff;
+@navbar-inverse-link-hover-bg:              transparent;
+@navbar-inverse-link-active-color:          @navbar-inverse-link-hover-color;
+@navbar-inverse-link-active-bg:             darken(@navbar-inverse-bg, 10%);
+@navbar-inverse-link-disabled-color:        #444;
+@navbar-inverse-link-disabled-bg:           transparent;
+
+// Inverted navbar brand label
+@navbar-inverse-brand-color:                @navbar-inverse-link-color;
+@navbar-inverse-brand-hover-color:          #fff;
+@navbar-inverse-brand-hover-bg:             transparent;
+
+// Inverted navbar toggle
+@navbar-inverse-toggle-hover-bg:            #333;
+@navbar-inverse-toggle-icon-bar-bg:         #fff;
+@navbar-inverse-toggle-border-color:        #333;
+
+@pre-color: #EEE;
+@pre-bg: #121212;
+@pre-border-color: lighten(@pre-bg, 12%);
+@pre-padding:9.5px;
+
+@code-color: #e26358;
+@code-bg: @pre-bg;
+
+@alert-success-bg: fade(@brand-success, 25%);
+@alert-success-border: @brand-success;
+@alert-success-text: white;
+
+@alert-danger-bg: fade(@brand-danger, 25%);
+@alert-danger-border: @brand-danger;
+@alert-danger-text: white;
+
+@alert-info-bg: fade(@brand-info, 25%);
+@alert-info-border: @brand-info;
+@alert-info-text: white;
+
+@alert-warning-bg: fade(@brand-warning, 25%);
+@alert-warning-border: @brand-warning;
+@alert-warning-text: white;
+
+@blockquote-small-color: lighten(@body-bg, 10%);
+@blockquote-border-color: @gray-lighter;

@@ -1,0 +1,71 @@
+﻿@import "bootstrap-variables-rezolver.less";
+
+/* Rezolver Highlight-js theme.  Uses structure adapted from the atom-one-dark theme, but nearly all the colours are changed 
+	©Copyright 2016 onwards Zolution Software Ltd
+*/
+
+@hljs-base-color: #e26358;
+@hljs-comment-color: #383;
+@hljs-keyword-color: @hljs-base-color;
+@hljs-subst-color: @hljs-base-color;
+@hljs-string-color: lighten(@main-color, 20%);
+@hljs-literal-color: saturate(@hljs-base-color, 25%);
+@hljs-title-color: @main-color;
+@hljs-number-color: @hljs-string-color;
+@hljs-symbol-color: spin(saturate(@hljs-base-color, 20%), 180);
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    color: #EEE;
+    //background: #000;
+    /* undo the word-breaking which is applied to all <pre> blocks in our styles. */
+    white-space: pre;
+}
+
+.hljs-comment, .hljs-quote {
+	&:extend(.hljs-emphasis);
+	color: @hljs-comment-color;
+}
+
+.hljs-doctag, .hljs-keyword, .hljs-formula {
+	color: @hljs-keyword-color;
+}
+
+.hljs-section, .hljs-name, .hljs-selector-tag, .hljs-deletion, .hljs-subst {
+	color: @hljs-subst-color;
+}
+
+.hljs-literal {
+	color: @hljs-literal-color;
+}
+
+.hljs-string, .hljs-regexp, .hljs-addition, .hljs-attribute, .hljs-meta-string, .hljs-value {
+	color: @hljs-string-color;
+}
+
+.hljs-built_in, .hljs-class .hljs-title {
+	color: @hljs-title-color;
+}
+
+.hljs-variable, .hljs-template-variable, .hljs-type, .hljs-selector-class, .hljs-selector-attr, .hljs-selector-pseudo, .hljs-number {
+	color: @hljs-number-color;
+}
+.hljs-title{
+	color: @hljs-title-color;
+}
+.hljs-symbol, .hljs-bullet, .hljs-link, .hljs-meta, .hljs-selector-id  {
+	color: @hljs-symbol-color;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+
+.hljs-link {
+	text-decoration: underline;
+}

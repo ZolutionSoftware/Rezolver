@@ -1,0 +1,475 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class EnumerableTarget
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class EnumerableTarget
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.2.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../content/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Rezolver.Targets.EnumerableTarget">
+  
+  
+  <h1 id="Rezolver_Targets_EnumerableTarget" data-uid="Rezolver.Targets.EnumerableTarget" class="text-break">Class EnumerableTarget
+  </h1>
+  <div class="markdown level0 summary"><p>A specialised target for creating instances of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Targets.TargetBase.html">TargetBase</a></div>
+    <div class="level2"><span class="xref">EnumerableTarget</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Rezolver.ITarget.html">ITarget</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_Id">TargetBase.Id</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_SupportsType_System_Type_">TargetBase.SupportsType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ToString">TargetBase.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Targets_EnumerableTarget_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class EnumerableTarget : TargetBase, ITarget, IEnumerable&lt;ITarget&gt;, IEnumerable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget__ctor_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.%23ctor(System.Collections.Generic.IEnumerable%7BRezolver.ITarget%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L46">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget__ctor_" data-uid="Rezolver.Targets.EnumerableTarget.#ctor*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget__ctor_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_" data-uid="Rezolver.Targets.EnumerableTarget.#ctor(System.Collections.Generic.IEnumerable{Rezolver.ITarget},System.Type)">EnumerableTarget(IEnumerable&lt;ITarget&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of <a class="xref" href="Rezolver.Targets.EnumerableTarget.html">EnumerableTarget</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public EnumerableTarget(IEnumerable&lt;ITarget&gt; targets, Type elementType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>Required.  Will be set into the <a class="xref" href="Rezolver.Targets.EnumerableTarget.html#Rezolver_Targets_EnumerableTarget_Targets">Targets</a> property.  All elements must be non-null
+and must support the <code data-dev-comment-type="paramref" class="paramref">elementType</code> (verified by calling the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_SupportsType_System_Type_">SupportsType(Type)</a>
+method.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">elementType</span></td>
+        <td><p>Required.  Will be set into the <a class="xref" href="Rezolver.Targets.EnumerableTarget.html#Rezolver_Targets_EnumerableTarget_ElementType">ElementType</a> property.  Must be a concrete type - that is,
+it must <em>not</em> be an open generic.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L21">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget_DeclaredType_" data-uid="Rezolver.Targets.EnumerableTarget.DeclaredType*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget_DeclaredType" data-uid="Rezolver.Targets.EnumerableTarget.DeclaredType">DeclaredType</h4>
+  <div class="markdown level1 summary"><p>Always returns a concrete version of the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> interface type, with
+<code>T</code> equal to <a class="xref" href="Rezolver.Targets.EnumerableTarget.html#Rezolver_Targets_EnumerableTarget_ElementType">ElementType</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Type DeclaredType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget_ElementType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.ElementType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L36">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget_ElementType_" data-uid="Rezolver.Targets.EnumerableTarget.ElementType*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget_ElementType" data-uid="Rezolver.Targets.EnumerableTarget.ElementType">ElementType</h4>
+  <div class="markdown level1 summary"><p>The element type of the enumerable (i.e. the &apos;<code>T</code>&apos; in <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a>)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Type ElementType { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget_Targets.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L31">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget_Targets_" data-uid="Rezolver.Targets.EnumerableTarget.Targets*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget_Targets" data-uid="Rezolver.Targets.EnumerableTarget.Targets">Targets</h4>
+  <div class="markdown level1 summary"><p>The targets whose objects will be included in the enumerable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;ITarget&gt; Targets { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L26">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget_UseFallback_" data-uid="Rezolver.Targets.EnumerableTarget.UseFallback*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget_UseFallback" data-uid="Rezolver.Targets.EnumerableTarget.UseFallback">UseFallback</h4>
+  <div class="markdown level1 summary"><p>Returns <code>true</code> if <a class="xref" href="Rezolver.Targets.EnumerableTarget.html#Rezolver_Targets_EnumerableTarget_Targets">Targets</a> is empty, otherwise <code>false</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool UseFallback { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_UseFallback">TargetBase.UseFallback</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L68">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget_GetEnumerator_" data-uid="Rezolver.Targets.EnumerableTarget.GetEnumerator*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget_GetEnumerator" data-uid="Rezolver.Targets.EnumerableTarget.GetEnumerator">GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator#System_Collections_Generic_IEnumerable_1_GetEnumerator">GetEnumerator()</a> (through the <a class="xref" href="Rezolver.Targets.EnumerableTarget.html#Rezolver_Targets_EnumerableTarget_Targets">Targets</a> property).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator&lt;ITarget&gt; GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;<a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L77">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_EnumerableTarget_System_Collections_IEnumerable_GetEnumerator_" data-uid="Rezolver.Targets.EnumerableTarget.System#Collections#IEnumerable#GetEnumerator*"></a>
+  <h4 id="Rezolver_Targets_EnumerableTarget_System_Collections_IEnumerable_GetEnumerator" data-uid="Rezolver.Targets.EnumerableTarget.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator#System_Collections_IEnumerable_GetEnumerator">GetEnumerator()</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerator IEnumerable.GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerator">IEnumerator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Rezolver.ITarget.html">ITarget</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">System.Collections.Generic.IEnumerable&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Unscoped_Rezolver_ITarget_">Target.Unscoped(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Singleton_Rezolver_ITarget_">Target.Singleton(ITarget)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As_Rezolver_ITarget_System_Type_">Target.As(ITarget, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.Target.html#Rezolver_Target_As__1_Rezolver_ITarget_">Target.As&lt;T&gt;(ITarget)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Targets_EnumerableTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.EnumerableTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/EnumerableTarget.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
