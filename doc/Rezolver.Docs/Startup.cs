@@ -48,17 +48,24 @@ namespace Rezolver.Docs
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/500");
             }
 
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "errors",
+                    template: "Error/{statusCode?}",
+                    defaults: new { controller = "Home", action = "Error" });
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "/",
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }
