@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Rezolver.Docs.Models;
 
 namespace Rezolver.Docs.Controllers
@@ -17,9 +18,8 @@ namespace Rezolver.Docs.Controllers
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error(int? statusCode)
+        public IActionResult Error(int? statusCode, [FromServices]ICompositeViewEngine viewEngine)
         {
-
             var feature = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
             var model = new ErrorViewModel()
             {
@@ -28,7 +28,14 @@ namespace Rezolver.Docs.Controllers
                 OriginalPath = feature?.OriginalPath
             };
 
-            return View(model);
+            string viewName = null;
+
+            if(statusCode != null)
+            {
+                viewName = viewEngine.FindView(ControllerContext, $"Error{statusCode.Value}", true)?.ViewName;
+            }
+
+            return View(viewName, model);
         }
     }
 }
