@@ -2,8 +2,10 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Rezolver;
+using Rezolver.Options;
 using System;
 
 namespace Microsoft.AspNetCore.Hosting
@@ -30,7 +32,11 @@ namespace Microsoft.AspNetCore.Hosting
         /// application's ConfigureServices method).</param>
         public static IWebHostBuilder UseRezolver(this IWebHostBuilder builder, Action<RezolverOptions> configureRezolverOptions = null)
 		{
-			return builder.ConfigureServices(services => services.AddRezolver(configureRezolverOptions));
+			return builder.ConfigureServices(services => services.AddRezolver(o => {
+                
+                o.TargetContainerConfig.ConfigureOption<EnableEnumerableCovariance, EndpointDataSource>(false);
+                configureRezolverOptions?.Invoke(o);
+            }));
 		}
 	}
 }

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class OptionsTargetContainerExtensions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.40.2.0">
+  	<meta name="generator" content="docfx 2.40.10.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -188,6 +188,7 @@ returning the <code data-dev-comment-type="paramref" class="paramref">default</c
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static TOption GetOption&lt;TOption&gt;(this ITargetContainer targets, TOption default = null)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -263,6 +264,7 @@ from the <code data-dev-comment-type="paramref" class="paramref">targets</code> 
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static TOption GetOption&lt;TOption&gt;(this ITargetContainer targets, Type serviceType, TOption default = null)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -357,6 +359,7 @@ is set to <code>true</code> for the <code data-dev-comment-type="paramref" class
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static TOption GetOption&lt;TOption, TService&gt;(this ITargetContainer targets, TOption default = null)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -436,6 +439,7 @@ returning an empty enumerable if none have been set.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TOption&gt; GetOptions&lt;TOption&gt;(this ITargetContainer targets)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -506,6 +510,7 @@ option has been set to <code>false</code> on the <code data-dev-comment-type="pa
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TOption&gt; GetOptions&lt;TOption&gt;(this ITargetContainer targets, Type serviceType)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -581,6 +586,7 @@ for more.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TOption&gt; GetOptions&lt;TOption, TService&gt;(this ITargetContainer targets)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -656,6 +662,7 @@ or one of its overloads.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static ITargetContainer SetOption&lt;TOption&gt;(this ITargetContainer targets, TOption option)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -732,6 +739,7 @@ or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static ITargetContainer SetOption&lt;TOption&gt;(this ITargetContainer targets, TOption option, Type serviceType)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -816,6 +824,7 @@ or <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static ITargetContainer SetOption&lt;TOption, TService&gt;(this ITargetContainer targets, TOption option)
+
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
