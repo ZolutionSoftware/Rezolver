@@ -11,17 +11,18 @@ using System.Threading.Tasks;
 namespace Rezolver
 {
 	/// <summary>
-	/// Options for using Rezolver as the DI container for Asp.Net Core web applications.
+	/// Options for using Rezolver as the DI container for .Net Core applications.
 	/// </summary>
 	public class RezolverOptions
 	{
         /// <summary>
-        /// The <see cref="ITargetContainerConfig"/> to be used to initialise the <see cref="ITargetContainer"/>
+        /// The <see cref="ITargetContainerConfig"/> to be used to initialise the <see cref="IRootTargetContainer"/>
         /// for the application.
         /// </summary>
         /// <remarks>This is always cloned from the <see cref="TargetContainer.DefaultConfig"/> using the 
         /// <see cref="CombinedTargetContainerConfig.Clone"/> method.</remarks>
 		public CombinedTargetContainerConfig TargetContainerConfig { get; set; }
+
         /// <summary>
         /// The <see cref="IContainerConfig"/> to be used to initialise the <see cref="IContainer"/>
         /// for the application.  Can be used to control the compiler used to translate <see cref="ITarget"/>

@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Rezolver.Microsoft.Extensions.DependencyInjection\Rezolver.Microsoft.Extensions.DependencyInjection.csproj" />
     <ProjectReference Include="..\Rezolver\Rezolver.csproj" />
   </ItemGroup>
 

@@ -13,9 +13,9 @@ namespace Rezolver
 {
     /// <summary>
     /// Implementation of the <see cref="IServiceProviderFactory{TContainerBuilder}"/> interface.
-    /// Providing a more flexible way to configure your web application to use Rezolver.
+    /// Providing a more flexible way to configure an Asp.Net Core application to use Rezolver.
     /// </summary>
-	internal class RezolverServiceProviderFactory 
+	internal class AspNetCoreServiceProviderFactory 
         : IServiceProviderFactory<IRootTargetContainer>, IServiceProviderFactory<ITargetContainer>
 	{
 		private RezolverOptions _options;
@@ -24,7 +24,7 @@ namespace Rezolver
         /// Creates a new instance of the 
         /// </summary>
         /// <param name="options"></param>
-		public RezolverServiceProviderFactory(IOptions<RezolverOptions> options) 
+		public AspNetCoreServiceProviderFactory(IOptions<RezolverOptions> options) 
             => _options = options.Value;
 
         public IRootTargetContainer CreateBuilder(IServiceCollection services)

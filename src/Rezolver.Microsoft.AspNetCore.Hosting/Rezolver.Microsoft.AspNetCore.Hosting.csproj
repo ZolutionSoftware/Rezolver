@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Rezolver.Microsoft.Extensions.DependencyInjection\Rezolver.Microsoft.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Rezolver.Microsoft.Extensions.Hosting\Rezolver.Microsoft.Extensions.Hosting.csproj" />
   </ItemGroup>
 
   <ItemGroup>
