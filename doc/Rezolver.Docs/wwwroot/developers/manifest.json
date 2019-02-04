@@ -426,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html",
-          "hash": "kh9nfb8K49KqPXCaVfqaGQ=="
+          "hash": "nkBdenzlRYl80EkMJyijNg=="
         }
       },
       "is_incremental": false,
@@ -733,7 +733,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html",
-          "hash": "5Brn63hAhIEU51OXQspf4w=="
+          "hash": "T/ZVBRA1Lh9J8xMVtnw7aQ=="
         }
       },
       "is_incremental": false,
@@ -769,7 +769,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.html",
-          "hash": "eYtqAFXF09eqKPnut8MEnA=="
+          "hash": "OnH3qaGW3MQDv4QRi7gHxQ=="
         }
       },
       "is_incremental": false,
@@ -805,7 +805,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.AutoFactoryRegistrationExtensions.html",
-          "hash": "Zg0wlkdyh+TdEsnEYCOCbw=="
+          "hash": "lKtrIWL2hD9/Ml0eg4YX0g=="
         }
       },
       "is_incremental": false,
@@ -925,7 +925,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.CombinedTargetContainerConfigExtensions.html",
-          "hash": "IAOtMwFDT9QrS26LPgGksg=="
+          "hash": "qYkJUwh5xoL0VVmuw24qOw=="
         }
       },
       "is_incremental": false,
@@ -1453,7 +1453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Configuration.Configure.html",
-          "hash": "eLJyVY5d55A/aYpn8CQl0A=="
+          "hash": "S0x20o9CDTnacf6gvSHnCA=="
         }
       },
       "is_incremental": false,
@@ -1585,7 +1585,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Configuration.OptionDependentConfigBase.html",
-          "hash": "u0XW+5+CJyH93y5uucuwPQ=="
+          "hash": "gfwYbGKffUqBykuhWGLbsw=="
         }
       },
       "is_incremental": false,
@@ -2113,7 +2113,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.MemberBindingBuilder-2.html",
-          "hash": "h/bPL/yZ3Dm4R2znfHOdFA=="
+          "hash": "ceUXcklHvcrCxEsrht9UVA=="
         }
       },
       "is_incremental": false,
@@ -2329,7 +2329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.OptionsTargetContainerExtensions.html",
-          "hash": "KhAMTEfX6Lbm+PiqXdn92Q=="
+          "hash": "9m+h+wZGA8z2l1xwVsPFxA=="
         }
       },
       "is_incremental": false,
@@ -2389,7 +2389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.RegisterTypeTargetContainerExtensions.html",
-          "hash": "h779fYA7PM7Z4X8jezIQ2Q=="
+          "hash": "BqEFfaL5NcCN/lZEL7f5yg=="
         }
       },
       "is_incremental": false,
@@ -2409,23 +2409,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "_docfx_proj/obj/api/Rezolver.RezolverOptions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Rezolver.RezolverOptions.html",
-          "hash": "9zV+kR3eJ8LijfXnlqSuSA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "_docfx_proj/obj/api/Rezolver.RootTargetContainerExtensions.yml",
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.RootTargetContainerExtensions.html",
-          "hash": "3+96bTPEnWddPnClXq2Icw=="
+          "hash": "NKHG2IuEA/KQRpIJ7R71sA=="
         }
       },
       "is_incremental": false,
@@ -2545,7 +2533,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Sdk.DependantCollection-1.html",
-          "hash": "VtTrQkao0BF+yppx+bdWLQ=="
+          "hash": "/A0XMpJH8RPmDWxpdfo6cg=="
         }
       },
       "is_incremental": false,
@@ -2557,7 +2545,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Sdk.DependantExtensions.html",
-          "hash": "0ILZhi9WvFtnHoRQpavIbQ=="
+          "hash": "8rduKuQ8oTCSBFsd79rwOA=="
         }
       },
       "is_incremental": false,
@@ -2569,7 +2557,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Sdk.DependencyEnumerableExtensions.html",
-          "hash": "MHH+IXfEavwpX5+FAb5Tfw=="
+          "hash": "LhhA2ofFPbIHtAAL5hVWGA=="
         }
       },
       "is_incremental": false,
@@ -2593,7 +2581,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Sdk.DependencyMetadata.html",
-          "hash": "6yawJAJW/6fGzoUvQh3CwA=="
+          "hash": "Dnbms5k4Kiab5JsK2ppRsQ=="
         }
       },
       "is_incremental": false,
@@ -2689,7 +2677,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.TargetContainerRegistrationExtensions.html",
-          "hash": "eKSFnE9J0MUNXyddvjCNSg=="
+          "hash": "69pudLy6NjgCYAGPby5F1w=="
         }
       },
       "is_incremental": false,
@@ -2989,7 +2977,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.html",
-          "hash": "6g1NsMO8oHq90jW7aqtcUA=="
+          "hash": "JEaN3HsYKQXNBAl3AFBvzw=="
         }
       },
       "is_incremental": false,
@@ -3001,7 +2989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "gllpAPJgOUpXRSVJQb//0w=="
+          "hash": "75SrD41SoljeM4LGFILx3A=="
         }
       },
       "is_incremental": false,
@@ -3029,13 +3017,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -3043,17 +3024,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 188,
+          "skipped_file_count": 53
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 43,
           "skipped_file_count": 43
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 189,
-          "skipped_file_count": 189
         }
       }
     },

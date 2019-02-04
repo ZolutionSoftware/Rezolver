@@ -14,7 +14,7 @@ namespace Rezolver.Microsoft.Extensions.Hosting
     internal class NetCoreServiceProviderFactory
         : IServiceProviderFactory<IRootTargetContainer>
     {
-        private Action<RezolverOptions> _configureOptions;
+        private readonly Action<RezolverOptions> _configureOptions;
         private readonly RezolverOptions _options = new RezolverOptions();
 
         internal NetCoreServiceProviderFactory(Action<RezolverOptions> configureOptions = null)

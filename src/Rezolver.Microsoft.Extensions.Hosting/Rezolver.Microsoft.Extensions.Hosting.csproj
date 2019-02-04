@@ -6,14 +6,12 @@
     <Description>Provides Rezolver support for the .Net Core Generic Host</Description>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-
     <PackageId>Rezolver.Microsoft.Extensions.Hosting</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore</PackageTags>
     <Title>Rezolver Generic Host Support</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
     <VersionPrefix>2.2.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>

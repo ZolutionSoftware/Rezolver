@@ -7575,51 +7575,6 @@ references:
   fullName.vb: Rezolver.ResolveContext.TryResolve(Of TResult)(ByRef TResult)
   nameWithType: ResolveContext.TryResolve<TResult>(out TResult)
   nameWithType.vb: ResolveContext.TryResolve(Of TResult)(ByRef TResult)
-- uid: Rezolver.RezolverOptions
-  name: RezolverOptions
-  href: api/Rezolver.RezolverOptions.html
-  commentId: T:Rezolver.RezolverOptions
-  fullName: Rezolver.RezolverOptions
-  nameWithType: RezolverOptions
-- uid: Rezolver.RezolverOptions.#ctor
-  name: RezolverOptions()
-  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions__ctor
-  commentId: M:Rezolver.RezolverOptions.#ctor
-  fullName: Rezolver.RezolverOptions.RezolverOptions()
-  nameWithType: RezolverOptions.RezolverOptions()
-- uid: Rezolver.RezolverOptions.#ctor*
-  name: RezolverOptions
-  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions__ctor_
-  commentId: Overload:Rezolver.RezolverOptions.#ctor
-  isSpec: "True"
-  fullName: Rezolver.RezolverOptions.RezolverOptions
-  nameWithType: RezolverOptions.RezolverOptions
-- uid: Rezolver.RezolverOptions.ContainerConfig
-  name: ContainerConfig
-  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_ContainerConfig
-  commentId: P:Rezolver.RezolverOptions.ContainerConfig
-  fullName: Rezolver.RezolverOptions.ContainerConfig
-  nameWithType: RezolverOptions.ContainerConfig
-- uid: Rezolver.RezolverOptions.ContainerConfig*
-  name: ContainerConfig
-  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_ContainerConfig_
-  commentId: Overload:Rezolver.RezolverOptions.ContainerConfig
-  isSpec: "True"
-  fullName: Rezolver.RezolverOptions.ContainerConfig
-  nameWithType: RezolverOptions.ContainerConfig
-- uid: Rezolver.RezolverOptions.TargetContainerConfig
-  name: TargetContainerConfig
-  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_TargetContainerConfig
-  commentId: P:Rezolver.RezolverOptions.TargetContainerConfig
-  fullName: Rezolver.RezolverOptions.TargetContainerConfig
-  nameWithType: RezolverOptions.TargetContainerConfig
-- uid: Rezolver.RezolverOptions.TargetContainerConfig*
-  name: TargetContainerConfig
-  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_TargetContainerConfig_
-  commentId: Overload:Rezolver.RezolverOptions.TargetContainerConfig
-  isSpec: "True"
-  fullName: Rezolver.RezolverOptions.TargetContainerConfig
-  nameWithType: RezolverOptions.TargetContainerConfig
 - uid: Rezolver.RootTargetContainerExtensions
   name: RootTargetContainerExtensions
   href: api/Rezolver.RootTargetContainerExtensions.html
