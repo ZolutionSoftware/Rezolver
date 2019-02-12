@@ -2229,6 +2229,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -2352,12 +2361,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -2365,7 +2375,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -4659,6 +4669,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -4776,12 +4795,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -4789,7 +4809,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -7119,6 +7139,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -7236,12 +7265,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -7249,7 +7279,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -9552,6 +9582,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -9669,12 +9708,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -9682,7 +9722,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -12021,6 +12061,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -12138,12 +12187,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -12151,7 +12201,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -14454,6 +14504,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -14571,12 +14630,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -14584,7 +14644,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -16923,6 +16983,15 @@
           "lib/win81/_._": {}
         }
       },
+      "System.ValueTuple/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.0/System.ValueTuple.dll": {}
+        }
+      },
       "System.Xml.ReaderWriter/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -17040,12 +17109,13 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.3.2": {
+      "Rezolver/1.4.0-alpha-1902122333": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel": "4.3.0"
+          "System.ComponentModel": "4.3.0",
+          "System.ValueTuple": "4.5.0"
         }
       },
       "XForms/1.0.0": {
@@ -17053,7 +17123,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.3.2",
+          "Rezolver": "1.4.0-alpha-1902122333",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -23269,6 +23339,50 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
+    "System.ValueTuple/4.5.0": {
+      "sha512": "a9Udp9JaxB01YdIDz7ST9pmbA+RIUCkwkYBMI/nBoZWcFZmuFJ5hVuqcHU8KGlWbhRfev9cqIRL4QGZa+5My1w==",
+      "type": "package",
+      "path": "system.valuetuple/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.ValueTuple.dll",
+        "lib/net461/System.ValueTuple.xml",
+        "lib/net47/System.ValueTuple.dll",
+        "lib/net47/System.ValueTuple.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.ValueTuple.dll",
+        "lib/netstandard1.0/System.ValueTuple.xml",
+        "lib/netstandard2.0/_._",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.ValueTuple.dll",
+        "ref/net47/System.ValueTuple.dll",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/_._",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.valuetuple.4.5.0.nupkg.sha512",
+        "system.valuetuple.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
     "System.Xml.ReaderWriter/4.3.0": {
       "sha512": "f0HgI5Hp/jvkyqr1qldLrqps4+mjn6XHNoWQ1Cgj3L2paZUHq3fdRVU1NoEBYOByL/O6vXIS0D62MpyEC/Mhqw==",
       "type": "package",
@@ -23700,7 +23814,7 @@
         "xamarin.forms.nuspec"
       ]
     },
-    "Rezolver/1.3.2": {
+    "Rezolver/1.4.0-alpha-1902122333": {
       "type": "project",
       "path": "../../../src/Rezolver/Rezolver.csproj",
       "msbuildProject": "../../../src/Rezolver/Rezolver.csproj"
@@ -23719,8 +23833,7 @@
     "UAP,Version=v10.0.10586": []
   },
   "packageFolders": {
-    "C:\\Users\\andras\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
+    "C:\\Users\\andras\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
@@ -23731,18 +23844,15 @@
       "packagesPath": "C:\\Users\\andras\\.nuget\\packages\\",
       "outputPath": "E:\\Github\\Rezolver\\Examples\\XForms\\XForms.UWP\\obj\\",
       "projectStyle": "ProjectJson",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
-      ],
       "configFilePaths": [
         "E:\\Github\\Rezolver\\Examples\\NuGet.Config",
         "E:\\Github\\Rezolver\\NuGet.Config",
         "C:\\Users\\andras\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "E:\\Github\\Rezolver\\.nupkg": {},
         "E:\\Nuget Feeds\\Local Test": {},
         "https://api.nuget.org/v3/index.json": {}
       },

@@ -409,6 +409,7 @@ to be created when <code data-dev-comment-type="typeparamref" class="typeparamre
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void RegisterConstructor&lt;TObject, TService&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)
+
     where TObject : TService</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -484,6 +485,7 @@ to be created when <code data-dev-comment-type="typeparamref" class="typeparamre
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void RegisterConstructor&lt;TObject, TService&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TObject&gt;&gt; newExpr, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt; configureMemberBinding)
+
     where TObject : TService</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -635,6 +637,7 @@ from <code data-dev-comment-type="typeparamref" class="typeparamref">TExampleSer
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void RegisterGenericConstructor&lt;TExample, TExampleService&gt;(this ITargetContainer targets, Expression&lt;Func&lt;TExample&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)
+
     where TExample : TExampleService</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

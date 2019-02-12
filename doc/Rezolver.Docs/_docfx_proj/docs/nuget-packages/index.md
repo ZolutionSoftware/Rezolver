@@ -14,6 +14,7 @@ All the core nuget packages support the .NetStandard 1.1 profile (don't know wha
 
 ## List of packages
 
-- [Rezolver](rezolver.md)
-- [Rezolver.Microsoft.Extensions.DependencyInjection](rezolver.microsoft.extensions.dependencyinjection.md)
-- [Rezolver.Microsoft.AspNetCore.Hosting](rezolver.microsoft.aspnetcore.hosting.md)
+- [Rezolver](rezolver.md) - core Rezolver library
+- [Rezolver.Microsoft.Extensions.DependencyInjection](rezolver.microsoft.extensions.dependencyinjection.md) - provides key types for Rezolver's implementation of the MS DI stack.
+- [Rezolver.Microsoft.AspNetCore.Hosting](rezolver.microsoft.aspnetcore.hosting.md) - 
+- [Rezolver.Microsoft.Extensions.Hosting](rezolver.microsoft.extensions.hosting.md)

@@ -16,6 +16,12 @@
         },
         {
           "files": [
+            "rezolver.microsoft.extensions.hosting.csproj"
+          ],
+          "cwd": "../../src/Rezolver.Microsoft.Extensions.Hosting"
+        },
+        {
+          "files": [
             "rezolver.microsoft.extensions.dependencyinjection.csproj"
           ],
           "cwd": "../../src/Rezolver.Microsoft.Extensions.DependencyInjection"

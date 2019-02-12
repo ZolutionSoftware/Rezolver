@@ -89,6 +89,77 @@ references:
   isSpec: "True"
   fullName: Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.AddRezolver
   nameWithType: RezolverServiceProviderServiceCollectionExtensions.AddRezolver
+- uid: Microsoft.Extensions.Hosting
+  name: Microsoft.Extensions.Hosting
+  href: api/Microsoft.Extensions.Hosting.html
+  commentId: N:Microsoft.Extensions.Hosting
+  fullName: Microsoft.Extensions.Hosting
+  nameWithType: Microsoft.Extensions.Hosting
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions
+  name: RezolverHostBuilderExtensions
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html
+  commentId: T:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions
+  nameWithType: RezolverHostBuilderExtensions
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Microsoft.Extensions.Hosting.HostBuilderContext,Rezolver.IRootTargetContainer})
+  name: ConfigureRezolver(IHostBuilder, Action<HostBuilderContext, IRootTargetContainer>)
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_ConfigureRezolver_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_Microsoft_Extensions_Hosting_HostBuilderContext_Rezolver_IRootTargetContainer__
+  commentId: M:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Microsoft.Extensions.Hosting.HostBuilderContext,Rezolver.IRootTargetContainer})
+  name.vb: ConfigureRezolver(IHostBuilder, Action(Of HostBuilderContext, IRootTargetContainer))
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action<Microsoft.Extensions.Hosting.HostBuilderContext, Rezolver.IRootTargetContainer>)
+  fullName.vb: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action(Of Microsoft.Extensions.Hosting.HostBuilderContext, Rezolver.IRootTargetContainer))
+  nameWithType: RezolverHostBuilderExtensions.ConfigureRezolver(IHostBuilder, Action<HostBuilderContext, IRootTargetContainer>)
+  nameWithType.vb: RezolverHostBuilderExtensions.ConfigureRezolver(IHostBuilder, Action(Of HostBuilderContext, IRootTargetContainer))
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Rezolver.IRootTargetContainer})
+  name: ConfigureRezolver(IHostBuilder, Action<IRootTargetContainer>)
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_ConfigureRezolver_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_Rezolver_IRootTargetContainer__
+  commentId: M:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Rezolver.IRootTargetContainer})
+  name.vb: ConfigureRezolver(IHostBuilder, Action(Of IRootTargetContainer))
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action<Rezolver.IRootTargetContainer>)
+  fullName.vb: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action(Of Rezolver.IRootTargetContainer))
+  nameWithType: RezolverHostBuilderExtensions.ConfigureRezolver(IHostBuilder, Action<IRootTargetContainer>)
+  nameWithType.vb: RezolverHostBuilderExtensions.ConfigureRezolver(IHostBuilder, Action(Of IRootTargetContainer))
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver*
+  name: ConfigureRezolver
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_ConfigureRezolver_
+  commentId: Overload:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver
+  isSpec: "True"
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.ConfigureRezolver
+  nameWithType: RezolverHostBuilderExtensions.ConfigureRezolver
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Microsoft.Extensions.Hosting.HostBuilderContext,Rezolver.IRootTargetContainer},System.Action{Rezolver.RezolverOptions})
+  name: UseRezolver(IHostBuilder, Action<HostBuilderContext, IRootTargetContainer>, Action<RezolverOptions>)
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_UseRezolver_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_Microsoft_Extensions_Hosting_HostBuilderContext_Rezolver_IRootTargetContainer__System_Action_Rezolver_RezolverOptions__
+  commentId: M:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Microsoft.Extensions.Hosting.HostBuilderContext,Rezolver.IRootTargetContainer},System.Action{Rezolver.RezolverOptions})
+  name.vb: UseRezolver(IHostBuilder, Action(Of HostBuilderContext, IRootTargetContainer), Action(Of RezolverOptions))
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action<Microsoft.Extensions.Hosting.HostBuilderContext, Rezolver.IRootTargetContainer>, System.Action<Rezolver.RezolverOptions>)
+  fullName.vb: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action(Of Microsoft.Extensions.Hosting.HostBuilderContext, Rezolver.IRootTargetContainer), System.Action(Of Rezolver.RezolverOptions))
+  nameWithType: RezolverHostBuilderExtensions.UseRezolver(IHostBuilder, Action<HostBuilderContext, IRootTargetContainer>, Action<RezolverOptions>)
+  nameWithType.vb: RezolverHostBuilderExtensions.UseRezolver(IHostBuilder, Action(Of HostBuilderContext, IRootTargetContainer), Action(Of RezolverOptions))
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Rezolver.IRootTargetContainer},System.Action{Rezolver.RezolverOptions})
+  name: UseRezolver(IHostBuilder, Action<IRootTargetContainer>, Action<RezolverOptions>)
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_UseRezolver_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_Rezolver_IRootTargetContainer__System_Action_Rezolver_RezolverOptions__
+  commentId: M:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Rezolver.IRootTargetContainer},System.Action{Rezolver.RezolverOptions})
+  name.vb: UseRezolver(IHostBuilder, Action(Of IRootTargetContainer), Action(Of RezolverOptions))
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action<Rezolver.IRootTargetContainer>, System.Action<Rezolver.RezolverOptions>)
+  fullName.vb: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action(Of Rezolver.IRootTargetContainer), System.Action(Of Rezolver.RezolverOptions))
+  nameWithType: RezolverHostBuilderExtensions.UseRezolver(IHostBuilder, Action<IRootTargetContainer>, Action<RezolverOptions>)
+  nameWithType.vb: RezolverHostBuilderExtensions.UseRezolver(IHostBuilder, Action(Of IRootTargetContainer), Action(Of RezolverOptions))
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Rezolver.RezolverOptions})
+  name: UseRezolver(IHostBuilder, Action<RezolverOptions>)
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_UseRezolver_Microsoft_Extensions_Hosting_IHostBuilder_System_Action_Rezolver_RezolverOptions__
+  commentId: M:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder,System.Action{Rezolver.RezolverOptions})
+  name.vb: UseRezolver(IHostBuilder, Action(Of RezolverOptions))
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action<Rezolver.RezolverOptions>)
+  fullName.vb: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver(Microsoft.Extensions.Hosting.IHostBuilder, System.Action(Of Rezolver.RezolverOptions))
+  nameWithType: RezolverHostBuilderExtensions.UseRezolver(IHostBuilder, Action<RezolverOptions>)
+  nameWithType.vb: RezolverHostBuilderExtensions.UseRezolver(IHostBuilder, Action(Of RezolverOptions))
+- uid: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver*
+  name: UseRezolver
+  href: api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_UseRezolver_
+  commentId: Overload:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver
+  isSpec: "True"
+  fullName: Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver
+  nameWithType: RezolverHostBuilderExtensions.UseRezolver
 - uid: Rezolver
   name: Rezolver
   href: api/Rezolver.html
@@ -7575,6 +7646,51 @@ references:
   fullName.vb: Rezolver.ResolveContext.TryResolve(Of TResult)(ByRef TResult)
   nameWithType: ResolveContext.TryResolve<TResult>(out TResult)
   nameWithType.vb: ResolveContext.TryResolve(Of TResult)(ByRef TResult)
+- uid: Rezolver.RezolverOptions
+  name: RezolverOptions
+  href: api/Rezolver.RezolverOptions.html
+  commentId: T:Rezolver.RezolverOptions
+  fullName: Rezolver.RezolverOptions
+  nameWithType: RezolverOptions
+- uid: Rezolver.RezolverOptions.#ctor
+  name: RezolverOptions()
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions__ctor
+  commentId: M:Rezolver.RezolverOptions.#ctor
+  fullName: Rezolver.RezolverOptions.RezolverOptions()
+  nameWithType: RezolverOptions.RezolverOptions()
+- uid: Rezolver.RezolverOptions.#ctor*
+  name: RezolverOptions
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions__ctor_
+  commentId: Overload:Rezolver.RezolverOptions.#ctor
+  isSpec: "True"
+  fullName: Rezolver.RezolverOptions.RezolverOptions
+  nameWithType: RezolverOptions.RezolverOptions
+- uid: Rezolver.RezolverOptions.ContainerConfig
+  name: ContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_ContainerConfig
+  commentId: P:Rezolver.RezolverOptions.ContainerConfig
+  fullName: Rezolver.RezolverOptions.ContainerConfig
+  nameWithType: RezolverOptions.ContainerConfig
+- uid: Rezolver.RezolverOptions.ContainerConfig*
+  name: ContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_ContainerConfig_
+  commentId: Overload:Rezolver.RezolverOptions.ContainerConfig
+  isSpec: "True"
+  fullName: Rezolver.RezolverOptions.ContainerConfig
+  nameWithType: RezolverOptions.ContainerConfig
+- uid: Rezolver.RezolverOptions.TargetContainerConfig
+  name: TargetContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_TargetContainerConfig
+  commentId: P:Rezolver.RezolverOptions.TargetContainerConfig
+  fullName: Rezolver.RezolverOptions.TargetContainerConfig
+  nameWithType: RezolverOptions.TargetContainerConfig
+- uid: Rezolver.RezolverOptions.TargetContainerConfig*
+  name: TargetContainerConfig
+  href: api/Rezolver.RezolverOptions.html#Rezolver_RezolverOptions_TargetContainerConfig_
+  commentId: Overload:Rezolver.RezolverOptions.TargetContainerConfig
+  isSpec: "True"
+  fullName: Rezolver.RezolverOptions.TargetContainerConfig
+  nameWithType: RezolverOptions.TargetContainerConfig
 - uid: Rezolver.RootTargetContainerExtensions
   name: RootTargetContainerExtensions
   href: api/Rezolver.RootTargetContainerExtensions.html

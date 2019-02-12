@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 		readme_microsoft_aspnetcore_hosting_nupkg.md = readme_microsoft_aspnetcore_hosting_nupkg.md
 		readme_microsoft_extensions_dependencyinjection_nupkg.md = readme_microsoft_extensions_dependencyinjection_nupkg.md
+		readme_microsoft_extensions_hosting.md = readme_microsoft_extensions_hosting.md
 		readme_rezolver_nupkg.md = readme_rezolver_nupkg.md
 	EndProjectSection
 EndProject
@@ -78,7 +79,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Benchmark", "test\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Docs", "doc\Rezolver.Docs\Rezolver.Docs.csproj", "{E7055E56-9E6A-449E-87A5-35A31F652548}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rezolver.Microsoft.Extensions.Hosting", "src\Rezolver.Microsoft.Extensions.Hosting\Rezolver.Microsoft.Extensions.Hosting.csproj", "{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Microsoft.Extensions.Hosting", "src\Rezolver.Microsoft.Extensions.Hosting\Rezolver.Microsoft.Extensions.Hosting.csproj", "{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

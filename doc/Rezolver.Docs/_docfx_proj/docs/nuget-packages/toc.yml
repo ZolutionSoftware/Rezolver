@@ -1,8 +1,8 @@
 ﻿- name: Rezolver
   href: rezolver.md
-- name: MS DependencyInjection integration
+- name: .Net Core DI Integration
   href: rezolver.microsoft.extensions.dependencyinjection.md
-- name: AspNetCore hosting integration
+- name: .Net Core Generic Host Integration
+  href: rezolver.microsoft.extensions.hosting.md
+- name: Asp.Net Core integration
   href: rezolver.microsoft.aspnetcore.hosting.md
-#- name: Rezolver.Configuration
-#  href: rezolver.configuration.md

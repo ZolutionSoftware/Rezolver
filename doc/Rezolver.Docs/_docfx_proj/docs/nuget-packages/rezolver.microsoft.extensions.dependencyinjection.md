@@ -7,8 +7,13 @@
 > on top of this one to enable integration of Rezolver into your Asp.Net core website at an earlier stage of 
 > its lifetime.
 
-This package provides Rezolver's implementation of the Microsoft DI Container which drives the new Asp.Net 
-Core stack.
+This package provides Rezolver's implementation of the Microsoft DI Container abstraction.
+
+Generally speaking, you'll want to use either the [Asp.Net Core Hosting Integration](rezolver.microsoft.aspnetcore.hosting.md)
+or the [Generic Host Integration](rezolver.microsoft.extensions.hosting.md) packages - both of which utilise this package
+anyway - however, if you are writing some other application, then you can use this package directly.
+
+---
 
 After adding the package, configuring your Asp.Net website to use Rezolver as the DI container is simple:
 
@@ -26,8 +31,3 @@ since the Rezolver container supports more functionality (e.g. expressions, deco
 than the MS DI container does through its `ServiceRegistrations` class.
 
 An alternative to calling that one-shot method is shown in the comments at the end of the function.
-
-As the tips says at the top of this page, however, the [Asp.Net Core Hosting package](rezolver.microsoft.aspnetcore.hosting.md)
-is probably the best way to integrate Rezolver into your application.  That uses this package, but uses
-additional extension points in the Asp.Net Core stack to integrate Rezolver at an earlier stage in the application
-lifecycle.

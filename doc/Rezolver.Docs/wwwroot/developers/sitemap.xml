@@ -2,930 +2,942 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>http://pre.rezolver.co.uk/developers/</loc>
-        <lastmod>2019-02-03T14:49:22.897Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.867Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/benchmarks.html</loc>
-        <lastmod>2019-02-03T14:49:21.701Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.056Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/create-and-use-a-container.html</loc>
-        <lastmod>2019-02-03T14:49:21.698Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.052Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/decorators.html</loc>
-        <lastmod>2019-02-03T14:49:21.691Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.034Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/delegates.html</loc>
-        <lastmod>2019-02-03T14:49:21.686Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.029Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/enumerables.html</loc>
-        <lastmod>2019-02-03T14:49:21.682Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.019Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/expressions.html</loc>
-        <lastmod>2019-02-03T14:49:21.675Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.010Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs</loc>
-        <lastmod>2019-02-03T14:49:22.877Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.997Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/objects.html</loc>
-        <lastmod>2019-02-03T14:49:21.669Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.991Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/service-registration.html</loc>
-        <lastmod>2019-02-03T14:49:21.664Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.986Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api</loc>
-        <lastmod>2019-02-03T14:49:21.704Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.463Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.AspNetCore.Hosting.html</loc>
-        <lastmod>2019-02-03T14:49:22.834Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.620Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.084Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.471Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.Extensions.DependencyInjection.html</loc>
-        <lastmod>2019-02-03T14:49:22.192Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.494Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.778Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.505Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.Extensions.DependencyInjection.RezolverServiceProviderServiceCollectionExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.252Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.491Z</lastmod>
+    </url>
+    <url>
+        <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.Extensions.Hosting.html</loc>
+        <lastmod>2019-02-12T23:32:41.466Z</lastmod>
+    </url>
+    <url>
+        <loc>http://pre.rezolver.co.uk/developers/api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html</loc>
+        <lastmod>2019-02-12T23:32:41.500Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.AliasTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.869Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.379Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.AutoFactoryRegistrationExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.516Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.528Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.BindAllMembersBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:21.376Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.081Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.BindNoMembersBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:22.519Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.256Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.BindPublicFieldsBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:22.646Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.263Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.BindPublicPropertiesBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:22.292Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.536Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.BindSpecificMembersBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:21.845Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.097Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.CachingContainerBase.html</loc>
-        <lastmod>2019-02-03T14:49:21.910Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.448Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.CombinedContainerConfig.html</loc>
-        <lastmod>2019-02-03T14:49:22.455Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.276Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.CombinedContainerConfigExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.774Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.542Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.CombinedTargetContainerConfig.html</loc>
-        <lastmod>2019-02-03T14:49:21.281Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.110Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.CombinedTargetContainerConfigExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.303Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.290Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.CompileContext.html</loc>
-        <lastmod>2019-02-03T14:49:22.545Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.140Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.CompileStackEntry.html</loc>
-        <lastmod>2019-02-03T14:49:22.653Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.547Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.ConstantCompiledTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.849Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.452Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.DelegatingCompiledTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.461Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.148Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.288Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.299Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.605Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.553Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.CompiledTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.684Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.456Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.307Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.157Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.DecoratorTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.657Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.308Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.DefaultTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.469Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.557Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.DelegateTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.464Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.466Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.EnumerableTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.444Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.164Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.350Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.316Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html</loc>
-        <lastmod>2019-02-03T14:49:21.431Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.474Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.Methods.html</loc>
-        <lastmod>2019-02-03T14:49:22.819Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.568Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionCompileContext.html</loc>
-        <lastmod>2019-02-03T14:49:22.325Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.186Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionCompiler.html</loc>
-        <lastmod>2019-02-03T14:49:22.665Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.203Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionCompilerBuildExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.249Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.623Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ExpressionTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.982Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.572Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.GenericConstructorTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.360Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.576Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.html</loc>
-        <lastmod>2019-02-03T14:49:22.831Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.597Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.IExpressionBuilder-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.689Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.478Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.IExpressionBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.189Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.627Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.IExpressionCompileContext.html</loc>
-        <lastmod>2019-02-03T14:49:22.339Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.220Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.IExpressionCompiler.html</loc>
-        <lastmod>2019-02-03T14:49:22.673Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.225Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ListTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.935Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.642Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ObjectTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.878Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.633Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.OptionalParameterTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.621Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.583Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ProjectionTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.692Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.590Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.RedundantConvertRewriter.html</loc>
-        <lastmod>2019-02-03T14:49:21.438Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.653Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.RezolvedTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.795Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.657Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.ScopedTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.475Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.642Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.SharedExpressionKey.html</loc>
-        <lastmod>2019-02-03T14:49:21.943Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.234Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.SingletonTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.299Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.240Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.TargetExpression.html</loc>
-        <lastmod>2019-02-03T14:49:21.872Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.676Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.UnscopedTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:22.786Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.662Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.Expressions.VariantMatchTargetBuilder.html</loc>
-        <lastmod>2019-02-03T14:49:21.624Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.673Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.html</loc>
-        <lastmod>2019-02-03T14:49:22.185Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.684Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.ICompileContext.html</loc>
-        <lastmod>2019-02-03T14:49:21.809Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.610Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.ITargetCompiler.html</loc>
-        <lastmod>2019-02-03T14:49:22.243Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.681Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.TargetCompilerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.768Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.245Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Compilation.UnresolvedTypeCompiledTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.784Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.250Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.Configure-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.365Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.680Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.Configure.html</loc>
-        <lastmod>2019-02-03T14:49:22.790Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.689Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.ExpressionCompilation.html</loc>
-        <lastmod>2019-02-03T14:49:22.284Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.109Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.html</loc>
-        <lastmod>2019-02-03T14:49:22.813Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.399Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectArrays.html</loc>
-        <lastmod>2019-02-03T14:49:22.479Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.118Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectAutoFuncs.html</loc>
-        <lastmod>2019-02-03T14:49:22.484Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.324Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectAutoLazies.html</loc>
-        <lastmod>2019-02-03T14:49:21.814Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.330Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectCollections.html</loc>
-        <lastmod>2019-02-03T14:49:22.696Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.387Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectEnumerables.html</loc>
-        <lastmod>2019-02-03T14:49:22.031Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.393Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectLists.html</loc>
-        <lastmod>2019-02-03T14:49:22.035Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.694Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.InjectResolveContext.html</loc>
-        <lastmod>2019-02-03T14:49:22.747Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.700Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.OptionDependentConfig-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.386Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.124Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.OptionDependentConfig-2.html</loc>
-        <lastmod>2019-02-03T14:49:22.372Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.132Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.OptionDependentConfigBase.html</loc>
-        <lastmod>2019-02-03T14:49:21.791Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.341Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Configuration.OverridingEnumerables.html</loc>
-        <lastmod>2019-02-03T14:49:22.585Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.347Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ConstructorBinding.html</loc>
-        <lastmod>2019-02-03T14:49:22.288Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.409Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Container.html</loc>
-        <lastmod>2019-02-03T14:49:22.706Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.697Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ContainerBase.html</loc>
-        <lastmod>2019-02-03T14:49:22.738Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.730Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ContainerResolveExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.239Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.714Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ContainerScope.html</loc>
-        <lastmod>2019-02-03T14:49:21.825Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.725Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ContainerScopeExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.736Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.135Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ContainerScopeResolveExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.763Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.148Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.CovariantTypeIndex.html</loc>
-        <lastmod>2019-02-03T14:49:22.417Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.877Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.DecoratingTargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.597Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.294Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.DecoratorTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.181Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.417Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.DelegateTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.808Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.748Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Events.html</loc>
-        <lastmod>2019-02-03T14:49:22.264Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.728Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Events.TargetContainerRegisteredEventArgs.html</loc>
-        <lastmod>2019-02-03T14:49:21.363Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.753Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Events.TargetRegisteredEventArgs.html</loc>
-        <lastmod>2019-02-03T14:49:22.741Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.421Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ExpressionFunctions.html</loc>
-        <lastmod>2019-02-03T14:49:22.230Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.732Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ExpressionTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.226Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.159Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.GenericTargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.779Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.173Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.html</loc>
-        <lastmod>2019-02-03T14:49:22.273Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.483Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ICompiledTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.731Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.298Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.756Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.306Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IContainerConfig-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.422Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.425Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IContainerConfig.html</loc>
-        <lastmod>2019-02-03T14:49:22.167Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.430Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IContainerScope.html</loc>
-        <lastmod>2019-02-03T14:49:22.601Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.434Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ICovariantTypeIndex.html</loc>
-        <lastmod>2019-02-03T14:49:22.799Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.759Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IMemberBindingBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:22.793Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.763Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IMemberBindingBehaviourBuilder-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.262Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.177Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IResolveContext.html</loc>
-        <lastmod>2019-02-03T14:49:21.388Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.189Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IRootTargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:21.950Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.313Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IScopedContainer.html</loc>
-        <lastmod>2019-02-03T14:49:21.831Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.321Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.IScopeFactory.html</loc>
-        <lastmod>2019-02-03T14:49:22.856Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.736Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.853Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.743Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:21.758Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.447Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITargetContainerConfig-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.425Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.451Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITargetContainerConfig.html</loc>
-        <lastmod>2019-02-03T14:49:22.164Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.770Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITargetContainerEventHandler-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.864Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.774Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITargetContainerFactory.html</loc>
-        <lastmod>2019-02-03T14:49:22.280Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.193Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ITargetContainerTypeResolver.html</loc>
-        <lastmod>2019-02-03T14:49:22.277Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.881Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ListMemberBinding.html</loc>
-        <lastmod>2019-02-03T14:49:21.448Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.887Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MemberBinding.html</loc>
-        <lastmod>2019-02-03T14:49:22.213Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.891Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MemberBindingBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:22.207Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.326Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MemberBindingBehaviourBuilder-1.html</loc>
-        <lastmod>2019-02-03T14:49:21.393Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.334Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MemberBindingBuilder-2.html</loc>
-        <lastmod>2019-02-03T14:49:21.923Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.752Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MethodBinding.html</loc>
-        <lastmod>2019-02-03T14:49:22.827Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.760Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MSDIITargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.880Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.783Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.MultipleTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.080Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.790Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ObjectTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.846Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.509Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.AllowMultiple.html</loc>
-        <lastmod>2019-02-03T14:49:22.629Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.515Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.ContainerOption-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.161Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.201Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableArrayInjection.html</loc>
-        <lastmod>2019-02-03T14:49:22.548Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.205Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableAutoFuncInjection.html</loc>
-        <lastmod>2019-02-03T14:49:21.605Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.339Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableAutoLazyInjection.html</loc>
-        <lastmod>2019-02-03T14:49:21.609Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.343Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableCollectionInjection.html</loc>
-        <lastmod>2019-02-03T14:49:21.459Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.794Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableContravariance.html</loc>
-        <lastmod>2019-02-03T14:49:21.836Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.798Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableEnumerableCovariance.html</loc>
-        <lastmod>2019-02-03T14:49:21.424Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.763Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableEnumerableInjection.html</loc>
-        <lastmod>2019-02-03T14:49:21.930Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.768Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableGlobalOptions.html</loc>
-        <lastmod>2019-02-03T14:49:22.440Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.772Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.EnableListInjection.html</loc>
-        <lastmod>2019-02-03T14:49:22.677Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.784Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.FetchAllMatchingGenerics.html</loc>
-        <lastmod>2019-02-03T14:49:22.680Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.520Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.html</loc>
-        <lastmod>2019-02-03T14:49:22.842Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.209Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Options.LazyEnumerables.html</loc>
-        <lastmod>2019-02-03T14:49:21.467Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.523Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.OptionsTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.643Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.230Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.OverridingContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.561Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.904Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.OverridingTargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.397Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.913Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ParameterBinding.html</loc>
-        <lastmod>2019-02-03T14:49:21.745Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.925Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ProjectionTargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.436Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.937Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.RegisterTypeTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.475Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.353Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ResolveContext.html</loc>
-        <lastmod>2019-02-03T14:49:21.490Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.366Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.RezolverOptions.html</loc>
-        <lastmod>2019-02-03T14:49:22.201Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.487Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.RootTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.573Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.811Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Runtime.EagerEnumerable-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.445Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.238Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Runtime.GenericTypeMapping.html</loc>
-        <lastmod>2019-02-03T14:49:22.257Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.244Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Runtime.html</loc>
-        <lastmod>2019-02-03T14:49:22.822Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.537Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Runtime.LazyEnumerable-1.html</loc>
-        <lastmod>2019-02-03T14:49:21.351Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.533Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ScopeBehaviour.html</loc>
-        <lastmod>2019-02-03T14:49:22.861Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.371Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ScopedContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.382Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.386Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ScopedTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.153Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.403Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.ScopePreference.html</loc>
-        <lastmod>2019-02-03T14:49:22.148Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.406Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.Dependant.html</loc>
-        <lastmod>2019-02-03T14:49:22.356Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.816Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.DependantCollection-1.html</loc>
-        <lastmod>2019-02-03T14:49:22.620Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.834Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.DependantExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.506Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.797Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.DependencyEnumerableExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.956Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.802Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.DependencyException.html</loc>
-        <lastmod>2019-02-03T14:49:22.448Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.805Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.DependencyMetadata.html</loc>
-        <lastmod>2019-02-03T14:49:22.016Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.810Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.DependencyMetadataCollection.html</loc>
-        <lastmod>2019-02-03T14:49:21.356Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.249Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.html</loc>
-        <lastmod>2019-02-03T14:49:22.839Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.946Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.IDependant.html</loc>
-        <lastmod>2019-02-03T14:49:22.859Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.253Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Sdk.IMutableDependant.html</loc>
-        <lastmod>2019-02-03T14:49:21.629Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.942Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.SingletonTargetContainerExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.145Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.956Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Target.html</loc>
-        <lastmod>2019-02-03T14:49:22.131Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.035Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.TargetContainer.html</loc>
-        <lastmod>2019-02-03T14:49:22.413Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.853Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.TargetContainerRegistrationExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:22.074Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.869Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.TargetDictionaryContainer.html</loc>
-        <lastmod>2019-02-03T14:49:21.340Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.604Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.TargetListContainer.html</loc>
-        <lastmod>2019-02-03T14:49:21.999Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.621Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.AutoFactoryTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.578Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.543Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ChangeTypeTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.041Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.551Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ConstructorTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.968Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.267Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.DecoratorTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.975Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.275Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.DefaultTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.004Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.413Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.DelegateTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.009Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.421Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.EnumerableTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.024Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.427Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ExpressionTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.399Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.436Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.GenericConstructorTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.412Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.824Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.html</loc>
-        <lastmod>2019-02-03T14:49:22.197Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.047Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ListTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.420Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.357Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ObjectTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.637Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.365Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.OptionalParameterTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.642Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.375Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ProjectionTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.890Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.280Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ResolvedTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.764Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.617Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.ScopedTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.769Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.560Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.SingletonTarget.html</loc>
-        <lastmod>2019-02-03T14:49:21.615Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.565Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.TargetBase.html</loc>
-        <lastmod>2019-02-03T14:49:22.050Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.576Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.UnscopedTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.056Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.487Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.Targets.VariantMatchTarget.html</loc>
-        <lastmod>2019-02-03T14:49:22.064Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.041Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.TargetTypeSelector.html</loc>
-        <lastmod>2019-02-03T14:49:21.979Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.058Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/api/Rezolver.UnresolvedICompiledTargetExtensions.html</loc>
-        <lastmod>2019-02-03T14:49:21.600Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.061Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/arrays-lists-collections/arrays.html</loc>
-        <lastmod>2019-02-03T14:49:21.657Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.917Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/arrays-lists-collections/collections.html</loc>
-        <lastmod>2019-02-03T14:49:22.874Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.103Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/arrays-lists-collections</loc>
-        <lastmod>2019-02-03T14:49:22.890Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.087Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/arrays-lists-collections/lists.html</loc>
-        <lastmod>2019-02-03T14:49:22.911Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.070Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/constructor-injection/generics-manual-constructor.html</loc>
-        <lastmod>2019-02-03T14:49:21.597Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.911Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/constructor-injection/generics.html</loc>
-        <lastmod>2019-02-03T14:49:21.591Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.979Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/constructor-injection</loc>
-        <lastmod>2019-02-03T14:49:21.727Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.969Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/decorators/collections.html</loc>
-        <lastmod>2019-02-03T14:49:22.907Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.076Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/decorators/delegates.html</loc>
-        <lastmod>2019-02-03T14:49:22.904Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.081Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/enumerables/generics.html</loc>
-        <lastmod>2019-02-03T14:49:21.586Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.841Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/enumerables/lazy-vs-eager.html</loc>
-        <lastmod>2019-02-03T14:49:21.581Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.830Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/enumerables/projections.html</loc>
-        <lastmod>2019-02-03T14:49:21.575Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.858Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/lifetimes/container-scopes.html</loc>
-        <lastmod>2019-02-03T14:49:21.651Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.852Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/lifetimes</loc>
-        <lastmod>2019-02-03T14:49:21.646Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.847Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/lifetimes/scoped.html</loc>
-        <lastmod>2019-02-03T14:49:21.530Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.906Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/lifetimes/singleton.html</loc>
-        <lastmod>2019-02-03T14:49:21.526Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.899Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/lifetimes/transient.html</loc>
-        <lastmod>2019-02-03T14:49:21.572Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.887Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/member-injection/collections.html</loc>
-        <lastmod>2019-02-03T14:49:21.565Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.882Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/member-injection/custom.html</loc>
-        <lastmod>2019-02-03T14:49:21.559Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.876Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/member-injection/fluent-api.html</loc>
-        <lastmod>2019-02-03T14:49:21.555Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.947Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/member-injection</loc>
-        <lastmod>2019-02-03T14:49:21.546Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.942Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/member-injection/options.html</loc>
-        <lastmod>2019-02-03T14:49:21.543Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.935Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/member-injection/per-registration.html</loc>
-        <lastmod>2019-02-03T14:49:21.536Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.931Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/nuget-packages</loc>
-        <lastmod>2019-02-03T14:49:22.899Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.891Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/nuget-packages/rezolver.configuration.html</loc>
-        <lastmod>2019-02-03T14:49:22.872Z</lastmod>
+        <lastmod>2019-02-11T22:46:58.445Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/nuget-packages/rezolver.html</loc>
-        <lastmod>2019-02-03T14:49:21.518Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.926Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html</loc>
-        <lastmod>2019-02-03T14:49:21.513Z</lastmod>
+        <lastmod>2019-02-12T23:32:41.457Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html</loc>
-        <lastmod>2019-02-03T14:49:21.509Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.060Z</lastmod>
+    </url>
+    <url>
+        <loc>http://pre.rezolver.co.uk/developers/docs/nuget-packages/rezolver.microsoft.extensions.hosting.html</loc>
+        <lastmod>2019-02-12T23:32:40.064Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/variance/contravariance.html</loc>
-        <lastmod>2019-02-03T14:49:21.717Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.962Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/variance/covariance.html</loc>
-        <lastmod>2019-02-03T14:49:21.709Z</lastmod>
+        <lastmod>2019-02-12T23:32:39.951Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/variance</loc>
-        <lastmod>2019-02-03T14:49:22.888Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.090Z</lastmod>
     </url>
     <url>
         <loc>http://pre.rezolver.co.uk/developers/docs/variance/mixed.html</loc>
-        <lastmod>2019-02-03T14:49:22.885Z</lastmod>
+        <lastmod>2019-02-12T23:32:40.094Z</lastmod>
     </url>
 </urlset>

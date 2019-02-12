@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Rezolver.Microsoft.Extensions.DependencyInjection Package | Rezolver IOC </title>
+  	<title>Rezolver.Microsoft.Extensions.Hosting Package | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Rezolver.Microsoft.Extensions.DependencyInjection Package | Rezolver IOC ">
+  	<meta name="title" content="Rezolver.Microsoft.Extensions.Hosting Package | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../../favicon.ico">
@@ -101,46 +101,62 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="rezolvermicrosoftextensionsdependencyinjection-package">Rezolver.Microsoft.Extensions.DependencyInjection Package</h1>
+<h1 id="rezolvermicrosoftextensionshosting-package">Rezolver.Microsoft.Extensions.Hosting Package</h1>
 
-<p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.Extensions.DependencyInjection">See package page on nuget</a>.</p>
-<div class="TIP"><h5>Tip</h5><p>It&#39;s recommended that you use the <a href="rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core Hosting integration package</a> 
-on top of this one to enable integration of Rezolver into your Asp.Net core website at an earlier stage of 
-its lifetime.</p>
-</div>
-<p>This package provides Rezolver&#39;s implementation of the Microsoft DI Container abstraction.</p>
-<p>Generally speaking, you&#39;ll want to use either the <a href="rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core Hosting Integration</a>
-or the <a href="rezolver.microsoft.extensions.hosting.html">Generic Host Integration</a> packages - both of which utilise this package
-anyway - however, if you are writing some other application, then you can use this package directly.</p>
-<hr>
-<p>After adding the package, configuring your Asp.Net website to use Rezolver as the DI container is simple:</p>
-<p>Replace the default <code>ConfigureServices</code> function in your application&#39;s <code>Startup.cs</code> file with
-this one:</p>
-<pre><code class="lang-csharp" name="StartupDIOnly.cs">// This method gets called by the runtime. Use this method to add services to the container.
-public IServiceProvider ConfigureServices(IServiceCollection services)
+<p><a href="https://www.nuget.org/packages/Rezolver.Microsoft.Extensions.Hosting">See package page on nuget</a>.</p>
+<p>Rezolver also offers integration with the .Net Generic Host.  Setup and configuration is very similar to 
+when <a href="rezolver.microsoft.aspnetcore.hosting.html">integrating Rezolver with Asp.Net Core</a> except whereas Asp.Net Core
+supports a convention-based approach to configuring the container, the generic host does not.</p>
+<p>Here is a complete example which uses Rezolver&#39;s covariance functionality to add a hosted service without calling <code>AddHostedService</code>:</p>
+<pre><code class="lang-csharp" name="Program.cs">using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Rezolver.Examples.GenericHost
 {
-    // Add framework services.
-    services.AddMvc();
+    class Program
+    {
+        public static Task Main(string[] args)
+        {
+            return new HostBuilder()
+                .ConfigureLogging((context, logging) =&gt;
+                {
+                    logging.AddConsole();
+                })
+                .UseRezolver((context, targets) =&gt;
+                {
+                    // note - this could&#39;ve been registered in ConfigureServices() too, via
+                    // the ServiceCollection.
+                    targets.RegisterType&lt;Service1&gt;();
+                })
+                .RunConsoleAsync();
+        }
 
-    //create the Rezolver container from the services, without making any additional
-    //registrations
-    return services.CreateRezolverContainer();
+        public class Service1 : IHostedService
+        {
+            private readonly ILogger&lt;Service1&gt; logger;
 
-    // Or you can separate the process, allowing you to configure the underlying
-    // target container, or the container or whatever:
+            public Service1(ILogger&lt;Service1&gt; logger)
+            {
+                this.logger = logger;
+            }
 
-    // ITargetContainer targets = new TargetContainer();
-    // targets.Populate(services);
-    // return new ScopedContainer(targets);
+            public Task StartAsync(CancellationToken cancellationToken)
+            {
+                logger.LogInformation($&quot;Started {typeof(Service1)}&quot;);
+                return Task.CompletedTask;
+            }
+
+            public Task StopAsync(CancellationToken cancellationToken)
+            {
+                logger.LogInformation($&quot;Stopping {typeof(Service1)}&quot;);
+                return Task.CompletedTask;
+            }
+        }
+    }
 }
-</code></pre><p>This returns a new service provider to the Asp.Net Core stack - thus replacing the default service provider
-that&#39;s already built.</p>
-<p>As the comment in the snippet suggests, you will likely want to perform additional registration operations
-on the <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> object that&#39;s returned by the <code>CreateRezolverContainer</code> function called here,
-since the Rezolver container supports more functionality (e.g. expressions, decorators, custom targets, and more) 
-than the MS DI container does through its <code>ServiceRegistrations</code> class.</p>
-<p>An alternative to calling that one-shot method is shown in the comments at the end of the function.</p>
-</article>
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -148,7 +164,7 @@ than the MS DI container does through its <code>ServiceRegistrations</code> clas
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/nuget-packages/rezolver.microsoft.extensions.hosting.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

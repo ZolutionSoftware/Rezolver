@@ -109,8 +109,10 @@ package to enable the integration of Rezolver into your Asp.Net Core site somewh
 <p>Rezolver integration is available for both Asp.Net Core 1.1 and 2.0, with the Asp.Net Core 2.0 
 integration offering more flexibility as it allows you to perform configuration on the container(s) that
 are created before any registrations are made.</p>
-<h1 id="aspnet-core-2120">Asp.Net Core 2.1/2.0</h1>
-<p>Version <code>2.1</code> of the package supports Asp.Net Core 2.1; <code>2.0</code> supports Asp.Net Core 2.0.</p>
+<h1 id="aspnet-core-2x">Asp.Net Core 2.x</h1>
+<p>As of version 2 of this package, the major/minor version of the package indicates the minimum version of the Asp.Net Core
+packages that is supported.</p>
+<p>The latest version is <code>2.2</code> - which therefore supports Asp.Net Core 2.2.</p>
 <h2 id="programcs-changes">Program.cs changes</h2>
 <p>After adding the package, change your <code>program.cs</code> file so it looks like this:</p>
 <pre><code class="lang-csharp" name="Example.cs">public class Program
@@ -142,24 +144,6 @@ are created before any registrations are made.</p>
 </code></pre><p>So, at the most basic level you just call the 
 <a class="xref" href="../../api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_">UseRezolver</a> method, and that&#39;s
 enough.</p>
-<h3 id="configuration-call-back">Configuration call-back</h3>
-<p>If you&#39;ve been reading some of the topics on this site - say, about <a href="../variance/contravariance.html">contravariance</a>
-or <a href="../enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> then you&#39;ll have seen how we can use options
-to control complex behaviours in Rezolver containers.  That&#39;s what is shown in the alternative call
-to <code>UseRezolver</code> in the commented code.  you can also pass a configuration callback that will be called
-to modify the @Rezolver.RezolverOptions that will be used to create both the <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> that
-forms the basis of the registrations, and the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will ultimately create the objects
-for the application.</p>
-<div class="NOTE"><h5>Note</h5><p>Please note that lazy enumerables are currently switched off in Rezolver&#39;s integration with Asp.Net Core
-because of a mis-specification of a test by the Dependency Injection team.</p>
-<p>The <a href="https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection.Specification.Tests/">specification test</a> is something
-which a DI container should pass if it&#39;s intending to be used with Asp.Net Core - and unfortunately there
-was one test that failed when Rezolver was using lazy enumerables - which is its default behaviour.
-<a href="https://github.com/aspnet/DependencyInjection/issues/589">An issue was raised</a> on the Git repo and has 
-been fixed, but it&#39;ll take a few more days/weeks before we see it in the wild.</p>
-<p>We can say that if you <em>need</em> lazy enumerables, then you should be able to re-enable them and your application
-will work.</p>
-</div>
 <h2 id="startupcs-changes">Startup.cs changes</h2>
 <p>Now we need to tell the Asp.Net Core stack that you want an <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> to be created
 in order to construct the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will be used as the DI container.</p>
@@ -230,6 +214,22 @@ from the <code>IServiceCollection</code> that contains all the service registrat
 abstractions, before the target container is passed to a new <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> that will then be
 used as the application&#39;s <code>IServiceProvider</code>.</p>
 <p>And that&#39;s it - your application is configured.</p>
+<h3 id="userezolver-configuration-call-back"><code>UseRezolver</code> Configuration call-back</h3>
+<p>If you&#39;ve been reading some of the topics on this site - say, about <a href="../variance/contravariance.html">contravariance</a>
+or <a href="../enumerables/lazy-vs-eager.html">lazy and eager enumerables</a> then you&#39;ll have seen how we can use options
+to control complex behaviours in Rezolver containers.  That&#39;s what is shown in the alternative call
+to <code>UseRezolver</code> in the commented code in the <code>Program.cs</code> sample above.  You can also pass a configuration callback 
+that will be called to modify the <a class="xref" href="../../api/Rezolver.RezolverOptions.html">RezolverOptions</a> that will be used to create both the 
+<a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> that forms the basis of the registrations, and the <a class="xref" href="../../api/Rezolver.ScopedContainer.html">ScopedContainer</a> 
+that will ultimately be the root container for the application.</p>
+<div class="NOTE"><h5>Note</h5><p>Please note that lazy enumerables are currently switched off in Rezolver&#39;s integration with Asp.Net Core
+because of a mis-specification of a test by the Dependency Injection team.</p>
+<p>The <a href="https://www.nuget.org/packages/Microsoft.Extensions.DependencyInjection.Specification.Tests/">specification test</a> is something
+which a DI container should pass if it&#39;s intending to be used with Asp.Net Core - and unfortunately there
+was one test that failed when Rezolver was using lazy enumerables - which is its default behaviour.
+<a href="https://github.com/aspnet/DependencyInjection/issues/589">An issue was raised</a> on the Git repo and was 
+fixed, but I then found another issue which I&#39;ve yet to report.</p>
+</div>
 <h1 id="aspnet-core-11">Asp.Net Core 1.1</h1>
 <p>Version <code>1.3</code> is the latest version of the package that supports Asp.Net Core 1.1.  The setup is fundamentally
 identical, except the <code>UseRezolver</code> method does not accept any callbacks.</p>
@@ -252,9 +252,6 @@ identical, except the <code>UseRezolver</code> method does not accept any callba
 </code></pre><p>The <code>startup.cs</code> is similar to what&#39;s required for Asp.Net Core 2.0 - except your <code>ConfigureContainer</code>
 method should accept an <code>ITargetContainer</code> - i.e. <code>ConfigureContainer(ITargetContainer)</code>
 and then Rezolver will be used as the container for your application.</p>
-<hr>
-<p>Clearly, we recommmend moving to Asp.Net Core 2.0 ASAP as it has more features, is faster, and is generally 
-<em>way</em> cooler than 1.1! <span class="emoji" shortcode="wink">😉</span></p>
 </article>
           </div>
           

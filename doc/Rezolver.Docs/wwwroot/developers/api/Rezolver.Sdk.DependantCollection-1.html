@@ -552,6 +552,7 @@ are cloned from this collection&apos;s items.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">protected TDerived Clone&lt;TDerived&gt;()
+
     where TDerived : DependantCollection&lt;T&gt;, new()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -1006,6 +1007,7 @@ the end of the collection.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ReplaceAnyOrAdd&lt;TOriginal&gt;(T replacement)
+
     where TOriginal : T</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1062,6 +1064,7 @@ will be added to the end of the collection.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ReplaceAnyOrAdd&lt;TOriginal&gt;(Func&lt;IEnumerable&lt;T&gt;, T&gt; replacementCallback)
+
     where TOriginal : T</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
