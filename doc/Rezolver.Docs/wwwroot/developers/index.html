@@ -102,19 +102,29 @@ with Asp.Net Core integration.</p>
 <ul>
 <li>.Net Standard 2.0</li>
 <li>.Net Standard 1.1</li>
-<li>.Net 4.5</li>
+<li>.Net 4.6.1</li>
 </ul>
-<h2 id="aspnet-core-support">Asp.Net Core Support</h2>
-<p>Asp.Net Core Support (v2.1 and below, on .Net Core or Full Framework) is provided by the 
-<a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting package</a>,
-supported by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection package</a>
-which provides an implementation of the new .Net Core DI container abstraction.</p>
-<blockquote><p>The major/minor version number of these packages indicates the version of Asp.Net Core they support.
-So, Rezolver.Microsoft.AspNetCore.Hosting v2.1 is for Asp.Net Core v2.1.</p>
-</blockquote>
+<div class="WARNING"><h5>Warning</h5><p>In Rezolver 1.5, Rezolver will <strong><em>only</em></strong> target <code>netstandard2.0</code> TFM.</p>
+</div>
+<h1 id="integration">Integration</h1>
+<p>In addition to simply using the Rezolver nuget package and creating a <a class="xref" href="api/Rezolver.Container.html">Container</a> directly, Rezolver also offers some off-the-shelf integrations:</p>
+<ul>
+<li>Asp.Net Core support (v2.2 and below) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting</a> package</li>
+<li><a href="(https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host)">.Net Core Generic Host</a> support (v2.2 and above) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.hosting.html">Rezolver.Microsoft.Extensions.Hosting</a> package</li>
+<li>Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a> from an @Microsoft.Extensions.DependencyInjection.IServiceCollection) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a> package.  This package is used by the other two packages above.</li>
+</ul>
+<h1 id="quickstart">Quickstart</h1>
+<p>TODO: quickstart notes for when you&#39;ve got a <code>Rezolver.Container</code></p>
 <h1 id="release-highlights">Release Highlights</h1>
 <p>For full release notes for each version - <a href="https://github.com/ZolutionSoftware/Rezolver/releases">see release notes on Github</a>.</p>
 <ul>
+<li><strong>1.4.0</strong><ul>
+<li><a href="docs/nuget-packages/rezolver.microsoft.extensions.hosting.html">.Net Core Generic Host Support</a> via the <code>Rezolver.Microsoft.Extensions.Hosting</code> package</li>
+<li><a href="docs/autofactories.html">&#39;Autofactories&#39;</a> -  Container-created factory methods (<code>e.g. Func&lt;T&gt;</code> or <code>delegate Foo FooFactory(IBar, IBaz)</code>) which create instances via the container/scope</li>
+<li><a href="docs/lazy.html">Automatic <code>Lazy&lt;T&gt;</code> creation</a> - With instances created via the container/scope</li>
+<li>Fixed a fatal bug in release builds of Asp.Net Core sites (<a href="https://github.com/ZolutionSoftware/Rezolver/issues/77">Issue #77</a>)</li>
+</ul>
+</li>
 <li><strong>1.3.4</strong><ul>
 <li>Added <a href="https://github.com/dotnet/sourcelink">Sourcelink</a> to the packaged assemblies.</li>
 <li>Bumped Asp.Net Core integration packages to 2.1</li>

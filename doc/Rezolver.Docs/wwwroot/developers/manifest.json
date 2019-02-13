@@ -74,6 +74,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/autofactories.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/autofactories.html",
+          "hash": "0XfV1gyQFgUO+lGgQHszQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "_docfx_proj/docs/benchmarks.md",
       "output": {
         ".html": {
@@ -222,7 +234,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/enumerables/projections.html",
-          "hash": "S7CQFxwb1mJ10kLDX9c5zQ=="
+          "hash": "AyeJs3q/FV6oqBCNPBt2Kg=="
         }
       },
       "is_incremental": false,
@@ -247,6 +259,18 @@
         ".html": {
           "relative_path": "docs/index.html",
           "hash": "PzOBvJ42Mig00eHDfmyEPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "_docfx_proj/docs/lazy.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/lazy.html",
+          "hash": "MHf/3OPqRb/p5WGxFRd4MQ=="
         }
       },
       "is_incremental": false,
@@ -390,7 +414,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/nuget-packages/index.html",
-          "hash": "3ATlAH2XLRNNHugUyUjKsA=="
+          "hash": "Gj7+55kMK4mjBLZf8+7B9w=="
         }
       },
       "is_incremental": false,
@@ -438,7 +462,7 @@
       "output": {
         ".html": {
           "relative_path": "docs/nuget-packages/rezolver.microsoft.extensions.hosting.html",
-          "hash": "uqpqIbBbCAVKIYkJK74DPA=="
+          "hash": "UXN2PlTJCXUhLrDAd8IebA=="
         }
       },
       "is_incremental": false,
@@ -721,7 +745,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "nnpUjLpLDbBuDsUFLwkdEw=="
+          "hash": "BAh9EYiYqwkFn9n8Av3HKQ=="
         }
       },
       "is_incremental": false,
@@ -3060,24 +3084,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 45,
+          "skipped_file_count": 39
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 191,
+          "skipped_file_count": 191
+        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 191,
-          "skipped_file_count": 185
-        },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
-          "incrementalPhase": "build",
-          "total_file_count": 43,
-          "skipped_file_count": 43
         }
       }
     },

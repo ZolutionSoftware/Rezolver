@@ -6,6 +6,7 @@ Rezolver also offers integration with the .Net Generic Host.  Setup and configur
 when [integrating Rezolver with Asp.Net Core](rezolver.microsoft.aspnetcore.hosting.md) except whereas Asp.Net Core
 supports a convention-based approach to configuring the container, the generic host does not.
 
-Here is a complete example which uses Rezolver's covariance functionality to add a hosted service without calling `AddHostedService`:
+Here is a complete example which uses Rezolver's decorator functionality to add logging on startup and shutdown of
+all @Microsoft.Extensions.Hosting.IHostedService services:
 
 [!code-csharp[Program.cs](../../../../../Examples/Rezolver.Examples.GenericHost/program.cs)]

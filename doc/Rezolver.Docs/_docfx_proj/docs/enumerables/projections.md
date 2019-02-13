@@ -91,7 +91,7 @@ with our rule which ensures that no combination of price adjustments will ever r
 
 This example is worthy of some extra explanation, so let's take a look at the code line-by-line:
 
-> [!INFO]
+> [!TIP]
 > You can skip this part if you're happy to accept that it 'just works'.
 
 - First, we're registering the `SimplePriceAdjustment` type for constructor injection when an `IPriceAdjustment`

@@ -107,15 +107,17 @@
 <p>Rezolver also offers integration with the .Net Generic Host.  Setup and configuration is very similar to 
 when <a href="rezolver.microsoft.aspnetcore.hosting.html">integrating Rezolver with Asp.Net Core</a> except whereas Asp.Net Core
 supports a convention-based approach to configuring the container, the generic host does not.</p>
-<p>Here is a complete example which uses Rezolver&#39;s covariance functionality to add a hosted service without calling <code>AddHostedService</code>:</p>
-<pre><code class="lang-csharp" name="Program.cs">using Microsoft.Extensions.Hosting;
+<p>Here is a complete example which uses Rezolver&#39;s decorator functionality to add logging on startup and shutdown of
+all <a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice">IHostedService</a> services:</p>
+<pre><code class="lang-csharp" name="Program.cs">using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Rezolver.Examples.GenericHost
 {
-    class Program
+    internal class Program
     {
         public static Task Main(string[] args)
         {
@@ -124,35 +126,53 @@ namespace Rezolver.Examples.GenericHost
                 {
                     logging.AddConsole();
                 })
+                .ConfigureServices(services =&gt;
+                {
+                    services.AddHostedService&lt;Service1&gt;();
+                    services.AddHostedService&lt;Service2&gt;();
+                })
                 .UseRezolver((context, targets) =&gt;
                 {
-                    // note - this could&#39;ve been registered in ConfigureServices() too, via
-                    // the ServiceCollection.
-                    targets.RegisterType&lt;Service1&gt;();
+                    // internally, the host resolves services as IEnumerable&lt;IHostedService&gt;,
+                    // so this decorator will decorate all hosted services.
+                    targets.RegisterDecorator&lt;LoggingServiceDecorator, IHostedService&gt;();
                 })
                 .RunConsoleAsync();
         }
 
-        public class Service1 : IHostedService
+        public class LoggingServiceDecorator : IHostedService
         {
-            private readonly ILogger&lt;Service1&gt; logger;
-
-            public Service1(ILogger&lt;Service1&gt; logger)
+            private readonly ILogger logger;
+            private readonly IHostedService inner;
+            public LoggingServiceDecorator(ILoggerFactory loggerFactory, IHostedService inner)
             {
-                this.logger = logger;
+                this.inner = inner;
+                this.logger = loggerFactory.CreateLogger(inner.GetType());
             }
 
             public Task StartAsync(CancellationToken cancellationToken)
             {
-                logger.LogInformation($&quot;Started {typeof(Service1)}&quot;);
+                logger.LogInformation(&quot;Started service&quot;);
                 return Task.CompletedTask;
             }
 
             public Task StopAsync(CancellationToken cancellationToken)
             {
-                logger.LogInformation($&quot;Stopping {typeof(Service1)}&quot;);
+                logger.LogInformation(&quot;Stopped service&quot;);
                 return Task.CompletedTask;
             }
+        }
+
+        public class Service1 : IHostedService
+        {
+            public Task StartAsync(CancellationToken cancellationToken) =&gt; Task.CompletedTask;
+            public Task StopAsync(CancellationToken cancellationToken) =&gt; Task.CompletedTask;
+        }
+
+        public class Service2 : IHostedService
+        {
+            public Task StartAsync(CancellationToken cancellationToken) =&gt; Task.CompletedTask;
+            public Task StopAsync(CancellationToken cancellationToken) =&gt; Task.CompletedTask;
         }
     }
 }
