@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Rezolver.Examples.GenericHost
 {
-    class Program
+    internal class Program
     {
         public static Task Main(string[] args)
         {
@@ -14,35 +15,53 @@ namespace Rezolver.Examples.GenericHost
                 {
                     logging.AddConsole();
                 })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<Service1>();
+                    services.AddHostedService<Service2>();
+                })
                 .UseRezolver((context, targets) =>
                 {
-                    // note - this could've been registered in ConfigureServices() too, via
-                    // the ServiceCollection.
-                    targets.RegisterType<Service1>();
+                    // internally, the host resolves services as IEnumerable<IHostedService>,
+                    // so this decorator will decorate all hosted services.
+                    targets.RegisterDecorator<LoggingServiceDecorator, IHostedService>();
                 })
                 .RunConsoleAsync();
         }
 
-        public class Service1 : IHostedService
+        public class LoggingServiceDecorator : IHostedService
         {
-            private readonly ILogger<Service1> logger;
-
-            public Service1(ILogger<Service1> logger)
+            private readonly ILogger logger;
+            private readonly IHostedService inner;
+            public LoggingServiceDecorator(ILoggerFactory loggerFactory, IHostedService inner)
             {
-                this.logger = logger;
+                this.inner = inner;
+                this.logger = loggerFactory.CreateLogger(inner.GetType());
             }
 
             public Task StartAsync(CancellationToken cancellationToken)
             {
-                logger.LogInformation($"Started {typeof(Service1)}");
+                logger.LogInformation("Started service");
                 return Task.CompletedTask;
             }
 
             public Task StopAsync(CancellationToken cancellationToken)
             {
-                logger.LogInformation($"Stopping {typeof(Service1)}");
+                logger.LogInformation("Stopped service");
                 return Task.CompletedTask;
             }
+        }
+
+        public class Service1 : IHostedService
+        {
+            public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+            public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+        }
+
+        public class Service2 : IHostedService
+        {
+            public Task StartAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+            public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
         }
     }
 }
