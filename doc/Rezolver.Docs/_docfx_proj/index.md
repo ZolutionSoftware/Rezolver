@@ -22,7 +22,7 @@ In addition to simply using the Rezolver nuget package and creating a @Rezolver.
 
 # Quickstart
 
-TODO: quickstart notes for when you've got a `Rezolver.Container`
+Read the [quickstart tutorial](quickstart.md) - which shows how to create and use Rezolver containers.
 
 # Release Highlights
 

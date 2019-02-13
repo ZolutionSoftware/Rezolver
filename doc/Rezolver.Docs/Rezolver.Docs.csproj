@@ -5,16 +5,15 @@
     <UserSecretsId>ccd314f1-a669-4af4-b1db-065388be2cae</UserSecretsId>
   </PropertyGroup>
 
-  <!--<ItemGroup>
+  <ItemGroup>
     <Content Remove="_docfx_themes\**" />
+  </ItemGroup>
 
-    <Compile Remove="_docfx_proj\obj\**" />
+    <!--<Compile Remove="_docfx_proj\obj\**" />
     <Content Remove="_docfx_proj\obj\**" />
-    <EmbeddedResource Remove="_docfx_proj\obj\**" />
     <None Remove="_docfx_proj\obj\**" />
     <None Include="_docfx_proj\**" />
-    <None Include="_docfx_themes\**" />
-  </ItemGroup>-->
+    <None Include="_docfx_themes\**" />-->
 
   <ItemGroup>
     <None Include="gulpfile.js" />

@@ -1,6 +1,6 @@
 {
   "name": "anchor-js",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "authors": [
     "Bryan Braun"
   ],
@@ -16,13 +16,13 @@
     "tests",
     "package.json"
   ],
-  "_release": "4.1.1",
+  "_release": "4.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "4.1.1",
-    "commit": "1bc1d94ab6fa3c6ee814e3263e664b48f294a98b"
+    "tag": "4.2.0",
+    "commit": "65fede08d0e4a705f72f1e7e6284f643d5ad3cf3"
   },
   "_source": "https://github.com/bryanbraun/anchorjs.git",
-  "_target": "^4.1.0",
+  "_target": "^4.2.0",
   "_originalSource": "anchor-js"
 }
