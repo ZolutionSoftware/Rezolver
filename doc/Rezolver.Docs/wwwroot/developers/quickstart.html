@@ -43,7 +43,7 @@
       <header>
         
         <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
-          <div class="container">
+          <div class="container-fluid">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -73,7 +73,7 @@
         </nav>
         
         <div class="subnav navbar navbar-default">
-          <div class="container hide-when-search" id="breadcrumb">
+          <div class="container-fluid hide-when-search" id="breadcrumb">
             <ul class="breadcrumb">
               <li></li>
             </ul>
@@ -90,20 +90,29 @@
           <ul id="pagination"></ul>
         </div>
       </div>
-      <div role="main" class="container body-content hide-when-search">
+      <div role="main" class="container-fluid body-content hide-when-search">
         <div class="article row grid">
-          <div class="col-md-10">
+          <div class="col-md-9">
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="quickstart">Quickstart</h1>
 
-<p>New to Rezolver?  New to IOC?  Here&#39;s how to perform some very common, simple tasks with Rezolver.</p>
-<h1 id="reference-packages">Reference package(s)</h1>
-<p>In this case we&#39;re just going to grab the <code>Rezolver</code> package and use it directly - but Rezolver integrates 
-with both Asp.Net Core applications and .Net Core Generic Host applications.</p>
-</article>
+<p>New to Rezolver?  New to IOC?  Here&#39;s how to do some of the basics.</p>
+<p>Before we start, you need to get a reference to the Rezolver library referenced, to do that you have two options:</p>
+<ol>
+<li>Add a reference to one of the <a href="docs/nuget-packages/index.html">nuget packages</a></li>
+<li>Pull the <a href="https://github.com/ZolutionSoftware/Rezolver">code from Github</a> and build it locally</li>
+</ol>
+<p>Now, after adding a <code>using</code> for the <code>Rezolver</code> namespace and you&#39;re ready to go.</p>
+<h1 id="basics">Basics</h1>
+<p>In general, you won&#39;t be using an IOC container directly to &#39;resolve&#39; types.  </p>
+<h2 id="registering-and-resolving">Registering and resolving</h2>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">var container = new Container();
+container.RegisterType&lt;MyType&gt;();
+
+var instance = container.Resolve&lt;MyType&gt;();
+</code></pre></article>
           </div>
-          
-          <div class="hidden-sm col-md-2" role="complementary">
+          <div class="hidden-sm col-md-3" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">

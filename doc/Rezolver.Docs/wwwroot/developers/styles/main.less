@@ -1,4 +1,4 @@
-﻿@import "../../../wwwroot/css/bootstrap-variables-rezolver.less";
+@import "../../../wwwroot/css/bootstrap-variables-rezolver.less";
 
 /* Included after docfx.vendor (incorporating bootstrap) and the base docfx.css styles */
 @subnav-border: darken(@gray-lighter, 10%);
@@ -20,6 +20,10 @@ button, a {
     }
 
     color: @link-color;
+}
+
+.affix > ul.level1 {
+    margin-right: auto;
 }
 
 // adjust topic/sub-heading link colors on the affix (sidebar)
@@ -47,6 +51,15 @@ button, a {
 
 .sideaffix > div.contribution > ul > li > a.contribution-link:hover {
     color: @body-bg;
+}
+
+article span.small.pull-right.contribution-link-body {
+    /* see ../partials/class.tmpl.partial for where the class is added */
+    margin-top: 15px;
+}
+
+.table-wrapper{
+    margin-bottom:10px;
 }
 
 .navbar-default.subnav {

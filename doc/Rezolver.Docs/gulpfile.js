@@ -1,10 +1,7 @@
 /// <binding BeforeBuild='default' AfterBuild='sitemap' Clean='cleanDocFXOutput' />
 
-var path = require('path');
 var gulp = require('gulp');
-var minify = require('gulp-minify-css');
 var cleancss = require('gulp-clean-css');
-var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var less = require('gulp-less');
 var sourcemaps = require('gulp-sourcemaps');
@@ -65,7 +62,7 @@ var vendor = {
 var devSitemap = {
     src: ['./wwwroot/developers/**/*.html', '!./wwwroot/developers/**/toc.html'],
     dest: './wwwroot/developers',
-    siteUrl: 'http://pre.rezolver.co.uk/developers'
+    siteUrl: 'http://rezolver.co.uk/developers'
 };
 
 gulp.task('sitemap', function () {

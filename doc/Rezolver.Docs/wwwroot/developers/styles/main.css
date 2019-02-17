@@ -18,6 +18,9 @@ button:focus,
 a:focus {
   color: #efb28c;
 }
+.affix > ul.level1 {
+  margin-right: auto;
+}
 .affix ul > li > a {
   color: #afafaf;
 }
@@ -37,6 +40,13 @@ a:focus {
 }
 .sideaffix > div.contribution > ul > li > a.contribution-link:hover {
   color: #040c21;
+}
+article span.small.pull-right.contribution-link-body {
+  /* see ../partials/class.tmpl.partial for where the class is added */
+  margin-top: 15px;
+}
+.table-wrapper {
+  margin-bottom: 10px;
 }
 .navbar-default.subnav {
   background: #061438;

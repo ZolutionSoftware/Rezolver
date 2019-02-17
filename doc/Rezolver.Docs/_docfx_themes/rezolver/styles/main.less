@@ -22,6 +22,10 @@ button, a {
     color: @link-color;
 }
 
+.affix > ul.level1 {
+    margin-right: auto;
+}
+
 // adjust topic/sub-heading link colors on the affix (sidebar)
 .affix ul > li {
     & > a {
@@ -47,6 +51,15 @@ button, a {
 
 .sideaffix > div.contribution > ul > li > a.contribution-link:hover {
     color: @body-bg;
+}
+
+article span.small.pull-right.contribution-link-body {
+    /* see ../partials/class.tmpl.partial for where the class is added */
+    margin-top: 15px;
+}
+
+.table-wrapper{
+    margin-bottom:10px;
 }
 
 .navbar-default.subnav {
