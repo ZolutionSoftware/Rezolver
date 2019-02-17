@@ -9,7 +9,7 @@ All the core nuget packages support the .NetStandard 1.1 profile (don't know wha
 .Net 4.5.1 and .Net 4.6.
 
 > [!WARNING]
-> Rezolver will only target the `.NetStandard2.0` profile from v1.5.
+> Rezolver will only target the `.NetStandard2.0` profile from v2.
 
 > [!NOTE]
 > Where a package has a dependency on a third party package (such as Newtonsoft's Json.Net or .Net Core's Microsoft.Extensions.DependencyInjection packages),

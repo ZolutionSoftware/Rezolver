@@ -152,5 +152,27 @@ namespace Rezolver.Tests.Examples
             Assert.IsType<CustomerActionsService>(result3.ActionsService);
         }
         // </example12>
+
+        [Fact]
+        public void ShouldCreateFactoryFunc()
+        {
+            // example shows a way to implement a factory function using a delegate
+
+            var container = new Container();
+
+            // <example13>
+            container.RegisterType<MyService1>();
+            container.RegisterType<MyService2>();
+            container.RegisterDelegate(context => new Func<Type, object>(t => context.Resolve(t)));
+
+            var factory = container.Resolve<Func<Type, object>>();
+
+            var service1 = factory(typeof(MyService1));
+            var service2 = factory(typeof(MyService2));
+
+            Assert.IsType<MyService1>(service1);
+            Assert.IsType<MyService2>(service2);
+            // </example13>
+        }
     }
 }

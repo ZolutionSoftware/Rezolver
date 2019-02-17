@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Markdown File | Rezolver IOC </title>
+  	<title>Autofactories | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Markdown File | Rezolver IOC ">
+  	<meta name="title" content="Autofactories | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
@@ -101,9 +101,142 @@
         <div class="article row grid-right">
           <div class="col-md-9">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="markdown-file">Markdown File</h1>
+<h1 id="autofactories">Autofactories</h1>
 
-</article>
+<p>Framework authors frequently need to be able to create instances of other developers&#39; objects on-demand.  When an application is 
+configured to run via an IOC container, this often means one of two things:</p>
+<ul>
+<li>Taking a dependency on an instance of the IOC container<ul>
+<li><em>This can be achieved in Rezolver either by injecting an instance of <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></em></li>
+</ul>
+</li>
+<li>Taking a dependency on a factory delegate</li>
+</ul>
+<p>The second of these two approaches is something that can be set up in Rezolver manually as follows:</p>
+<pre><code class="lang-csharp" name="DelegateExamples.cs">container.RegisterType&lt;MyService1&gt;();
+container.RegisterType&lt;MyService2&gt;();
+container.RegisterDelegate(context =&gt; new Func&lt;Type, object&gt;(t =&gt; context.Resolve(t)));
+
+var factory = container.Resolve&lt;Func&lt;Type, object&gt;&gt;();
+
+var service1 = factory(typeof(MyService1));
+var service2 = factory(typeof(MyService2));
+
+Assert.IsType&lt;MyService1&gt;(service1);
+Assert.IsType&lt;MyService2&gt;(service2);
+</code></pre><p>This creates a registration that will provide a general-purpose factory to resolve any type - in a way that honours the current scope - 
+back through the container, but without exposing the container to the calling code.</p>
+<p>However, this isn&#39;t terribly nice to work with at runtime (the factory delegate is far too &#39;open&#39; - most of the time we&#39;d want to 
+limit the types that could be passed) and if we want to have more focused factories (e.g. <code>Func&lt;MyService&gt;</code>) then we would need 
+a registration like this for each individual type that we&#39;d want to create instances of - which defeats the point.</p>
+<h1 id="examples">Examples</h1>
+<h2 id="basic-functionality">Basic functionality</h2>
+<p>Starting with Rezolver 1.4, however, Rezolver makes this kind of registration trivial, and also gives you some extra power.</p>
+<p>The <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc_">RegisterAutoFunc</a> overload provides a simple way to enable Rezolver to automatically
+inject a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> or one of its related types, using its own registrations as the source of the object that is produced by that
+factory when it is executed.</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">var container = new Container();
+container.RegisterType&lt;MyService1, IMyService&gt;();
+container.RegisterAutoFunc&lt;IMyService&gt;();
+
+var factory = container.Resolve&lt;Func&lt;IMyService&gt;&gt;();
+var instance = factory();
+
+Assert.IsType&lt;MyService1&gt;(instance);
+</code></pre><p>It also supports enumerables - either as the created type:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterType&lt;MyService1, IMyService&gt;();
+container.RegisterType&lt;MyService2, IMyService&gt;();
+container.RegisterType&lt;MyService3, IMyService&gt;();
+container.RegisterAutoFunc&lt;IEnumerable&lt;IMyService&gt;&gt;();
+
+var factory = container.Resolve&lt;Func&lt;IEnumerable&lt;IMyService&gt;&gt;&gt;();
+var instances = factory();  // will contain three instances
+</code></pre><p>Or to resolve an enumerable of factories</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterAutoFunc&lt;IMyService&gt;();
+
+// will contain three funcs, one for each registration compatible with
+// IMyService, thanks to enumerable covariance.
+var factories = container.ResolveMany&lt;Func&lt;IMyService&gt;&gt;();
+var instances = factories.Select(f =&gt; f());
+</code></pre><p>All of the above works for custom delegate types, too (so long as they have a non-<code>void</code> return type), via the 
+<a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> overload:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">public delegate IMyService MyServiceFactory();
+</code></pre><pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterAutoFactory&lt;MyServiceFactory&gt;();
+
+var factories = container.ResolveMany&lt;MyServiceFactory&gt;();
+var instances = factories.Select(f =&gt; f());
+</code></pre><h2 id="using-arguments-for-dependencies">Using arguments for dependencies</h2>
+<p>So far, all the delegates we&#39;ve been building are nullary - that is, they have no parameters.  After all, what could Rezolver
+possibly do with the arguments that you supply?  Well, the answer is that it can use them to fulfil any dependencies that are
+required by any of the registrations used to by the delegate it creates:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterType&lt;MyService1, IMyService&gt;();
+container.RegisterType&lt;RequiresMyService, IRequiresIMyService&gt;();
+container.RegisterAutoFunc&lt;IMyService, IRequiresIMyService&gt;();
+
+var factory = container.Resolve&lt;Func&lt;IMyService, IRequiresIMyService&gt;&gt;();
+var myService2 = new MyService2();
+
+var instance = factory(myService2);
+
+Assert.Same(instance.Service, myService2);
+</code></pre><div class="WARNING"><h5>Warning</h5><p>All parameter types <strong><em>must</em></strong> be unique otherwise the registration call will fail!</p>
+</div>
+<div class="TIP"><h5>Tip</h5><p>Argument values are matched by <strong><em>type</em></strong> to dependencies which are being satisfied internally by the <a class="xref" href="../api/Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>
+when the delegate return type is resolved normally.  Most typically, this means arguments for constructor parameters.</p>
+<p>This overriding of dependencies flows all the way down through all registrations which are used to satisfy a particular
+factory&#39;s output type - so if an argument type appears in the constructor of, save, five objects which are all built as part
+of a particular request, then all five constructor calls will receive the argument instead of </p>
+</div>
+<p>This also works even if no registrations exist for the dependency type - shown below where we omit the registration
+of the <code>IMyService</code> implementation:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterType&lt;RequiresMyService, IRequiresIMyService&gt;();
+container.RegisterAutoFunc&lt;IMyService, IRequiresIMyService&gt;();
+
+var factory = container.Resolve&lt;Func&lt;IMyService, IRequiresIMyService&gt;&gt;();
+var myService2 = new MyService2();
+
+var instance = factory(myService2);
+</code></pre><p>This functionality is particularly powerful in generic scenarios where you have a component which is responsible for handling
+user-supplied objects at runtime that you can&#39;t inject via the container.</p>
+<p>Again, all of this works with custom delegate types, too.</p>
+<h2 id="scopes-and-factories">Scopes and factories</h2>
+<p>The objects produced by Autofactories are tied to the scope that created the autofactory:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterScoped&lt;MyService, IMyService&gt;();
+container.RegisterType&lt;DisposableType&gt;();
+container.RegisterAutoFunc&lt;IMyService&gt;();
+container.RegisterAutoFunc&lt;DisposableType&gt;();
+
+DisposableType outerDisposable, innerDisposable;
+
+using (var scope = container.CreateScope())
+{
+    // get two funcs for IMyService
+    var f1 = scope.Resolve&lt;Func&lt;IMyService&gt;&gt;();
+    var f2 = scope.Resolve&lt;Func&lt;IMyService&gt;&gt;();
+    var f3 = scope.Resolve&lt;Func&lt;DisposableType&gt;&gt;();
+
+    // different funcs...
+    Assert.NotSame(f1, f2);
+
+    var service1 = f1();
+    var service2 = f2();
+
+    //... but same instances because MyService was registered as Scoped.
+    Assert.Same(service1, service2); 
+
+    outerDisposable = f3();
+
+    using(var childScope = scope.CreateScope())
+    {
+        var f4 = childScope.Resolve&lt;Func&lt;DisposableType&gt;&gt;();
+        innerDisposable = f4();
+    }
+
+    Assert.True(innerDisposable.Disposed);
+    Assert.False(outerDisposable.Disposed);
+}
+Assert.True(outerDisposable.Disposed);
+</code></pre></article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
             <div class="sideaffix">

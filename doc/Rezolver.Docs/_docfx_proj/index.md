@@ -10,7 +10,7 @@ The nuget package has binaries specifically targeted to these .Net versions/stan
 - .Net 4.6.1
 
 > [!WARNING]
-> In Rezolver 1.5, Rezolver will ***only*** target `netstandard2.0` TFM.
+> Rezolver 2.0 (the next version) will ***only*** target `netstandard2.0` TFM.
 
 # Integration
 
@@ -18,7 +18,7 @@ In addition to simply using the Rezolver nuget package and creating a @Rezolver.
 
 - Asp.Net Core support (v2.2 and below) is provided by the [Rezolver.Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) package
 - [.Net Core Generic Host]((https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host)) support (v2.2 and above) is provided by the [Rezolver.Microsoft.Extensions.Hosting](docs/nuget-packages/rezolver.microsoft.extensions.hosting.md) package
-- Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an @System.IServiceProvider from an @Microsoft.Extensions.DependencyInjection.IServiceCollection) is provided by the [Rezolver.Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) package.  This package is used by the other two packages above.
+- Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an @System.IServiceProvider from an <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) is provided by the [Rezolver.Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) package.  This package is used by the other two packages above.
 
 # Quickstart
 
@@ -48,6 +48,7 @@ For full release notes for each version - [see release notes on Github](https://
 - **1.3.1**  
   - Added .Net Standard 2.0 support and more.
 
+<a name="features"></a>
 # Feature Overview
 
 _Linked topics provide high level overviews and examples in our developer guide - click on them to find out more! (*)_
@@ -96,6 +97,8 @@ _Linked topics provide high level overviews and examples in our developer guide 
 
 ## Advanced
 
+- [Delegate injection](docs/autofactories.md) ('autofactories')
+- [Lazy injection](docs/lazy.md)
 - [Generic Variance](docs/variance/index.md)
   - [Generic Contravariance](docs/variance/contravariance.md) (`Action<IFoo>` resolved for `Action<Foo>`)
   - [Generic Covariance](docs/variance/covariance.md) (`Func<Foo>` resolved for `Func<IFoo>`)
@@ -115,7 +118,8 @@ _Linked topics provide high level overviews and examples in our developer guide 
 
 ## Other
 - No 'prepare' phase - you can register targets in a container after you start using it
-  - *Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way*
+  - *Note - services which have already been used cannot yet be replaced, but mutable containers are planned.  In the meantime, you
+can use child containers to create new registrations which override those of another container*.
 - Extensible compiler framework
   - Expression tree compiler used by default
 - Extensible 'targets'
@@ -125,6 +129,7 @@ _<small> * If a topic isn't linked, it's probably because we're still working on
 
 ## Quick Links
 
+- [Quickstart](quickstart.md)
 - [Developer Guide](docs/index.md)
 - [Nuget Packages](docs/nuget-packages/index.md)
 - [API Reference](api/index.md)

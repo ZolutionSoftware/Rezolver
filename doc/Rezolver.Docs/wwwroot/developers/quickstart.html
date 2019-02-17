@@ -96,21 +96,154 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="quickstart">Quickstart</h1>
 
-<p>New to Rezolver?  New to IOC?  Here&#39;s how to do some of the basics.</p>
-<p>Before we start, you need to get a reference to the Rezolver library referenced, to do that you have two options:</p>
+<p>New to Rezolver?  New to IOC/DI (&#39;Inversion of Control&#39;, or Dependency Injection)?  Here&#39;s how to do some of the basics.</p>
+<p>Before we start, you need to get a reference to the Rezolver library added to your project, to do that you have two options:</p>
 <ol>
 <li>Add a reference to one of the <a href="docs/nuget-packages/index.html">nuget packages</a></li>
 <li>Pull the <a href="https://github.com/ZolutionSoftware/Rezolver">code from Github</a> and build it locally</li>
 </ol>
-<p>Now, after adding a <code>using</code> for the <code>Rezolver</code> namespace and you&#39;re ready to go.</p>
+<p>Now, after adding a <code>using</code> for the <code>Rezolver</code> namespace, you&#39;re ready to go.</p>
 <h1 id="basics">Basics</h1>
-<p>In general, you won&#39;t be using an IOC container directly to &#39;resolve&#39; types.  </p>
-<h2 id="registering-and-resolving">Registering and resolving</h2>
+<p>In a <a href="https://en.wikipedia.org/wiki/Dependency_injection">world of injected dependencies</a>, your code will
+typically never use the <code>new</code> operator to create instances of anything other than perhaps 
+<a href="https://en.wikipedia.org/wiki/Data_transfer_object">DTOs</a>.  </p>
+<p>For example, a method which updates a record in the database will receive not only the new values for that 
+record, but also an instance of an object that will provide access to the database.  Typically, this database 
+accessor will likely be provided as an instance of an interface, or perhaps abstract class:</p>
+<pre><code class="lang-cs">public Task UpdateWidget(Widget newValues, IRepository&lt;Widget&gt; widgetRepo)
+{
+  // find widget, update and save
+}
+</code></pre><p>This type of architecture is very typical as it decouples the code that wants to update the database from the
+code that knows how to access the database.  The challenge now becomes what type of object should be created when we 
+need an <code>IRepository&lt;Widget&gt;</code>?  This is where an IOC/DI  <strong>container</strong> - such as Rezolver - comes in.</p>
+<h2 id="services">&#39;Services&#39;</h2>
+<p>In the DI world, our <code>IRepository&lt;Widget&gt;</code> is known as a <em>service</em>.  This is not to be confused with the services that
+you might be writing as part of a Service Layer Architecture, or a web service.  A service in this case is just some object 
+that provides services to other code - it could be accessing a database, as in the case of our repository, or it could be 
+formatting numbers, providing dates/times, sending an email or almost anything else.</p>
+<p>Once all of our methods/objects have to be provided their service dependencies as arguments, it now means we either have to 
+create an instance of a type that satisfies that dependency, or pass one that we&#39;ve been given by something else.</p>
+<p>And that&#39;s where the IOC/DI container comes in - it takes care of matching an object&#39;s service dependencies to service
+<em>implementations</em> which can satisfy those dependencies.</p>
+<p>To do this, an application needs to register one or more services in the container so that, when it&#39;s asked for a service
+of a given type it knows <em>what</em> to build and <em>how</em> to build it - so that&#39;s where our quickstart kicks off.</p>
+<div class="NOTE"><h5>Note</h5><p>All of the quickstart examples shown here will work with the default <a class="xref" href="api/Rezolver.Container.html">Container</a>, <a class="xref" href="api/Rezolver.ScopedContainer.html">ScopedContainer</a> and 
+<a class="xref" href="api/Rezolver.TargetContainer.html">TargetContainer</a> types with their default configurations.</p>
+</div>
+<hr>
+<h1 id="registering-and-resolving-services">Registering and Resolving Services</h1>
+<h2 id="concrete-types">Concrete types</h2>
+<p>Initially we&#39;re just using this type:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">internal class MyType
+{
+
+}
+</code></pre><p>Here we&#39;ll create a container, register the type <code>MyType</code> and then get the container to create an instance of it.</p>
 <pre><code class="lang-csharp" name="QuickstartExamples.cs">var container = new Container();
 container.RegisterType&lt;MyType&gt;();
 
-var instance = container.Resolve&lt;MyType&gt;();
-</code></pre></article>
+MyType instance = container.Resolve&lt;MyType&gt;();
+</code></pre><p>There are a few other ways we can register <code>MyType</code> too:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">container.RegisterType(typeof(MyType));
+container.Register(Target.ForType&lt;MyType&gt;());
+container.Register(Target.ForType(typeof(MyType)));
+</code></pre><p>There&#39;s also other ways to resolve an instance:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">MyType instance = (MyType)container.Resolve(typeof(MyType));
+MyType instance2 = (MyType)container.Resolve(new ResolveContext(container, typeof(MyType)));
+</code></pre><p>When we&#39;re registering a type like this, we&#39;re telling the container to give us an instance of <code>MyType</code> by
+<a href="docs/constructor-injection/index.html">Constructor Injection</a>, as seen here - when we want to create an instance
+of a type which doesn&#39;t have a default constructor:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">internal class RequiresMyType
+{
+    public MyType Dependency { get; }
+    public RequiresMyType(MyType dependency)
+    {
+        Dependency = dependency;
+    }
+}
+</code></pre><pre><code class="lang-csharp" name="QuickstartExamples.cs">container.RegisterType&lt;MyType&gt;();
+container.RegisterType&lt;RequiresMyType&gt;();
+var instance = container.Resolve&lt;RequiresMyType&gt;();
+</code></pre><h2 id="decoupled-services--implementations">Decoupled services + implementations</h2>
+<p>Obviously, most of the time, your code will be depending upon <em>abstractions</em> instead of concrete types, for example:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">internal interface IAbstraction
+{
+    void DoSomething();
+}
+
+internal class Implementation : IAbstraction
+{
+    public Implementation()
+    {
+
+    }
+
+    public void DoSomething()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+internal class RequiresAbstraction
+{
+    public IAbstraction Dependency { get; }
+
+    public RequiresAbstraction(IAbstraction abstraction)
+    {
+        Dependency = abstraction;
+    }
+}
+</code></pre><p>So here, when creating an instance of <code>RequiresAbstraction</code>, we also require an instance of <code>IAbstraction</code>.  This
+requires registering <code>Implementation</code> against the service type <code>IAbstraction</code> so that the container knows that every
+time an instance of <code>IAbstraction</code> is required, an instance of <code>Implementation</code> should be created:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">container.RegisterType&lt;Implementation, IAbstraction&gt;();
+container.RegisterType&lt;RequiresAbstraction&gt;();
+var instance = container.Resolve&lt;RequiresAbstraction&gt;();
+</code></pre><div class="TIP"><h5>Tip</h5><p>Most of the container registration methods have overloads which allow you to specify the &#39;service type&#39; 
+against which the registration is made.  This type must be compatible with the type of whatever will be produced by
+that registration.</p>
+<p>Generally speaking - the container will only match a registration against a requested type if that registration
+was made against that <strong>exact</strong> type.  The exception to this is when registrations are matched
+<a href="docs/variance/index.html">covariantly or contravariantly</a> for generics.</p>
+</div>
+<h1 id="integration-with-the-ms-di-container">Integration with the MS DI Container</h1>
+<p>Many applications written today will be built around Asp.Net Core or the .Net Core Generic Host, and therefore will
+be creating registrations in the <a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.servicecollection">ServiceCollection</a>.  The
+<a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection package</a>
+provides Rezolver&#39;s integration with this abstraction, and can be used to populate a Rezolver container that&#39;s already
+been created:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">var container = new Container();
+ServiceCollection services = new ServiceCollection();
+services.AddTransient&lt;MyType&gt;();
+services.AddTransient&lt;RequiresMyType&gt;();
+services.AddTransient&lt;IAbstraction, Implementation&gt;();
+services.AddTransient&lt;RequiresAbstraction&gt;();
+
+container.Populate(services);
+
+var instance1 = container.Resolve&lt;RequiresMyType&gt;();
+var instance2 = container.Resolve&lt;RequiresAbstraction&gt;();
+</code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="api/Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_">Populate</a> method is available from the <code>Rezolver</code> namespace as
+soon as you reference the package.</p>
+</div>
+<p>You can also create a container directly from a <code>ServiceCollection</code> using the 
+<a class="xref" href="api/Microsoft.Extensions.DependencyInjection.RezolverServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_RezolverServiceCollectionExtensions_CreateRezolverContainer_">CreateRezolverContainer</a> extension method
+(in the <code>Microsoft.Extensions.DependencyInjection</code> namespace), shown here being used to create a container with
+the same registrations as the previous example:</p>
+<pre><code class="lang-csharp" name="QuickstartExamples.cs">var container = services.CreateRezolverContainer();
+
+var instance1 = container.Resolve&lt;RequiresMyType&gt;();
+var instance2 = container.Resolve&lt;RequiresAbstraction&gt;();
+</code></pre><p>The <a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core integration</a> and 
+<a href="docs/nuget-packages/rezolver.microsoft.extensions.hosting.html">Generic Host integration</a> packages provide even deeper
+integration with the .Net Core DI stack, and should be used when you want to drive your application with Rezolver&#39;s
+enhanced registrations.</p>
+<h1 id="further-reading">Further reading</h1>
+<p>This was just a brief flyover of Rezolver&#39;s functionality - and it is capable of so much more.</p>
+<p>Refer to the <a href="index.html#features">list of features on the homepage</a> to see all the different things that you can do with
+Rezolver, and from there you&#39;ll find links to extensive walkthroughs on how to take advantage of them.</p>
+</article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
             <div class="sideaffix">

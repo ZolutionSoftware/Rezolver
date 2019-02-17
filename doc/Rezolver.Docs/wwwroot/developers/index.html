@@ -104,14 +104,14 @@ with Asp.Net Core integration.</p>
 <li>.Net Standard 1.1</li>
 <li>.Net 4.6.1</li>
 </ul>
-<div class="WARNING"><h5>Warning</h5><p>In Rezolver 1.5, Rezolver will <strong><em>only</em></strong> target <code>netstandard2.0</code> TFM.</p>
+<div class="WARNING"><h5>Warning</h5><p>Rezolver 2.0 (the next version) will <strong><em>only</em></strong> target <code>netstandard2.0</code> TFM.</p>
 </div>
 <h1 id="integration">Integration</h1>
 <p>In addition to simply using the Rezolver nuget package and creating a <a class="xref" href="api/Rezolver.Container.html">Container</a> directly, Rezolver also offers some off-the-shelf integrations:</p>
 <ul>
 <li>Asp.Net Core support (v2.2 and below) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Rezolver.Microsoft.AspNetCore.Hosting</a> package</li>
 <li><a href="(https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host)">.Net Core Generic Host</a> support (v2.2 and above) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.hosting.html">Rezolver.Microsoft.Extensions.Hosting</a> package</li>
-<li>Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a> from an @Microsoft.Extensions.DependencyInjection.IServiceCollection) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a> package.  This package is used by the other two packages above.</li>
+<li>Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a> from an <a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a>) is provided by the <a href="docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.html">Rezolver.Microsoft.Extensions.DependencyInjection</a> package.  This package is used by the other two packages above.</li>
 </ul>
 <h1 id="quickstart">Quickstart</h1>
 <p>Read the <a href="quickstart.html">quickstart tutorial</a> - which shows how to create and use Rezolver containers.</p>
@@ -148,6 +148,7 @@ with Asp.Net Core integration.</p>
 </ul>
 </li>
 </ul>
+<p><a name="features"></a></p>
 <h1 id="feature-overview">Feature Overview</h1>
 <p><em>Linked topics provide high level overviews and examples in our developer guide - click on them to find out more! (*)</em></p>
 <h2 id="core-features">Core Features</h2>
@@ -212,6 +213,8 @@ with Asp.Net Core integration.</p>
 </ul>
 <h2 id="advanced">Advanced</h2>
 <ul>
+<li><a href="docs/autofactories.html">Delegate injection</a> (&#39;autofactories&#39;)</li>
+<li><a href="docs/lazy.html">Lazy injection</a></li>
 <li><a href="docs/variance/index.html">Generic Variance</a><ul>
 <li><a href="docs/variance/contravariance.html">Generic Contravariance</a> (<code>Action&lt;IFoo&gt;</code> resolved for <code>Action&lt;Foo&gt;</code>)</li>
 <li><a href="docs/variance/covariance.html">Generic Covariance</a> (<code>Func&lt;Foo&gt;</code> resolved for <code>Func&lt;IFoo&gt;</code>)</li>
@@ -238,7 +241,8 @@ with Asp.Net Core integration.</p>
 <h2 id="other">Other</h2>
 <ul>
 <li>No &#39;prepare&#39; phase - you can register targets in a container after you start using it<ul>
-<li><em>Note - services which have already been used cannot yet be replaced, but high-performance mutable containers are on their way</em></li>
+<li><em>Note - services which have already been used cannot yet be replaced, but mutable containers are planned.  In the meantime, you
+can use child containers to create new registrations which override those of another container</em>.</li>
 </ul>
 </li>
 <li>Extensible compiler framework<ul>
@@ -253,6 +257,7 @@ with Asp.Net Core integration.</p>
 <p><em><small> * If a topic isn&#39;t linked, it&#39;s probably because we&#39;re still working on the documentation, or because it&#39;s covered in the parent topic</small></em></p>
 <h2 id="quick-links">Quick Links</h2>
 <ul>
+<li><a href="quickstart.html">Quickstart</a></li>
 <li><a href="docs/index.html">Developer Guide</a></li>
 <li><a href="docs/nuget-packages/index.html">Nuget Packages</a></li>
 <li><a href="api/index.html">API Reference</a></li>
