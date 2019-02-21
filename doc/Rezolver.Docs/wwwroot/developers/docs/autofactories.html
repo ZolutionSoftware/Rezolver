@@ -170,7 +170,7 @@ var instances = factories.Select(f =&gt; f());
 possibly do with the arguments that you supply?  Well, the answer is that it can use them to fulfil any dependencies that are
 required by any of the registrations used to by the delegate it creates:</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterType&lt;MyService1, IMyService&gt;();
-container.RegisterType&lt;RequiresMyService, IRequiresIMyService&gt;();
+container.RegisterType&lt;RequiresIMyService, IRequiresIMyService&gt;();
 container.RegisterAutoFunc&lt;IMyService, IRequiresIMyService&gt;();
 
 var factory = container.Resolve&lt;Func&lt;IMyService, IRequiresIMyService&gt;&gt;();
@@ -185,11 +185,11 @@ Assert.Same(instance.Service, myService2);
 when the delegate return type is resolved normally.  Most typically, this means arguments for constructor parameters.</p>
 <p>This overriding of dependencies flows all the way down through all registrations which are used to satisfy a particular
 factory&#39;s output type - so if an argument type appears in the constructor of, save, five objects which are all built as part
-of a particular request, then all five constructor calls will receive the argument instead of </p>
+of a particular request, then all five constructor calls will receive the argument instead of an instance produced by the container.</p>
 </div>
 <p>This also works even if no registrations exist for the dependency type - shown below where we omit the registration
 of the <code>IMyService</code> implementation:</p>
-<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterType&lt;RequiresMyService, IRequiresIMyService&gt;();
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterType&lt;RequiresIMyService, IRequiresIMyService&gt;();
 container.RegisterAutoFunc&lt;IMyService, IRequiresIMyService&gt;();
 
 var factory = container.Resolve&lt;Func&lt;IMyService, IRequiresIMyService&gt;&gt;();
@@ -236,7 +236,82 @@ using (var scope = container.CreateScope())
     Assert.False(outerDisposable.Disposed);
 }
 Assert.True(outerDisposable.Disposed);
-</code></pre></article>
+</code></pre><div class="WARNING"><h5>Warning</h5><p>Executing a factory which was produced from a scope that is now disposed will result in an <code>ObjectDisposedException</code>
+being thrown.</p>
+</div>
+<h2 id="generics">Generics</h2>
+<p>With the <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> method, Rezolver is also capable of injecting
+delegates whose result is an open generic.  When requested, Rezolver will build a delegate of the closed version of that
+generic:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">public interface IWrapper&lt;T&gt;
+{
+    T InnerValue { get; }
+}
+
+public class Wrapper&lt;T&gt; : IWrapper&lt;T&gt;
+{
+    public Wrapper(T innerValue)
+    {
+        InnerValue = innerValue;
+    }
+
+    public T InnerValue { get; }
+}
+</code></pre><pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterObject(10);
+container.RegisterObject(&quot;hello world&quot;);
+container.RegisterType(typeof(Wrapper&lt;&gt;), typeof(IWrapper&lt;&gt;));
+container.RegisterAutoFactory(typeof(Func&lt;&gt;).MakeGenericType(typeof(IWrapper&lt;&gt;)));
+
+var f1 = container.Resolve&lt;Func&lt;IWrapper&lt;int&gt;&gt;&gt;();
+var f2 = container.Resolve&lt;Func&lt;IWrapper&lt;string&gt;&gt;&gt;();
+
+var w1 = f1();
+var w2 = f2();
+
+Assert.Equal(10, w1.InnerValue);
+Assert.Equal(&quot;hello world&quot;, w2.InnerValue);
+</code></pre><h1 id="automatic-functreturn-injection">Automatic <code>Func&lt;TReturn&gt;</code> Injection</h1>
+<p>By default, all autofactory injection is <em>opt-in</em> using the registration functions shown on this page.</p>
+<p>It is possible, however, to configure a Rezolver container to be able to automatically inject <code>Func&lt;TReturn&gt;</code> delegates,
+with the <a class="xref" href="../api/Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a> option.  As with all options in Rezolver, you have two main ways of
+configuring this.</p>
+<p>The first, and easiest, is to modify the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> like this:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">TargetContainer
+    .DefaultConfig
+    .ConfigureOption&lt;EnableAutoFuncInjection&gt;(true);
+
+var container = new Container();
+container.RegisterObject(&quot;Hello world&quot;);
+
+var f1 = container.Resolve&lt;Func&lt;string&gt;&gt;();
+
+Assert.Equal(&quot;Hello world&quot;, f1());
+</code></pre><p>The other way is to <em>clone</em> the default configuration, apply the option on the new instance and then explictly
+create the <a class="xref" href="../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> that your <a class="xref" href="../api/Rezolver.Container.html">Container</a> (or <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>) will
+use to source its registrations:</p>
+<pre><code class="lang-csharp" name="AutoFactoryExamples.cs">var config = TargetContainer
+    .DefaultConfig
+    .Clone()    // clone the configuration
+    .ConfigureOption&lt;EnableAutoFuncInjection&gt;(true);
+
+// create the container but pass a new TargetContainer 
+// to it which has been passed the configuration.
+var container = new Container(new TargetContainer(config));
+
+container.RegisterObject(&quot;Hello world&quot;);
+
+var f1 = container.Resolve&lt;Func&lt;string&gt;&gt;(); // f1() == &quot;Hello World&quot;
+</code></pre><p>Where possible, you should try to opt for the second solution.  Indeed, if you are using the 
+<a href="nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core</a> or 
+<a href="nuget-packages/rezolver.microsoft.extensions.hosting.html">Generic Host</a> integration packages then you can supply a callback
+to the <a class="xref" href="../api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_"><code>IWebHostBuilder.UseRezolver</code> extension method</a>
+or the <a class="xref" href="../api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_UseRezolver_"><code>IHostBuilder.UseRezolver</code> extension methods</a>
+which give you the opportunity to modify the <a class="xref" href="../api/Rezolver.CombinedTargetContainerConfig.html">CombinedTargetContainerConfig</a> before the target container is created.</p>
+<hr>
+<h1 id="see-also">See also</h1>
+<p><a href="lazy.html">Automatic Lazy Injection</a> is a feature which builds on the topics discussed here to enable the automatic injection
+of <code>Lazy&lt;T&gt;</code>.</p>
+</article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
             <div class="sideaffix">

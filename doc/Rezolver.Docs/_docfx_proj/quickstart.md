@@ -131,5 +131,6 @@ enhanced registrations.
 
 This was just a brief flyover of Rezolver's functionality - and it is capable of so much more.
 
-Refer to the [list of features on the homepage](index.md#features) to see all the different things that you can do with
+- Refer to the [list of features on the homepage](index.md#features) to see all the different things that you can do with
 Rezolver, and from there you'll find links to extensive walkthroughs on how to take advantage of them.
+- Take a look at the [Developer guide]

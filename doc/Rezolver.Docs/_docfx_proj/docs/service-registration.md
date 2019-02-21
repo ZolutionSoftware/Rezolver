@@ -46,6 +46,10 @@ of this site:
 - @Rezolver.ScopedTargetContainerExtensions *- for [registering scoped constructor-injected types](lifetimes/scoped.md)*
 - @Rezolver.SingletonTargetContainerExtensions *- for [registering singleton constructor-injected types](lifetimes/singleton.md)*
 
+> [!NOTE] 
+> This list isn't exhaustive, and in Rezolver 2.0 all the registration extension methods will be relocated into a single
+> extension class.
+
 ## Registering via @Rezolver.ITargetContainer.Register*
 
 To add registrations to an @Rezolver.ITargetContainer directly, i.e. without extension methods, we ultimately use the 
@@ -131,10 +135,10 @@ to fulfil a @Rezolver.IContainer.Resolve* operation, specifically:
 
 - If the target also supports the @Rezolver.ICompiledTarget interface, then its @Rezolver.ICompiledTarget.GetObject* method
 will be used to get the object.
-- If the target can be cast to the type originally requested through the @Rezolver.IContainer.Resolve* method, then target
+- If the target can be cast to the type originally requested through the @Rezolver.IContainer.Resolve* method, then the target
 will be returned as the object.
 
-The framework exploits both of these techniques to use the container as the source of its own services and configuration.
+The framework exploits both of these techniques to use the container as the source of its own services, configuration and options.
 
 # Next steps
 

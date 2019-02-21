@@ -112,6 +112,7 @@ all <a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extens
 <pre><code class="lang-csharp" name="Program.cs">using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Rezolver.Options;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -136,6 +137,10 @@ namespace Rezolver.Examples.GenericHost
                     // internally, the host resolves services as IEnumerable&lt;IHostedService&gt;,
                     // so this decorator will decorate all hosted services.
                     targets.RegisterDecorator&lt;LoggingServiceDecorator, IHostedService&gt;();
+                }, options =&gt;
+                {
+                    // example of configuring global options for this application
+                    options.TargetContainerConfig.ConfigureOption&lt;EnableAutoFuncInjection&gt;(true);
                 })
                 .RunConsoleAsync();
         }

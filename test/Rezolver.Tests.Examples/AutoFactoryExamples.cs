@@ -1,4 +1,5 @@
-﻿using Rezolver.Tests.Examples.Types;
+﻿using Rezolver.Options;
+using Rezolver.Tests.Examples.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -169,6 +170,87 @@ namespace Rezolver.Tests.Examples
             }
             Assert.True(outerDisposable.Disposed);
             // </example7>
+        }
+
+        // <example8a>
+        public interface IWrapper<T>
+        {
+            T InnerValue { get; }
+        }
+
+        public class Wrapper<T> : IWrapper<T>
+        {
+            public Wrapper(T innerValue)
+            {
+                InnerValue = innerValue;
+            }
+
+            public T InnerValue { get; }
+        }
+        // </example8a>
+
+        [Fact]
+        public void ShouldProduceClosedGeneric()
+        {
+            var container = new Container();
+
+            // <example8b>
+            container.RegisterObject(10);
+            container.RegisterObject("hello world");
+            container.RegisterType(typeof(Wrapper<>), typeof(IWrapper<>));
+            container.RegisterAutoFactory(typeof(Func<>).MakeGenericType(typeof(IWrapper<>)));
+
+            var f1 = container.Resolve<Func<IWrapper<int>>>();
+            var f2 = container.Resolve<Func<IWrapper<string>>>();
+
+            var w1 = f1();
+            var w2 = f2();
+
+            Assert.Equal(10, w1.InnerValue);
+            Assert.Equal("hello world", w2.InnerValue);
+            // </example8b>
+        }
+
+
+        //[Fact]
+#pragma warning disable xUnit1013 // Public method should be marked as test
+        public void ShouldAutoRegisterFunc_ViaGlobalConfig()
+#pragma warning restore xUnit1013 // Public method should be marked as test
+        {
+            // note - this isn't a test, because changing the global default configuration for all TargetContainers
+            // would break a bunch of tests!
+            // <example9a>
+            TargetContainer
+                .DefaultConfig
+                .ConfigureOption<EnableAutoFuncInjection>(true);
+
+            var container = new Container();
+            container.RegisterObject("Hello world");
+
+            var f1 = container.Resolve<Func<string>>();
+
+            Assert.Equal("Hello world", f1());
+            // </example9a>
+        }
+
+        [Fact]
+        public void ShouldAutoRegisterFunc_ViaNewConfig()
+        {
+            // <example9b>
+            var config = TargetContainer
+                .DefaultConfig
+                .Clone()    // clone the configuration
+                .ConfigureOption<EnableAutoFuncInjection>(true);
+
+            // create the container but pass a new TargetContainer 
+            // to it which has been passed the configuration.
+            var container = new Container(new TargetContainer(config));
+
+            container.RegisterObject("Hello world");
+
+            var f1 = container.Resolve<Func<string>>(); // f1() == "Hello World"
+            // </example9b>
+            Assert.Equal("Hello world", f1());
         }
     }
 }

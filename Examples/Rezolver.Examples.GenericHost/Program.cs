@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Rezolver.Options;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,6 +26,10 @@ namespace Rezolver.Examples.GenericHost
                     // internally, the host resolves services as IEnumerable<IHostedService>,
                     // so this decorator will decorate all hosted services.
                     targets.RegisterDecorator<LoggingServiceDecorator, IHostedService>();
+                }, options =>
+                {
+                    // example of configuring global options for this application
+                    options.TargetContainerConfig.ConfigureOption<EnableAutoFuncInjection>(true);
                 })
                 .RunConsoleAsync();
         }

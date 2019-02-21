@@ -16,6 +16,8 @@ be made available for in-development features.
 without having to change core types.  If that's not the case, post an issue on the Github project so we can get it added in and
 make it better for everyone!
 
+For more, read our [Quickstart Guide](../quickstart.md).
+
 * * *
 
 # Tests as Examples

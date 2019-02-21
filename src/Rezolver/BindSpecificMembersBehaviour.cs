@@ -13,6 +13,9 @@ namespace Rezolver
     /// <summary>
     /// Overrides the <see cref="BindAllMembersBehaviour"/> to provide explicit per-member bindings.
     /// </summary>
+    /// <remarks>
+    /// See [the fluent API documentation](/developers/docs/member-injection/fluent-api.html) for more.
+    /// </remarks>
     public class BindSpecificMembersBehaviour : BindAllMembersBehaviour
     {
         private readonly Dictionary<MemberInfoKey, MemberBinding> members;

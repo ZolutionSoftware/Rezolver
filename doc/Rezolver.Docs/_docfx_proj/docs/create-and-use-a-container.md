@@ -176,41 +176,28 @@ bool canResolve = container.CanResolve<MyService>();
 
 * * *
 
-# Container Configurations and Options
+# Container Options and Configuration
 
-For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
-the @Rezolver.ITargetContainer and @Rezolver.IContainer implementations mentioned above also use
-another mechanism that provides extensibility without having to subclass them.
+Much of Rezolver's built-in extended functionality can be switched on and off - often at a per-service level - through the use of
+Options which are used to control the activation of 'configuration objects' which manipulate the registrations which are
+made in the container.  For example, the @Rezolver.Configuration.InjectAutoLazies configuration (which enables
+the automatic injection of `Lazy<T>` instances) is controlled by the @Rezolver.Options.EnableAutoLazyInjection boolean option.
 
-> [!NOTE]
-> This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
-> this guide will highlight where you can use the functionality described below - this section is intended to be 
-> a high-level overview only. 
+At an application-level, the easiest way to modify the configuration of the container before it is created is to use the
+[Asp.Net Core](nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) or 
+[Generic Host](nuget-packages/rezolver.microsoft.extensions.hosting.md) integration packages - both of which allow you to supply 
+a callback to the [`IWebHostBuilder.UseRezolver` extension method](xref:Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver*)
+or the [`IHostBuilder.UseRezolver` extension methods](xref:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver*).
 
-There are two primary types of container configuration in Rezolver:
+> [!TIP]
+> The documentation for both of the integration packages mentioned above have example code which show how you'd configure your
+> container options before the container is actually created.
 
-1. **Target container configuration** (via implementations of <xref:Rezolver.ITargetContainerConfig>)
-2. **Container configuration** (via implementations of <xref:Rezolver.IContainerConfig>)
-
-Both are very similar in that they define a method called `Configure` (see 
-[ITargetContainerConfig.Configure](xref:Rezolver.ITargetContainerConfig.Configure*) and 
-[IContainerConfig.Configure](xref:Rezolver.IContainerConfig.Configure*)) to 
-which is passed an @Rezolver.ITargetContainer and, in the case of @Rezolver.IContainerConfig, also an
-@Rezolver.IContainer.
-
-Implementations of the interfaces can add/modify service registrations which are then used either directly by the 
-container, or which provide more advanced registration functionality.
-
-For example, Rezolver's [automatic enumerable injection](enumerables.md) is enabled by the 
-@Rezolver.Configuration.InjectEnumerables configuration when it configures an @Rezolver.ITargetContainer.  This configuration
-is actually applied to all instances of @Rezolver.TargetContainer by default (via the @Rezolver.TargetContainer.DefaultConfig
-configuration collection) - but you can also control whether enumerable injection is enabled without having to remove the 
-configuration from that collection, [as is shown in the last enumerable example](enumerables.md#disabling-enumerable-injection).
-
-There is much more to be covered about configuration and options.  For now - use them where this guide shows you can
-(e.g. to [control contravariance](variance/contravariance.md#disabling-contravariance-advanced) or 
-[member binding behaviour](member-injection/index.md) etc), and if you want to be able to control
-something else this way, and can't, then just open an issue on Github.
+In these, you can manipulate the @Rezolver.CombinedTargetContainerConfig that will be used to create the container, thus allowing
+you to switch on and off any of the features in Rezolver which are configurable.  This is still possible if you're not using these
+packages, of course - either by directly manipulating the @Rezolver.TargetContainer.DefaultConfig global default configuration
+(**before** creating a new @Rezolver.Container of course!) or by cloning that config and passing it to a @Rezolver.TargetContainer
+on construction.
 
 * * *
 

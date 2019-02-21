@@ -351,7 +351,6 @@ The registration will auto-bind a constructor based on the services available in
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void RegisterType&lt;TObject, TService&gt;(this ITargetContainer targetContainer, IMemberBindingBehaviour memberBinding = null)
-
     where TObject : TService</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -423,7 +422,6 @@ created via constructor injection.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void RegisterType&lt;TObject, TService&gt;(this ITargetContainer targets, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt; configureMemberBinding)
-
     where TObject : TService</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

@@ -150,6 +150,16 @@ supports binding to types which have multiple constructors.</p>
 
     IMyService IRequiresIMyService.Service { get { return Service; } }
 }
+
+public class RequiresIMyService : IRequiresIMyService
+{
+    public IMyService Service { get; }
+
+    public RequiresIMyService(IMyService service)
+    {
+        Service = service;
+    }
+}
 </code></pre><div class="NOTE"><h5>Note</h5><p>The rather silly explicit implementation and argument checking in the second constructor is purely for 
 illustrative purposes!</p>
 </div>

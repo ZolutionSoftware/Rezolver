@@ -61,7 +61,7 @@ required by any of the registrations used to by the delegate it creates:
 > 
 > This overriding of dependencies flows all the way down through all registrations which are used to satisfy a particular
 > factory's output type - so if an argument type appears in the constructor of, save, five objects which are all built as part
-> of a particular request, then all five constructor calls will receive the argument instead of 
+> of a particular request, then all five constructor calls will receive the argument instead of an instance produced by the container.
 
 This also works even if no registrations exist for the dependency type - shown below where we omit the registration
 of the `IMyService` implementation:
@@ -78,3 +78,49 @@ Again, all of this works with custom delegate types, too.
 The objects produced by Autofactories are tied to the scope that created the autofactory:
 
 [!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example7)]
+
+> [!WARNING]
+> Executing a factory which was produced from a scope that is now disposed will result in an `ObjectDisposedException`
+> being thrown.
+
+## Generics
+
+With the @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory* method, Rezolver is also capable of injecting
+delegates whose result is an open generic.  When requested, Rezolver will build a delegate of the closed version of that
+generic:
+
+[!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example8a)]
+[!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example8b)]
+
+<a name="automatic"></a>
+# Automatic `Func<TReturn>` Injection
+
+By default, all autofactory injection is *opt-in* using the registration functions shown on this page.
+
+It is possible, however, to configure a Rezolver container to be able to automatically inject `Func<TReturn>` delegates,
+with the @Rezolver.Options.EnableAutoFuncInjection option.  As with all options in Rezolver, you have two main ways of
+configuring this.
+
+The first, and easiest, is to modify the @Rezolver.TargetContainer.DefaultConfig like this:
+
+[!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example9a)]
+
+The other way is to *clone* the default configuration, apply the option on the new instance and then explictly
+create the @Rezolver.IRootTargetContainer that your @Rezolver.Container (or <xref:Rezolver.ScopedContainer>) will
+use to source its registrations:
+
+[!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example9b)]
+
+Where possible, you should try to opt for the second solution.  Indeed, if you are using the 
+[Asp.Net Core](nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) or 
+[Generic Host](nuget-packages/rezolver.microsoft.extensions.hosting.md) integration packages then you can supply a callback
+to the [`IWebHostBuilder.UseRezolver` extension method](xref:Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.UseRezolver*)
+or the [`IHostBuilder.UseRezolver` extension methods](xref:Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.UseRezolver*)
+which give you the opportunity to modify the @Rezolver.CombinedTargetContainerConfig before the target container is created.
+
+---
+
+# See also
+
+[Automatic Lazy Injection](lazy.md) is a feature which builds on the topics discussed here to enable the automatic injection
+of `Lazy<T>`.

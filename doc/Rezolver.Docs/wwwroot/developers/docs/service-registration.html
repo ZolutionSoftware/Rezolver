@@ -139,6 +139,9 @@ of this site:</p>
 <li><a class="xref" href="../api/Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a> <em>- for <a href="lifetimes/scoped.html">registering scoped constructor-injected types</a></em></li>
 <li><a class="xref" href="../api/Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a> <em>- for <a href="lifetimes/singleton.html">registering singleton constructor-injected types</a></em></li>
 </ul>
+<div class="NOTE"><h5>Note</h5><p>This list isn&#39;t exhaustive, and in Rezolver 2.0 all the registration extension methods will be relocated into a single
+extension class.</p>
+</div>
 <h2 id="registering-via-rezolveritargetcontainerregister">Registering via <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a></h2>
 <p>To add registrations to an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> directly, i.e. without extension methods, we ultimately use the 
 <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a> method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> object and an optional <code>Type</code> against 
@@ -211,10 +214,10 @@ to fulfil a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_ICont
 <ul>
 <li>If the target also supports the <a class="xref" href="../api/Rezolver.ICompiledTarget.html">ICompiledTarget</a> interface, then its <a class="xref" href="../api/Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_">GetObject</a> method
 will be used to get the object.</li>
-<li>If the target can be cast to the type originally requested through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method, then target
+<li>If the target can be cast to the type originally requested through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method, then the target
 will be returned as the object.</li>
 </ul>
-<p>The framework exploits both of these techniques to use the container as the source of its own services and configuration.</p>
+<p>The framework exploits both of these techniques to use the container as the source of its own services, configuration and options.</p>
 <h1 id="next-steps">Next steps</h1>
 <ul>
 <li>Use <a href="#target-types">some of the links</a> above to start exploring different ways to create objects in Rezolver.</li>

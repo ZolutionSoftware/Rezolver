@@ -26,6 +26,10 @@
   href: objects.md
 - name: Factory Delegates
   href: delegates.md
+- name: Autofactory injection
+  href: autofactories.md
+- name: Lazy<T> injection
+  href: lazy.md
 - name: Expression Trees
   href: expressions.md
 - name: Generic Variance

@@ -221,35 +221,24 @@ by using the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_ICon
 methods (e.g. <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">CanResolve&lt;TObject&gt;(IContainer)</a>)):</p>
 <pre><code class="lang-cs">bool canResolve = container.CanResolve&lt;MyService&gt;();
 </code></pre><hr>
-<h1 id="container-configurations-and-options">Container Configurations and Options</h1>
-<p>For those looking to customise or extend Rezolver, many of the types are overridable.  However, 
-the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a> implementations mentioned above also use
-another mechanism that provides extensibility without having to subclass them.</p>
-<div class="NOTE"><h5>Note</h5><p>This is an advanced topic and not one that you should have to worry about most of the time.  The examples in
-this guide will highlight where you can use the functionality described below - this section is intended to be 
-a high-level overview only. </p>
+<h1 id="container-options-and-configuration">Container Options and Configuration</h1>
+<p>Much of Rezolver&#39;s built-in extended functionality can be switched on and off - often at a per-service level - through the use of
+Options which are used to control the activation of &#39;configuration objects&#39; which manipulate the registrations which are
+made in the container.  For example, the <a class="xref" href="../api/Rezolver.Configuration.InjectAutoLazies.html">InjectAutoLazies</a> configuration (which enables
+the automatic injection of <code>Lazy&lt;T&gt;</code> instances) is controlled by the <a class="xref" href="../api/Rezolver.Options.EnableAutoLazyInjection.html">EnableAutoLazyInjection</a> boolean option.</p>
+<p>At an application-level, the easiest way to modify the configuration of the container before it is created is to use the
+<a href="nuget-packages/rezolver.microsoft.aspnetcore.hosting.html">Asp.Net Core</a> or 
+<a href="nuget-packages/rezolver.microsoft.extensions.hosting.html">Generic Host</a> integration packages - both of which allow you to supply 
+a callback to the <a class="xref" href="../api/Microsoft.AspNetCore.Hosting.RezolverServiceProviderWebHostBuilderExtensions.html#Microsoft_AspNetCore_Hosting_RezolverServiceProviderWebHostBuilderExtensions_UseRezolver_"><code>IWebHostBuilder.UseRezolver</code> extension method</a>
+or the <a class="xref" href="../api/Microsoft.Extensions.Hosting.RezolverHostBuilderExtensions.html#Microsoft_Extensions_Hosting_RezolverHostBuilderExtensions_UseRezolver_"><code>IHostBuilder.UseRezolver</code> extension methods</a>.</p>
+<div class="TIP"><h5>Tip</h5><p>The documentation for both of the integration packages mentioned above have example code which show how you&#39;d configure your
+container options before the container is actually created.</p>
 </div>
-<p>There are two primary types of container configuration in Rezolver:</p>
-<ol>
-<li><strong>Target container configuration</strong> (via implementations of <a class="xref" href="../api/Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>)</li>
-<li><strong>Container configuration</strong> (via implementations of <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>)</li>
-</ol>
-<p>Both are very similar in that they define a method called <code>Configure</code> (see 
-<a class="xref" href="../api/Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_">ITargetContainerConfig.Configure</a> and 
-<a class="xref" href="../api/Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_">IContainerConfig.Configure</a>) to 
-which is passed an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> and, in the case of <a class="xref" href="../api/Rezolver.IContainerConfig.html">IContainerConfig</a>, also an
-<a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>.</p>
-<p>Implementations of the interfaces can add/modify service registrations which are then used either directly by the 
-container, or which provide more advanced registration functionality.</p>
-<p>For example, Rezolver&#39;s <a href="enumerables.html">automatic enumerable injection</a> is enabled by the 
-<a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration when it configures an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.  This configuration
-is actually applied to all instances of <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> by default (via the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>
-configuration collection) - but you can also control whether enumerable injection is enabled without having to remove the 
-configuration from that collection, <a href="enumerables.html#disabling-enumerable-injection">as is shown in the last enumerable example</a>.</p>
-<p>There is much more to be covered about configuration and options.  For now - use them where this guide shows you can
-(e.g. to <a href="variance/contravariance.html#disabling-contravariance-advanced">control contravariance</a> or 
-<a href="member-injection/index.html">member binding behaviour</a> etc), and if you want to be able to control
-something else this way, and can&#39;t, then just open an issue on Github.</p>
+<p>In these, you can manipulate the <a class="xref" href="../api/Rezolver.CombinedTargetContainerConfig.html">CombinedTargetContainerConfig</a> that will be used to create the container, thus allowing
+you to switch on and off any of the features in Rezolver which are configurable.  This is still possible if you&#39;re not using these
+packages, of course - either by directly manipulating the <a class="xref" href="../api/Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> global default configuration
+(<strong>before</strong> creating a new <a class="xref" href="../api/Rezolver.Container.html">Container</a> of course!) or by cloning that config and passing it to a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a>
+on construction.</p>
 <hr>
 <h1 id="next-steps">Next Steps</h1>
 <ul>

@@ -2361,7 +2361,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -2375,7 +2375,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -4795,7 +4795,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -4809,7 +4809,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -7265,7 +7265,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -7279,7 +7279,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -9708,7 +9708,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -9722,7 +9722,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -12187,7 +12187,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -12201,7 +12201,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -14630,7 +14630,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -14644,7 +14644,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -17109,7 +17109,7 @@
           "build/netstandard1.0/Xamarin.Forms.targets": {}
         }
       },
-      "Rezolver/1.4.0-alpha-1902131311": {
+      "Rezolver/1.4.0-alpha-1902211730": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
@@ -17123,7 +17123,7 @@
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Rezolver": "1.4.0-alpha-1902131311",
+          "Rezolver": "1.4.0-alpha-1902211730",
           "Xamarin.Forms": "2.4.0.282"
         }
       }
@@ -23814,7 +23814,7 @@
         "xamarin.forms.nuspec"
       ]
     },
-    "Rezolver/1.4.0-alpha-1902131311": {
+    "Rezolver/1.4.0-alpha-1902211730": {
       "type": "project",
       "path": "../../../src/Rezolver/Rezolver.csproj",
       "msbuildProject": "../../../src/Rezolver/Rezolver.csproj"
