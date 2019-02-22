@@ -20,6 +20,13 @@ For more information, including API reference and developer how-tos, head on ove
 
 # Version Highlights
 
+## 1.4.0
+
+- Added [Generic Host Support](http://rezolver.co.uk/developers/docs/nuget-packages/rezolver.microsoft.extensions.hosting.html)
+- Added [Autofactory Injection](http://rezolver.co.uk/developers/docs/autofactories.html)
+- Added [Automatic `Lazy<T>` Injection](http://rezolver.co.uk/developers/docs/lazy.html)
+- Fixed a [critical bug (#77)](https://github.com/ZolutionSoftware/Rezolver/issues/77) for Release-build Asp.Net Core Apps 
+
 ## 1.3.4
 
 Primary purpose of this release was to have a build that's been built and tested explicitly against the .Net Core 2.1

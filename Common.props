@@ -7,7 +7,7 @@
     <PackageReleaseNotes>See https://github.com/ZolutionSoftware/Rezolver/releases</PackageReleaseNotes>
     <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
     <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ZolutionSoftware/Rezolver/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Product>Rezolver</Product>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ZolutionSoftware/Rezolver</RepositoryUrl>
