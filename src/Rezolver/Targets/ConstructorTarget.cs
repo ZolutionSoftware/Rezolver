@@ -27,6 +27,8 @@ namespace Rezolver.Targets
     /// To compile this target, an <see cref="Compilation.ITargetCompiler"/> should first call the <see cref="Bind(ICompileContext)"/> method,
     /// which will select the correct constructor to be bound based on the original arguments passed to the target when it was built, and
     /// the other registrations in the <see cref="ITargetContainer"/> that's active when compilation occurs.
+    /// 
+    /// This target is used to implement [constructor injection](/developers/docs/constructor-injection/index.html).
     /// </remarks>
     public partial class ConstructorTarget : TargetBase
     {

@@ -16,6 +16,9 @@ namespace Rezolver
     /// <seealso cref="BindNoMembersBehaviour"/>
     /// <seealso cref="BindAllMembersBehaviour"/>
     /// <seealso cref="MemberBindingBehaviour"/>
+    /// <remarks>
+    /// See the [member binding guide](/developers/docs/member-injection/index.html) for more.
+    /// </remarks>
     public interface IMemberBindingBehaviour
     {
         /// <summary>

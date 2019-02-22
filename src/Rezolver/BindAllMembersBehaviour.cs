@@ -24,7 +24,10 @@ namespace Rezolver
     /// as well as how those bindings are created.
     ///
     /// The default behaviour is to bind each member to a new <see cref="ResolvedTarget"/> whose
-    /// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
+    /// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.
+    /// 
+    /// See the [member binding guide](/developers/docs/member-injection/index.html) for more.
+    /// </remarks>
     public class BindAllMembersBehaviour : IMemberBindingBehaviour
     {
         /// <summary>

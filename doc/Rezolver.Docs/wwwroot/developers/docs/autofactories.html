@@ -270,7 +270,8 @@ var w2 = f2();
 
 Assert.Equal(10, w1.InnerValue);
 Assert.Equal(&quot;hello world&quot;, w2.InnerValue);
-</code></pre><h1 id="automatic-functreturn-injection">Automatic <code>Func&lt;TReturn&gt;</code> Injection</h1>
+</code></pre><p><a name="automatic"></a></p>
+<h1 id="automatic-functreturn-injection">Automatic <code>Func&lt;TReturn&gt;</code> Injection</h1>
 <p>By default, all autofactory injection is <em>opt-in</em> using the registration functions shown on this page.</p>
 <p>It is possible, however, to configure a Rezolver container to be able to automatically inject <code>Func&lt;TReturn&gt;</code> delegates,
 with the <a class="xref" href="../api/Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a> option.  As with all options in Rezolver, you have two main ways of

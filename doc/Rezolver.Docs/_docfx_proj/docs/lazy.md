@@ -1,25 +1,52 @@
 ﻿# Automatic Lazy&lt;T&gt; Injection
 
-This was added at the same time as the [Autofactory injection](autofactories.md), in 1.4, as the two sets of functionality go hand
-in hand.
+This functionality builds on [Autofactory injection](autofactories.md) to provide the ability to inject @System.Lazy`1 instances where the container is used
+to create the instance on-demand.
 
-Indeed - to really get the most out of this functionality, you'll probably want to enable [automatic `Func<T>` injection](autofactories.md#automatic)
-as well as enable [automatic `Lazy<T>` injection](#automatic).
+This is not something that's easily achievable via conventional registrations, because the constructors for `Lazy<T>` create an inherent ambiguity: 
 
-Normally, in order to be able to inject `Lazy<T>` objects which actually perform just-in-time initialisation of their value, you would 
-have to explicitly register a `Func<T>` as an object (or via some custom @Rezolver.ITarget implementation); and then either register 
-the open type `Lazy<T>` or a closed version of it whose value type matches the return type of that delegate.
+[!code-csharp[AutoLazyExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoLazyExamples.cs#example0)]
 
-That's because of the [best-matched behaviour](constructor-injection/generics.md#best-match-vs-specific) that's used by default, which
-selects the best constructor in a type that's available, based on the registrations in the container.
+If you try to do this, the `Resolve` call will throw an @System.Reflection.AmbiguousMatchException because Rezolver is unable to decide whether to bind to the 
+<xref:System.Lazy%601.%23ctor(%600)?displayProperty=nameWithType> or <xref:System.Lazy%601.%23ctor(System.Func%7b%600%7d)?displayProperty=nameWithType>
+constructor.
 
-You could also [explicitly target the required constructor on the `Lazy<T>` type](constructor-injection/generics-manual-constructor.md), 
-but the problem is that you're going to have to jump through a few hoops in order to be able to use the container's own registrations
-to build the instead for the Lazy.
+Whilst it is possible to [bind to a specific constructor on a generic type](/constructor-injection/generics-manual-constructor.md), the whole experience isn't
+exactly friendly.
 
-Automatic Lazy Injection is a feature which takes away all this pain, whilst also transparently allowing the container to
-be used in the proouction of lazily-initialised instance.
+Instead, you can configure your container to automatically support `Lazy<T>` injection by getting it to automatically assume that you want it to be implemented
+via the <xref:System.Lazy%601.%23ctor(System.Func%7b%600%7d)?displayProperty=nameWithType> constructor, with the `valueFactory` parameter being provided a 
+delegate that's resolved from the container.
 
-## How to enable
+# Enabling
 
-Automatic 
+Enabling automatic lazy injection is similar to [how we enable automatic `Func<T>` injection](autofactories.md#automatic):
+
+[!code-csharp[AutoLazyExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoLazyExamples.cs#example1a)]
+
+With this in place, we can adjust our earlier attempt, and it'll work:
+
+[!code-csharp[AutoLazyExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoLazyExamples.cs#example1b)]
+
+## Simplifying
+
+As you can see from that example, we still need to use the @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc* method to make it possible
+for the `Lazy<IFoo>` to be created (or we could register our own `Func<T>` to be used instead).
+
+Instead, if we also [enable Automatic `Func<T>` injection](autofactories.md#automatic-functreturn-injection) using the @Rezolver.Options.EnableAutoFuncInjection 
+option, then we can remove the need for the second registration:
+
+[!code-csharp[AutoLazyExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoLazyExamples.cs#example2a)]
+
+[!code-csharp[AutoLazyExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoLazyExamples.cs#example2b)]
+
+# Interaction with scopes
+
+As with Autofactories, Rezolver's automatically generated `Lazy<T>` instances will work with scopes correctly.  The scope that produces a Lazy instance will be
+the scope to which its @System.Lazy`1.Value will be tied:
+
+[!code-csharp[AutoLazyExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoLazyExamples.cs#example3)]
+
+> [!TIP]
+> This is also true for [Singleton](lifetimes/singleton.md) objects, including disposable singletons (which are rooted to the 'outer' scope to prevent early
+> disposal).

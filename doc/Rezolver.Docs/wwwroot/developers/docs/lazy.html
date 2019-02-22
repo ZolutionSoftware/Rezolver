@@ -5,9 +5,9 @@
   <head>
   	<meta charset="utf-8">
   	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  	<title>Markdown File | Rezolver IOC </title>
+  	<title>Automatic Lazy&lt;T&gt; Injection | Rezolver IOC </title>
   	<meta name="viewport" content="width=device-width">
-  	<meta name="title" content="Markdown File | Rezolver IOC ">
+  	<meta name="title" content="Automatic Lazy&lt;T&gt; Injection | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
@@ -101,8 +101,95 @@
         <div class="article row grid-right">
           <div class="col-md-9">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="markdown-file">Markdown File</h1>
+<h1 id="automatic-lazylttgt-injection">Automatic Lazy&lt;T&gt; Injection</h1>
 
+<p>This functionality builds on <a href="autofactories.html">Autofactory injection</a> to provide the ability to inject <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a> instances where the container is used
+to create the instance on-demand.</p>
+<p>This is not something that&#39;s easily achievable via conventional registrations, because the constructors for <code>Lazy&lt;T&gt;</code> create an inherent ambiguity: </p>
+<pre><code class="lang-csharp" name="AutoLazyExamples.cs">container.RegisterType&lt;Foo, IFoo&gt;();
+container.RegisterAutoFunc&lt;IFoo&gt;();
+container.RegisterType&lt;Lazy&lt;IFoo&gt;&gt;();
+
+var result = container.Resolve&lt;Lazy&lt;IFoo&gt;&gt;();
+</code></pre><p>If you try to do this, the <code>Resolve</code> call will throw an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.ambiguousmatchexception">AmbiguousMatchException</a> because Rezolver is unable to decide whether to bind to the 
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1.-ctor#System_Lazy_1__ctor__0_">Lazy&lt;T&gt;.Lazy&lt;T&gt;(T)</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1.-ctor#System_Lazy_1__ctor_System_Func__0__">Lazy&lt;T&gt;.Lazy&lt;T&gt;(Func&lt;T&gt;)</a>
+constructor.</p>
+<p>Whilst it is possible to <a href="/constructor-injection/generics-manual-constructor.md">bind to a specific constructor on a generic type</a>, the whole experience isn&#39;t
+exactly friendly.</p>
+<p>Instead, you can configure your container to automatically support <code>Lazy&lt;T&gt;</code> injection by getting it to automatically assume that you want it to be implemented
+via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1.-ctor#System_Lazy_1__ctor_System_Func__0__">Lazy&lt;T&gt;.Lazy&lt;T&gt;(Func&lt;T&gt;)</a> constructor, with the <code>valueFactory</code> parameter being provided a 
+delegate that&#39;s resolved from the container.</p>
+<h1 id="enabling">Enabling</h1>
+<p>Enabling automatic lazy injection is similar to <a href="autofactories.html#automatic">how we enable automatic <code>Func&lt;T&gt;</code> injection</a>:</p>
+<pre><code class="lang-csharp" name="AutoLazyExamples.cs">// This shows creating a new configuration
+// but it can also be applied directly to the DefaultConfig.
+var config = TargetContainer
+    .DefaultConfig
+    .Clone()
+    .ConfigureOption&lt;EnableAutoLazyInjection&gt;(true);
+
+var container = new Container(new TargetContainer(config));
+</code></pre><p>With this in place, we can adjust our earlier attempt, and it&#39;ll work:</p>
+<pre><code class="lang-csharp" name="AutoLazyExamples.cs">container.RegisterType&lt;Foo, IFoo&gt;();
+container.RegisterAutoFunc&lt;IFoo&gt;();
+
+var result = container.Resolve&lt;Lazy&lt;IFoo&gt;&gt;();
+</code></pre><h2 id="simplifying">Simplifying</h2>
+<p>As you can see from that example, we still need to use the <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc_">RegisterAutoFunc</a> method to make it possible
+for the <code>Lazy&lt;IFoo&gt;</code> to be created (or we could register our own <code>Func&lt;T&gt;</code> to be used instead).</p>
+<p>Instead, if we also <a href="autofactories.html#automatic-functreturn-injection">enable Automatic <code>Func&lt;T&gt;</code> injection</a> using the <a class="xref" href="../api/Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a> 
+option, then we can remove the need for the second registration:</p>
+<pre><code class="lang-csharp" name="AutoLazyExamples.cs">// This shows creating a new configuration
+// but it can also be applied directly to the DefaultConfig.
+var config = TargetContainer
+    .DefaultConfig
+    .Clone()
+    .ConfigureOption&lt;EnableAutoFuncInjection&gt;(true)
+    .ConfigureOption&lt;EnableAutoLazyInjection&gt;(true);
+
+var container = new Container(new TargetContainer(config));
+</code></pre><pre><code class="lang-csharp" name="AutoLazyExamples.cs">container.RegisterType&lt;Foo, IFoo&gt;();
+
+var result = container.Resolve&lt;Lazy&lt;IFoo&gt;&gt;();
+</code></pre><h1 id="interaction-with-scopes">Interaction with scopes</h1>
+<p>As with Autofactories, Rezolver&#39;s automatically generated <code>Lazy&lt;T&gt;</code> instances will work with scopes correctly.  The scope that produces a Lazy instance will be
+the scope to which its <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1.value#System_Lazy_1_Value">Value</a> will be tied:</p>
+<pre><code class="lang-csharp" name="AutoLazyExamples.cs">container.RegisterScoped&lt;MyService, IMyService&gt;();
+container.RegisterType&lt;DisposableType&gt;();
+
+DisposableType outerDisposable, innerDisposable;
+
+using (var scope = container.CreateScope())
+{
+    // get two lazies for IMyService
+    var l1 = scope.Resolve&lt;Lazy&lt;IMyService&gt;&gt;();
+    var l2 = scope.Resolve&lt;Lazy&lt;IMyService&gt;&gt;();
+    var l3 = scope.Resolve&lt;Lazy&lt;DisposableType&gt;&gt;();
+
+    // different lazies...
+    Assert.NotSame(l1, l2);
+
+    var service1 = l1.Value;
+    var service2 = l2.Value;
+
+    //... but same instances because MyService was registered as Scoped.
+    Assert.Same(service1, service2);
+
+    outerDisposable = l3.Value;
+
+    using (var childScope = scope.CreateScope())
+    {
+        var l4 = childScope.Resolve&lt;Lazy&lt;DisposableType&gt;&gt;();
+        innerDisposable = l4.Value;
+    }
+
+    Assert.True(innerDisposable.Disposed);
+    Assert.False(outerDisposable.Disposed);
+}
+Assert.True(outerDisposable.Disposed);
+</code></pre><div class="TIP"><h5>Tip</h5><p>This is also true for <a href="lifetimes/singleton.html">Singleton</a> objects, including disposable singletons (which are rooted to the &#39;outer&#39; scope to prevent early
+disposal).</p>
+</div>
 </article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">

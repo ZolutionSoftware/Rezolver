@@ -15,9 +15,9 @@ namespace Rezolver
     /// An object responsible for building an <see cref="IMemberBindingBehaviour"/> for instances of the type <typeparamref name="TInstance"/>
     /// </summary>
     /// <typeparam name="TInstance">The type of object for which a member binding behaviour is to be built.</typeparam>
-    /// <remarks>This interface is part of a fluent API which drastically simplifies the way in which you can configure custom
-    /// member bindings for objects of different types.  The <see cref="MemberBindingBehaviour.For{TInstance}"/> method is
-    /// the easiest way to get an instance of this to work with.</remarks>
+    /// <remarks>This interface is part of [the fluent API](/developers/docs/member-injection/fluent-api.html) which drastically 
+    /// simplifies the way in which you can configure custom member bindings for objects of different types.
+    /// The <see cref="MemberBindingBehaviour.For{TInstance}"/> method is the easiest way to get an instance of this to work with.</remarks>
     public interface IMemberBindingBehaviourBuilder<TInstance>
     {
         /// <summary>

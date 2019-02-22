@@ -13,6 +13,7 @@ namespace Rezolver.Targets
     /// to build components to use Rezolver containers as the mechanism for doing this directly instead of having
     /// to resort to mechanisms such as <see cref="IServiceProvider"/> etc.
     /// </summary>
+    /// <remarks>This is used to implement the [Autofactories functionality](/developers/docs/autofactories.html).</remarks>
     public class AutoFactoryTarget : TargetBase, INotifyRegistrationTarget
     {
         private readonly bool _isOpenGenericReturnType;
