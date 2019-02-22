@@ -70,7 +70,7 @@ namespace Rezolver.Options
         /// Note that if this is <c>null</c>, then the return value will be the default for <typeparamref name="TOption" /></param>
         public static implicit operator TOption(ContainerOption<TOption> option)
         {
-            return option != null ? option.Value : default(TOption);
+            return option != null ? option.Value : default;
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Rezolver.Options
         /// <returns>A string in the form <code>"{Value} ({typeof(TOption)})"</code></returns>
         public override string ToString()
         {
-            return $"{this.Value} ({typeof(TOption)})";
+            return $"{Value} ({typeof(TOption)})";
         }
     }
 }

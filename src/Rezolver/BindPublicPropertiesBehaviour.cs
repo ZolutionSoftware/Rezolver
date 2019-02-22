@@ -14,6 +14,9 @@ namespace Rezolver
     /// An <see cref="IMemberBindingBehaviour"/> which binds all non-indexer publicly writeable instance
     /// properties on new instances to services from the container.
     /// </summary>
+    /// <remarks>
+    /// See the [member binding guide](/developers/docs/member-injection/index.html) for more.
+    /// </remarks>
     public class BindPublicPropertiesBehaviour : BindAllMembersBehaviour
     {
         /// <summary>

@@ -17,7 +17,7 @@ namespace Rezolver.Compilation.Expressions
   /// </summary>
   internal class BlockExpressionLocalsRewriter : ExpressionVisitor
   {
-    private ParameterExpression[] _liftedLocals;
+    private readonly ParameterExpression[] _liftedLocals;
 
     public BlockExpressionLocalsRewriter(IEnumerable<ParameterExpression> liftedLocals)
     {
@@ -28,7 +28,7 @@ namespace Rezolver.Compilation.Expressions
     {
       if (this._liftedLocals.Length != 0)
       {
-        return Expression.Block(node.Type, node.Variables.Where(p => !this._liftedLocals.Contains(p)), this.Visit(node.Expressions));
+        return Expression.Block(node.Type, node.Variables.Where(p => !this._liftedLocals.Contains(p)), Visit(node.Expressions));
       }
 
       return base.VisitBlock(node);

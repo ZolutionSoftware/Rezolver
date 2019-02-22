@@ -36,7 +36,7 @@ namespace Rezolver.Targets
         /// the delegate, you might as well use this.</remarks>
         public MethodInfo FactoryMethod { get; }
 
-        private Type _declaredType;
+        private readonly Type _declaredType;
 
         /// <summary>
         /// Gets the declared type of object that is constructed by this target, either set on
@@ -46,7 +46,7 @@ namespace Rezolver.Targets
         {
             get
             {
-                return this._declaredType ?? this.FactoryMethod.ReturnType;
+                return this._declaredType ?? FactoryMethod.ReturnType;
             }
         }
 
@@ -64,20 +64,20 @@ namespace Rezolver.Targets
         public DelegateTarget(Delegate factory, Type declaredType = null)
         {
             factory.MustNotBeNull(nameof(factory));
-            this.FactoryMethod = factory.GetMethodInfo();
-            this.FactoryMethod.MustNot(m => this.FactoryMethod.ReturnType == null || this.FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
-            this.FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
+            FactoryMethod = factory.GetMethodInfo();
+            FactoryMethod.MustNot(m => FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
+            FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
 
             if (declaredType != null)
             {
-                if (!TypeHelpers.AreCompatible(this.FactoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, this.FactoryMethod.ReturnType))
+                if (!TypeHelpers.AreCompatible(FactoryMethod.ReturnType, declaredType) && !TypeHelpers.AreCompatible(declaredType, FactoryMethod.ReturnType))
                 {
-                    throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, this.FactoryMethod.ReturnType), nameof(declaredType));
+                    throw new ArgumentException(string.Format(ExceptionResources.DeclaredTypeIsNotCompatible_Format, declaredType, FactoryMethod.ReturnType), nameof(declaredType));
                 }
             }
 
             this._declaredType = declaredType;
-            this.Factory = factory;
+            Factory = factory;
         }
     }
 }

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class OptionDependentConfig&lt;TOption&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -117,19 +108,19 @@
   <h1 id="Rezolver_Configuration_OptionDependentConfig_1" data-uid="Rezolver.Configuration.OptionDependentConfig`1" class="text-break">Class OptionDependentConfig&lt;TOption&gt;
   </h1>
   <div class="markdown level0 summary"><p>Abstract base class for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that is dependent upon a particular type of option
-having been set in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> before being able to <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a>
+having been set in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> before being able to <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a>
 that target container.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">OptionDependentConfig&lt;TOption&gt;</span></div>
-      <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectArrays.html">InjectArrays</a></div>
-      <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></div>
-      <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></div>
-      <div class="level2"><a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a></div>
-      <div class="level2"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-2.html">OptionDependentConfig&lt;T, TOption&gt;</a></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></div>
+    <div class="level2"><span class="xref">OptionDependentConfig&lt;TOption&gt;</span></div>
+      <div class="level3"><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></div>
+      <div class="level3"><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></div>
+      <div class="level3"><a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a></div>
+      <div class="level3"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-2.html">OptionDependentConfig&lt;T, TOption&gt;</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -139,32 +130,41 @@ that target container.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies">OptionDependentConfigBase.Dependencies</a>
     </div>
     <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">OptionDependentConfigBase.Configure(IRootTargetContainer)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetHashCode()</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_">OptionDependentConfigBase.CreateOptionDependency&lt;TOption&gt;(Boolean)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetType()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ToString()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Configuration.html">Rezolver.Configuration</a></h6>
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_Configuration_OptionDependentConfig_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class OptionDependentConfig&lt;TOption&gt; : ITargetContainerConfig, IDependant where TOption : class</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class OptionDependentConfig&lt;TOption&gt; : OptionDependentConfigBase, ITargetContainerConfig, IDependant where TOption : class</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -178,9 +178,9 @@ that target container.</p>
       <tr>
         <td><span class="parametername">TOption</span></td>
         <td><p>The type of option upon which this config object depends.  The default dependency created and
-returned by this class&apos; implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">Dependencies</a> will actually be dependent upon the config type
-<a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>, which is the standard contract expected by a configuration object that configures
-a aprticular option.</p>
+returned by the <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies">Dependencies</a> will actually be dependent upon the config type
+<a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a>, which is the standard contract expected by a configuration object that configures
+a particular option.</p>
 </td>
       </tr>
     </tbody>
@@ -189,7 +189,7 @@ a aprticular option.</p>
   <div class="markdown level0 remarks"><p>If you are developing an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that you want to be configurable via the use of
 a single option type (see the extension methods in the <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> class), then inheriting from this
 abstract class instead of directly implementing <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> and <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> is a good idea.</p>
-<p>The default implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">Dependencies</a> will return a single dependency on the type <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>
+<p>The default implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase">GetDependenciesBase()</a> will return a single dependency on the type <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a>
 specialised for the option type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>.</p>
 <p>You can also specify that the dependency is not <em>required</em> in cases where an option has a reasonable default value - thus allowing
 applications to omit any up-front configuration for that option except where absolutely necessary.</p>
@@ -201,10 +201,10 @@ has been configured by any <a class="xref" href="Rezolver.ITargetContainerConfig
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1__ctor_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601.%23ctor(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1__ctor_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601.%23ctor(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfig.cs/#L50">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/OptionDependentConfig.cs/#L43">View Source</a>
   </span>
   <a id="Rezolver_Configuration_OptionDependentConfig_1__ctor_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.#ctor*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfig_1__ctor_System_Boolean_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.#ctor(System.Boolean)">OptionDependentConfig(Boolean)</h4>
@@ -233,26 +233,26 @@ dependency (controlled by the argument passed <code data-dev-comment-type="param
       </tr>
     </tbody>
   </table>
-  <h3 id="properties">Properties
+  <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601.Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601.GetDependenciesBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfig.cs/#L43">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/OptionDependentConfig.cs/#L52">View Source</a>
   </span>
-  <a id="Rezolver_Configuration_OptionDependentConfig_1_Dependencies_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.Dependencies*"></a>
-  <h4 id="Rezolver_Configuration_OptionDependentConfig_1_Dependencies" data-uid="Rezolver.Configuration.OptionDependentConfig`1.Dependencies">Dependencies</h4>
+  <a id="Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.GetDependenciesBase*"></a>
+  <h4 id="Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase" data-uid="Rezolver.Configuration.OptionDependentConfig`1.GetDependenciesBase">GetDependenciesBase()</h4>
   <div class="markdown level1 summary"><p>The base implementation returns an enumerable containing a single dependency on the type <a class="xref" href="Rezolver.ITargetContainerConfig-1.html">ITargetContainerConfig&lt;T&gt;</a>
 specialised for the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual IEnumerable&lt;DependencyMetadata&gt; Dependencies { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">protected override IEnumerable&lt;DependencyMetadata&gt; GetDependenciesBase()</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -262,46 +262,13 @@ specialised for the type <code data-dev-comment-type="typeparamref" class="typep
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Rezolver.Sdk.DependencyMetadata.html">DependencyMetadata</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h3 id="methods">Methods
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfig.cs/#L59">View Source</a>
-  </span>
-  <a id="Rezolver_Configuration_OptionDependentConfig_1_Configure_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.Configure*"></a>
-  <h4 id="Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.OptionDependentConfig`1.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Abstract implementation of the <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> interface</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract void Configure(IRootTargetContainer targets)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
-        <td><span class="parametername">targets</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase">OptionDependentConfigBase.GetDependenciesBase()</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
@@ -327,10 +294,10 @@ specialised for the type <code data-dev-comment-type="typeparamref" class="typep
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfig_1.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfig%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfig.cs/#L34" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/OptionDependentConfig.cs/#L33" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

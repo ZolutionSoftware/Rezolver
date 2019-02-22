@@ -38,9 +38,9 @@ namespace Rezolver.Compilation.Expressions
         {
             targetType.MustNotBeNull("targetType");
             name.MustNotBeNull("name");
-            this.TargetType = targetType;
-            this.Name = name;
-            this.RequestingType = requestingType;
+            TargetType = targetType;
+            Name = name;
+            RequestingType = requestingType;
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Rezolver.Compilation.Expressions
         /// <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
         public override int GetHashCode()
         {
-            return this.TargetType.GetHashCode() ^
-              this.Name.GetHashCode() ^
-              (this.RequestingType?.GetHashCode() ?? 0);
+            return TargetType.GetHashCode() ^
+              Name.GetHashCode() ^
+              (RequestingType?.GetHashCode() ?? 0);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Rezolver.Compilation.Expressions
         public bool Equals(SharedExpressionKey other)
         {
             return object.ReferenceEquals(this, other) ||
-              (this.RequestingType == other.RequestingType && this.TargetType == other.TargetType && this.Name == other.Name);
+              (Name == other.Name && RequestingType == other.RequestingType && TargetType == other.TargetType);
         }
     }
 }

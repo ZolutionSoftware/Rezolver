@@ -51,7 +51,7 @@ namespace Rezolver
             {
                 get
                 {
-                    return this.Current;
+                    return Current;
                 }
             }
 
@@ -98,7 +98,7 @@ namespace Rezolver
 
         private struct ReverseEnumerable : IEnumerable<T>
         {
-            private OrderedSet<T> _set;
+            private readonly OrderedSet<T> _set;
 
             public ReverseEnumerable(OrderedSet<T> set)
             {
@@ -112,7 +112,7 @@ namespace Rezolver
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return this.GetEnumerator();
+                return GetEnumerator();
             }
         }
         #endregion
@@ -149,7 +149,7 @@ namespace Rezolver
 
         void ICollection<T>.Add(T item)
         {
-            this.Add(item);
+            Add(item);
         }
 
         public bool Add(T item)
@@ -193,7 +193,7 @@ namespace Rezolver
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         public bool Contains(T item)

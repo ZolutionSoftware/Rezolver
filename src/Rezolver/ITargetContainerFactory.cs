@@ -20,10 +20,8 @@ namespace Rezolver
         /// <param name="type">A type that is, in some way, common to all targets or child target containers that will
         /// be registered in the required container.</param>
         /// <param name="targets">The target container into which the returned target container will be registered.</param>
-        /// <param name="rootTargetContainer">The rootmost target container (ultimate ancestor of the
-        /// <paramref name="targets"/> target container).</param>
         /// <returns>An <see cref="ITargetContainer"/> to be added to the <paramref name="targets"/> into which targets
         /// will be registered.  Or <c>null</c> if this factory doesn't handle the passed <paramref name="type"/>.</returns>
-        ITargetContainer CreateContainer(Type type, ITargetContainer targets, ITargetContainer rootTargetContainer);
+        ITargetContainer CreateContainer(Type type, ITargetContainer targets);
     }
 }

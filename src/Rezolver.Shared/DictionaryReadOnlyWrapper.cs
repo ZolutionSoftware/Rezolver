@@ -13,7 +13,7 @@ namespace Rezolver
     {
         private static readonly IDictionary<TKey, TValue> EmptyDictionary = new Dictionary<TKey, TValue>();
 
-        private IDictionary<TKey, TValue> dictionary;
+        private readonly IDictionary<TKey, TValue> dictionary;
 
         public DictionaryReadOnlyWrapper(IDictionary<TKey, TValue> dictionary)
         {
@@ -69,7 +69,7 @@ namespace Rezolver
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

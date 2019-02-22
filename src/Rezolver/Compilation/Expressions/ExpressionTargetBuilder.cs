@@ -31,8 +31,8 @@ namespace Rezolver.Compilation.Expressions
         {
             private class MethodCallRewrite
             {
-                private MethodInfo _method;
-                private Func<ExpressionTranslator, MethodCallExpression, MethodCallExpression> _callback;
+                private readonly MethodInfo _method;
+                private readonly Func<ExpressionTranslator, MethodCallExpression, MethodCallExpression> _callback;
 
                 public MethodCallRewrite(MethodInfo method, Func<ExpressionTranslator, MethodCallExpression, MethodCallExpression> callback)
                 {
@@ -164,7 +164,7 @@ namespace Rezolver.Compilation.Expressions
                 ParameterBinding[] parameterBindings = null;
 
                 ctor = translated.Constructor;
-                parameterBindings = this.ExtractParameterBindings(translated).ToArray();
+                parameterBindings = ExtractParameterBindings(translated).ToArray();
 
                 return new TargetExpression(new ConstructorTarget(ctor, parameterBindings, null).Unscoped());
             }
@@ -174,14 +174,14 @@ namespace Rezolver.Compilation.Expressions
                 // var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, _adapter);
                 return new TargetExpression(new ExpressionTarget(c =>
                 {
-                    var adaptedCtorExp = this.Visit(node.NewExpression);
+                    var adaptedCtorExp = Visit(node.NewExpression);
                     // var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
 
                     // the goal here, then, is to find the new expression for this type and replace it
                     // with a memberinit equivalent to the one we visited.  Although the constructor target produces
                     // a NewExpression, it isn't going to be the root expression, because of the scoping boilerplate
                     // that is put around nearly all expressions produced by RezolveTargetBase implementations.
-                    var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => this.VisitMemberBinding(mb)));
+                    var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
                     return rewriter.Visit(adaptedCtorExp);
                 }, node.Type));
             }
@@ -246,7 +246,7 @@ namespace Rezolver.Compilation.Expressions
                     }
                 }
 
-                var rezolvedType = this.ExtractRezolveCallType(rewritten ?? node);
+                var rezolvedType = ExtractRezolveCallType(rewritten ?? node);
                 if (rezolvedType != null)
                 {
                     return new TargetExpression(new ResolvedTarget(rezolvedType));

@@ -12,9 +12,12 @@ namespace Rezolver
     /// This is the default <see cref="IMemberBindingBehaviour"/> which doesn't bind any members.  It's
     /// a singleton accessible only via the <see cref="MemberBindingBehaviour.BindNone"/> static property.
     /// </summary>
+    /// <remarks>
+    /// See the [member binding guide](/developers/docs/member-injection/index.html) for more.
+    /// </remarks>
     public sealed class BindNoMembersBehaviour : IMemberBindingBehaviour
     {
-        private static MemberBinding[] NoBindings = new MemberBinding[0];
+        private static readonly MemberBinding[] NoBindings = new MemberBinding[0];
 
         internal BindNoMembersBehaviour() { }
 

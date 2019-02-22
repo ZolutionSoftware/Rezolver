@@ -12,7 +12,7 @@ namespace Rezolver
     {
         private class EnumerableConcatenator<T> : IEnumerable<T>
         {
-            private IEnumerable<T> _concatenated;
+            private readonly IEnumerable<T> _concatenated;
 
             public EnumerableConcatenator(IResolveContext context, IEnumerable<T> baseEnumerable, IEnumerable<T> extra)
             {
@@ -26,7 +26,7 @@ namespace Rezolver
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                return this.GetEnumerator();
+                return GetEnumerator();
             }
         }
 

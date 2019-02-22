@@ -44,13 +44,13 @@ namespace Rezolver.Targets
             {
                 if (this._declaredType == null)
                 {
-                    if (!this.AsArray)
+                    if (!AsArray)
                     {
-                        this._declaredType = typeof(List<>).MakeGenericType(this.ElementType);
+                        this._declaredType = typeof(List<>).MakeGenericType(ElementType);
                     }
                     else
                     {
-                        this._declaredType = this.ElementType.MakeArrayType();
+                        this._declaredType = ElementType.MakeArrayType();
                     }
                 }
 
@@ -65,7 +65,7 @@ namespace Rezolver.Targets
         {
             get
             {
-                return !this.Items.Any();
+                return !Items.Any();
             }
         }
 
@@ -101,12 +101,12 @@ namespace Rezolver.Targets
             {
                 if (this._listConstructor == null)
                 {
-                    if (this.DeclaredType == typeof(List<>).MakeGenericType(this.ElementType))
+                    if (DeclaredType == typeof(List<>).MakeGenericType(ElementType))
                     {
-                        this._listConstructor = TypeHelpers.GetConstructor(this.DeclaredType, new[] { typeof(IEnumerable<>).MakeGenericType(this.ElementType) });
+                        this._listConstructor = TypeHelpers.GetConstructor(DeclaredType, new[] { typeof(IEnumerable<>).MakeGenericType(ElementType) });
                         if (this._listConstructor == null)
                         {
-                            throw new InvalidOperationException(string.Format("Fatal error: Could not get IEnumerable<{0}> constructor for List<{0}>", this.ElementType));
+                            throw new InvalidOperationException(string.Format("Fatal error: Could not get IEnumerable<{0}> constructor for List<{0}>", ElementType));
                         }
                     }
                     else
@@ -141,9 +141,9 @@ namespace Rezolver.Targets
             items.MustNot(ts => ts.Any(t => t == null), "All targets in the items enumerable must be non-null", nameof(items));
             items.MustNot(ts => ts.Any(t => !t.SupportsType(elementType)), $"All targets in the items enumerable must support the element type {elementType}", nameof(items));
 
-            this.ElementType = elementType;
-            this.Items = items;
-            this.AsArray = asArray;
+            ElementType = elementType;
+            Items = items;
+            AsArray = asArray;
         }
     }
 }

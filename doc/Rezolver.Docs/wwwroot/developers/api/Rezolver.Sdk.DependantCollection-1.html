@@ -1,0 +1,1232 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class DependantCollection&lt;T&gt;
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class DependantCollection&lt;T&gt;
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../images/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container-fluid hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container-fluid body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-9">
+            <article class="content wrap" id="_content" data-uid="Rezolver.Sdk.DependantCollection`1">
+  
+  <h1 id="Rezolver_Sdk_DependantCollection_1" data-uid="Rezolver.Sdk.DependantCollection`1" class="text-break">Class DependantCollection&lt;T&gt;
+  </h1>
+  <div class="markdown level0 summary"><p>A collection of objects in which one or more objects can be dependent on others in the
+same collection (via the <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> interface).</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">DependantCollection&lt;T&gt;</span></div>
+      <div class="level2"><a class="xref" href="Rezolver.CombinedContainerConfig.html">CombinedContainerConfig</a></div>
+      <div class="level2"><a class="xref" href="Rezolver.CombinedTargetContainerConfig.html">CombinedTargetContainerConfig</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList</a>&lt;T&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection</a>&lt;T&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Sdk.html">Rezolver.Sdk</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Sdk_DependantCollection_1_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DependantCollection&lt;T&gt; : IList&lt;T&gt;, ICollection&lt;T&gt;, IEnumerable&lt;T&gt;, IEnumerable where T : class</code></pre>
+  </div>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of object in the collection</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Sdk_DependantCollection_1_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>To iterate the collection in order of least dependant to most dependant, enumerate the
+result of the <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1_Ordered">Ordered</a> function - which uses a typical DAG topological
+sort to organise the objects by least dependent to most dependent.</p>
+<p>In order for this to work - one or more objects in the collection must implement the <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a>
+interface.</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1__ctor.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L31">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1__ctor_" data-uid="Rezolver.Sdk.DependantCollection`1.#ctor*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1__ctor" data-uid="Rezolver.Sdk.DependantCollection`1.#ctor">DependantCollection()</h4>
+  <div class="markdown level1 summary"><p>Constructs a new empty <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html">DependantCollection&lt;T&gt;</a> instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DependantCollection()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1__ctor__0___.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.%23ctor(%600%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L52">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1__ctor_" data-uid="Rezolver.Sdk.DependantCollection`1.#ctor*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1__ctor__0___" data-uid="Rezolver.Sdk.DependantCollection`1.#ctor(`0[])">DependantCollection(T[])</h4>
+  <div class="markdown level1 summary"><p>Provides a convenient way to initialise a <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html">DependantCollection&lt;T&gt;</a> using a variable argument
+list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DependantCollection(params T[] dependants)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">dependants</span></td>
+        <td><p>The items to be added to the collection on construction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1__ctor_System_Collections_Generic_IEnumerable__0__.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.%23ctor(System.Collections.Generic.IEnumerable%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L42">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1__ctor_" data-uid="Rezolver.Sdk.DependantCollection`1.#ctor*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1__ctor_System_Collections_Generic_IEnumerable__0__" data-uid="Rezolver.Sdk.DependantCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">DependantCollection(IEnumerable&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Constructs a new <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html">DependantCollection&lt;T&gt;</a> with the passed range of objects as the initial
+set.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DependantCollection(IEnumerable&lt;T&gt; range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">range</span></td>
+        <td><p>The items to be added to the collection on construction.  If null, then the collection simply
+starts off empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Count.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Count%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L222">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Count_" data-uid="Rezolver.Sdk.DependantCollection`1.Count*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Count" data-uid="Rezolver.Sdk.DependantCollection`1.Count">Count</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.count#System_Collections_Generic_ICollection_1_Count">Count</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Count { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_IsReadOnly.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.IsReadOnly%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L227">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_IsReadOnly_" data-uid="Rezolver.Sdk.DependantCollection`1.IsReadOnly*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_IsReadOnly" data-uid="Rezolver.Sdk.DependantCollection`1.IsReadOnly">IsReadOnly</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.isreadonly#System_Collections_Generic_ICollection_1_IsReadOnly">IsReadOnly</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsReadOnly { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Item_System_Int32_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Item(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L217">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Item_" data-uid="Rezolver.Sdk.DependantCollection`1.Item*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Item_System_Int32_" data-uid="Rezolver.Sdk.DependantCollection`1.Item(System.Int32)">Item[Int32]</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1.item#System_Collections_Generic_IList_1_Item_System_Int32_">Item[Int32]</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T this[int index] { get; set; }</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>Index of the item to be read or written.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Ordered.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Ordered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L68">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Ordered_" data-uid="Rezolver.Sdk.DependantCollection`1.Ordered*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Ordered" data-uid="Rezolver.Sdk.DependantCollection`1.Ordered">Ordered</h4>
+  <div class="markdown level1 summary"><p>Gets an enumerable which will return the items in the collection in order of least dependent
+to most dependent.  Therefore, if item 1 depends on item 2, this enumerable will return item 2
+first, followed by item 1.</p>
+<p>Items which have no dependencies within the same collection will be sorted earlier in the collection.</p>
+<p>The sort is stable with respect to the order in which items are added; so equally dependant objects will
+retain their original order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;T&gt; Ordered { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Add__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Add(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L294">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Add_" data-uid="Rezolver.Sdk.DependantCollection`1.Add*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Add__0_" data-uid="Rezolver.Sdk.DependantCollection`1.Add(`0)">Add(T)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.add#System_Collections_Generic_ICollection_1_Add__0_">Add(T)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Add(T item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>Required.  The item to be added to the collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_AddAll__0___.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.AddAll(%600%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L322">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_AddAll_" data-uid="Rezolver.Sdk.DependantCollection`1.AddAll*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_AddAll__0___" data-uid="Rezolver.Sdk.DependantCollection`1.AddAll(`0[])">AddAll(T[])</h4>
+  <div class="markdown level1 summary"><p>Alternative to <a class="xref" href="Rezolver.Sdk.DependantCollection-1.html#Rezolver_Sdk_DependantCollection_1_AddAll_System_Collections_Generic_IEnumerable__0__">AddAll(IEnumerable&lt;T&gt;)</a> which allows you to pass individual items as arguments</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddAll(params T[] items)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">items</span></td>
+        <td><p>The items to be added</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_AddAll_System_Collections_Generic_IEnumerable__0__.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.AddAll(System.Collections.Generic.IEnumerable%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L308">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_AddAll_" data-uid="Rezolver.Sdk.DependantCollection`1.AddAll*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_AddAll_System_Collections_Generic_IEnumerable__0__" data-uid="Rezolver.Sdk.DependantCollection`1.AddAll(System.Collections.Generic.IEnumerable{`0})">AddAll(IEnumerable&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds all the passed items to the collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddAll(IEnumerable&lt;T&gt; range)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">range</span></td>
+        <td><p>Required - the items to be added.  None of the items can be <code>null</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Clear.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Clear%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L232">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Clear_" data-uid="Rezolver.Sdk.DependantCollection`1.Clear*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Clear" data-uid="Rezolver.Sdk.DependantCollection`1.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.clear#System_Collections_Generic_ICollection_1_Clear">Clear()</a>.  Empties the collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Clone__1.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Clone%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L84">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Clone_" data-uid="Rezolver.Sdk.DependantCollection`1.Clone*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Clone__1" data-uid="Rezolver.Sdk.DependantCollection`1.Clone``1">Clone&lt;TDerived&gt;()</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the collection type <code data-dev-comment-type="typeparamref" class="typeparamref">TDerived</code> whose items
+are cloned from this collection&apos;s items.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TDerived Clone&lt;TDerived&gt;()
+    where TDerived : DependantCollection&lt;T&gt;, new()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TDerived</span></td>
+        <td><p>A new instance of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TDerived</code> whose items are cloned
+from this collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TDerived</span></td>
+        <td><p>The type of collection to be created from this one.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Contains__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Contains(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L240">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Contains_" data-uid="Rezolver.Sdk.DependantCollection`1.Contains*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Contains__0_" data-uid="Rezolver.Sdk.DependantCollection`1.Contains(`0)">Contains(T)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.contains#System_Collections_Generic_ICollection_1_Contains__0_">Contains(T)</a>.  Returns a boolean indicating whether
+the passed <code data-dev-comment-type="paramref" class="paramref">item</code> is found in the collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Contains(T item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>The item to be checked.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_CopyTo__0___System_Int32_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.CopyTo(%600%5B%5D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L247">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_CopyTo_" data-uid="Rezolver.Sdk.DependantCollection`1.CopyTo*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_CopyTo__0___System_Int32_" data-uid="Rezolver.Sdk.DependantCollection`1.CopyTo(`0[],System.Int32)">CopyTo(T[], Int32)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.copyto#System_Collections_Generic_ICollection_1_CopyTo__0___System_Int32_">CopyTo(T[], Int32)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyTo(T[] array, int arrayIndex)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>T[]</td>
+        <td><span class="parametername">array</span></td>
+        <td><p>The target array into which the collection will be copied.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">arrayIndex</span></td>
+        <td><p>The starting index in the array </p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L253">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_GetEnumerator_" data-uid="Rezolver.Sdk.DependantCollection`1.GetEnumerator*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_GetEnumerator" data-uid="Rezolver.Sdk.DependantCollection`1.GetEnumerator">GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1.getenumerator#System_Collections_Generic_IEnumerable_1_GetEnumerator">GetEnumerator()</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerator&lt;T&gt; GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_IndexOf__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.IndexOf(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L260">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_IndexOf_" data-uid="Rezolver.Sdk.DependantCollection`1.IndexOf*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_IndexOf__0_" data-uid="Rezolver.Sdk.DependantCollection`1.IndexOf(`0)">IndexOf(T)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1.indexof#System_Collections_Generic_IList_1_IndexOf__0_">IndexOf(T)</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int IndexOf(T item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>The item whose index in the collection is to be returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Insert_System_Int32__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Insert(System.Int32%2C%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L267">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Insert_" data-uid="Rezolver.Sdk.DependantCollection`1.Insert*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Insert_System_Int32__0_" data-uid="Rezolver.Sdk.DependantCollection`1.Insert(System.Int32,`0)">Insert(Int32, T)</h4>
+  <div class="markdown level1 summary"><p>Inserts the passed <code data-dev-comment-type="paramref" class="paramref">item</code> at the given <code data-dev-comment-type="paramref" class="paramref">index</code> in the collection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Insert(int index, T item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index at which the new item is to be inserted.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>Required.  The item to be inserted.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Remove__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Remove(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L282">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Remove_" data-uid="Rezolver.Sdk.DependantCollection`1.Remove*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Remove__0_" data-uid="Rezolver.Sdk.DependantCollection`1.Remove(`0)">Remove(T)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1.remove#System_Collections_Generic_ICollection_1_Remove__0_">Remove(T)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(T item)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">item</span></td>
+        <td><p>The item to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_RemoveAll_System_Collections_Generic_IEnumerable__0__.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.RemoveAll(System.Collections.Generic.IEnumerable%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L333">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_RemoveAll_" data-uid="Rezolver.Sdk.DependantCollection`1.RemoveAll*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_RemoveAll_System_Collections_Generic_IEnumerable__0__" data-uid="Rezolver.Sdk.DependantCollection`1.RemoveAll(System.Collections.Generic.IEnumerable{`0})">RemoveAll(IEnumerable&lt;T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Removes all the <code data-dev-comment-type="paramref" class="paramref">items</code> from the collection that can be found within it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool RemoveAll(IEnumerable&lt;T&gt; items)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;</td>
+        <td><span class="parametername">items</span></td>
+        <td><p>Required.  The items to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p><code>true</code> if all items were removed (note - if <code data-dev-comment-type="paramref" class="paramref">items</code> is empty this is
+    also the case); <code>false</code> otherwise.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_RemoveAt_System_Int32_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.RemoveAt(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L288">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_RemoveAt_" data-uid="Rezolver.Sdk.DependantCollection`1.RemoveAt*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_RemoveAt_System_Int32_" data-uid="Rezolver.Sdk.DependantCollection`1.RemoveAt(System.Int32)">RemoveAt(Int32)</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1.removeat#System_Collections_Generic_IList_1_RemoveAt_System_Int32_">RemoveAt(Int32)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAt(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index of the item to be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_Replace__0__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.Replace(%600%2C%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L99">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_Replace_" data-uid="Rezolver.Sdk.DependantCollection`1.Replace*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_Replace__0__0_" data-uid="Rezolver.Sdk.DependantCollection`1.Replace(`0,`0)">Replace(T, T)</h4>
+  <div class="markdown level1 summary"><p>Replaces the <code data-dev-comment-type="paramref" class="paramref">original</code> object with the passed <code data-dev-comment-type="paramref" class="paramref">replacement</code> object, if
+<code data-dev-comment-type="paramref" class="paramref">original</code> is found within the collection.  The original object is returned if it is found
+and the replacement operation succeeds.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Replace(T original, T replacement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">original</span></td>
+        <td><p>Required. The object to be replaced.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">replacement</span></td>
+        <td><p>Required. The replacement object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_ReplaceAnyOrAdd__1__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.ReplaceAnyOrAdd%60%601(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L150">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_ReplaceAnyOrAdd_" data-uid="Rezolver.Sdk.DependantCollection`1.ReplaceAnyOrAdd*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_ReplaceAnyOrAdd__1__0_" data-uid="Rezolver.Sdk.DependantCollection`1.ReplaceAnyOrAdd``1(`0)">ReplaceAnyOrAdd&lt;TOriginal&gt;(T)</h4>
+  <div class="markdown level1 summary"><p>Replaces any objects of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOriginal</code> with the single object
+passed for the <code data-dev-comment-type="paramref" class="paramref">replacement</code> argument.  Note - the replacement will be inserted at the
+first index at which a matching object was found.  If none is found, then the replacement will be added to
+the end of the collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReplaceAnyOrAdd&lt;TOriginal&gt;(T replacement)
+    where TOriginal : T</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">replacement</span></td>
+        <td><p>The object to be added to the collection at the position where the first object
+of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOriginal</code> is found.  Note that all will still be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TOriginal</span></td>
+        <td><p>The type of object to be removed.  Note that any object equal to, derived from,
+or which implements the type will be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_ReplaceAnyOrAdd__1_System_Func_System_Collections_Generic_IEnumerable__0___0__.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.ReplaceAnyOrAdd%60%601(System.Func%7BSystem.Collections.Generic.IEnumerable%7B%600%7D%2C%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L184">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_ReplaceAnyOrAdd_" data-uid="Rezolver.Sdk.DependantCollection`1.ReplaceAnyOrAdd*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_ReplaceAnyOrAdd__1_System_Func_System_Collections_Generic_IEnumerable__0___0__" data-uid="Rezolver.Sdk.DependantCollection`1.ReplaceAnyOrAdd``1(System.Func{System.Collections.Generic.IEnumerable{`0},`0})">ReplaceAnyOrAdd&lt;TOriginal&gt;(Func&lt;IEnumerable&lt;T&gt;, T&gt;)</h4>
+  <div class="markdown level1 summary"><p>Replaces any objects of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TOriginal</code> with a single object
+obtained by calling the <code data-dev-comment-type="paramref" class="paramref">replacementCallback</code> callback.  Note - the replacement will be
+inserted at the first index at which a matching object was found.  If none is found, then the replacement
+will be added to the end of the collection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReplaceAnyOrAdd&lt;TOriginal&gt;(Func&lt;IEnumerable&lt;T&gt;, T&gt; replacementCallback)
+    where TOriginal : T</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;T&gt;, T&gt;</td>
+        <td><span class="parametername">replacementCallback</span></td>
+        <td><p>Callback to be executed to get the object that will replace any existing entries
+of the given type.  The callback will be passed an enumerable containing any existing entries.  Note that this
+enumerable will <em>never</em> be null, but might be empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TOriginal</span></td>
+        <td><p>The type of object to be removed.  Note that any object whose type is equal to, derived from,
+or which implements the type will be removed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_ReplaceOrAdd__0__0_.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.ReplaceOrAdd(%600%2C%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L131">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_ReplaceOrAdd_" data-uid="Rezolver.Sdk.DependantCollection`1.ReplaceOrAdd*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_ReplaceOrAdd__0__0_" data-uid="Rezolver.Sdk.DependantCollection`1.ReplaceOrAdd(`0,`0)">ReplaceOrAdd(T, T)</h4>
+  <div class="markdown level1 summary"><p>Replaces the <code data-dev-comment-type="paramref" class="paramref">original</code> with the <code data-dev-comment-type="paramref" class="paramref">replacement</code>, or
+adds the <code data-dev-comment-type="paramref" class="paramref">replacement</code> to the end of the collection if the <code data-dev-comment-type="paramref" class="paramref">original</code>
+does not exist.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ReplaceOrAdd(T original, T replacement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">original</span></td>
+        <td><p>The item to be replaced.  If found, it will be swapped with
+the <code data-dev-comment-type="paramref" class="paramref">replacement</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">replacement</span></td>
+        <td><p>The item to be swapped with <code data-dev-comment-type="paramref" class="paramref">original</code> or added to
+the end of the collection if the <code data-dev-comment-type="paramref" class="paramref">original</code> can&apos;t be found.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L356">View Source</a>
+  </span>
+  <a id="Rezolver_Sdk_DependantCollection_1_System_Collections_IEnumerable_GetEnumerator_" data-uid="Rezolver.Sdk.DependantCollection`1.System#Collections#IEnumerable#GetEnumerator*"></a>
+  <h4 id="Rezolver_Sdk_DependantCollection_1_System_Collections_IEnumerable_GetEnumerator" data-uid="Rezolver.Sdk.DependantCollection`1.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable.getenumerator#System_Collections_IEnumerable_GetEnumerator">GetEnumerator()</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IEnumerator IEnumerable.GetEnumerator()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerator">IEnumerator</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">System.Collections.Generic.IList&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">System.Collections.Generic.ICollection&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">System.Collections.Generic.IEnumerable&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
+  </div>
+</article>
+          </div>
+          <div class="hidden-sm col-md-3" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Sdk_DependantCollection_1.md&amp;value=---%0Auid%3A%20Rezolver.Sdk.DependantCollection%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Sdk/DependantCollection.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

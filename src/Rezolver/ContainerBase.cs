@@ -17,7 +17,7 @@ namespace Rezolver
     /// <summary>
     /// Starting point for implementations of <see cref="IContainer"/> - only creatable through inheritance.
     /// </summary>
-    /// <remarks>This class also implements <see cref="ITargetContainer"/> by proxying the <see cref="Targets"/> that are
+    /// <remarks>This class also implements <see cref="IRootTargetContainer"/> by proxying the <see cref="Targets"/> that are
     /// provided to it on construction (or created anew if not supplied).  All of those interface methods are implemented
     /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public
     /// API.
@@ -64,19 +64,19 @@ namespace Rezolver
         /// after construction, through the <see cref="Targets"/> property.</param>
         protected ContainerBase(IRootTargetContainer targets = null)
         {
-            this.Targets = targets ?? new TargetContainer();
+            Targets = targets ?? new TargetContainer();
         }
 
         event EventHandler<TargetRegisteredEventArgs> IRootTargetContainer.TargetRegistered
         {
             add
             {
-                this.Targets.TargetRegistered += value;
+                Targets.TargetRegistered += value;
             }
 
             remove
             {
-                this.Targets.TargetRegistered -= value;
+                Targets.TargetRegistered -= value;
             }
         }
 
@@ -84,14 +84,18 @@ namespace Rezolver
         {
             add
             {
-                this.Targets.TargetContainerRegistered += value;
+                Targets.TargetContainerRegistered += value;
             }
 
             remove
             {
-                this.Targets.TargetContainerRegistered -= value;
+                Targets.TargetContainerRegistered -= value;
             }
         }
+
+        ITargetContainer IRootTargetContainer.CreateTargetContainer(Type forType) => Targets.CreateTargetContainer(forType);
+
+        Type IRootTargetContainer.GetContainerRegistrationType(Type serviceType) => Targets.GetContainerRegistrationType(serviceType);
 
         /// <summary>
         /// Implementation of the <see cref="IContainer.Resolve(IResolveContext)"/> method.
@@ -104,7 +108,7 @@ namespace Rezolver
         /// <returns></returns>
         public virtual object Resolve(IResolveContext context)
         {
-            return this.GetCompiledTarget(context).GetObject(context);
+            return GetCompiledTarget(context).GetObject(context);
         }
 
         /// <summary>
@@ -120,7 +124,7 @@ namespace Rezolver
         /// <returns>A boolean indicating whether the operation completed successfully.</returns>
         public virtual bool TryResolve(IResolveContext context, out object result)
         {
-            var target = this.GetCompiledTarget(context);
+            var target = GetCompiledTarget(context);
             if (!target.IsUnresolved())
             {
                 result = target.GetObject(context);
@@ -158,7 +162,7 @@ namespace Rezolver
         {
             // note that this container is fixed as the container in the context - regardless of the
             // one passed in.  This is important.  Scope and RequestedType are left unchanged
-            return this.GetCompiledTargetVirtual(context.New(newContainer: this));
+            return GetCompiledTargetVirtual(context.New(newContainer: this));
         }
 
         /// <summary>
@@ -169,7 +173,7 @@ namespace Rezolver
         /// <param name="context">The resolve context containing the requested type.</param>
         public virtual bool CanResolve(IResolveContext context)
         {
-            return this.Targets.Fetch(context.RequestedType) != null;
+            return Targets.Fetch(context.RequestedType) != null;
         }
 
         /// <summary>
@@ -229,18 +233,18 @@ namespace Rezolver
         /// </remarks>
         protected virtual ICompiledTarget GetCompiledTargetVirtual(IResolveContext context)
         {
-            ITarget target = this.Targets.Fetch(context.RequestedType);
+            ITarget target = Targets.Fetch(context.RequestedType);
 
             if (target == null)
             {
-                return this.GetFallbackCompiledTarget(context);
+                return GetFallbackCompiledTarget(context);
             }
 
             // if the entry advises us to fall back if possible, then we'll see what we get from the
             // fallback operation.  If it's NOT the unresolved target, then we'll use that instead
             if (target.UseFallback)
             {
-                var fallback = this.GetFallbackCompiledTarget(context);
+                var fallback = GetFallbackCompiledTarget(context);
                 if (!fallback.IsUnresolved())
                 {
                     return fallback;
@@ -262,13 +266,13 @@ namespace Rezolver
                 return new ConstantCompiledTarget(target, target);
             }
 
-            var compiler = this.Targets.GetOption<ITargetCompiler>(target.GetType());
+            var compiler = Targets.GetOption<ITargetCompiler>(target.GetType());
             if (compiler == null)
             {
                 throw new InvalidOperationException($"No compiler has been configured in the Targets target container for a target of type {target.GetType()} - please use the SetOption API to set an ITargetCompiler for all target types, or for specific target types.");
             }
 
-            return compiler.CompileTarget(target, context.New(newContainer: this), this.Targets);
+            return compiler.CompileTarget(target, context.New(newContainer: this), Targets);
         }
 
         /// <summary>
@@ -288,7 +292,7 @@ namespace Rezolver
 
         object IServiceProvider.GetService(Type serviceType)
         {
-            return this.GetService(serviceType);
+            return GetService(serviceType);
         }
 
         /// <summary>
@@ -323,21 +327,23 @@ namespace Rezolver
         /// </remarks>
         public void Register(ITarget target, Type serviceType = null)
         {
-            this.Targets.Register(target, serviceType);
+            Targets.Register(target, serviceType);
         }
 
-        #region ITargetContainer explicit implementation
-        ITarget ITargetContainer.Fetch(Type type) => this.Targets.Fetch(type);
+        #region IRootTargetContainer explicit implementation
+        IRootTargetContainer ITargetContainer.Root => Targets;
 
-        IEnumerable<ITarget> ITargetContainer.FetchAll(Type type) => this.Targets.FetchAll(type);
+        ITarget ITargetContainer.Fetch(Type type) => Targets.Fetch(type);
+
+        IEnumerable<ITarget> ITargetContainer.FetchAll(Type type) => Targets.FetchAll(type);
 
         ITargetContainer ITargetContainer.CombineWith(ITargetContainer existing, Type type) => throw new NotSupportedException();
 
-        ITargetContainer ITargetContainer.FetchContainer(Type type) => this.Targets.FetchContainer(type);
+        ITargetContainer ITargetContainer.FetchContainer(Type type) => Targets.FetchContainer(type);
 
-        void ITargetContainer.RegisterContainer(Type type, ITargetContainer container) => this.Targets.RegisterContainer(type, container);
+        void ITargetContainer.RegisterContainer(Type type, ITargetContainer container) => Targets.RegisterContainer(type, container);
 
-        void ICovariantTypeIndex.AddKnownType(Type serviceType) => this.Targets.AddKnownType(serviceType);
+        void ICovariantTypeIndex.AddKnownType(Type serviceType) => Targets.AddKnownType(serviceType);
 
         IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType) => Targets.GetKnownCovariantTypes(serviceType);
 

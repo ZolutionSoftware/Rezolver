@@ -75,7 +75,7 @@ namespace Rezolver
 
             try
             {
-                this.AddBinding(toAdd);
+                AddBinding(toAdd);
             }
             catch (ArgumentException aex)
             {

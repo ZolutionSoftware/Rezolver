@@ -14,27 +14,27 @@ namespace Rezolver
     {
         private class TargetOrderTracker
         {
-            private Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(ReferenceComparer<ITarget>.Instance);
+            private readonly Dictionary<ITarget, int> _dictionary = new Dictionary<ITarget, int>(TargetIdentityComparer.Instance);
             private int _counter = 0;
 
             public TargetOrderTracker(IRootTargetContainer root)
             {
-                root.TargetRegistered += this.Root_TargetRegistered1;
+                root.TargetRegistered += Root_TargetRegistered;
             }
 
-            private void Root_TargetRegistered1(object sender, TargetRegisteredEventArgs e)
+            private void Root_TargetRegistered(object sender, TargetRegisteredEventArgs e)
             {
-                this.Track(e.Target);
+                Track(e.Target);
             }
 
-            public int? GetOrder(ITarget target)
+            public int GetOrder(ITarget target)
             {
                 if (this._dictionary.TryGetValue(target, out var order))
                 {
                     return order;
                 }
 
-                return null;
+                return int.MaxValue;
             }
 
             public int Track(ITarget target)
@@ -59,8 +59,8 @@ namespace Rezolver
                 // this is the first enumerable container in the root
                 // so create the tracker and register our own event handler
                 // for adding enumerable types.
-                root.SetOption(this._tracker = new TargetOrderTracker(this.Root));
-                this.Root.TargetRegistered += this.Root_TargetRegistered;
+                root.SetOption(this._tracker = new TargetOrderTracker(Root));
+                Root.TargetRegistered += Root_TargetRegistered;
             }
         }
 
@@ -70,23 +70,7 @@ namespace Rezolver
             // targets are registered (and indeed empty enumerables for those which aren't).
             // So, every time a target is registered we make sure to its IEnumerable variant
             // as a known type.
-            this.Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
-        }
-
-        private class CovariantMatch
-        {
-            public Type RequestedType { get; set; }
-            public ITarget Target { get; set; }
-            public static IEqualityComparer<CovariantMatch> Comparer => TargetIDComparer.Instance;
-            private class TargetIDComparer : IEqualityComparer<CovariantMatch>
-            {
-                public static TargetIDComparer Instance { get; } = new TargetIDComparer();
-                private TargetIDComparer() { }
-
-                public bool Equals(CovariantMatch x, CovariantMatch y) => TargetIdentityComparer.Instance.Equals(x.Target, y.Target);
-
-                public int GetHashCode(CovariantMatch obj) => TargetIdentityComparer.Instance.GetHashCode(obj.Target);
-            }
+            Root.AddKnownType(typeof(IEnumerable<>).MakeGenericType(e.Type));
         }
 
         public override ITarget Fetch(Type type)
@@ -117,7 +101,7 @@ namespace Rezolver
             // the target container is an OverridingTargetContainer.
 
             // if the root is an OverridingTargetContainer, then
-            if (this.Root is OverridingTargetContainer overridingContainer)
+            if (Root is OverridingTargetContainer overridingContainer)
             {
                 result = overridingContainer.Parent.Fetch(type);
                 // if the root result is an enumerable target; then we won't use it, because
@@ -134,22 +118,18 @@ namespace Rezolver
 
             var elementType = TypeHelpers.GetGenericArguments(type)[0];
 
-            bool enableCovariance = this.Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
+            bool enableCovariance = Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
 
             if (enableCovariance)
             {
-                return new EnumerableTarget(Root.FetchAll(elementType)
-                    .Concat(Root.GetKnownCompatibleTypes(elementType)
-                        .SelectMany(compatibleType => Root.FetchAll(compatibleType)
-                            .Select(t => VariantMatchTarget.Wrap(t, elementType, compatibleType))
-                        )).Distinct(TargetIdentityComparer.Instance)
-                        .OrderBy(t => (t is VariantMatchTarget variant ? _tracker.GetOrder(variant.Target) : _tracker.GetOrder(t)) ?? int.MaxValue), elementType);
+                return new EnumerableTarget(Root.FetchAllCompatibleTargetsInternal(elementType)
+                        .OrderBy(t => _tracker.GetOrder(t)), elementType);
             }
             else
             {
-                return new EnumerableTarget(this.Root.FetchAll(elementType)
+                return new EnumerableTarget(Root.FetchAll(elementType)
                     .Distinct(TargetIdentityComparer.Instance) // don't duplicate targets
-                    .OrderBy(t => this._tracker.GetOrder(t) ?? int.MaxValue), elementType);
+                    .OrderBy(t => this._tracker.GetOrder(t)), elementType);
             }
         }
 

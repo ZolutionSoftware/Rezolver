@@ -1,0 +1,209 @@
+﻿@import "../../../wwwroot/css/bootstrap-variables-rezolver.less";
+
+/* Included after docfx.vendor (incorporating bootstrap) and the base docfx.css styles */
+@subnav-border: darken(@gray-lighter, 10%);
+@topic-link-color: rgb(175,175,175);
+@topic-link-hover-color: @alt-color-lighter;
+@topic-link-active-color: @topic-link-hover-color;
+@topic-link-active-hover-color: darken(@topic-link-active-color, 10%);
+
+a #logo {
+    padding: 1px;
+}
+.navbar-inverse {
+    border-bottom: none;
+}
+// restore link and button colors
+button, a {
+    &:hover, &:focus {
+        color: @link-hover-color;
+    }
+
+    color: @link-color;
+}
+
+.affix > ul.level1 {
+    margin-right: auto;
+}
+
+// adjust topic/sub-heading link colors on the affix (sidebar)
+.affix ul > li {
+    & > a {
+        color: @topic-link-color;
+
+        &:hover, &:focus {
+            color: @topic-link-hover-color;
+        }
+    }
+
+    &.active > a {
+        color: @topic-link-active-color;
+
+        &:before {
+            color: @topic-link-active-color;
+        }
+
+        &:hover, &:focus {
+            color: @topic-link-active-hover-color;
+        }
+    }
+}
+
+.sideaffix > div.contribution > ul > li > a.contribution-link:hover {
+    color: @body-bg;
+}
+
+article span.small.pull-right.contribution-link-body {
+    /* see ../partials/class.tmpl.partial for where the class is added */
+    margin-top: 15px;
+}
+
+.table-wrapper{
+    margin-bottom:10px;
+}
+
+.navbar-default.subnav {
+    background: lighten(@body-bg, 5%);
+    border-bottom: none;
+}
+
+.github-link {
+    font-size: 30px;
+    margin-top: 2px;
+    margin-bottom: 0;
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.sidefilter, .sidetoc {
+    border-left: none;
+    border-right: none;
+}
+
+.toc-filter {
+    /* search box in the toc */
+    border: solid 1px @subnav-border;
+}
+
+body .toc, .sidenav, .sidefilter, .sidetoc, .fixed-header {
+    background: @body-bg;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    /* remove header breaking - looks v.silly for long titles and narrow screens */
+    word-wrap: normal; /* break-word;*/
+    word-break: normal; /* break-all;*/
+}
+
+blockquote {
+    border-left-color: lighten(@body-bg, 15%);
+    background: lighten(@body-bg, 10%);
+    font-size: @font-size-base;
+    color: @text-color;
+
+    h5 {
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+}
+
+.toc {
+    .nav > li{
+        & > a{
+            color:@topic-link-color;
+            &:hover, &:focus{
+                color:@topic-link-hover-color;
+            }
+        }
+
+        &.active > a{
+            color:@topic-link-active-color;
+            &:hover, &:focus{
+                color:@topic-link-active-hover-color;
+            }
+        }
+    }
+
+    .level1 > li {
+        font-size: @font-size-base;
+        font-weight: normal;
+    }
+
+    .level2 {
+        font-size: @font-size-small;
+        margin-left: 5px;
+    }
+}
+
+pre {
+    position: relative;
+}
+
+.labelledCode() {
+    &::before {
+        content: attr(name);
+        display: block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        padding: 5px;
+        /*border: 1px solid;
+			border-color: darken(@pre-border-color, 30%);
+			border-top: none;*/
+        background: @pre-border-color;
+        color: white;
+    }
+
+    margin-top: 2em;
+    display: inline-block;
+}
+
+@media only screen and (max-width: @screen-sm) {
+    pre code[name] {
+        .labelledCode;
+    }
+}
+
+@media only screen and (min-width: @screen-lg-min) {
+    pre code[name] {
+        .labelledCode;
+    }
+}
+
+
+.hljs {
+    //have to prevent inherit because if using a transparent colour, the transparency stacks.
+    background: none;
+}
+
+.footer {
+    border-top: none;
+    background: @navbar-inverse-bg;
+    color: @navbar-inverse-color;
+
+    a {
+        color: @main-color;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+@media only screen and (max-width: @screen-sm) {
+    .toc .level2 > li {
+        &:after {
+            content: none;
+        }
+
+        display: inline-block;
+        min-width: 20em;
+    }
+
+    .toc .nav > .li > a {
+        display: inline-block;
+    }
+}

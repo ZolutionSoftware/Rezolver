@@ -62,18 +62,18 @@ namespace Rezolver
             Func<IRootTargetContainer, ITarget, TargetProjection> targetProjectionFactory)
             : this(root, sourceElementType, outputElementType)
         {
-            this.TargetProjectionFactory = targetProjectionFactory ?? throw new ArgumentNullException(nameof(targetProjectionFactory));
+            TargetProjectionFactory = targetProjectionFactory ?? throw new ArgumentNullException(nameof(targetProjectionFactory));
         }
 
         private ProjectionTargetContainer(IRootTargetContainer root, Type sourceElementType, Type outputElementType)
         {
-            this.Root = root;
-            this.SourceElementType = sourceElementType;
-            this.OutputElementType = outputElementType;
-            this.SourceEnumerableType = typeof(IEnumerable<>).MakeGenericType(sourceElementType);
-            this.OutputEnumerableType = typeof(IEnumerable<>).MakeGenericType(outputElementType);
+            Root = root;
+            SourceElementType = sourceElementType;
+            OutputElementType = outputElementType;
+            SourceEnumerableType = typeof(IEnumerable<>).MakeGenericType(sourceElementType);
+            OutputEnumerableType = typeof(IEnumerable<>).MakeGenericType(outputElementType);
 
-            this.Root.AddKnownType(this.OutputEnumerableType);
+            Root.AddKnownType(OutputEnumerableType);
         }
 
         /// <summary>
@@ -86,26 +86,26 @@ namespace Rezolver
         {
             return this._cache.GetOrAdd(type, t =>
             {
-                if (type != this.OutputEnumerableType)
+                if (type != OutputEnumerableType)
                 {
-                    throw new ArgumentException($"This projection container only supports the type {this.OutputEnumerableType}", nameof(type));
+                    throw new ArgumentException($"This projection container only supports the type {OutputEnumerableType}", nameof(type));
                 }
 
-                var input = this.Root.Fetch(this.SourceEnumerableType);
+                var input = Root.Fetch(SourceEnumerableType);
 
                 if (!(input is IEnumerable<ITarget> targets))
                 {
-                    throw new InvalidOperationException($"Projection of {this.OutputEnumerableType} requires {this.SourceEnumerableType} to result in an IEnumerable<ITarget> result from the root target container.  Cannot build projection.");
+                    throw new InvalidOperationException($"Projection of {OutputEnumerableType} requires {SourceEnumerableType} to result in an IEnumerable<ITarget> result from the root target container.  Cannot build projection.");
                 }
 
                 return new EnumerableTarget(
-                    targets.Select(tgt => new { input = tgt, projection = this.TargetProjectionFactory(this.Root, tgt) })
+                    targets.Select(tgt => new { input = tgt, projection = TargetProjectionFactory(Root, tgt) })
                     .Select(tp => new ProjectionTarget(
                         tp.input,
-                        this.SourceElementType,
-                        this.OutputElementType,
+                        SourceElementType,
+                        OutputElementType,
                         tp.projection)),
-                    this.OutputElementType);
+                    OutputElementType);
             });
         }
 
@@ -126,7 +126,7 @@ namespace Rezolver
         /// <returns></returns>
         public IEnumerable<ITarget> FetchAll(Type type)
         {
-            return new[] { this.Fetch(type) };
+            return new[] { Fetch(type) };
         }
 
         /// <summary>

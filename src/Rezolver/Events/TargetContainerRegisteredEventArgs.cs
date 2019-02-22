@@ -29,8 +29,8 @@ namespace Rezolver.Events
         /// <param name="type">The type against which the target container was registered</param>
         public TargetContainerRegisteredEventArgs(ITargetContainer container, Type type)
         {
-            this.Container = container;
-            this.Type = type;
+            Container = container;
+            Type = type;
         }
     }
 }

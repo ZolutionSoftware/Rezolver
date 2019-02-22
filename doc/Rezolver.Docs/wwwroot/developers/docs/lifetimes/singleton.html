@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Singletons | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Singletons | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../images/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container-fluid hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container-fluid body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-9">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="singletons">Singletons</h1>
+
+<p>Rezolver&#39;s implementation of singletons has three entry points:</p>
+<ul>
+<li>The <a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload, which offers a shortcut to registering a type via the 
+<a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> (see the 
+<a href="../constructor-injection/index.html">construction injection topic</a> for more) as a singleton.</li>
+<li>The <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> extension method, which creates a new <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the target
+on which it is called, converting it into a singleton.</li>
+<li>The <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html#Rezolver_Targets_SingletonTarget__ctor_Rezolver_ITarget_">SingletonTarget(ITarget)</a> constructor</li>
+</ul>
+<p>The <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> enforces a lock around its inner target so that its first result is cached and then returned
+for each subsequent <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operation.</p>
+<div class="NOTE"><h5>Note</h5><p>At the moment, the lifetime of a singleton is tied to the lifetime of the <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> itself.
+If you only ever have one container, or if you have multiple containers but use different targets for singletons 
+of the same type, apply across the whole <code>AppDomain</code>, then you won&#39;t enounter any issues.  But if you create multiple
+containers from the same <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, then you will find that singletons will be shared between them.</p>
+<hr>
+<p>In the future (v1.2), singletons will be unique to each container - 
+meaning that the same registration in two different containers would yield two different singletons.</p>
+</div>
+<hr>
+<h1 id="examples">Examples</h1>
+<div class="TIP"><h5>Tip</h5><p>As with many of the other examples throughout this guide, you&#39;ll find the code for these tests in the <code>test/Rezolver.Examples</code> tests
+project.</p>
+</div>
+<h2 id="constructor-injection">Constructor Injection</h2>
+<p>If you are using the <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_">RegisterType</a> overload, you can swap it for the 
+<a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload to register a singleton for constructor injection:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
+// The RegisterSingleton overload is like the RegisterType
+// overload, it creates a ConstructorTarget/GenericConstructorTarget
+// and wraps it in a SingletonTarget
+container.RegisterSingleton&lt;MyService, IMyService&gt;();
+
+var result1 = container.Resolve&lt;IMyService&gt;();
+var result2 = container.Resolve&lt;IMyService&gt;();
+
+Assert.Same(result1, result2);
+</code></pre><hr>
+<h2 id="constructor-injection-via-rezolvertargetsingleton-extension">Constructor Injection (via <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> extension)</h2>
+<p>If you need to use some of the more advanced constructor injection functionality, such as 
+<a href="../constructor-injection/index.html#best-match-named-args">named argument binding</a>, or 
+<a href="../constructor-injection/index.html#with-a-constructorinfo">specific <code>ConstructorInfo</code> binding</a>, then you can&#39;t use the 
+<a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload - because that creates the <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
+<a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for you.  Instead, you will create it yourself and then wrap a 
+<a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> around it - using either its <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html#Rezolver_Targets_SingletonTarget__ctor_Rezolver_ITarget_">SingletonTarget(ITarget)</a> constructor, or 
+the <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> extension method.</p>
+<div class="NOTE"><h5>Note</h5><p>The <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> inherits its <a class="xref" href="../../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> from its inner target - so a singleton will always be
+compatible with whatever type its inner target is compatible with.</p>
+</div>
+<p>This example is derived from the <a href="../constructor-injection/index.html#best-match-named-args">named argument binding</a> constructor injection 
+example mentioned above, except the <code>RequiresIMyServiceAndDateTime</code> type is registered as a singleton via the 
+<a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> extension method:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">// This time, because we&#39;re binding to a specific constructor with named
+// arguments, we have to create a ConstructorTarget manually and then 
+// convert it to a Singleton with the .Singleton() extension method
+var container = new Container();
+
+container.RegisterType&lt;MyService, IMyService&gt;();
+container.Register(
+    Target.ForType&lt;RequiresIMyServiceAndDateTime&gt;(new {
+        startDate = Target.ForObject(DateTime.UtcNow.AddDays(1))
+    }
+).Singleton()); // //&lt;-- Singleton created here
+
+var result1 = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
+var result2 = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
+
+Assert.Same(result1, result2);
+</code></pre><hr>
+<h2 id="open-generics">Open Generics</h2>
+<p>When you register an open generic (via <a href="../constructor-injection/generics.html">generic constructor injection</a>) as a singleton, then one 
+singleton is created for each concrete generic type:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
+// note - UsesAnyService&lt;&gt; doesn&#39;t have any dependencies
+container.RegisterSingleton(typeof(UsesAnyService&lt;&gt;), typeof(IUsesAnyService&lt;&gt;));
+
+var result1a = container.Resolve&lt;IUsesAnyService&lt;MyService1&gt;&gt;();
+var result1b = container.Resolve&lt;IUsesAnyService&lt;MyService1&gt;&gt;();
+var result2a = container.Resolve&lt;IUsesAnyService&lt;MyService2&gt;&gt;();
+var result2b = container.Resolve&lt;IUsesAnyService&lt;MyService2&gt;&gt;();
+
+Assert.Same(result1a, result1b);
+Assert.Same(result2a, result2b);
+</code></pre><hr>
+<h2 id="factory-delegates">Factory Delegates</h2>
+<p>Building on the <a href="../delegates.html">factory delegate documentation</a>, we can also register delegates as singletons, too:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
+
+// Incremented by the delegate registered below
+int counter = 0;
+
+container.Register(
+    Target.ForDelegate(() =&gt; ++counter).Singleton()
+);
+
+var result1 = container.Resolve&lt;int&gt;();
+var result2 = container.Resolve&lt;int&gt;();
+
+Assert.Equal(counter, result1);
+Assert.Equal(result1, result2);
+</code></pre><div class="NOTE"><h5>Note</h5><p>Clearly this is not a real-world example - but intended to be as illustrative as possible of the effects of converting a delegate
+into a singleton: the delegate will be executed just the once.</p>
+</div>
+<hr>
+<h2 id="expressions">Expressions</h2>
+<p>If you&#39;re <a href="../expressions.html">registering expressions in your container</a> then you won&#39;t be surprised to learn you can also register
+these as singletons.  By now, you should pretty much already be able to guess how!</p>
+<p>This example is similar to the delegate example above, in that we have a counter variable which is being (pre)incremented by an expression, 
+with its result returned whenever we resolve an <code>int</code>.  In itself this poses an additional challenge because such an expression cannot be 
+written as a compile-time lambda (assignments are not allowed).  So in this case we have a type which holds a mutable counter:</p>
+<pre><code class="lang-csharp" name="CounterHolder.cs">public class CounterHolder
+{
+    public int Counter { get; set; }
+}
+</code></pre><p>We register that as a singleton (so the counter is shared) and then build an expression by hand to return the result of pre-incrementing
+it and writing the value back to the counter holder.  This example also shows another way to leverage Rezolver&#39;s ability to inject arguments 
+into your expressions, by supplying a hand-built <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a> with <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression.parameters#System_Linq_Expressions_LambdaExpression_Parameters">Parameters</a>:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">// Similar to the delegate example above,
+// but we&#39;re injecting an instance which holds the counter
+// so we can use a PreIncrementAssign UnaryExpression, which you 
+// can&#39;t do in compiler-built lambda expressions.
+// In any case, you can&#39;t change the value of a lifted local in 
+// an expression, because it&#39;s lifted as a constant.
+var container = new Container();
+
+container.RegisterSingleton&lt;CounterHolder&gt;();
+
+// expression below is equivalent to:
+// (CounterHolder c) =&gt; ++c.Counter
+var counterHolderParam = Expression.Parameter(typeof(CounterHolder));
+container.Register(
+    new ExpressionTarget(Expression.Lambda(
+        Expression.PreIncrementAssign(
+            Expression.Property(counterHolderParam, &quot;Counter&quot;)
+        ),
+        counterHolderParam
+    )).Singleton()
+);
+
+// get the singleton CounterHolder and change its counter to 10
+var counterHolder = container.Resolve&lt;CounterHolder&gt;();
+counterHolder.Counter = 10;
+
+// now resolve two ints via the expression which would, if 
+// the expression wasn&#39;t registered as a singleton, increment
+// the counterHolder.Counter property twice
+var result1 = container.Resolve&lt;int&gt;();
+var result2 = container.Resolve&lt;int&gt;();
+
+// counterHolder&#39;s Counter should have been incremented only once
+Assert.Equal(counterHolder.Counter, result1);
+Assert.Equal(result1, result2);
+</code></pre><hr>
+<h2 id="mixing-transient-and-singleton">Mixing Transient and Singleton</h2>
+<p>Rezolver allows you to mix singletons and transients in a single object graph, since an individual registration controls its own lifetime.</p>
+<p>First, we have a transient object with dependencies on objects registered as singletons (the most common case):</p>
+<div class="NOTE"><h5>Note</h5><p>The <code>RequiresMyServices</code> type and other related types shown here are introduced in the <a href="../constructor-injection/index.html">constructor injection</a>
+topic.</p>
+</div>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
+container.RegisterType&lt;RequiresMyServices&gt;();
+container.RegisterSingleton&lt;MyService1&gt;();
+container.RegisterSingleton&lt;MyService2&gt;();
+container.RegisterSingleton&lt;MyService3&gt;();
+
+var service1 = container.Resolve&lt;MyService1&gt;();
+var service2 = container.Resolve&lt;MyService2&gt;();
+var service3 = container.Resolve&lt;MyService3&gt;();
+var dependant1 = container.Resolve&lt;RequiresMyServices&gt;();
+var dependant2 = container.Resolve&lt;RequiresMyServices&gt;();
+
+Assert.NotSame(dependant1, dependant2);
+Assert.Same(service1, dependant1.Service1);
+Assert.Same(service2, dependant1.Service2);
+Assert.Same(service3, dependant1.Service3);
+Assert.Same(dependant1.Service1, dependant2.Service1);
+Assert.Same(dependant1.Service2, dependant2.Service2);
+Assert.Same(dependant1.Service3, dependant2.Service3);
+</code></pre><p>Then, the same types, but this time the <code>RequiresMyServices</code> type is registered as a singleton, with the three dependency types registered
+as transient:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
+container.RegisterSingleton&lt;RequiresMyServices&gt;();
+container.RegisterType&lt;MyService1&gt;();
+container.RegisterType&lt;MyService2&gt;();
+container.RegisterType&lt;MyService3&gt;();
+
+var service1 = container.Resolve&lt;MyService1&gt;();
+var service2 = container.Resolve&lt;MyService2&gt;();
+var service3 = container.Resolve&lt;MyService3&gt;();
+var dependant1 = container.Resolve&lt;RequiresMyServices&gt;();
+var dependant2 = container.Resolve&lt;RequiresMyServices&gt;();
+
+Assert.Same(dependant1, dependant2);
+Assert.NotSame(service1, dependant1.Service1);
+Assert.NotSame(service2, dependant1.Service2);
+Assert.NotSame(service3, dependant1.Service3);
+</code></pre><hr>
+<h2 id="singletons-in-enumerables">Singletons in Enumerables</h2>
+<p>Building on the examples shown in the <a href="../enumerables.html">enumerables documentation</a>, you can register a singleton among a collection
+of services which are later resolved or injected as an enumerable of that service:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
+container.RegisterType&lt;MyService1, IMyService&gt;();
+container.RegisterSingleton&lt;MyService2, IMyService&gt;();
+container.RegisterType&lt;MyService3, IMyService&gt;();
+
+var result1 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+var result2 = container.Resolve&lt;IEnumerable&lt;IMyService&gt;&gt;().ToArray();
+
+Assert.NotSame(result1[0], result2[0]);
+Assert.Same(result1[1], result2[1]);
+Assert.NotSame(result1[2], result2[2]);
+</code></pre><div class="NOTE"><h5>Note</h5><p>At present, the enumerable itself is <em>always</em> a new instance, even if every element within it is a singleton.  There is currently
+no way to force an enumerable to be a singleton, however this ability might be added at a later date.  If, however, you
+inject the enumerable as a dependency of a singleton, then it will behave as you would expect.</p>
+</div>
+<hr>
+<h2 id="decorating-singletons">Decorating Singletons</h2>
+<p>The <a href="../decorators.html">decorator documentation</a> show many permutations of Rezolver&#39;s support for the decorator pattern.  As the 
+<a href="transient.html">documentation for transient objects</a> mentions, it&#39;s not (currently) possible to control the lifetime of the decorators themselves,
+because they are always transient.  However, as you would expect, if the original registration for the decorated type is a singleton, then 
+each decorator instance that is created by the container will receive the same non-decorated service instance:</p>
+<pre><code class="lang-csharp" name="SingletonExamples.cs">// See the notes on the decorators topic for why we have to
+// create a TargetContainer for registrations in this example.
+var targets = new TargetContainer();
+targets.RegisterSingleton&lt;MyService1, IMyService&gt;();
+targets.RegisterDecorator&lt;MyServiceDecorator1, IMyService&gt;();
+
+var container = new Container(targets);
+var decorator1 = 
+    Assert.IsType&lt;MyServiceDecorator1&gt;(container.Resolve&lt;IMyService&gt;());
+var decorator2 =
+    Assert.IsType&lt;MyServiceDecorator1&gt;(container.Resolve&lt;IMyService&gt;());
+
+Assert.Same(decorator1.Inner, decorator2.Inner);
+</code></pre><hr>
+<h1 id="wrapping-up-and-next-steps">Wrapping up (and next steps)</h1>
+<p>The key takeaway from this is that you can convert any of the targets in the <a class="xref" href="../../api/Rezolver.Targets.html">Rezolver.Targets</a> namespace into a singleton simply by wrapping
+a <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> around it.  Clearly, there are some targets to which you <em>shouldn&#39;t</em> do this (the <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>
+and the SingletonTarget itself, for instance!) although, right now, Rezolver doesn&#39;t prevent you from doing so.</p>
+<ul>
+<li>You should now take a look at <a href="scoped.html">how explicitly scoped objects</a> are supported by Rezolver.</li>
+<li>You might also want to see how singletons behave inside an <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> - which is part of the 
+<a href="container-scopes.html">container scopes</a> documentation.</li>
+</ul>
+</article>
+          </div>
+          <div class="hidden-sm col-md-3" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/singleton.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

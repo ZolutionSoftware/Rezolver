@@ -29,5 +29,15 @@ namespace Rezolver.Tests.Examples.Types
 
         IMyService IRequiresIMyService.Service { get { return Service; } }
     }
+
+    public class RequiresIMyService : IRequiresIMyService
+    {
+        public IMyService Service { get; }
+
+        public RequiresIMyService(IMyService service)
+        {
+            Service = service;
+        }
+    }
     //</example>
 }

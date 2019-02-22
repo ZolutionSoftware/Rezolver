@@ -1,0 +1,146 @@
+﻿<#@ template language="C#" debug="true" hostspecific="true" #>
+<#@ output extension="cs" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+<#@ include file="genericgenerator.t4" #>
+<#
+var specs = new []{
+	new GenericSpec { 
+		Args = "TResult"
+	},
+	new GenericSpec {
+		Args = "T1, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult"
+	},
+	new GenericSpec {
+		Args = "T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult"
+	}
+};
+#>namespace Rezolver
+{
+	using System;
+
+	public static partial class AutoFactoryRegistrationExtensions
+	{
+<#
+	ForSpecs(specs, RegisterTargetGroup);
+#>
+	}
+}
+
+<#+
+void TypeParamRef(GenericSpecArg arg)
+{#>
+		/// <typeparam name="<#= arg.Name #>"><#+ if(arg.Name != "TResult")
+	{#>Type of the <#= arg.nthDescriptor #> parameter of the delegate.<#+ if(arg.Pos>1)
+	{#>  This must not be the same type as any other parameter types.<#+}
+	#><#+}
+	else{#>The return type of the delegate - equivalent to the service type that is to be resolved from the container when the delegate is called.<#+}#></typeparam>
+<#+
+}
+
+void RegisterTargetGroup(GenericSpec spec)
+{
+	//generates the RegisterAutoFunc extension method for the spec
+	ForSignatures(spec, RegisterAutoFunc);
+}
+
+void RegisterAutoFunc(Signature sig)
+{	
+if(sig.Args.Length > 1)
+	{
+		
+		#>
+
+		/// <summary>Enables the automatic injection of a <see cref="Func{<#=sig.Spec.Args#>}" /> auto-factory for the given 
+		/// <typeparamref name="TResult" /> where one or more dependencies which would usually be resolved from the container 
+		/// will instead be supplied by the code which calls the delegate.</summary>
+<#+
+	}
+	else
+	{
+#>
+		/// <summary>Enables the automatic injection of a <see cref="Func{<#=sig.Spec.Args#>}" /> for the given <typeparamref name="TResult" /></summary>
+<#+
+	}
+	ForArgs(sig.Spec, TypeParamRef);
+#>
+		/// <param name="targets">Required.  The <see cref="IRootTargetContainer" /> into which the newly created target will be registered</param>
+<#+
+		if(sig.Args.Length > 1)
+		{
+#>
+		/// <remarks>A parameterised auto-factory provides a way both to hide the container from application code, but also 
+		/// to allow dependencies to be supplied to the requested service instead of relying on the container to have registrations
+		/// for it.
+		///
+		/// Note that scoping is honoured for the delegate call; with an injected auto-factory being bound to the scope from which
+		/// it is resolved.
+		/// 
+		/// This methods ensures that enumerables of the delegate type are also injectable.</remarks>
+<#+
+		}
+		else
+		{
+#>
+		/// <remarks>
+		/// Note that scoping is honoured for the delegate call; with an injected auto-factory being bound to the scope from which
+		/// it is resolved.
+		/// 
+		/// This methods ensures that enumerables of the delegate type are also injectable.
+		/// </remarks>
+<#+
+		}
+#>
+		public static void RegisterAutoFunc<<#= sig.Spec.Args #>>(this IRootTargetContainer targets)
+		{
+			// typeof(Func<<#= new string(',', sig.Args.Length - 1) #>>).MakeGenericType(<#= string.Join(", ", sig.Args.Select(s => $"typeof({s})")) #>)
+			RegisterAutoFactory<Func<<#= sig.Spec.Args #>>>(targets);
+		}
+<#+
+}
+#>

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class InjectCollections
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -117,7 +108,7 @@
   <h1 id="Rezolver_Configuration_InjectCollections" data-uid="Rezolver.Configuration.InjectCollections" class="text-break">Class InjectCollections
   </h1>
   <div class="markdown level0 summary"><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as
-<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a>
 and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection&lt;T&gt;</a> (so long as there are no registrations for these types in the target container when the configuration is applied).</p>
 <p>Out of the box, such collections will be seeded by any objects that have been registered against the element type.</p>
 </div>
@@ -125,8 +116,9 @@ and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collectio
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableCollectionInjection.html">EnableCollectionInjection</a>&gt;</div>
-    <div class="level2"><span class="xref">InjectCollections</span></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></div>
+    <div class="level2"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableCollectionInjection.html">EnableCollectionInjection</a>&gt;</div>
+    <div class="level3"><span class="xref">InjectCollections</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -136,28 +128,34 @@ and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collectio
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;EnableCollectionInjection&gt;.Dependencies</a>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase">OptionDependentConfig&lt;EnableCollectionInjection&gt;.GetDependenciesBase()</a>
     </div>
     <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies">OptionDependentConfigBase.Dependencies</a>
     </div>
     <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_">OptionDependentConfigBase.CreateOptionDependency&lt;TOption&gt;(Boolean)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetHashCode()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetType()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ToString()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Configuration.html">Rezolver.Configuration</a></h6>
@@ -175,18 +173,18 @@ the <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;
 that is via the <a class="xref" href="Rezolver.CombinedTargetContainerConfigExtensions.html#Rezolver_CombinedTargetContainerConfigExtensions_ConfigureOption__1_Rezolver_CombinedTargetContainerConfig___0_">ConfigureOption&lt;TOption&gt;(CombinedTargetContainerConfig, TOption)</a> extension method or
 one of its overloads.</p>
 <h2 id="requires-list-injection">Requires List Injection</h2>
-<p>Note that because <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a> and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a> <em>both</em> require an instance of <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> in their constructor,
-the target container MUST also be able to inject an instance of <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span>.  The best way to do this is to ensure the <a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a> and
+<p>Note that because <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a> and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a> <em>both</em> require an instance of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> in their constructor,
+the target container MUST also be able to inject an instance of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a>.  The best way to do this is to ensure the <a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a> and
 <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> are both enabled (which they are, by default).</p>
 </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectCollections.cs/#L57">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectCollections.cs/#L57">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectCollections_Instance_" data-uid="Rezolver.Configuration.InjectCollections.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectCollections_Instance" data-uid="Rezolver.Configuration.InjectCollections.Instance">Instance</h4>
@@ -216,10 +214,10 @@ the target container MUST also be able to inject an instance of <span class="xre
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectCollections_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectCollections.cs/#L68">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectCollections.cs/#L68">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectCollections_Configure_" data-uid="Rezolver.Configuration.InjectCollections.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectCollections_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectCollections.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
@@ -249,7 +247,7 @@ their primary interfaces) so long as none of the types are already registered.</
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableCollectionInjection&gt;.Configure(Rezolver.IRootTargetContainer)</span></div>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">OptionDependentConfigBase.Configure(IRootTargetContainer)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a>
@@ -275,10 +273,10 @@ their primary interfaces) so long as none of the types are already registered.</
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectCollections.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectCollections.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectCollections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectCollections.cs/#L34" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectCollections.cs/#L34" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

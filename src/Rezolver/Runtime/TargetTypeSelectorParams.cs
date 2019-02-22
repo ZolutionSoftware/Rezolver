@@ -60,7 +60,7 @@ namespace Rezolver
         {
             get
             {
-                return this._forceContravariance ?? this.Parent?.ForceContravariance;
+                return this._forceContravariance ?? Parent?.ForceContravariance;
             }
         }
 
@@ -86,7 +86,7 @@ namespace Rezolver
         {
             get
             {
-                return this.TypeParameter?.IsVariantTypeParameter() ?? false;
+                return TypeParameter?.IsVariantTypeParameter() ?? false;
             }
         }
 
@@ -94,7 +94,7 @@ namespace Rezolver
         {
             get
             {
-                return this.TypeParameter?.IsContravariantTypeParameter() ?? false;
+                return TypeParameter?.IsContravariantTypeParameter() ?? false;
             }
         }
 
@@ -102,13 +102,13 @@ namespace Rezolver
         {
             get
             {
-                return this.TypeParameter?.IsCovariantTypeParameter() ?? false;
+                return TypeParameter?.IsCovariantTypeParameter() ?? false;
             }
         }
 
         public TargetTypeSelectorParams(Type type)
         {
-            this.Type = type;
+            Type = type;
         }
 
         /// <summary>
@@ -119,18 +119,18 @@ namespace Rezolver
         public TargetTypeSelectorParams(Type type, TargetTypeSelector owner)
             : this(type)
         {
-            this.RootTargets = owner?.RootTargets;
+            RootTargets = owner?.RootTargets;
             // variance always starts off enabled.
-            this.EnableVariance = true;
+            EnableVariance = true;
 
             bool enableContravariance = true;
 
-            this._forceContravariance = GetInternalContravarianceOverride(this.Type);
+            this._forceContravariance = GetInternalContravarianceOverride(Type);
             if (this._forceContravariance == null)
             {
-                if (this.RootTargets != null)
-                    enableContravariance = this.RootTargets.GetOption(
-                        this.Type, Options.EnableContravariance.Default);
+                if (RootTargets != null)
+                    enableContravariance = RootTargets.GetOption(
+                        Type, Options.EnableContravariance.Default);
             }
             else
             {
@@ -139,11 +139,11 @@ namespace Rezolver
 
             if (enableContravariance)
             {
-                this.Contravariance = Contravariance.BasesAndInterfaces;
+                Contravariance = Contravariance.BasesAndInterfaces;
             }
             else
             {
-                this.Contravariance = Contravariance.None;
+                Contravariance = Contravariance.None;
             }
         }
 
@@ -153,23 +153,23 @@ namespace Rezolver
             Contravariance? contravariantSearchType = null)
             : this(type)
         {
-            this.Parent = parent;
-            this.RootTargets = parent?.RootTargets;
-            this.TypeParameter = typeParameter;
+            Parent = parent;
+            RootTargets = parent?.RootTargets;
+            TypeParameter = typeParameter;
             // We enable variance if we have no parent
             // Or if we have a variant type parameter and
             // the parent hasn't disabled variance.
-            this.EnableVariance = parent == null ||
-                (this.TypeParameterIsVariant && this.Parent.EnableVariance);
+            EnableVariance = parent == null ||
+                (TypeParameterIsVariant && Parent.EnableVariance);
 
-            if (this.EnableVariance)
+            if (EnableVariance)
             {
                 bool enableContravariance;
-                if (this.ForceContravariance == null)
+                if (ForceContravariance == null)
                 {
                     // start off always enabled
                     enableContravariance = true;
-                    var overridenContravariance = GetInternalContravarianceOverride(this.Type);
+                    var overridenContravariance = GetInternalContravarianceOverride(Type);
 
                     if (overridenContravariance != null)
                     {
@@ -177,43 +177,43 @@ namespace Rezolver
                         this._forceContravariance = overridenContravariance;
                         enableContravariance = overridenContravariance.Value;
                     }
-                    else if (this.RootTargets != null)
-                        enableContravariance = this.RootTargets.GetOption(
-                            this.Type, Options.EnableContravariance.Default);
+                    else if (RootTargets != null)
+                        enableContravariance = RootTargets.GetOption(
+                            Type, Options.EnableContravariance.Default);
                 }
                 else
                 {
-                    enableContravariance = this.ForceContravariance.Value;
+                    enableContravariance = ForceContravariance.Value;
                 }
 
                 if (contravariantSearchType != null)
                 {
-                    this.Contravariance = contravariantSearchType.Value;
+                    Contravariance = contravariantSearchType.Value;
                 }
                 else
                 {
                     if (!enableContravariance)
                     {
-                        this.Contravariance = Contravariance.None;
+                        Contravariance = Contravariance.None;
                     }
                     else
                     {
                         // if the parent has its contravariance search set to None, we inherit that
                         // and move on.
-                        if (this.Parent?.Contravariance == Contravariance.None)
+                        if (Parent?.Contravariance == Contravariance.None)
                         {
-                            this.Contravariance = Contravariance.None;
+                            Contravariance = Contravariance.None;
                         }
                         else
                         {
-                            var numContras = this.TypeParameterChain.Count(t => t.IsContravariantTypeParameter());
+                            var numContras = TypeParameterChain.Count(t => t.IsContravariantTypeParameter());
                             if (numContras <= 1 || (numContras % 2) == 1)
                             {
-                                this.Contravariance = Contravariance.BasesAndInterfaces;
+                                Contravariance = Contravariance.BasesAndInterfaces;
                             }
                             else
                             {
-                                this.Contravariance = Contravariance.Derived;
+                                Contravariance = Contravariance.Derived;
                             }
                         }
                     }
@@ -223,13 +223,13 @@ namespace Rezolver
 
         public override string ToString()
         {
-            if (this.TypeParameter != null)
+            if (TypeParameter != null)
             {
-                return $"{this.TypeParameter.Name}(#{this.TypeParameter.GenericParameterPosition}) = {this.Type.CSharpLikeTypeName()} for {this.Parent}";
+                return $"{TypeParameter.Name}(#{TypeParameter.GenericParameterPosition}) = {Type.CSharpLikeTypeName()} for {Parent}";
             }
             else
             {
-                return this.Type.CSharpLikeTypeName();
+                return Type.CSharpLikeTypeName();
             }
         }
     }

@@ -209,7 +209,6 @@ namespace Rezolver
             return new ExpressionTarget(expression, declaredType);
         }
 
-        #region Types/Constructors
         private static readonly IDictionary<string, ITarget> _emptyArgsDictionary = new Dictionary<string, ITarget>();
 
         /// <summary>
@@ -528,6 +527,39 @@ namespace Rezolver
             return new ConstructorTarget(constructor, bindings, memberBinding);
         }
 
-        #endregion
+        /// <summary>
+        /// Creates a target which binds to the constructor of an open generic type, an exemplar of which is passed in <paramref name="newExpr"/>.
+        /// 
+        /// The created target will be <see cref="Targets.GenericConstructorTarget"/> whose <see cref="Targets.GenericConstructorTarget.GenericTypeConstructor"/>
+        /// will be set to the constructor that is identified from the expression.
+        /// </summary>
+        /// <typeparam name="TExample">Must be a generic type.  It doesn't matter what the type arguments are, however,
+        /// as the target that is created will be for the generic type definition of this type.</typeparam>
+        /// <param name="newExpr">A lambda expression whose <see cref="LambdaExpression.Body"/> is a <see cref="NewExpression"/>
+        /// which identifies the constructor that is to be used to create the instance of all concrete types derived from the
+        /// the same generic type definition as <typeparamref name="TExample"/>.</param>
+        /// <param name="memberBindingBehaviour">Optional. If you wish to bind members on the new instance, pass a member binding
+        /// behaviour here.</param>
+        /// <remarks>Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
+        /// and registered against the open generic of the type you actually invoke this method for; e.g. if
+        /// <typeparamref name="TExample"/> is `MyGeneric&lt;Foo, Bar&gt;`, then a target bound to the equivalent
+        /// constructor on the open generic `MyGeneric&lt;,&gt;` will be what is actually created.</remarks>
+        public static ITarget ForGenericConstructor<TExample>(
+            Expression<Func<TExample>> newExpr,
+            IMemberBindingBehaviour memberBindingBehaviour = null)
+        {
+            if (!TypeHelpers.IsGenericType(typeof(TExample)))
+            {
+                throw new ArgumentException($"{typeof(TExample)} is not a generic type.");
+            }
+
+            var ctor = Extract.GenericConstructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
+            if (ctor == null)
+            {
+                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
+            }
+
+            return ForConstructor(ctor, memberBindingBehaviour);
+        }
     }
 }

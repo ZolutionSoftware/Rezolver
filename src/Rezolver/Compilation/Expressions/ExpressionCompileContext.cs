@@ -38,7 +38,7 @@ namespace Rezolver.Compilation.Expressions
             }
         }
 
-        private Expression _currentContainerExpression;
+        private readonly Expression _currentContainerExpression;
         /// <summary>
         /// Gets an expression which gives a reference to the <see cref="IContainer" /> for this context -
         /// i.e. the one on the <see cref="ICompileContext.ResolveContext" /> property.
@@ -51,7 +51,7 @@ namespace Rezolver.Compilation.Expressions
         {
             get
             {
-                return this._currentContainerExpression ?? this.ParentContext.CurrentContainerExpression;
+                return this._currentContainerExpression ?? ParentContext.CurrentContainerExpression;
             }
         }
 
@@ -71,11 +71,11 @@ namespace Rezolver.Compilation.Expressions
         {
             get
             {
-                return this._resolveContextExpression ?? this.ParentContext.ResolveContextParameterExpression;
+                return this._resolveContextExpression ?? ParentContext.ResolveContextParameterExpression;
             }
         }
 
-        private MemberExpression _contextContainerPropertyExpression;
+        private readonly MemberExpression _contextContainerPropertyExpression;
         /// <summary>
         /// Gets an expression for reading the <see cref="IResolveContext.Container" /> property of the <see cref="IResolveContext" />
         /// that's in scope when the <see cref="ICompiledTarget" /> (which is built from the compiled expression) is executed.
@@ -85,11 +85,11 @@ namespace Rezolver.Compilation.Expressions
         {
             get
             {
-                return this._contextContainerPropertyExpression ?? this.ParentContext.ContextContainerPropertyExpression;
+                return this._contextContainerPropertyExpression ?? ParentContext.ContextContainerPropertyExpression;
             }
         }
 
-        private MemberExpression _contextScopePropertyExpression;
+        private readonly MemberExpression _contextScopePropertyExpression;
 
         /// <summary>
         /// Gets an expression for reading the <see cref="IResolveContext.Scope" /> property of the <see cref="IResolveContext" />
@@ -100,7 +100,7 @@ namespace Rezolver.Compilation.Expressions
         {
             get
             {
-                return this._contextScopePropertyExpression ?? this.ParentContext.ContextScopePropertyExpression;
+                return this._contextScopePropertyExpression ?? ParentContext.ContextScopePropertyExpression;
             }
         }
 
@@ -115,7 +115,7 @@ namespace Rezolver.Compilation.Expressions
         {
             get
             {
-                return this._sharedExpressions != null ? this._sharedExpressions.Values : this.ParentContext.SharedExpressions;
+                return this._sharedExpressions != null ? this._sharedExpressions.Values : ParentContext.SharedExpressions;
             }
         }
 
@@ -143,7 +143,7 @@ namespace Rezolver.Compilation.Expressions
         {
             this._sharedExpressions = useParentSharedExpressions ? null : new Dictionary<SharedExpressionKey, Expression>();
 
-            this.RegisterExpressionTargets();
+            RegisterExpressionTargets();
         }
 
         /// <summary>
@@ -174,8 +174,8 @@ namespace Rezolver.Compilation.Expressions
             this._sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
             this._currentContainerExpression = Expression.Constant(resolveContext.Container, typeof(IContainer));
             this._contextContainerPropertyExpression = Expression.Property(this._resolveContextExpression, nameof(IResolveContext.Container));
-            this._contextScopePropertyExpression = Expression.Property(this.ResolveContextParameterExpression, nameof(IResolveContext.Scope));
-            this.RegisterExpressionTargets();
+            this._contextScopePropertyExpression = Expression.Property(ResolveContextParameterExpression, nameof(IResolveContext.Scope));
+            RegisterExpressionTargets();
         }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Rezolver.Compilation.Expressions
         /// </summary>
         protected void RegisterExpressionTargets()
         {
-            this.DependencyTargetContainer.Register(new ExpressionTarget(this.ContextContainerPropertyExpression, typeof(IContainer)));
+            DependencyTargetContainer.Register(new ExpressionTarget(ContextContainerPropertyExpression, typeof(IContainer)));
         }
 
         /// <summary>
@@ -256,12 +256,12 @@ namespace Rezolver.Compilation.Expressions
             // if no sharedExpressions dictionary, then we have a parent which will handle the call for us.
             if (this._sharedExpressions == null)
             {
-                return this.ParentContext.GetOrAddSharedLocal(type, name, requestingType);
+                return ParentContext.GetOrAddSharedLocal(type, name, requestingType);
             }
 
             try
             {
-                return (ParameterExpression)this.GetOrAddSharedExpression(type, name, () => Expression.Parameter(type, name), requestingType);
+                return (ParameterExpression)GetOrAddSharedExpression(type, name, () => Expression.Parameter(type, name), requestingType);
             }
             catch (InvalidCastException)
             {
@@ -283,7 +283,7 @@ namespace Rezolver.Compilation.Expressions
         {
             if (this._sharedExpressions == null)
             {
-                return this.ParentContext.GetOrAddSharedExpression(type, name, expressionFactory, requestingType);
+                return ParentContext.GetOrAddSharedExpression(type, name, expressionFactory, requestingType);
             }
 
             type.MustNotBeNull("type");

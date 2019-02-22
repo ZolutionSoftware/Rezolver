@@ -39,7 +39,7 @@ namespace Rezolver.Targets
         /// <remarks>Always forwards the call on to <see cref="InnerTarget"/></remarks>
         public override Type DeclaredType
         {
-            get { return this.InnerTarget.DeclaredType; }
+            get { return InnerTarget.DeclaredType; }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Rezolver.Targets
         public ScopedTarget(ITarget innerTarget)
         {
             innerTarget.MustNotBeNull("innerTarget");
-            this.InnerTarget = innerTarget;
+            InnerTarget = innerTarget;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Rezolver.Targets
         /// <remarks>Always forwards the call on the <see cref="InnerTarget"/></remarks>
         public override bool SupportsType(Type type)
         {
-            return this.InnerTarget.SupportsType(type);
+            return InnerTarget.SupportsType(type);
         }
     }
 }

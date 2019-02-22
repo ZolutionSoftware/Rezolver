@@ -39,14 +39,17 @@ namespace Rezolver
 
         private ITargetContainer Inner { get; set; }
 
-        private IRootTargetContainer Root { get; }
+        /// <summary>
+        /// Implementation of <see cref="ITargetContainer.Root"/>
+        /// </summary>
+        public IRootTargetContainer Root { get; }
 
         private DecoratingTargetFactory DecoratorFactory { get; }
 
         private DecoratingTargetContainer(IRootTargetContainer root, Type decoratedType)
         {
-            this.Root = root ?? throw new ArgumentNullException(nameof(root));
-            this.DecoratedType = decoratedType ?? throw new ArgumentNullException(nameof(decoratedType));
+            Root = root ?? throw new ArgumentNullException(nameof(root));
+            DecoratedType = decoratedType ?? throw new ArgumentNullException(nameof(decoratedType));
         }
 
         /// <summary>
@@ -66,7 +69,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(decoratorType));
             }
 
-            this.DecoratorFactory = (ta, ty) => Target.ForType(decoratorType);
+            DecoratorFactory = (ta, ty) => Target.ForType(decoratorType);
         }
 
         /// <summary>
@@ -85,7 +88,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(decoratorTarget));
             }
 
-            this.DecoratorFactory = (ta, ty) => decoratorTarget;
+            DecoratorFactory = (ta, ty) => decoratorTarget;
         }
 
         /// <summary>
@@ -97,21 +100,19 @@ namespace Rezolver
         internal DecoratingTargetContainer(IRootTargetContainer root, DecoratingTargetFactory factory, Type decoratedType)
             : this(root, decoratedType)
         {
-            this.DecoratorFactory = factory ?? throw new ArgumentNullException(nameof(factory));
+            DecoratorFactory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
 
         private ITargetContainer EnsureInner()
         {
             // This reuses the same logic that TargetContainer employs via these extension methods
-            return this.Inner ??
-                (this.Inner = this.Root.CreateChildContainer(
-                            this.Root.GetChildContainerType(this.DecoratedType),
-                            this.Root));
+            return Inner ??
+                (Inner = Root.CreateTargetContainerForServiceTypeInternal(DecoratedType));
         }
 
         private DecoratorTarget CreateDecoratorTarget(ITarget decorated, Type type)
         {
-            return new DecoratorTarget(this.DecoratorFactory(decorated, type), decorated, type);
+            return new DecoratorTarget(DecoratorFactory(decorated, type), decorated, type);
         }
 
         /// <summary>
@@ -126,12 +127,12 @@ namespace Rezolver
         /// <exception cref="InvalidOperationException">If this target container is already decorating another container</exception>
         public ITargetContainer CombineWith(ITargetContainer existing, Type type)
         {
-            if (this.Inner != null)
+            if (Inner != null)
             {
                 throw new InvalidOperationException("Already decorating another container");
             }
 
-            this.Inner = existing;
+            Inner = existing;
             return this;
         }
 
@@ -143,19 +144,19 @@ namespace Rezolver
         /// <remarks>If the inner container returns null, then so does this one.</remarks>
         public ITarget Fetch(Type type)
         {
-            if (this.Inner == null)
+            if (Inner == null)
             {
                 return null;
             }
 
-            if (this.ShouldDecorate(type))
+            if (ShouldDecorate(type))
             {
-                var result = this.Inner.Fetch(type);
-                return result != null ? this.CreateDecoratorTarget(result, type) : null;
+                var result = Inner.Fetch(type);
+                return result != null ? CreateDecoratorTarget(result, type) : null;
             }
             else
             {
-                return this.Inner.Fetch(type);
+                return Inner.Fetch(type);
             }
         }
 
@@ -163,11 +164,11 @@ namespace Rezolver
         {
             // not ideal this - perhaps the decorator container should have this filter
             // passed to it on construction.
-            return type == this.DecoratedType
+            return type == DecoratedType
                 || (TypeHelpers.IsGenericType(type)
-                    && TypeHelpers.IsGenericTypeDefinition(this.DecoratedType)
-                    && type.GetGenericTypeDefinition() == this.DecoratedType)
-                || (this.DecoratedType == typeof(Array)
+                    && TypeHelpers.IsGenericTypeDefinition(DecoratedType)
+                    && type.GetGenericTypeDefinition() == DecoratedType)
+                || (DecoratedType == typeof(Array)
                     && TypeHelpers.IsArray(type));
         }
 
@@ -179,18 +180,18 @@ namespace Rezolver
         /// <param name="type">Required.  The type for which the <see cref="ITarget" /> instances are to be retrieved.</param>
         public IEnumerable<ITarget> FetchAll(Type type)
         {
-            if (this.Inner == null)
+            if (Inner == null)
             {
                 return Enumerable.Empty<ITarget>();
             }
 
-            if (this.ShouldDecorate(type))
+            if (ShouldDecorate(type))
             {
-                return this.Inner.FetchAll(type).Select(t => this.CreateDecoratorTarget(t, type));
+                return Inner.FetchAll(type).Select(t => CreateDecoratorTarget(t, type));
             }
             else
             {
-                return this.Inner.FetchAll(type);
+                return Inner.FetchAll(type);
             }
         }
 
@@ -208,7 +209,7 @@ namespace Rezolver
         /// multiple decorators registered against it.</remarks>
         public void Register(ITarget target, Type serviceType = null)
         {
-            this.EnsureInner().Register(target, serviceType);
+            EnsureInner().Register(target, serviceType);
         }
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace Rezolver
         /// around the inner target container and passes the call on to that.</remarks>
         public ITargetContainer FetchContainer(Type type)
         {
-            return this.EnsureInner().FetchContainer(type);
+            return EnsureInner().FetchContainer(type);
         }
 
         /// <summary>
@@ -231,7 +232,7 @@ namespace Rezolver
         /// <param name="container">The container.</param>
         public void RegisterContainer(Type type, ITargetContainer container)
         {
-            this.EnsureInner().RegisterContainer(type, container);
+            EnsureInner().RegisterContainer(type, container);
         }
     }
 }

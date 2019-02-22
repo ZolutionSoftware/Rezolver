@@ -24,7 +24,10 @@ namespace Rezolver
     /// as well as how those bindings are created.
     ///
     /// The default behaviour is to bind each member to a new <see cref="ResolvedTarget"/> whose
-    /// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.</remarks>
+    /// <see cref="ResolvedTarget.DeclaredType"/> is set to the member's type.
+    /// 
+    /// See the [member binding guide](/developers/docs/member-injection/index.html) for more.
+    /// </remarks>
     public class BindAllMembersBehaviour : IMemberBindingBehaviour
     {
         /// <summary>
@@ -49,8 +52,8 @@ namespace Rezolver
         public virtual MemberBinding[] GetMemberBindings(ICompileContext context, Type type)
         {
             // find all publicly writable properties and public fields, emit
-            return this.BindProperties(context, type, this.GetBindableProperties(context, type))
-              .Concat(this.BindFields(context, type, this.GetBindableFields(context, type))).ToArray();
+            return BindProperties(context, type, GetBindableProperties(context, type))
+              .Concat(BindFields(context, type, GetBindableFields(context, type))).ToArray();
         }
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace Rezolver
         /// <returns>An enumerable containing bindings for each of the passed <paramref name="fields"></paramref></returns>
         protected virtual IEnumerable<MemberBinding> BindFields(ICompileContext context, Type type, IEnumerable<FieldInfo> fields)
         {
-            return fields.Select(f => this.CreateBinding(context, type, f)).Where(b => b != null);
+            return fields.Select(f => CreateBinding(context, type, f)).Where(b => b != null);
         }
 
         /// <summary>
@@ -81,7 +84,7 @@ namespace Rezolver
         /// for each bindable property in <paramref name="properties"/>.</returns>
         protected virtual IEnumerable<MemberBinding> BindProperties(ICompileContext context, Type type, IEnumerable<PropertyInfo> properties)
         {
-            return properties.Select(p => this.CreateBinding(context, type, p)).Where(b => b != null);
+            return properties.Select(p => CreateBinding(context, type, p)).Where(b => b != null);
         }
 
         /// <summary>
@@ -155,7 +158,7 @@ namespace Rezolver
         /// <returns>An enumerable of the fields that can be bound on the given <paramref name="type"/></returns>
         protected virtual IEnumerable<FieldInfo> GetBindableFields(ICompileContext context, Type type)
         {
-            return type.GetInstanceFields().Where(this.ShouldBind);
+            return type.GetInstanceFields().Where(ShouldBind);
         }
 
         /// <summary>
@@ -171,7 +174,7 @@ namespace Rezolver
         /// <returns>An enumerable of the properties that can be bound on the given <paramref name="type"/></returns>
         protected virtual IEnumerable<PropertyInfo> GetBindableProperties(ICompileContext context, Type type)
         {
-            return type.GetInstanceProperties().Where(this.ShouldBind);
+            return type.GetInstanceProperties().Where(ShouldBind);
         }
 
         /// <summary>

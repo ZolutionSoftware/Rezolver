@@ -15,7 +15,7 @@ namespace Rezolver.Sdk
         public TypeDependency(Type type, IDependant owner, bool required)
             : base(owner, required)
         {
-            this.Type = type;
+            Type = type;
         }
 
         public override IEnumerable<T> GetDependencies<T>(IEnumerable<T> objects)
@@ -25,7 +25,7 @@ namespace Rezolver.Sdk
             bool match;
             foreach (var o in objects)
             {
-                match = !object.ReferenceEquals(this.Owner, o) && TypeHelpers.IsAssignableFrom(this.Type, o.GetType());
+                match = !object.ReferenceEquals(Owner, o) && TypeHelpers.IsAssignableFrom(Type, o.GetType());
 
                 if (match && o is IDependant oDependant)
                 {
@@ -39,7 +39,7 @@ namespace Rezolver.Sdk
                     // calculated, then it should be).
                     foreach (var oDependency in oDependant.Dependencies.OfType<TypeDependency>())
                     {
-                        if (oDependency.Type == this.Type && TypeHelpers.IsAssignableFrom(this.Type, this.Owner.GetType()))
+                        if (oDependency.Type == Type && TypeHelpers.IsAssignableFrom(Type, Owner.GetType()))
                         {
                             match = false;
 
@@ -59,9 +59,9 @@ namespace Rezolver.Sdk
                 }
             }
 
-            if (this.Required && count == 0)
+            if (Required && count == 0)
             {
-                string msg = $"{this.Owner} requires at least one object of type {this.Type}";
+                string msg = $"{Owner} requires at least one object of type {Type}";
                 if (allSkipped.Count != 0)
                 {
                     msg = $"{msg} - {allSkipped.Count} matching object(s) ignored because they also have an identical type dependency which matches the owner.";

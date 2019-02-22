@@ -39,12 +39,12 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <summary>
 		/// Creates the target container for the test.
 		/// </summary>
-		/// <param name="testName">Name of the test.</param>
-        /// <param name="configOverride">An explicit <see cref="ITargetContainerConfig"/> to use to configure the 
+		/// <param name="configOverride">An explicit <see cref="ITargetContainerConfig"/> to use to configure the 
         /// <see cref="ITargetContainer"/>.  If not provided, then the config returned by <see cref="GetDefaultTargetContainerConfig(string)"/> 
         /// is used, which is always a clone of the <see cref="TargetContainer.DefaultConfig"/>.</param>
-		protected virtual IRootTargetContainer CreateTargetContainer([CallerMemberName]string testName = null, ITargetContainerConfig configOverride = null)
-		{
+        /// <param name="testName">Name of the test.</param>
+		protected virtual IRootTargetContainer CreateTargetContainer(ITargetContainerConfig configOverride = null, [CallerMemberName]string testName = null)
+        {
 			return new TargetContainer(configOverride ?? GetDefaultTargetContainerConfig(testName));
 		}
 
@@ -123,7 +123,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <param name="testName">Name of the test executing the method.  The compiler fills this in if ommitted.</param>
 		protected IContainer CreateContainerForSingleTarget(ITarget target, Type serviceType = null, [CallerMemberName]string testName = null)
 		{
-			var targets = CreateTargetContainer(testName);
+			var targets = CreateTargetContainer(testName: testName);
 			targets.Register(target, serviceType);
 			return CreateContainer(targets, testName);
 		}		

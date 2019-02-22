@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Mixing Covariant and Contravariant parameters | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Mixing Covariant and Contravariant parameters | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../../favicon.ico">
+  	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../../styles/docfx.css">
+  	<link rel="stylesheet" href="../../styles/main.css">
+  	<meta property="docfx:navrel" content="../../toc.html">
+  	<meta property="docfx:tocrel" content="../toc.html">
+  	
+  	<meta property="docfx:rel" content="../../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../../manifest.json">
+  		<link rel="mask-icon" href="../../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../../images/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container-fluid hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container-fluid body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-9">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="mixing-covariant-and-contravariant-parameters">Mixing Covariant and Contravariant parameters</h1>
+
+<p>All of our <a href="covariance.html">covariant</a> and <a href="contravariance.html">contravariant</a> examples have focused on variant
+generic interfaces or delegates which have <em>all</em> covariant or <em>all</em> contravariant type parameters, but Rezolver 
+is not limited to this.</p>
+<p>Rezolver can also match registrations to generics whose type arguments don&#39;t match the requested types, but 
+which are still compatible across <em>all</em> type arguments, regardless of whether the underlying type parameters 
+are covariant or contravariant.</p>
+<p>Consider the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.converter-2">Converter&lt;TInput,TOutput&gt;</a> type:</p>
+<p><code>public delegate TOutput Converter&lt;in TInput, out TOutput&gt;(TInput input);</code></p>
+<div class="TIP"><h5>Tip</h5><p>These examples use the same shapes types that are used in the <a href="contravariance.html">contravariance</a> examples.</p>
+</div>
+<p>In this example, we&#39;ll resolve a <code>Converter&lt;Rectangle, IDictionary&lt;string, string&gt;&gt;</code> - but neither type argument 
+matches the types used in the registration (<code>Converter&lt;object, Dictionary&lt;string, string&gt;&gt;</code>).
+However, because the first is contravariant and the second is covariant, Rezolver pulls out the registered 
+converter, seeing that it is compatible:</p>
+<pre><code class="lang-csharp" name="MixedVarianceExamples.cs">var container = new Container();
+var expected = new Converter&lt;object, Dictionary&lt;string, string&gt;&gt;(
+    o =&gt; new Dictionary&lt;string, string&gt;
+    {
+        [&quot;type&quot;] = o.GetType().ToString(),
+        [&quot;value&quot;] = o.ToString()
+    });
+container.RegisterObject(expected);
+
+var result = container.Resolve&lt;Converter&lt;Rectangle, IDictionary&lt;string, string&gt;&gt;&gt;();
+Assert.Same(expected, result);
+</code></pre><p>And, of course, if you resolve an <code>IEnumerable&lt;&gt;</code> of a type containing a mixture of covariant and contravariant
+type parameters - it works exactly as expected:</p>
+<pre><code class="lang-csharp" name="MixedVarianceExamples.cs">var container = new Container();
+
+var objectConverter = new Converter&lt;object, Dictionary&lt;string, string&gt;&gt;(
+    o =&gt; new Dictionary&lt;string, string&gt;
+    {
+        [&quot;type&quot;] = o.GetType().ToString(),
+        [&quot;value&quot;] = o.ToString()
+    });
+var shapeConverter = new Converter&lt;I2DShape, Dictionary&lt;string, string&gt;&gt;(
+    o =&gt; new Dictionary&lt;string, string&gt;
+    {
+        [&quot;area&quot;] = o.CalcArea().ToString()
+    });
+var rectangleConverter = new Converter&lt;Rectangle, Dictionary&lt;string, string&gt;&gt;(
+    o =&gt; new Dictionary&lt;string, string&gt;
+    {
+        [&quot;width&quot;] = o.Length.ToString(),
+        [&quot;height&quot;] = o.Height.ToString()
+    });
+var circleConverter = new Converter&lt;Circle, Dictionary&lt;string, string&gt;&gt;(
+    o =&gt; new Dictionary&lt;string, string&gt;
+    {
+        [&quot;radius&quot;] = o.Radius.ToString()
+    });
+
+container.RegisterObject(objectConverter);
+container.RegisterObject(shapeConverter);
+container.RegisterObject(rectangleConverter);
+container.RegisterObject(circleConverter);
+
+// for &lt;Circle, IDictionary&lt;string, string&gt;&gt;, we should get three:
+var result1 = container.ResolveMany&lt;Converter&lt;Circle, IDictionary&lt;string, string&gt;&gt;&gt;();
+Assert.Equal(new Converter&lt;Circle, IDictionary&lt;string, string&gt;&gt;[] {
+    objectConverter,
+    shapeConverter,
+    circleConverter
+}, result1);
+
+// and for &lt;Square, IDictionary&lt;string, string&gt;&gt;, we should also get three:
+// this time, there are *no* exact matches
+var result2 = container.ResolveMany&lt;Converter&lt;Square, IDictionary&lt;string, string&gt;&gt;&gt;();
+Assert.Equal(new Converter&lt;Square, IDictionary&lt;string, string&gt;&gt;[] {
+    objectConverter,
+    shapeConverter,
+    rectangleConverter
+}, result2);
+</code></pre><div class="NOTE"><h5>Note</h5><p>Remember that auto-generated enumerables always return objects in <em>registration</em> order.</p>
+</div>
+<p>Further examples for this functionality which don&#39;t also require lots of background and other classes are thin on 
+the ground right now.  That said, generic variance is something you either <em>know</em> you need, or you don&#39;t.  So,
+if you do, hopefully these examples - and the rest in this section - should be enough to satisfy you that Rezolver
+will be able to support you in whatever you need.</p>
+<p>Certainly, don&#39;t start marking all your generic parameters as <code>in</code> or <code>out</code> just because they can be - variant
+interfaces and delegates are typically variant for a <em>specific reason</em>.  If you don&#39;t have a good reason, then 
+don&#39;t make your types variant.</p>
+</article>
+          </div>
+          <div class="hidden-sm col-md-3" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/variance/mixed.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

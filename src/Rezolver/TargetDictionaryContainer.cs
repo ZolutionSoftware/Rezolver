@@ -31,12 +31,7 @@ namespace Rezolver
         /// <summary>
         /// Never null.  Returns the root target container.
         /// </summary>
-        /// <value>If this instance is created with a root
-        /// passed to the <see cref="TargetDictionaryContainer(IRootTargetContainer)"/>
-        /// constructor, then it will be returned by this property.
-        ///
-        /// Otherwise it will return this instance.</value>
-        protected virtual IRootTargetContainer Root { get; }
+        public virtual IRootTargetContainer Root { get; }
 
         /// <summary>
         /// Constructs a new <see cref="TargetDictionaryContainer"/> optionally setting the <see cref="Root"/> target container.
@@ -48,7 +43,7 @@ namespace Rezolver
         /// both as a root, but also for other more specialised target containers.</remarks>
         public TargetDictionaryContainer(IRootTargetContainer root)
         {
-            this.Root = root;
+            Root = root;
         }
 
         internal TargetDictionaryContainer()
@@ -68,7 +63,7 @@ namespace Rezolver
         public virtual ITarget Fetch(Type type)
         {
             type.MustNotBeNull(nameof(type));
-            var container = this.FetchContainer(type);
+            var container = FetchContainer(type);
             if (container == null)
             {
                 return null;
@@ -86,7 +81,7 @@ namespace Rezolver
         public virtual IEnumerable<ITarget> FetchAll(Type type)
         {
             type.MustNotBeNull(nameof(type));
-            var container = this.FetchContainer(type);
+            var container = FetchContainer(type);
             if (container == null)
             {
                 return Enumerable.Empty<ITarget>();
@@ -106,7 +101,7 @@ namespace Rezolver
         public virtual ITargetContainer FetchContainer(Type serviceType)
         {
             serviceType.MustNotBeNull(nameof(serviceType));
-            this._targetContainers.TryGetValue(this.GetTargetContainerType(serviceType), out ITargetContainer toReturn);
+            this._targetContainers.TryGetValue(GetRegisteredContainerType(serviceType), out ITargetContainer toReturn);
             return toReturn;
         }
 
@@ -173,7 +168,7 @@ namespace Rezolver
             target.MustNotBeNull(nameof(target));
             serviceType = serviceType ?? target.DeclaredType;
 
-            ITargetContainer container = this.EnsureContainer(serviceType);
+            ITargetContainer container = EnsureContainer(serviceType);
 
             container.Register(target, serviceType);
         }
@@ -194,7 +189,7 @@ namespace Rezolver
         /// <see cref="ITargetContainerTypeResolver"/> that's registered via the options API.</remarks>
         protected ITargetContainer EnsureContainer(Type serviceType)
         {
-            return this.FetchContainer(serviceType) ?? this.AutoRegisterContainer(this.GetTargetContainerType(serviceType));
+            return FetchContainer(serviceType) ?? AutoRegisterContainer(GetRegisteredContainerType(serviceType));
         }
 
         /// <summary>
@@ -204,13 +199,13 @@ namespace Rezolver
         /// against a single type.</summary>
         /// <param name="targetContainerType">The type that the target container is to be registered under.
         ///
-        /// Note that this type will *not* be remapped by the <see cref="GetTargetContainerType(Type)"/> method -
+        /// Note that this type will *not* be remapped by the <see cref="GetRegisteredContainerType(Type)"/> method -
         /// it will be used as-is.</param>
         /// <returns></returns>
         protected virtual ITargetContainer AutoRegisterContainer(Type targetContainerType)
         {
-            var created = this.CreateContainer(targetContainerType);
-            this.RegisterContainer(targetContainerType, created);
+            var created = CreateTargetContainer(targetContainerType);
+            RegisterContainer(targetContainerType, created);
             return created;
         }
 
@@ -221,7 +216,7 @@ namespace Rezolver
         /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a
         /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="Fetch(Type)"/>.</param>
         /// <returns>The base implementation always returns the <paramref name="serviceType"/></returns>
-        protected virtual Type GetTargetContainerType(Type serviceType)
+        protected virtual Type GetRegisteredContainerType(Type serviceType)
         {
             return serviceType;
         }
@@ -231,9 +226,9 @@ namespace Rezolver
         /// </summary>
         /// <param name="targetContainerType"></param>
         /// <returns></returns>
-        protected virtual ITargetContainer CreateContainer(Type targetContainerType)
+        protected virtual ITargetContainer CreateTargetContainer(Type targetContainerType)
         {
-            return new TargetListContainer(this.Root, targetContainerType);
+            return new TargetListContainer(Root, targetContainerType);
         }
 
         /// <summary>

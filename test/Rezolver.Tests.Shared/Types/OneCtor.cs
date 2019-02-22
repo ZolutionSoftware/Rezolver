@@ -16,4 +16,20 @@ namespace Rezolver.Tests.Types
 			Value = value;
 		}
 	}
+
+    public class OneCtorAlt1 : NoCtor
+    {
+        public OneCtorAlt1(int value)
+        {
+            Value = value;
+        }
+    }
+
+    public class OneCtorAlt2 : NoCtor
+    {
+        public OneCtorAlt2(int value)
+        {
+            Value = value;
+        }
+    }
 }

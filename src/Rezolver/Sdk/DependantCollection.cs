@@ -108,7 +108,7 @@ namespace Rezolver.Sdk
                 throw new ArgumentNullException(nameof(replacement));
             }
 
-            var index = this.IndexOf(original);
+            var index = IndexOf(original);
             if (index >= 0)
             {
                 var toReturn = this[index];
@@ -130,10 +130,10 @@ namespace Rezolver.Sdk
         /// the end of the collection if the <paramref name="original"/> can't be found.</param>
         public void ReplaceOrAdd(T original, T replacement)
         {
-            var result = this.Replace(original, replacement);
+            var result = Replace(original, replacement);
             if (result == null)
             {
-                this.Add(replacement);
+                Add(replacement);
             }
         }
 
@@ -157,16 +157,16 @@ namespace Rezolver.Sdk
             for (var f = toRemoveIndices.Length; f > 0; f--)
             {
                 insertIndex = toRemoveIndices[f - 1].index;
-                this.RemoveAt(insertIndex);
+                RemoveAt(insertIndex);
             }
 
-            if (insertIndex < 0 || insertIndex == this.Count)
+            if (insertIndex < 0 || insertIndex == Count)
             {
-                this.Add(replacement);
+                Add(replacement);
             }
             else
             {
-                this.Insert(insertIndex, replacement);
+                Insert(insertIndex, replacement);
             }
         }
 
@@ -196,17 +196,17 @@ namespace Rezolver.Sdk
             for (var f = toRemoveIndices.Length; f > 0; f--)
             {
                 insertIndex = toRemoveIndices[f - 1].index;
-                this.RemoveAt(insertIndex);
+                RemoveAt(insertIndex);
             }
 
             var replacement = replacementCallback(toRemoveIndices.Select(r => r.obj));
-            if (insertIndex < 0 || insertIndex == this.Count)
+            if (insertIndex < 0 || insertIndex == Count)
             {
-                this.Add(replacement);
+                Add(replacement);
             }
             else
             {
-                this.Insert(insertIndex, replacement);
+                Insert(insertIndex, replacement);
             }
         }
 
@@ -321,7 +321,7 @@ namespace Rezolver.Sdk
         /// <param name="items">The items to be added</param>
         public void AddAll(params T[] items)
         {
-            this.AddAll((IEnumerable<T>)items);
+            AddAll((IEnumerable<T>)items);
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace Rezolver.Sdk
             bool success = true;
             foreach (var item in items)
             {
-                if (!this.Remove(item))
+                if (!Remove(item))
                 {
                     success = false;
                 }
@@ -353,6 +353,6 @@ namespace Rezolver.Sdk
         /// Implementation of <see cref="IEnumerable.GetEnumerator"/>
         /// </summary>
         /// <returns></returns>
-        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

@@ -44,8 +44,8 @@ namespace Rezolver
         public ListMemberBinding(MemberInfo member, ITarget target, Type elementType, MethodInfo addMethod)
         : base(member, target)
         {
-            this.ElementType = elementType;
-            this.AddMethod = addMethod;
+            ElementType = elementType;
+            AddMethod = addMethod;
         }
     }
 }

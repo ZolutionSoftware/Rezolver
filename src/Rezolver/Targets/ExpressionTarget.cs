@@ -59,11 +59,11 @@ namespace Rezolver.Targets
         public ExpressionTarget(Expression expression, Type declaredType = null)
         {
             expression.MustNotBeNull(nameof(expression));
-            this.Expression = expression;
+            Expression = expression;
             var expressionType = (expression.NodeType == ExpressionType.Lambda ? ((LambdaExpression)expression).Body.Type : expression.Type);
-            this.DeclaredType = declaredType ?? expressionType;
+            DeclaredType = declaredType ?? expressionType;
 
-            if (!TypeHelpers.IsAssignableFrom(this.DeclaredType, expressionType))
+            if (!TypeHelpers.IsAssignableFrom(DeclaredType, expressionType))
             {
                 throw new ArgumentException($"{nameof(declaredType)} must be compatible with the type of the expression", nameof(declaredType));
             }
@@ -80,8 +80,8 @@ namespace Rezolver.Targets
         {
             expressionFactory.MustNotBeNull(nameof(expressionFactory));
             declaredType.MustNotBeNull(nameof(declaredType));
-            this.ExpressionFactory = expressionFactory;
-            this.DeclaredType = declaredType;
+            ExpressionFactory = expressionFactory;
+            DeclaredType = declaredType;
         }
 
         // TODO: Consider adding a Bind() function to this class to carry out the complex lambda rewriting etc, as it's

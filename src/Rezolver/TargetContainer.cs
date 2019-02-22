@@ -42,14 +42,6 @@ namespace Rezolver
         /// </summary>
         public event EventHandler<TargetContainerRegisteredEventArgs> TargetContainerRegistered;
 
-        void ICovariantTypeIndex.AddKnownType(Type serviceType) => this._typeIndex.AddKnownType(serviceType);
-
-        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType) => this._typeIndex.GetKnownCovariantTypes(serviceType);
-
-        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType) => this._typeIndex.GetKnownCompatibleTypes(serviceType);
-
-        TargetTypeSelector ICovariantTypeIndex.SelectTypes(Type type) => _typeIndex.SelectTypes(type);
-
         /// <summary>
         /// The default configuration used for <see cref="TargetContainer"/> objects created via the <see cref="TargetContainer.TargetContainer(ITargetContainerConfig)"/>
         /// constructor when no configuration is explicitly passed.
@@ -60,29 +52,40 @@ namespace Rezolver
         ///
         /// #### Default configurations
         ///
-        /// In addition to some internal configurations, the configurations applied by default are:
+        /// The configurations applied by default are:
         ///
         /// - <see cref="Configuration.InjectEnumerables"/>
         /// - <see cref="Configuration.InjectArrays"/>
         /// - <see cref="Configuration.InjectLists"/>
         /// - <see cref="Configuration.InjectCollections"/>
+        /// - <see cref="Configuration.InjectAutoFuncs"/>
+        /// - <see cref="Configuration.InjectAutoLazies"/>
         /// - <see cref="Configuration.InjectResolveContext"/>
+        /// 
+        /// In most cases, these are controllable through the use of global properties such as:
+        /// 
+        /// - <see cref="Options.EnableEnumerableInjection"/>
+        /// - <see cref="Options.EnableArrayInjection"/>
+        /// - <see cref="Options.EnableListInjection"/>
+        /// - <see cref="Options.EnableCollectionInjection"/>
+        /// - <see cref="Options.EnableAutoFuncInjection"/> (**NOTE:** defaults to <c>false</c>)
+        /// - <see cref="Options.EnableAutoLazyInjection"/> (**NOTE:** defaults to <c>false</c>)
         /// </remarks>
         public static CombinedTargetContainerConfig DefaultConfig { get; } = new CombinedTargetContainerConfig(new ITargetContainerConfig[]
         {
-            new Configuration.Configure<ITargetContainerFactory>(DefaultTargetContainerFactory.Instance),
-            new Configuration.Configure<ITargetContainerTypeResolver>(DefaultTargetContainerTypeResolver.Instance),
             Configuration.InjectEnumerables.Instance,
             Configuration.InjectArrays.Instance,
             Configuration.InjectLists.Instance,
             Configuration.InjectCollections.Instance,
-            Configuration.InjectResolveContext.Instance
+            Configuration.InjectAutoFuncs.Instance,
+            Configuration.InjectAutoLazies.Instance,
+            Configuration.InjectResolveContext.Instance,
         });
 
         /// <summary>
         /// Always returns this instance.
         /// </summary>
-        protected override IRootTargetContainer Root => this;
+        public override IRootTargetContainer Root => this;
 
         /// <summary>
         /// Constructs a new instance of the <see cref="TargetContainer"/> class.
@@ -96,7 +99,7 @@ namespace Rezolver
         public TargetContainer(ITargetContainerConfig config = null)
             : this()
         {
-            if (this.GetType() != typeof(TargetContainer))
+            if (GetType() != typeof(TargetContainer))
             {
                 throw new InvalidOperationException("Derived types must not use this constructor because it triggers virtual method calls via the configuration callbacks.  Please use the protected parameterless constructor instead");
             }
@@ -117,19 +120,6 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Called to get the type that's to be used to fetch a child <see cref="ITargetContainer"/> for targets registered
-        /// against a given <paramref name="serviceType"/>.
-        /// </summary>
-        /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a
-        /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="ITargetContainer.Fetch(Type)"/>.</param>
-        /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
-        protected override Type GetTargetContainerType(Type serviceType)
-        {
-            // NOTE - shouldn't require descending to the base class because of the default type resolver option
-            return this.GetChildContainerType(serviceType, this.Root) ?? base.GetTargetContainerType(serviceType);
-        }
-
-        /// <summary>
         /// Implementation of <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/>,
         /// overriding the base version to extend special support for open generic types and for
         /// <see cref="ITargetContainerTypeResolver"/> options.
@@ -144,28 +134,18 @@ namespace Rezolver
             // Easy way to check: see if GetTargetContainerType returns a difference type to the one passed,
             // and then autoregistering the container type if it does.  The EnsureContainer function takes
             // care of everything else.
-            if (this.GetTargetContainerType(type) != type)
+            if (GetRegisteredContainerType(type) != type)
             {
-                this.EnsureContainer(type).RegisterContainer(type, container);
-                this.TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+                EnsureContainer(type).RegisterContainer(type, container);
+                TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
                 return;
             }
 
             base.RegisterContainer(type, container);
-            this.TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
         }
 
-        /// <summary>
-        /// Overrides <see cref="TargetDictionaryContainer.CreateContainer(Type)"/> to provide special support
-        /// for open generic types and to support <see cref="ITargetContainerFactory"/> options.
-        /// </summary>
-        /// <param name="targetContainerType"></param>
-        /// <returns></returns>
-        protected override ITargetContainer CreateContainer(Type targetContainerType)
-        {
-            // NOTE - shouldn't require descending to the base class because of the default target factory option
-            return this.CreateChildContainer(targetContainerType, this.Root) ?? base.CreateContainer(targetContainerType);
-        }
+
 
         /// <summary>
         /// Overrides the base method to block registration if the <paramref name="target"/> does not support the
@@ -183,7 +163,80 @@ namespace Rezolver
             }
 
             base.Register(target, serviceType);
-            this.TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
+
+            if(target is INotifyRegistrationTarget notifiableTarget)
+            {
+                notifiableTarget.OnRegistration(Root, serviceType ?? notifiableTarget.DeclaredType);
+            }
+
+            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
         }
+
+        /// <summary>
+        /// Called to get the type that's to be used to fetch a child <see cref="ITargetContainer"/> for targets registered
+        /// against a given <paramref name="serviceType"/>.
+        /// </summary>
+        /// <param name="serviceType">The service type - usually pulled from the <see cref="ITarget.DeclaredType"/> of a
+        /// <see cref="ITarget"/> that is to be registered, or the service type passed to <see cref="ITargetContainer.Fetch(Type)"/>.</param>
+        /// <returns>The redirected type, or the <paramref name="serviceType"/> if no type redirection is necessary.</returns>
+        protected override Type GetRegisteredContainerType(Type serviceType)
+        {
+            Type toReturn;
+            var attr = TypeHelpers.GetCustomAttributes<ContainerTypeAttribute>(serviceType, true).FirstOrDefault();
+            if (attr != null)
+            {
+                toReturn = attr.Type;
+            }
+            else
+            {
+                var option = this.GetOption<ITargetContainerTypeResolver>(serviceType);
+                if(option != null)
+                {
+                    toReturn = option.GetContainerType(serviceType) ?? serviceType;
+                }
+                else if(ShouldUseGenericTypeDef(serviceType))
+                {
+                    toReturn = serviceType.GetGenericTypeDefinition();
+                }
+                else
+                {
+                    toReturn = base.GetRegisteredContainerType(serviceType);
+                }
+            }
+
+            return toReturn;
+        }
+
+        /// <summary>
+        /// Overrides <see cref="TargetDictionaryContainer.CreateTargetContainer(Type)"/> to provide special support
+        /// for open generic types and to support <see cref="ITargetContainerFactory"/> options.
+        /// </summary>
+        /// <param name="targetContainerType"></param>
+        /// <returns></returns>
+        protected override ITargetContainer CreateTargetContainer(Type targetContainerType)
+        {
+            if (TypeHelpers.IsGenericTypeDefinition(targetContainerType))
+                return new GenericTargetContainer(this, targetContainerType);
+
+            return this.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, this) ?? base.CreateTargetContainer(targetContainerType);
+        }
+
+        ITargetContainer IRootTargetContainer.CreateTargetContainer(Type forType) => CreateTargetContainer(forType);
+
+        Type IRootTargetContainer.GetContainerRegistrationType(Type serviceType) => GetRegisteredContainerType(serviceType);
+
+        private static bool ShouldUseGenericTypeDef(Type serviceType)
+        {
+            return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
+        }
+
+
+        void ICovariantTypeIndex.AddKnownType(Type serviceType) => this._typeIndex.AddKnownType(serviceType);
+
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCovariantTypes(Type serviceType) => this._typeIndex.GetKnownCovariantTypes(serviceType);
+
+        IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType) => this._typeIndex.GetKnownCompatibleTypes(serviceType);
+
+        TargetTypeSelector ICovariantTypeIndex.SelectTypes(Type type) => _typeIndex.SelectTypes(type);
     }
 }

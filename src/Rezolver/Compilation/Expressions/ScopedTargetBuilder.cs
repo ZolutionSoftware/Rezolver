@@ -16,7 +16,7 @@ namespace Rezolver.Compilation.Expressions
     /// </summary>
     public class ScopedTargetBuilder : ExpressionBuilderBase<ScopedTarget>
     {
-        private ConstructorInfo _argExceptionCtor =
+        private readonly ConstructorInfo _argExceptionCtor =
             Extract.Constructor(() => new ArgumentException("", ""));
 
         /// <summary>

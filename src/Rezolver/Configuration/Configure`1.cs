@@ -46,8 +46,8 @@ namespace Rezolver.Configuration
                 throw new ArgumentNullException(nameof(optionValue));
             }
 
-            this.OptionFactory = (tc, t) => optionValue;
-            this.ServiceType = serviceType;
+            OptionFactory = (tc, t) => optionValue;
+            ServiceType = serviceType;
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace Rezolver.Configuration
         /// are read in a service-specific manner)</param>
         public Configure(Func<ITargetContainer, Type, TOption> optionFactory, Type serviceType = null)
         {
-            this.OptionFactory = optionFactory ?? throw new ArgumentNullException(nameof(optionFactory));
-            this.ServiceType = serviceType;
+            OptionFactory = optionFactory ?? throw new ArgumentNullException(nameof(optionFactory));
+            ServiceType = serviceType;
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Rezolver.Configuration
         {
             // note - the explicit implementation is required because
             // otherwise the method name is the same as the enclosing class
-            this.ConfigureOption(targets);
+            ConfigureOption(targets);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Rezolver.Configuration
         /// <param name="targets">The target container into which the option is to be set.</param>
         public void ConfigureOption(ITargetContainer targets)
         {
-            targets.SetOption(this.OptionFactory(targets, this.ServiceType), this.ServiceType);
+            targets.SetOption(OptionFactory(targets, ServiceType), ServiceType);
         }
     }
 }

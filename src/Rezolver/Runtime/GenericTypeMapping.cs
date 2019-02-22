@@ -61,7 +61,7 @@ namespace Rezolver.Runtime
         /// an open generic - but you will be able to bind the same target to a closed generic of the same <see cref="Type"/>.
         /// </summary>
         /// <value><c>true</c> if success; otherwise, <c>false</c>.</value>
-        public bool Success { get { return this.Type != null; } }
+        public bool Success { get { return Type != null; } }
 
         /// <summary>
         /// If true, then the <see cref="Type"/> is a fully closed generic type that can be constructed (and therefore would
@@ -71,20 +71,20 @@ namespace Rezolver.Runtime
         /// compatible with the requested type, you can't create an instance.  The target will, however, be able to mapped to
         /// a closed generic type based on the same <see cref="Type"/>.
         /// </summary>
-        public bool IsFullyBound { get { return this.Success ? this.Type.IsConstructedGenericType : false; } }
+        public bool IsFullyBound { get { return Success ? Type.IsConstructedGenericType : false; } }
 
         internal GenericTypeMapping(Type requestedType, Type type, ConstructorInfo constructor = null, string bindErrorMessage = null)
         {
-            this.RequestedType = requestedType;
-            this.Type = type;
-            this.Constructor = constructor;
-            this.BindErrorMessage = bindErrorMessage;
+            RequestedType = requestedType;
+            Type = type;
+            Constructor = constructor;
+            BindErrorMessage = bindErrorMessage;
         }
 
         internal GenericTypeMapping(Type requestedType, string errorMessage)
         {
-            this.RequestedType = requestedType;
-            this.BindErrorMessage = errorMessage;
+            RequestedType = requestedType;
+            BindErrorMessage = errorMessage;
         }
     }
 }

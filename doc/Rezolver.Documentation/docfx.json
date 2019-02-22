@@ -38,7 +38,7 @@
       "_packagePreRelease": false,
       "_githubPath": "ZolutionSoftware/Rezolver",
       "_usingWaffle": true,
-      "_GATracking": true,
+      "_GATracking": false,
       "_GATrackingID": "UA-92764222-1"
     },
     "xrefservice": [
@@ -49,7 +49,7 @@
         "files": [
           "api/**.yml"
         ],
-        "cwd": "_docfx_proj/obj"
+        "src": "_docfx_proj/obj"
       },
       {
         "files": [
@@ -62,7 +62,7 @@
         "exclude": [
           "obj/**"
         ],
-        "cwd": "_docfx_proj"
+        "src": "_docfx_proj"
       }
     ],
     "resource": [
@@ -73,7 +73,7 @@
         "exclude": [
           "obj/**"
         ],
-        "cwd": "_docfx_proj"
+        "src": "_docfx_proj"
       }
     ],
     "overwrite": [
@@ -84,7 +84,7 @@
         "exclude": [
           "obj/**"
         ],
-        "cwd": "_docfx_proj"
+        "src": "_docfx_proj"
       }
     ],
     "dest": "developers",

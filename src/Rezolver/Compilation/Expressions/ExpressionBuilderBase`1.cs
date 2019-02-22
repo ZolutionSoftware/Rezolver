@@ -65,7 +65,7 @@ namespace Rezolver.Compilation.Expressions
                 throw new ArgumentException($"target must be an instance of {typeof(TTarget)}", nameof(target));
             }
 
-            return this.Build(target2, context, compiler);
+            return Build(target2, context, compiler);
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Rezolver.Compilation.Expressions
 
             if (compiler == null)
             {
-                compiler = this.GetContextCompiler(context);
+                compiler = GetContextCompiler(context);
                 if (compiler == null)
                 {
                     throw new InvalidOperationException("Unable to identify the IExpressionCompiler for the current context");
@@ -105,7 +105,7 @@ namespace Rezolver.Compilation.Expressions
 
             if (target is ITarget tTarget)
             {
-                return this.BuildCore(tTarget, context, compiler);
+                return BuildCore(tTarget, context, compiler);
             }
             else
             {

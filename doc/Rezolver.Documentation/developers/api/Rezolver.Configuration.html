@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Configuration
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -143,19 +134,30 @@ created without a specific config will automatically be configured to use the <a
 which enables the automatic injection of arrays by converting automatically injected enumerables into array
 instances via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.enumerable.toarray#System_Linq_Enumerable_ToArray__1_System_Collections_Generic_IEnumerable___0__">ToArray&lt;TSource&gt;(IEnumerable&lt;TSource&gt;)</a> method from Linq.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.Configuration.InjectAutoFuncs.html">InjectAutoFuncs</a></h4>
+      <section><p>Controls whether the injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> will automatically be
+available <em>without</em> having to use the <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_">RegisterAutoFunc&lt;TResult&gt;(IRootTargetContainer)</a>
+method or explicitly register <a class="xref" href="Rezolver.Targets.AutoFactoryTarget.html">AutoFactoryTarget</a> targets.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Configuration.InjectAutoLazies.html">InjectAutoLazies</a></h4>
+      <section><p>Configuration which, if the <a class="xref" href="Rezolver.Options.EnableAutoLazyInjection.html">EnableAutoLazyInjection</a>, option is
+configured to <code>true</code>, will auto-register a target container for <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.lazy-1">Lazy&lt;T&gt;</a>
+that will, in turn, automatically enable the injection of lazy instances - rather than
+requiring explicit registration.</p>
+</section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectCollections.html">InjectCollections</a></h4>
       <section><p>Applying this configuration to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> will enable automatic injection of collection types such as
-<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a>
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection&lt;T&gt;</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.icollection-1">ICollection&lt;T&gt;</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.objectmodel.readonlycollection-1">ReadOnlyCollection&lt;T&gt;</a>
 and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1">IReadOnlyCollection&lt;T&gt;</a> (so long as there are no registrations for these types in the target container when the configuration is applied).</p>
 <p>Out of the box, such collections will be seeded by any objects that have been registered against the element type.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which enables automatic handling of fetching
-targets for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> based on all the targets registered for a given <code>T</code>
+targets for <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> based on all the targets registered for a given <code>T</code>
 in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectLists.html">InjectLists</a></h4>
-      <section><p>This configuration will enable automatic injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a>, <span class="xref">System.Collections.Generic.IList&lt;T&gt;</span> and <span class="xref">System.Collections.Generic.IReadOnlyList&lt;T&gt;</span>
+      <section><p>This configuration will enable automatic injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List&lt;T&gt;</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ilist-1">IList&lt;T&gt;</a> and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList&lt;T&gt;</a>
 when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, <em>so long as there aren&apos;t already registrations for those types</em>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectResolveContext.html">InjectResolveContext</a></h4>
@@ -164,12 +166,16 @@ when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITarget
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a></h4>
       <section><p>Abstract base class for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that is dependent upon a particular type of option
-having been set in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> before being able to <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a>
+having been set in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> before being able to <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a>
 that target container.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-2.html">OptionDependentConfig&lt;T, TOption&gt;</a></h4>
       <section><p>Extension to the <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a> generic which can be used by config types which also want to target
 a specific type for configuration (<code data-dev-comment-type="typeparamref" class="typeparamref">T</code>)</p>
+</section>
+      <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></h4>
+      <section><p>Abstract base class for <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> implementations which are dependent upon
+one or more configuration objects having been applied before being applied themselves.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a></h4>
       <section><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to

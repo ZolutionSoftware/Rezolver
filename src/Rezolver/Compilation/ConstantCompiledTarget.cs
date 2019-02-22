@@ -25,7 +25,7 @@ namespace Rezolver.Compilation
         /// <param name="sourceTarget">The <see cref="ITarget"/> from which this compiled target is created.</param>
         public ConstantCompiledTarget(object obj, ITarget sourceTarget)
         {
-            this.SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
+            SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
             this._obj = obj;
         }
 

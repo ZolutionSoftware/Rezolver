@@ -17,7 +17,7 @@ namespace Rezolver.Targets
         /// <summary>
         /// Always returns the <see cref="ParameterInfo.ParameterType"/> of the <see cref="MethodParameter"/>
         /// </summary>
-        public override Type DeclaredType { get { return this.MethodParameter.ParameterType; } }
+        public override Type DeclaredType { get { return MethodParameter.ParameterType; } }
 
         /// <summary>
         /// Always returns <see cref="ScopeBehaviour.None"/>
@@ -59,10 +59,10 @@ namespace Rezolver.Targets
         {
             methodParameter.MustNotBeNull(nameof(methodParameter));
             methodParameter.MustNot(pi => !pi.IsOptional, "The methodParameter must represent an optional parameter", nameof(methodParameter));
-            this.MethodParameter = methodParameter;
+            MethodParameter = methodParameter;
             // re-use the DefaultTarget's GetDefault method, which gives us easy access to the default value for any type.
-            this.Value = (this.MethodParameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault ?
-                this.MethodParameter.DefaultValue : DefaultTarget.GetDefault(this.MethodParameter.ParameterType);
+            Value = (MethodParameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault ?
+                MethodParameter.DefaultValue : DefaultTarget.GetDefault(MethodParameter.ParameterType);
         }
     }
 }

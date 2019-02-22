@@ -187,6 +187,7 @@ namespace Rezolver
         /// callback.</param>
         /// <remarks>Note that you can achieve a similar result by simply registering an expression which
         /// represents a call to a type's constructor.</remarks>
+        /// <seealso cref="Target.ForGenericConstructor{TExample}(Expression{Func{TExample}}, IMemberBindingBehaviour)"/>
         public static void RegisterConstructor<TObject, TService>(
             this ITargetContainer targets,
             Expression<Func<TObject>> newExpr,
@@ -210,24 +211,22 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Register a generic type by constructor (represented by the model expression <paramref name="newExpr"/>).
-        /// Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
-        /// and registered against the open generic of the type you actually invoke this method for; e.g. if
-        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt;, then a target bound to the equivalent
-        /// constructor on the open generic MyGeneric&lt;,&gt; will be what is actually registered.
+        /// Creates and registers a target bound to the constructor of a generic type definition using the 
+        /// <see cref="Target.ForGenericConstructor{TExample}(Expression{Func{TExample}}, IMemberBindingBehaviour)"/> factory method. 
+        /// 
+        /// See the documentation on that method for more.
+        /// 
+        /// The registration will be made against the open generic type.
         /// </summary>
-        /// <typeparam name="TObject">Must be a generic type.  It doesn't matter what the type arguments are, however,
-        /// as the target that is created will be for the generic type definition of this type.</typeparam>
-        /// <param name="targets"></param>
-        /// <param name="newExpr">A lambda expression whose <see cref="LambdaExpression.Body"/> is a <see cref="NewExpression"/>
-        /// which identifies the constructor that is to be used to create the instance of <typeparamref name="TObject"/>.</param>
-        /// <param name="memberBindingBehaviour">Optional. If you wish to bind members on the new instance, passing a member binding
-        /// behaviour here.</param>
-        /// <remarks>Note that you can achieve a similar result by simply registering an expression which
-        /// represents a call to a type's constructor.</remarks>
-        public static void RegisterGenericConstructor<TObject>(
+        /// <typeparam name="TExample">Must be a generic type which represents a concrete generic whose generic type definition will be
+        /// bound by the created target.  This type is also used as the service type for the registration.</typeparam>
+        /// <param name="targets">The container into which the registration will be made.</param>
+        /// <param name="newExpr">Exemplar expression which is used to identify the constructor to be bound.</param>
+        /// <param name="memberBindingBehaviour">A member binding behaviour to be passed to the created target</param>
+        /// <seealso cref="Target.ForGenericConstructor{TExample}(Expression{Func{TExample}}, IMemberBindingBehaviour)"/>
+        public static void RegisterGenericConstructor<TExample>(
             this ITargetContainer targets,
-            Expression<Func<TObject>> newExpr,
+            Expression<Func<TExample>> newExpr,
             IMemberBindingBehaviour memberBindingBehaviour = null)
         {
             if (targets == null)
@@ -235,68 +234,39 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(targets));
             }
 
-            if (!TypeHelpers.IsGenericType(typeof(TObject)))
-            {
-                throw new ArgumentException($"{typeof(TObject)} is not a generic type.");
-            }
-
-            var ctor = Extract.GenericConstructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
-            if (ctor == null)
-            {
-                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
-            }
-
-            targets.Register(Target.ForConstructor(ctor, memberBindingBehaviour));
+            targets.Register(Target.ForGenericConstructor(newExpr, memberBindingBehaviour));
         }
 
         /// <summary>
-        /// Register a generic type by constructor (represented by the model expression <paramref name="newExpr"/>)
-        /// as an implementation of another open generic based on <typeparamref name="TService"/>.
-        /// Note - a concrete generic is used as an *example* - the equivalent open generic constructor is located
-        /// and registered against the open generic of the type you actually invoke this method for; e.g. if
-        /// <typeparamref name="TObject"/> is MyGeneric&lt;Foo, Bar&gt; , then a target bound to the equivalent
-        /// constructor on the open generic MyGeneric&lt;,&gt; will be what is actually registered.
-        /// Also, if <typeparamref name="TService"/> is IMyGeneric&lt;Foo, Bar&gt;, then the service type that
-        /// the new target is registered against will be IMyGeneric&lt;,&gt;.
+        /// Same as <see cref="RegisterGenericConstructor{TObject}(ITargetContainer, Expression{Func{TObject}}, IMemberBindingBehaviour)"/>
+        /// except this creates the target and then registers it against a generic base or interface of the generic type definition identified
+        /// from <typeparamref name="TExampleService"/>.
         /// </summary>
-        /// <typeparam name="TObject">Must be a generic type.  It doesn't matter what the type arguments are, however,
-        /// as the target that is created will be for the generic type definition of this type.</typeparam>
-        /// <typeparam name="TService">Must also be a generic type that is a base or interface of <typeparamref name="TObject"/></typeparam>
-        /// <param name="targets">The target container into which the registration will be made.</param>
-        /// <param name="newExpr">A lambda expression whose <see cref="LambdaExpression.Body"/> is a <see cref="NewExpression"/>
-        /// which identifies the constructor that is to be used to create the instance of <typeparamref name="TObject"/>.</param>
-        /// <param name="memberBindingBehaviour">Optional. If you wish to bind members on the new instance, passing a member binding
-        /// behaviour here.</param>
-        /// <remarks>Note that you can achieve a similar result by simply registering an expression which
-        /// represents a call to a type's constructor.</remarks>
-        public static void RegisterGenericConstructor<TObject, TService>(
+        /// <typeparam name="TExample">Must be a generic type which represents a concrete generic whose generic type definition will be
+        /// bound by the target that is created and registered.  The type must inherit or implement the type <typeparamref name="TExampleService"/>.</typeparam>
+        /// <typeparam name="TExampleService">Must be a generic type that is a base or interface of <typeparamref name="TExample"/>.  The registration will
+        /// be made against this type's generic type definition.</typeparam>
+        /// <param name="targets">The container into which the registration will be made.</param>
+        /// <param name="newExpr">Exemplar expression which is used to identify the constructor to be bound.</param>
+        /// <param name="memberBindingBehaviour">A member binding behaviour to be passed to the created target</param>
+        /// <seealso cref="Target.ForGenericConstructor{TExample}(Expression{Func{TExample}}, IMemberBindingBehaviour)"/>
+        public static void RegisterGenericConstructor<TExample, TExampleService>(
             this ITargetContainer targets,
-            Expression<Func<TObject>> newExpr,
+            Expression<Func<TExample>> newExpr,
             IMemberBindingBehaviour memberBindingBehaviour = null)
-            where TObject : TService
+            where TExample : TExampleService
         {
             if (targets == null)
             {
                 throw new ArgumentNullException(nameof(targets));
             }
 
-            if (!TypeHelpers.IsGenericType(typeof(TObject)))
+            if (!TypeHelpers.IsGenericType(typeof(TExampleService)))
             {
-                throw new ArgumentException($"Object type {typeof(TObject)} is not a generic type.", nameof(TObject));
+                throw new ArgumentException($"Service type {typeof(TExampleService)} is not a generic type", nameof(TExampleService));
             }
 
-            if (!TypeHelpers.IsGenericType(typeof(TService)))
-            {
-                throw new ArgumentException($"Service type {typeof(TService)} is not a generic type", nameof(TService));
-            }
-
-            var ctor = Extract.GenericConstructor(newExpr ?? throw new ArgumentNullException(nameof(newExpr)));
-            if (ctor == null)
-            {
-                throw new ArgumentException($"The expression ${newExpr} does not represent a NewExpression invoking a generic type's constructor.", nameof(newExpr));
-            }
-
-            targets.Register(Target.ForConstructor(ctor, memberBindingBehaviour), typeof(TService).GetGenericTypeDefinition());
+            targets.Register(Target.ForGenericConstructor(newExpr, memberBindingBehaviour), typeof(TExampleService).GetGenericTypeDefinition());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Rezolver
 {
     /// <summary>
     /// Provides the <see cref="Populate(ITargetContainer, IServiceCollection)"/> extension method which allows
-    /// easy importing of all registrations in an <c>IServiceCollection</c> from <c>Microsoft.Extensions.DependencyInjection</c>
+    /// easy importing of all registrations in an <see cref="IServiceCollection"/> from <c>Microsoft.Extensions.DependencyInjection</c>
     /// into a Rezolver <see cref="ITargetContainer"/>.
     /// </summary>
 	public static class MSDIITargetContainerExtensions

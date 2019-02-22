@@ -4,7 +4,7 @@
     <AssemblyName>Rezolver</AssemblyName>
     <AssemblyTitle>Rezolver Core</AssemblyTitle>
     <Description>Rezolver is a fast IOC framework that lets you work the way you want to.  It's easy to use and very extensible.</Description>
-    <TargetFrameworks>netstandard1.1;net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net461;netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     
     <PackageId>Rezolver</PackageId>
@@ -19,7 +19,7 @@
 
   <Import Project="../Rezolver.Shared.Props" />
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System.ComponentModel" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +45,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="AutoFactoryRegistrationExtensions.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AutoFactoryRegistrationExtensions.cs</LastGenOutput>
+    </None>
     <None Update="GenericGenerator.t4">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>GenericGenerator.cs</LastGenOutput>
@@ -60,6 +64,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="AutoFactoryRegistrationExtensions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AutoFactoryRegistrationExtensions.tt</DependentUpon>
+    </Compile>
     <Compile Update="GenericGenerator.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

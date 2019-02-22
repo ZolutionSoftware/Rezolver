@@ -40,8 +40,8 @@ namespace Rezolver
 
             public ScopedObject(object obj)
             {
-                this.Id = _order++;
-                this.Object = obj;
+                Id = _order++;
+                Object = obj;
             }
         }
 
@@ -64,7 +64,7 @@ namespace Rezolver
         {
             get
             {
-                return this._container ?? this.Parent.Container;
+                return this._container ?? Parent.Container;
             }
         }
 
@@ -94,7 +94,7 @@ namespace Rezolver
 
         private ContainerScope()
         {
-            this.InitScopeContainers();
+            InitScopeContainers();
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Rezolver
             : this()
         {
             parentScope.MustNotBeNull(nameof(parentScope));
-            this.Parent = parentScope;
+            Parent = parentScope;
             if (containerOverride != null)
             {
                 this._container = containerOverride;
@@ -137,7 +137,7 @@ namespace Rezolver
         /// </summary>
         public IContainerScope CreateScope()
         {
-            if (this.Disposed)
+            if (Disposed)
             {
                 throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
             }
@@ -167,7 +167,7 @@ namespace Rezolver
         /// </summary>
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -179,7 +179,7 @@ namespace Rezolver
         {
             // have to cope with recursion below because of the complexity of some of the disposable
             // scenarios we might have to deal with.
-            if (this.Disposed || this._disposing)
+            if (Disposed || this._disposing)
             {
                 return;
             }
@@ -206,7 +206,7 @@ namespace Rezolver
                     var allImplicitObjects = this._implicitlyScopedObjects.Skip(0).ToArray();
 
                     // deref all used collections
-                    this.FreeScopeContainers();
+                    FreeScopeContainers();
 
                     foreach (var obj in allExplicitObjects.Concat(allImplicitObjects)
                         .OrderByDescending(so => so.Id))
@@ -224,7 +224,7 @@ namespace Rezolver
 
         object IContainerScope.Resolve(IResolveContext context, Guid targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
         {
-            if (this.Disposed)
+            if (Disposed)
             {
                 throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
             }
@@ -258,12 +258,12 @@ namespace Rezolver
 
         object IServiceProvider.GetService(Type serviceType)
         {
-            if (this.Disposed)
+            if (Disposed)
             {
                 throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
             }
 
-            this.Container.TryResolve(new ResolveContext(this, serviceType), out object toReturn);
+            Container.TryResolve(new ResolveContext(this, serviceType), out object toReturn);
             return toReturn;
         }
     }

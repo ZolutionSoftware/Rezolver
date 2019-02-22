@@ -20,7 +20,7 @@ namespace Rezolver.Runtime
 
         public ContravarianceAttribute(bool enable)
         {
-            this.Enable = enable;
+            Enable = enable;
         }
     }
 }

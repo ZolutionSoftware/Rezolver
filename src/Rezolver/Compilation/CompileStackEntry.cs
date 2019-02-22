@@ -33,8 +33,8 @@ namespace Rezolver.Compilation
             target.MustNotBeNull(nameof(target));
             targetType.MustNotBeNull(nameof(targetType));
 
-            this.Target = target;
-            this.TargetType = targetType;
+            Target = target;
+            TargetType = targetType;
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Rezolver.Compilation
         /// being equal between this instance and the <paramref name="other"/> instance.</remarks>
         public bool Equals(CompileStackEntry other)
         {
-            return object.ReferenceEquals(this.Target, other.Target) && this.TargetType.Equals(other.TargetType);
+            return object.ReferenceEquals(Target, other.Target) && TargetType.Equals(other.TargetType);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Rezolver.Compilation
         {
             if (obj is CompileStackEntry se)
             {
-                return this.Equals(se);
+                return Equals(se);
             }
             else
             {
@@ -69,7 +69,7 @@ namespace Rezolver.Compilation
         /// </summary>
         public override int GetHashCode()
         {
-            return this.Target.GetHashCode() ^ this.TargetType.GetHashCode();
+            return Target.GetHashCode() ^ TargetType.GetHashCode();
         }
     }
 }

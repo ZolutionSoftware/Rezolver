@@ -36,7 +36,7 @@ namespace Rezolver.Targets
         /// <summary>
         /// The type of object returned by the decorator target
         /// </summary>
-        public override Type DeclaredType => this.InnerTarget.DeclaredType;
+        public override Type DeclaredType => InnerTarget.DeclaredType;
 
         /// <summary>
         /// Gets the target which will create an instance of the decorator
@@ -75,9 +75,9 @@ namespace Rezolver.Targets
                 throw new ArgumentException($"The type passed ({decoratedType}) is not compatible with the decoratedTarget {decoratedTarget}", nameof(decoratedType));
             }
 
-            this.DecoratedTarget = decoratedTarget;
-            this.DecoratedType = decoratedType;
-            this.InnerTarget = decoratorTarget;
+            DecoratedTarget = decoratedTarget;
+            DecoratedType = decoratedType;
+            InnerTarget = decoratorTarget;
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Rezolver.Targets
         /// if not.</returns>
         public override bool SupportsType(Type type)
         {
-            return this.InnerTarget.SupportsType(type);
+            return InnerTarget.SupportsType(type);
         }
     }
 }

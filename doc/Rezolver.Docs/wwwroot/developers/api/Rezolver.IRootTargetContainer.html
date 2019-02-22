@@ -1,0 +1,650 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Interface IRootTargetContainer
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Interface IRootTargetContainer
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../images/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container-fluid hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container-fluid body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-9">
+            <article class="content wrap" id="_content" data-uid="Rezolver.IRootTargetContainer">
+  
+  <h1 id="Rezolver_IRootTargetContainer" data-uid="Rezolver.IRootTargetContainer" class="text-break">Interface IRootTargetContainer
+  </h1>
+  <div class="markdown level0 summary"><p>Interface for the root-most target container, which typically &apos;owns&apos; all the top-level registrations
+required by an application.</p>
+<p>This builds on the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface by adding the <a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a>
+interface too, as well as events which allow an application to listen for target and target container registrations
+within the root.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Root">ITargetContainer.Root</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_Rezolver_ITarget_System_Type_">ITargetContainer.Register(ITarget, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Fetch_System_Type_">ITargetContainer.Fetch(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchAll_System_Type_">ITargetContainer.FetchAll(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ITargetContainer.CombineWith(ITargetContainer, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">ITargetContainer.FetchContainer(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ITargetContainer.RegisterContainer(Type, ITargetContainer)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">ICovariantTypeIndex.AddKnownType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_">ICovariantTypeIndex.GetKnownCovariantTypes(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_">ICovariantTypeIndex.GetKnownCompatibleTypes(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.ICovariantTypeIndex.html#Rezolver_ICovariantTypeIndex_SelectTypes_System_Type_">ICovariantTypeIndex.SelectTypes(Type)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_IRootTargetContainer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IRootTargetContainer : ITargetContainer, ICovariantTypeIndex</code></pre>
+  </div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/IRootTargetContainer.cs/#L45">View Source</a>
+  </span>
+  <a id="Rezolver_IRootTargetContainer_CreateTargetContainer_" data-uid="Rezolver.IRootTargetContainer.CreateTargetContainer*"></a>
+  <h4 id="Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_" data-uid="Rezolver.IRootTargetContainer.CreateTargetContainer(System.Type)">CreateTargetContainer(Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an instance of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> whose <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Root">Root</a>
+will be set to this instance and which will ultimately own all registrations for the given
+<code data-dev-comment-type="paramref" class="paramref">forContainerRegistrationType</code>.</p>
+<p>Note - the container is not automatically registered - it can be registered with a call to 
+this instance&apos;s <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> implementation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">ITargetContainer CreateTargetContainer(Type forContainerRegistrationType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">forContainerRegistrationType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/IRootTargetContainer.cs/#L73">View Source</a>
+  </span>
+  <a id="Rezolver_IRootTargetContainer_GetContainerRegistrationType_" data-uid="Rezolver.IRootTargetContainer.GetContainerRegistrationType*"></a>
+  <h4 id="Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_" data-uid="Rezolver.IRootTargetContainer.GetContainerRegistrationType(System.Type)">GetContainerRegistrationType(Type)</h4>
+  <div class="markdown level1 summary"><p>Gets the type under which the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that will &apos;own&apos; registrations
+for the given <code data-dev-comment-type="paramref" class="paramref">serviceType</code> will be registered in this root container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Type GetContainerRegistrationType(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Use of this API is exclusive to code that is extending Rezolver.</p>
+<p>All targets that are registered in an <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> are ultimately stored
+inside another <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> that will be registered with the
+<a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a> API and retrieved
+with the <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_FetchContainer_System_Type_">FetchContainer(Type)</a> methods.  When registering
+targets, both this method and the <a class="xref" href="Rezolver.IRootTargetContainer.html#Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_">CreateTargetContainer(Type)</a> methods are used
+to ensure that the correct <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> is created to hold a given target.</p>
+<p>This method is specifically used to identify the type that should be used to fetch a target 
+container (or indeed register it) for a given service type.  Most of the time, the two types
+are the same; however, there are special cases where they&apos;re not.</p>
+<p>For example, in the standard implementation of this interface (<a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>),
+if you pass a generic type to this method, it will return the definition of that generic type - 
+which then allows the <a class="xref" href="Rezolver.GenericTargetContainer.html">GenericTargetContainer</a> class to ultimately &apos;own&apos; all the 
+registrations against all generic types - open or closed.</p>
+<p>Therefore, the system uses this method both to locate existing target containers and when 
+auto-creating and registering new target containers to hold new registrations.</p>
+</div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_IRootTargetContainer_TargetContainerRegistered.md&amp;value=---%0Auid%3A%20Rezolver.IRootTargetContainer.TargetContainerRegistered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/IRootTargetContainer.cs/#L33">View Source</a>
+  </span>
+  <h4 id="Rezolver_IRootTargetContainer_TargetContainerRegistered" data-uid="Rezolver.IRootTargetContainer.TargetContainerRegistered">TargetContainerRegistered</h4>
+  <div class="markdown level1 summary"><p>Raised when a child target container (e.g. a <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>)
+is registered in this root container, or when any container is automatically created and
+registered in this root container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event EventHandler&lt;TargetContainerRegisteredEventArgs&gt; TargetContainerRegistered</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Rezolver.Events.TargetContainerRegisteredEventArgs.html">TargetContainerRegisteredEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_IRootTargetContainer_TargetContainerRegistered_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Please note - this event is only guaranteed to fire for target containers that are
+directly registered through this instance.</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_IRootTargetContainer_TargetRegistered.md&amp;value=---%0Auid%3A%20Rezolver.IRootTargetContainer.TargetRegistered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/IRootTargetContainer.cs/#L25">View Source</a>
+  </span>
+  <h4 id="Rezolver_IRootTargetContainer_TargetRegistered" data-uid="Rezolver.IRootTargetContainer.TargetRegistered">TargetRegistered</h4>
+  <div class="markdown level1 summary"><p>Raised when a target has been registered in this root container (possibly as a child within a
+target container that was previously registered).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">event EventHandler&lt;TargetRegisteredEventArgs&gt; TargetRegistered</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Rezolver.Events.TargetRegisteredEventArgs.html">TargetRegisteredEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_IRootTargetContainer_TargetRegistered_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Please note - this event is only guaranteed to fire for targets that are
+directly registered through this instance.</p>
+</div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Rezolver.MSDIITargetContainerExtensions.html#Rezolver_MSDIITargetContainerExtensions_Populate_Rezolver_ITargetContainer_Microsoft_Extensions_DependencyInjection_IServiceCollection_">MSDIITargetContainerExtensions.Populate(ITargetContainer, IServiceCollection)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory__1_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFactory&lt;TDelegate&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_Rezolver_IRootTargetContainer_System_Type_">AutoFactoryRegistrationExtensions.RegisterAutoFactory(IRootTargetContainer, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__2_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__3_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__4_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__5_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__6_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__7_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__8_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__9_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__10_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__11_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__12_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__13_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__14_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__15_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__16_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__17_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_CreateTargetContainerForServiceType_Rezolver_IRootTargetContainer_System_Type_">RootTargetContainerExtensions.CreateTargetContainerForServiceType(IRootTargetContainer, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_FetchAllCompatibleTargets_Rezolver_IRootTargetContainer_System_Type_">RootTargetContainerExtensions.FetchAllCompatibleTargets(IRootTargetContainer, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_">RootTargetContainerExtensions.RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__3_Rezolver_IRootTargetContainer_">RootTargetContainerExtensions.RegisterProjection&lt;TFrom, TTo, TImplementation&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__">RootTargetContainerExtensions.RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_">RootTargetContainerExtensions.RegisterProjection(IRootTargetContainer, Type, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Type_">RootTargetContainerExtensions.RegisterProjection(IRootTargetContainer, Type, Type, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_System_Type__">RootTargetContainerExtensions.RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, Type&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection__2_Rezolver_IRootTargetContainer_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__">RootTargetContainerExtensions.RegisterProjection&lt;TFrom, TTo&gt;(IRootTargetContainer, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterProjection_Rezolver_IRootTargetContainer_System_Type_System_Type_System_Func_Rezolver_IRootTargetContainer_Rezolver_ITarget_Rezolver_ITarget__">RootTargetContainerExtensions.RegisterProjection(IRootTargetContainer, Type, Type, Func&lt;IRootTargetContainer, ITarget, ITarget&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias__2_Rezolver_ITargetContainer_">AliasTargetContainerExtensions.RegisterAlias&lt;TAlias, TOriginal&gt;(ITargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.AliasTargetContainerExtensions.html#Rezolver_AliasTargetContainerExtensions_RegisterAlias_Rezolver_ITargetContainer_System_Type_System_Type_">AliasTargetContainerExtensions.RegisterAlias(ITargetContainer, Type, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_">TargetContainerRegistrationExtensions.RegisterConstructor(ITargetContainer, ConstructorInfo, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_Rezolver_ITargetContainer_System_Reflection_ConstructorInfo_System_Type_Rezolver_IMemberBindingBehaviour_">TargetContainerRegistrationExtensions.RegisterConstructor(ITargetContainer, ConstructorInfo, Type, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">TargetContainerRegistrationExtensions.RegisterConstructor&lt;TObject&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">TargetContainerRegistrationExtensions.RegisterConstructor&lt;TObject&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">TargetContainerRegistrationExtensions.RegisterConstructor&lt;TObject, TService&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">TargetContainerRegistrationExtensions.RegisterConstructor&lt;TObject, TService&gt;(ITargetContainer, Expression&lt;Func&lt;TObject&gt;&gt;, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">TargetContainerRegistrationExtensions.RegisterGenericConstructor&lt;TExample&gt;(ITargetContainer, Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">TargetContainerRegistrationExtensions.RegisterGenericConstructor&lt;TExample, TExampleService&gt;(ITargetContainer, Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_IRootTargetContainer_System_Func___0___0__">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(IRootTargetContainer, Func&lt;TDecorated, TDecorated&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__1_Rezolver_IRootTargetContainer_System_Delegate_">DecoratorTargetContainerExtensions.RegisterDecorator&lt;TDecorated&gt;(IRootTargetContainer, Delegate)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Delegate_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Delegate, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Type, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate(ITargetContainer, Delegate, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_IResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;IResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, TResult&gt;(ITargetContainer, Func&lt;T1, T2, TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__3_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__4_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__5_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__6_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterMultiple_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_">MultipleTargetContainerExtensions.RegisterMultiple(ITargetContainer, IEnumerable&lt;ITarget&gt;, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__">MultipleTargetContainerExtensions.RegisterAll(ITargetContainer, IEnumerable&lt;ITarget&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_Rezolver_ITargetContainer_Rezolver_ITarget___">MultipleTargetContainerExtensions.RegisterAll(ITargetContainer, ITarget[])</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject__1_Rezolver_ITargetContainer___0_System_Type_System_Type_Rezolver_ScopeBehaviour_">ObjectTargetContainerExtensions.RegisterObject&lt;T&gt;(ITargetContainer, T, Type, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ObjectTargetContainerExtensions.html#Rezolver_ObjectTargetContainerExtensions_RegisterObject_Rezolver_ITargetContainer_System_Object_System_Type_System_Type_Rezolver_ScopeBehaviour_">ObjectTargetContainerExtensions.RegisterObject(ITargetContainer, Object, Type, Type, ScopeBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_">OptionsTargetContainerExtensions.SetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_System_Type_">OptionsTargetContainerExtensions.SetOption&lt;TOption&gt;(ITargetContainer, TOption, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_SetOption__2_Rezolver_ITargetContainer___0_">OptionsTargetContainerExtensions.SetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer___0_">OptionsTargetContainerExtensions.GetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__1_Rezolver_ITargetContainer_System_Type___0_">OptionsTargetContainerExtensions.GetOption&lt;TOption&gt;(ITargetContainer, Type, TOption)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOption__2_Rezolver_ITargetContainer___0_">OptionsTargetContainerExtensions.GetOption&lt;TOption, TService&gt;(ITargetContainer, TOption)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_">OptionsTargetContainerExtensions.GetOptions&lt;TOption&gt;(ITargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__1_Rezolver_ITargetContainer_System_Type_">OptionsTargetContainerExtensions.GetOptions&lt;TOption&gt;(ITargetContainer, Type)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html#Rezolver_OptionsTargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_">OptionsTargetContainerExtensions.GetOptions&lt;TOption, TService&gt;(ITargetContainer)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterTypeTargetContainerExtensions.RegisterType&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">RegisterTypeTargetContainerExtensions.RegisterType&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_">RegisterTypeTargetContainerExtensions.RegisterType(ITargetContainer, Type, Type, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">RegisterTypeTargetContainerExtensions.RegisterType&lt;TObject&gt;(ITargetContainer, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__2_Rezolver_ITargetContainer_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">RegisterTypeTargetContainerExtensions.RegisterType&lt;TObject, TService&gt;(ITargetContainer, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">ScopedTargetContainerExtensions.RegisterScoped&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">ScopedTargetContainerExtensions.RegisterScoped&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_">ScopedTargetContainerExtensions.RegisterScoped(ITargetContainer, Type, Type, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__1_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">SingletonTargetContainerExtensions.RegisterSingleton&lt;TObject&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton__2_Rezolver_ITargetContainer_Rezolver_IMemberBindingBehaviour_">SingletonTargetContainerExtensions.RegisterSingleton&lt;TObject, TService&gt;(ITargetContainer, IMemberBindingBehaviour)</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_Rezolver_ITargetContainer_System_Type_System_Type_Rezolver_IMemberBindingBehaviour_">SingletonTargetContainerExtensions.RegisterSingleton(ITargetContainer, Type, Type, IMemberBindingBehaviour)</a>
+  </div>
+</article>
+          </div>
+          <div class="hidden-sm col-md-3" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_IRootTargetContainer.md&amp;value=---%0Auid%3A%20Rezolver.IRootTargetContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/IRootTargetContainer.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

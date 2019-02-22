@@ -80,7 +80,7 @@ namespace Rezolver.Compilation.Expressions
 
             public override bool Equals(object obj)
             {
-                return this.Equals(obj as ConditionalExpressionInfo);
+                return Equals(obj as ConditionalExpressionInfo);
             }
 
             public override int GetHashCode()
@@ -117,12 +117,12 @@ namespace Rezolver.Compilation.Expressions
             public int MatchCount = 0;
         }
 
-        private Expression _expression;
-        private CandidateTest[] _candidateTests;
-        private Stack<Expression> _currentStack = new Stack<Expression>();
-        private List<ConditionalExpressionInfo> _allConditionals = new List<ConditionalExpressionInfo>();
+        private readonly Expression _expression;
+        private readonly CandidateTest[] _candidateTests;
+        private readonly Stack<Expression> _currentStack = new Stack<Expression>();
+        private readonly List<ConditionalExpressionInfo> _allConditionals = new List<ConditionalExpressionInfo>();
         private ConditionalExpressionGroupInfo[] _groupedConditionals = null;
-        private Stack<ConditionalExpressionRewriteState> _currentlyRewriting = new Stack<ConditionalExpressionRewriteState>();
+        private readonly Stack<ConditionalExpressionRewriteState> _currentlyRewriting = new Stack<ConditionalExpressionRewriteState>();
         private RewriteStages _currentStage = RewriteStages.NotRun;
 
         public ConditionalRewriter(Expression expression, IEnumerable<Expression> candidateTests)
@@ -143,7 +143,7 @@ namespace Rezolver.Compilation.Expressions
             {
                 this._currentStage = RewriteStages.GatheringConditionals;
                 this._allConditionals.Clear();
-                result = this.Visit(result);
+                result = Visit(result);
                 // on the first loop, adjust the maxLoops to the number of
                 // candidate tests which are actually present in the expression
                 if (currentLoop == 1)
@@ -188,7 +188,7 @@ namespace Rezolver.Compilation.Expressions
                                         where commonParent != null
                                         select new ConditionalExpressionGroupInfo { Group = grp, CommonParent = commonParent }).ToArray();
 
-                result = this.Visit(result);
+                result = Visit(result);
             }
 ;
 
@@ -270,12 +270,12 @@ namespace Rezolver.Compilation.Expressions
                     {
                         case ConditionalRewritePart.TruePart:
                             {
-                                return this.Visit(matching.Expression.IfTrue);
+                                return Visit(matching.Expression.IfTrue);
                             }
 
                         case ConditionalRewritePart.FalsePart:
                             {
-                                return this.Visit(matching.Expression.IfFalse);
+                                return Visit(matching.Expression.IfFalse);
                             }
                     }
                 }

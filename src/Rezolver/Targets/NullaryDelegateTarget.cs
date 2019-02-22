@@ -20,7 +20,7 @@ namespace Rezolver.Targets
 
         public NullaryDelegateTarget(Delegate factory, Type declaredType = null) : base(factory, declaredType)
         {
-            if (this.FactoryMethod.GetParameters()?.Length > 0)
+            if (FactoryMethod.GetParameters()?.Length > 0)
             {
                 throw new ArgumentException("Only nullary delegates (i.e. which have no parameters) can be used for this target");
             }

@@ -4,13 +4,21 @@
     <Description>Shared source for Rezolver projects</Description>
     <VersionPrefix>1.3.4</VersionPrefix>
     <Authors>Zolution Software Ltd</Authors>
-    <TargetFrameworks>netstandard1.1;net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard1.1;net461;netstandard2.0</TargetFrameworks>
     <AssemblyName>Rezolver.Shared</AssemblyName>
     <PackageId>Rezolver.Shared</PackageId>
     <PackageTags>rezolver</PackageTags>
     <RootNamespace>Rezolver</RootNamespace>
   </PropertyGroup>
-  
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.1' ">
     <DefineConstants>$(DefineConstants);MAXCOMPAT</DefineConstants>
   </PropertyGroup>

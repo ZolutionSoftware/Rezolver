@@ -18,6 +18,20 @@ namespace Rezolver
     /// </summary>
     internal static class TypeHelpers
     {
+#if MAXCOMPAT
+        private static readonly Type[] _emptyTypes = new Type[0];
+#endif
+        public static Type[] EmptyTypes
+        {
+            get
+            {
+#if MAXCOMPAT
+                return _emptyTypes;
+#else
+                return Type.EmptyTypes;
+#endif
+            }
+        }
         internal static IEnumerable<TAttribute> GetCustomAttributes<TAttribute>(Type type, bool inherit=false)
             where TAttribute : Attribute
         {
@@ -35,6 +49,16 @@ namespace Rezolver
 #else
             return type.IsArray;
 #endif
+        }
+
+        internal static bool IsDelegateType(Type type) => IsAssignableFrom(typeof(Delegate), type);
+
+        private delegate int _DummyDelegate_(int a);
+        internal static (Type returnType, Type[] argTypes) DecomposeDelegateType(Type delegateType)
+        {
+            var method = GetMethod(delegateType, nameof(_DummyDelegate_.Invoke));
+
+            return (method.ReturnType, method.GetParameters().Select(p => p.ParameterType).ToArray());
         }
 
         internal static int GetArrayRank(Type type)

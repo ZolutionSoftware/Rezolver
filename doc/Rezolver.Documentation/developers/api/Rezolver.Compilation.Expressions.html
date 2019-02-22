@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Namespace Rezolver.Compilation.Expressions
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -120,6 +111,8 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
+      <h4><a class="xref" href="Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.html">AutoFactoryTargetBuilder</a></h4>
+      <section></section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.ChangeTypeTargetBuilder.html">ChangeTypeTargetBuilder</a></h4>
       <section><p>Implementation of <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised to build expressions for the
 <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a></p>
@@ -139,7 +132,7 @@ will be used for <a class="xref" href="Rezolver.Targets.ObjectTarget.html">Objec
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.DefaultTargetBuilder.html">DefaultTargetBuilder</a></h4>
       <section><p>An <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> specialised for building the expression for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html">DefaultTarget</a> target.</p>
-<p>Essentially, it just calls <span class="xref">System.Linq.Expressions.Expression.Default(System.Type)</span> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
+<p>Essentially, it just calls <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression.default#System_Linq_Expressions_Expression_Default_System_Type_">Default(Type)</a> for the <a class="xref" href="Rezolver.Targets.DefaultTarget.html#Rezolver_Targets_DefaultTarget_DeclaredType">DeclaredType</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Compilation.Expressions.DelegateTargetBuilder.html">DelegateTargetBuilder</a></h4>
       <section><p>Specialised builder for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> class and all its derivatives.</p>

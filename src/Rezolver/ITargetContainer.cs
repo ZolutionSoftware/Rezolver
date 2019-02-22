@@ -30,6 +30,11 @@ namespace Rezolver
     public interface ITargetContainer
     {
         /// <summary>
+        /// The <see cref="IRootTargetContainer"/> in which this target container is registered.
+        /// </summary>
+        IRootTargetContainer Root { get; }
+
+        /// <summary>
         /// Registers a target, either for the <paramref name="serviceType"/> specified or, if null, the <see cref="ITarget.DeclaredType"/>
         /// of the <paramref name="target"/>.
         /// </summary>

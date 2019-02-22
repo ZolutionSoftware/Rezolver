@@ -35,8 +35,8 @@ namespace Rezolver.Sdk
         /// <param name="required"></param>
         public DependencyMetadata(IDependant owner, bool required)
         {
-            this.Owner = owner;
-            this.Required = required;
+            Owner = owner;
+            Required = required;
         }
 
         /// <summary>

@@ -14,9 +14,9 @@ namespace Rezolver
     {
         public BindableCollectionType(Type type, MethodInfo addMethod, Type elementType)
         {
-            this.Type = type;
-            this.AddMethod = addMethod;
-            this.ElementType = elementType;
+            Type = type;
+            AddMethod = addMethod;
+            ElementType = elementType;
         }
 
         public Type Type { get; }

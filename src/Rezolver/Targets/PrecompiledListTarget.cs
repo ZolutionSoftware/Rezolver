@@ -38,7 +38,7 @@ namespace Rezolver.Targets
         public object GetObject(IResolveContext context)
         {
             var elements = this._compiledTargets.Select(i => (TElement)i.GetObject(context.New(newRequestedType: typeof(TElement))));
-            return this.AsArray ? (object)elements.ToArray() : new List<TElement>(elements);
+            return AsArray ? (object)elements.ToArray() : new List<TElement>(elements);
         }
     }
 

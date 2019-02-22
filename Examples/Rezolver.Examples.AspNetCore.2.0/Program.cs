@@ -23,8 +23,8 @@ namespace Rezolver.Examples.AspNetCore._2._0
         /*  
          *  .UseRezolver(o =>
          *  {
-         *      // Example of disabling contravariance
-         *      o.TargetContainerConfig.ConfigureOption<EnableContravariance>(false);
+         *      // Example of enabling Automatic Func<> injection
+         *      o.TargetContainerConfig.ConfigureOption<EnableAutoFuncInjection>(true);
          *
          *      // you can also add configuration to the container configuration via 
          *      // the ContainerConfig property (e.g. change compilers).

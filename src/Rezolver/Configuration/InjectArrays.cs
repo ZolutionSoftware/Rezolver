@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Rezolver.Options;
 using Rezolver.Sdk;
 
 namespace Rezolver.Configuration
@@ -16,7 +17,7 @@ namespace Rezolver.Configuration
     /// </summary>
     /// <remarks>Note that this configuration requires that the <see cref="InjectEnumerables"/> configuration is
     /// also applied.</remarks>
-    public class InjectArrays : OptionDependentConfig<Options.EnableArrayInjection>
+    public class InjectArrays : OptionDependentConfigBase
     {
         /// <summary>
         /// The one and only instance of the <see cref="InjectArrays"/> configuration object
@@ -25,6 +26,10 @@ namespace Rezolver.Configuration
 
         internal class ArrayTypeResolver : ITargetContainerTypeResolver
         {
+            public static ArrayTypeResolver Instance { get; } = new ArrayTypeResolver();
+
+            private ArrayTypeResolver() { }
+
             public Type GetContainerType(Type serviceType)
             {
                 if (TypeHelpers.IsArray(serviceType))
@@ -36,21 +41,27 @@ namespace Rezolver.Configuration
             }
         }
 
-        private IEnumerable<DependencyMetadata> _dependencies;
-
-        /// <summary>
-        /// Overrides the <see cref="OptionDependentConfig{TOption}"/> implementation to include a required dependency
-        /// on the <see cref="InjectEnumerables"/> configuration.
-        /// </summary>
-        public override IEnumerable<DependencyMetadata> Dependencies => this._dependencies;
-
-        private InjectArrays() : base(false)
+        private InjectArrays()
         {
-            this._dependencies = base.Dependencies.Concat(new[] { this.CreateTypeDependency<InjectEnumerables>(true) }).ToArray();
+
         }
 
         /// <summary>
-        /// Implements the <see cref="OptionDependentConfig{TOption}.Configure(IRootTargetContainer)"/> abstract method
+        /// Overrides the abstract base method to return dependencies on the <see cref="Options.EnableArrayInjection"/> option
+        /// and the 
+        /// </summary>
+        /// <returns></returns>
+        protected override IEnumerable<DependencyMetadata> GetDependenciesBase()
+        {
+            return new[]
+            {
+                this.CreateOptionDependency<EnableArrayInjection>(false),
+                this.CreateTypeDependency<InjectEnumerables>(true)
+            };
+        }
+
+        /// <summary>
+        /// Implements the <see cref="OptionDependentConfigBase.Configure(IRootTargetContainer)"/> abstract method
         /// by configuring the passed <paramref name="targets"/> so it can produce targets for any array type, regardless
         /// of whether a single object has been registered for the array's element type.
         ///
@@ -74,7 +85,7 @@ namespace Rezolver.Configuration
             }
 
             targets.RegisterContainer(typeof(Array), new ArrayTargetContainer(targets));
-            targets.SetOption<ITargetContainerTypeResolver, Array>(new ArrayTypeResolver());
+            targets.SetOption<ITargetContainerTypeResolver, Array>(ArrayTypeResolver.Instance);
         }
     }
 }

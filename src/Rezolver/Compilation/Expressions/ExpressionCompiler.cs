@@ -66,7 +66,7 @@ namespace Rezolver.Compilation.Expressions
 
             public CompiledLambdaTarget(ITarget sourceTarget, Func<IResolveContext, object> getObjectDelegate)
             {
-                this.SourceTarget = sourceTarget;
+                SourceTarget = sourceTarget;
                 this._getObjectDelegate = getObjectDelegate;
             }
 
@@ -97,7 +97,7 @@ namespace Rezolver.Compilation.Expressions
 
             if (context is IExpressionCompileContext exprContext)
             {
-                return this.BuildCompiledTargetForLambda(target, this.BuildResolveLambda(target, exprContext));
+                return BuildCompiledTargetForLambda(target, this.BuildResolveLambda(target, exprContext));
             }
             else
             {
@@ -194,7 +194,11 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="context">The compilation context.</param>
         /// <exception cref="ArgumentException">If the compiler is unable to resolve an <see cref="IExpressionBuilder" /> from
         /// the <paramref name="context" /> for the <paramref name="target" /></exception>
-        /// <remarks>This implementation attempts to resolve an <see cref="IExpressionBuilder{TTarget}" /> (with <c>TTarget"</c>
+        /// <remarks>This implementation first looks for an <see cref="IExpressionCompilationFilter"/> as an option from the 
+        /// <paramref name="context"/>.  If one is obtained, its <see cref="IExpressionCompilationFilter.Intercept(ITarget, IExpressionCompileContext, IExpressionCompiler)"/>
+        /// method is called and, if it returns a non-null <see cref="Expression"/>, then that expression is used.
+        /// 
+        /// Otherwise, the normal behaviour is to attempt to resolve an <see cref="IExpressionBuilder{TTarget}" /> (with <c>TTarget"</c>
         /// equal to the runtime type of the <paramref name="target" />) or <see cref="IExpressionBuilder" /> whose
         /// <see cref="IExpressionBuilder.CanBuild(ITarget)" /> function returns <c>true</c> for the given target and context.
         /// If that lookup fails, then an <see cref="ArgumentException" /> is raised.  If the lookup succeeds, then the builder's
@@ -205,8 +209,18 @@ namespace Rezolver.Compilation.Expressions
             target.MustNotBeNull(nameof(target));
             context.MustNotBeNull(nameof(context));
 
-            var builder = this.ResolveBuilder(target, context)
+            //var filter = context.GetOption<IExpressionCompilationFilter>();
+
+            //if(filter != null)
+            //{
+            //    var interceptExpr = filter.Intercept(target, context, this);
+            //    if (interceptExpr != null)
+            //        return interceptExpr;
+            //}
+
+            var builder = ResolveBuilder(target, context)
                 ?? throw new ArgumentException($"Unable to find an IExpressionBuilder for the target {target}", nameof(target));
+
             return builder.Build(target, context);
         }
 

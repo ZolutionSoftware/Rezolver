@@ -113,7 +113,7 @@ namespace Rezolver
 
         private static void RegisterDecoratorInternal(IRootTargetContainer targetContainer, Type decoratorType, Type decoratedType)
             => targetContainer.RegisterContainer(
-                targetContainer.GetChildContainerType(decoratedType),
+                targetContainer.GetContainerRegistrationType(decoratedType),
                 new DecoratingTargetContainer(
                     targetContainer,
                     decoratorType,
@@ -121,7 +121,7 @@ namespace Rezolver
 
         private static void RegisterDecoratorDelegateInternal(IRootTargetContainer targetContainer, Delegate decoratorDelegate, Type decoratedType)
             => targetContainer.RegisterContainer(
-                targetContainer.GetChildContainerType(decoratedType),
+                targetContainer.GetContainerRegistrationType(decoratedType),
                 new DecoratingTargetContainer(
                     targetContainer,
                     Target.ForDelegate(

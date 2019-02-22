@@ -70,7 +70,7 @@ namespace Rezolver
         /// order, calling its <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method.</remarks>
         public void Configure(IContainer container, IRootTargetContainer targets)
         {
-            foreach (var behaviour in this.Ordered)
+            foreach (var behaviour in Ordered)
             {
                 behaviour.Configure(container, targets);
             }

@@ -1,0 +1,3063 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  	<title>Class Target
+   | Rezolver IOC </title>
+  	<meta name="viewport" content="width=device-width">
+  	<meta name="title" content="Class Target
+   | Rezolver IOC ">
+  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<link rel="shortcut icon" href="../favicon.ico">
+  	<link rel="stylesheet" href="../styles/docfx.vendor.css">
+  	<link rel="stylesheet" href="../styles/docfx.css">
+  	<link rel="stylesheet" href="../styles/main.css">
+  	<meta property="docfx:navrel" content="../toc.html">
+  	<meta property="docfx:tocrel" content="toc.html">
+  	
+  	<meta property="docfx:rel" content="../">
+  	
+  		<link rel="apple-touch-icon" sizes="57x57" href="../../apple-touch-icon-57x57.png">
+  		<link rel="apple-touch-icon" sizes="60x60" href="../../apple-touch-icon-60x60.png">
+  		<link rel="apple-touch-icon" sizes="72x72" href="../../apple-touch-icon-72x72.png">
+  		<link rel="apple-touch-icon" sizes="76x76" href="../../apple-touch-icon-76x76.png">
+  		<link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png">
+  		<link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png">
+  		<link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png">
+  		<link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png">
+  		<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon-180x180.png">
+  		<link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32">
+  		<link rel="icon" type="image/png" href="../../android-chrome-192x192.png" sizes="192x192">
+  		<link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96">
+  		<link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16">
+  		<link rel="manifest" href="../../manifest.json">
+  		<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="#5bbad5">
+  		<meta name="msapplication-TileColor" content="#da532c">
+  		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
+  		<meta name="theme-color" content="#ffffff">
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../../images/rz_square_white_on_orange_48x48.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+        		<p class="navbar-text navbar-right github-link"><a href="http://github.com/ZolutionSoftware/Rezolver" target="_blank" title="See this project on Github"><span class="fa fa-github"></span></a></p>
+        		<form class="navbar-form navbar-right" role="search" id="search">
+        		<div class="form-group">
+        			<input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+        		</div>
+        		</form>
+        		<p class="navbar-text navbar-right">
+        			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
+        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
+        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
+        		</p>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container-fluid hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container-fluid body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-9">
+            <article class="content wrap" id="_content" data-uid="Rezolver.Target">
+  
+  <h1 id="Rezolver_Target" data-uid="Rezolver.Target" class="text-break">Class Target
+  </h1>
+  <div class="markdown level0 summary"><p>Provides static factory methods (including extension methods) for creating numerous types of targets
+from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> namespace.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">Target</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
+  <h6><strong>Assembly</strong>: Rezolver.dll</h6>
+  <h5 id="Rezolver_Target_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Target</code></pre>
+  </div>
+  <h5 id="Rezolver_Target_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Although most of these methods create targets of a known type (e.g. <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Scoped(ITarget)</a>
+returns a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>), the methods all return <a class="xref" href="Rezolver.ITarget.html">ITarget</a> to allow for
+changes in implementation in the future.</p>
+</div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_As_Rezolver_ITarget_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.As(Rezolver.ITarget%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L78">View Source</a>
+  </span>
+  <a id="Rezolver_Target_As_" data-uid="Rezolver.Target.As*"></a>
+  <h4 id="Rezolver_Target_As_Rezolver_ITarget_System_Type_" data-uid="Rezolver.Target.As(Rezolver.ITarget,System.Type)">As(ITarget, Type)</h4>
+  <div class="markdown level1 summary"><p>Extension method which creates a new <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> that wraps the
+<code data-dev-comment-type="paramref" class="paramref">target</code>, changing its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to the
+<code data-dev-comment-type="paramref" class="paramref">targetType</code> passed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget As(this ITarget target, Type targetType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Required. The target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">targetType</span></td>
+        <td><p>Required. The new type for the <code data-dev-comment-type="paramref" class="paramref">target</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_As__1_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.As%60%601(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L99">View Source</a>
+  </span>
+  <a id="Rezolver_Target_As_" data-uid="Rezolver.Target.As*"></a>
+  <h4 id="Rezolver_Target_As__1_Rezolver_ITarget_" data-uid="Rezolver.Target.As``1(Rezolver.ITarget)">As&lt;T&gt;(ITarget)</h4>
+  <div class="markdown level1 summary"><p>Extension method which creates a new <a class="xref" href="Rezolver.Targets.ChangeTypeTarget.html">ChangeTypeTarget</a> that wraps the
+<code data-dev-comment-type="paramref" class="paramref">target</code>, changing its <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> to
+<code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget As&lt;T&gt;(this ITarget target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>Required. The target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L421">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
+  <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
+constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForConstructor(ConstructorInfo constructor, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
+        <td><span class="parametername">constructor</span></td>
+        <td><p>Required.  The constructor to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CRezolver.ParameterBinding%5B%5D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L438">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
+  <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_Rezolver_ParameterBinding___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,Rezolver.ParameterBinding[],Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, ParameterBinding[], IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
+constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForConstructor(ConstructorInfo constructor, ParameterBinding[] parameterBindings, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
+        <td><span class="parametername">constructor</span></td>
+        <td><p>Required.  The constructor to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>[]</td>
+        <td><span class="parametername">parameterBindings</span></td>
+        <td><p>Can be null/empty.  An array of <a class="xref" href="Rezolver.ParameterBinding.html">ParameterBinding</a>
+objects containing targets to be bound to somme or all of the constructor parameters.  <strong>Must not be supplied if <code data-dev-comment-type="paramref" class="paramref">constructor</code>
+is a constructor belonging to an open generic type,</strong></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L471">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
+  <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
+constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForConstructor(ConstructorInfo constructor, IDictionary&lt;string, ITarget&gt; namedArgs, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
+        <td><span class="parametername">constructor</span></td>
+        <td><p>Required.  The constructor to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Can be null.  A dictionary of targets that are to be bound to the
+constructor by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.  <strong>Must not be supplied if <code data-dev-comment-type="paramref" class="paramref">constructor</code>
+is a constructor belonging to an open generic type,</strong></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo%2CSystem.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L506">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForConstructor_" data-uid="Rezolver.Target.ForConstructor*"></a>
+  <h4 id="Rezolver_Target_ForConstructor_System_Reflection_ConstructorInfo_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForConstructor(System.Reflection.ConstructorInfo,System.Object,Rezolver.IMemberBindingBehaviour)">ForConstructor(ConstructorInfo, Object, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the given constructor, or a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the
+constructor belongs to a generic type definition (&apos;open generic type&apos;).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForConstructor(ConstructorInfo constructor, object namedArgs, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.reflection.constructorinfo">ConstructorInfo</a></td>
+        <td><span class="parametername">constructor</span></td>
+        <td><p>Required.  The constructor to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Optional.  An object whose publicly readable members which are of the
+type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the constructor
+by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.  <strong>Must not be supplied if <code data-dev-comment-type="paramref" class="paramref">constructor</code>
+is a constructor belonging to an open generic type,</strong></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate_System_Delegate_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate(System.Delegate%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L180">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate_System_Delegate_System_Type_" data-uid="Rezolver.Target.ForDelegate(System.Delegate,System.Type)">ForDelegate(Delegate, Type)</h4>
+  <div class="markdown level1 summary"><p>A simple wrapper for the <a class="xref" href="Rezolver.Targets.DelegateTarget.html#Rezolver_Targets_DelegateTarget__ctor_System_Delegate_System_Type_">DelegateTarget(Delegate, Type)</a> constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate(Delegate factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.delegate">Delegate</a></td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required, the factory delegate that is to be used to produce an object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  If not null, then it will be used as the target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+which, in turn, is used as the target&apos;s default registration type if not overriden when added to
+an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  If null, then the return type of the factory will be used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which represents the passed factory.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__1_System_Func___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%601(System.Func%7B%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L17">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__1_System_Func___0__System_Type_" data-uid="Rezolver.Target.ForDelegate``1(System.Func{``0},System.Type)">ForDelegate&lt;TResult&gt;(Func&lt;TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a parameterless factory delegate
+which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;TResult&gt;(Func&lt;TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%601(System.Func%7BRezolver.IResolveContext%2C%60%600%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L35">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type_" data-uid="Rezolver.Target.ForDelegate``1(System.Func{Rezolver.IResolveContext,``0},System.Type)">ForDelegate&lt;TResult&gt;(Func&lt;IResolveContext, TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes an
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> and which returns
+an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;TResult&gt;(Func&lt;IResolveContext, TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForDelegate__1_System_Func_Rezolver_IResolveContext___0__System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__2_System_Func___0___1__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%602(System.Func%7B%60%600%2C%60%601%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L53">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__2_System_Func___0___1__System_Type_" data-uid="Rezolver.Target.ForDelegate``2(System.Func{``0,``1},System.Type)">ForDelegate&lt;T1, TResult&gt;(Func&lt;T1, TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes 1 argument
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;T1, TResult&gt;(Func&lt;T1, TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T1, TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForDelegate__2_System_Func___0___1__System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__3_System_Func___0___1___2__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%603(System.Func%7B%60%600%2C%60%601%2C%60%602%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L72">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__3_System_Func___0___1___2__System_Type_" data-uid="Rezolver.Target.ForDelegate``3(System.Func{``0,``1,``2},System.Type)">ForDelegate&lt;T1, T2, TResult&gt;(Func&lt;T1, T2, TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes 2 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;T1, T2, TResult&gt;(Func&lt;T1, T2, TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;T1, T2, TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForDelegate__3_System_Func___0___1___2__System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__4_System_Func___0___1___2___3__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%604(System.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L92">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__4_System_Func___0___1___2___3__System_Type_" data-uid="Rezolver.Target.ForDelegate``4(System.Func{``0,``1,``2,``3},System.Type)">ForDelegate&lt;T1, T2, T3, TResult&gt;(Func&lt;T1, T2, T3, TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes 3 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;T1, T2, T3, TResult&gt;(Func&lt;T1, T2, T3, TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;T1, T2, T3, TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td><p>Type of the 3rd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForDelegate__4_System_Func___0___1___2___3__System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__5_System_Func___0___1___2___3___4__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%605(System.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L113">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__5_System_Func___0___1___2___3___4__System_Type_" data-uid="Rezolver.Target.ForDelegate``5(System.Func{``0,``1,``2,``3,``4},System.Type)">ForDelegate&lt;T1, T2, T3, T4, TResult&gt;(Func&lt;T1, T2, T3, T4, TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes 4 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;T1, T2, T3, T4, TResult&gt;(Func&lt;T1, T2, T3, T4, TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;T1, T2, T3, T4, TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td><p>Type of the 3rd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td><p>Type of the 4th delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForDelegate__5_System_Func___0___1___2___3___4__System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForDelegate__6_System_Func___0___1___2___3___4___5__System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForDelegate%60%606(System.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/DelegateTarget_CreateAndRegister.cs/#L135">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForDelegate_" data-uid="Rezolver.Target.ForDelegate*"></a>
+  <h4 id="Rezolver_Target_ForDelegate__6_System_Func___0___1___2___3___4___5__System_Type_" data-uid="Rezolver.Target.ForDelegate``6(System.Func{``0,``1,``2,``3,``4,``5},System.Type)">ForDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> for a factory delegate which takes 5 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(Func&lt;T1, T2, T3, T4, T5, TResult&gt; factory, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-6">Func</a>&lt;T1, T2, T3, T4, T5, TResult&gt;</td>
+        <td><span class="parametername">factory</span></td>
+        <td><p>Required.  The factory delegate that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td><p>Type of the 3rd delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td><p>Type of the 4th delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td><p>Type of the 5th delegate parameter</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The type of the object produced by the factory delegate.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForDelegate__6_System_Func___0___1___2___3___4___5__System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the delegate are injected from the container when executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression_System_Linq_Expressions_Expression_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression(System.Linq.Expressions.Expression%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L202">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression_System_Linq_Expressions_Expression_System_Type_" data-uid="Rezolver.Target.ForExpression(System.Linq.Expressions.Expression,System.Type)">ForExpression(Expression, Type)</h4>
+  <div class="markdown level1 summary"><p>A simple wrapper for the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_">ExpressionTarget(Expression, Type)</a> constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression(Expression expression, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></td>
+        <td><span class="parametername">expression</span></td>
+        <td><p>Required, the expression representing the code that is to be executed
+in order to produce an object.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  If not null, then it will be used as the target&apos;s <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+which, in turn, is used as the target&apos;s default registration type if not overriden when added to an
+<a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.  If null, then the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression.type#System_Linq_Expressions_Expression_Type">Type</a> will be used, unless
+<code data-dev-comment-type="paramref" class="paramref">expression</code> is a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression">LambdaExpression</a>, in which case the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression.type#System_Linq_Expressions_Expression_Type">Type</a>
+of its <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression.body#System_Linq_Expressions_LambdaExpression_Body">Body</a> will be used.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which represents the given expression; which must be compiled or otherwise
+translated into a runtime operation which creates/obtains an object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func___0___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L18">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func___0___System_Type_" data-uid="Rezolver.Target.ForExpression``1(System.Linq.Expressions.Expression{System.Func{``0}},System.Type)">ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a parameterless lambda expression
+which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7BRezolver.IResolveContext%2C%60%600%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L36">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_" data-uid="Rezolver.Target.ForExpression``1(System.Linq.Expressions.Expression{System.Func{Rezolver.IResolveContext,``0}},System.Type)">ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes an
+<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> and which returns
+an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;TResult&gt;(Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForExpression__1_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__2_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%602(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L54">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__2_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_" data-uid="Rezolver.Target.ForExpression``2(System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Type)">ForExpression&lt;T1, TResult&gt;(Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes 1 argument
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;T1, TResult&gt;(Expression&lt;Func&lt;T1, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;T1, TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForExpression__2_System_Linq_Expressions_Expression_System_Func___0___1___System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__3_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%603(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L73">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__3_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_" data-uid="Rezolver.Target.ForExpression``3(System.Linq.Expressions.Expression{System.Func{``0,``1,``2}},System.Type)">ForExpression&lt;T1, T2, TResult&gt;(Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes 2 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;T1, T2, TResult&gt;(Expression&lt;Func&lt;T1, T2, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-3">Func</a>&lt;T1, T2, TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForExpression__3_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__4_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%604(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L93">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__4_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_" data-uid="Rezolver.Target.ForExpression``4(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3}},System.Type)">ForExpression&lt;T1, T2, T3, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes 3 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;T1, T2, T3, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-4">Func</a>&lt;T1, T2, T3, TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td><p>Type of the 3rd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForExpression__4_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__5_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%605(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L114">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__5_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_" data-uid="Rezolver.Target.ForExpression``5(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3,``4}},System.Type)">ForExpression&lt;T1, T2, T3, T4, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes 4 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;T1, T2, T3, T4, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-5">Func</a>&lt;T1, T2, T3, T4, TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td><p>Type of the 3rd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td><p>Type of the 4th parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForExpression__5_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForExpression__6_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForExpression%60%606(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2C%60%601%2C%60%602%2C%60%603%2C%60%604%2C%60%605%7D%7D%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L136">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForExpression_" data-uid="Rezolver.Target.ForExpression*"></a>
+  <h4 id="Rezolver_Target_ForExpression__6_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_" data-uid="Rezolver.Target.ForExpression``6(System.Linq.Expressions.Expression{System.Func{``0,``1,``2,``3,``4,``5}},System.Type)">ForExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type)</h4>
+  <div class="markdown level1 summary"><p>Creates an <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> for a lambda expression which takes 5 arguments
+and which returns an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt; lambda, Type declaredType = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-6">Func</a>&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;</td>
+        <td><span class="parametername">lambda</span></td>
+        <td><p>Required.  The lambda expression that is to be wrapped by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional.  The <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> of the target to be created,
+if different from <code data-dev-comment-type="typeparamref" class="typeparamref">TResult</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T1</span></td>
+        <td><p>Type of the 1st parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T2</span></td>
+        <td><p>Type of the 2nd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T3</span></td>
+        <td><p>Type of the 3rd parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T4</span></td>
+        <td><p>Type of the 4th parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">T5</span></td>
+        <td><p>Type of the 5th parameter of the lambda expression.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="parametername">TResult</span></td>
+        <td><p>The return type of the lambda expression.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForExpression__6_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All arguments to the lambda are injected from the container when compiled and executed</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForGenericConstructor__1_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForGenericConstructor%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%7D%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L547">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForGenericConstructor_" data-uid="Rezolver.Target.ForGenericConstructor*"></a>
+  <h4 id="Rezolver_Target_ForGenericConstructor__1_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForGenericConstructor``1(System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)">ForGenericConstructor&lt;TExample&gt;(Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a target which binds to the constructor of an open generic type, an exemplar of which is passed in <code data-dev-comment-type="paramref" class="paramref">newExpr</code>.</p>
+<p>The created target will be <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> whose <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html#Rezolver_Targets_GenericConstructorTarget_GenericTypeConstructor">GenericTypeConstructor</a>
+will be set to the constructor that is identified from the expression.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForGenericConstructor&lt;TExample&gt;(Expression&lt;Func&lt;TExample&gt;&gt; newExpr, IMemberBindingBehaviour memberBindingBehaviour = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression-1">Expression</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func</a>&lt;TExample&gt;&gt;</td>
+        <td><span class="parametername">newExpr</span></td>
+        <td><p>A lambda expression whose <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.lambdaexpression.body#System_Linq_Expressions_LambdaExpression_Body">Body</a> is a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.newexpression">NewExpression</a>
+which identifies the constructor that is to be used to create the instance of all concrete types derived from the
+the same generic type definition as <code data-dev-comment-type="typeparamref" class="typeparamref">TExample</code>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBindingBehaviour</span></td>
+        <td><p>Optional. If you wish to bind members on the new instance, pass a member binding
+behaviour here.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TExample</span></td>
+        <td><p>Must be a generic type.  It doesn&apos;t matter what the type arguments are, however,
+as the target that is created will be for the generic type definition of this type.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForGenericConstructor__1_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Note - a concrete generic is used as an <em>example</em> - the equivalent open generic constructor is located
+and registered against the open generic of the type you actually invoke this method for; e.g. if
+<code data-dev-comment-type="typeparamref" class="typeparamref">TExample</code> is <code>MyGeneric&amp;lt;Foo, Bar&gt;</code>, then a target bound to the equivalent
+constructor on the open generic <code>MyGeneric&amp;lt;,&gt;</code> will be what is actually created.</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForObject_System_Object_System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForObject(System.Object%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L135">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForObject_" data-uid="Rezolver.Target.ForObject*"></a>
+  <h4 id="Rezolver_Target_ForObject_System_Object_System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Target.ForObject(System.Object,System.Type,Rezolver.ScopeBehaviour)">ForObject(Object, Type, ScopeBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> for the passed <code data-dev-comment-type="paramref" class="paramref">object</code> whose
+<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> will either be set to object&apos;s type (obtained by calling
+<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">GetType()</a> or <code data-dev-comment-type="paramref" class="paramref">declaredType</code>, if it is passed non-null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForObject(object object, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>The @object to be wrapped by the new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional - will be used to set the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+of the target that is created.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
+        <td><span class="parametername">scopeBehaviour</span></td>
+        <td><p>The scope behaviour of the target if resolved inside an
+<a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForObject__1___0_System_Type_Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForObject%60%601(%60%600%2CSystem.Type%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L120">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForObject_" data-uid="Rezolver.Target.ForObject*"></a>
+  <h4 id="Rezolver_Target_ForObject__1___0_System_Type_Rezolver_ScopeBehaviour_" data-uid="Rezolver.Target.ForObject``1(``0,System.Type,Rezolver.ScopeBehaviour)">ForObject&lt;T&gt;(T, Type, ScopeBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> for the passed <code data-dev-comment-type="paramref" class="paramref">object</code> whose
+<a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> will either be set to <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> or
+<code data-dev-comment-type="paramref" class="paramref">declaredType</code>, if it is passed non-null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForObject&lt;T&gt;(T object, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>The @object to be wrapped by the new <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">declaredType</span></td>
+        <td><p>Optional - will be used to set the <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>
+of the target that is created.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
+        <td><span class="parametername">scopeBehaviour</span></td>
+        <td><p>The scope behaviour of the target if resolved inside an
+<a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>Type of the object</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L224">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,Rezolver.IMemberBindingBehaviour)">ForType(Type, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+for the type <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType(Type type, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type whose constructor is to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="paramref" class="paramref">type</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForType_System_Type_Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the type is a generic type definition, then a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is created.</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CSystem.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L244">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForType(Type, IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+for the type <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType(Type type, IDictionary&lt;string, ITarget&gt; namedArgs, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type whose constructor is to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Optional.  A dictionary of targets that are to be bound to the type&apos;s
+constructor by name and type.  If <code data-dev-comment-type="paramref" class="paramref">type</code> is a generic type definition, then
+this parameter must be null, or an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a> will be thrown.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="paramref" class="paramref">type</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForType_System_Type_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the type is a generic type definition, then a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is created.</p>
+</div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType(System.Type%2CSystem.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L363">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType(System.Type,System.Object,Rezolver.IMemberBindingBehaviour)">ForType(Type, Object, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+for the type <code data-dev-comment-type="paramref" class="paramref">type</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType(Type type, object namedArgs, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>The type whose constructor is to be bound by the target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Optional.  An object whose publicly readable members which are of the
+type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor
+by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+<p>If <code data-dev-comment-type="paramref" class="paramref">type</code> is a generic type definition, then
+this parameter must be null, or an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a> will be thrown.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>If the type is a generic type definition, then a <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+is created; otherwise a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is created.</p>
+</div>
+  <h5 id="Rezolver_Target_ForType_System_Type_System_Object_Rezolver_IMemberBindingBehaviour__examples">Examples</h5>
+  <p>This example shows how to provide an ObjectTarget for the parameter &apos;param1&apos; when creating a
+ConstructorTarget for the type &apos;MyType&apos;:</p>
+<pre><code>Target.ForType(typeof(MyType), namedArguments: new { param1 = new ObjectTarget(&quot; Hello World&quot;) });</code></pre>
+
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType__1_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(Rezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L277">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType__1_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType&lt;T&gt;(IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type whose constructor is to be bound by the target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L292">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType__1_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.Target.ForType``1(System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">ForType&lt;T&gt;(Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> with
+an <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> built from an <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a>
+that&apos;s configured by the <code data-dev-comment-type="paramref" class="paramref">configureMemberBinding</code> callback.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType&lt;T&gt;(Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt; configureMemberBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;T&gt;&gt;</td>
+        <td><span class="parametername">configureMemberBinding</span></td>
+        <td><p>Will be called with a new instance of
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> for you to configure any
+member bindings you wish to add to the target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type of object to be created by the target</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L312">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType&lt;T&gt;(IDictionary&lt;string, ITarget&gt; namedArgs, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Can be null. A dictionary of targets that are to be bound to the type&apos;s
+constructor by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+<p>If <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> is a generic type definition, then
+this parameter must be null, or an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a> will be thrown.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type whose constructor is to be bound by the target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Collections.Generic.IDictionary%7BSystem.String%2CRezolver.ITarget%7D%2CSystem.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L334">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.Target.ForType``1(System.Collections.Generic.IDictionary{System.String,Rezolver.ITarget},System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">ForType&lt;T&gt;(IDictionary&lt;String, ITarget&gt;, Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Same as <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ForType__1_System_Collections_Generic_IDictionary_System_String_Rezolver_ITarget__Rezolver_IMemberBindingBehaviour_">ForType&lt;T&gt;(IDictionary&lt;String, ITarget&gt;, IMemberBindingBehaviour)</a> except this allows you to
+build a custom member binding behaviour using the fluent API exposed by the <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a>
+interface</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType&lt;T&gt;(IDictionary&lt;string, ITarget&gt; namedArgs, Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt; configureMemberBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.idictionary-2">IDictionary</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>, <a class="xref" href="Rezolver.ITarget.html">ITarget</a>&gt;</td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Can be null. A dictionary of targets that are to be bound to the type&apos;s
+constructor by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+<p>If <code data-dev-comment-type="typeparamref" class="typeparamref">T</code> is a generic type definition, then
+this parameter must be null, or an <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentexception">ArgumentException</a> will be thrown.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;T&gt;&gt;</td>
+        <td><span class="parametername">configureMemberBinding</span></td>
+        <td><p>Will be called with a new instance of
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> for you to configure any
+member bindings you wish to add to the target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type whose constructor is to be bound by the target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Object%2CRezolver.IMemberBindingBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L386">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_" data-uid="Rezolver.Target.ForType``1(System.Object,Rezolver.IMemberBindingBehaviour)">ForType&lt;T&gt;(Object, IMemberBindingBehaviour)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
+for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType&lt;T&gt;(object namedArgs, IMemberBindingBehaviour memberBinding = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Optional.  An object whose publicly readable members which are of the
+type <a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor
+by name and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></td>
+        <td><span class="parametername">memberBinding</span></td>
+        <td><p>Optional - provides an explicit member injection behaviour to be used when creating the instance,
+if different from the behaviour configured via options on any target container in which the target is subsequently registered.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type whose constructor is to be bound by the created target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour__examples">Examples</h5>
+  <p>This example shows how to provide an ObjectTarget for the parameter &apos;param1&apos; when creating a
+ConstructorTarget for the type &apos;MyType&apos;:</p>
+<pre><code>Target.ForType&lt;MyType>(namedArguments: new { param1 = new ObjectTarget(&quot;Hello World&quot;) });</code></pre>
+
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_ForType__1_System_Object_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___.md&amp;value=---%0Auid%3A%20Rezolver.Target.ForType%60%601(System.Object%2CSystem.Action%7BRezolver.IMemberBindingBehaviourBuilder%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L405">View Source</a>
+  </span>
+  <a id="Rezolver_Target_ForType_" data-uid="Rezolver.Target.ForType*"></a>
+  <h4 id="Rezolver_Target_ForType__1_System_Object_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___" data-uid="Rezolver.Target.ForType``1(System.Object,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})">ForType&lt;T&gt;(Object, Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Same as <a class="xref" href="Rezolver.Target.html#Rezolver_Target_ForType__1_System_Object_Rezolver_IMemberBindingBehaviour_">ForType&lt;T&gt;(Object, IMemberBindingBehaviour)</a> except this lets you build a custom <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a>
+using the fluent API offered by the <a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> interface.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget ForType&lt;T&gt;(object namedArgs, Action&lt;IMemberBindingBehaviourBuilder&lt;T&gt;&gt; configureMemberBinding)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">namedArgs</span></td>
+        <td><p>Optional.  An objeect whose publicly readable members which are of the type
+<a class="xref" href="Rezolver.ITarget.html">ITarget</a> (or a type which implements it) are to be bound to the type&apos;s constructor by name
+and <a class="xref" href="Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder</a>&lt;T&gt;&gt;</td>
+        <td><span class="parametername">configureMemberBinding</span></td>
+        <td><p>Will be called with a new instance of
+<a class="xref" href="Rezolver.IMemberBindingBehaviourBuilder-1.html">IMemberBindingBehaviourBuilder&lt;TInstance&gt;</a> for you to configure any
+member bindings you wish to add to the target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>A new target for the type <code data-dev-comment-type="typeparamref" class="typeparamref">T</code></p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type whose constructor is to be bound by the created target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_Resolved_System_Type_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Resolved(System.Type%2CRezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L148">View Source</a>
+  </span>
+  <a id="Rezolver_Target_Resolved_" data-uid="Rezolver.Target.Resolved*"></a>
+  <h4 id="Rezolver_Target_Resolved_System_Type_Rezolver_ITarget_" data-uid="Rezolver.Target.Resolved(System.Type,Rezolver.ITarget)">Resolved(Type, ITarget)</h4>
+  <div class="markdown level1 summary"><p>Creates a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> for the given type, providing a way to call back into the
+container during the execution of another target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget Resolved(Type type, ITarget fallbackTarget = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">type</span></td>
+        <td><p>Required. The type to be resolved from the container.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">fallbackTarget</span></td>
+        <td><p>Optional. If provided and the container is unable to resolve the
+<code data-dev-comment-type="paramref" class="paramref">type</code>, then this target is used instead.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_Resolved__1_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Resolved%60%601(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L167">View Source</a>
+  </span>
+  <a id="Rezolver_Target_Resolved_" data-uid="Rezolver.Target.Resolved*"></a>
+  <h4 id="Rezolver_Target_Resolved__1_Rezolver_ITarget_" data-uid="Rezolver.Target.Resolved``1(Rezolver.ITarget)">Resolved&lt;T&gt;(ITarget)</h4>
+  <div class="markdown level1 summary"><p>Generic version of <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Resolved_System_Type_Rezolver_ITarget_">Resolved(Type, ITarget)</a> - creates a <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a>
+for the given type, providing a way to callback into the container during the execution of another
+target.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget Resolved&lt;T&gt;(ITarget fallbackTarget = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">fallbackTarget</span></td>
+        <td><p>Optional. If provided and the container is unable to resolve the
+<code data-dev-comment-type="typeparamref" class="typeparamref">T</code>, then this target is used instead</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><p>An <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which represents the act of resolving a particular type from the container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The type to be resolved from the container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_Scoped_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Scoped(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L30">View Source</a>
+  </span>
+  <a id="Rezolver_Target_Scoped_" data-uid="Rezolver.Target.Scoped*"></a>
+  <h4 id="Rezolver_Target_Scoped_Rezolver_ITarget_" data-uid="Rezolver.Target.Scoped(Rezolver.ITarget)">Scoped(ITarget)</h4>
+  <div class="markdown level1 summary"><p>Extension method which creates a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> from the target on which this
+method is invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget Scoped(this ITarget target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_Singleton_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Singleton(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L61">View Source</a>
+  </span>
+  <a id="Rezolver_Target_Singleton_" data-uid="Rezolver.Target.Singleton*"></a>
+  <h4 id="Rezolver_Target_Singleton_Rezolver_ITarget_" data-uid="Rezolver.Target.Singleton(Rezolver.ITarget)">Singleton(ITarget)</h4>
+  <div class="markdown level1 summary"><p>Extension method which constructs a <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the
+target on which the method is invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget Singleton(this ITarget target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target_Unscoped_Rezolver_ITarget_.md&amp;value=---%0Auid%3A%20Rezolver.Target.Unscoped(Rezolver.ITarget)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Target.cs/#L45">View Source</a>
+  </span>
+  <a id="Rezolver_Target_Unscoped_" data-uid="Rezolver.Target.Unscoped*"></a>
+  <h4 id="Rezolver_Target_Unscoped_Rezolver_ITarget_" data-uid="Rezolver.Target.Unscoped(Rezolver.ITarget)">Unscoped(ITarget)</h4>
+  <div class="markdown level1 summary"><p>Extension method which creates an <a class="xref" href="Rezolver.Targets.UnscopedTarget.html">UnscopedTarget</a> from the target
+on which this method is invoked.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ITarget Unscoped(this ITarget target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The target.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          <div class="hidden-sm col-md-3" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Target.md&amp;value=---%0Auid%3A%20Rezolver.Target%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Targets/ExpressionTarget_CreateAndRegister.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <span>Copyright &copy;2014 onwards <a href="http://www.zolution.co.uk" target="_blank">Zolution Software Ltd</a><br>Generated by <a href="https://dotnet.github.io/docfx/" target="_blank">DocFX</a>, with the Rezolver theme</span>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

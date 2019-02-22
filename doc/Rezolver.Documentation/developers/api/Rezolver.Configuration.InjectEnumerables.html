@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class InjectEnumerables
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.36.2.0">
+  	<meta name="generator" content="docfx 2.40.1.0">
   	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -39,16 +39,7 @@
   		<meta name="msapplication-TileColor" content="#da532c">
   		<meta name="msapplication-TileImage" content="../../mstile-144x144.png">
   		<meta name="theme-color" content="#ffffff">
-  	<script>
-  	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  	
-  	  ga('create', 'UA-92764222-1', 'auto');
-  	  ga('send', 'pageview');
-  	
-  	</script></head>
+  </head>
   <body data-spy="scroll" data-target="#affix" data-offset="120">
     <div id="wrapper">
       <header>
@@ -117,15 +108,16 @@
   <h1 id="Rezolver_Configuration_InjectEnumerables" data-uid="Rezolver.Configuration.InjectEnumerables" class="text-break">Class InjectEnumerables
   </h1>
   <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which enables automatic handling of fetching
-targets for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> based on all the targets registered for a given <code>T</code>
+targets for <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> based on all the targets registered for a given <code>T</code>
 in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>&gt;</div>
-    <div class="level2"><span class="xref">InjectEnumerables</span></div>
+    <div class="level1"><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></div>
+    <div class="level2"><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig</a>&lt;<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a>&gt;</div>
+    <div class="level3"><span class="xref">InjectEnumerables</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -135,28 +127,34 @@ in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Dependencies">OptionDependentConfig&lt;EnableEnumerableInjection&gt;.Dependencies</a>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase">OptionDependentConfig&lt;EnableEnumerableInjection&gt;.GetDependenciesBase()</a>
     </div>
     <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Dependencies">OptionDependentConfigBase.Dependencies</a>
     </div>
     <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+      <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_">OptionDependentConfigBase.CreateOptionDependency&lt;TOption&gt;(Boolean)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetHashCode()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.GetType()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
     </div>
     <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
     </div>
     <div>
-      <span class="xref">System.Object.ToString()</span>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.Configuration.html">Rezolver.Configuration</a></h6>
@@ -191,10 +189,10 @@ it at its default of <code>true</code> for all other enumerable types.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectEnumerables.cs/#L49">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectEnumerables.cs/#L49">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectEnumerables_Instance_" data-uid="Rezolver.Configuration.InjectEnumerables.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectEnumerables_Instance" data-uid="Rezolver.Configuration.InjectEnumerables.Instance">Instance</h4>
@@ -224,14 +222,14 @@ it at its default of <code>true</code> for all other enumerable types.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectEnumerables.cs/#L66">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectEnumerables.cs/#L66">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectEnumerables_Configure_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectEnumerables.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a></p>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -256,10 +254,10 @@ it at its default of <code>true</code> for all other enumerable types.</p>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Rezolver.Configuration.OptionDependentConfig&lt;Rezolver.Options.EnableEnumerableInjection&gt;.Configure(Rezolver.IRootTargetContainer)</span></div>
+  <div><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html#Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_">OptionDependentConfigBase.Configure(IRootTargetContainer)</a></div>
   <h5 id="Rezolver_Configuration_InjectEnumerables_Configure_Rezolver_IRootTargetContainer__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This implementation registers a special target container (via <a class="xref" href="Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">RegisterContainer(Type, ITargetContainer)</a>)
-for <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> in passed <code data-dev-comment-type="paramref" class="paramref">targets</code>
+for <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> in passed <code data-dev-comment-type="paramref" class="paramref">targets</code>
 if the <a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option evaluates to <code>true</code> when read from <code data-dev-comment-type="paramref" class="paramref">targets</code>.</p>
 <p>This is the default value for that option anyway, so, as the remarks section on the class states, all that&apos;s required to enable
 the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></p>
@@ -289,10 +287,10 @@ the enumerable resolving behaviour is simply to make sure this configuration obj
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/autofactories/apiSpec/new?filename=Rezolver_Configuration_InjectEnumerables.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectEnumerables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectEnumerables.cs/#L44" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/src/Rezolver/Configuration/InjectEnumerables.cs/#L44" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

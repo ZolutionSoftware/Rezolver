@@ -19,7 +19,7 @@ namespace Rezolver
     {
         public class ListLock : IDisposable
         {
-            private LockedList<T> _list;
+            private readonly LockedList<T> _list;
 
             internal ListLock(LockedList<T> list)
             {
@@ -175,7 +175,7 @@ namespace Rezolver
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
     }
 }

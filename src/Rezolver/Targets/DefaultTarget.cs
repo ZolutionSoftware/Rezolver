@@ -69,7 +69,7 @@ namespace Rezolver.Targets
         {
             get
             {
-                return GetDefault(this.DeclaredType);
+                return GetDefault(DeclaredType);
             }
         }
 
@@ -85,8 +85,8 @@ namespace Rezolver.Targets
 
         ITarget ICompiledTarget.SourceTarget => this;
 
-        object ICompiledTarget.GetObject(IResolveContext context) => this.Value;
+        object ICompiledTarget.GetObject(IResolveContext context) => Value;
 
-        object IDirectTarget.GetValue() => this.Value;
+        object IDirectTarget.GetValue() => Value;
     }
 }

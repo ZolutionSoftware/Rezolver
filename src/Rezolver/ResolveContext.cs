@@ -44,10 +44,10 @@ namespace Rezolver
         /// <param name="previous"></param>
         private ResolveContext(IResolveContext previous)
         {
-            this.Previous = previous;
-            this.RequestedType = previous.RequestedType;
-            this.Container = previous.Container;
-            this.Scope = previous.Scope;
+            Previous = previous;
+            RequestedType = previous.RequestedType;
+            Container = previous.Container;
+            Scope = previous.Scope;
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Rezolver
         public ResolveContext(IContainer container, Type requestedType)
           : this(container)
         {
-            this.RequestedType = requestedType;
+            RequestedType = requestedType;
         }
 
         /// <summary>
@@ -70,16 +70,16 @@ namespace Rezolver
         /// <param name="requestedType">The of object to be resolved from the container.</param>
         public ResolveContext(IContainerScope scope, Type requestedType)
         {
-            this.Scope = scope;
-            this.Container = scope.Container;
-            this.RequestedType = requestedType;
+            Scope = scope;
+            Container = scope.Container;
+            RequestedType = requestedType;
         }
 
         private ResolveContext(IContainer container)
         {
-            this.Container = container ?? StubContainer.Instance;
+            Container = container ?? StubContainer.Instance;
             // if the container is a scoped container, then we pull it out and set it into this context.
-            this.Scope = (container as IScopedContainer)?.Scope;
+            Scope = (container as IScopedContainer)?.Scope;
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Rezolver
         /// If a scope is active then it will be honoured.</remarks>
         public object Resolve(Type newRequestedType)
         {
-            return (this.Scope?.Container ?? this.Container).Resolve(this.New(newRequestedType: newRequestedType));
+            return (Scope?.Container ?? Container).Resolve(New(newRequestedType: newRequestedType));
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Rezolver
         /// If a scope is active then it will be honoured.</remarks>
         public TResult Resolve<TResult>()
         {
-            return (TResult)this.Resolve(typeof(TResult));
+            return (TResult)Resolve(typeof(TResult));
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Rezolver
         /// If a scope is active then it will be honoured.</remarks>
         public bool TryResolve(Type newRequestedType, out object result)
         {
-            return (this.Scope?.Container ?? this.Container).TryResolve(this.New(newRequestedType: newRequestedType), out result);
+            return (Scope?.Container ?? Container).TryResolve(New(newRequestedType: newRequestedType), out result);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Rezolver
         /// <returns>A boolean indicating whether the operation was successful.</returns>
         public bool TryResolve<TResult>(out TResult result)
         {
-            bool success = this.TryResolve(typeof(TResult), out object temp);
+            bool success = TryResolve(typeof(TResult), out object temp);
             result = (TResult)temp;
             return success;
         }
@@ -165,38 +165,38 @@ namespace Rezolver
         {
             ResolveContext newContext = null;
 
-            if (newRequestedType != null && newRequestedType != this.RequestedType)
+            if (newRequestedType != null && newRequestedType != RequestedType)
             {
                 newContext = new ResolveContext(this)
                 {
                     RequestedType = newRequestedType
                 };
-                if (newContainer != null && !Object.ReferenceEquals(newContainer, this.Container))
+                if (newContainer != null && !Object.ReferenceEquals(newContainer, Container))
                 {
                     newContext.Container = newContainer;
                 }
 
-                if (newScope != null && !Object.ReferenceEquals(newScope, this.Scope))
+                if (newScope != null && !Object.ReferenceEquals(newScope, Scope))
                 {
                     newContext.Scope = newScope;
                 }
 
                 return newContext;
             }
-            else if (newContainer != null && !Object.ReferenceEquals(newContainer, this.Container))
+            else if (newContainer != null && !Object.ReferenceEquals(newContainer, Container))
             {
                 newContext = new ResolveContext(this)
                 {
                     Container = newContainer
                 };
-                if (newScope != null && !Object.ReferenceEquals(newScope, this.Scope))
+                if (newScope != null && !Object.ReferenceEquals(newScope, Scope))
                 {
                     newContext.Scope = newScope;
                 }
 
                 return newContext;
             }
-            else if (newScope != null && !Object.ReferenceEquals(newScope, this.Scope))
+            else if (newScope != null && !Object.ReferenceEquals(newScope, Scope))
             {
                 newContext = new ResolveContext(this)
                 {
@@ -215,12 +215,12 @@ namespace Rezolver
         {
             List<string> parts = new List<string>
             {
-                $"Type: {this.RequestedType}",
-                $"Container: {this.Container}"
+                $"Type: {RequestedType}",
+                $"Container: {Container}"
             };
-            if (this.Scope != null)
+            if (Scope != null)
             {
-                parts.Add($"Scope: {this.Scope}");
+                parts.Add($"Scope: {Scope}");
             }
 
             return $"({string.Join(", ", parts)})";
@@ -233,7 +233,7 @@ namespace Rezolver
         /// in order to create child scopes which are correctly parented either to another active scope or the container.</remarks>
         public IContainerScope CreateScope()
         {
-            return (((IScopeFactory)this.Scope) ?? this.Container).CreateScope();
+            return (((IScopeFactory)Scope) ?? Container).CreateScope();
         }
     }
 }
