@@ -47,7 +47,7 @@ namespace Rezolver.Compilation.Expressions
             {
                 var all = target.Targets.Select(t => compiler.BuildResolveLambda(t, context.NewContext(target.ElementType)));
                 return Expression.New(
-                    TypeHelpers.GetConstructors(typeof(LazyEnumerable<>).MakeGenericType(target.ElementType)).Single(),
+                    typeof(LazyEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
                     context.ResolveContextParameterExpression,
                     Expression.NewArrayInit(
                         typeof(Func<IResolveContext, object>),
@@ -56,7 +56,7 @@ namespace Rezolver.Compilation.Expressions
             else
             {
                 return Expression.New(
-                    TypeHelpers.GetConstructors(typeof(EagerEnumerable<>).MakeGenericType(target.ElementType)).Single(),
+                    typeof(EagerEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
                     Expression.NewArrayInit(target.ElementType,
                         target.Targets.Select(t => compiler.Build(t, context.NewContext(target.ElementType))))
                     );

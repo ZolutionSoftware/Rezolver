@@ -27,12 +27,18 @@ namespace Rezolver
 
         internal static IEnumerable<Type> GetAllBases(this Type type)
         {
-            var baseType = TypeHelpers.BaseType(type);
-            while (baseType != null)
+            if (type.BaseType == null)
+                return Enumerable.Empty<Type>();
+
+            List<Type> toReturn = new List<Type>() { type.BaseType };
+            type = type.BaseType;
+            
+            while ((type = type.BaseType) != null)
             {
-                yield return baseType;
-                baseType = TypeHelpers.BaseType(baseType);
+                toReturn.Add(type);
             }
+
+            return toReturn;
         }
 
         internal static bool IsBindableCollectionType(this Type type)
@@ -51,10 +57,10 @@ namespace Rezolver
                     .Where(mi => mi.IsPublic && mi.Name == "Add" && mi.ReturnType == typeof(void))
                     .Select(mi => new { Method = mi, Parameters = mi.GetParameters() });
 
-                foreach (var i in TypeHelpers.GetInterfaces(t)
-                    .Where(iface => TypeHelpers.IsGenericType(iface) && iface.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
+                foreach (var i in t.GetInterfaces()
+                    .Where(iface => iface.IsGenericType && iface.GetGenericTypeDefinition() == typeof(IEnumerable<>)))
                 {
-                    enumElemType = TypeHelpers.GetGenericArguments(i)[0];
+                    enumElemType = i.GetGenericArguments()[0];
                     addMethod = allAddMethods.Where(
                         m => (m.Parameters?.Length ?? 0) == 1 && m.Parameters[0].ParameterType == enumElemType)
                         .Select(m => m.Method)
@@ -85,18 +91,18 @@ namespace Rezolver
         /// to which an instance of the arrayType can be assigned.</returns>
         internal static IEnumerable<Type> GetBaseArrayTypes(this Type arrayType)
         {
-            var elemType = TypeHelpers.GetElementType(arrayType);
+            var elemType = arrayType.GetElementType();
             if (elemType == typeof(object))
             {
                 return Enumerable.Empty<Type>();
             }
 
-            var rank = TypeHelpers.GetArrayRank(arrayType);
+            var rank = arrayType.GetArrayRank();
             Func<Type, int, Type> typeFac = rank == 1 ? (Func<Type, int, Type>)MakeVectorType : MakeArrayType;
             List<Type> toReturn = new List<Type>();
             while (elemType != typeof(object))
             {
-                elemType = TypeHelpers.BaseType(elemType);
+                elemType = elemType.BaseType;
                 toReturn.Add(typeFac(elemType, rank));
             }
 
@@ -105,12 +111,12 @@ namespace Rezolver
 
         internal static IEnumerable<Type> GetInterfaceArrayTypes(this Type interfaceArrayType)
         {
-            var elemType = TypeHelpers.GetElementType(interfaceArrayType);
-            var rank = TypeHelpers.GetArrayRank(interfaceArrayType);
+            var elemType = interfaceArrayType.GetElementType();
+            var rank = interfaceArrayType.GetArrayRank();
             Func<Type, int, Type> typeFac = rank == 1 ? (Func<Type, int, Type>)MakeVectorType : MakeArrayType;
             List<Type> toReturn = new List<Type>();
 
-            foreach (var iFaceType in TypeHelpers.GetInterfaces(elemType))
+            foreach (var iFaceType in elemType.GetInterfaces())
             {
                 toReturn.Add(typeFac(iFaceType, rank));
             }
@@ -121,28 +127,22 @@ namespace Rezolver
         internal static bool IsContravariantTypeParameter(this Type type)
         {
             return type.IsGenericParameter &&
-                (TypeHelpers.GetGenericParameterAttributes(type) & GenericParameterAttributes.Contravariant)
+                (type.GenericParameterAttributes & GenericParameterAttributes.Contravariant)
                 == GenericParameterAttributes.Contravariant;
         }
 
         internal static bool IsCovariantTypeParameter(this Type type)
         {
             return type.IsGenericParameter &&
-                (TypeHelpers.GetGenericParameterAttributes(type) & GenericParameterAttributes.Covariant)
+                (type.GenericParameterAttributes & GenericParameterAttributes.Covariant)
                 == GenericParameterAttributes.Covariant;
         }
 
         internal static bool IsVariantTypeParameter(this Type type)
         {
-            switch (TypeHelpers.GetGenericParameterAttributes(type)
-                       & GenericParameterAttributes.VarianceMask)
-            {
-                case GenericParameterAttributes.Contravariant:
-                case GenericParameterAttributes.Covariant:
-                    return true;
-                default:
-                    return false;
-            }
+            var masked = type.GenericParameterAttributes
+                       & GenericParameterAttributes.VarianceMask;
+            return masked == GenericParameterAttributes.Contravariant || masked == GenericParameterAttributes.Covariant;
         }
 
         internal static string CSharpLikeTypeName(this Type type)
@@ -160,11 +160,11 @@ namespace Rezolver
             }
 
             sb.Append(t.Name);
-            if (TypeHelpers.IsGenericType(t))
+            if (t.IsGenericType)
             {
                 sb.Append("<");
                 bool moreThanOne = false;
-                foreach (var tP in TypeHelpers.GetGenericArguments(t))
+                foreach (var tP in t.GetGenericArguments())
                 {
                     if (moreThanOne)
                     {
@@ -182,31 +182,26 @@ namespace Rezolver
 
         internal static bool CanBeNull(this Type type)
         {
-            return !TypeHelpers.IsValueType(type) || IsNullableType(type);
+            return !type.IsValueType || IsNullableType(type);
         }
 
         internal static bool IsNullableType(this Type type)
         {
-            return TypeHelpers.IsGenericType(type) && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
 
-        internal static bool IsNullableType(this Type type, out Type nulledType)
+        internal static Type GetNullableUnderlyingType(this Type type)
         {
-            nulledType = null;
-
-            if (!TypeHelpers.IsGenericType(type))
+            if (type.IsGenericType)
             {
-                return false;
+                var genType = type.GetGenericTypeDefinition();
+                if(genType == typeof(Nullable<>))
+                {
+                    return genType.GetGenericArguments()[0];
+                }
             }
 
-            var genType = type.GetGenericTypeDefinition();
-            if (genType != typeof(Nullable<>))
-            {
-                return false;
-            }
-
-            nulledType = TypeHelpers.GetGenericArguments(type)[0];
-            return true;
+            return null;
         }
 
         internal static FieldInfo[] GetInstanceFields(this Type type)
@@ -220,63 +215,19 @@ namespace Rezolver
 
         }
 
-        internal static PropertyInfo[] GetStaticProperties(this Type type)
-        {
-            return type.GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-        }
-
         internal static FieldInfo[] GetStaticFields(this Type type)
         {
             return type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
         }
 
-        internal static bool IsEnumerableType(this Type type, out Type elementType)
+        internal static MethodInfo GetPublicInstanceMethod(this Type type, string methodName)
         {
-            elementType = null;
-            if (!TypeHelpers.IsGenericType(type))
-            {
-                return false;
-            }
-
-            var genDef = type.GetGenericTypeDefinition();
-            if (genDef != typeof(IEnumerable<>))
-            {
-                return false;
-            }
-
-            elementType = TypeHelpers.GetGenericArguments(type)[0];
-            return true;
-        }
-
-        internal static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
-        {
-            // Different to GetRuntimeProperties - this will return every single available property on a type.  If the type is a
-            // class then it will return properties declared on the class itself plus any of its bases (same as GetRuntimeProperties).
-            // If the type is an interface, then it'll return all properties on that interface and any other that it inherits (not
-            // the same as GetRuntimeProperties).
-            if (!TypeHelpers.IsInterface(type))
-            {
-                return type.GetRuntimeProperties();
-            }
-            else
-            {
-                return SelfAndBases(type).SelectMany(t => t.GetRuntimeProperties());
-            }
-        }
-
-        internal static IEnumerable<FieldInfo> GetAllFields(this Type type)
-        {
-            if (!TypeHelpers.IsInterface(type))
-            {
-                return type.GetRuntimeFields();
-            }
-
-            return Enumerable.Empty<FieldInfo>();
+            return type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);
         }
 
         internal static IEnumerable<MethodInfo> GetAllMethods(this Type type)
         {
-            if (!TypeHelpers.IsInterface(type))
+            if (!type.IsInterface)
             {
                 return type.GetRuntimeMethods();
             }
@@ -290,13 +241,13 @@ namespace Rezolver
         {
             List<Type> toReturn = new List<Type> { type };
 
-            if (!TypeHelpers.IsInterface(type))
+            if (!type.IsInterface)
             {
                 toReturn.AddRange(type.GetAllBases());
             }
             else
             {
-                toReturn.AddRange(TypeHelpers.GetInterfaces(type));
+                toReturn.AddRange(type.GetInterfaces());
             }
 
             return toReturn;

@@ -261,7 +261,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(targets));
             }
 
-            if (!TypeHelpers.IsGenericType(typeof(TExampleService)))
+            if (!typeof(TExampleService).IsGenericType)
             {
                 throw new ArgumentException($"Service type {typeof(TExampleService)} is not a generic type", nameof(TExampleService));
             }

@@ -32,11 +32,11 @@ namespace Rezolver.Options
             // so we can register an option against a service, taking advantage of the contravariance
             // and other generic functionality of the target containers -
             return typeof(IOptionContainer<TOption>) == type
-                || (TypeHelpers.IsGenericType(type)
+                || (type.IsGenericType
                     && (typeof(IOptionContainer<,>).Equals(type.GetGenericTypeDefinition())
-                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1])
+                        && typeof(TOption) == type.GetGenericArguments()[1])
                     || (typeof(IAnyGenericOptionContainer<>).Equals(type.GetGenericTypeDefinition())
-                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[0]));
+                        && typeof(TOption) == type.GetGenericArguments()[0]));
         }
     }
 }

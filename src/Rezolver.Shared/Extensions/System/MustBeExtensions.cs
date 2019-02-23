@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace System
 {
-    [Obsolete("All the extension methods in this class need to be removed and any code which uses them converted to 'normal' exception throwing code - they hide the actual source of the exception.")]
+    [Obsolete("All the extension methods in this class need to be removed and any code which uses them converted to 'normal' exception throwing code - they hide the actual source of the exception.", true)]
     internal static class MustBeExtensions
     {
         /// <summary>

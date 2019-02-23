@@ -30,7 +30,7 @@ namespace Rezolver
 
         private static object FetchDirect(ITarget target, ITargetContainer targets, Type objectType)
         {
-            if (TypeHelpers.IsAssignableFrom(objectType, target.GetType()))
+            if (objectType.IsAssignableFrom(target.GetType()))
             {
                 return target;
             }

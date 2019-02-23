@@ -17,7 +17,7 @@ namespace Rezolver.Tests
 		public void ShouldExtractMethodFromCallExpression()
 		{
             // Arrange
-			MethodInfo expected = TypeHelpers.GetMethod(typeof(object), ("GetHashCode"));
+			MethodInfo expected = typeof(object).GetMethod("GetHashCode");
 
             // Act
 			MethodInfo mi = Extract.Method((object o) => o.GetHashCode());
@@ -30,7 +30,7 @@ namespace Rezolver.Tests
 		public void ShouldExtractConstructor()
 		{
             // Arrange
-			var expected = TypeHelpers.GetConstructors(typeof(string)).SingleOrDefault(c =>
+			var expected = typeof(string).GetConstructors().SingleOrDefault(c =>
 			{
 				var parms = c.GetParameters();
 				return parms.Length == 2 && parms[0].ParameterType == typeof(char) && parms[1].ParameterType == typeof(int);
@@ -48,7 +48,7 @@ namespace Rezolver.Tests
         {
             // Arrange
             var p1Type = typeof(GenericTwoCtors<>).GetGenericArguments()[0];
-            var expected = TypeHelpers.GetConstructors(typeof(GenericTwoCtors<>))
+            var expected = typeof(GenericTwoCtors<>).GetConstructors()
                 .SingleOrDefault(c => new[] { p1Type, typeof(int) }.SequenceEqual(c.GetParameters().Select(p => p.ParameterType)));
 
             // Act
@@ -62,7 +62,7 @@ namespace Rezolver.Tests
         public void ShouldExtractGenericMethod()
         {
             // Arrange
-            var expected = TypeHelpers.GetMethod(typeof(List<>), "Add");
+            var expected = typeof(List<>).GetMethod("Add");
 
             // Act
             var addMethod = Extract.GenericTypeMethod((List<object> l) => l.Add(null));

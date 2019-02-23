@@ -75,7 +75,7 @@ namespace Rezolver
 
         public override ITarget Fetch(Type type)
         {
-            if (!TypeHelpers.IsGenericType(type))
+            if (!type.IsGenericType)
             {
                 throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
             }
@@ -116,7 +116,7 @@ namespace Rezolver
                 }
             }
 
-            var elementType = TypeHelpers.GetGenericArguments(type)[0];
+            var elementType = type.GetGenericArguments()[0];
 
             bool enableCovariance = Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
 

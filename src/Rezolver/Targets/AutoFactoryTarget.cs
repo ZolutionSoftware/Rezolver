@@ -16,8 +16,6 @@ namespace Rezolver.Targets
     /// <remarks>This is used to implement the [Autofactories functionality](/developers/docs/autofactories.html).</remarks>
     public class AutoFactoryTarget : TargetBase, INotifyRegistrationTarget
     {
-        private readonly bool _isOpenGenericReturnType;
-
         private readonly Type _delegateType;
         /// <summary>
         /// The delegate type that will be built by this target - always equal to <see cref="DeclaredType"/>
@@ -55,7 +53,7 @@ namespace Rezolver.Targets
         {
             if (delegateType == null)
                 throw new ArgumentNullException(nameof(delegateType));
-            if (!TypeHelpers.IsAssignableFrom(typeof(Delegate), delegateType))
+            if (!typeof(Delegate).IsAssignableFrom(delegateType))
                 throw new ArgumentException("Must be a delegate type with a non-void return type", nameof(delegateType));
 
             var (returnType, paramTypes) = TypeHelpers.DecomposeDelegateType(delegateType);
@@ -70,7 +68,6 @@ namespace Rezolver.Targets
             ReturnType = returnType;
             ParameterTypes = paramTypes;
             BoundTarget = boundTarget;
-            _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
         }
 
         internal AutoFactoryTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
@@ -78,12 +75,11 @@ namespace Rezolver.Targets
         {
             _delegateType = delegateType;
             ReturnType = returnType;
-            ParameterTypes = parameterTypes ?? TypeHelpers.EmptyTypes;
+            ParameterTypes = parameterTypes ?? Type.EmptyTypes;
             if (ParameterTypes.Distinct().Count() != ParameterTypes.Length)
                 throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(parameterTypes));
 
             BoundTarget = boundTarget;
-            _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
         }
 
         /// <summary>
@@ -102,33 +98,28 @@ namespace Rezolver.Targets
             // Func<T<>> (or something similar).  In this case, we have to check the
             // return
 
-            if (!TypeHelpers.IsGenericType(type))
-                return false;
-
-            if (TypeHelpers.ContainsGenericParameters(type))
+            if (!type.IsGenericType || type.ContainsGenericParameters)
                 return false;   //we don't bind to open generics
 
             if (type.GetGenericTypeDefinition() != typeof(Func<>))
                 return false;
 
             // get the desired return type
-            var expectedReturnType = TypeHelpers.GetGenericArguments(type)[0];
+            var expectedReturnType = type.GetGenericArguments()[0];
 
-            if (TypeHelpers.IsAssignableFrom(expectedReturnType, ReturnType))
+            if (expectedReturnType.IsAssignableFrom(ReturnType))
                 return true;
 
-            if (!_isOpenGenericReturnType)
+            if (!ReturnType.ContainsGenericParameters)
                 return false;
 
             // if we have an open generic return type, then we're compatible if
             // the desired return type is a generic that's based on that open generic,
             // or another which inherits from it.
-            if (!TypeHelpers.IsGenericType(expectedReturnType))
+            if (!expectedReturnType.IsGenericType)
                 return false;
-
-            var expectedReturnGenericType = expectedReturnType.GetGenericTypeDefinition();
-
-            return TypeHelpers.IsAssignableFrom(expectedReturnGenericType, ReturnType);
+            
+            return expectedReturnType.GetGenericTypeDefinition().IsAssignableFrom(ReturnType);
         }
 
         /// <summary>

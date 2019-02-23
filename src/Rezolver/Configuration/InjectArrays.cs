@@ -32,7 +32,7 @@ namespace Rezolver.Configuration
 
             public Type GetContainerType(Type serviceType)
             {
-                if (TypeHelpers.IsArray(serviceType))
+                if (serviceType.IsArray)
                 {
                     return typeof(Array);
                 }

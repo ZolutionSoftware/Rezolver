@@ -250,7 +250,7 @@ namespace Rezolver
 
             // currently internal-only option container which allows us to set options
             // that take effect only for generic types (closed/open classes, structs or interfaces)
-            if (optionContainer == null && TypeHelpers.IsGenericType(serviceType))
+            if (optionContainer == null && serviceType.IsGenericType)
             {
                 optionContainer = targets.FetchDirect<IAnyGenericOptionContainer<TOption>>();
             }

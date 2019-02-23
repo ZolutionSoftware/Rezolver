@@ -48,7 +48,7 @@ namespace Rezolver
         public void AddKnownType(Type serviceType)
         {
             // Open generic types are not tracked
-            if (TypeHelpers.ContainsGenericParameters(serviceType))
+            if (serviceType.ContainsGenericParameters)
             {
                 return;
             }
@@ -56,9 +56,9 @@ namespace Rezolver
             if (this.KnownTypes.Add(serviceType))
             {
                 Stack<Type> derivedTypeStack = new Stack<Type>(new[] { serviceType });
-                if (TypeHelpers.IsArray(serviceType))
+                if (serviceType.IsArray)
                 {
-                    var elementType = TypeHelpers.GetElementType(serviceType);
+                    var elementType = serviceType.GetElementType();
 
                     foreach (var type in GetGenericCovariants(elementType, derivedTypeStack)
                         .Select(t => TypeHelpers.MakeArrayType(t)))
@@ -140,14 +140,14 @@ namespace Rezolver
             // if this type is a closed generic type whose generic type definition has one or
             // more covariant arguments, then we descend each covariant argument's type hierarchy,
             // constructing a new generic and adding that too.
-            if (TypeHelpers.IsGenericType(type) && !TypeHelpers.IsGenericTypeDefinition(type))
+            if (type.IsGenericType && !type.IsGenericTypeDefinition)
             {
                 var genericTypeDef = type.GetGenericTypeDefinition();
                 // get the generic type arguments and the parameters they belong to.
-                return TypeHelpers.GetGenericArguments(type)
+                return type.GetGenericArguments()
                         .Zip(
-                            TypeHelpers.GetGenericArguments(genericTypeDef),
-                            (ta, tp) => new { typeArg = ta, typeParam = tp }
+                            genericTypeDef.GetGenericArguments(),
+                            (ta, tp) => (typeArg: ta, typeParam: tp)
                         )
                         .Select(tap =>
                             // when a type argument is passed to a covariant parameter, then we can
@@ -180,12 +180,12 @@ namespace Rezolver
         private IEnumerable<Type> GetTypeHierarchy(Type type)
         {
             var toReturn = Enumerable.Empty<Type>();
-            if (TypeHelpers.IsClass(type))
+            if (type.IsClass)
             {
                 toReturn = toReturn.Concat(type.GetAllBases());
             }
 
-            toReturn = toReturn.Concat(TypeHelpers.GetInterfaces(type));
+            toReturn = toReturn.Concat(type.GetInterfaces());
             return toReturn.OrderBy(t => t, DescendingTypeOrder.Instance);
         }
 
@@ -205,9 +205,9 @@ namespace Rezolver
         {
             List<Type> toReturn = new List<Type>();
 
-            if (TypeHelpers.IsArray(type))
+            if (type.IsArray)
             {
-                foreach (var t in GetAllCompatibleTypes(TypeHelpers.GetElementType(type), derivedTypeStack))
+                foreach (var t in GetAllCompatibleTypes(type.GetElementType(), derivedTypeStack))
                 {
                     toReturn.Add(TypeHelpers.MakeArrayType(t));
                 }

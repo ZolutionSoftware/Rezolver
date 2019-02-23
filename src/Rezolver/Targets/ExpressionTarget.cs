@@ -63,7 +63,7 @@ namespace Rezolver.Targets
             var expressionType = (expression.NodeType == ExpressionType.Lambda ? ((LambdaExpression)expression).Body.Type : expression.Type);
             DeclaredType = declaredType ?? expressionType;
 
-            if (!TypeHelpers.IsAssignableFrom(DeclaredType, expressionType))
+            if (!DeclaredType.IsAssignableFrom(expressionType))
             {
                 throw new ArgumentException($"{nameof(declaredType)} must be compatible with the type of the expression", nameof(declaredType));
             }

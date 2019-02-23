@@ -261,7 +261,7 @@ namespace Rezolver
             {
                 return compiledTarget;
             }
-            else if (context.RequestedType != typeof(object) && TypeHelpers.IsAssignableFrom(context.RequestedType, target.GetType()))
+            else if (context.RequestedType != typeof(object) && context.RequestedType.IsAssignableFrom(target.GetType()))
             {
                 return new ConstantCompiledTarget(target, target);
             }

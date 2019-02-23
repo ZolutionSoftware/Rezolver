@@ -124,7 +124,7 @@ namespace Rezolver.Compilation.Expressions
                     else
                     {
                         // the first non-null Constant type is compatible with System.Type is the one we use.
-                        var typeArg = methodExpr.Arguments.OfType<ConstantExpression>().FirstOrDefault(arg => arg.Value != null && TypeHelpers.IsAssignableFrom(typeof(Type), arg.Type));
+                        var typeArg = methodExpr.Arguments.OfType<ConstantExpression>().FirstOrDefault(arg => arg.Value != null && typeof(Type).IsAssignableFrom(arg.Type));
                         return (Type)typeArg.Value;
                     }
                 }

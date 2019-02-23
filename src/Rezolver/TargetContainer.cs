@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Rezolver.Events;
 using Rezolver.Runtime;
-using Rezolver.Targets;
 
 namespace Rezolver
 {
@@ -182,7 +182,7 @@ namespace Rezolver
         protected override Type GetRegisteredContainerType(Type serviceType)
         {
             Type toReturn;
-            var attr = TypeHelpers.GetCustomAttributes<ContainerTypeAttribute>(serviceType, true).FirstOrDefault();
+            var attr = serviceType.GetCustomAttributes<ContainerTypeAttribute>(true).FirstOrDefault();
             if (attr != null)
             {
                 toReturn = attr.Type;
@@ -215,7 +215,7 @@ namespace Rezolver
         /// <returns></returns>
         protected override ITargetContainer CreateTargetContainer(Type targetContainerType)
         {
-            if (TypeHelpers.IsGenericTypeDefinition(targetContainerType))
+            if (targetContainerType.IsGenericTypeDefinition)
                 return new GenericTargetContainer(this, targetContainerType);
 
             return this.GetOption<ITargetContainerFactory>(targetContainerType)?.CreateContainer(targetContainerType, this) ?? base.CreateTargetContainer(targetContainerType);
@@ -227,7 +227,7 @@ namespace Rezolver
 
         private static bool ShouldUseGenericTypeDef(Type serviceType)
         {
-            return TypeHelpers.IsGenericType(serviceType) && !TypeHelpers.IsGenericTypeDefinition(serviceType);
+            return serviceType.IsGenericType && !serviceType.IsGenericTypeDefinition;
         }
 
 

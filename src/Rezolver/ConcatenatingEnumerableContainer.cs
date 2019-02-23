@@ -53,7 +53,7 @@ namespace Rezolver
             // we know from above that if type is not IEnumerable<T>, then an exception will occur.
             // so this type wrangling is safe
 
-            return Target.ForType(typeof(EnumerableConcatenator<>).MakeGenericType(TypeHelpers.GetGenericArguments(type)[0]),
+            return Target.ForType(typeof(EnumerableConcatenator<>).MakeGenericType(type.GetGenericArguments()[0]),
                 new { context = Target.Resolved<IResolveContext>(), baseEnumerable = baseCompiled.SourceTarget, extra = overrideTarget });
         }
 

@@ -37,7 +37,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldCreateTargetForCtor()
 		{
-			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]);
+			var ctor = typeof(NoCtor).GetConstructor(Type.EmptyTypes);
 			var target = new ConstructorTarget(ctor);
 
 			//declared type should be lifted from the ctor
@@ -52,8 +52,8 @@ namespace Rezolver.Tests.Targets
 		public void ShouldSetMemberBindingBehaviour()
 		{
 			//test both Ctors here
-			var ctor = TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]);
-			var target1 = new ConstructorTarget(typeof(NoCtor), memberBinding: MemberBindingBehaviour.BindAll);
+			var ctor = typeof(NoCtor).GetConstructor(Type.EmptyTypes);
+            var target1 = new ConstructorTarget(typeof(NoCtor), memberBinding: MemberBindingBehaviour.BindAll);
 			var target2 = new ConstructorTarget(ctor, memberBinding: MemberBindingBehaviour.BindAll);
 
 			Assert.Same(target1.MemberBindingBehaviour, MemberBindingBehaviour.BindAll);
@@ -79,7 +79,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void ShouldSetParameterBindings()
 		{
-			var ctor = TypeHelpers.GetConstructor(typeof(OneCtor), new[] { typeof(int) });
+			var ctor = typeof(OneCtor).GetConstructor(new[] { typeof(int) });
 			var bindings = new[] { new ParameterBinding(ctor.GetParameters()[0], new TestTarget(typeof(int))) };
 
 			var target = new ConstructorTarget(ctor, parameterBindings: bindings);
@@ -166,28 +166,28 @@ namespace Rezolver.Tests.Targets
 			{
 				new[] {  new ExpectedJITBinding(
 					typeof(NoCtor),
-					TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]),
+                    typeof(NoCtor).GetConstructor(Type.EmptyTypes),
 					description: "Default constructor"
 				)},
 				new[] {  new ExpectedJITBinding(
 					typeof(OneCtor),
-					TypeHelpers.GetConstructor(typeof(OneCtor), new[] { typeof(int) }),
+                    typeof(OneCtor).GetConstructor(new[] { typeof(int) }),
 					description: "Constructor with parameters"
 				)},
 				new[] {  new ExpectedJITBinding(
 					typeof(TwoCtors),
-					TypeHelpers.GetConstructor(typeof(TwoCtors), new[] { typeof(string), typeof(int) }),
+                    typeof(TwoCtors).GetConstructor(new[] { typeof(string), typeof(int) }),
 					description: "Constructor with greatest number of parameters (i.e. 'greedy')"
 				)},
 
 				new [] { new ExpectedJITBinding(
 					typeof(TwoCtorsOneNoOptional),
-					TypeHelpers.GetConstructor(typeof(TwoCtorsOneNoOptional), new[] { typeof(string), typeof(int), typeof(object) }),
+                    typeof(TwoCtorsOneNoOptional).GetConstructor(new[] { typeof(string), typeof(int), typeof(object) }),
 					description: "Constructor with least number of optional parameters when more than one have the largest number of parameters"
 				)},
 				new[] { new ExpectedJITBinding(
 					typeof(TwoCtors),
-					TypeHelpers.GetConstructor(typeof(TwoCtors), new [] { typeof(string) }),
+                    typeof(TwoCtors).GetConstructor(new [] { typeof(string) }),
 					() => {
 						var container = new Container();
 						//fallback switched off for the target because we're simulating a direct match
@@ -198,7 +198,7 @@ namespace Rezolver.Tests.Targets
 				)},
 				new[] { new ExpectedJITBinding(
 					typeof(TwoCtors),
-					TypeHelpers.GetConstructor(typeof(TwoCtors), new[] { typeof(string) }),
+                    typeof(TwoCtors).GetConstructor(new[] { typeof(string) }),
 					namedArgsFactory: () => {
 						return new Dictionary<string, ITarget>() {
 							["s"] = new TestTarget(typeof(string), useFallBack: false)
@@ -289,21 +289,21 @@ namespace Rezolver.Tests.Targets
 			return new object[][]
 			{
 				new[] {  new UpfrontBinding(
-					TypeHelpers.GetConstructor(typeof(NoCtor), new Type[0]),
+                    typeof(NoCtor).GetConstructor(Type.EmptyTypes),
 					description: "Default constructor"
 				)},
 				new[] {  new UpfrontBinding(
-					TypeHelpers.GetConstructor(typeof(OneCtor), new[] { typeof(int) }),
+                    typeof(OneCtor).GetConstructor(new[] { typeof(int) }),
 					description: "Constructor with parameters (no bindings)"
 				)},
 				new[] {  new UpfrontBinding(
-					TypeHelpers.GetConstructor(typeof(TwoCtors), new[] { typeof(string), typeof(int) }),
+                    typeof(TwoCtors).GetConstructor(new[] { typeof(string), typeof(int) }),
 					//auto-bound parameters which default to resolving values
 					suppliedBindingsFactory: c => c.GetParameters().Select(p => new ParameterBinding(p)).ToArray(),
 					description: "Constructor with two parameters (all bound)"
 				)},
 				new [] { new UpfrontBinding(
-					TypeHelpers.GetConstructor(typeof(TwoCtors), new[] { typeof(string), typeof(int) }),
+                    typeof(TwoCtors).GetConstructor(new[] { typeof(string), typeof(int) }),
 					suppliedBindingsFactory: c => c.GetParameters().Take(1).Select(
 						p => new ParameterBinding(p, new TestTarget(p.ParameterType, useFallBack: false))).ToArray(),
 					description: "Constructor with two parameters (one bound up front)"

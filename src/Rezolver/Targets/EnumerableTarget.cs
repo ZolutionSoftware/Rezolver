@@ -48,7 +48,7 @@ namespace Rezolver.Targets
             Targets = targets ?? throw new ArgumentNullException(nameof(targets));
             ElementType = elementType ?? throw new ArgumentNullException(nameof(elementType));
 
-            if (TypeHelpers.IsGenericType(elementType) && TypeHelpers.ContainsGenericParameters(elementType))
+            if (elementType.IsGenericType && elementType.ContainsGenericParameters)
             {
                 throw new ArgumentException($"If elementType is a generic type, then it must be fully closed; {elementType} contains generic parameters", nameof(elementType));
             }

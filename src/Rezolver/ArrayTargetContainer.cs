@@ -76,9 +76,7 @@ namespace Rezolver
                 // Now, technically arrays are covariant and therefore
                 // should contain any object whose type is equal to or derived from
                 // the desired element type.  Need to figure that one out.
-                Type elementType = TypeHelpers.GetElementType(arrayType);
-
-                return new ArrayTarget(arrayType, elementType);
+                return new ArrayTarget(arrayType, arrayType.GetElementType());
             }
         }
     }

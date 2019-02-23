@@ -60,7 +60,7 @@ namespace Rezolver.Targets
 
                     return Expression.Lambda<CompiledListFactory>(
                         Expression.Convert(
-                            Expression.New(TypeHelpers.GetConstructor(listTargetType, new[] { typeof(IEnumerable<ITarget>), typeof(bool) }), targetsParam, asArrayParam),
+                            Expression.New(listTargetType.GetConstructor(new[] { typeof(IEnumerable<ITarget>), typeof(bool) }), targetsParam, asArrayParam),
                             typeof(ITarget)
                         ),
                         targetsParam,

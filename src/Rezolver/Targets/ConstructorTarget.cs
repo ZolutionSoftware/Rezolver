@@ -167,7 +167,7 @@ namespace Rezolver.Targets
             DeclaredType = type ?? ctor?.DeclaringType;
             if (type != null)
             {
-                type.MustNot(t => TypeHelpers.IsInterface(t) || TypeHelpers.IsAbstract(t), "Type must not be an interface or an abstract class", nameof(type));
+                type.MustNot(t => t.IsInterface || t.IsAbstract, "Type must not be an interface or an abstract class", nameof(type));
             }
 
             this._parameterBindings = parameterBindings ?? ParameterBinding.None;
@@ -312,7 +312,7 @@ namespace Rezolver.Targets
 
         private static IGrouping<int, ConstructorInfo>[] GetPublicConstructorGroups(Type declaredType)
         {
-            var ctorGroups = TypeHelpers.GetConstructors(declaredType)
+            var ctorGroups = declaredType.GetConstructors()
                     .GroupBy(c => c.GetParameters().Length)
                     .OrderByDescending(g => g.Key).ToArray();
 

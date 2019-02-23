@@ -104,7 +104,7 @@ namespace Rezolver.Sdk
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            if (TypeHelpers.IsValueType(dependencyType))
+            if (dependencyType.IsValueType)
             {
                 throw new ArgumentException($"{dependencyType} is a value type - only reference types are allowed", nameof(dependencyType));
             }
@@ -185,7 +185,7 @@ namespace Rezolver.Sdk
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            if (TypeHelpers.IsValueType(dependencyType))
+            if (dependencyType.IsValueType)
             {
                 throw new ArgumentException($"{dependencyType} is a value type - only reference types are allowed", nameof(dependencyType));
             }

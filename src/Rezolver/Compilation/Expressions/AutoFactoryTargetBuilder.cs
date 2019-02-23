@@ -13,7 +13,7 @@ namespace Rezolver.Compilation.Expressions
         protected override Expression Build(AutoFactoryTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var (returnType, parameterTypes) = TypeHelpers.DecomposeDelegateType(context.TargetType);
-            var compileReturnType = TypeHelpers.ContainsGenericParameters(target.ReturnType) ? returnType : target.ReturnType;
+            var compileReturnType = target.ReturnType.ContainsGenericParameters ? returnType : target.ReturnType;
             var newContext = context.NewContext(compileReturnType);
             ParameterExpression[] parameters = new ParameterExpression[0];
             // if there are parameters, we have to replace any Resolve calls for the parameter types in 

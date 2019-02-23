@@ -34,14 +34,14 @@ namespace Rezolver.Tests.Types
 
         public object GetObject(IResolveContext context)
         {
-            if (!TypeHelpers.IsAssignableFrom(context.RequestedType, _obj.GetType()))
+            if (!context.RequestedType.IsAssignableFrom(_obj.GetType()))
                 throw new ArgumentException($"The RequestedType { context.RequestedType } on the context is not compatible with the object { _obj }", nameof(context));
             return _obj;
         }
 
         public bool SupportsType(Type type)
         {
-            return TypeHelpers.IsAssignableFrom(type, _obj.GetType());
+            return type.IsAssignableFrom(_obj.GetType());
         }
     }
 }

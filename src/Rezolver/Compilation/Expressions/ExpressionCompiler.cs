@@ -178,7 +178,7 @@ namespace Rezolver.Compilation.Expressions
             }
 
             // value types must be boxed, and that requires an explicit convert expression
-            if (expression.Type != typeof(object) && TypeHelpers.IsValueType(expression.Type))
+            if (expression.Type != typeof(object) && expression.Type.IsValueType)
             {
                 expression = Expression.Convert(expression, typeof(object));
             }

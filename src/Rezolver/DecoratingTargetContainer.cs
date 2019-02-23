@@ -165,11 +165,11 @@ namespace Rezolver
             // not ideal this - perhaps the decorator container should have this filter
             // passed to it on construction.
             return type == DecoratedType
-                || (TypeHelpers.IsGenericType(type)
-                    && TypeHelpers.IsGenericTypeDefinition(DecoratedType)
+                || (type.IsGenericType
+                    && DecoratedType.IsGenericTypeDefinition
                     && type.GetGenericTypeDefinition() == DecoratedType)
                 || (DecoratedType == typeof(Array)
-                    && TypeHelpers.IsArray(type));
+                    && type.IsArray);
         }
 
         /// <summary>

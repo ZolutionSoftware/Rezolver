@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Rezolver.Compilation;
 using Rezolver.Compilation.Expressions;
 using Rezolver.Targets;
@@ -45,16 +44,15 @@ namespace Rezolver.Configuration
             // builders.  This means that applications can extend this compiler behaviour simply by adding
             // instances of that new behaviour type and this class will automatically use them.
 
-            var rezolverAssembly = TypeHelpers.GetAssembly(typeof(IContainer));
-            var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilation));
+            var rezolverAssembly = typeof(IContainer).Assembly;
             // the well-known target types for compilation are ICompiledTarget, plus all the concrete target types in Rezolver.Targets
             foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
                 t == typeof(ICompiledTarget) ||
-                (t.Namespace == typeof(ObjectTarget).Namespace && TypeHelpers.IsPublic(t) && !TypeHelpers.IsAbstract(t) && TypeHelpers.IsClass(t))))
+                (t.Namespace == typeof(ObjectTarget).Namespace && t.IsPublic && !t.IsAbstract && t.IsClass)))
             {
                 var builderInterfaceType = typeof(IExpressionBuilder<>).GetTypeInfo().MakeGenericType(type);
                 // attempt to find a single expressionbuilder type in this assembly which implements the builderInterfaceType
-                var possibleTypes = thisAssembly.DefinedTypes.Where(t => t.IsClass
+                var possibleTypes = rezolverAssembly.DefinedTypes.Where(t => t.IsClass
                     && !t.ContainsGenericParameters
                     && !t.IsAbstract
                     && t.ImplementedInterfaces.Contains(builderInterfaceType)).ToArray();

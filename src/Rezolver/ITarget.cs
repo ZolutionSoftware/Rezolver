@@ -40,6 +40,7 @@ namespace Rezolver
         /// <summary>
         /// Unique Id for this target
         /// </summary>
+        [Obsolete("Change to an integer")]
         Guid Id { get; }
         /// <summary>
         /// If <c>true</c>, then the consumer should consider falling back to a more suitable target if available, as

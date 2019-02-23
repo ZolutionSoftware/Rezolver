@@ -72,9 +72,9 @@ namespace Rezolver.Configuration
             targets.TargetRegistered += (object sender, Events.TargetRegisteredEventArgs e) =>
             {
                 if (e.Target is AutoFactoryTarget ||
-                    (TypeHelpers.IsAssignableFrom(typeof(Delegate), e.Type)
-                    && TypeHelpers.IsGenericType(e.Type)
-                    && ((TypeHelpers.IsGenericTypeDefinition(e.Type) && FuncTypes.Contains(e.Type))
+                    (typeof(Delegate).IsAssignableFrom(e.Type)
+                    && e.Type.IsGenericType
+                    && ((e.Type.IsGenericTypeDefinition && FuncTypes.Contains(e.Type))
                         || FuncTypes.Contains(e.Type.GetGenericTypeDefinition()))))
                 {
                     return;
@@ -89,7 +89,7 @@ namespace Rezolver.Configuration
                     // you'd think we would bind to the target that was registered, but we don't because
                     // that would prevent auto IEnumerable<delegate_type> from working, and would also prevent
                     // decorators from working.
-                    root.Register(new AutoFactoryTarget(funcType, e.Type, TypeHelpers.EmptyTypes));
+                    root.Register(new AutoFactoryTarget(funcType, e.Type, Type.EmptyTypes));
                 }
 
                 if (enableEnumerables)
@@ -99,7 +99,7 @@ namespace Rezolver.Configuration
                     existing = root.Fetch(funcType);
                     if(existing == null || existing.UseFallback)
                     {
-                        root.Register(new AutoFactoryTarget(funcType, enumerableType, TypeHelpers.EmptyTypes));
+                        root.Register(new AutoFactoryTarget(funcType, enumerableType, Type.EmptyTypes));
                     }
                 }
             };

@@ -27,7 +27,7 @@ namespace Rezolver.Compilation.Expressions
         {
             if (node.NodeType == ExpressionType.Convert &&
               node.Type == node.Operand.Type ||
-              (!TypeHelpers.IsValueType(node.Operand.Type) && TypeHelpers.IsAssignableFrom(node.Type, node.Operand.Type)))
+              (!node.Operand.Type.IsValueType && node.Type.IsAssignableFrom(node.Operand.Type)))
             {
                 return node.Operand;
             }

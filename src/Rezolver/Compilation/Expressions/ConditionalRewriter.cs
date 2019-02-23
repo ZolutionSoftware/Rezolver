@@ -224,11 +224,11 @@ namespace Rezolver.Compilation.Expressions
                     if (truePart.Type != falsePart.Type)
                     {
                         // note that this code relies on NULLs (either via DefaultExpression or ConstantExpression) being strongly-typed
-                        if (TypeHelpers.IsAssignableFrom(truePart.Type, falsePart.Type))
+                        if (truePart.Type.IsAssignableFrom(falsePart.Type))
                         {
                             falsePart = Expression.Convert(falsePart, truePart.Type);
                         }
-                        else if (TypeHelpers.IsAssignableFrom(falsePart.Type, truePart.Type))
+                        else if (falsePart.Type.IsAssignableFrom(truePart.Type))
                         {
                             truePart = Expression.Convert(truePart, falsePart.Type);
                         }

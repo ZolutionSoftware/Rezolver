@@ -32,54 +32,54 @@ namespace Rezolver.Runtime
             // if x is a base of y then it's greater than y (and vice-versa)
             // if x is an interface of y then it's greater than y (and vice-versa)
 
-            if (TypeHelpers.IsClass(x))
+            if (x.IsClass)
             {
-                if (TypeHelpers.IsClass(y))
+                if (y.IsClass)
                 {
-                    if (TypeHelpers.IsSubclassOf(x, y))
+                    if (x.IsSubclassOf(y))
                     {
                         return -1;
                     }
-                    else if (TypeHelpers.IsSubclassOf(y, x))
+                    else if (y.IsSubclassOf(x))
                     {
                         return 1;
                     }
                 }
-                else if (TypeHelpers.IsInterface(y))
+                else if (y.IsInterface)
                 {
                     // y is an interface of x
-                    if (TypeHelpers.IsAssignableFrom(y, x))
+                    if (y.IsAssignableFrom(x))
                     {
                         return -1;
                     }
                 }
             }
-            else if (TypeHelpers.IsInterface(x))
+            else if (x.IsInterface)
             {
-                if (TypeHelpers.IsClass(y))
+                if (y.IsClass)
                 {
                     // x is an interface of y
-                    if (TypeHelpers.IsAssignableFrom(x, y))
+                    if (x.IsAssignableFrom(y))
                     {
                         return 1;
                     }
                 }
-                else if (TypeHelpers.IsInterface(y))
+                else if (y.IsInterface)
                 {
-                    if (TypeHelpers.GetInterfaces(x).Contains(y))
+                    if (x.GetInterfaces().Contains(y))
                     {
                         return -1;
                     }
-                    else if (TypeHelpers.GetInterfaces(y).Contains(x))
+                    else if (y.GetInterfaces().Contains(x))
                     {
                         return 1;
                     }
                 }
             }
 
-            if (TypeHelpers.IsGenericType(x))
+            if (x.IsGenericType)
             {
-                if (TypeHelpers.IsGenericType(y))
+                if (y.IsGenericType)
                 {
                     if (x.IsConstructedGenericType)
                     {
@@ -111,7 +111,7 @@ namespace Rezolver.Runtime
             }
             else
             {
-                if (TypeHelpers.IsGenericType(y)) // place nongeneric types after generic types.
+                if (y.IsGenericType) // place nongeneric types after generic types.
                 {
                     return 1;
                 }

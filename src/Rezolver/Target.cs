@@ -251,7 +251,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(type));
             }
 
-            if (TypeHelpers.IsGenericTypeDefinition(type))
+            if (type.IsGenericTypeDefinition)
             {
                 // can't pass named arguments if the type is generic, because there's no reliable
                 // way to guarantee that the arguments can actually be bound at the moment.
@@ -445,7 +445,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(constructor));
             }
 
-            if (TypeHelpers.IsGenericTypeDefinition(constructor.DeclaringType))
+            if (constructor.DeclaringType.IsGenericTypeDefinition)
             {
                 if (parameterBindings?.Length > 0)
                 {
@@ -478,7 +478,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(constructor));
             }
 
-            if (TypeHelpers.IsGenericTypeDefinition(constructor.DeclaringType))
+            if (constructor.DeclaringType.IsGenericTypeDefinition)
             {
                 if (namedArgs?.Count > 0)
                 {
@@ -513,7 +513,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(constructor));
             }
 
-            if (TypeHelpers.IsGenericTypeDefinition(constructor.DeclaringType))
+            if (constructor.DeclaringType.IsGenericTypeDefinition)
             {
                 if (namedArgs != null)
                 {
@@ -548,7 +548,7 @@ namespace Rezolver
             Expression<Func<TExample>> newExpr,
             IMemberBindingBehaviour memberBindingBehaviour = null)
         {
-            if (!TypeHelpers.IsGenericType(typeof(TExample)))
+            if (!typeof(TExample).IsGenericType)
             {
                 throw new ArgumentException($"{typeof(TExample)} is not a generic type.");
             }

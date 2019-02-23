@@ -13,7 +13,7 @@ namespace System.Reflection
 
         internal static MethodInfo ToGenericTypeDefMethod(this MethodInfo method)
         {
-            if (TypeHelpers.IsGenericType(method.DeclaringType))
+            if (method.DeclaringType.IsGenericType)
             {
 
                 return (MethodInfo)MethodBase.GetMethodFromHandle(method.MethodHandle,
@@ -25,7 +25,7 @@ namespace System.Reflection
 
         internal static ConstructorInfo ToGenericTypeDefCtor(this ConstructorInfo ctor)
         {
-            if (TypeHelpers.IsGenericType(ctor.DeclaringType))
+            if (ctor.DeclaringType.IsGenericType)
             { 
                 return (ConstructorInfo)MethodBase.GetMethodFromHandle(ctor.MethodHandle,
                     ctor.DeclaringType.GetGenericTypeDefinition().TypeHandle);
@@ -36,7 +36,7 @@ namespace System.Reflection
 
         internal static MethodInfo ToGenericTypeMethod(this MethodInfo method, Type targetGenericType)
         {
-            if (TypeHelpers.IsGenericType(targetGenericType) && targetGenericType.GetGenericTypeDefinition() == method.DeclaringType)
+            if (targetGenericType.IsGenericType && targetGenericType.GetGenericTypeDefinition() == method.DeclaringType)
             {
                 return (MethodInfo)MethodBase.GetMethodFromHandle(method.MethodHandle,
                     targetGenericType.TypeHandle);
@@ -47,7 +47,7 @@ namespace System.Reflection
 
         internal static ConstructorInfo ToGenericTypeCtor(this ConstructorInfo ctor, Type targetGenericType)
         {
-            if (TypeHelpers.IsGenericType(targetGenericType) && targetGenericType.GetGenericTypeDefinition() == ctor.DeclaringType)
+            if (targetGenericType.IsGenericType && targetGenericType.GetGenericTypeDefinition() == ctor.DeclaringType)
             {
                 return (ConstructorInfo)MethodBase.GetMethodFromHandle(ctor.MethodHandle,
                     targetGenericType.TypeHandle);

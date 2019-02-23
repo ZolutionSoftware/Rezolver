@@ -48,8 +48,8 @@ namespace Rezolver
             // the other way around, then we need to stick in an explicit change of type, otherwise the registration will
             // fail.  This does, unfortunately, give rise to the situation where we could be performing an invalid cast - but that
             // will come out in the wash at runtime.
-            if (!TypeHelpers.IsAssignableFrom(aliasType, originalType) &&
-              TypeHelpers.IsAssignableFrom(originalType, aliasType))
+            if (!aliasType.IsAssignableFrom(originalType) &&
+              originalType.IsAssignableFrom(aliasType))
             {
                 target = new ChangeTypeTarget(target, aliasType);
             }

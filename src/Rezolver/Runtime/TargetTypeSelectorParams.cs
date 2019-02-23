@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Rezolver
 {
@@ -11,7 +12,7 @@ namespace Rezolver
     internal class TargetTypeSelectorParams
     {
         private static bool? GetInternalContravarianceOverride(Type type) =>
-            TypeHelpers.GetCustomAttributes<Runtime.ContravarianceAttribute>(type).SingleOrDefault()?.Enable;
+            type.GetCustomAttributes<Runtime.ContravarianceAttribute>(false).SingleOrDefault()?.Enable;
 
         public TargetTypeSelectorParams Parent { get; }
 
