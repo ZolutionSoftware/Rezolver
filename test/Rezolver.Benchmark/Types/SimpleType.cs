@@ -2,7 +2,7 @@
 
 namespace Rezolver.Benchmark.Types
 {
-    public class SimpleType
+    public class SimpleType : ISimpleType
     {
     }
 }

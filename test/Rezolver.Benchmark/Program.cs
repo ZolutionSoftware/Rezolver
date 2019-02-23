@@ -12,12 +12,6 @@ namespace Rezolver.Benchmark
 {
     class Program
     {
-        static int BenchDotNetMain(string[] args)
-        {
-            var summary = BenchmarkRunner.Run<CreationBenches>();
-            return 0;
-        }
-
         const int DEFAULT_COUNT = 50000;
         const int DEFAULT_TIMEOUT = 10;
         static int Main(string[] args)
@@ -38,7 +32,7 @@ namespace Rezolver.Benchmark
             var appExe = new Func<Task<int>>(async () =>
             {
                 if (fullBench.HasValue())
-                    return BenchDotNetMain(app.RemainingArguments.ToArray());
+                    return BenchDotNetProgram.Main(app.RemainingArguments.ToArray());
 
                 var benches = LoadBenchmarks();
 

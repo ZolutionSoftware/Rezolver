@@ -12,7 +12,7 @@
     <Title>Rezolver Asp.Net Core Extensions</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
-    <VersionPrefix>2.2.0</VersionPrefix>
+    <VersionPrefix>2.2.1</VersionPrefix>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
