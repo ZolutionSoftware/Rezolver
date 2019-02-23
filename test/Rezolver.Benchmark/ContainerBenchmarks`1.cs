@@ -66,15 +66,9 @@ namespace Rezolver.Benchmark
 
         public IEnumerable<ContainerBenchmarkBase> CreateBenchmarks()
         {
-#if !MAXCOMPAT
             var benchTypes = this.GetType()
                 .GetNestedTypes()
                 .Where(t => !t.IsAbstract && t.GetConstructor(Type.EmptyTypes) != null && typeof(BenchmarkBase).IsAssignableFrom(t));
-#else
-            var benchTypes = this.GetType()
-                .GetNestedTypes(BindingFlags.Public)
-                .Where(t => !t.GetTypeInfo().IsAbstract && t.GetConstructor(Type.EmptyTypes) != null && typeof(BenchmarkBase).IsAssignableFrom(t));
-#endif
 
             return benchTypes.Select(CreateBenchmarkInstance);
         }

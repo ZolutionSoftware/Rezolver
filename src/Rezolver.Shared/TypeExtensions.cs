@@ -211,45 +211,23 @@ namespace Rezolver
 
         internal static FieldInfo[] GetInstanceFields(this Type type)
         {
-#if MAXCOMPAT
-            return type.GetAllFields().Where(f => !f.IsStatic).ToArray();
-#else
-            // it's better to use the old GetFields API even though the above
-            // line also works when !MAXCOMPAT
             return type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-#endif
         }
 
         internal static PropertyInfo[] GetInstanceProperties(this Type type)
         {
-#if MAXCOMPAT
-            return type.GetAllProperties().Where(p =>
-                (p.GetMethod != null && !p.GetMethod.IsStatic) ||
-                (p.SetMethod != null && !p.SetMethod.IsStatic)).ToArray();
-#else
             return type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-#endif
 
         }
 
         internal static PropertyInfo[] GetStaticProperties(this Type type)
         {
-#if MAXCOMPAT
-            return type.GetTypeInfo().DeclaredProperties.Where(p =>
-                (p.GetMethod != null && p.GetMethod.IsStatic) ||
-                (p.SetMethod != null && p.SetMethod.IsStatic)).ToArray();
-#else
             return type.GetProperties(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-#endif
         }
 
         internal static FieldInfo[] GetStaticFields(this Type type)
         {
-#if MAXCOMPAT
-            return type.GetTypeInfo().DeclaredFields.Where(f => f.IsStatic).ToArray();
-#else
             return type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-#endif
         }
 
         internal static bool IsEnumerableType(this Type type, out Type elementType)

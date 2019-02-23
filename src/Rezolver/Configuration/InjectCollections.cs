@@ -35,22 +35,6 @@ namespace Rezolver.Configuration
     {
         private static readonly ConstructorInfo _collectionCtor = Extract.GenericConstructor((IList<object> o) => new Collection<object>(o));
 
-#if MAXCOMPAT
-        static InjectCollections()
-        {
-            // SEE https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
-            if (_collectionCtor == null)
-            {
-                throw new InvalidOperationException("Couldn't locate Collection<T>(IList<T>) constructor");
-            }
-
-            if (_collectionCtor.GetParameters()?.Length != 1)
-            {
-                throw new InvalidOperationException($"Expression extractor returned incorrect constructor {_collectionCtor} for { _collectionCtor.DeclaringType }");
-            }
-        }
-#endif
-
         /// <summary>
         /// The one and only instance of the <see cref="InjectCollections"/> configuration.
         /// </summary>

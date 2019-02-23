@@ -7,7 +7,5 @@ using System.Security;
 // comment this out when including fastexpressioncompiler (1.4.0)
 [assembly: AllowPartiallyTrustedCallers]
 [assembly: SecurityTransparent]
-#if !MAXCOMPAT
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
-#endif
 

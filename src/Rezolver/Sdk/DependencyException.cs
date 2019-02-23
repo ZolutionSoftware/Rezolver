@@ -15,9 +15,7 @@ namespace Rezolver.Sdk
     /// <see cref="DependencyMetadata.GetDependencies{T}(IEnumerable{T})"/> method.
     /// </summary>
     /// <remarks>Creation of this exception is currently kept internal</remarks>
-#if !MAXCOMPAT
     [System.Serializable]
-#endif
     public sealed class DependencyException : Exception
     {
         internal DependencyException() { }
@@ -25,7 +23,6 @@ namespace Rezolver.Sdk
         internal DependencyException(string message) : base(message) { }
 
         internal DependencyException(string message, Exception inner) : base(message, inner) { }
-#if !MAXCOMPAT
 #pragma warning disable CS0628 // New protected member declared in sealed class
         /// <summary>
         /// Required constructor for Serialization
@@ -37,6 +34,5 @@ namespace Rezolver.Sdk
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
 #pragma warning restore CS0628 // New protected member declared in sealed class
-#endif
     }
 }
