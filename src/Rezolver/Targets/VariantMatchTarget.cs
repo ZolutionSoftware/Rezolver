@@ -16,7 +16,7 @@ namespace Rezolver.Targets
     /// the wrapped target.</remarks>
     public class VariantMatchTarget : ITarget
     {
-        public Guid Id => Target.Id;
+        public int Id => Target.Id;
 
         public bool UseFallback => Target.UseFallback;
 

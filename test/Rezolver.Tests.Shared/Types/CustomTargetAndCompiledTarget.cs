@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Targets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Rezolver.Tests.Types
     /// </summary>
     public class CustomTargetAndCompiledTarget : ITarget, ICompiledTarget
     {
-        public Guid Id { get; } = Guid.NewGuid();
+        public int Id { get; } = TargetBase.NextId();
         public bool UseFallback => false;
 
         public Type DeclaredType => _obj.GetType() ?? typeof(object);

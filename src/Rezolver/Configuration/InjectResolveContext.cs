@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,7 @@ namespace Rezolver.Configuration
     {
         private class ResolveContextTarget : ITarget, ICompiledTarget
         {
-            public Guid Id { get; } = Guid.NewGuid();
+            public int Id { get; } = TargetBase.NextId();
 
             public bool UseFallback => false;
 

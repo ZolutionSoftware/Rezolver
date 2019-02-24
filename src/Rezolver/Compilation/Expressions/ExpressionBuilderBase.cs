@@ -64,24 +64,24 @@ namespace Rezolver.Compilation.Expressions
                 Extract.Method((IContainer c) => c.Resolve(null));
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, Guid, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, int, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// method for help in generating scope-interfacing code.
             /// </summary>
             public static MethodInfo IContainerScope_Resolve_Method =>
                 Extract.Method(
                     (IContainerScope s) => s.Resolve(
                         (IResolveContext)null,
-                        Guid.Empty,
+                        0,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, Guid, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, int, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// extension method.
             /// </summary>
             public static MethodInfo ResolveContextExtensions_Resolve_Method =>
                 Extract.Method(
-                    (IResolveContext rc) => rc.Resolve(Guid.Empty,
+                    (IResolveContext rc) => rc.Resolve(0,
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 

@@ -11,7 +11,7 @@ namespace Rezolver
     {
         public Type Type { get; }
 
-        public Guid Id { get; }
+        public int Id { get; }
 
         public TypeAndTargetId(Type type, ITarget target)
         {
@@ -19,7 +19,7 @@ namespace Rezolver
             Id = target.Id;
         }
 
-        public TypeAndTargetId(Type type, Guid id)
+        public TypeAndTargetId(Type type, int id)
         {
             Type = type;
             Id = id;

@@ -49,7 +49,7 @@ namespace Rezolver.Targets
         /// <param name="delegateType">Required.  The type of delegate that is to be produced by this target.  It MUST have a non-void return type.</param>
         /// <param name="boundTarget">Optional.  The target whose result is to be wrapped by the delegate.</param>
         public AutoFactoryTarget(Type delegateType, ITarget boundTarget = null)
-            : base(boundTarget?.Id ?? Guid.NewGuid())
+            : base(boundTarget?.Id ?? NextId())
         {
             if (delegateType == null)
                 throw new ArgumentNullException(nameof(delegateType));
@@ -71,7 +71,7 @@ namespace Rezolver.Targets
         }
 
         internal AutoFactoryTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
-            : base(boundTarget?.Id ?? Guid.NewGuid()) // note here - passing the ID in from the inner target to preserve the order.
+            : base(boundTarget?.Id ?? NextId()) // note here - passing the ID in from the inner target to preserve the order.
         {
             _delegateType = delegateType;
             ReturnType = returnType;

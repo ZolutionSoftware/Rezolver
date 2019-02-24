@@ -13,8 +13,8 @@ namespace Rezolver.Runtime
 
         private TargetIdentityComparer() { }
 
-        public bool Equals(ITarget x, ITarget y) => EqualityComparer<Guid?>.Default.Equals(x?.Id, y?.Id);
+        public bool Equals(ITarget x, ITarget y) => x?.Id == y?.Id;
 
-        public int GetHashCode(ITarget obj) => EqualityComparer<Guid?>.Default.GetHashCode(obj?.Id);
+        public int GetHashCode(ITarget obj) => obj?.Id ?? 0;
     }
 }

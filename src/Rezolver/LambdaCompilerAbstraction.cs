@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FastExpressionCompiler;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,17 @@ namespace System.Linq.Expressions
     {
         public static Func<T> CompileForRezolver<T>(this Expression<Func<T>> lambda)
         {
-            return lambda.Compile();
+            return lambda.CompileFast();
         }
 
         public static Func<T1, TResult> CompileForRezolver<T1, TResult>(this Expression<Func<T1, TResult>> lambda)
         {
-            return lambda.Compile();
+            return lambda.CompileFast();
         }
 
         public static Func<T1, T2, TResult> CompileForRezolver<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> lambda)
         {
-            return lambda.Compile();
+            return lambda.CompileFast();
         }
 
     }

@@ -29,7 +29,7 @@ namespace Rezolver.Targets
             private readonly ConcurrentDictionary<TypeAndTargetId, object> _cachedObjects =
                 new ConcurrentDictionary<TypeAndTargetId, object>();
 
-            private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
+            private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, int targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext: ICompileContext
             {
                 return GetCompiled(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
@@ -41,7 +41,7 @@ namespace Rezolver.Targets
                 return this._cachedCompiled.GetOrAdd(key, t => compiledTargetFactory(context));
             }
 
-            private Lazy<object> GetLazy(IResolveContext context, Guid targetId, Func<IResolveContext, object> lazyFactory)
+            private Lazy<object> GetLazy(IResolveContext context, int targetId, Func<IResolveContext, object> lazyFactory)
             {
                 return GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
             }
@@ -51,7 +51,7 @@ namespace Rezolver.Targets
                 return this._cached.GetOrAdd(key, c => new Lazy<object>(() => lazyFactory(context)));
             }
 
-            public object GetObject<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
+            public object GetObject<TCompileContext>(TCompileContext context, int targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
                 return GetObject(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);

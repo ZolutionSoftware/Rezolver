@@ -154,7 +154,7 @@ namespace Rezolver
 
     internal static class ResolveContextExtensions
     {
-        internal static object Resolve(this IResolveContext context, Guid targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
+        internal static object Resolve(this IResolveContext context, int targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
         {
             return context.Scope.Resolve(context, targetId, factory, behaviour);
         }

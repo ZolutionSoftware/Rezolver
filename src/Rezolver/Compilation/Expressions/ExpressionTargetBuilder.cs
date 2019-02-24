@@ -104,9 +104,7 @@ namespace Rezolver.Compilation.Expressions
                 // in order for it to be translated.  If it is not, then it will not be converted to a ResolvedTarget and will instead be baked as a
                 // method call.  This isn't a problem as such, it just reduces the potential efficiency of the generated expression as it will not be able
                 // to 'lift' the expression for that target into the expression being compiled.
-                var methodExpr = e as MethodCallExpression;
-
-                if (methodExpr == null)
+                if (!(e is MethodCallExpression methodExpr))
                 {
                     return null;
                 }

@@ -9,14 +9,14 @@ namespace Rezolver.Runtime
 {
     internal class TargetIdentityOverride
     {
-        public TargetIdentityOverride(Guid targetId)
+        public TargetIdentityOverride(int targetId)
         {
             TargetId = targetId;
         }
 
-        public Guid TargetId { get; }
+        public int TargetId { get; }
 
-        public static implicit operator Guid(TargetIdentityOverride tio)
+        public static implicit operator int(TargetIdentityOverride tio)
         {
             return (tio ?? throw new ArgumentNullException(nameof(tio))).TargetId;
         }
