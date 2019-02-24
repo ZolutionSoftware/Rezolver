@@ -11,17 +11,20 @@ namespace System.Linq.Expressions
     {
         public static Func<T> CompileForRezolver<T>(this Expression<Func<T>> lambda)
         {
-            return lambda.CompileFast();
+            var result = lambda.CompileFast();
+            return result;
         }
 
         public static Func<T1, TResult> CompileForRezolver<T1, TResult>(this Expression<Func<T1, TResult>> lambda)
         {
-            return lambda.CompileFast();
+            var result = lambda.CompileFast();
+            return result;
         }
 
         public static Func<T1, T2, TResult> CompileForRezolver<T1, T2, TResult>(this Expression<Func<T1, T2, TResult>> lambda)
         {
-            return lambda.CompileFast();
+            var result = lambda.CompileFast();
+            return result;
         }
 
     }

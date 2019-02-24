@@ -114,7 +114,7 @@ namespace Rezolver.Tests.Examples
             container.Register(
                 new ExpressionTarget(Expression.Lambda(
                     Expression.PreIncrementAssign(
-                        Expression.Property(counterHolderParam, "Counter")
+                        Expression.Property(counterHolderParam, nameof(CounterHolder.Counter))
                     ),
                     counterHolderParam
                 )).Singleton()
