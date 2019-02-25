@@ -101,6 +101,5 @@ namespace Rezolver
         // The difficulty with this being that it means the underlying storage containers for scoped objects used by the scope needs to exposed to implementations
         // of that interface.  The current implementation, for example, uses privately declared concurrent dictionaries and a synchronised list to track objects - this
         // storage would need to be abstracted away.
-        object Resolve(Activation activation, Func<IResolveContext, object> factory, IResolveContext context);
     }
 }

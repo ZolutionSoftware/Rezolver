@@ -71,8 +71,8 @@ namespace Rezolver
         /// the type <paramref name="serviceType"/> or <paramref name="objectType"/>.</remarks>
         public static void RegisterType(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            objectType.MustNotBeNull(nameof(objectType));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
+            if(objectType == null) throw new ArgumentNullException(nameof(objectType));
             RegisterTypeInternal(targetContainer, objectType, serviceType, memberBinding);
         }
 

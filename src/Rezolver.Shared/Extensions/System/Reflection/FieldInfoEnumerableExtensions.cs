@@ -12,7 +12,7 @@ namespace System.Reflection
   {
     public static IEnumerable<FieldInfo> Public(this IEnumerable<FieldInfo> fields)
     {
-      fields.MustNotBeNull(nameof(fields));
+      if(fields == null) throw new ArgumentNullException(nameof(fields));
       return fields.Where(f => f.IsPublic);
     }
   }

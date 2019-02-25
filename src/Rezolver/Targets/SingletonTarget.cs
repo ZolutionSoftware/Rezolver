@@ -94,8 +94,8 @@ namespace Rezolver.Targets
         /// <param name="innerTarget">The target whose result (when compiled) is to be used as the singleton instance.</param>
         public SingletonTarget(ITarget innerTarget)
         {
-            innerTarget.MustNotBeNull("innerTarget");
-            innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
+            if(innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
+            if(innerTarget is SingletonTarget) throw new ArgumentException("A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
 
             InnerTarget = innerTarget;
         }

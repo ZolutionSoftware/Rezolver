@@ -61,9 +61,9 @@ namespace Rezolver.Targets
         /// <param name="decoratedType"></param>
         public DecoratorTarget(ITarget decoratorTarget, ITarget decoratedTarget, Type decoratedType)
         {
-            decoratorTarget.MustNotBeNull(nameof(decoratorTarget));
-            decoratedTarget.MustNotBeNull(nameof(decoratedTarget));
-            decoratedType.MustNotBeNull(nameof(decoratedType));
+            if(decoratorTarget == null) throw new ArgumentNullException(nameof(decoratorTarget));
+            if(decoratedTarget == null) throw new ArgumentNullException(nameof(decoratedTarget));
+            if(decoratedType == null) throw new ArgumentNullException(nameof(decoratedType));
 
             if (!decoratorTarget.SupportsType(decoratedType))
             {

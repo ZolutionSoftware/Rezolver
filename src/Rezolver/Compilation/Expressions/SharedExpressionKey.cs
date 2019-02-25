@@ -36,8 +36,8 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="requestingType">The type (e.g. the runtime type of an <see cref="ITarget"/> implementation) whose compilation requires the cached expression.</param>
         public SharedExpressionKey(Type targetType, string name, Type requestingType = null)
         {
-            targetType.MustNotBeNull("targetType");
-            name.MustNotBeNull("name");
+            if(targetType == null) throw new ArgumentNullException(nameof(targetType));
+            if(name == null) throw new ArgumentNullException(nameof(name));
             TargetType = targetType;
             Name = name;
             RequestingType = requestingType;

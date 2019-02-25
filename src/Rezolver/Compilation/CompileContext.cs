@@ -111,7 +111,7 @@ namespace Rezolver.Compilation
             ScopeBehaviour? scopeBehaviourOverride = null,
             ScopePreference? scopePreferenceOverride = null)
         {
-            parentContext.MustNotBeNull(nameof(parentContext));
+            if(parentContext == null) throw new ArgumentNullException(nameof(parentContext));
             ParentContext = parentContext;
             DependencyTargetContainer = new OverridingTargetContainer(parentContext, _emptyConfig);
             this._targetType = targetType;
@@ -140,8 +140,8 @@ namespace Rezolver.Compilation
           Type targetType = null
           )
         {
-            resolveContext.MustNotBeNull(nameof(resolveContext));
-            dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
+            if(resolveContext == null) throw new ArgumentNullException(nameof(resolveContext));
+            if(dependencyTargetContainer == null) throw new ArgumentNullException(nameof(dependencyTargetContainer));
             DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer, _emptyConfig);
             this._resolveContext = resolveContext;
             this._targetType = targetType;
@@ -190,7 +190,7 @@ namespace Rezolver.Compilation
                 return ParentContext.PushCompileStack(toCompile, targetType ?? TargetType);
             }
 
-            toCompile.MustNotBeNull("toCompile");
+            if(toCompile == null) throw new ArgumentNullException(nameof(toCompile));
             // whereas here we default to the target's declared type if no targetType is passed.
             CompileStackEntry entry = new CompileStackEntry(toCompile, targetType ?? toCompile.DeclaredType);
             if (!this._compileStack.Contains(entry))

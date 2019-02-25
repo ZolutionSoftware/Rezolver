@@ -60,7 +60,7 @@ namespace Rezolver.Targets
         /// <param name="innerTarget">Required.  The inner target.</param>
         public ScopedTarget(ITarget innerTarget)
         {
-            innerTarget.MustNotBeNull("innerTarget");
+            if(innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
             InnerTarget = innerTarget;
         }
 

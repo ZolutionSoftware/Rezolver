@@ -29,8 +29,8 @@ namespace Rezolver
         /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
         public static void RegisterDelegate(this ITargetContainer targetContainer, Delegate factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            factory.MustNotBeNull(nameof(factory));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
+            if(factory == null) throw new ArgumentNullException(nameof(factory));
 
             ITarget toRegister = null;
             if (factory.GetMethodInfo().GetParameters()?.Length > 0)

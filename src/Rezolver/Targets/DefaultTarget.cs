@@ -79,7 +79,7 @@ namespace Rezolver.Targets
         /// <param name="type">The type.</param>
         public DefaultTarget(Type type)
         {
-            type.MustNotBeNull("type");
+            if(type == null) throw new ArgumentNullException(nameof(type));
             this._declaredType = type;
         }
 

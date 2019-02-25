@@ -92,7 +92,7 @@ namespace Rezolver.Compilation.Expressions
                 throw new ArgumentNullException(nameof(target));
             }
 
-            context.MustNotBeNull(nameof(target));
+            if(context == null) throw new ArgumentNullException(nameof(context));
 
             if (compiler == null)
             {

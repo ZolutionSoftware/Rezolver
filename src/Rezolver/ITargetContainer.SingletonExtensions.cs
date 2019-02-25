@@ -60,8 +60,8 @@ namespace Rezolver
         /// if different from the behaviour configured via options on the <paramref name="targetContainer"/>.</param>
         public static void RegisterSingleton(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            objectType.MustNotBeNull(nameof(targetContainer));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
+            if(objectType == null) throw new ArgumentNullException(nameof(objectType));
 
             RegisterSingletonInternal(targetContainer, objectType, serviceType, memberBinding);
         }

@@ -93,7 +93,7 @@ namespace Rezolver.Configuration
         /// of the various components (compiler etc).</remarks>
         public virtual void Configure(IContainer container, IRootTargetContainer targets)
         {
-            targets.MustNotBeNull(nameof(targets));
+            if(targets == null) throw new ArgumentNullException(nameof(targets));
             // note - the singleton container is done like this because the expression compiler which uses
             // it Resolves it from the container during compilation.  This is to ensure that each container
             // gets the same singleton container (including OverridingContainer), rather than a single shared one

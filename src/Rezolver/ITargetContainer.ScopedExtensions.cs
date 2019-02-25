@@ -74,8 +74,8 @@ namespace Rezolver
         /// and then registering it against the type <paramref name="serviceType"/> or <paramref name="objectType"/>.</remarks>
         public static void RegisterScoped(this ITargetContainer targetContainer, Type objectType, Type serviceType = null, IMemberBindingBehaviour memberBinding = null)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            objectType.MustNotBeNull(nameof(targetContainer));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
+            if(objectType == null) throw new ArgumentNullException(nameof(objectType));
 
             RegisterScopedInternal(targetContainer, objectType, serviceType, memberBinding);
         }

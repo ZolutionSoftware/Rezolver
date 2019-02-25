@@ -65,7 +65,7 @@ namespace Rezolver.Configuration
         /// the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <see cref="IRootTargetContainer"/></remarks>
         public override void Configure(IRootTargetContainer targets)
         {
-            targets.MustNotBeNull(nameof(targets));
+            if(targets == null) throw new ArgumentNullException(nameof(targets));
             // if an option has already been set on the target container which disables automatic enumerables,
             // then do not apply the configuration.
             if (!targets.GetOption(Options.EnableEnumerableInjection.Default))

@@ -33,7 +33,7 @@ namespace Rezolver
         /// is a less specific type than the one for which you wish to create a registration.</remarks>
         public static void RegisterObject<T>(this ITargetContainer targetContainer, T obj, Type declaredType = null, Type serviceType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
             targetContainer.Register(Target.ForObject(obj, declaredType: declaredType ?? typeof(T), scopeBehaviour: scopeBehaviour), serviceType ?? declaredType ?? typeof(T));
         }
 
@@ -50,7 +50,7 @@ namespace Rezolver
         /// <remarks><c>null</c> objects are implicitly treated as <see cref="System.Object"/> if <paramref name="declaredType"/> is not passed.</remarks>
         public static void RegisterObject(this ITargetContainer targetContainer, object obj, Type declaredType = null, Type serviceType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
             targetContainer.Register(Target.ForObject(obj, declaredType ?? obj?.GetType(), scopeBehaviour: scopeBehaviour), serviceType ?? declaredType ?? obj?.GetType());
         }
     }

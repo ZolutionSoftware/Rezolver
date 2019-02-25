@@ -67,7 +67,7 @@ namespace Rezolver
         public OverridingContainer(IContainer inner, IRootTargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
-            inner.MustNotBeNull("inner");
+            if(inner == null) throw new ArgumentNullException(nameof(inner));
             Inner = inner;
 
             (config ?? DefaultConfig).Configure(this, Targets);

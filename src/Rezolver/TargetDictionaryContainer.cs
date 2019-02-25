@@ -62,7 +62,7 @@ namespace Rezolver
         /// use a parent container's result for the same type.</remarks>
         public virtual ITarget Fetch(Type type)
         {
-            type.MustNotBeNull(nameof(type));
+            if(type == null) throw new ArgumentNullException(nameof(type));
             var container = FetchContainer(type);
             if (container == null)
             {
@@ -80,7 +80,7 @@ namespace Rezolver
         /// empty enumerable if the type is not registered.</returns>
         public virtual IEnumerable<ITarget> FetchAll(Type type)
         {
-            type.MustNotBeNull(nameof(type));
+            if(type == null) throw new ArgumentNullException(nameof(type));
             var container = FetchContainer(type);
             if (container == null)
             {
@@ -100,7 +100,7 @@ namespace Rezolver
         /// <returns>The target container which manages the given service type, if one is registered - otherwise <c>null</c>.</returns>
         public virtual ITargetContainer FetchContainer(Type serviceType)
         {
-            serviceType.MustNotBeNull(nameof(serviceType));
+            if(serviceType == null) throw new ArgumentNullException(nameof(serviceType));
             this._targetContainers.TryGetValue(GetRegisteredContainerType(serviceType), out ITargetContainer toReturn);
             return toReturn;
         }
@@ -119,8 +119,8 @@ namespace Rezolver
         /// instances into which the 'standard' targets are registered.</remarks>
         public virtual void RegisterContainer(Type type, ITargetContainer container)
         {
-            type.MustNotBeNull(nameof(type));
-            container.MustNotBeNull(nameof(container));
+            if(type == null) throw new ArgumentNullException(nameof(type));
+            if(container == null) throw new ArgumentNullException(nameof(container));
             this._targetContainers.TryGetValue(type, out ITargetContainer existing);
             // if there is already another container registered, we attempt to combine the two, prioritising
             // the new container over the old one but trying the reverse operation if that fails.
@@ -165,7 +165,7 @@ namespace Rezolver
         /// <see cref="ITargetContainer.Register(ITarget, Type)"/>.</remarks>
         public virtual void Register(ITarget target, Type serviceType = null)
         {
-            target.MustNotBeNull(nameof(target));
+            if(target == null) throw new ArgumentNullException(nameof(target));
             serviceType = serviceType ?? target.DeclaredType;
 
             ITargetContainer container = EnsureContainer(serviceType);

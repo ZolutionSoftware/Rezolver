@@ -58,7 +58,7 @@ namespace Rezolver.Targets
         /// taken directly from the Type property of the expression itself.</remarks>
         public ExpressionTarget(Expression expression, Type declaredType = null)
         {
-            expression.MustNotBeNull(nameof(expression));
+            if(expression == null) throw new ArgumentNullException(nameof(expression));
             Expression = expression;
             var expressionType = (expression.NodeType == ExpressionType.Lambda ? ((LambdaExpression)expression).Body.Type : expression.Type);
             DeclaredType = declaredType ?? expressionType;
@@ -78,8 +78,8 @@ namespace Rezolver.Targets
         /// returned by <paramref name="expressionFactory"/>.</param>
         public ExpressionTarget(Func<ICompileContext, Expression> expressionFactory, Type declaredType)
         {
-            expressionFactory.MustNotBeNull(nameof(expressionFactory));
-            declaredType.MustNotBeNull(nameof(declaredType));
+            if(expressionFactory == null) throw new ArgumentNullException(nameof(expressionFactory));
+            if(declaredType == null) throw new ArgumentNullException(nameof(declaredType));
             ExpressionFactory = expressionFactory;
             DeclaredType = declaredType;
         }

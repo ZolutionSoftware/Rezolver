@@ -4,9 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Rezolver.Targets
 {
@@ -136,10 +134,10 @@ namespace Rezolver.Targets
         /// All targets in the items enumerable must support the element type <paramref name="elementType"/></exception>
         public ListTarget(Type elementType, IEnumerable<ITarget> items, bool asArray = false)
         {
-            elementType.MustNotBeNull(nameof(elementType));
-            items.MustNotBeNull(nameof(items));
-            items.MustNot(ts => ts.Any(t => t == null), "All targets in the items enumerable must be non-null", nameof(items));
-            items.MustNot(ts => ts.Any(t => !t.SupportsType(elementType)), $"All targets in the items enumerable must support the element type {elementType}", nameof(items));
+            if (elementType == null) throw new ArgumentNullException(nameof(elementType));
+            if (items == null) throw new ArgumentNullException(nameof(items));
+            if (items.Any(t => t == null)) throw new ArgumentException("All targets in the items enumerable must be non-null", nameof(items));
+            if (items.Any(t => !t.SupportsType(elementType))) throw new ArgumentException($"All targets in the items enumerable must support the element type {elementType}", nameof(items));
 
             ElementType = elementType;
             Items = items;

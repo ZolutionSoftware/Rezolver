@@ -52,8 +52,8 @@ namespace Rezolver.Targets
         /// <param name="targetType">Required.  See <see cref="DeclaredType"/></param>
         public ChangeTypeTarget(ITarget innerTarget, Type targetType)
         {
-            innerTarget.MustNotBeNull(nameof(innerTarget));
-            targetType.MustNotBeNull(nameof(targetType));
+            if(innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
+            if(targetType == null) throw new ArgumentNullException(nameof(targetType));
 
             // to check validity of the type change, we can't use innerTarget.SupportsType, because that's a different
             // idea - that method returns true if it can build an instance of that type.

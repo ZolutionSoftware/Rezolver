@@ -85,8 +85,8 @@ namespace Rezolver.Compilation.Expressions
         /// <exception cref="System.ArgumentException">context must be an instance of IExpressionCompileContext</exception>
         public ICompiledTarget CompileTarget(ITarget target, ICompileContext context)
         {
-            target.MustNotBeNull(nameof(target));
-            context.MustNotBeNull(nameof(context));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             // if the target is already a compiledTarget, then cast it - its implementation
             // of ICompiledTarget is likely to be faster than any we could generate dynamically.
@@ -121,8 +121,8 @@ namespace Rezolver.Compilation.Expressions
         /// to find a general purpose <see cref="IExpressionBuilder"/> which can build the type.</remarks>
         public virtual IExpressionBuilder ResolveBuilder(ITarget target, IExpressionCompileContext context)
         {
-            target.MustNotBeNull(nameof(target));
-            context.MustNotBeNull(nameof(context));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             return context.GetOption<IExpressionBuilder>(target.GetType());
         }
@@ -148,8 +148,8 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="context">The context.</param>
         public virtual Expression<Func<IResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
         {
-            expression.MustNotBeNull(nameof(expression));
-            context.MustNotBeNull(nameof(context));
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             // strip unnecessary conversions
             expression = new RedundantConvertRewriter().Visit(expression);
@@ -206,17 +206,8 @@ namespace Rezolver.Compilation.Expressions
         /// produces is returned.</remarks>
         public Expression Build(ITarget target, IExpressionCompileContext context)
         {
-            target.MustNotBeNull(nameof(target));
-            context.MustNotBeNull(nameof(context));
-
-            //var filter = context.GetOption<IExpressionCompilationFilter>();
-
-            //if(filter != null)
-            //{
-            //    var interceptExpr = filter.Intercept(target, context, this);
-            //    if (interceptExpr != null)
-            //        return interceptExpr;
-            //}
+            if(target == null) throw new ArgumentNullException(nameof(target));
+            if(context == null) throw new ArgumentNullException(nameof(context));
 
             var builder = ResolveBuilder(target, context)
                 ?? throw new ArgumentException($"Unable to find an IExpressionBuilder for the target {target}", nameof(target));

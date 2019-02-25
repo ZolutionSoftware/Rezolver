@@ -292,8 +292,8 @@ namespace Rezolver.Compilation.Expressions
                 return ParentContext.GetOrAddSharedExpression(type, name, expressionFactory, requestingType);
             }
 
-            type.MustNotBeNull("type");
-            expressionFactory.MustNotBeNull("expressionFactory");
+            if(type == null) throw new ArgumentNullException(nameof(type));
+            if(expressionFactory == null) throw new ArgumentNullException(nameof(expressionFactory));
             // if this is
             SharedExpressionKey key = new SharedExpressionKey(type, name, requestingType);
             if (!this._sharedExpressions.TryGetValue(key, out Expression toReturn))

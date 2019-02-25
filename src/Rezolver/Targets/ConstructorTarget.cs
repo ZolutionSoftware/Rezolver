@@ -136,7 +136,7 @@ namespace Rezolver.Targets
         {
             // it's a post-check, but the private constructor sidesteps null types and ctors to allow the
             // public constructors to do their thing.
-            type.MustNotBeNull(nameof(type));
+            if(type == null) throw new ArgumentNullException(nameof(type));
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Rezolver.Targets
         public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)
             : this(null, ctor, memberBinding, parameterBindings, null)
         {
-            ctor.MustNotBeNull(nameof(ctor));
+            if(ctor == null) throw new ArgumentNullException(nameof(ctor));
         }
 
         private ConstructorTarget(Type type,
@@ -167,7 +167,7 @@ namespace Rezolver.Targets
             DeclaredType = type ?? ctor?.DeclaringType;
             if (type != null)
             {
-                type.MustNot(t => t.IsInterface || t.IsAbstract, "Type must not be an interface or an abstract class", nameof(type));
+                if(type.IsInterface || type.IsAbstract) throw new ArgumentException("Type must not be an interface or an abstract class", nameof(type));
             }
 
             this._parameterBindings = parameterBindings ?? ParameterBinding.None;

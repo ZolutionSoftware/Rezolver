@@ -83,7 +83,7 @@ namespace Rezolver.Targets
         /// function returns <c>false</c> when called with the <paramref name="type"/>.</param>
         public ResolvedTarget(Type type, ITarget fallbackTarget = null)
         {
-            type.MustNotBeNull("type");
+            if(type == null) throw new ArgumentNullException(nameof(type));
             if (fallbackTarget != null && !fallbackTarget.SupportsType(type))
             {
                 throw new ArgumentException($"The fallback target must support the passed type {type}", nameof(fallbackTarget));
@@ -106,7 +106,7 @@ namespace Rezolver.Targets
         /// </remarks>
         public virtual ITarget Bind(ICompileContext context)
         {
-            context.MustNotBeNull(nameof(context));
+            if(context == null) throw new ArgumentNullException(nameof(context));
 
             var fromContext = context.Fetch(DeclaredType);
             if (fromContext == null)

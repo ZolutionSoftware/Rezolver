@@ -100,7 +100,7 @@ namespace Rezolver.Targets
         /// </remarks>
         public virtual bool SupportsType(Type type)
         {
-            type.MustNotBeNull("type");
+            if(type == null) throw new ArgumentNullException(nameof(type));
             // removed generic type test here because it's a blunt instrument.
             return TypeHelpers.AreCompatible(DeclaredType, type);
         }

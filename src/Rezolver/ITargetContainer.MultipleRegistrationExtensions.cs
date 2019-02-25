@@ -30,7 +30,7 @@ namespace Rezolver
         /// then each target will be returned when an IEnumerable of the common service type is requested.</remarks>
         public static void RegisterMultiple(this ITargetContainer targetContainer, IEnumerable<ITarget> targets, Type commonServiceType = null)
         {
-            targets.MustNotBeNull("targets");
+            if(targets == null) throw new ArgumentNullException(nameof(targets));
             var targetArray = targets.ToArray();
             if (targets.Any(t => t == null))
             {
@@ -66,7 +66,7 @@ namespace Rezolver
         /// <param name="targets">The targets to be registered</param>
         public static void RegisterAll(this ITargetContainer targetContainer, IEnumerable<ITarget> targets)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
 
             foreach (var target in targets)
             {

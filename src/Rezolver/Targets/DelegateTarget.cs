@@ -63,10 +63,14 @@ namespace Rezolver.Targets
         /// <exception cref="ArgumentNullException">If <paramref name="factory" /> is null</exception>
         public DelegateTarget(Delegate factory, Type declaredType = null)
         {
-            factory.MustNotBeNull(nameof(factory));
+            if(factory == null) throw new ArgumentNullException(nameof(factory));
+
             FactoryMethod = factory.GetMethodInfo();
-            FactoryMethod.MustNot(m => FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
-            FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
+
+            if (FactoryMethod.ReturnType == typeof(void))
+                throw new ArgumentException("Factory must have a return type", nameof(factory));
+            if (FactoryMethod.GetParameters().Any(p => p.ParameterType.IsByRef))
+                throw new ArgumentException("Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
 
             if (declaredType != null)
             {

@@ -41,8 +41,9 @@ namespace Rezolver
         /// </remarks>
         public static void RegisterAlias(this ITargetContainer targetContainer, Type aliasType, Type originalType)
         {
-            targetContainer.MustNotBeNull(nameof(targetContainer));
-            aliasType.MustNot(t => t == originalType, "The aliased type and alias must be different", nameof(aliasType));
+            if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
+            if (aliasType == originalType) throw new ArgumentException("The aliased type and its alias must be different", nameof(aliasType));
+
             ITarget target = new ResolvedTarget(originalType);
             // if there's no implicit conversion to our alias type from the aliased type, but there is
             // the other way around, then we need to stick in an explicit change of type, otherwise the registration will

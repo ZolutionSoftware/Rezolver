@@ -279,7 +279,7 @@ namespace Rezolver.Targets
         /// </remarks>
         public ITarget Bind(ICompileContext context)
         {
-            context.MustNotBeNull(nameof(context));
+            if(context == null) throw new ArgumentNullException(nameof(context));
 
             // always create a constructor target from new
             // basically this class simply acts as a factory for other constructor targets.

@@ -156,7 +156,7 @@ namespace Rezolver
         /// target's <see cref="ITarget.DeclaredType"/>.</param>
         public override void Register(ITarget target, Type serviceType = null)
         {
-            target.MustNotBeNull(nameof(target));
+            if(target == null) throw new ArgumentNullException(nameof(target));
             if (serviceType != null && !target.SupportsType(serviceType))
             {
                 throw new ArgumentException(string.Format(ExceptionResources.TargetDoesntSupportType_Format, serviceType), nameof(target));

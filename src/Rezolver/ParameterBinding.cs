@@ -80,7 +80,7 @@ namespace Rezolver
         public static ParameterBinding[] BindWithRezolvedArguments(MethodBase method)
         {
             // TODO: allow some bindings to be passed up front, so that they can be used instead of the default resolved binding; falling back to a resolved binding if not provided.
-            method.MustNotBeNull("method");
+            if(method == null) throw new ArgumentNullException(nameof(method));
             var parameters = method.GetParameters();
             return parameters.Select(pi =>
               new ParameterBinding(pi, BindRezolvedArgument(pi))).ToArray();
@@ -104,7 +104,7 @@ namespace Rezolver
         public static ParameterBinding[] BindOverload(MethodBase[] methods, IDictionary<string, ITarget> args, out MethodBase resolvedMethod)
         {
             resolvedMethod = null;
-            methods.MustNotBeNull("methods");
+            if(methods == null) throw new ArgumentNullException(nameof(methods));
             if (methods.Length == 0)
             {
                 throw new ArgumentException("The methods array must contain at least one item", "methods");

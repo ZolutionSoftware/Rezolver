@@ -105,7 +105,7 @@ namespace System.Collections.Generic
 
         public static IList<T> AsReadOnly<T>(this IEnumerable<T> range)
         {
-            range.MustNotBeNull(nameof(range));
+            if(range == null) throw new ArgumentNullException(nameof(range));
             return new ReadOnlyCollection<T>(range);
         }
     }

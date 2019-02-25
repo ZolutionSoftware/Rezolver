@@ -30,8 +30,8 @@ namespace Rezolver.Compilation
         /// <param name="targetType">Type for which the target is being compiled.</param>
         public CompileStackEntry(ITarget target, Type targetType)
         {
-            target.MustNotBeNull(nameof(target));
-            targetType.MustNotBeNull(nameof(targetType));
+            if(target == null) throw new ArgumentNullException(nameof(target));
+            if(targetType == null) throw new ArgumentNullException(nameof(targetType));
 
             Target = target;
             TargetType = targetType;
