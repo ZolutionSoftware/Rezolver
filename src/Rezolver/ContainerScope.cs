@@ -18,7 +18,6 @@ namespace Rezolver
         /// <summary>
         /// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
         /// </summary>
-        // private ConcurrentDictionary<IResolveContext, Lazy<object>> _explicitlyScopedObjects;
         private ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>> _explicitlyScopedObjects;
 
         /// <summary>
@@ -244,6 +243,45 @@ namespace Rezolver
             else if (behaviour == ScopeBehaviour.Implicit)
             {
                 var result = factory(context);
+                // don't *ever* track scopes as disposable objects
+                if (result is IDisposable && !(result is IContainerScope))
+                {
+                    this._implicitlyScopedObjects.Add(new ScopedObject(result));
+                }
+
+                return result;
+            }
+
+            return factory(context);
+        }
+
+        object IContainerScope.Resolve(Activation activation, Func<IResolveContext, object> factory, IResolveContext context)
+        {
+            if (Disposed)
+            {
+                throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
+            }
+
+            if (activation.ScopePreference == ScopePreference.Root && this.Parent != null)
+                return this.GetRootScope().Resolve(activation, factory, context);
+
+            if (activation.ScopeBehaviour == ScopeBehaviour.Explicit)
+            {
+                var key = new TypeAndTargetId(activation.ActualType, activation.TargetId);
+                // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
+                if (this._explicitlyScopedObjects.TryGetValue(key, out Lazy<ScopedObject> lazy))
+                {
+                    return lazy.Value.Object;
+                }
+
+                // use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
+                return this._explicitlyScopedObjects.GetOrAdd(key,
+                    k => new Lazy<ScopedObject>(() => new ScopedObject(factory(context)))).Value.Object;
+            }
+            else if (activation.ScopeBehaviour == ScopeBehaviour.Implicit)
+            {
+                var result = factory(context);
+
                 // don't *ever* track scopes as disposable objects
                 if (result is IDisposable && !(result is IContainerScope))
                 {

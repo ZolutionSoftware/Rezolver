@@ -59,6 +59,30 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
+        public void AutoFactory_ShouldSupportCustomDelegateType_InScope()
+        {
+            // Arrange
+            var targets = CreateTargetContainer();
+            targets.RegisterType<Disposable>();
+            targets.RegisterAutoFactory<DisposableFactory>();
+
+            var container = CreateContainer(targets);
+            Disposable instance = null;
+            // Act
+            using(var scope = container.CreateScope())
+            {
+                var factory = scope.Resolve<DisposableFactory>();
+
+                // Assert
+                Assert.NotNull(factory);
+                instance = factory();
+                Assert.NotNull(instance);
+            }
+
+            Assert.True(instance.Disposed);
+        }
+
+        [Fact]
         public void AutoFactory_DisposableShouldHonourImplicitScope()
         {
             // Arrange

@@ -25,6 +25,12 @@ namespace Rezolver.Compilation.Expressions
         public static ParameterExpression DefaultResolveContextParameterExpression { get; }
             = Expression.Parameter(typeof(IResolveContext), "resolveContext");
 
+        private static int _rcParamCount = 0;
+        private static ParameterExpression GetNewResolveContextParam()
+        {
+            return Expression.Parameter(typeof(IResolveContext), $"rc{++_rcParamCount:00000}");
+        }
+
         /// <summary>
         /// Gets the parent context.
         /// </summary>
@@ -170,7 +176,7 @@ namespace Rezolver.Compilation.Expressions
           ParameterExpression resolveContextExpression = null)
             : base(resolveContext, dependencyTargetContainer, targetType)
         {
-            this._resolveContextExpression = resolveContextExpression ?? DefaultResolveContextParameterExpression;
+            this._resolveContextExpression = resolveContextExpression ?? GetNewResolveContextParam();  //DefaultResolveContextParameterExpression;
             this._sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
             this._currentContainerExpression = Expression.Constant(resolveContext.Container, typeof(IContainer));
             this._contextContainerPropertyExpression = Expression.Property(this._resolveContextExpression, nameof(IResolveContext.Container));

@@ -235,5 +235,10 @@ namespace Rezolver
         {
             return (((IScopeFactory)Scope) ?? Container).CreateScope();
         }
+
+        //public object Activate(Activation activation, Func<IResolveContext, object> factory)
+        //{
+        //    return (Scope ?? DefaultScope.Instance).Activate(activation, factory, this);
+        //}
     }
 }

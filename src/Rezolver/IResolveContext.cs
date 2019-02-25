@@ -5,41 +5,6 @@ using System;
 
 namespace Rezolver
 {
-    // public interface IResolve
-    // {
-    //    object Resolve(Type type);
-    //    TResult Resolve<TResult>();
-    // }
-
-    // public interface IResolveByContext
-    // {
-    //    object Resolve(IResolveContext context);
-    //    TResult Resolve<TResult>(IResolveContext context);
-    // }
-
-    // public interface ICanResolve
-    // {
-    //    bool CanResolve(Type type);
-    //    bool CanResolve<TResult>();
-    // }
-
-    // public interface ICanResolveByContext
-    // {
-    //    bool CanResolve(IResolveContext context);
-    // }
-
-    // public interface ITryResolve
-    // {
-    //    bool TryResolve(Type type, out object result);
-    //    bool TryResolve<TResult>(out TResult result);
-    // }
-
-    // public interface ITryResolveByContext
-    // {
-    //    bool TryResolve(IResolveContext context, out object result);
-    //    bool TryResolve<TResult>(IResolveContext context, out TResult result);
-    // }
-
     /// <summary>
     /// Captures the state for a call to <see cref="IContainer.Resolve(IResolveContext)"/>
     /// (or <see cref="IContainer.TryResolve(IResolveContext, out object)"/>), including the container on which
@@ -150,6 +115,8 @@ namespace Rezolver
         IResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,
             IContainerScope newScope = null);
+
+        //object Activate(Activation activation, Func<IResolveContext, object> factory);
     }
 
     internal static class ResolveContextExtensions

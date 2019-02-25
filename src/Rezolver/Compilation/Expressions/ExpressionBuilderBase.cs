@@ -75,6 +75,12 @@ namespace Rezolver.Compilation.Expressions
                         (Func<IResolveContext, object>)null,
                         ScopeBehaviour.None));
 
+            public static MethodInfo IContainerScope_Resolve2_Method =>
+                Extract.Method((IContainerScope s) => s.Resolve(
+                    (Activation)null,
+                    (Func<IResolveContext, object>)null,
+                    (IResolveContext)null));
+
             /// <summary>
             /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, int, Func{IResolveContext, object}, ScopeBehaviour)"/>
             /// extension method.
@@ -242,6 +248,10 @@ namespace Rezolver.Compilation.Expressions
             }
 
             var originalType = builtExpression.Type;
+            var @override = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+
+            var activation = new Activation(originalType, @override ?? target.Id, scopePreference, scopeBehaviour);
+
             // so the expression needs to be rewritten so that it becomes something like this:
             // if(context.Scope != null) return context.Scope.Resolve(context, lambda<targetExpression>);
             // else return targetExpression
@@ -270,25 +280,71 @@ namespace Rezolver.Compilation.Expressions
                                 context.ContextScopePropertyExpression)
                     );
 
-            var @override = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType) ;
-
             builtExpression = Expression.Condition(
                 compareExpr,
                 builtExpression, // if null scope, just use the built expression as-is
                 Expression.Convert( // otherwise - generate a call into the scope's special Resolve method
                     Expression.Call(
-                        Methods.ResolveContextExtensions_Resolve_Method,
-                        newContextExpr,
-                        Expression.Constant(@override ?? target.Id),
+                        context.ContextScopePropertyExpression,
+                        Methods.IContainerScope_Resolve2_Method,
+                        Expression.Constant(activation),
                         compiler.BuildResolveLambda(builtExpression, context),
                         // we used to do this - but this doesn't work when we'rdoing the auto factories
                         // Expression.Constant(compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver()),
-                        Expression.Constant(scopeBehaviour)
+                        context.ResolveContextParameterExpression
                     ),
                     originalType
                 ));
 
             return builtExpression;
+
+            //// so the expression needs to be rewritten so that it becomes something like this:
+            //// if(context.Scope != null) return context.Scope.Resolve(context, lambda<targetExpression>);
+            //// else return targetExpression
+
+            //// TODO: if behaviour == explicit, then a scope is *required* and the expression should throw
+            //// an exception if it is null :)
+
+            //// this will automatically be of type object and will be optimised.
+            ////var lambda = compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver();
+
+            //// use a shared expression for the scope check so we can optimise away all the nested scope calls
+            //// we're likely to be generating.
+            //var compareExpr = context.GetOrAddSharedExpression(typeof(bool), "isScoped", () =>
+            //{
+            //    return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
+            //}, typeof(ExpressionBuilderBase));
+
+            //// have to force the creation of a new IResolveContext whose RequestedType type is equal to the type
+            //// that we sought for compilation - so that the instance can be tracked correctly.
+            //var newContextExpr = Methods.CallResolveContext_New(
+            //        context.ResolveContextParameterExpression,
+            //        Expression.Constant(builtExpression.Type),
+            //                Expression.Default(typeof(IContainer)),
+            //                scopePreference == ScopePreference.Current ? (Expression)Expression.Default(typeof(IContainerScope)) :
+            //                Expression.Call(Methods.IContainerScope_GetRootScope_Method,
+            //                    context.ContextScopePropertyExpression)
+            //        );
+
+            //var @override = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType) ;
+
+            //builtExpression = Expression.Condition(
+            //    compareExpr,
+            //    builtExpression, // if null scope, just use the built expression as-is
+            //    Expression.Convert( // otherwise - generate a call into the scope's special Resolve method
+            //        Expression.Call(
+            //            Methods.ResolveContextExtensions_Resolve_Method,
+            //            newContextExpr,
+            //            Expression.Constant(@override ?? target.Id),
+            //            compiler.BuildResolveLambda(builtExpression, context),
+            //            // we used to do this - but this doesn't work when we'rdoing the auto factories
+            //            // Expression.Constant(compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver()),
+            //            Expression.Constant(scopeBehaviour)
+            //        ),
+            //        originalType
+            //    ));
+
+            //return builtExpression;
         }
 
         /// <summary>
