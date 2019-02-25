@@ -30,13 +30,21 @@ namespace Rezolver.Compilation.Expressions
         {
             var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
             var keyTarget = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
-            return Expression.Constant(holder.GetObject(context, keyTarget ?? target.Id,
-                c => compiler.CompileTarget(
-                    target.InnerTarget,
+
+            return Expression.Constant(
+                holder.GetObject(
+                    target, 
+                    context, 
+                    keyTarget ?? target.Id,
+                    GetCompiled));
+
+            ICompiledTarget GetCompiled(SingletonTarget singleton, IExpressionCompileContext c) => 
+                compiler.CompileTarget(
+                    singleton.InnerTarget, 
                     c.NewContext(
-                        context.TargetType ?? target.DeclaredType,
+                        c.TargetType ?? singleton.DeclaredType, 
                         scopeBehaviourOverride: ScopeBehaviour.None,
-                        scopePreferenceOverride: ScopePreference.Root))));
+                        scopePreferenceOverride: ScopePreference.Root));
         }
     }
 }

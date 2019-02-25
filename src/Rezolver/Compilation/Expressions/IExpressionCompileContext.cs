@@ -93,9 +93,9 @@ namespace Rezolver.Compilation.Expressions
         /// expression in question.  For example, conditional expressions which share the same operand and comparand can all be
         /// merged into one with all the 'true' and 'false' branches being combined into one of each, thus saving multiple identical
         /// comparisons.</remarks>
-        Expression GetOrAddSharedExpression(Type type, string name, Func<Expression> expressionFactory, Type requestingType = null);
+        Expression GetOrAddSharedExpression(Type type, string name, Func<Type, string, Expression> expressionFactory, Type requestingType = null);
         /// <summary>
-        /// Similar to <see cref="GetOrAddSharedExpression(Type, string, Func{Expression}, Type)"/>, except this is used when expression
+        /// Similar to <see cref="GetOrAddSharedExpression(Type, string, Func{Type, string, Expression}, Type)"/>, except this is used when expression
         /// builders want to use local variables in block expressions to store the result of some operation in the expression tree built
         /// for a particular target.  Reusing one local variable is more efficient than declaring the same local multiple times.
         /// </summary>

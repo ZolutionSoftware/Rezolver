@@ -109,21 +109,17 @@ namespace Rezolver.Compilation.Expressions
                     return null;
                 }
 
-                var match = RezolveMethods.FirstOrDefault(m =>
-                    m == methodExpr.Method ||
-                    methodExpr.Method.IsGenericMethod && m.IsGenericMethodDefinition && m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
-
-                if (match != null)
+                for(var f = 0; f<RezolveMethods.Length; f++)
                 {
-                    if (match.IsGenericMethodDefinition)
-                    {
-                        return methodExpr.Method.GetGenericArguments()[0];
-                    }
-                    else
+                    if(RezolveMethods[f] == methodExpr.Method)
                     {
                         // the first non-null Constant type is compatible with System.Type is the one we use.
                         var typeArg = methodExpr.Arguments.OfType<ConstantExpression>().FirstOrDefault(arg => arg.Value != null && typeof(Type).IsAssignableFrom(arg.Type));
                         return (Type)typeArg.Value;
+                    }
+                    else if(RezolveMethods[f].IsGenericMethodDefinition && methodExpr.Method.IsGenericMethod && RezolveMethods[f] == methodExpr.Method.GetGenericMethodDefinition())
+                    {
+                        return methodExpr.Method.GetGenericArguments()[0];
                     }
                 }
 
@@ -169,8 +165,9 @@ namespace Rezolver.Compilation.Expressions
 
             protected override Expression VisitMemberInit(MemberInitExpression node)
             {
-                // var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, _adapter);
-                return new TargetExpression(new ExpressionTarget(c =>
+                return new TargetExpression(new ExpressionTarget(Factory, node.Type));
+
+                Expression Factory(ICompileContext context)
                 {
                     var adaptedCtorExp = Visit(node.NewExpression);
                     // var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
@@ -181,7 +178,7 @@ namespace Rezolver.Compilation.Expressions
                     // that is put around nearly all expressions produced by RezolveTargetBase implementations.
                     var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
                     return rewriter.Visit(adaptedCtorExp);
-                }, node.Type));
+                }
             }
 
             protected override Expression VisitLambda<T>(Expression<T> node)

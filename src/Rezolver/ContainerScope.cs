@@ -29,7 +29,7 @@ namespace Rezolver
         private LockedList<IContainerScope> _childScopes
             = new LockedList<IContainerScope>();
 
-        private struct ScopedObject
+        private readonly struct ScopedObject
         {
             private static int _order = 0;
 
@@ -78,7 +78,6 @@ namespace Rezolver
 
         private void InitScopeContainers()
         {
-            // _explicitlyScopedObjects = new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
             this._explicitlyScopedObjects = new ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>>();
             this._implicitlyScopedObjects = new ConcurrentBag<ScopedObject>();
             this._childScopes = new LockedList<IContainerScope>();
@@ -109,8 +108,7 @@ namespace Rezolver
         public ContainerScope(IContainerScope parentScope, IContainer containerOverride = null)
             : this()
         {
-            if(parentScope == null) throw new ArgumentNullException(nameof(parentScope));
-            Parent = parentScope;
+            Parent = parentScope ?? throw new ArgumentNullException(nameof(parentScope));
             if (containerOverride != null)
             {
                 this._container = containerOverride;
@@ -124,9 +122,7 @@ namespace Rezolver
         public ContainerScope(IContainer container)
             : this()
         {
-            if(container == null) throw new ArgumentNullException(nameof(container));
-
-            this._container = container;
+            this._container = container ?? throw new ArgumentNullException(nameof(container));
         }
 
         /// <summary>
@@ -230,15 +226,15 @@ namespace Rezolver
 
             if (behaviour == ScopeBehaviour.Explicit)
             {
+                var key = new TypeAndTargetId(context.RequestedType, targetId);
                 // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
-                if (this._explicitlyScopedObjects.TryGetValue(new TypeAndTargetId(context.RequestedType, targetId), out Lazy<ScopedObject> lazy))
+                if (this._explicitlyScopedObjects.TryGetValue(key, out Lazy<ScopedObject> lazy))
                 {
                     return lazy.Value.Object;
                 }
 
                 // use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
-                return this._explicitlyScopedObjects.GetOrAdd(new TypeAndTargetId(context.RequestedType, targetId),
-                    k => new Lazy<ScopedObject>(() => new ScopedObject(factory(context)))).Value.Object;
+                return this._explicitlyScopedObjects.GetOrAdd(key, CreateLazy).Value.Object;
             }
             else if (behaviour == ScopeBehaviour.Implicit)
             {
@@ -253,6 +249,10 @@ namespace Rezolver
             }
 
             return factory(context);
+
+            Lazy<ScopedObject> CreateLazy(TypeAndTargetId k) => new Lazy<ScopedObject>(CreateScoped);
+
+            ScopedObject CreateScoped() => new ScopedObject(factory(context));
         }
 
         object IServiceProvider.GetService(Type serviceType)

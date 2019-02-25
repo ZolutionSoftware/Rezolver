@@ -267,7 +267,7 @@ namespace Rezolver.Compilation.Expressions
 
             try
             {
-                return (ParameterExpression)GetOrAddSharedExpression(type, name, () => Expression.Parameter(type, name), requestingType);
+                return (ParameterExpression)GetOrAddSharedExpression(type, name, (t, s) => Expression.Parameter(t, s), requestingType);
             }
             catch (InvalidCastException)
             {
@@ -285,7 +285,7 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="requestingType">Optional - to avoid naming clashes with shared expressions created by other targets, you can pass a type here
         /// (usually the runtime type of your <see cref="ITarget"/> implementation).</param>
         /// <returns>Expression.</returns>
-        public Expression GetOrAddSharedExpression(Type type, string name, Func<Expression> expressionFactory, Type requestingType = null)
+        public Expression GetOrAddSharedExpression(Type type, string name, Func<Type, string, Expression> expressionFactory, Type requestingType = null)
         {
             if (this._sharedExpressions == null)
             {
@@ -298,7 +298,7 @@ namespace Rezolver.Compilation.Expressions
             SharedExpressionKey key = new SharedExpressionKey(type, name, requestingType);
             if (!this._sharedExpressions.TryGetValue(key, out Expression toReturn))
             {
-                this._sharedExpressions[key] = toReturn = expressionFactory();
+                this._sharedExpressions[key] = toReturn = expressionFactory(type, name);
             }
 
             return toReturn;

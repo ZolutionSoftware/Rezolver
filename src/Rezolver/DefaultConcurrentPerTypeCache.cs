@@ -60,8 +60,7 @@ namespace Rezolver
                 //    type,
                 //    c => new Lazy<TValue>(() => valueFactory())).Value;
                 cached = this._entries.GetOrAdd(
-                    type,
-                    c => new Lazy<TValue>(() => valueFactory())).Value;
+                    type, new Lazy<TValue>(valueFactory)).Value;
             }
             else
             {
@@ -83,10 +82,8 @@ namespace Rezolver
             // performs better than GetOrAdd.
             if (this._entries.TryGetValue(type, out Lazy<TValue> myLazy))
                 return myLazy.Value;
-                
-            return this._entries.GetOrAdd(
-                    type,
-                    c => new Lazy<TValue>(() => valueFactory())).Value;
+
+            return this._entries.GetOrAdd(type, new Lazy<TValue>(valueFactory)).Value;
         }
 
         #endregion

@@ -204,7 +204,6 @@ namespace Rezolver.Targets
                 // have to go searching for the best constructor match for the current context,
                 // which will also give us our arguments
                 var publicCtorGroups = GetPublicConstructorGroups(DeclaredType);
-                // var possibleBindingsGrouped = publicCtorGroups.Select(g => g.Select(ci => new BoundConstructorTarget(ci, ParameterBinding.BindMethod(ci))));
                 var ctorsWithBindingsGrouped = publicCtorGroups.Select(g =>
                   g.Select(ci => new
                   {

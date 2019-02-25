@@ -28,8 +28,14 @@ namespace Rezolver.Compilation.Expressions
         /// parameter is optional, this will always be provided</param>
         protected override Expression Build(ListTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            var arrayExpr = Expression.NewArrayInit(target.ElementType,
-                    target.Items.Select(t => compiler.Build(t, context.NewContext(target.ElementType))));
+            var items = new List<Expression>();
+
+            foreach(var itemTarget in target.Items)
+            {
+                items.Add(compiler.Build(itemTarget, context.NewContext(target.ElementType)));
+            }
+
+            var arrayExpr = Expression.NewArrayInit(target.ElementType, items);
 
             if (target.AsArray)
             {

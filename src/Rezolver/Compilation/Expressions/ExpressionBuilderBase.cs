@@ -256,7 +256,7 @@ namespace Rezolver.Compilation.Expressions
 
             // use a shared expression for the scope check so we can optimise away all the nested scope calls
             // we're likely to be generating.
-            var compareExpr = context.GetOrAddSharedExpression(typeof(bool), "isScoped", () =>
+            var compareExpr = context.GetOrAddSharedExpression(typeof(bool), "isScoped", (t, s) =>
             {
                 return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
             }, typeof(ExpressionBuilderBase));

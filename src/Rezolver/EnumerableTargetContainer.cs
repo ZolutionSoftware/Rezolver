@@ -123,13 +123,13 @@ namespace Rezolver
             if (enableCovariance)
             {
                 return new EnumerableTarget(Root.FetchAllCompatibleTargetsInternal(elementType)
-                        .OrderBy(t => _tracker.GetOrder(t)), elementType);
+                        .OrderBy(_tracker.GetOrder), elementType);
             }
             else
             {
                 return new EnumerableTarget(Root.FetchAll(elementType)
                     .Distinct(TargetIdentityComparer.Instance) // don't duplicate targets
-                    .OrderBy(t => this._tracker.GetOrder(t)), elementType);
+                    .OrderBy(_tracker.GetOrder), elementType);
             }
         }
 

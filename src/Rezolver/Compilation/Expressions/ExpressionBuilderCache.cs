@@ -57,7 +57,7 @@ namespace Rezolver.Compilation.Expressions
             })).Value;
         }
 
-        private IEnumerable<Type> TargetSearchTypes(Type targetType)
+        private static IEnumerable<Type> TargetSearchTypes(Type targetType)
         {
             // the search list is:
             // 1) the target's type

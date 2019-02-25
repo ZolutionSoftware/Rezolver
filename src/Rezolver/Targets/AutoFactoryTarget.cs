@@ -147,8 +147,10 @@ namespace Rezolver.Targets
         void INotifyRegistrationTarget.OnRegistration(IRootTargetContainer root, Type registeredType)
         {
             if (this.BoundTarget == null) {
-                root.RegisterProjection(ReturnType, registeredType, (root2, source) => new AutoFactoryTarget(registeredType, ReturnType, ParameterTypes, source));
+                root.RegisterProjection(ReturnType, registeredType, CreateTarget);
             }
+
+            AutoFactoryTarget CreateTarget(IRootTargetContainer root2, ITarget source) => new AutoFactoryTarget(registeredType, ReturnType, ParameterTypes, source);
         }
     }
 }

@@ -29,10 +29,10 @@ namespace Rezolver.Compilation.Expressions
 
         public override Expression Visit(Expression node)
         {
-            var found = Array.Find(this._replacements, r => r.Original == node);
-            if (found != null)
+            for(var f = 0; f<_replacements.Length; f++)
             {
-                return base.Visit(found.Replacement);
+                if (_replacements[f].Original == node)
+                    return base.Visit(_replacements[f].Replacement);
             }
 
             return base.Visit(node);
