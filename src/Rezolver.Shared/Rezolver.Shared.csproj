@@ -9,6 +9,7 @@
     <PackageId>Rezolver.Shared</PackageId>
     <PackageTags>rezolver</PackageTags>
     <RootNamespace>Rezolver</RootNamespace>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
   
   <ItemGroup>

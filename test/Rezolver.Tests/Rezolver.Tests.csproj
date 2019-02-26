@@ -4,6 +4,7 @@
     <AssemblyName>Rezolver.Tests</AssemblyName>
     <PackageId>Rezolver.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>

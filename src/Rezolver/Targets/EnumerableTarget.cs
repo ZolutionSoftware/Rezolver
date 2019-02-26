@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Rezolver.Targets
 {
@@ -23,12 +22,12 @@ namespace Rezolver.Targets
         /// <summary>
         /// Returns <c>true</c> if <see cref="Targets"/> is empty, otherwise <c>false</c>.
         /// </summary>
-        public override bool UseFallback => !Targets.Any();
+        public override bool UseFallback => Targets.Length == 0;
 
         /// <summary>
         /// The targets whose objects will be included in the enumerable
         /// </summary>
-        public IEnumerable<ITarget> Targets { get; }
+        public ITarget[] Targets { get; }
 
         /// <summary>
         /// The element type of the enumerable (i.e. the '<c>T</c>' in <see cref="IEnumerable{T}"/>)
@@ -45,7 +44,7 @@ namespace Rezolver.Targets
         /// it must *not* be an open generic.</param>
         public EnumerableTarget(IEnumerable<ITarget> targets, Type elementType)
         {
-            Targets = targets ?? throw new ArgumentNullException(nameof(targets));
+            Targets = (targets ?? throw new ArgumentNullException(nameof(targets))).ToArray();
             ElementType = elementType ?? throw new ArgumentNullException(nameof(elementType));
 
             if (elementType.IsGenericType && elementType.ContainsGenericParameters)
@@ -55,9 +54,10 @@ namespace Rezolver.Targets
 
             DeclaredType = typeof(IEnumerable<>).MakeGenericType(elementType);
 
-            if (!targets.All(t => t != null && t.SupportsType(elementType)))
+            for (var f = 0; f < Targets.Length; f++)
             {
-                throw new ArgumentException($"All targets must be non-null and support the type {elementType}", nameof(targets));
+                if (Targets[f] == null || !Targets[f].SupportsType(elementType))
+                    throw new ArgumentException($"All targets must be non-null and support the type {elementType}", nameof(targets));
             }
         }
 
@@ -67,7 +67,7 @@ namespace Rezolver.Targets
         /// <returns></returns>
         public IEnumerator<ITarget> GetEnumerator()
         {
-            return Targets.GetEnumerator();
+            return ((IEnumerable<ITarget>)Targets).GetEnumerator();
         }
 
         /// <summary>

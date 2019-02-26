@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.1;net451;net46</TargetFrameworks>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

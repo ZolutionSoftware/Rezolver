@@ -261,16 +261,11 @@ namespace Rezolver
         }
         public TargetTypeSelector SelectTypes(Type type)
         {
-            // TODO: implement a 'stability' calculator for this function which disables caching until the _version
-            // local has not changed for a certain number of successive calls. 
-            // -- UPDATE to above.  I tried it - it made no difference.
-
             // this function is complicated by the fact that searching and registering types are asymmetrically parallel.
             // in theory most applications will register first and then start searching.  However, the searching part is parallelised
             // equally, if registrations continue whilst searching is being performed, then we'd have a problem.  So this is written to
             // ensure that the cached type selectors stay up to date as extra registrations are made.
-            var result = _cachedSearches.GetOrAdd(type,
-                t => new CachedTargetTypeSelector() { Version = Interlocked.Read(ref _version), Selector = new TargetTypeSelector(type, _root) });
+            var result = _cachedSearches.GetOrAdd(type, CreateSelector);
             long resultVersion = Interlocked.Read(ref result.Version);
             long currentVersion = Interlocked.Read(ref _version);
             long oldResultVersion = resultVersion;
@@ -289,6 +284,11 @@ namespace Rezolver
             }
 
             return result.Selector;
+
+            CachedTargetTypeSelector CreateSelector(Type t)
+            {
+                return new CachedTargetTypeSelector() { Version = Interlocked.Read(ref _version), Selector = new TargetTypeSelector(t, _root) };
+            }
         }
     }
 }

@@ -5,6 +5,7 @@
     <PackageId>Rezolver.Tests.Shared</PackageId>
     <RootNamespace>Rezolver.Tests</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
   
   <Import Project="..\..\src\Rezolver.Shared.props " />

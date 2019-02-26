@@ -4,6 +4,7 @@
     <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
     <AssemblyName>Rezolver.Tests.Compilation.Specification</AssemblyName>
     <PackageId>Rezolver.Tests.Compilation.Specification</PackageId>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>

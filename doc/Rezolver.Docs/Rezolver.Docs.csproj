@@ -5,6 +5,8 @@
     <UserSecretsId>ccd314f1-a669-4af4-b1db-065388be2cae</UserSecretsId>
 
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

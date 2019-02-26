@@ -18,6 +18,7 @@ namespace Rezolver.Runtime
     /// <remarks>See the remarks section on <see cref="LazyEnumerable{T}"/> for more about lazy and eager enumerables.</remarks>
     public class EagerEnumerable<T> : IEnumerable<T>
     {
+        private static readonly T[] Empty = new T[0];
         private readonly T[] _items;
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace Rezolver.Runtime
         /// <param name="items"></param>
         public EagerEnumerable(T[] items)
         {
-            this._items = items;
+            this._items = items ?? Empty;
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return (this._items ?? (Enumerable.Empty<T>())).GetEnumerator();
+            return ((IEnumerable<T>)this._items).GetEnumerator();
         }
 
         /// <summary>

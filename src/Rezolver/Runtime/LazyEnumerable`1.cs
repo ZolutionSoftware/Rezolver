@@ -33,7 +33,7 @@ namespace Rezolver.Runtime
     public class LazyEnumerable<T> : IEnumerable<T>
     {
         private readonly IResolveContext _context;
-        private readonly IEnumerable<Func<IResolveContext, object>> _factories;
+        private readonly Func<IResolveContext, object>[] _factories;
 
         /// <summary>
         /// Creates a new <see cref="LazyEnumerable{T}"/> instance.
@@ -43,7 +43,17 @@ namespace Rezolver.Runtime
         public LazyEnumerable(IResolveContext context, IEnumerable<Func<IResolveContext, object>> factories)
         {
             this._context = context;
-            this._factories = factories;
+
+            // we can eagerly create an array of delegates.
+            this._factories = factories.ToArray();
+        }
+
+        private IEnumerable<T> GetInstances()
+        {
+            foreach(var factory in _factories)
+            {
+                yield return (T)factory(_context);
+            }
         }
 
         /// <summary>
@@ -52,7 +62,7 @@ namespace Rezolver.Runtime
         /// <returns></returns>
         public IEnumerator<T> GetEnumerator()
         {
-            return this._factories.Select(f => (T)f(this._context.New(typeof(T)))).GetEnumerator();
+            return GetInstances().GetEnumerator();
         }
 
         /// <summary>

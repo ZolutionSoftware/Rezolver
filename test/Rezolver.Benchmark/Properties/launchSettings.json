@@ -1,20 +1,7 @@
 {
   "profiles": {
     "Default": {
-      "commandName": "Project",
-      "commandLineArgs": "-c 1000000 -t 25"
-    },
-    "Compare Simple": {
-      "commandName": "Project",
-      "commandLineArgs": "-i Simple -i RequiresSimple -c 10000000 -t 100"
-    },
-    "Simple (Quick)": {
-      "commandName": "Project",
-      "commandLineArgs": "-c 500 -t 10"
-    },
-    "Compare Complex": {
-      "commandName": "Project",
-      "commandLineArgs": "-i RequiresLotsAndSingleton -c 1000000"
+      "commandName": "Project"
     }
   }
 }

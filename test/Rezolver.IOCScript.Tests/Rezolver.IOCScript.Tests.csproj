@@ -5,6 +5,7 @@
     <AssemblyName>Rezolver.IOCScript.Tests</AssemblyName>
     <PackageId>Rezolver.IOCScript.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>

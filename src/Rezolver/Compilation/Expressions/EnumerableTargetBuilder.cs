@@ -45,7 +45,12 @@ namespace Rezolver.Compilation.Expressions
         {
             if (context.GetOption(target.ElementType, Options.LazyEnumerables.Default))
             {
-                var all = target.Targets.Select(t => compiler.BuildResolveLambda(t, context.NewContext(target.ElementType)));
+                List<Expression<Func<IResolveContext, object>>> all = new List<Expression<Func<IResolveContext, object>>>();
+                for(var f = 0; f<target.Targets.Length; f++)
+                {
+                    all.Add(compiler.BuildResolveLambda(target.Targets[f], context.NewContext(target.ElementType)));
+                }
+                
                 return Expression.New(
                     typeof(LazyEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
                     context.ResolveContextParameterExpression,
@@ -55,11 +60,16 @@ namespace Rezolver.Compilation.Expressions
             }
             else
             {
+                List<Expression> all = new List<Expression>();
+
+                for(var f = 0; f<target.Targets.Length; f++)
+                {
+                    all.Add(compiler.Build(target.Targets[f], context.NewContext(target.ElementType)));
+                }
+
                 return Expression.New(
                     typeof(EagerEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
-                    Expression.NewArrayInit(target.ElementType,
-                        target.Targets.Select(t => compiler.Build(t, context.NewContext(target.ElementType))))
-                    );
+                    Expression.NewArrayInit(target.ElementType, all));
             }
         }
     }

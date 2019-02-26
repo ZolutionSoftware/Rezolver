@@ -4,6 +4,7 @@
     <AssemblyName>Rezolver.Microsoft.DependencyInjection.Tests</AssemblyName>
     <PackageId>Rezolver.Microsoft.DependencyInjection.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>

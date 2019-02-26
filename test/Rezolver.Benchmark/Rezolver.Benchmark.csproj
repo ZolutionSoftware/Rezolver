@@ -6,6 +6,7 @@
     <LangVersion>latest</LangVersion>
     <AssemblyName>Rezolver.Benchmark</AssemblyName>
     <StartupObject>Rezolver.Benchmark.BenchDotNetProgram</StartupObject>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.11.4" />
