@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Rezolver.Benchmark.CreationBenches</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet=v0.11.4, OS=Windows 10.0.17763.316 (1809/October2018Update/Redstone5)
+Intel Core i7-4700MQ CPU 2.40GHz (Haswell), 1 CPU, 8 logical and 4 physical cores
+.NET Core SDK=2.2.101
+  [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+  Core   : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
+</code></pre>
+<pre><code>Job=Core  Runtime=Core  
+</code></pre>
+
+<table>
+<thead><tr><th>          Method</th><th> Categories</th><th>  Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
+</tr>
+</thead><tbody><tr><td>No_New</td><td>New</td><td>3.639 ns</td><td>0.1403 ns</td><td>0.1312 ns</td><td>1.00</td><td>0.00</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>Rezolver_New_ICompiled</td><td>New</td><td>59.281 ns</td><td>0.1104 ns</td><td>0.0922 ns</td><td>16.45</td><td>0.47</td><td>0.0432</td><td>-</td><td>-</td><td>136 B</td>
+</tr><tr><td>Rezolver_New</td><td>New</td><td>64.309 ns</td><td>0.6680 ns</td><td>0.5921 ns</td><td>17.76</td><td>0.63</td><td>0.0432</td><td>-</td><td>-</td><td>136 B</td>
+</tr><tr><td>No_WithArg</td><td>NewCtorArg</td><td>10.027 ns</td><td>0.0515 ns</td><td>0.0430 ns</td><td>1.00</td><td>0.00</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
+</tr><tr><td>Rezolver_WithArg</td><td>NewCtorArg</td><td>73.888 ns</td><td>1.6405 ns</td><td>1.6112 ns</td><td>7.35</td><td>0.19</td><td>0.0508</td><td>-</td><td>-</td><td>160 B</td>
+</tr><tr><td>No_Complex</td><td>Complex</td><td>71.879 ns</td><td>1.3804 ns</td><td>1.1527 ns</td><td>1.00</td><td>0.00</td><td>0.0991</td><td>-</td><td>-</td><td>312 B</td>
+</tr><tr><td>Rezolver_Complex</td><td>Complex</td><td>135.572 ns</td><td>1.0924 ns</td><td>0.9122 ns</td><td>1.89</td><td>0.03</td><td>0.1347</td><td>-</td><td>-</td><td>424 B</td>
+</tr><tr><td>No_Enumerable</td><td>Enumerable-Simple</td><td>65.641 ns</td><td>1.3453 ns</td><td>1.3212 ns</td><td>1.00</td><td>0.00</td><td>0.0330</td><td>-</td><td>-</td><td>104 B</td>
+</tr><tr><td>Rezolver_Enumerable</td><td>Enumerable-Simple</td><td>2,807.841 ns</td><td>9.9656 ns</td><td>8.8343 ns</td><td>42.93</td><td>0.83</td><td>0.1755</td><td>-</td><td>-</td><td>560 B</td>
+</tr></tbody></table>
+</body>
+</html>
