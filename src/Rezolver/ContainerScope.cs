@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
@@ -187,9 +185,9 @@ namespace Rezolver
                     using (var listLock = this._childScopes.Lock())
                     {
                         // dispose child scopes in reverse order of creation
-                        for (var f = this._childScopes.Count; f>0; f--)
+                        for (var f = this._childScopes.Count; f > 0; f--)
                         {
-                            this._childScopes[f-1].Dispose();
+                            this._childScopes[f - 1].Dispose();
                         }
                     }
 
@@ -264,6 +262,221 @@ namespace Rezolver
 
             Container.TryResolve(new ResolveContext(this, serviceType), out object toReturn);
             return toReturn;
+        }
+    }
+
+    /// <summary>
+    /// Base class for a container scope.
+    /// 
+    /// This scope doesn't do anything 
+    /// </summary>
+    public class ContainerScope2 : IDisposable, IServiceProvider, IContainerScope
+    {
+        private Container Container { get; }
+
+        private ContainerScope2 Root { get; }
+
+        private ContainerScope2 Parent { get; }
+        IContainerScope IContainerScope.Parent { get; }
+        Container IContainerScope.Container { get; }
+
+        public ContainerScope2(Container container)
+        {
+            Container = container;
+        }
+
+        public ContainerScope2(ContainerScope2 parent)
+        {
+            Parent = parent;
+            Root = parent.Root;
+        }
+
+        public T ActivateUnscoped<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            return instanceFactory(context);
+        }
+
+        public virtual T ActivateImplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            return instanceFactory(context);
+        }
+
+        public virtual T ActivateExplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            return instanceFactory(context);
+        }
+
+        #region IDisposable Support
+        private protected bool _isDisposing = false;
+        private protected bool _isDisposed = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                _isDisposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Disposes this scope.
+        /// 
+        /// **Note** - This scope doesn't actually have anything to dispose.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        public object GetService(Type serviceType)
+        {
+            Container.TryResolve(new ResolveContext(this, serviceType), out object result);
+            return result;
+        }
+
+        void IContainerScope.ChildScopeDisposed(IContainerScope child)
+        {
+            throw new NotImplementedException();
+        }
+
+        object IContainerScope.Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
+        {
+            throw new NotImplementedException();
+        }
+
+        IContainerScope IScopeFactory.CreateScope()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
+
+    public sealed class ConcurrentContainerScope : ContainerScope2
+    {
+        /// <summary>
+        /// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
+        /// </summary>
+        private ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>> _explicitlyScopedObjects;
+
+        /// <summary>
+        /// implicitly scoped objects will always be IDisposable
+        /// </summary>
+        private ConcurrentBag<ScopedObject> _implicitlyScopedObjects
+            = new ConcurrentBag<ScopedObject>();
+
+        private LockedList<IContainerScope> _childScopes
+            = new LockedList<IContainerScope>(64);
+
+        private readonly struct ScopedObject
+        {
+            private static int _order = 0;
+
+            public int Id { get; }
+
+            public object Object { get; }
+
+            public ScopedObject(object obj)
+            {
+                Id = _order++;
+                Object = obj;
+            }
+        }
+
+        public ConcurrentContainerScope(Container container)
+            : base(container)
+        {
+
+        }
+
+        public ConcurrentContainerScope(ContainerScope2 parent)
+            : base(parent)
+        {
+
+        }
+
+        public override T ActivateImplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            var result = instanceFactory(context);
+            // don't *ever* track scopes as disposable objects
+            if (result is IDisposable && !(result is IContainerScope))
+            {
+                this._implicitlyScopedObjects.Add(new ScopedObject(result));
+            }
+
+            return result;
+        }
+
+        public override T ActivateExplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            var key = new TypeAndTargetId(context.RequestedType, targetId);
+            // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
+            if (this._explicitlyScopedObjects.TryGetValue(key, out Lazy<ScopedObject> lazy))
+            {
+                return (T)lazy.Value.Object;
+            }
+
+            // use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
+            return (T)this._explicitlyScopedObjects.GetOrAdd(key, CreateLazy).Value.Object;
+
+            Lazy<ScopedObject> CreateLazy(TypeAndTargetId k) => new Lazy<ScopedObject>(CreateScoped);
+
+            ScopedObject CreateScoped() => new ScopedObject(instanceFactory(context));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (!_isDisposed && !_isDisposing)
+                {
+                    _isDisposing = true;
+                    try
+                    {
+                        using (var listLock = this._childScopes.Lock())
+                        {
+                            // dispose child scopes in reverse order of creation
+                            for (var f = this._childScopes.Count; f > 0; f--)
+                            {
+                                this._childScopes[f - 1].Dispose();
+                            }
+                        }
+
+                        // note that explicitly scoped objects might not actually be IDisposable :)
+                        var allExplicitObjects = this._explicitlyScopedObjects.Skip(0).ToArray()
+                            .Where(l => l.Value.Value.Object is IDisposable)
+                            .Select(l => l.Value.Value);
+                        var allImplicitObjects = this._implicitlyScopedObjects.Skip(0).ToArray();
+
+                        // deref all used collections
+                        FreeScopeContainers();
+
+                        foreach (var obj in allExplicitObjects.Concat(allImplicitObjects)
+                            .OrderByDescending(so => so.Id))
+                        {
+                            ((IDisposable)obj.Object).Dispose();
+                        }
+                    }
+                    finally
+                    {
+                        base.Dispose(disposing);
+                    }
+                }
+            }
+
+        }
+
+        private void InitScopeContainers()
+        {
+            this._explicitlyScopedObjects = new ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>>();
+            this._implicitlyScopedObjects = new ConcurrentBag<ScopedObject>();
+            this._childScopes = new LockedList<IContainerScope>();
+        }
+
+        private void FreeScopeContainers()
+        {
+            this._explicitlyScopedObjects = null;
+            this._implicitlyScopedObjects = null;
+            this._childScopes = null;
         }
     }
 }
