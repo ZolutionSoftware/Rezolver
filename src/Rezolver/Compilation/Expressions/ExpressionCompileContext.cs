@@ -178,7 +178,7 @@ namespace Rezolver.Compilation.Expressions
         {
             this._resolveContextExpression = resolveContextExpression ?? GetNewResolveContextParam();  //DefaultResolveContextParameterExpression;
             this._sharedExpressions = new Dictionary<SharedExpressionKey, Expression>(20);
-            this._currentContainerExpression = Expression.Constant(resolveContext.Container, typeof(IContainer));
+            this._currentContainerExpression = Expression.Constant(resolveContext.Container, typeof(Container));
             this._contextContainerPropertyExpression = Expression.Property(this._resolveContextExpression, nameof(Rezolver.ResolveContext.Container));
             this._contextScopePropertyExpression = Expression.Property(ResolveContextParameterExpression, nameof(Rezolver.ResolveContext.Scope));
             RegisterExpressionTargets();
@@ -189,7 +189,7 @@ namespace Rezolver.Compilation.Expressions
         /// </summary>
         protected void RegisterExpressionTargets()
         {
-            DependencyTargetContainer.Register(new ExpressionTarget(ContextContainerPropertyExpression, typeof(IContainer)));
+            DependencyTargetContainer.Register(new ExpressionTarget(ContextContainerPropertyExpression, typeof(Container)));
         }
 
         /// <summary>

@@ -5,12 +5,11 @@
     <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <AssemblyName>Rezolver.Benchmark</AssemblyName>
-    <StartupObject>Rezolver.Benchmark.BenchDotNetProgram</StartupObject>
     <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.11.4" />
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.3.2" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.11.4" />
   </ItemGroup>
 
   <ItemGroup>

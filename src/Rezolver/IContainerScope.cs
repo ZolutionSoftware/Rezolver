@@ -71,7 +71,7 @@ namespace Rezolver
         /// The container that this scope is tied to.  All standard resolve operations
         /// should be made against this container to begin with.
         /// </summary>
-        IContainer Container { get; }
+        Container Container { get; }
         /// <summary>
         /// Called by child scopes when they are disposed to notify the parent that they
         /// will no longer need to be disposed of when the parent is disposed.

@@ -22,7 +22,7 @@ namespace Rezolver
         /// <param name="container">The container.</param>
         /// <param name="type">The type to be resolved.</param>
         /// <returns>An instance of the <paramref name="type"/>.</returns>
-        public static object Resolve(this IContainer container, Type type)
+        public static object Resolve(this Container container, Type type)
         {
             return container.Resolve(new ResolveContext(container, type));
         }
@@ -33,7 +33,7 @@ namespace Rezolver
         /// <typeparam name="TObject">The type to be resolved.</typeparam>
         /// <param name="container">The container.</param>
         /// <returns>An instance of <typeparamref name="TObject"/>.</returns>
-        public static TObject Resolve<TObject>(this IContainer container)
+        public static TObject Resolve<TObject>(this Container container)
         {
             return (TObject)container.Resolve(typeof(TObject));
         }
@@ -44,7 +44,7 @@ namespace Rezolver
         /// <param name="container">The container.</param>
         /// <param name="type">The type of objects you want to retrieve</param>
         /// <returns>An enumerable (possibly empty) containing the objects which were resolved.</returns>
-        public static IEnumerable ResolveMany(this IContainer container, Type type)
+        public static IEnumerable ResolveMany(this Container container, Type type)
         {
             if (type == null)
             {
@@ -60,7 +60,7 @@ namespace Rezolver
         /// <typeparam name="TObject">The type of objects expected in the enumerable</typeparam>
         /// <param name="container">The container.</param>
         /// <returns>An enumerable (possibly empty) containing the objects which were resolved.</returns>
-        public static IEnumerable<TObject> ResolveMany<TObject>(this IContainer container)
+        public static IEnumerable<TObject> ResolveMany<TObject>(this Container container)
         {
             return Resolve<IEnumerable<TObject>>(container);
         }
@@ -74,9 +74,9 @@ namespace Rezolver
         /// <param name="type">The type to be resolved.</param>
         /// <param name="result">Received the value, or a reference to the instance, that is resolved if the operation is successful.</param>
         /// <returns><c>true</c> if the object was resolved, <c>false</c> otherwise.</returns>
-        /// <remarks>For more detail on the <paramref name="type"/> parameter, see <see cref="Resolve(IContainer, Type)"/>
+        /// <remarks>For more detail on the <paramref name="type"/> parameter, see <see cref="Resolve(Container, Type)"/>
         /// overloads</remarks>
-        public static bool TryResolve(this IContainer container, Type type, out object result)
+        public static bool TryResolve(this Container container, Type type, out object result)
         {
             return container.TryResolve(new ResolveContext(container, type), out result);
         }
@@ -90,7 +90,7 @@ namespace Rezolver
         /// <param name="container">The container.</param>
         /// <param name="result">Receives the object that is resolved if the operation is successful.</param>
         /// <returns><c>true</c> if the object was resolved, <c>false</c> otherwise.</returns>
-        public static bool TryResolve<TObject>(this IContainer container, out TObject result)
+        public static bool TryResolve<TObject>(this Container container, out TObject result)
         {
             var success = container.TryResolve(typeof(TObject), out object oResult);
             if (success)
@@ -99,7 +99,7 @@ namespace Rezolver
             }
             else
             {
-                result = default(TObject);
+                result = default;
             }
 
             return success;
@@ -110,7 +110,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="type">The type.</param>
-        public static bool CanResolve(this IContainer container, Type type)
+        public static bool CanResolve(this Container container, Type type)
         {
             return container.CanResolve(new ResolveContext(container, type));
         }
@@ -120,7 +120,7 @@ namespace Rezolver
         /// </summary>
         /// <typeparam name="TObject">The type to be checked..</typeparam>
         /// <param name="container">The container.</param>
-        public static bool CanResolve<TObject>(this IContainer container)
+        public static bool CanResolve<TObject>(this Container container)
         {
             return container.CanResolve(typeof(TObject));
         }

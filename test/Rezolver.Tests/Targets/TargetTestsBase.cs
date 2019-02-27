@@ -17,12 +17,12 @@ namespace Rezolver.Tests.Targets
 			this.Output = output;
 		}
 
-		protected virtual IContainer GetDefaultContainer(IRootTargetContainer targets = null)
+		protected virtual Container GetDefaultContainer(IRootTargetContainer targets = null)
 		{
 			return new Container(targets);
 		}
 
-		protected virtual IRootTargetContainer GetDefaultTargetContainer(IContainer existingContainer = null)
+		protected virtual IRootTargetContainer GetDefaultTargetContainer(Container existingContainer = null)
 		{
             return (existingContainer as IRootTargetContainer) ?? new TargetContainer();
 		}
@@ -39,7 +39,7 @@ namespace Rezolver.Tests.Targets
 		/// <param name="targets">The target container to use for the compile context.  If null, then the <paramref name="container"/>
 		/// will be passed to the <see cref="GetDefaultTargetContainer(IContainer)"/> method (including if one is automatically
 		/// built) - with the target container that's returned being used instead.</param>
-		protected virtual ICompileContext GetCompileContext(ITarget target, IContainer container = null, IRootTargetContainer targets = null, Type targetType = null)
+		protected virtual ICompileContext GetCompileContext(ITarget target, Container container = null, IRootTargetContainer targets = null, Type targetType = null)
 		{
 			targets = targets ?? GetDefaultTargetContainer(container);
             container = container ?? GetDefaultContainer(targets);

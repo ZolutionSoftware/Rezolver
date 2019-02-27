@@ -107,18 +107,18 @@ namespace Rezolver.Tests.Targets
 		/// </summary>
 		public class ExpectedJITBinding
 		{
-			private static Func<IContainer> DefaultContainerFactory = () => null;
+			private static Func<Container> DefaultContainerFactory = () => null;
 			private static Func<IDictionary<string, ITarget>> DefaultNamedArgsFactory = () => null;
 
 			public Type Type { get; }
 			public ConstructorInfo ExpectedConstructor { get; }
-			public Func<IContainer> ContainerFactory { get; }
+			public Func<Container> ContainerFactory { get; }
 			public Func<IDictionary<string, ITarget>> NamedArgsFactory { get; }
 			public string Description { get; }
 
 			public ExpectedJITBinding(Type type, 
 				ConstructorInfo expectedConstructor, 
-				Func<IContainer> containerFactory = null, 
+				Func<Container> containerFactory = null, 
 				Func<Dictionary<string, ITarget>> namedArgsFactory = null,
 				string description = null)
 			{

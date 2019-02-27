@@ -24,7 +24,7 @@ namespace Rezolver
     /// Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
     /// the two interfaces are not actually compatible with each other, thanks to identical sets of extension methods.
     /// </remarks>
-    public sealed class ScopedContainer : Container, IScopedContainer, IDisposable
+    public sealed class ScopedContainer : Container, IDisposable
     {
         private readonly IContainerScope _scope;
 

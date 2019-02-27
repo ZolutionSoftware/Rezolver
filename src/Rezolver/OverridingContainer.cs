@@ -49,7 +49,7 @@ namespace Rezolver
         /// <summary>
         /// Gets the <see cref="IContainer"/> that is overriden by this container.
         /// </summary>
-        public IContainer Inner { get; }
+        public Container Inner { get; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="OverridingContainer"/>
@@ -64,11 +64,10 @@ namespace Rezolver
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
         /// <param name="config">Can be null.  A configuration to apply to this container (and, potentially its
         /// <see cref="Targets"/>).  If not provided, then the <see cref="Container.DefaultConfig"/> will be used</param>
-        public OverridingContainer(IContainer inner, IRootTargetContainer targets = null, IContainerConfig config = null)
+        public OverridingContainer(Container inner, IRootTargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
-            if(inner == null) throw new ArgumentNullException(nameof(inner));
-            Inner = inner;
+            Inner = inner ?? throw new ArgumentNullException(nameof(inner));
 
             (config ?? DefaultConfig).Configure(this, Targets);
         }
@@ -79,7 +78,7 @@ namespace Rezolver
         /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
         /// <returns><c>true</c> if either this container or the inner container can resolve the
         /// <see cref="ResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
-        public override bool CanResolve(ResolveContext context)
+        public sealed override bool CanResolve(ResolveContext context)
         {
             return base.CanResolve(context) || Inner.CanResolve(context);
         }
@@ -90,7 +89,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
         /// <returns></returns>
-        protected override ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
+        protected sealed override ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
         {
             return Inner.GetCompiledTarget(context);
         }

@@ -8,40 +8,15 @@ using System.Threading.Tasks;
 
 namespace Rezolver
 {
-    internal class StubContainer : IContainer
+    internal class StubContainer : Container
     {
+        private static readonly TargetContainer DefaultTargetContainer = new TargetContainer(new CombinedTargetContainerConfig());
+
         internal static StubContainer Instance { get; } = new StubContainer();
 
-        private StubContainer() { }
-
-        public bool CanResolve(ResolveContext context)
+        private StubContainer()
+        : base(DefaultTargetContainer)
         {
-            throw new InvalidOperationException("The ResolveContext has no Container set");
-        }
-
-        public IContainerScope CreateScope()
-        {
-            throw new InvalidOperationException("The ResolveContext has no Container set");
-        }
-
-        public ICompiledTarget GetCompiledTarget(ResolveContext context)
-        {
-            throw new InvalidOperationException("The ResolveContext has no Container set");
-        }
-
-        public object GetService(Type serviceType)
-        {
-            throw new InvalidOperationException("The ResolveContext has no Container set");
-        }
-
-        public object Resolve(ResolveContext context)
-        {
-            throw new InvalidOperationException("The ResolveContext has no Container set");
-        }
-
-        public bool TryResolve(ResolveContext context, out object result)
-        {
-            throw new InvalidOperationException("The ResolveContext has no Container set");
         }
     }
 }

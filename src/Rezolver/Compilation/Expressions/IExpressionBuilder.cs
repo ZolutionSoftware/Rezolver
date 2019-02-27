@@ -16,10 +16,10 @@ namespace Rezolver.Compilation.Expressions
     public interface IExpressionBuilder
     {
         /// <summary>
-        /// Determines whether this instance can build an expression for the specified target.
+        /// Determines whether this instance can build an expression for the specified target type.
         /// </summary>
-        /// <param name="target">The target.</param>
-        bool CanBuild(ITarget target);
+        /// <param name="targetType">The type of target.</param>
+        bool CanBuild(Type targetType);
         /// <summary>
         /// Builds an expression for the specified target.
         /// </summary>

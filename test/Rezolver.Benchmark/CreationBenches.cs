@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Diagnostics.Windows.Configs;
 using BenchmarkDotNet.Engines;
 using Rezolver.Benchmark.Types;
 using Rezolver.Targets;
@@ -77,7 +78,7 @@ namespace Rezolver.Benchmark
             var first = _containerCompiled.Resolve<SimpleType>();
         }
 
-        private List<object> Warmup(IContainer container)
+        private List<object> Warmup(Container container)
         {
             // literally just calls each of the warm methods once to force compilation
             return new List<object>

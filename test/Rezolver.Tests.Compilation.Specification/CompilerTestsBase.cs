@@ -72,7 +72,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// </summary>
 		/// <param name="targets">The targets to be used for the container.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual IContainer CreateContainer(IRootTargetContainer targets, [CallerMemberName]string testName = null)
+		protected virtual Container CreateContainer(IRootTargetContainer targets, [CallerMemberName]string testName = null)
 		{
 			return new Container(targets, GetContainerConfig(testName));
 		}
@@ -86,7 +86,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// </summary>
 		/// <param name="targets">The targets.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual IScopedContainer CreateScopedContainer(IRootTargetContainer targets, [CallerMemberName]string testName = null)
+		protected virtual ScopedContainer CreateScopedContainer(IRootTargetContainer targets, [CallerMemberName]string testName = null)
 		{
 			return new ScopedContainer(targets, GetContainerConfig(testName));
 		}
@@ -100,7 +100,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <param name="baseContainer">The base container.</param>
 		/// <param name="newTargets">The new targets.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual OverridingContainer CreateOverridingContainer(IContainer baseContainer, IRootTargetContainer newTargets = null, [CallerMemberName]string testName = null)
+		protected virtual OverridingContainer CreateOverridingContainer(Container baseContainer, IRootTargetContainer newTargets = null, [CallerMemberName]string testName = null)
 		{
 			return new OverridingContainer(baseContainer, newTargets, GetContainerConfig(testName));
 		}
@@ -121,7 +121,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <param name="registeredType">Type against which the target should be registered, if different from the 
 		/// <paramref name="target"/>'s <see cref="ITarget.DeclaredType"/>.</param>
 		/// <param name="testName">Name of the test executing the method.  The compiler fills this in if ommitted.</param>
-		protected IContainer CreateContainerForSingleTarget(ITarget target, Type serviceType = null, [CallerMemberName]string testName = null)
+		protected Container CreateContainerForSingleTarget(ITarget target, Type serviceType = null, [CallerMemberName]string testName = null)
 		{
 			var targets = CreateTargetContainer(testName: testName);
 			targets.Register(target, serviceType);

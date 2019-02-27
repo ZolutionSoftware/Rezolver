@@ -12,24 +12,24 @@ namespace Rezolver.Compilation.Expressions
 {
     internal class ExpressionBuilderCache
     {
-        private readonly ConcurrentDictionary<Type, Lazy<IExpressionBuilder>> _cache
-             = new ConcurrentDictionary<Type, Lazy<IExpressionBuilder>>();
+        private readonly ConcurrentDictionary<Type, IExpressionBuilder> _cache
+             = new ConcurrentDictionary<Type, IExpressionBuilder>();
 
-        private readonly IContainer _container;
+        private readonly Container _container;
 
-        public ExpressionBuilderCache(IContainer container)
+        public ExpressionBuilderCache(Container container)
         {
             this._container = container;
         }
 
         public IExpressionBuilder ResolveBuilder(ITarget target)
         {
-            if (this._cache.TryGetValue(target.GetType(), out Lazy<IExpressionBuilder> builder))
+            if (this._cache.TryGetValue(target.GetType(), out IExpressionBuilder builder))
             {
-                return builder.Value;
+                return builder;
             }
 
-            return this._cache.GetOrAdd(target.GetType(), t => new Lazy<IExpressionBuilder>(() =>
+            return this._cache.GetOrAdd(target.GetType(), t => 
             {
                 List<Type> builderTypes =
                     TargetSearchTypes(t)
@@ -41,11 +41,12 @@ namespace Rezolver.Compilation.Expressions
 
                 foreach (var type in builderTypes)
                 {
+                    // TODO: investigate whether the TargetSearchTypes method is needed any more, because it was written before Rezolver supported contravariance.
                     foreach (IExpressionBuilder expressionBuilder in (IEnumerable)this._container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)))
                     {
                         if (expressionBuilder != this)
                         {
-                            if (expressionBuilder.CanBuild(target))
+                            if (expressionBuilder.CanBuild(t))
                             {
                                 return expressionBuilder;
                             }
@@ -54,7 +55,7 @@ namespace Rezolver.Compilation.Expressions
                 }
 
                 return null;
-            })).Value;
+            });
         }
 
         private static IEnumerable<Type> TargetSearchTypes(Type targetType)

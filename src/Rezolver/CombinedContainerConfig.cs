@@ -67,8 +67,8 @@ namespace Rezolver
         /// <param name="container">The container to which the behaviours are being attached.</param>
         /// <param name="targets">The target container used by the <paramref name="container"/> for its registrations.</param>
         /// <remarks>The implementation runs through each behaviour that has been added to the collection, in dependency
-        /// order, calling its <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method.</remarks>
-        public void Configure(IContainer container, IRootTargetContainer targets)
+        /// order, calling its <see cref="IContainerConfig.Configure(Container, IRootTargetContainer)"/> method.</remarks>
+        public void Configure(Container container, IRootTargetContainer targets)
         {
             foreach (var behaviour in Ordered)
             {

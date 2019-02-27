@@ -20,7 +20,7 @@ namespace Rezolver.Configuration
     ///
     /// As such, when applied to an <see cref="IContainer"/> instance, it will only auto-attach when the container is an instance
     /// of (or derived from) <see cref="OverridingContainer"/> *and* if the <see cref="Options.EnableEnumerableInjection"/> options evaluates
-    /// to <c>true</c> when read from the <see cref="ITargetContainer"/> passed to <see cref="Configure(IContainer, IRootTargetContainer)"/>.</remarks>
+    /// to <c>true</c> when read from the <see cref="ITargetContainer"/> passed to <see cref="Configure(Container, IRootTargetContainer)"/>.</remarks>
     public sealed class OverridingEnumerables : IContainerConfig
     {
         /// <summary>
@@ -38,7 +38,7 @@ namespace Rezolver.Configuration
         /// </summary>
         /// <param name="container">The container to be configured.</param>
         /// <param name="targets">The <see cref="ITargetContainer"/> which supplies the registrations for the <paramref name="container"/></param>
-        public void Configure(IContainer container, IRootTargetContainer targets)
+        public void Configure(Container container, IRootTargetContainer targets)
         {
             if (container == null)
             {

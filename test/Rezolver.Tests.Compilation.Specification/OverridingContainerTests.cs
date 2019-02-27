@@ -50,7 +50,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			//and so must use the child container at call-time.
 			var childTargets = CreateTargetContainer();
 			childTargets.RegisterType<Dependant>();
-			IContainer childContainer = CreateOverridingContainer(parent, childTargets);
+			Container childContainer = CreateOverridingContainer(parent, childTargets);
 
 			var result = childContainer.Resolve<Dependant>();
 			Assert.NotNull(result);
@@ -69,7 +69,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			//and so must use the child container at call-time.
 			var childTargets = CreateTargetContainer();
 			childTargets.RegisterType<Dependency>();
-			IContainer childContainer = CreateOverridingContainer(parent, childTargets);
+			Container childContainer = CreateOverridingContainer(parent, childTargets);
 
 			var result = childContainer.Resolve<Dependant>();
 			Assert.NotNull(result);
@@ -91,7 +91,7 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			var childTargets = CreateTargetContainer();
 			childTargets.RegisterType<Dependency>();
-			IContainer childContainer = CreateOverridingContainer(parent, childTargets);
+			Container childContainer = CreateOverridingContainer(parent, childTargets);
 
 			var result = childContainer.Resolve<Dependant>();
 			Assert.NotNull(result);

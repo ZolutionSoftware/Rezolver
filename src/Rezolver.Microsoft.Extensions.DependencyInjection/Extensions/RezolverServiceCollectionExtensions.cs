@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <remarks>The <see cref="Rezolver.Options.LazyEnumerables"/> option (is set to <c>false</c> by this method,
         /// because v2.0 of .Net Core 2 seems to expect all enumerables to be eagerly loaded - getting clarification
         /// on this from the team at https://github.com/aspnet/DependencyInjection/issues/589</remarks>
-        public static IContainer CreateRezolverContainer(this IServiceCollection services)
+        public static Container CreateRezolverContainer(this IServiceCollection services)
 		{
 			if (services == null) throw new ArgumentNullException(nameof(services));
 

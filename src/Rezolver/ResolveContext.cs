@@ -29,7 +29,7 @@ namespace Rezolver
         /// </summary>
         /// <remarks>This is the container which received the original call to <see cref="IContainer.Resolve(ResolveContext)"/>,
         /// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
-        public IContainer Container { get; private set; }
+        public Container Container { get; private set; }
 
         /// <summary>
         /// Gets the scope that's active for all calls for this context.
@@ -55,7 +55,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="requestedType">The type of object to be resolved from the container.</param>
-        public ResolveContext(IContainer container, Type requestedType)
+        public ResolveContext(Container container, Type requestedType)
           : this(container)
         {
             RequestedType = requestedType;
@@ -75,11 +75,11 @@ namespace Rezolver
             RequestedType = requestedType;
         }
 
-        private ResolveContext(IContainer container)
+        private ResolveContext(Container container)
         {
             Container = container ?? StubContainer.Instance;
             // if the container is a scoped container, then we pull it out and set it into this context.
-            Scope = (container as IScopedContainer)?.Scope;
+            Scope = (container as ScopedContainer)?.Scope;
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Rezolver
         /// it's not possible to create a new, child, context which has a null scope.</param>
         /// <returns></returns>
         public ResolveContext New(Type newRequestedType = null,
-            IContainer newContainer = null,
+            Container newContainer = null,
             IContainerScope newScope = null)
         {
             ResolveContext newContext = null;
@@ -215,7 +215,7 @@ namespace Rezolver
             return this;
         }
 
-        public ResolveContext New(IContainer newContainer)
+        public ResolveContext New(Container newContainer)
         {
             if (newContainer != Container)
                 return new ResolveContext(this) { Container = newContainer ?? Container };

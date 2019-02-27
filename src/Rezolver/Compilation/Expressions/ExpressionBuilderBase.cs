@@ -55,13 +55,13 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             public static MethodInfo IContainer_CanResolve_Method =>
                 Extract.Method(
-                    (IContainer c) => c.CanResolve((ResolveContext)null));
+                    (Container c) => c.CanResolve((ResolveContext)null));
 
             /// <summary>
             /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(ResolveContext)"/> method
             /// </summary>
             public static MethodInfo IContainer_Resolve_Method =>
-                Extract.Method((IContainer c) => c.Resolve(null));
+                Extract.Method((Container c) => c.Resolve(null));
 
             internal static object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
             {
@@ -81,15 +81,15 @@ namespace Rezolver.Compilation.Expressions
                         ScopeBehaviour.None));
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="ResolveContext.New(Type, IContainer, IContainerScope)"/> method
+            /// Gets a MethodInfo object for the <see cref="ResolveContext.New(Type, Container, IContainerScope)"/> method
             /// </summary>
             /// <value>The type of the resolve context create new method.</value>
             public static MethodInfo IResolveContext_New_Method =>
-                Extract.Method((ResolveContext r) => r.New((Type)null, (IContainer)null, (IContainerScope)null));
+                Extract.Method((ResolveContext r) => r.New((Type)null, (Container)null, (IContainerScope)null));
 
             /// <summary>
             /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="ResolveContext.New(Type, IContainer, IContainerScope)"/> method with the
+            /// <see cref="ResolveContext.New(Type, Container, IContainerScope)"/> method with the
             /// given arguments.
             /// </summary>
             /// <param name="resolveContext">An expression representing the context on which the method will be called</param>
@@ -105,7 +105,7 @@ namespace Rezolver.Compilation.Expressions
                 return Expression.Call(resolveContext,
                     IResolveContext_New_Method,
                     newRequestedType ?? Expression.Default(typeof(Type)),
-                    newContainer ?? Expression.Default(typeof(IContainer)),
+                    newContainer ?? Expression.Default(typeof(Container)),
                     newScope ?? Expression.Default(typeof(IContainerScope)));
             }
 
@@ -261,7 +261,7 @@ namespace Rezolver.Compilation.Expressions
             var newContextExpr = Methods.CallResolveContext_New(
                     context.ResolveContextParameterExpression,
                     Expression.Constant(builtExpression.Type),
-                            Expression.Default(typeof(IContainer)),
+                            Expression.Default(typeof(Container)),
                             scopePreference == ScopePreference.Current ? (Expression)Expression.Default(typeof(IContainerScope)) :
                             Expression.Call(Methods.IContainerScope_GetRootScope_Method,
                                 context.ContextScopePropertyExpression)
@@ -329,10 +329,10 @@ namespace Rezolver.Compilation.Expressions
         protected abstract Expression Build(ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler);
 
         /// <summary>
-        /// Abstract method (implementation of <see cref="IExpressionBuilder.CanBuild(ITarget)"/>) which
+        /// Abstract method (implementation of <see cref="IExpressionBuilder.CanBuild(Type)"/>) which
         /// determines whether this instance can build an expression for the specified target.
         /// </summary>
-        /// <param name="target">The target.</param>
-        public abstract bool CanBuild(ITarget target);
+        /// <param name="targetType">The type of target.</param>
+        public abstract bool CanBuild(Type targetType);
     }
 }

@@ -53,13 +53,13 @@ namespace Rezolver
         /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
         public bool Disposed { get { return this._disposed; } }
 
-        private readonly IContainer _container;
+        private readonly Container _container;
         /// <summary>
         /// The container that this scope is tied to.  All standard resolve operations
         /// should be made against this container.
         /// </summary>
         /// <value>The container.</value>
-        public IContainer Container
+        public Container Container
         {
             get
             {
@@ -105,7 +105,7 @@ namespace Rezolver
         /// <param name="containerOverride">Optional - the container which should be used for resolve
         /// operations executed against this scope (note - all the resolve methods are declared as extension
         /// methods which mirror those present on <see cref="IContainer"/>.</param>
-        public ContainerScope(IContainerScope parentScope, IContainer containerOverride = null)
+        public ContainerScope(IContainerScope parentScope, Container containerOverride = null)
             : this()
         {
             Parent = parentScope ?? throw new ArgumentNullException(nameof(parentScope));
@@ -119,7 +119,7 @@ namespace Rezolver
         /// Creates a new root scope tied to the given <paramref name="container"/>
         /// </summary>
         /// <param name="container"></param>
-        public ContainerScope(IContainer container)
+        public ContainerScope(Container container)
             : this()
         {
             this._container = container ?? throw new ArgumentNullException(nameof(container));

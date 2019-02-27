@@ -128,13 +128,13 @@ namespace Rezolver.Compilation.Expressions
         /// <summary>
         /// Determines whether this instance can build an expression from the specified target.
         ///
-        /// This base implementation simply checks that the type of <paramref name="target"/> is
+        /// This base implementation simply checks that the type of <paramref name="targetType"/> is
         /// compatible with the type <typeparamref name="TTarget"/>.
         /// </summary>
-        /// <param name="target">The target.</param>
-        public override bool CanBuild(ITarget target)
+        /// <param name="targetType">The target type.</param>
+        public override bool CanBuild(Type targetType)
         {
-            return target is TTarget;
+            return typeof(TTarget).IsAssignableFrom(targetType);
         }
     }
 }

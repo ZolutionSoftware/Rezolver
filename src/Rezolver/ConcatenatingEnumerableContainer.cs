@@ -33,7 +33,7 @@ namespace Rezolver
         private readonly OverridingContainer _owner;
         private readonly IRootTargetContainer _targets;
 
-        public ConcatenatingEnumerableContainer(IContainer owner, IRootTargetContainer targets)
+        public ConcatenatingEnumerableContainer(Container owner, IRootTargetContainer targets)
             : base(targets)
         {
             if (owner == null)

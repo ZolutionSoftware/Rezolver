@@ -17,7 +17,7 @@ namespace Rezolver
     /// Stores and retrieves registrations of <see cref="ITarget"/>s, is also Generic type aware,
     /// unlike its base class - <see cref="TargetDictionaryContainer"/>.
     /// </summary>
-    /// <remarks>This is the type used by default for the <see cref="ContainerBase.Targets"/> of all
+    /// <remarks>This is the type used by default for the <see cref="Container.Targets"/> of all
     /// the standard containers in the core framework, e.g. <see cref="Container"/>,
     /// <see cref="ScopedContainer"/> etc, when you don't supply an instance of an
     /// <see cref="ITargetContainer"/> explicitly on construction.
