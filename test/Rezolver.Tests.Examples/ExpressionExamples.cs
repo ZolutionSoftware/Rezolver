@@ -104,7 +104,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterExpression(() => CurrentPrincipal);
             // now register the expression for the IUserActionsService, which does the
             // role sniffing over the principal as one expression
-            container.RegisterExpression((IPrincipal p, IResolveContext rc) =>
+            container.RegisterExpression((IPrincipal p, ResolveContext rc) =>
                 p.IsInRole("Customer") ?
                 rc.Resolve<CustomerActionsService>() :
                     p.IsInRole("Sales") ?

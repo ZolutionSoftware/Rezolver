@@ -11,8 +11,8 @@ namespace Rezolver.Targets
     /// <summary>
     /// A special delegate target which explicitly allows direct resolving (via <see cref="IDirectTarget"/>) without compilation.
     ///
-    /// Created by the factory and registration functions e.g. <see cref="Target.ForDelegate{TResult}(Func{IResolveContext, TResult}, Type)"/>
-    /// or <see cref="DelegateTargetContainerExtensions.RegisterDelegate{TResult}(ITargetContainer, Func{IResolveContext, TResult}, Type, ScopeBehaviour)"/>.
+    /// Created by the factory and registration functions e.g. <see cref="Target.ForDelegate{TResult}(Func{ResolveContext, TResult}, Type)"/>
+    /// or <see cref="DelegateTargetContainerExtensions.RegisterDelegate{TResult}(ITargetContainer, Func{ResolveContext, TResult}, Type, ScopeBehaviour)"/>.
     /// </summary>
     internal class NullaryDelegateTarget : DelegateTarget, IDirectTarget
     {

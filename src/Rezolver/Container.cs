@@ -13,7 +13,7 @@ namespace Rezolver
     /// The standard IOC container class in Rezolver.
     /// </summary>
     /// <remarks>
-    /// All of this class' functionality is inherited through <see cref="CachingContainerBase"/> and its base classes.
+    /// All of this class' functionality is inherited through <see cref="ContainerBase"/> and its base classes.
     ///
     /// Note that it doesn't implement lifetime scoping (although you can create a lifetime scope from it by calling its
     /// <see cref="IScopeFactory.CreateScope"/> method).
@@ -33,7 +33,7 @@ namespace Rezolver
     ///
     /// If you don't provide a config on construction, then the <see cref="DefaultConfig"/> will be used.
     /// </remarks>
-    public class Container : CachingContainerBase
+    public class Container : ContainerBase
     {
         /// <summary>
         /// The default container config used by all new containers.  You can add/remove configurations from this collection
@@ -56,7 +56,7 @@ namespace Rezolver
         /// Constructs a new instance of the <see cref="Container"/> class.
         /// </summary>
         /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when
-        /// <see cref="IContainer.Resolve(IResolveContext)"/> (and other operations) is called.  If not provided, a new
+        /// <see cref="IContainer.Resolve(ResolveContext)"/> (and other operations) is called.  If not provided, a new
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available
         /// to derived types, after construction, through the <see cref="Targets"/> property.</param>
         /// <param name="config">Can be null.  Configuration to apply to this container (and, potentially its <see cref="Targets"/>).

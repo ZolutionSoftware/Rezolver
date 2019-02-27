@@ -26,14 +26,14 @@ namespace Rezolver
         }
 
         /// <summary>Creates an <see cref="Rezolver.Targets.ExpressionTarget" /> for a lambda expression which takes an
-        /// <see cref="IResolveContext" /> and which returns
+        /// <see cref="ResolveContext" /> and which returns
         /// an instance of <typeparamref name="TResult" /></summary>
         /// <typeparam name="TResult">The return type of the lambda expression.</typeparam>
         /// <param name="lambda">Required.  The lambda expression that is to be wrapped by the target.</param>
         /// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created,
         /// if different from <typeparamref name="TResult" /></param>
         /// <remarks>All arguments to the lambda are injected from the container when compiled and executed</remarks>
-        public static ITarget ForExpression<TResult>(Expression<Func<IResolveContext, TResult>> lambda, Type declaredType = null)
+        public static ITarget ForExpression<TResult>(Expression<Func<ResolveContext, TResult>> lambda, Type declaredType = null)
         {
             if (lambda == null)
             {
@@ -168,7 +168,7 @@ namespace Rezolver
         }
 
         /// <summary>Registers an <see cref="Rezolver.Targets.ExpressionTarget" /> built from a lambda expression which takes an
-        /// <see cref="IResolveContext" /> and which returns an instance of <typeparamref name="TResult" /></summary>
+        /// <see cref="ResolveContext" /> and which returns an instance of <typeparamref name="TResult" /></summary>
         /// <typeparam name="TResult">The return type of the lambda expression.</typeparam>
         /// <param name="targets">Required.  The <see cref="ITargetContainer" /> into which the newly created target will be registered</param>
         /// <param name="lambda">Required.  The lambda expression which is to be compiled and executed when an instance is resolved by a container</param>
@@ -177,7 +177,7 @@ namespace Rezolver
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the compiled expression will be
         /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
         /// <remarks>All arguments to the lambda are injected from the container when compiled and executed</remarks>
-        public static void RegisterExpression<TResult>(this ITargetContainer targets, Expression<Func<IResolveContext, TResult>> lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
+        public static void RegisterExpression<TResult>(this ITargetContainer targets, Expression<Func<ResolveContext, TResult>> lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
         {
             targets.RegisterExpression((Expression)lambda, declaredType, scopeBehaviour);
         }

@@ -217,7 +217,7 @@ namespace Rezolver
             }
         }
 
-        object IContainerScope.Resolve(IResolveContext context, int targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
+        object IContainerScope.Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
         {
             if (Disposed)
             {

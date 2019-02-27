@@ -193,7 +193,7 @@ namespace Rezolver.Targets
         /// which are to be set with values from the container after construction.  The exact behaviour of this is
         /// controlled by the behaviour set on the <see cref="MemberBindingBehaviour"/> property, or, if <c>null</c>
         /// then the method attempts to resolve an <see cref="IMemberBindingBehaviour"/> from the
-        /// <see cref="IResolveContext.Container"/> of the <see cref="IResolveContext"/> set on the
+        /// <see cref="ResolveContext.Container"/> of the <see cref="ResolveContext"/> set on the
         /// <see cref="ICompileContext.ResolveContext"/> of the passed <paramref name="context"/>.</remarks>
         public ConstructorBinding Bind(ICompileContext context)
         {

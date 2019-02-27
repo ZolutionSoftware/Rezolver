@@ -55,7 +55,7 @@ namespace Rezolver.Tests
             using (var scope = new ContainerScope(new Container()))
             {
                 Disposable inner1, inner2;
-                Func<IResolveContext, object> factory = c => new Disposable();
+                Func<ResolveContext, object> factory = c => new Disposable();
 
                 using (var childScope = scope.CreateScope())
                 {
@@ -89,7 +89,7 @@ namespace Rezolver.Tests
             // note - this works because we pass the same target both times
             using (var scope = new ContainerScope(new Container()))
             {
-                Func<IResolveContext, object> factory = c => new NoCtor();
+                Func<ResolveContext, object> factory = c => new NoCtor();
                 var target = new TestTarget();
                 var result = scope.Resolve<NoCtor>(
                     target.Id,
@@ -114,7 +114,7 @@ namespace Rezolver.Tests
         {
             using (var scope = new ContainerScope(new Container()))
             {
-                Func<IResolveContext, object> factory = c => new NoCtor();
+                Func<ResolveContext, object> factory = c => new NoCtor();
 
                 var result = scope.Resolve<NoCtor>(
                     new TestTarget().Id,
@@ -143,7 +143,7 @@ namespace Rezolver.Tests
             Disposable explicitlyScoped, implicitlyScoped;
             using (var scope = new ContainerScope(new Container()))
             {
-                Func<IResolveContext, object> factory = c => new Disposable();
+                Func<ResolveContext, object> factory = c => new Disposable();
                 explicitlyScoped = scope.Resolve<Disposable>(
                     new TestTarget().Id,
                     new ResolveContext(scope, typeof(Disposable)),
@@ -165,7 +165,7 @@ namespace Rezolver.Tests
         [Fact]
         public void ParentScopeShouldDisposeAllChildScopesAndObjects()
         {
-            Func<IResolveContext, object> factory = c => new Disposable();
+            Func<ResolveContext, object> factory = c => new Disposable();
             Disposable parentObj, childObj, grandChildObj, siblingObj;
 
             using (var parent = new ContainerScope(new Container()))

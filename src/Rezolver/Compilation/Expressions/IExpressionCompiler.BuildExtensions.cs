@@ -24,7 +24,7 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="compiler">The compiler.</param>
         /// <param name="target">The target.</param>
         /// <param name="context">The current compilation context.</param>
-        public static Expression<Func<IResolveContext, object>> BuildResolveLambda(this IExpressionCompiler compiler, ITarget target, IExpressionCompileContext context)
+        public static Expression<Func<ResolveContext, object>> BuildResolveLambda(this IExpressionCompiler compiler, ITarget target, IExpressionCompileContext context)
         {
             if(compiler == null) throw new ArgumentNullException(nameof(compiler));
             if(target == null) throw new ArgumentNullException(nameof(target));

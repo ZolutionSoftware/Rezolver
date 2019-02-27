@@ -11,8 +11,8 @@ namespace Rezolver.Targets
 {
     /// <summary>
     /// Represents a target that is rezolved statically at compile time via the <see cref="ICompileContext"/>, or dynamically
-    /// (at 'resolve time') from the <see cref="IContainer"/> that is attached to the current <see cref="IResolveContext"/> when
-    /// <see cref="IContainer.Resolve(IResolveContext)"/> is called.
+    /// (at 'resolve time') from the <see cref="IContainer"/> that is attached to the current <see cref="ResolveContext"/> when
+    /// <see cref="IContainer.Resolve(ResolveContext)"/> is called.
     ///
     /// This is the most common way that we bind constructor parameters, for example - i.e. 'I want an
     /// <c>IService</c> instance - go get it'.
@@ -22,7 +22,7 @@ namespace Rezolver.Targets
     /// constructor parameter bound to one of these).
     ///
     /// So, in essence, a <see cref="ResolvedTarget"/> represents an automatic call to a container's
-    /// <see cref="IContainer.Resolve(IResolveContext)"/> method, for the <see cref="DeclaredType"/>.
+    /// <see cref="IContainer.Resolve(ResolveContext)"/> method, for the <see cref="DeclaredType"/>.
     ///
     /// In practise - an <see cref="ITargetCompiler"/> might take advantage of the fact that, during compilation, targets
     /// can be discovered directly from the <see cref="ICompileContext"/> that is passed to
@@ -33,7 +33,7 @@ namespace Rezolver.Targets
     /// choosing to compile all the expressions for all targets required for an operation into one dynamically built method -
     /// which results in very fast execution times for all resolve operations.
     ///
-    /// Not only this, but the behaviour can be extended still further by realising that a <see cref="IResolveContext.Container"/>
+    /// Not only this, but the behaviour can be extended still further by realising that a <see cref="ResolveContext.Container"/>
     /// on which a resolve operation is invoked might not be the same container for which this <see cref="ResolvedTarget"/> was
     /// first compiled.  In this case - it's possible that the other container has alternative registrations for a given service
     /// type which the application expects to take precedence over those which were originally resolved when compilation took

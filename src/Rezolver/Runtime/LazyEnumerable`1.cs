@@ -32,15 +32,15 @@ namespace Rezolver.Runtime
     /// <seealso cref="EagerEnumerable{T}"/>
     public class LazyEnumerable<T> : IEnumerable<T>
     {
-        private readonly IResolveContext _context;
-        private readonly Func<IResolveContext, object>[] _factories;
+        private readonly ResolveContext _context;
+        private readonly Func<ResolveContext, object>[] _factories;
 
         /// <summary>
         /// Creates a new <see cref="LazyEnumerable{T}"/> instance.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="factories"></param>
-        public LazyEnumerable(IResolveContext context, IEnumerable<Func<IResolveContext, object>> factories)
+        public LazyEnumerable(ResolveContext context, IEnumerable<Func<ResolveContext, object>> factories)
         {
             this._context = context;
 

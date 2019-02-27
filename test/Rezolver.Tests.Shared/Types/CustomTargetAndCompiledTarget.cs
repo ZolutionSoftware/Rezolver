@@ -33,7 +33,7 @@ namespace Rezolver.Tests.Types
             _obj = obj;
         }
 
-        public object GetObject(IResolveContext context)
+        public object GetObject(ResolveContext context)
         {
             if (!context.RequestedType.IsAssignableFrom(_obj.GetType()))
                 throw new ArgumentException($"The RequestedType { context.RequestedType } on the context is not compatible with the object { _obj }", nameof(context));

@@ -10,10 +10,10 @@ namespace Rezolver.Configuration
 {
     /// <summary>
     /// An <see cref="ITargetContainerConfig"/> that enables automatic resolving of the
-    /// <see cref="IResolveContext"/> created for a <see cref="IContainer.Resolve(IResolveContext)"/> operation.
+    /// <see cref="ResolveContext"/> created for a <see cref="IContainer.Resolve(ResolveContext)"/> operation.
     /// </summary>
     /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/>
-    /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method.
+    /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method.
     /// 
     /// This configuration is applied to the <see cref="TargetContainer.DefaultConfig"/> automatically, and cannot be disabled
     /// through the use of options.  Either it's in the configuration, or its not.</remarks>
@@ -25,7 +25,7 @@ namespace Rezolver.Configuration
 
             public bool UseFallback => false;
 
-            public Type DeclaredType => typeof(IResolveContext);
+            public Type DeclaredType => typeof(ResolveContext);
 
             public ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
 
@@ -33,14 +33,14 @@ namespace Rezolver.Configuration
 
             public ITarget SourceTarget => this;
 
-            public object GetObject(IResolveContext context)
+            public object GetObject(ResolveContext context)
             {
                 return context;
             }
 
             public bool SupportsType(Type type)
             {
-                return type.Equals(typeof(IResolveContext));
+                return type.IsAssignableFrom(typeof(ResolveContext));
             }
         }
 
@@ -54,15 +54,15 @@ namespace Rezolver.Configuration
         public static InjectResolveContext Instance { get; } = new InjectResolveContext();
         /// <summary>
         /// Attaches this behaviour to the target container, adding a registration to the <paramref name="targets"/>
-        /// for the type <see cref="IResolveContext"/>.
+        /// for the type <see cref="ResolveContext"/>.
         ///
-        /// Note - if the <paramref name="targets"/> already has a registration for <see cref="IResolveContext"/>,
+        /// Note - if the <paramref name="targets"/> already has a registration for <see cref="ResolveContext"/>,
         /// then the behaviour DOES NOT overwrite it.
         /// </summary>
         /// <param name="targets"></param>
         public void Configure(IRootTargetContainer targets)
         {
-            var existing = targets.Fetch(typeof(IResolveContext));
+            var existing = targets.Fetch(typeof(ResolveContext));
             if (existing == null || existing.UseFallback)
             {
                 targets.Register(this._target);

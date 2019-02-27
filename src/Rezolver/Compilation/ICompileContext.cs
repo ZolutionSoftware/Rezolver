@@ -12,7 +12,7 @@ namespace Rezolver.Compilation
     /// are compiled into <see cref="ICompiledTarget"/> targets, which produce actual instances of objects.
     ///
     /// Instances of this interface are created by calling the
-    /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of the <see cref="ITargetCompiler"/>
+    /// <see cref="ITargetCompiler.CreateContext(ResolveContext, ITargetContainer)"/> method of the <see cref="ITargetCompiler"/>
     /// which is registered in a container.
     /// </summary>
     /// <seealso cref="Rezolver.ITargetContainer" />
@@ -62,7 +62,7 @@ namespace Rezolver.Compilation
         ///
         /// Provides access to the current container, scope and more besides
         /// </summary>
-        IResolveContext ResolveContext { get; }
+        ResolveContext ResolveContext { get; }
 
         /// <summary>
         /// Creates a new child context from this one, except the <see cref="TargetType"/> and

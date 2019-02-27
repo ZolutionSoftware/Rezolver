@@ -23,7 +23,7 @@ namespace Rezolver
     /// in the framework).
     ///
     /// As an example, the <see cref="Container"/> class uses this as the source of the registrations that it uses to resolve objects
-    /// in its <see cref="IContainer.Resolve(IResolveContext)"/> implementation.
+    /// in its <see cref="IContainer.Resolve(ResolveContext)"/> implementation.
     ///
     /// Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
     /// are <see cref="TargetContainer"/> and <see cref="OverridingTargetContainer"/>.</remarks>

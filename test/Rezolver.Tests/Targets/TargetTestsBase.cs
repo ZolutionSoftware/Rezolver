@@ -34,7 +34,7 @@ namespace Rezolver.Tests.Targets
 		/// of the passed target.
 		/// </summary>
 		/// <param name="target">The target.</param>
-		/// <param name="container">The container to use for the <see cref="IResolveContext"/> from which the compile context
+		/// <param name="container">The container to use for the <see cref="ResolveContext"/> from which the compile context
 		/// will be created.  If null, then the <see cref="GetDefaultContainer"/> method is called.</param>
 		/// <param name="targets">The target container to use for the compile context.  If null, then the <paramref name="container"/>
 		/// will be passed to the <see cref="GetDefaultTargetContainer(IContainer)"/> method (including if one is automatically

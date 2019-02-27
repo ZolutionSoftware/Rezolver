@@ -85,7 +85,7 @@ namespace Rezolver.Targets
 
         ITarget ICompiledTarget.SourceTarget => this;
 
-        object ICompiledTarget.GetObject(IResolveContext context) => Value;
+        object ICompiledTarget.GetObject(ResolveContext context) => Value;
 
         object IDirectTarget.GetValue() => Value;
     }

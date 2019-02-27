@@ -12,7 +12,7 @@ namespace Rezolver.Compilation
 {
     /// <summary>
     /// Core implementation of <see cref="ICompileContext" />.  A root context (i.e. where <see cref="ParentContext"/> is
-    /// <c>null</c>; created via the <see cref="CompileContext.CompileContext(IResolveContext, ITargetContainer, Type)"/>
+    /// <c>null</c>; created via the <see cref="CompileContext.CompileContext(ResolveContext, ITargetContainer, Type)"/>
     /// constructor) is the starting point for all shared state, such as the <see cref="Container"/> and the compilation
     /// stack.
     ///
@@ -27,7 +27,7 @@ namespace Rezolver.Compilation
     /// <seealso cref="Rezolver.ITargetContainer" />
     /// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
     /// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via the
-    /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of an
+    /// <see cref="ITargetCompiler.CreateContext(ResolveContext, ITargetContainer)"/> method of an
     /// <see cref="ITargetCompiler" /> resolved from an <see cref="IContainer" />.
     /// </remarks>
     public class CompileContext : ICompileContext, ITargetContainer
@@ -52,11 +52,11 @@ namespace Rezolver.Compilation
         /// <value>The parent context.</value>
         public ICompileContext ParentContext { get; }
 
-        private readonly IResolveContext _resolveContext;
+        private readonly ResolveContext _resolveContext;
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ResolveContext"/>
         /// </summary>
-        public IResolveContext ResolveContext => this._resolveContext ?? ParentContext?.ResolveContext;
+        public ResolveContext ResolveContext => this._resolveContext ?? ParentContext?.ResolveContext;
 
         private readonly Type _targetType;
         /// <summary>
@@ -135,7 +135,7 @@ namespace Rezolver.Compilation
         /// without modifying the underlying targets in the container you pass.</param>
         /// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If null, then any
         /// <see cref="ITarget"/> that is compiled should be compiled for its own <see cref="ITarget.DeclaredType"/>.</param>
-        protected CompileContext(IResolveContext resolveContext,
+        protected CompileContext(ResolveContext resolveContext,
           ITargetContainer dependencyTargetContainer,
           Type targetType = null
           )

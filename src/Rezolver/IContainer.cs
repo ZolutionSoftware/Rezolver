@@ -12,16 +12,16 @@ namespace Rezolver
     /// The primary IOC container interface in the Rezolver framework.
     /// </summary>
     /// <remarks>Instances of objects (typically known as 'services' in IOC-speak) are resolved via the <see cref="Resolve"/> or
-    /// <see cref="TryResolve(IResolveContext, out object)"/> methods.
+    /// <see cref="TryResolve(ResolveContext, out object)"/> methods.
     ///
     /// You can introspect the container to check in advance whether a given type can be resolved through the
-    /// <see cref="CanResolve(IResolveContext)"/> method.
+    /// <see cref="CanResolve(ResolveContext)"/> method.
     ///
     /// Lifetime scoping (where <see cref="IDisposable"/> objects are created within a scope and destroyed when that scope is destroyed) can be achieved
     /// by obtaining a new scope through the object's implementatio of the <see cref="IScopeFactory.CreateScope"/> method; although a container might also implement the
     /// <see cref="IScopedContainer"/> interface, in which case the container itself is a lifetime scope.
     ///
-    /// Many of the functions which accept a <see cref="IResolveContext"/> also have alternatives (in the form of extension methods) in the
+    /// Many of the functions which accept a <see cref="ResolveContext"/> also have alternatives (in the form of extension methods) in the
     /// <see cref="ContainerResolveExtensions"/> class.  If you're looking for the 'traditional' IOC container methods
     /// (e.g. <see cref="ContainerResolveExtensions.Resolve{TObject}(IContainer)"/>, that's where you'll find them.
     ///
@@ -33,34 +33,34 @@ namespace Rezolver
     {
         /// <summary>
         /// Returns true if a resolve operation for the given context will succeed.
-        /// If you're going to be calling <see cref="Resolve(IResolveContext)"/> immediately afterwards, consider using the
-        /// <see cref="TryResolve(IResolveContext, out object)"/> method instead, which allows you to check and obtain the result at the same time.
+        /// If you're going to be calling <see cref="Resolve(ResolveContext)"/> immediately afterwards, consider using the
+        /// <see cref="TryResolve(ResolveContext, out object)"/> method instead, which allows you to check and obtain the result at the same time.
         /// </summary>
         /// <param name="context">The resolve context.</param>
         /// <returns><c>true</c> if this instance can resolve a type for the specified context; otherwise, <c>false</c>.</returns>
-        bool CanResolve(IResolveContext context);
+        bool CanResolve(ResolveContext context);
 
         /// <summary>
-        /// Called to resolve a reference to an object for the given context (which provides the <see cref="IResolveContext.RequestedType"/> of the
+        /// Called to resolve a reference to an object for the given context (which provides the <see cref="ResolveContext.RequestedType"/> of the
         /// object that is required, among other things).
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns>The resolved object, if successful.</returns>
         /// <exception cref="System.InvalidOperationException">If the requested type cannot be resolved.</exception>
-        object Resolve(IResolveContext context);
+        object Resolve(ResolveContext context);
 
         /// <summary>
-        /// Merges the <see cref="CanResolve(IResolveContext)"/> and <see cref="Resolve(IResolveContext)"/> operations into one operation.
+        /// Merges the <see cref="CanResolve(ResolveContext)"/> and <see cref="Resolve(ResolveContext)"/> operations into one operation.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <param name="result">Receives the resultant resolved object if the operation succeeds.</param>
         /// <returns><c>true</c> if the operation succeeded (the resolved object will be set into the <paramref name="result"/>
         /// parameter); <c>false</c> otherwise.</returns>
-        bool TryResolve(IResolveContext context, out object result);
+        bool TryResolve(ResolveContext context, out object result);
 
         /// <summary>
-        /// Fetches the <see cref="ICompiledTarget"/> for the given context, whose <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method
-        /// would ultimately be called if the same context was passed to <see cref="Resolve(IResolveContext)"/> or <see cref="TryResolve(IResolveContext, out object)"/>.
+        /// Fetches the <see cref="ICompiledTarget"/> for the given context, whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method
+        /// would ultimately be called if the same context was passed to <see cref="Resolve(ResolveContext)"/> or <see cref="TryResolve(ResolveContext, out object)"/>.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <remarks>This is not typically a method that you're likely to use as the consumer of an <see cref="IContainer" />.
@@ -69,6 +69,6 @@ namespace Rezolver
         ///
         /// As such, its use at an application level is limited.
         /// </remarks>
-        ICompiledTarget GetCompiledTarget(IResolveContext context);
+        ICompiledTarget GetCompiledTarget(ResolveContext context);
     }
 }

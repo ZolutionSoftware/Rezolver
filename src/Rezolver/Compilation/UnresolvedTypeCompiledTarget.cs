@@ -15,7 +15,7 @@ namespace Rezolver.Compilation
     /// </summary>
     /// <remarks>Use of this class is encouraged when an <see cref="IContainer"/> cannot resolve a type.  Instead of
     /// checking the compiled target for a null, an instance of this can be returned in its place, but its only when the
-    /// <see cref="GetObject(IResolveContext)"/> method is executed that an exception occurs.
+    /// <see cref="GetObject(ResolveContext)"/> method is executed that an exception occurs.
     ///
     /// This is particularly useful when using classes such as <see cref="OverridingContainer"/>, which allow dependencies
     /// that do not exist in the base container to be fulfilled by the overriding container instead: by delaying the throwing
@@ -40,11 +40,11 @@ namespace Rezolver.Compilation
         }
 
         /// <summary>
-        /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)"/>
+        /// Implementation of <see cref="ICompiledTarget.GetObject(ResolveContext)"/>
         /// </summary>
-        /// <param name="context">The current <see cref="IResolveContext"/></param>
+        /// <param name="context">The current <see cref="ResolveContext"/></param>
         /// <returns>Always throws an <see cref="InvalidOperationException"/></returns>
-        public object GetObject(IResolveContext context) => throw new InvalidOperationException($"Could not resolve type {this._requestedType}");
+        public object GetObject(ResolveContext context) => throw new InvalidOperationException($"Could not resolve type {this._requestedType}");
     }
 }
 

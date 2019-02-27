@@ -55,7 +55,7 @@ namespace Rezolver.Benchmark
             public ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
             public ScopePreference ScopePreference => ScopePreference.Current;
 
-            public object GetObject(IResolveContext context)
+            public object GetObject(ResolveContext context)
             {
                 return new SimpleType();
             }

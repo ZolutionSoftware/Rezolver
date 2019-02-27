@@ -10,14 +10,14 @@ using Rezolver.Compilation;
 namespace Rezolver
 {
     /// <summary>
-    /// Standard implementation of <see cref="Rezolver.IResolveContext"/>
+    /// 
     /// </summary>
-    public class ResolveContext : IResolveContext
+    public sealed class ResolveContext : IScopeFactory
     {
         /// <summary>
         /// A reference to the context from which this one was created.
         /// </summary>
-        public IResolveContext Previous { get; private set; }
+        public ResolveContext Previous { get; private set; }
 
         /// <summary>
         /// Gets the type being requested from the container.
@@ -27,7 +27,7 @@ namespace Rezolver
         /// <summary>
         /// The container for this context.
         /// </summary>
-        /// <remarks>This is the container which received the original call to <see cref="IContainer.Resolve(IResolveContext)"/>,
+        /// <remarks>This is the container which received the original call to <see cref="IContainer.Resolve(ResolveContext)"/>,
         /// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
         public IContainer Container { get; private set; }
 
@@ -42,7 +42,7 @@ namespace Rezolver
         /// <see cref="Previous"/> set to the one passed.
         /// </summary>
         /// <param name="previous"></param>
-        private ResolveContext(IResolveContext previous)
+        private ResolveContext(ResolveContext previous)
         {
             Previous = previous;
             RequestedType = previous.RequestedType;
@@ -111,7 +111,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Mirror of the <see cref="IContainer.TryResolve(IResolveContext, out object)"/> method
+        /// Mirror of the <see cref="IContainer.TryResolve(ResolveContext, out object)"/> method
         /// which works directly off this resolve context - taking into account the current
         /// <see cref="Container"/> and <see cref="Scope"/>
         /// </summary>
@@ -159,7 +159,7 @@ namespace Rezolver
         /// container is passed to this parameter.  Note the implication: once a context has a non-null <see cref="Scope"/>,
         /// it's not possible to create a new, child, context which has a null scope.</param>
         /// <returns></returns>
-        public IResolveContext New(Type newRequestedType = null,
+        public ResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,
             IContainerScope newScope = null)
         {
@@ -205,6 +205,20 @@ namespace Rezolver
                 return newContext;
             }
 
+            return this;
+        }
+
+        public ResolveContext New(Type newRequestedType)
+        {
+            if (newRequestedType != RequestedType)
+                return new ResolveContext(this) { RequestedType = newRequestedType ?? RequestedType };
+            return this;
+        }
+
+        public ResolveContext New(IContainer newContainer)
+        {
+            if (newContainer != Container)
+                return new ResolveContext(this) { Container = newContainer ?? Container };
             return this;
         }
 

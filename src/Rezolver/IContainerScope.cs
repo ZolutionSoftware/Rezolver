@@ -40,12 +40,12 @@ namespace Rezolver
     public enum ScopePreference
     {
         /// <summary>
-        /// The object will be tracked within the scope already set on the <see cref="IResolveContext"/>
+        /// The object will be tracked within the scope already set on the <see cref="ResolveContext"/>
         /// </summary>
         Current = 0,
         /// <summary>
         /// The object (and all its dependants) will be tracked within the root scope of the current scope
-        /// set on the <see cref="IResolveContext"/>
+        /// set on the <see cref="ResolveContext"/>
         /// </summary>
         Root
     }
@@ -95,7 +95,7 @@ namespace Rezolver
         /// method supporting targets and compiled targets - i.e. not a method that an application should
         /// be calling.
         /// </remarks>
-        object Resolve(IResolveContext context, int targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour);
+        object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour);
         // REVIEW: The enum solution for this method works fine for now, but offers no scope for extending it outside of the Rezolver codebase.
         // The more extensible solution would be to have an interface which represents the behaviour so that the logic for that behaviour can be abstracted away
         // The difficulty with this being that it means the underlying storage containers for scoped objects used by the scope needs to exposed to implementations

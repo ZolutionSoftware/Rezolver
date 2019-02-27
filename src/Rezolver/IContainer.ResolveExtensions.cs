@@ -11,7 +11,7 @@ using System.Text;
 namespace Rezolver
 {
     /// <summary>
-    /// Extension methods for <see cref="IContainer"/> which provide shortcuts for the <see cref="IContainer.Resolve(IResolveContext)"/>
+    /// Extension methods for <see cref="IContainer"/> which provide shortcuts for the <see cref="IContainer.Resolve(ResolveContext)"/>
     /// operation.
     /// </summary>
     public static partial class ContainerResolveExtensions
@@ -106,7 +106,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Determines whether this instance can resolve the specified type - wrapper for <see cref="IContainer.CanResolve(IResolveContext)"/>
+        /// Determines whether this instance can resolve the specified type - wrapper for <see cref="IContainer.CanResolve(ResolveContext)"/>
         /// </summary>
         /// <param name="container">The container.</param>
         /// <param name="type">The type.</param>
@@ -116,7 +116,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Determines whether this instance can resolve the specified container - wrapper for <see cref="IContainer.CanResolve(IResolveContext)"/>
+        /// Determines whether this instance can resolve the specified container - wrapper for <see cref="IContainer.CanResolve(ResolveContext)"/>
         /// </summary>
         /// <typeparam name="TObject">The type to be checked..</typeparam>
         /// <param name="container">The container.</param>

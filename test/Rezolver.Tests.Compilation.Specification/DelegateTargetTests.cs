@@ -55,7 +55,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void DelegateTarget_ShouldInject_ResolveContext()
 		{
-			Func<IResolveContext, RequiresResolveContext> f = (IResolveContext rc) => new RequiresResolveContext(rc);
+			Func<ResolveContext, RequiresResolveContext> f = (ResolveContext rc) => new RequiresResolveContext(rc);
 			var targets = CreateTargetContainer();
 			targets.RegisterDelegate(f);
 			var container = CreateContainer(targets);
@@ -85,7 +85,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		[Fact]
 		public void DelegateTarget_ShouldInject_ResolveContext_Int()
 		{
-			Func<IResolveContext, int, string> f = (rc, i) =>
+			Func<ResolveContext, int, string> f = (rc, i) =>
 			{
 				Assert.NotNull(rc);
 				return $"String #{i}";
@@ -106,7 +106,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		public void DelegateTarget_ShouldInject_Int_ResolveContext()
 		{
 			//same as above, just the parameters are reversed - checking that there's no cheating going on
-			Func<int, IResolveContext, string> f = (i, rc) =>
+			Func<int, ResolveContext, string> f = (i, rc) =>
 			{
 				Assert.NotNull(rc);
 				return $"String #{i}";
@@ -128,7 +128,7 @@ namespace Rezolver.Tests.Compilation.Specification
 			return $"Instance {_thisID}, String #{i}";
 		}
 
-		string DelegateTargetMethodWithContext(int i, IResolveContext c)
+		string DelegateTargetMethodWithContext(int i, ResolveContext c)
 		{
 			return $"Instance {_thisID}, String #{i}, for context {c}";
 		}

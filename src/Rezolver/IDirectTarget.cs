@@ -13,7 +13,7 @@ namespace Rezolver
     /// </summary>
     /// <remarks>This has similarities to <see cref="ICompiledTarget"/> except implementations of
     /// this interface guarantee that an object can be obtained (via <see cref="GetValue"/>)
-    /// outside the context of a <see cref="IContainer.Resolve(IResolveContext)"/> operation,
+    /// outside the context of a <see cref="IContainer.Resolve(ResolveContext)"/> operation,
     /// without requiring any compilation or other container operations.
     ///
     /// Rezolver uses targets like this extensively for its configuration and container

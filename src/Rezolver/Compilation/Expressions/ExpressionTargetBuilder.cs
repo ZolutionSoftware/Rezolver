@@ -16,7 +16,7 @@ namespace Rezolver.Compilation.Expressions
     /// target type.
     ///
     /// This builder takes care of all expressions, including lambdas (where additional parameters beyond the standard
-    /// <see cref="IResolveContext"/> are turned into local variables with injected values), producing an expression which can
+    /// <see cref="ResolveContext"/> are turned into local variables with injected values), producing an expression which can
     /// be compiled by an <see cref="IExpressionCompiler"/> after a <see cref="TargetExpressionRewriter"/> has been used to
     /// expand any targets embedded in the expression.
     /// </summary>
@@ -70,8 +70,8 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             private static readonly MethodInfo[] RezolveMethods =
             {
-                Extract.Method((IResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
-                Extract.Method((IResolveContext rc) => rc.Resolve(typeof(int)))
+                Extract.Method((ResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
+                Extract.Method((ResolveContext rc) => rc.Resolve((Type)typeof(int)))
             };
 
             /// <summary>
@@ -186,7 +186,7 @@ namespace Rezolver.Compilation.Expressions
                 Expression body = node.Body;
                 try
                 {
-                    ParameterExpression rezolveContextParam = node.Parameters.SingleOrDefault(p => p.Type == typeof(IResolveContext));
+                    ParameterExpression rezolveContextParam = node.Parameters.SingleOrDefault(p => p.Type == typeof(ResolveContext));
                     // if the lambda had a parameter of the type ResolveContext, swap it for the
                     // RezolveContextParameterExpression parameter expression that all the internal
                     // components use when building expression trees from targets.
@@ -202,7 +202,7 @@ namespace Rezolver.Compilation.Expressions
                     throw new ArgumentException($"The lambda expression {node} is not supported - it has multiple ResolveContext parameters, and only a maximum of one is allowed", nameof(node), ioex);
                 }
 
-                var variables = node.Parameters.Where(p => p.Type != typeof(IResolveContext)).ToArray();
+                var variables = node.Parameters.Where(p => p.Type != typeof(ResolveContext)).ToArray();
                 // if we have lambda parameters which need to be converted to block variables which are resolved
                 // by assignment (dynamic service location I suppose you'd call it) then we need to wrap everything
                 // in a block expression.

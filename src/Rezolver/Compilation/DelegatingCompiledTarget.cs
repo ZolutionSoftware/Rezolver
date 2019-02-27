@@ -13,7 +13,7 @@ namespace Rezolver.Compilation
     /// </summary>
     public class DelegatingCompiledTarget : ICompiledTarget
     {
-        private readonly Func<IResolveContext, object> _callback;
+        private readonly Func<ResolveContext, object> _callback;
 
         /// <summary>
         /// Implementation of <see cref="ICompiledTarget.SourceTarget"/>
@@ -24,22 +24,22 @@ namespace Rezolver.Compilation
         /// Creates a new instance of the <see cref="DelegatingCompiledTarget"/> class.
         /// </summary>
         /// <param name="callback">Required.  The delegate to be executed when
-        /// <see cref="GetObject(IResolveContext)"/> is called.</param>
+        /// <see cref="GetObject(ResolveContext)"/> is called.</param>
         /// <param name="sourceTarget">Required.  The <see cref="ITarget"/> from which this
         /// <see cref="DelegatingCompiledTarget"/> is constructed.</param>
-        public DelegatingCompiledTarget(Func<IResolveContext, object> callback, ITarget sourceTarget)
+        public DelegatingCompiledTarget(Func<ResolveContext, object> callback, ITarget sourceTarget)
         {
             this._callback = callback ?? throw new ArgumentNullException(nameof(callback));
             SourceTarget = sourceTarget ?? throw new ArgumentNullException(nameof(sourceTarget));
         }
 
         /// <summary>
-        /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)" /> - simply
+        /// Implementation of <see cref="ICompiledTarget.GetObject(ResolveContext)" /> - simply
         /// executes the delegate passed on construction.
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public object GetObject(IResolveContext context)
+        public object GetObject(ResolveContext context)
         {
             return this._callback(context);
         }

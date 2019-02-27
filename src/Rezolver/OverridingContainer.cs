@@ -16,13 +16,13 @@ namespace Rezolver
     /// e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.
     /// </summary>
     /// <remarks>When overriding another <see cref="IContainer"/>, you are overriding the <see cref="ICompiledTarget"/> objects that
-    /// will be returned when <see cref="IContainer.GetCompiledTarget(IResolveContext)"/> is called on that container and, therefore,
-    /// the compiled target which is executed when the <see cref="IContainer.Resolve(IResolveContext)"/> method is called.
+    /// will be returned when <see cref="IContainer.GetCompiledTarget(ResolveContext)"/> is called on that container and, therefore,
+    /// the compiled target which is executed when the <see cref="IContainer.Resolve(ResolveContext)"/> method is called.
     ///
     /// This has the side effect of overriding automatically resolved arguments (bound to a <see cref="ResolvedTarget"/>) compiled
     /// in the overridden container by virtue of the fact that the overriding container is a different reference, because the
     /// <see cref="ResolvedTarget"/> is typically compiled with a check, at resolve-time, that the
-    /// <see cref="IResolveContext.Container"/> is the same container as the one that was active when it was originally compiled.
+    /// <see cref="ResolveContext.Container"/> is the same container as the one that was active when it was originally compiled.
     ///
     /// In essence, when resolving an instance as a dependency the <see cref="ResolvedTarget"/> does something like this:
     ///
@@ -76,10 +76,10 @@ namespace Rezolver
         /// <summary>
         /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
         /// </summary>
-        /// <param name="context">Required.  The <see cref="IResolveContext"/>.</param>
+        /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
         /// <returns><c>true</c> if either this container or the inner container can resolve the
-        /// <see cref="IResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
-        public override bool CanResolve(IResolveContext context)
+        /// <see cref="ResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
+        public override bool CanResolve(ResolveContext context)
         {
             return base.CanResolve(context) || Inner.CanResolve(context);
         }
@@ -88,9 +88,9 @@ namespace Rezolver
         /// Overrides the base implementation to pass the lookup for an <see cref="ITarget"/> to the inner container - this
         /// is how dependency chaining from this container to the inner container is achieved.
         /// </summary>
-        /// <param name="context">Required.  The <see cref="IResolveContext"/>.</param>
+        /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
         /// <returns></returns>
-        protected override ICompiledTarget GetFallbackCompiledTarget(IResolveContext context)
+        protected override ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
         {
             return Inner.GetCompiledTarget(context);
         }

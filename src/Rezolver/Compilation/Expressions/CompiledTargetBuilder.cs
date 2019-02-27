@@ -15,15 +15,15 @@ namespace Rezolver.Compilation.Expressions
     /// will be used for <see cref="Rezolver.Targets.ObjectTarget"/> instead of this one, even though that class also implements
     /// <see cref="ICompiledTarget"/>.
     /// </summary>
-    /// <remarks>This builder creates an expression which explicitly calls the <see cref="ICompiledTarget.GetObject(IResolveContext)"/>
-    /// method of the target, with an <see cref="IResolveContext"/> which naturally flows from the one created for the wider
+    /// <remarks>This builder creates an expression which explicitly calls the <see cref="ICompiledTarget.GetObject(ResolveContext)"/>
+    /// method of the target, with an <see cref="ResolveContext"/> which naturally flows from the one created for the wider
     /// resolve call to the container.</remarks>
     public class CompiledTargetBuilder : ExpressionBuilderBase<ICompiledTarget>
     {
         /// <summary>
-        /// Builds an expression which calls the <see cref="ICompiledTarget.GetObject(IResolveContext)"/> of the passed <paramref name="target"/>
+        /// Builds an expression which calls the <see cref="ICompiledTarget.GetObject(ResolveContext)"/> of the passed <paramref name="target"/>
         /// </summary>
-        /// <param name="target">The target whose <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method is to be called by the expression
+        /// <param name="target">The target whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method is to be called by the expression
         /// that is returned from this builder.</param>
         /// <param name="context">The compilation context</param>
         /// <param name="compiler">The compiler for which the expression is being built.</param>

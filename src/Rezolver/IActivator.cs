@@ -8,6 +8,6 @@ namespace Rezolver
 {
     public interface IActivator
     {
-        object Activate(Activation activation, Func<IResolveContext, object> factory, IResolveContext context);
+        object Activate(Activation activation, Func<ResolveContext, object> factory, ResolveContext context);
     }
 }

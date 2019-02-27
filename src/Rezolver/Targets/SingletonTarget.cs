@@ -43,12 +43,12 @@ namespace Rezolver.Targets
                 ICompiledTarget CreateCompiledTarget(TypeAndTargetId k) => compiledTargetFactory(target, context);
             }
 
-            private Lazy<object> GetLazy(IResolveContext context, int targetId, Func<IResolveContext, object> lazyFactory)
+            private Lazy<object> GetLazy(ResolveContext context, int targetId, Func<ResolveContext, object> lazyFactory)
             {
                 return GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
             }
 
-            private Lazy<object> GetLazy(IResolveContext context, in TypeAndTargetId key, Func<IResolveContext, object> lazyFactory)
+            private Lazy<object> GetLazy(ResolveContext context, in TypeAndTargetId key, Func<ResolveContext, object> lazyFactory)
             {
                 return this._cached.GetOrAdd(key, c => new Lazy<object>(() => lazyFactory(context)));
             }

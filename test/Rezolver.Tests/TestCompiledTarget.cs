@@ -16,7 +16,7 @@ namespace Rezolver.Tests
 			_obj = obj;
 		}
 
-		public object GetObject(IResolveContext context)
+		public object GetObject(ResolveContext context)
 		{
 			return _obj;
 		}

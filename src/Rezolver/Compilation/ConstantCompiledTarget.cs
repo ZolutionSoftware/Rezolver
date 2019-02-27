@@ -21,7 +21,7 @@ namespace Rezolver.Compilation
         /// <summary>
         /// Constructs a new instance of the <see cref="ConstantCompiledTarget"/>
         /// </summary>
-        /// <param name="obj">The constant object to be returned by <see cref="GetObject(IResolveContext)"/></param>
+        /// <param name="obj">The constant object to be returned by <see cref="GetObject(ResolveContext)"/></param>
         /// <param name="sourceTarget">The <see cref="ITarget"/> from which this compiled target is created.</param>
         public ConstantCompiledTarget(object obj, ITarget sourceTarget)
         {
@@ -30,12 +30,12 @@ namespace Rezolver.Compilation
         }
 
         /// <summary>
-        /// Implementation of <see cref="ICompiledTarget.GetObject(IResolveContext)"/> - simply returns the
+        /// Implementation of <see cref="ICompiledTarget.GetObject(ResolveContext)"/> - simply returns the
         /// target with which this instance was constructed.
         /// </summary>
         /// <param name="context">ignored</param>
         /// <returns></returns>
-        public object GetObject(IResolveContext context)
+        public object GetObject(ResolveContext context)
         {
             return this._obj;
         }

@@ -68,7 +68,7 @@ namespace Rezolver.Tests.Targets
 		[Fact]
 		public void DeclaredTypeShouldBeInheritedFromLambdaExpression()
 		{
-			Expression<Func<IResolveContext, string>> expr = c => "hello world";
+			Expression<Func<ResolveContext, string>> expr = c => "hello world";
 
 			var result2 = new ExpressionTarget(expr);
 

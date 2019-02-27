@@ -123,7 +123,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterDelegate(() => CurrentPrincipal);
             // now register the delegate handler for the IUserActionsService, which does the
             // role sniffing over the principal
-            container.RegisterDelegate((IPrincipal p, IResolveContext rc) => {
+            container.RegisterDelegate((IPrincipal p, ResolveContext rc) => {
                 IUserActionsService toReturn = null;
                 if (p != null)
                 {

@@ -14,7 +14,7 @@ namespace Rezolver
         {
             private readonly IEnumerable<T> _concatenated;
 
-            public EnumerableConcatenator(IResolveContext context, IEnumerable<T> baseEnumerable, IEnumerable<T> extra)
+            public EnumerableConcatenator(ResolveContext context, IEnumerable<T> baseEnumerable, IEnumerable<T> extra)
             {
                 this._concatenated = baseEnumerable.Concat(extra);
             }
@@ -54,7 +54,7 @@ namespace Rezolver
             // so this type wrangling is safe
 
             return Target.ForType(typeof(EnumerableConcatenator<>).MakeGenericType(type.GetGenericArguments()[0]),
-                new { context = Target.Resolved<IResolveContext>(), baseEnumerable = baseCompiled.SourceTarget, extra = overrideTarget });
+                new { context = Target.Resolved<ResolveContext>(), baseEnumerable = baseCompiled.SourceTarget, extra = overrideTarget });
         }
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)

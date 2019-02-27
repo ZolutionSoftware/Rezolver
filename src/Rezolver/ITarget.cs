@@ -9,17 +9,17 @@ using Rezolver.Targets;
 namespace Rezolver
 {
     /// <summary>
-    /// Represents an action to be performed in order to obtain an object to satisfy a call to <see cref="IContainer.Resolve(IResolveContext)"/>,
+    /// Represents an action to be performed in order to obtain an object to satisfy a call to <see cref="IContainer.Resolve(ResolveContext)"/>,
     /// when the standard implementations of <see cref="IContainer"/> are used (e.g. <see cref="Container"/>).
     /// </summary>
     /// <remarks>
     /// As mentioned in the summary, the role of this interface is largely determined by the framework's own standard implementations of the
     /// <see cref="IContainer"/> interface - all of which use an <see cref="ITargetContainer"/> to store service registrations which, when
-    /// <see cref="IContainer.Resolve(IResolveContext)"/> is called, is queried to obtain one or more targets which will have been registered
+    /// <see cref="IContainer.Resolve(ResolveContext)"/> is called, is queried to obtain one or more targets which will have been registered
     /// for the requested type.
     ///
     /// After obtaining a target, an <see cref="Compilation.ITargetCompiler"/> is then used to compile the target(s) into an
-    /// <see cref="ICompiledTarget"/> whose <see cref="ICompiledTarget.GetObject(IResolveContext)"/> method will ultimately then be called to
+    /// <see cref="ICompiledTarget"/> whose <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method will ultimately then be called to
     /// 'resolve' the instance.  The role of the target, then, is to act as a description of the action that is to be performed by that
     /// compiled target that is built from it.
     ///

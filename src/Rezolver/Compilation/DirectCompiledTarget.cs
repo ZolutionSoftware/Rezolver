@@ -10,7 +10,7 @@ namespace Rezolver.Compilation
     /// <summary>
     /// An <see cref="ICompiledTarget"/> which wraps around an <see cref="IDirectTarget"/>.
     ///
-    /// The implementation of <see cref="GetObject(IResolveContext)"/> simply executes the target's
+    /// The implementation of <see cref="GetObject(ResolveContext)"/> simply executes the target's
     /// <see cref="IDirectTarget.GetValue"/> method.
     /// </summary>
     internal class DirectCompiledTarget : ICompiledTarget
@@ -24,7 +24,7 @@ namespace Rezolver.Compilation
             this._directTarget = target;
         }
 
-        public object GetObject(IResolveContext context)
+        public object GetObject(ResolveContext context)
         {
             return this._directTarget.GetValue();
         }

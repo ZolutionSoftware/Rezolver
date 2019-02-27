@@ -55,7 +55,7 @@ namespace Rezolver.Tests.Compilation.Specification
             _registrations.RegisterObject(service, serviceType: typeof(TService));
         }
 
-        bool IContainer.CanResolve(IResolveContext context)
+        bool IContainer.CanResolve(ResolveContext context)
         {
             var target = _registrations.Fetch(context.RequestedType) as Targets.ObjectTarget;
             return (target != null && !target.UseFallback) || _inner.CanResolve(context);
@@ -66,7 +66,7 @@ namespace Rezolver.Tests.Compilation.Specification
             return new ContainerScope(this);
         }
 
-        ICompiledTarget IContainer.GetCompiledTarget(IResolveContext context)
+        ICompiledTarget IContainer.GetCompiledTarget(ResolveContext context)
         {
             // the registrations only allow ObjectTargets or other objects which support ICompiledTarget or direct resolving,
             // so if it gets a result, we know we can use it.
@@ -79,13 +79,13 @@ namespace Rezolver.Tests.Compilation.Specification
             return target != null ? target.Value : _inner.GetService(serviceType);
         }
 
-        object IContainer.Resolve(IResolveContext context)
+        object IContainer.Resolve(ResolveContext context)
         {
             var target = _registrations.Fetch(context.RequestedType) as Targets.ObjectTarget;
             return target != null ? target.Value : _inner.Resolve(context);
         }
 
-        bool IContainer.TryResolve(IResolveContext context, out object result)
+        bool IContainer.TryResolve(ResolveContext context, out object result)
         {
             result = null;
             var target = _registrations.Fetch(context.RequestedType) as Targets.ObjectTarget;

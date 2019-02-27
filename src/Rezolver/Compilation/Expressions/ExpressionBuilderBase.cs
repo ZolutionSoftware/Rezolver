@@ -36,7 +36,7 @@ namespace Rezolver.Compilation.Expressions
             Extract.Method((IDirectTarget t) => t.GetValue());
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ICompiledTarget.GetObject(IResolveContext)"/>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="ICompiledTarget.GetObject(ResolveContext)"/>
             /// method.
             /// </summary>
             public static MethodInfo ICompiledTarget_GetObject_Method =>
@@ -50,51 +50,46 @@ namespace Rezolver.Compilation.Expressions
                 Extract.Method((IContainerScope s) => s.GetRootScope());
 
             /// <summary>
-            /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(IResolveContext)"/>
+            /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(ResolveContext)"/>
             /// method
             /// </summary>
             public static MethodInfo IContainer_CanResolve_Method =>
                 Extract.Method(
-                    (IContainer c) => c.CanResolve((IResolveContext)null));
+                    (IContainer c) => c.CanResolve((ResolveContext)null));
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(IResolveContext)"/> method
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(ResolveContext)"/> method
             /// </summary>
             public static MethodInfo IContainer_Resolve_Method =>
                 Extract.Method((IContainer c) => c.Resolve(null));
 
-            /// <summary>
-            /// Gets a MethodInfo object for the <see cref="IContainerScope.Resolve(IResolveContext, int, Func{IResolveContext, object}, ScopeBehaviour)"/>
-            /// method for help in generating scope-interfacing code.
-            /// </summary>
-            public static MethodInfo IContainerScope_Resolve_Method =>
-                Extract.Method(
-                    (IContainerScope s) => s.Resolve(
-                        (IResolveContext)null,
-                        0,
-                        (Func<IResolveContext, object>)null,
-                        ScopeBehaviour.None));
+            internal static object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
+            {
+                return context.Scope.Resolve(context, targetId, factory, behaviour);
+            }
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ResolveContextExtensions.Resolve(IResolveContext, int, Func{IResolveContext, object}, ScopeBehaviour)"/>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="Resolve(ResolveContext, int, Func{ResolveContext, object}, ScopeBehaviour)"/>
             /// extension method.
             /// </summary>
             public static MethodInfo ResolveContextExtensions_Resolve_Method =>
                 Extract.Method(
-                    (IResolveContext rc) => rc.Resolve(0,
-                        (Func<IResolveContext, object>)null,
+                    (ResolveContext rc) => Resolve(
+                        rc, 
+                        0,
+                        null,
                         ScopeBehaviour.None));
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method
+            /// Gets a MethodInfo object for the <see cref="ResolveContext.New(Type, IContainer, IContainerScope)"/> method
             /// </summary>
             /// <value>The type of the resolve context create new method.</value>
             public static MethodInfo IResolveContext_New_Method =>
-                Extract.Method((IResolveContext r) => r.New(null, null, null));
+                Extract.Method((ResolveContext r) => r.New((Type)null, (IContainer)null, (IContainerScope)null));
 
             /// <summary>
             /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="IResolveContext.New(Type, IContainer, IContainerScope)"/> method with the
+            /// <see cref="ResolveContext.New(Type, IContainer, IContainerScope)"/> method with the
             /// given arguments.
             /// </summary>
             /// <param name="resolveContext">An expression representing the context on which the method will be called</param>
@@ -116,7 +111,7 @@ namespace Rezolver.Compilation.Expressions
 
             /// <summary>
             /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="IContainer.Resolve(IResolveContext)"/> method with the given
+            /// <see cref="IContainer.Resolve(ResolveContext)"/> method with the given
             /// context argument.
             /// </summary>
             /// <param name="container">An expression representing the container on which the method will be called</param>
@@ -130,7 +125,7 @@ namespace Rezolver.Compilation.Expressions
 
             /// <summary>
             /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="IContainer.CanResolve(IResolveContext)"/> method with the given
+            /// <see cref="IContainer.CanResolve(ResolveContext)"/> method with the given
             /// context argument.
             /// </summary>
             /// <param name="container">An expression representing the container on which the method will be called</param>
@@ -154,7 +149,7 @@ namespace Rezolver.Compilation.Expressions
         /// (typically via the explicit implementation of <see cref="IExpressionBuilder"/>).
         ///
         /// The base implementation simply attempts to resolve an instance of <see cref="IExpressionCompiler"/>
-        /// from the <see cref="IResolveContext.Container"/> of the context's <see cref="ICompileContext.ResolveContext"/> which should,
+        /// from the <see cref="ResolveContext.Container"/> of the context's <see cref="ICompileContext.ResolveContext"/> which should,
         /// with the default configuration, resolve to the root <see cref="ExpressionCompiler"/>.  In order for this to work, it is
         /// imperative that the underlying registered target implements the ICompiledTarget interface - so as to avoid needing a (or,
         /// more precisely, this) compiler needing to compile it.</remarks>
@@ -222,7 +217,7 @@ namespace Rezolver.Compilation.Expressions
         /// Called by the <see cref="BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)"/> method.
         ///
         /// Applies the scoping behaviour to the <paramref name="builtExpression"/> such that when it is executed it
-        /// correctly interfaces with the active scope (from the <see cref="IResolveContext"/>) if one is present for the
+        /// correctly interfaces with the active scope (from the <see cref="ResolveContext"/>) if one is present for the
         /// scope behaviour and preference determined from the <paramref name="context"/> and <paramref name="target"/>.
         /// </summary>
         /// <param name="builtExpression">The expression that was built for the <paramref name="target"/>.</param>
