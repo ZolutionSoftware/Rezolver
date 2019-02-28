@@ -1,11 +1,6 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
@@ -32,22 +27,6 @@ namespace Rezolver
         /// or whether the object is disposable.
         /// </summary>
         None
-    }
-
-    /// <summary>
-    /// Specifies the scope that the object produced by a target should be tracked within.
-    /// </summary>
-    public enum ScopePreference
-    {
-        /// <summary>
-        /// The object will be tracked within the scope already set on the <see cref="ResolveContext"/>
-        /// </summary>
-        Current = 0,
-        /// <summary>
-        /// The object (and all its dependants) will be tracked within the root scope of the current scope
-        /// set on the <see cref="ResolveContext"/>
-        /// </summary>
-        Root
     }
 
     

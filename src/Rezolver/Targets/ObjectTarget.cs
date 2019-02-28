@@ -2,9 +2,6 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Rezolver.Compilation;
 
 namespace Rezolver.Targets
 {
@@ -83,15 +80,12 @@ namespace Rezolver.Targets
         object ICompiledTarget.GetObject(ResolveContext context)
         {
             // when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
-            if (context.Scope == null)
-            {
+            if (ScopeBehaviour == ScopeBehaviour.None)
                 return Value;
-            }
-            else
-            {
-                // whatever scoping we're doing, we MUST use the root scope.
-                return context.Scope.GetRootScope().Resolve(context, Id, r => Value, ScopeBehaviour);
-            }
+            // whatever scoping we're doing, we MUST use the root scope.
+            return ScopeBehaviour == ScopeBehaviour.Implicit ?
+                context.Scope.Root.ActivateImplicit(Value) :
+                context.Scope.Root.ActivateExplicit(context, this.Id, c => Value);
         }
 
         object IDirectTarget.GetValue() => Value;

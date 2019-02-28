@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -127,39 +128,104 @@ namespace Rezolver
         /// <summary>
         /// Obsolete, use <see cref="ContainerScope2.Parent"/>
         /// </summary>
-        [Obsolete("Obsolete, use ContainerScope.Parent")]
+        [Obsolete("Obsolete, use ContainerScope.Parent", true)]
         IContainerScope Parent { get; }
 
         /// <summary>
         /// Obsolete, use <see cref="ContainerScope2.Container"/>
         /// </summary>
-        [Obsolete("Obsolete, use ContainerScope.Container")]
+        [Obsolete("Obsolete, use ContainerScope.Container", true)]
         Container Container { get; }
 
         /// <summary>
         /// Obsolete, use <see cref="ContainerScope2"/>
         /// </summary>
-        [Obsolete("Obsolete, use ContainerScope.Parent")]
+        [Obsolete("Obsolete, use ContainerScope.Parent", true)]
         void ChildScopeDisposed(IContainerScope child);
 
         /// <summary>
         /// Obsolete, use <see cref="ContainerScope2.Parent"/>
         /// </summary>
-        [Obsolete("Obsolete, use ContainerScope.Parent")]
+        [Obsolete("Obsolete, use ContainerScope.Parent", true)]
         object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour);
     }
 
     /// <summary>
     /// Represents an object from which a scope can be created
     /// </summary>
-    [Obsolete("This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions")]
+    [Obsolete("This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions", true)]
     public interface IScopeFactory
     {
         /// <summary>
         /// Creates a new scope.  If the implementing object is also a scope, then the new scope must be
         /// created as a child scope of that scope.
         /// </summary>
-        [Obsolete("This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions")]
+        [Obsolete("This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions", true)]
         IContainerScope CreateScope();
     }
+    /// <summary>
+    /// Obsolete - container scope is available directly from <see cref="ContainerScope2.Root"/>
+    /// </summary>
+    [Obsolete("Root scope is now available directly from ContainerScope.Root", true)]
+    public static class ContainerScopeExtensions
+    {
+        /// <summary>
+        /// Obsolete - container scope is available directly from <see cref="ContainerScope2.Root"/>
+        /// </summary>
+        [Obsolete("Root scope is now available directly from ContainerScope.Root", true)]
+        public static IContainerScope GetRootScope(this IContainerScope scope)
+        {
+            if (scope == null)
+            {
+                throw new ArgumentNullException(nameof(scope));
+            }
+
+            while (scope.Parent != null) { scope = scope.Parent; }
+            return scope;
+        }
+    }
+
+    /// <summary>
+    /// The extension methods in this class are no longer required.  Use ContainerScope directly
+    /// </summary>
+    [Obsolete("ContainerScopes now have a full suite of Resolve operations implemented as direct methods", true)]
+    public static class ContainerScopeResolveExtensions
+    {
+        /// <summary>
+        /// Obsolete - use the direct resolve operations declared directly on the <see cref="ContainerScope2"/> class
+        /// </summary>
+        [Obsolete("Use the direct resolve operations declared directly on the ContainerScope class", true)]
+        public static TResult Resolve<TResult>(this IContainerScope scope)
+        {
+            throw new NotSupportedException("This extension method is no longer available.");
+        }
+
+        /// <summary>
+        /// Obsolete - use the direct resolve operations declared directly on the <see cref="ContainerScope2"/> class
+        /// </summary>
+        [Obsolete("Use the direct resolve operations declared directly on the ContainerScope class", true)]
+        public static object Resolve(this IContainerScope scope, Type requestedType)
+        {
+            throw new NotSupportedException("This extension method is no longer available");
+        }
+
+        /// <summary>
+        /// Obsolete - use the direct resolve operations declared directly on the <see cref="ContainerScope2"/> class
+        /// </summary>
+        [Obsolete("Use the direct resolve operations declared directly on the ContainerScope class", true)]
+        public static IEnumerable ResolveMany(this IContainerScope scope, Type type)
+        {
+            throw new NotSupportedException("This extension method is no longer available");
+        }
+
+        /// <summary>
+        /// Obsolete - use the direct resolve operations declared directly on the <see cref="ContainerScope2"/> class
+        /// </summary>
+        [Obsolete("Use the direct resolve operations declared directly on the ContainerScope class", true)]
+        public static IEnumerable<TObject> ResolveMany<TObject>(this IContainerScope scope)
+        {
+            throw new NotSupportedException("This extension method is no longer available");
+        }
+    }
+
 }

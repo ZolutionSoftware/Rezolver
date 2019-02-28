@@ -76,7 +76,7 @@ namespace Rezolver
         /// <remarks>
         /// You must ***NEVER*** dispose this scope.
         /// </remarks>
-        public ContainerScope2 Scope { get; }
+        public ContainerScope2 Scope { get; private protected set; }
 
         /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.
@@ -89,7 +89,6 @@ namespace Rezolver
         {
             _cache = new ConcurrentCache();
             Targets = targets ?? new TargetContainer();
-            Scope = new DisposingContainerScope(this);
         }
 
         /// <summary>
@@ -114,6 +113,7 @@ namespace Rezolver
                 throw new InvalidOperationException("This constructor must not be used by derived types because applying configuration will most likely trigger calls to virtual methods on this instance.  Please use the protected constructor and apply configuration explicitly in your derived class");
             }
 
+            Scope = new DisposingContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 

@@ -26,22 +26,6 @@ namespace Rezolver
     /// </remarks>
     public sealed class ScopedContainer : Container, IDisposable
     {
-        private readonly IContainerScope _scope;
-
-        /// <summary>
-        /// Gets the scope for this scoped container.
-        ///
-        /// Note that this is used automatically by the container for <see cref="IContainer.Resolve(ResolveContext)"/>
-        /// operations where the <see cref="ResolveContext.Scope"/> property is not already set.
-        /// </summary>
-        public IContainerScope Scope
-        {
-            get
-            {
-                return this._scope;
-            }
-        }
-
         /// <summary>
         /// Constructs a new instance of the <see cref="ScopedContainer"/> class.
         /// </summary>
@@ -54,12 +38,12 @@ namespace Rezolver
         public ScopedContainer(IRootTargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
-            this._scope = new ContainerScope(this);
+            Scope = new ConcurrentContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 
         #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
+        private bool _isDisposed = false; // To detect redundant calls
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources.
@@ -67,14 +51,14 @@ namespace Rezolver
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         private void Dispose(bool disposing)
         {
-            if (!this.disposedValue)
+            if (!_isDisposed)
             {
                 if (disposing)
                 {
-                    this._scope.Dispose();
+                    Scope.Dispose();
                 }
 
-                this.disposedValue = true;
+                this._isDisposed = true;
             }
         }
 
@@ -85,15 +69,6 @@ namespace Rezolver
         {
             Dispose(true);
         }
-
-        /// <summary>
-        /// Overrides the base method's implementation of <see cref="IScopeFactory.CreateScope" /> to pass the call to the <see cref="Scope" />.
-        /// </summary>
-        public override IContainerScope CreateScope()
-        {
-            return Scope.CreateScope();
-        }
         #endregion
-
     }
 }
