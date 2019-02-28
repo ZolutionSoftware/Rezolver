@@ -12,13 +12,8 @@ namespace Rezolver
     /// <summary>
     /// 
     /// </summary>
-    public sealed class ResolveContext : IScopeFactory
+    public sealed class ResolveContext
     {
-        /// <summary>
-        /// A reference to the context from which this one was created.
-        /// </summary>
-        public ResolveContext Previous { get; private set; }
-
         /// <summary>
         /// Gets the type being requested from the container.
         /// </summary>
@@ -27,15 +22,14 @@ namespace Rezolver
         /// <summary>
         /// The container for this context.
         /// </summary>
-        /// <remarks>This is the container which received the original call to <see cref="IContainer.Resolve(ResolveContext)"/>,
-        /// but is not necessarily the same container that will eventually end up resolving the object.</remarks>
-        public Container Container { get; private set; }
+        /// <remarks>This is a wrapper for the <see cref="ContainerScope2.Container"/> property of the <see cref="Scope"/></remarks>
+        public Container Container => Scope.Container;
 
         /// <summary>
         /// Gets the scope that's active for all calls for this context.
         /// </summary>
         /// <value>The scope.</value>
-        public IContainerScope Scope { get; private set; }
+        public ContainerScope2 Scope { get; private set; }
 
         /// <summary>
         /// Creates a new context which is initially a clone of the one passed, but with
@@ -44,9 +38,7 @@ namespace Rezolver
         /// <param name="previous"></param>
         private ResolveContext(ResolveContext previous)
         {
-            Previous = previous;
             RequestedType = previous.RequestedType;
-            Container = previous.Container;
             Scope = previous.Scope;
         }
 
@@ -68,18 +60,16 @@ namespace Rezolver
         /// </summary>
         /// <param name="scope">The scope.</param>
         /// <param name="requestedType">The of object to be resolved from the container.</param>
-        public ResolveContext(IContainerScope scope, Type requestedType)
+        public ResolveContext(ContainerScope2 scope, Type requestedType)
         {
             Scope = scope;
-            Container = scope.Container;
             RequestedType = requestedType;
         }
 
         private ResolveContext(Container container)
         {
-            Container = container ?? StubContainer.Instance;
             // if the container is a scoped container, then we pull it out and set it into this context.
-            Scope = (container as ScopedContainer)?.Scope;
+            Scope = Container.Scope;
         }
 
         /// <summary>
@@ -151,74 +141,33 @@ namespace Rezolver
         /// <param name="newRequestedType">Optional - a new type to be resolved.  If a new context is created,
         /// then its <see cref="RequestedType"/> will be inherited from this context, unless a non-null type
         /// is passed to this parameter.</param>
-        /// <param name="newContainer">Optional - a new container to be used for the new context.  If a new context
-        /// is created, then its <see cref="Container"/> will be inherited from this context unless a non-null
-        /// container is passed to this parameter.</param>
         /// <param name="newScope">Optional - a new scope to be used for the new context.  If a new context
         /// is created, then its <see cref="Scope"/> will be inherited from this context unless a non-null
         /// container is passed to this parameter.  Note the implication: once a context has a non-null <see cref="Scope"/>,
         /// it's not possible to create a new, child, context which has a null scope.</param>
         /// <returns></returns>
-        public ResolveContext New(Type newRequestedType = null,
-            Container newContainer = null,
-            IContainerScope newScope = null)
+        public ResolveContext New(
+            Type newRequestedType = null,
+            ContainerScope2 newScope = null)
         {
-            ResolveContext newContext = null;
-
-            if (newRequestedType != null && newRequestedType != RequestedType)
-            {
-                newContext = new ResolveContext(this)
-                {
-                    RequestedType = newRequestedType
-                };
-                if (newContainer != null && !Object.ReferenceEquals(newContainer, Container))
-                {
-                    newContext.Container = newContainer;
-                }
-
-                if (newScope != null && !Object.ReferenceEquals(newScope, Scope))
-                {
-                    newContext.Scope = newScope;
-                }
-
-                return newContext;
-            }
-            else if (newContainer != null && !Object.ReferenceEquals(newContainer, Container))
-            {
-                newContext = new ResolveContext(this)
-                {
-                    Container = newContainer
-                };
-                if (newScope != null && !Object.ReferenceEquals(newScope, Scope))
-                {
-                    newContext.Scope = newScope;
-                }
-
-                return newContext;
-            }
-            else if (newScope != null && !Object.ReferenceEquals(newScope, Scope))
-            {
-                newContext = new ResolveContext(this)
-                {
-                    Scope = newScope
-                };
-                return newContext;
-            }
-
-            return this;
+            return new ResolveContext(newScope ?? Scope, newRequestedType ?? RequestedType);
         }
 
         public ResolveContext New(Type newRequestedType)
         {
             if (newRequestedType != RequestedType)
-                return new ResolveContext(this) { RequestedType = newRequestedType ?? RequestedType };
+                return new ResolveContext(Scope, newRequestedType);
+
             return this;
         }
 
         public ResolveContext New(Container newContainer)
         {
+            // we have to create a new 'fake' scope which proxies the current one,
+            // but with a different container.
             if (newContainer != Container)
-                return new ResolveContext(this) { Container = newContainer ?? Container };
+                return new ResolveContext(new ContainerScopeProxy(Scope, newContainer), RequestedType);
+
             return this;
         }
 
@@ -245,14 +194,9 @@ namespace Rezolver
         /// </summary>
         /// <remarks>This interface implementation is present for when an object wants to be able to inject a scope factory
         /// in order to create child scopes which are correctly parented either to another active scope or the container.</remarks>
-        public IContainerScope CreateScope()
+        public ContainerScope2 CreateScope()
         {
-            return (((IScopeFactory)Scope) ?? Container).CreateScope();
+            return Scope.CreateScope();
         }
-
-        //public object Activate(Activation activation, Func<IResolveContext, object> factory)
-        //{
-        //    return (Scope ?? DefaultScope.Instance).Activate(activation, factory, this);
-        //}
     }
 }

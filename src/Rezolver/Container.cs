@@ -33,7 +33,7 @@ namespace Rezolver
     /// registered as sub target containers within an <see cref="ITargetContainer"/> via its
     /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method.
     /// </remarks>
-    public class Container : IRootTargetContainer, IServiceProvider, IScopeFactory
+    public class Container : IRootTargetContainer, IServiceProvider
     {
         /// <summary>
         /// The default container config used by all new containers.  You can add/remove configurations from this collection
@@ -71,6 +71,14 @@ namespace Rezolver
         protected IRootTargetContainer Targets { get; }
 
         /// <summary>
+        /// Gets the root scope for this container.
+        /// </summary>
+        /// <remarks>
+        /// You must ***NEVER*** dispose this scope.
+        /// </remarks>
+        public ContainerScope2 Scope { get; }
+
+        /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.
         /// </summary>
         /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup
@@ -81,6 +89,7 @@ namespace Rezolver
         {
             _cache = new ConcurrentCache();
             Targets = targets ?? new TargetContainer();
+            Scope = new DisposingContainerScope(this);
         }
 
         /// <summary>
@@ -139,17 +148,41 @@ namespace Rezolver
         Type IRootTargetContainer.GetContainerRegistrationType(Type serviceType) => Targets.GetContainerRegistrationType(serviceType);
 
         /// <summary>
-        /// Implementation of the <see cref="IContainer.Resolve(ResolveContext)"/> method.
-        ///
-        /// Obtains an <see cref="ICompiledTarget"/> by calling the
-        /// <see cref="GetCompiledTarget(ResolveContext)"/> method, and then immediately calls its
-        /// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method, returning the result.
+        /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container
         /// </summary>
-        /// <param name="context">The context containing the type that's requested, any active scope and so on.</param>
-        /// <returns></returns>
-        public virtual object Resolve(ResolveContext context)
+        /// <param name="context">The resolve context</param>
+        /// <returns>An instance of the type that was requested.</returns>
+        public object Resolve(ResolveContext context)
         {
             return GetCompiledTarget(context).GetObject(context);
+        }
+
+        public object Resolve(Type serviceType)
+        {
+            return Resolve(new ResolveContext(Scope, serviceType));
+        }
+
+        public TService Resolve<TService>()
+        {
+            // our scope is bound to this container
+            return Resolve<TService>(new ResolveContext(Scope, typeof(TService)));
+        }
+
+        public TService Resolve<TService>(ContainerScope2 scope)
+        {
+            // resolve, assuming a different scope to this container's scope
+            return Resolve<TService>(new ResolveContext(new ContainerScopeProxy(scope, this), typeof(TService)));
+        }
+
+        public TService Resolve<TService>(ResolveContext context)
+        {
+            // worker for resolving
+            return ResolveInternal<TService>(context ?? throw new ArgumentNullException(nameof(context)));
+        }
+
+        internal TService ResolveInternal<TService>(ResolveContext context)
+        {
+            return (TService)GetCompiledTarget(context).GetObject(context);
         }
 
         /// <summary>
@@ -163,7 +196,7 @@ namespace Rezolver
         /// <param name="result">Receives a reference to the object that was resolved, if successful, or <c>null</c>
         /// if not.</param>
         /// <returns>A boolean indicating whether the operation completed successfully.</returns>
-        public virtual bool TryResolve(ResolveContext context, out object result)
+        public bool TryResolve(ResolveContext context, out object result)
         {
             var target = GetCompiledTarget(context);
             if (!target.IsUnresolved())
@@ -185,9 +218,9 @@ namespace Rezolver
         ///
         /// Thus, the new scope is a 'root' scope.
         /// </summary>
-        public virtual IContainerScope CreateScope()
+        public ContainerScope2 CreateScope()
         {
-            return new ContainerScope(this);
+            return Scope.CreateScope();
         }
 
         /// <summary>

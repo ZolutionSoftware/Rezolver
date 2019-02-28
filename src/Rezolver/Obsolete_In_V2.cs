@@ -117,4 +117,49 @@ namespace Rezolver
         [Obsolete("Obsolete, use ScopedContainer.Scope", true)]
         IContainerScope Scope { get; }
     }
+
+    /// <summary>
+    /// Obsolete in v2 use <see cref="ContainerScope2"/>
+    /// </summary>
+    [Obsolete("This interface is now obsolete, use ContainerScope directly", true)]
+    public interface IContainerScope : IDisposable, IServiceProvider, IScopeFactory
+    {
+        /// <summary>
+        /// Obsolete, use <see cref="ContainerScope2.Parent"/>
+        /// </summary>
+        [Obsolete("Obsolete, use ContainerScope.Parent")]
+        IContainerScope Parent { get; }
+
+        /// <summary>
+        /// Obsolete, use <see cref="ContainerScope2.Container"/>
+        /// </summary>
+        [Obsolete("Obsolete, use ContainerScope.Container")]
+        Container Container { get; }
+
+        /// <summary>
+        /// Obsolete, use <see cref="ContainerScope2"/>
+        /// </summary>
+        [Obsolete("Obsolete, use ContainerScope.Parent")]
+        void ChildScopeDisposed(IContainerScope child);
+
+        /// <summary>
+        /// Obsolete, use <see cref="ContainerScope2.Parent"/>
+        /// </summary>
+        [Obsolete("Obsolete, use ContainerScope.Parent")]
+        object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour);
+    }
+
+    /// <summary>
+    /// Represents an object from which a scope can be created
+    /// </summary>
+    [Obsolete("This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions")]
+    public interface IScopeFactory
+    {
+        /// <summary>
+        /// Creates a new scope.  If the implementing object is also a scope, then the new scope must be
+        /// created as a child scope of that scope.
+        /// </summary>
+        [Obsolete("This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions")]
+        IContainerScope CreateScope();
+    }
 }

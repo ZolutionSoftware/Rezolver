@@ -17,28 +17,6 @@ namespace Rezolver
     public static partial class ContainerResolveExtensions
     {
         /// <summary>
-        /// Resolves an object of the given <paramref name="type"/>
-        /// </summary>
-        /// <param name="container">The container.</param>
-        /// <param name="type">The type to be resolved.</param>
-        /// <returns>An instance of the <paramref name="type"/>.</returns>
-        public static object Resolve(this Container container, Type type)
-        {
-            return container.Resolve(new ResolveContext(container, type));
-        }
-
-        /// <summary>
-        /// Resolves an object of type <typeparamref name="TObject"/>
-        /// </summary>
-        /// <typeparam name="TObject">The type to be resolved.</typeparam>
-        /// <param name="container">The container.</param>
-        /// <returns>An instance of <typeparamref name="TObject"/>.</returns>
-        public static TObject Resolve<TObject>(this Container container)
-        {
-            return (TObject)container.Resolve(typeof(TObject));
-        }
-
-        /// <summary>
         /// Shortcut for resolving an IEnumerable of objects of a given type.
         /// </summary>
         /// <param name="container">The container.</param>
@@ -51,7 +29,7 @@ namespace Rezolver
                 throw new ArgumentNullException(nameof(type));
             }
 
-            return (IEnumerable)Resolve(container, typeof(IEnumerable<>).MakeGenericType(type));
+            return (IEnumerable)container.Resolve(typeof(IEnumerable<>).MakeGenericType(type));
         }
 
         /// <summary>
@@ -62,7 +40,7 @@ namespace Rezolver
         /// <returns>An enumerable (possibly empty) containing the objects which were resolved.</returns>
         public static IEnumerable<TObject> ResolveMany<TObject>(this Container container)
         {
-            return Resolve<IEnumerable<TObject>>(container);
+            return container.Resolve<IEnumerable<TObject>>();
         }
 
         /// <summary>
