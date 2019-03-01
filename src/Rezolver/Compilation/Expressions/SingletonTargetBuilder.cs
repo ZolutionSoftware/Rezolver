@@ -29,13 +29,13 @@ namespace Rezolver.Compilation.Expressions
         protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
-            var keyTarget = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            int? targetIdOverride = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
 
             return Expression.Constant(
                 holder.GetObject(
                     target, 
-                    context, 
-                    keyTarget ?? target.Id,
+                    context,
+                    targetIdOverride ?? target.Id,
                     GetCompiled));
 
             ICompiledTarget GetCompiled(SingletonTarget singleton, IExpressionCompileContext c) => 

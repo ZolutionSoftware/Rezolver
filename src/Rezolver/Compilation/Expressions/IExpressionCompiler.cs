@@ -42,6 +42,7 @@ namespace Rezolver.Compilation.Expressions
         /// <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> function also defined on
         /// this interface.</remarks>
         Expression Build(ITarget target, IExpressionCompileContext context);
+
         /// <summary>
         /// This function optimises and prepares an expression that's (most likely) previously been
         /// produced by the <see cref="Build(ITarget, IExpressionCompileContext)"/> function into a
@@ -52,13 +53,24 @@ namespace Rezolver.Compilation.Expressions
         /// <paramref name="context"/> will be used to define the single parameter for the lambda that
         /// is created.
         /// </summary>
-        /// <param name="targetExpression">Expression to be optimised and used as the body of the lambda.
+        /// <param name="expression">Expression to be optimised and used as the body of the lambda.
         /// Any expression produced by the <see cref="Build(ITarget, IExpressionCompileContext)"/> method
         /// must be compatible with this.</param>
         /// <param name="context">Contains the supporting expressions (shared locals, shared expressions,
         /// ResolveContext expression etc) that have been used in the generation of the expression.</param>
         /// <returns>A lambda expression which, when compiled and executed, will produce an object
         /// consistent with the <see cref="ITarget"/> from which the code was produced.</returns>
-        Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression targetExpression, IExpressionCompileContext context);
+        Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context);
+
+        /// <summary>
+        /// Builds a delegate whose type is `Func{<see cref="ResolveContext"/>, {Type}}` where `{Type}` is equal
+        /// to the static <see cref="Expression.Type"/> of the <paramref name="expression"/>
+        /// </summary>
+        /// <param name="expression">Expression to be optimised and used as the body of the lambda.</param>
+        /// <param name="context">Contains the supporting expressions (shared locals, shared expressions,
+        /// ResolveContext expression etc) that have been used in the generation of the expression.</param>
+        /// <returns>A lambda expression which is strongly type for <see cref="Func{T, TResult}"/> with `TResult`
+        /// equal to the type of the input expression; and `T` equal to <see cref="ResolveContext"/>.</returns>
+        LambdaExpression BuildResolveLambdaStrong(Expression expression, IExpressionCompileContext context);
     }
 }

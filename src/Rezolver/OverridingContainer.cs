@@ -73,14 +73,13 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Called to determine if this container is able to resolve the type specified in the passed <paramref name="context"/>.
+        /// Overrides the base method to check if both this and the inner container can resolve the type.
         /// </summary>
-        /// <param name="context">Required.  The <see cref="ResolveContext"/>.</param>
-        /// <returns><c>true</c> if either this container or the inner container can resolve the
-        /// <see cref="ResolveContext.RequestedType"/>; otherwise <c>false</c></returns>
-        public sealed override bool CanResolve(ResolveContext context)
+        /// <param name="serviceType"></param>
+        /// <returns></returns>
+        public sealed override bool CanResolve(Type serviceType)
         {
-            return base.CanResolve(context) || Inner.CanResolve(context);
+            return base.CanResolve(serviceType) || Inner.CanResolve(serviceType);
         }
 
         /// <summary>

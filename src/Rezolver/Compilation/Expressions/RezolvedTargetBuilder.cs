@@ -64,29 +64,29 @@ namespace Rezolver.Compilation.Expressions
             // TODO: This should be a shared expression
             var currentContainer = context.CurrentContainerExpression;
             var declaredTypeExpr = Expression.Constant(target.DeclaredType, typeof(Type));
-            var newContext = Methods.CallResolveContext_New(context.ResolveContextParameterExpression, declaredTypeExpr);
+            var newContext = Methods.CallResolveContext_New_Type(context.ResolveContextParameterExpression, declaredTypeExpr);
             /* new version */
             Expression staticExpr;
 
             if (staticTarget != null)
             {
                 staticExpr = compiler.Build(staticTarget, context.NewContext(target.DeclaredType));
+
                 if (staticExpr == null)
-                {
                     throw new InvalidOperationException(string.Format(ExceptionResources.TargetReturnedNullExpressionFormat, staticTarget.GetType(), context.TargetType));
-                }
+
+                if (staticExpr.Type != target.DeclaredType)
+                    staticExpr = Expression.Convert(staticExpr, target.DeclaredType);
             }
             else
             {
                 // this should generate a missing dependency exception if executed
                 // or, might actually yield a result if registrations have been added
                 // after the expression is compiled.
-                staticExpr = Methods.CallIContainer_Resolve(currentContainer, newContext);
-            }
-
-            if (staticExpr.Type != target.DeclaredType)
-            {
-                staticExpr = Expression.Convert(staticExpr, target.DeclaredType);
+                staticExpr = Methods.CallResolveContext_Resolve_NewContainer_Strong_Method(
+                    context.ResolveContextParameterExpression,
+                    target.DeclaredType,
+                    currentContainer);
             }
 
             var checkContainer = context.GetOrAddSharedExpression(typeof(bool),
@@ -94,8 +94,8 @@ namespace Rezolver.Compilation.Expressions
                 (t, s) => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), GetType());
 
             Expression useContextRezolverIfCanExpr = Expression.Condition(
-                Methods.CallIContainer_CanResolve(context.ContextContainerPropertyExpression, newContext),
-                Expression.Convert(Methods.CallIContainer_Resolve(context.ContextContainerPropertyExpression, newContext), target.DeclaredType),
+                Methods.CallContainer_CanResolve(context.ContextContainerPropertyExpression, target.DeclaredType),
+                Methods.CallContainer_ResolveStrong(context.ContextContainerPropertyExpression, target.DeclaredType, newContext),
                 staticExpr
               );
 

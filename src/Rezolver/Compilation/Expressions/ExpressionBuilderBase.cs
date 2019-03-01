@@ -42,85 +42,103 @@ namespace Rezolver.Compilation.Expressions
             public static MethodInfo ICompiledTarget_GetObject_Method =>
                 Extract.Method((ICompiledTarget t) => t.GetObject(null));
 
+            public static MethodInfo Container_ResolveStrong_Method =>
+                Extract.Method((Container c) => c.ResolveInternal<object>((ResolveContext)null)).GetGenericMethodDefinition();
+
             /// <summary>
             /// Gets a <see cref="MethodInfo"/> for the <see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>
             /// extension method.
             /// </summary>
-            public static MethodInfo IContainerScope_GetRootScope_Method =>
-                Extract.Method((IContainerScope s) => s.GetRootScope());
+            public static PropertyInfo Scope_RootScope_Property =>
+                (PropertyInfo)Extract.Member((ContainerScope2 s) => s.Root);
+
+            public static MethodInfo Scope_ActivateImplicit_Method =>
+                Extract.Method((ContainerScope2 s) => s.ActivateImplicit<object>(null)).GetGenericMethodDefinition();
+
+            public static MethodInfo Scope_ActivateExplicit_Method =>
+                Extract.Method((ContainerScope2 s) => s.ActivateExplicit<object>(null, 0, null)).GetGenericMethodDefinition();
 
             /// <summary>
             /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(ResolveContext)"/>
             /// method
             /// </summary>
-            public static MethodInfo IContainer_CanResolve_Method =>
+            public static MethodInfo Container_CanResolve_Method =>
                 Extract.Method(
-                    (Container c) => c.CanResolve((ResolveContext)null));
+                    (Container c) => c.CanResolve((Type)null));
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="IContainer.Resolve(ResolveContext)"/> method
+            /// Gets a MethodInfo object for the <see cref="ResolveContext.ChangeRequestedType(Type)"/> method
             /// </summary>
-            public static MethodInfo IContainer_Resolve_Method =>
-                Extract.Method((Container c) => c.Resolve(null));
+            /// <value>The type of the resolve context create new method.</value>
+            public static MethodInfo ResolveContext_New_Type_Method =>
+                Extract.Method((ResolveContext r) => r.ChangeRequestedType((Type)null));
 
-            internal static object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour)
+            /// <summary>
+            /// Gets a MethodInfo object for the <see cref="ResolveContext.ChangeContainer(Container)"/> method
+            /// </summary>
+            /// <value>The type of the resolve context create new method.</value>
+            public static MethodInfo ResolveContext_New_Container_Method =>
+                Extract.Method((ResolveContext r) => r.ChangeContainer((Container)null));
+
+            public static MethodInfo ResolveContext_Resolve_NewContainer_Strong_Method =>
+                Extract.Method((ResolveContext r) => r.Resolve<object>((Container)null)).GetGenericMethodDefinition();
+
+            public static MethodCallExpression CallScope_ActivateImplicit(
+                Expression scopeInstance,
+                Expression instance)
             {
-                return context.Scope.Resolve(context, targetId, factory, behaviour);
+                return Expression.Call(
+                    scopeInstance,
+                    Scope_ActivateImplicit_Method.MakeGenericMethod(instance.Type),
+                    instance);
+            }
+
+            public static MethodCallExpression CallScope_ActivateExplicit(
+                Expression scopeInstance,
+                Expression resolveContext,
+                int targetId,
+                LambdaExpression instanceFactory)
+            {
+                return Expression.Call(
+                    scopeInstance,
+                    Scope_ActivateExplicit_Method.MakeGenericMethod(instanceFactory.Body.Type),
+                    resolveContext,
+                    Expression.Constant(targetId),
+                    instanceFactory);
             }
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="Resolve(ResolveContext, int, Func{ResolveContext, object}, ScopeBehaviour)"/>
-            /// extension method.
-            /// </summary>
-            public static MethodInfo ResolveContextExtensions_Resolve_Method =>
-                Extract.Method(
-                    (ResolveContext rc) => Resolve(
-                        rc, 
-                        0,
-                        null,
-                        ScopeBehaviour.None));
-
-            /// <summary>
-            /// Gets a MethodInfo object for the <see cref="ResolveContext.New(Type, Container, IContainerScope)"/> method
-            /// </summary>
-            /// <value>The type of the resolve context create new method.</value>
-            public static MethodInfo IResolveContext_New_Method =>
-                Extract.Method((ResolveContext r) => r.New((Type)null, (Container)null, (IContainerScope)null));
-
-            /// <summary>
             /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="ResolveContext.New(Type, Container, IContainerScope)"/> method with the
+            /// <see cref="ResolveContext.ChangeRequestedType(Type)"/> method with the
             /// given arguments.
             /// </summary>
             /// <param name="resolveContext">An expression representing the context on which the method will be called</param>
-            /// <param name="newRequestedType">An expression representing the argument to the newRequestedType parameter</param>
-            /// <param name="newContainer">An expression representing the argument to the newContainer parameter</param>
-            /// <param name="newScope">An expression representing the argument to the newScope parameter</param>
+            /// <param name="serviceType">An expression representing the argument to the newRequestedType parameter</param>
             /// <returns></returns>
-            public static MethodCallExpression CallResolveContext_New(Expression resolveContext,
-                Expression newRequestedType = null,
-                Expression newContainer = null,
-                Expression newScope = null)
+            public static MethodCallExpression CallResolveContext_New_Type(Expression resolveContext,
+                Expression serviceType)
             {
                 return Expression.Call(resolveContext,
-                    IResolveContext_New_Method,
-                    newRequestedType ?? Expression.Default(typeof(Type)),
-                    newContainer ?? Expression.Default(typeof(Container)),
-                    newScope ?? Expression.Default(typeof(IContainerScope)));
+                    ResolveContext_New_Type_Method,
+                    serviceType);
             }
 
-            /// <summary>
-            /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="IContainer.Resolve(ResolveContext)"/> method with the given
-            /// context argument.
-            /// </summary>
-            /// <param name="container">An expression representing the container on which the method will be called</param>
-            /// <param name="context">An expression representing the argument to the context parameter</param>
-            /// <returns></returns>
-            public static MethodCallExpression CallIContainer_Resolve(Expression container,
+            public static MethodCallExpression CallResolveContext_Resolve_NewContainer_Strong_Method(
+                Expression resolveContext,
+                Type serviceType,
+                Expression container)
+            {
+                return Expression.Call(
+                    resolveContext,
+                    ResolveContext_Resolve_NewContainer_Strong_Method.MakeGenericMethod(serviceType),
+                    container);
+            }
+
+            internal static MethodCallExpression CallContainer_ResolveStrong(Expression container,
+                Type type,
                 Expression context)
             {
-                return Expression.Call(container, IContainer_Resolve_Method, context);
+                return Expression.Call(container, Container_ResolveStrong_Method.MakeGenericMethod(type), context);
             }
 
             /// <summary>
@@ -129,12 +147,12 @@ namespace Rezolver.Compilation.Expressions
             /// context argument.
             /// </summary>
             /// <param name="container">An expression representing the container on which the method will be called</param>
-            /// <param name="context">An expression representing the argument to the context parameter</param>
+            /// <param name="serviceType">The static type to be passed to the method.</param>
             /// <returns></returns>
-            public static MethodCallExpression CallIContainer_CanResolve(Expression container,
-                Expression context)
+            public static MethodCallExpression CallContainer_CanResolve(Expression container,
+                Type serviceType)
             {
-                return Expression.Call(container, IContainer_CanResolve_Method, context);
+                return Expression.Call(container, Container_CanResolve_Method, Expression.Constant(serviceType, typeof(Type)));
             }
         }
 
@@ -229,7 +247,6 @@ namespace Rezolver.Compilation.Expressions
         protected virtual Expression ApplyScoping(Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var scopeBehaviour = context.ScopeBehaviourOverride ?? target.ScopeBehaviour;
-            var scopePreference = context.ScopePreferenceOverride ?? target.ScopePreference;
 
             if (scopeBehaviour == ScopeBehaviour.None)
             {
@@ -237,53 +254,28 @@ namespace Rezolver.Compilation.Expressions
             }
 
             var originalType = builtExpression.Type;
-            var @override = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            int? targetIdOverride = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            var scopePreference = context.ScopePreferenceOverride ?? target.ScopePreference;
 
-            // so the expression needs to be rewritten so that it becomes something like this:
-            // if(context.Scope != null) return context.Scope.Resolve(context, lambda<targetExpression>);
-            // else return targetExpression
+            Expression scopeExpr = scopePreference == ScopePreference.Current
+                ? context.ContextScopePropertyExpression
+                : Expression.Property(context.ContextScopePropertyExpression, Methods.Scope_RootScope_Property);
 
-            // TODO: if behaviour == explicit, then a scope is *required* and the expression should throw
-            // an exception if it is null :)
-
-            // this will automatically be of type object and will be optimised.
-            //var lambda = compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver();
-
-            // use a shared expression for the scope check so we can optimise away all the nested scope calls
-            // we're likely to be generating.
-            var compareExpr = context.GetOrAddSharedExpression(typeof(bool), "isScoped", (t, s) =>
+            // this will now call either Scope.ActivateImplicit or Scope.ActivateExplicit
+            if (scopeBehaviour == ScopeBehaviour.Implicit)
             {
-                return Expression.Equal(context.ContextScopePropertyExpression, Expression.Default(typeof(IContainerScope)));
-            }, typeof(ExpressionBuilderBase));
-
-            // have to force the creation of a new IResolveContext whose RequestedType type is equal to the type
-            // that we sought for compilation - so that the instance can be tracked correctly.
-            var newContextExpr = Methods.CallResolveContext_New(
+                return Methods.CallScope_ActivateImplicit(
+                    scopeExpr,
+                    builtExpression);
+            }
+            else
+            {
+                return Methods.CallScope_ActivateExplicit(
+                    scopeExpr,
                     context.ResolveContextParameterExpression,
-                    Expression.Constant(builtExpression.Type),
-                            Expression.Default(typeof(Container)),
-                            scopePreference == ScopePreference.Current ? (Expression)Expression.Default(typeof(IContainerScope)) :
-                            Expression.Call(Methods.IContainerScope_GetRootScope_Method,
-                                context.ContextScopePropertyExpression)
-                    );
-
-            builtExpression = Expression.Condition(
-                compareExpr,
-                builtExpression, // if null scope, just use the built expression as-is
-                Expression.Convert( // otherwise - generate a call into the scope's special Resolve method
-                    Expression.Call(
-                        Methods.ResolveContextExtensions_Resolve_Method,
-                        newContextExpr,
-                        Expression.Constant(@override ?? target.Id),
-                        compiler.BuildResolveLambda(builtExpression, context),
-                        // we used to do this - but this doesn't work when we'rdoing the auto factories
-                        // Expression.Constant(compiler.BuildResolveLambda(builtExpression, context).CompileForRezolver()),
-                        Expression.Constant(scopeBehaviour)
-                    ),
-                    originalType
-                ));
-
-            return builtExpression;
+                    targetIdOverride ?? target.Id,
+                    compiler.BuildResolveLambdaStrong(builtExpression, context));
+            }
         }
 
         /// <summary>

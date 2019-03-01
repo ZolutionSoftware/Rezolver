@@ -20,6 +20,30 @@ For more information, including API reference and developer how-tos, head on ove
 
 # Version Highlights
 
+## 2.0.0
+
+- `NetStandard2.0` is now the only TFM
+- Major performance improvements - up to 45% faster than before.
+- Scopes are now always present
+  - But 
+  - `ScopedContainer` should still be used if you want a 'root' disposable scope (it will be used by default by Asp.Net Core)Major changes to key types:
+- Got rid of a whole bunch of interfaces in favour of concrete classes with non-virtual (where possible) methods:
+  - `IResolveContext` -> `ResolveContext`
+  - `IContainer` -> `Container`
+  - `IContainerScope` -> `ContainerScope`
+- Got rid of a bunch of `Resolve` extension methods in favour of concrete methods on the types
+- New Container/Scope/Context behaviour:
+  - `IServiceProvider` is now explicitly implemented by all three of `Container`, `ContainerScope` and `ResolveContext`
+  - All three also have their own `Resolve` method implementations, the behaviour of which is slightly different for each:
+    - All `Container` instances have a `Scope`
+      - The default root scope used by `Container` doesn't track instances, only child scopes
+      - `ScopedContainer` should be used if you want the root scope to track instances (this is the default for Asp.Net Core and Generic Host integration)
+      - Resolving through a `Container` uses the scope on the `ResolveContext`, but defaults to its own `Scope` when calling the `Resolve` methods which only take a type
+    - All `ContainerScope` instances have a `Container`
+      - Resolving through a `Scope` routes the call to its own `Container`, but with a `ResolveContext` which fixes the `Scope` to that scope.
+    - `ResolveContext` now only has a `Scope` (the `Container` property just proxies the Container from the scope)
+    - Resolving through a `ResolveContext` routes the call to its own `Scope` (and therefore `Container`)
+
 ## 1.4.0
 
 - Added [Generic Host Support](http://rezolver.co.uk/developers/docs/nuget-packages/rezolver.microsoft.extensions.hosting.html)

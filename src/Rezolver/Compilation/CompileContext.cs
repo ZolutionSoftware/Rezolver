@@ -115,7 +115,7 @@ namespace Rezolver.Compilation
             ParentContext = parentContext;
             DependencyTargetContainer = new OverridingTargetContainer(parentContext, _emptyConfig);
             this._targetType = targetType;
-            this._resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
+            this._resolveContext = parentContext.ResolveContext.ChangeRequestedType(targetType);
             ScopeBehaviourOverride = scopeBehaviourOverride;
             this._scopePreferenceOverride = scopePreferenceOverride;
             // note - many of the other members are inherited in the property getters or interface implementations

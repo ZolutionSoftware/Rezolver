@@ -140,13 +140,7 @@ namespace Rezolver.Compilation.Expressions
             return new CompiledLambdaTarget(target, lambda.CompileForRezolver());
         }
 
-        /// <summary>
-        /// Takes the unoptimised expression built for a target and optimises it and turns it into a lambda expression ready to
-        /// be compiled into an <see cref="ICompiledTarget"/>.
-        /// </summary>
-        /// <param name="expression">The expression.</param>
-        /// <param name="context">The context.</param>
-        public virtual Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
+        private static Expression BuildResolveLambdaBody(Expression expression, IExpressionCompileContext context)
         {
             if (expression == null) throw new ArgumentNullException(nameof(expression));
             if (context == null) throw new ArgumentNullException(nameof(context));
@@ -160,7 +154,7 @@ namespace Rezolver.Compilation.Expressions
             // Note that this is a tricky optimisation to understand - but the remarks section
             // of the ConditionalRewriter XML documentation contains a code-based example which should explain
             // what's going on.
-            var sharedConditionalTests = context.SharedExpressions.Where(e => e.Type == typeof(Boolean)).ToArray();
+            var sharedConditionalTests = context.SharedExpressions.Where(e => e.Type == typeof(bool)).ToArray();
             if (sharedConditionalTests.Length != 0)
             {
                 expression = new ConditionalRewriter(expression, sharedConditionalTests).Rewrite();
@@ -177,6 +171,19 @@ namespace Rezolver.Compilation.Expressions
                 expression = Expression.Block(expression.Type, sharedLocals, new BlockExpressionLocalsRewriter(sharedLocals).Visit(expression));
             }
 
+            return expression;
+        }
+
+        /// <summary>
+        /// Takes the unoptimised expression built for a target and optimises it and turns it into a lambda expression ready to
+        /// be compiled into an <see cref="ICompiledTarget"/>.
+        /// </summary>
+        /// <param name="expression">The expression.</param>
+        /// <param name="context">The context.</param>
+        public virtual Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
+        {
+            expression = BuildResolveLambdaBody(expression, context);
+
             // value types must be boxed, and that requires an explicit convert expression
             if (expression.Type != typeof(object) && expression.Type.IsValueType)
             {
@@ -184,6 +191,16 @@ namespace Rezolver.Compilation.Expressions
             }
 
             return Expression.Lambda<Func<ResolveContext, object>>(expression, context.ResolveContextParameterExpression);
+        }
+
+        public LambdaExpression BuildResolveLambdaStrong(Expression expression, IExpressionCompileContext context)
+        {
+            // TODO: Consider whether we need to isolate the resolve context parameter and any other parameter expressions
+            // so they are contained wholly within the lambda and don't accidentally create closures.
+            return Expression.Lambda(
+                typeof(Func<,>).MakeGenericType(typeof(ResolveContext), expression.Type),
+                expression, 
+                context.ResolveContextParameterExpression);
         }
 
         /// <summary>

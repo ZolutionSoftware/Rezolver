@@ -12,15 +12,15 @@ namespace Rezolver
 {
 	internal class RezolverContainerScopeFactory : IServiceScopeFactory
 	{
-		private IScopeFactory _scopeFactory;
-		public RezolverContainerScopeFactory(IScopeFactory scopeFactory)
+		private ResolveContext _context;
+		public RezolverContainerScopeFactory(ResolveContext context)
 		{
-			_scopeFactory = scopeFactory;
+			_context = context;
 		}
 
 		public IServiceScope CreateScope()
 		{
-			return new RezolverServiceScope(_scopeFactory.CreateScope());
+			return new RezolverServiceScope(_context.CreateScope());
 		}
 	}
 }

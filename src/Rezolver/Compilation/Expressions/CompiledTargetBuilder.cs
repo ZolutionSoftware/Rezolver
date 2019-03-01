@@ -33,7 +33,7 @@ namespace Rezolver.Compilation.Expressions
             return Expression.Call(
                     Expression.Constant(target),
                     Methods.ICompiledTarget_GetObject_Method,
-                    Methods.CallResolveContext_New(context.ResolveContextParameterExpression,
+                    Methods.CallResolveContext_New_Type(context.ResolveContextParameterExpression,
                         Expression.Constant(context.TargetType))
                 );
         }

@@ -16,9 +16,9 @@ namespace Rezolver.Runtime
 
         public int TargetId { get; }
 
-        public static implicit operator int(TargetIdentityOverride tio)
+        public static implicit operator int?(TargetIdentityOverride tio)
         {
-            return (tio ?? throw new ArgumentNullException(nameof(tio))).TargetId;
+            return tio?.TargetId;
         }
     }
 }

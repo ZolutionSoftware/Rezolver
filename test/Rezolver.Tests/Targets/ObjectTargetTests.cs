@@ -53,9 +53,9 @@ namespace Rezolver.Tests.Targets
 		public void CompiledTargetImplementationShouldReturnValue(object value)
 		{
 			ICompiledTarget target = new ObjectTarget(value);
-			Assert.Same(value, target.GetObject(new ResolveContext((Container)null, value.GetType())));
+			Assert.Same(value, target.GetObject(new ResolveContext(new Container(), value.GetType())));
 			//also check that it works for a base (going for typeof(object))
-			Assert.Same(value, target.GetObject(new ResolveContext((Container)null, typeof(object))));
+			Assert.Same(value, target.GetObject(new ResolveContext(new Container(), typeof(object))));
 		}
 	}
 }

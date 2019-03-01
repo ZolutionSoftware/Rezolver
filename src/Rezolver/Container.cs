@@ -2,6 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Rezolver.Compilation;
 using Rezolver.Events;
@@ -143,12 +144,10 @@ namespace Rezolver
             }
         }
 
-        ITargetContainer IRootTargetContainer.CreateTargetContainer(Type forType) => Targets.CreateTargetContainer(forType);
-
-        Type IRootTargetContainer.GetContainerRegistrationType(Type serviceType) => Targets.GetContainerRegistrationType(serviceType);
-
         /// <summary>
-        /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container
+        /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container,
+        /// using the scope from <see cref="ResolveContext.Scope"/> (even if different from this container's
+        /// <see cref="Scope"/>).
         /// </summary>
         /// <param name="context">The resolve context</param>
         /// <returns>An instance of the type that was requested.</returns>
@@ -157,27 +156,48 @@ namespace Rezolver
             return GetCompiledTarget(context).GetObject(context);
         }
 
+        /// <summary>
+        /// Resolves an instances of the given type using this container's scope.
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <returns></returns>
         public object Resolve(Type serviceType)
         {
             return Resolve(new ResolveContext(Scope, serviceType));
         }
 
+        /// <summary>
+        /// Resolves an instance of the given type for the given scope
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <param name="scope"></param>
+        /// <returns></returns>
+        public object Resolve(Type serviceType, ContainerScope2 scope)
+        {
+            // resolve, assuming a different scope to this container's scope
+            return Resolve(new ResolveContext(new ContainerScopeProxy(scope, this), serviceType));
+        }
+
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
-            return Resolve<TService>(new ResolveContext(Scope, typeof(TService)));
+            return ResolveInternal<TService>(new ResolveContext(Scope, typeof(TService)));
         }
 
         public TService Resolve<TService>(ContainerScope2 scope)
         {
             // resolve, assuming a different scope to this container's scope
-            return Resolve<TService>(new ResolveContext(new ContainerScopeProxy(scope, this), typeof(TService)));
+            return ResolveInternal<TService>(new ResolveContext(new ContainerScopeProxy(scope, this), typeof(TService)));
         }
 
-        public TService Resolve<TService>(ResolveContext context)
+        public IEnumerable ResolveMany(Type serviceType)
         {
-            // worker for resolving
-            return ResolveInternal<TService>(context ?? throw new ArgumentNullException(nameof(context)));
+            return (IEnumerable)Resolve(new ResolveContext(Scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
+        }
+
+        public IEnumerable<TService> ResolveMany<TService>()
+        {
+            return Resolve<IEnumerable<TService>>();
         }
 
         internal TService ResolveInternal<TService>(ResolveContext context)
@@ -221,6 +241,56 @@ namespace Rezolver
         public ContainerScope2 CreateScope()
         {
             return Scope.CreateScope();
+        }
+
+        /// <summary>
+        /// Returns <c>true</c> if a service registration can be found for the given <paramref name="serviceType"/>
+        /// </summary>
+        /// <param name="serviceType"></param>
+        /// <returns></returns>
+        public virtual bool CanResolve(Type serviceType)
+        {
+            return Targets.Fetch(serviceType) != null;
+        }
+
+        public bool CanResolve<TService>()
+        {
+            return CanResolve(typeof(TService));
+        }
+
+        /// <summary>
+        /// Implementation of <see cref="ITargetContainer.Register(ITarget, Type)"/> - simply proxies the
+        /// call to the target container referenced by the <see cref="Targets"/> property.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="serviceType"></param>
+        /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an
+        /// <see cref="IContainer"/> has started compiling targets within it can yield unpredictable results.
+        ///
+        /// If you create a new container and perform all your registrations before you use it, however, then everything
+        /// will work as expected.
+        ///
+        /// Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the
+        /// list of class members.
+        /// </remarks>
+        public void Register(ITarget target, Type serviceType = null)
+        {
+            Targets.Register(target, serviceType);
+        }
+
+        /// <summary>
+        /// Called by <see cref="GetCompiledTarget(ResolveContext)"/> if no valid <see cref="ITarget"/> can be
+        /// found for the <paramref name="context"/> or if the one found has its <see cref="ITarget.UseFallback"/> property
+        /// set to <c>true</c>.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(ResolveContext)"/>
+        /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
+        /// </returns>
+        /// <remarks>The base implementation always returns an instance of the <see cref="UnresolvedTypeCompiledTarget"/>.</remarks>
+        protected virtual ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
+        {
+            return new UnresolvedTypeCompiledTarget(context.RequestedType);
         }
 
         /// <summary>
@@ -281,76 +351,24 @@ namespace Rezolver
                 throw new InvalidOperationException($"No compiler has been configured in the Targets target container for a target of type {target.GetType()} - please use the SetOption API to set an ITargetCompiler for all target types, or for specific target types.");
             }
 
-            return compiler.CompileTarget(target, context.New(newContainer: this), Targets);
+            return compiler.CompileTarget(target, context.ChangeContainer(newContainer: this), Targets);
         }
 
-        /// <summary>
-        /// Implementation of the <see cref="IContainer.CanResolve(ResolveContext)"/> method.  Returns true if, and only
-        /// if, the <see cref="Targets"/> <see cref="ITargetContainer"/> returns a non-null <see cref="ITarget"/> when the
-        /// <see cref="ResolveContext.RequestedType"/> is passed to its <see cref="ITargetContainer.Fetch(Type)"/> method.
-        /// </summary>
-        /// <param name="context">The resolve context containing the requested type.</param>
-        public virtual bool CanResolve(ResolveContext context)
-        {
-            return Targets.Fetch(context.RequestedType) != null;
-        }
-
-        /// <summary>
-        /// Called by <see cref="GetCompiledTarget(ResolveContext)"/> if no valid <see cref="ITarget"/> can be
-        /// found for the <paramref name="context"/> or if the one found has its <see cref="ITarget.UseFallback"/> property
-        /// set to <c>true</c>.
-        /// </summary>
-        /// <param name="context"></param>
-        /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(ResolveContext)"/>
-        /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
-        /// </returns>
-        /// <remarks>The base implementation always returns an instance of the <see cref="UnresolvedTypeCompiledTarget"/>.</remarks>
-        protected virtual ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
-        {
-            return new UnresolvedTypeCompiledTarget(context.RequestedType);
-        }
-
+        #region IServiceProvider implementation
         object IServiceProvider.GetService(Type serviceType)
         {
-            return GetService(serviceType);
-        }
-
-        /// <summary>
-        /// Protected virtual implementation of <see cref="IServiceProvider.GetService(Type)"/>.
-        ///
-        /// Uses the <see cref="TryResolve(ResolveContext, out object)"/> method to resolve the service, returning
-        /// <c>null</c> if the operation fails.
-        /// </summary>
-        /// <param name="serviceType">Type of service to be resolved.</param>
-        /// <returns></returns>
-        protected virtual object GetService(Type serviceType)
-        {
             // IServiceProvider should return null if not found - so we use TryResolve.
-            this.TryResolve(serviceType, out object toReturn);
-            return toReturn;
+            TryResolve(new ResolveContext(Scope, serviceType), out var result);
+            return result;
         }
+        #endregion
 
-        /// <summary>
-        /// Implementation of <see cref="ITargetContainer.Register(ITarget, Type)"/> - simply proxies the
-        /// call to the target container referenced by the <see cref="Targets"/> property.
-        /// </summary>
-        /// <param name="target"></param>
-        /// <param name="serviceType"></param>
-        /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an
-        /// <see cref="IContainer"/> has started compiling targets within it can yield unpredictable results.
-        ///
-        /// If you create a new container and perform all your registrations before you use it, however, then everything
-        /// will work as expected.
-        ///
-        /// Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the
-        /// list of class members.
-        /// </remarks>
-        public void Register(ITarget target, Type serviceType = null)
-        {
-            Targets.Register(target, serviceType);
-        }
 
         #region IRootTargetContainer explicit implementation
+        ITargetContainer IRootTargetContainer.CreateTargetContainer(Type forType) => Targets.CreateTargetContainer(forType);
+
+        Type IRootTargetContainer.GetContainerRegistrationType(Type serviceType) => Targets.GetContainerRegistrationType(serviceType);
+
         IRootTargetContainer ITargetContainer.Root => Targets;
 
         ITarget ITargetContainer.Fetch(Type type) => Targets.Fetch(type);
@@ -370,7 +388,6 @@ namespace Rezolver
         IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType) => Targets.GetKnownCompatibleTypes(serviceType);
 
         TargetTypeSelector ICovariantTypeIndex.SelectTypes(Type type) => Targets.SelectTypes(type);
-
         #endregion
     }
 }

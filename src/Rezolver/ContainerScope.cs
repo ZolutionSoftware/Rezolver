@@ -2,7 +2,9 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Rezolver
@@ -355,8 +357,10 @@ namespace Rezolver
 
         }
 
-        public object GetService(Type serviceType)
+        object IServiceProvider.GetService(Type serviceType)
         {
+            // when resolving through a scope, we give the container a context
+            // which explicitly has this scope on it.
             Container.TryResolve(new ResolveContext(this, serviceType), out object result);
             return result;
         }
@@ -368,7 +372,17 @@ namespace Rezolver
 
         public TService Resolve<TService>()
         {
-            return Container.Resolve<TService>(new ResolveContext(this, typeof(TService)));
+            return Container.ResolveInternal<TService>(new ResolveContext(this, typeof(TService)));
+        }
+
+        public IEnumerable ResolveMany(Type serviceType)
+        {
+            return (IEnumerable)Container.Resolve(new ResolveContext(this, typeof(IEnumerable<>).MakeGenericType(serviceType)));
+        }
+
+        public IEnumerable<TService> ResolveMany<TService>()
+        {
+            return Container.ResolveInternal<IEnumerable<TService>>(new ResolveContext(this, typeof(IEnumerable<TService>)));
         }
 
         private protected virtual void ChildDisposed(ContainerScope2 child)
@@ -506,21 +520,28 @@ namespace Rezolver
 
         private protected override void OnDispose()
         {
-            // note that explicitly scoped objects might not actually be IDisposable :)
-            var allExplicitObjects = this._explicitlyScopedObjects.Skip(0).ToArray()
-                .Where(l => l.Value.Value.Object is IDisposable && !(l.Value.Value.Object is ContainerScope2))
-                .Select(l => l.Value.Value);
-            var allImplicitObjects = this._implicitlyScopedObjects.Skip(0).ToArray()
-                .Where(l => !(l.Object is ContainerScope2));
-
-            // deref all used collections
-            this._explicitlyScopedObjects = null;
-            this._implicitlyScopedObjects = null;
-
-            foreach (var obj in allExplicitObjects.Concat(allImplicitObjects)
-                .OrderByDescending(so => so.Id))
+            try
             {
-                ((IDisposable)obj.Object).Dispose();
+                base.OnDispose();
+            }
+            finally
+            {
+                // note that explicitly scoped objects might not actually be IDisposable :)
+                var allExplicitObjects = this._explicitlyScopedObjects.Skip(0).ToArray()
+                    .Where(l => l.Value.Value.Object is IDisposable && !(l.Value.Value.Object is ContainerScope2))
+                    .Select(l => l.Value.Value);
+                var allImplicitObjects = this._implicitlyScopedObjects.Skip(0).ToArray()
+                    .Where(l => !(l.Object is ContainerScope2));
+
+                // deref all used collections
+                this._explicitlyScopedObjects = null;
+                this._implicitlyScopedObjects = null;
+
+                foreach (var obj in allExplicitObjects.Concat(allImplicitObjects)
+                    .OrderByDescending(so => so.Id))
+                {
+                    ((IDisposable)obj.Object).Dispose();
+                }
             }
         }
     }
