@@ -6,7 +6,7 @@ namespace Rezolver
 {
     internal class AutoLazyTargetContainer : GenericTargetContainer
     {
-        private ConcurrentDictionary<Type, ConstructorTarget> _cachedTargets = new ConcurrentDictionary<Type, ConstructorTarget>();
+        private ConcurrentDictionary<Type, ITarget> _cachedTargets = new ConcurrentDictionary<Type, ITarget>();
         internal AutoLazyTargetContainer(IRootTargetContainer root)
             : base(root, typeof(Lazy<>))
         {
@@ -30,7 +30,7 @@ namespace Rezolver
 
             return _cachedTargets.GetOrAdd(type, BuildTarget);
 
-            ConstructorTarget BuildTarget(Type t)
+            ITarget BuildTarget(Type t)
             {
                 // we need a ConstructorTarget that binds to the correct Lazy<T> constructor (for the specific type 
                 // passed as the generic type argument)
@@ -41,7 +41,7 @@ namespace Rezolver
                 if (constructor == null)
                     throw new InvalidOperationException($"Could not get Func callback constructor for {t}");
 
-                return new ConstructorTarget(constructor);
+                return new ConstructorTarget(constructor).Unscoped();
             }
         }
     }

@@ -42,7 +42,7 @@ namespace Rezolver.Runtime
         /// <param name="factories"></param>
         public LazyEnumerable(ResolveContext context, IEnumerable<Func<ResolveContext, object>> factories)
         {
-            this._context = context;
+            this._context = context.ChangeRequestedType(typeof(T));
 
             // we can eagerly create an array of delegates.
             this._factories = factories.ToArray();

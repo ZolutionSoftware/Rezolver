@@ -43,6 +43,11 @@ namespace Rezolver.Targets
         public Type[] ParameterTypes { get; }
 
         /// <summary>
+        /// Overrides the property always to return <see cref="ScopeBehaviour.None"/> by default.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+
+        /// <summary>
         /// Creates a new <see cref="AutoFactoryTarget"/> for the given <paramref name="delegateType"/>, optionally already bound
         /// to the given <paramref name="boundTarget"/>.
         /// </summary>

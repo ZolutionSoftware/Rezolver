@@ -439,6 +439,8 @@ namespace Rezolver
 
         public sealed override ContainerScope2 CreateScope()
         {
+            if (_isDisposed) throw new ObjectDisposedException(nameof(DisposingContainerScope));
+
             var scope = base.CreateScope();
             this._childScopes.Add(scope);
             return scope;
@@ -503,7 +505,7 @@ namespace Rezolver
         {
             if (_isDisposed) throw new ObjectDisposedException(nameof(ConcurrentContainerScope));
 
-            var key = new TypeAndTargetId(context.RequestedType, targetId);
+            var key = new TypeAndTargetId(typeof(T), targetId);
             // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
             if (this._explicitlyScopedObjects.TryGetValue(key, out Lazy<ScopedObject> lazy))
             {
