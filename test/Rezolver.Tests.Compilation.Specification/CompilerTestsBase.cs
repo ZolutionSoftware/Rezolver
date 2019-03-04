@@ -100,9 +100,9 @@ namespace Rezolver.Tests.Compilation.Specification
 		/// <param name="baseContainer">The base container.</param>
 		/// <param name="newTargets">The new targets.</param>
 		/// <param name="testName">Name of the test.</param>
-		protected virtual OverridingContainer CreateOverridingContainer(Container baseContainer, IRootTargetContainer newTargets = null, [CallerMemberName]string testName = null)
+		protected virtual OverridingContainer CreateOverridingContainer(Container baseContainer, [CallerMemberName]string testName = null)
 		{
-			return new OverridingContainer(baseContainer, newTargets, GetContainerConfig(testName));
+			return new OverridingContainer(baseContainer, GetContainerConfig(testName));
 		}
 
 		/// <summary>

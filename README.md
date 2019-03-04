@@ -22,12 +22,12 @@ For more information, including API reference and developer how-tos, head on ove
 
 ## 2.0.0
 
-- `NetStandard2.0` is now the only TFM
+- `NetStandard2.0` is now the only TFM ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78))
 - Major performance improvements - up to 45% faster than before.
-- Scopes are now always present
-  - But 
-  - `ScopedContainer` should still be used if you want a 'root' disposable scope (it will be used by default by Asp.Net Core)Major changes to key types:
-- Got rid of a whole bunch of interfaces in favour of concrete classes with non-virtual (where possible) methods:
+- Scopes are now always present ([#89](https://github.com/ZolutionSoftware/Rezolver/issues/89))
+  - But, by default, the `Container` class won't support instance tracking or explicitly scoped registrations. You need to create a scope to do this, unless...
+  - You use `ScopedContainer` instead, which creates its own 'root' disposable scope on creation.  This will be used by default by Asp.Net Core)
+- Got rid of a whole bunch of interfaces in favour of concrete classes with non-virtual (where possible) methods ([#90](https://github.com/ZolutionSoftware/Rezolver/issues/90)):
   - `IResolveContext` -> `ResolveContext`
   - `IContainer` -> `Container`
   - `IContainerScope` -> `ContainerScope`
@@ -43,6 +43,10 @@ For more information, including API reference and developer how-tos, head on ove
       - Resolving through a `Scope` routes the call to its own `Container`, but with a `ResolveContext` which fixes the `Scope` to that scope.
     - `ResolveContext` now only has a `Scope` (the `Container` property just proxies the Container from the scope)
     - Resolving through a `ResolveContext` routes the call to its own `Scope` (and therefore `Container`)
+- `OverridingContainer` renamed to `ChildContainer` ([#87](https://github.com/ZolutionSoftware/Rezolver/issues/87))
+  - Constructor now no longer accepts an `IRootTargetContainer` on creation.  To register new services, you create a new instance and then register into it via its implementation of `IRootTargetContainer`
+- `OverridingTargetContainer` renamed to `ChildTargetContainer` ([#88](https://github.com/ZolutionSoftware/Rezolver/issues/88))
+
 
 ## 1.4.0
 

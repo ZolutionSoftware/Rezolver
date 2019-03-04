@@ -89,22 +89,23 @@ namespace Rezolver.Compilation.Expressions
                     currentContainer);
             }
 
-            var checkContainer = context.GetOrAddSharedExpression(typeof(bool),
-                "IsSameRezolver",
-                (t, s) => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), GetType());
+            return staticExpr;
+            //var checkContainer = context.GetOrAddSharedExpression(typeof(bool),
+            //    "IsSameRezolver",
+            //    (t, s) => Expression.ReferenceEqual(context.ContextContainerPropertyExpression, currentContainer), GetType());
 
-            Expression useContextRezolverIfCanExpr = Expression.Condition(
-                Methods.CallContainer_CanResolve(context.ContextContainerPropertyExpression, target.DeclaredType),
-                Methods.CallContainer_ResolveStrong(context.ContextContainerPropertyExpression, target.DeclaredType, newContext),
-                staticExpr
-              );
+            //Expression useContextRezolverIfCanExpr = Expression.Condition(
+            //    Methods.CallContainer_CanResolve(context.ContextContainerPropertyExpression, target.DeclaredType),
+            //    Methods.CallContainer_ResolveStrong(context.ContextContainerPropertyExpression, target.DeclaredType, newContext),
+            //    staticExpr
+            //  );
 
-            var finalExpr = Expression.Condition(checkContainer,
-                staticExpr,
-                useContextRezolverIfCanExpr);
-            //var finalExpr = staticExpr;
+            //var finalExpr = Expression.Condition(checkContainer,
+            //    staticExpr,
+            //    useContextRezolverIfCanExpr);
+            ////var finalExpr = staticExpr;
 
-            return finalExpr;
+            //return finalExpr;
         }
     }
 }

@@ -46,90 +46,10 @@ namespace Rezolver
     /// </remarks>
     public sealed class OverridingContainer : Container
     {
-        private class CombinedTargetContainer : IRootTargetContainer
-        {
-            private readonly IRootTargetContainer _first;
-            private readonly IRootTargetContainer _second;
-
-            public IRootTargetContainer Root { get; }
-
-            public event EventHandler<TargetRegisteredEventArgs> TargetRegistered;
-            public event EventHandler<TargetContainerRegisteredEventArgs> TargetContainerRegistered;
-
-            public CombinedTargetContainer(IRootTargetContainer first, IRootTargetContainer second)
-            {
-                this._first = first;
-                this._second = second;
-            }
-
-            public void AddKnownType(Type serviceType)
-            {
-                _second.AddKnownType(serviceType);
-            }
-
-            public ITargetContainer CombineWith(ITargetContainer existing, Type type)
-            {
-                return _second.CombineWith(existing, type);
-            }
-
-            public ITargetContainer CreateTargetContainer(Type forContainerRegistrationType)
-            {
-                return _second.CreateTargetContainer(forContainerRegistrationType);
-            }
-
-            public ITarget Fetch(Type type)
-            {
-                var result = _second.Fetch(type);
-                if (result?.UseFallback ?? true)
-                    return _first.Fetch(type);
-                return result;
-            }
-
-            public IEnumerable<ITarget> FetchAll(Type type)
-            {
-                return _first.FetchAll(type).Concat(_second.FetchAll(type));
-            }
-
-            public ITargetContainer FetchContainer(Type type)
-            {
-                return _second.FetchContainer(type);
-            }
-
-            public Type GetContainerRegistrationType(Type serviceType)
-            {
-                return GetContainerRegistrationType(serviceType);
-            }
-
-            public IEnumerable<Type> GetKnownCompatibleTypes(Type serviceType)
-            {
-                //return
-            }
-
-            public IEnumerable<Type> GetKnownCovariantTypes(Type serviceType)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Register(ITarget target, Type serviceType = null)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void RegisterContainer(Type type, ITargetContainer container)
-            {
-                throw new NotImplementedException();
-            }
-
-            public TargetTypeSelector SelectTypes(Type type)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         /// <summary>
         /// Gets the <see cref="IContainer"/> that is overriden by this container.
         /// </summary>
-        //public Container Inner { get; }
+        public Container Inner { get; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="OverridingContainer"/>
@@ -144,10 +64,10 @@ namespace Rezolver
         /// If not provided, then a new <see cref="TargetContainer"/> will be created.</param>
         /// <param name="config">Can be null.  A configuration to apply to this container (and, potentially its
         /// <see cref="Targets"/>).  If not provided, then the <see cref="Container.DefaultConfig"/> will be used</param>
-        public OverridingContainer(Container inner, IRootTargetContainer targets = null, IContainerConfig config = null)
+        public OverridingContainer(Container inner, IContainerConfig config = null)
             : base(new OverridingTargetContainer(inner))
         {
-            //Inner = inner ?? throw new ArgumentNullException(nameof(inner));
+            Inner = inner ?? throw new ArgumentNullException(nameof(inner));
 
             (config ?? DefaultConfig).Configure(this, Targets);
         }
