@@ -50,7 +50,7 @@ namespace Rezolver
             Configuration.ExpressionCompilation.Instance,
             // note: this config object only applies itself to OverridingContainer objects, and only when the
             // EnableAutoEnumerables option is set to true in the ITargetContainer.
-            Configuration.OverridingEnumerables.Instance
+            //Configuration.OverridingEnumerables.Instance
         });
 
         private readonly ConcurrentCache _cache;
@@ -90,6 +90,7 @@ namespace Rezolver
         {
             _cache = new ConcurrentCache();
             Targets = targets ?? new TargetContainer();
+            Scope = new DisposingContainerScope(this);
         }
 
         /// <summary>

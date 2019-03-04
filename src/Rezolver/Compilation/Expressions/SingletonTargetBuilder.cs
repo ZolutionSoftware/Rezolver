@@ -43,7 +43,7 @@ namespace Rezolver.Compilation.Expressions
                     singleton.InnerTarget, 
                     c.NewContext(
                         c.TargetType ?? singleton.DeclaredType, 
-                        scopeBehaviourOverride: ScopeBehaviour.None,
+                        scopeBehaviourOverride: ScopeBehaviour.Implicit,
                         scopePreferenceOverride: ScopePreference.Root));
         }
     }

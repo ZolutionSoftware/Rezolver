@@ -278,11 +278,28 @@ namespace Rezolver
     {
         private protected bool _isDisposing = false;
         private protected bool _isDisposed = false;
-
+        
+        /// <summary>
+        /// The container that this scope uses by default to resolve instances.
+        /// </summary>
         public Container Container { get; }
 
+        /// <summary>
+        /// Root scope to be used for 'top-level' object tracking.
+        /// 
+        /// Note - when a <see cref="Container"/> is used, this should be the first scope
+        /// created via the <see cref="Container.CreateScope"/> method.
+        /// 
+        /// With <see cref="ScopedContainer"/> it will be the scope that lives inside that container.
+        /// 
+        /// So, as a result of this, this property could point to a scope that's not actually
+        /// a parent of <see cref="Parent"/>
+        /// </summary>
         public ContainerScope2 Root { get; }
 
+        /// <summary>
+        /// The scope from which this scope was created.
+        /// </summary>
         public ContainerScope2 Parent { get; }
 
         /// <summary>
@@ -299,11 +316,14 @@ namespace Rezolver
         /// Creates a new child scope whose container is inherited from the <paramref name="parent"/>
         /// </summary>
         /// <param name="parent"></param>
-        private protected ContainerScope2(ContainerScope2 parent)
+        /// <param name="isRoot"></param>
+        private protected ContainerScope2(ContainerScope2 parent, bool isRoot)
         {
             Container = parent.Container;
             Parent = parent;
-            Root = parent.Root;
+            // cheeky - basically as soon as we have a fully-functioning scope that can track instances,
+            // that must become the root scope; but until that point, it just gets 
+            Root = isRoot ? this : parent.Root;
         }
 
         public virtual T ActivateImplicit<T>(T instance)
@@ -318,7 +338,9 @@ namespace Rezolver
 
         public virtual ContainerScope2 CreateScope()
         {
-            return new ConcurrentContainerScope(this);
+            // note that the new scope is set as its own root if this scope's Root is not 
+            // a 'full' instance-tracking scope.
+            return new ConcurrentContainerScope(this, !(this.Root is ConcurrentContainerScope));
         }
 
         /// <summary>
@@ -403,14 +425,14 @@ namespace Rezolver
         private LockedList<ContainerScope2> _childScopes
             = new LockedList<ContainerScope2>(64);
 
-        public DisposingContainerScope(Container container)
+        internal DisposingContainerScope(Container container)
             : base(container)
         {
 
         }
 
-        public DisposingContainerScope(ContainerScope2 parent)
-            : base(parent)
+        internal DisposingContainerScope(ContainerScope2 parent, bool isRoot)
+            : base(parent, isRoot)
         {
 
         }
@@ -482,8 +504,8 @@ namespace Rezolver
 
         }
 
-        public ConcurrentContainerScope(ContainerScope2 parent)
-            : base(parent)
+        public ConcurrentContainerScope(ContainerScope2 parent, bool isRoot)
+            : base(parent, isRoot)
         {
 
         }

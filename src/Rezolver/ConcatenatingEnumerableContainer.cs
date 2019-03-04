@@ -47,14 +47,15 @@ namespace Rezolver
 
         public override ITarget Fetch(Type type)
         {
-            var baseCompiled = this._owner.Inner.GetCompiledTarget(new ResolveContext(this._owner.Inner, type));
-            var overrideTarget = base.Fetch(type);
+            throw new NotSupportedException();
+            //var baseCompiled = this._owner.Inner.GetCompiledTarget(new ResolveContext(this._owner.Inner, type));
+            //var overrideTarget = base.Fetch(type);
 
-            // we know from above that if type is not IEnumerable<T>, then an exception will occur.
-            // so this type wrangling is safe
+            //// we know from above that if type is not IEnumerable<T>, then an exception will occur.
+            //// so this type wrangling is safe
 
-            return Target.ForType(typeof(EnumerableConcatenator<>).MakeGenericType(type.GetGenericArguments()[0]),
-                new { context = Target.Resolved<ResolveContext>(), baseEnumerable = baseCompiled.SourceTarget, extra = overrideTarget });
+            //return Target.ForType(typeof(EnumerableConcatenator<>).MakeGenericType(type.GetGenericArguments()[0]),
+            //    new { context = Target.Resolved<ResolveContext>(), baseEnumerable = baseCompiled.SourceTarget, extra = overrideTarget });
         }
 
         public override ITargetContainer CombineWith(ITargetContainer existing, Type type)
