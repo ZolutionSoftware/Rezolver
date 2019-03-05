@@ -37,7 +37,7 @@ namespace Rezolver
 
         public bool Equals(TypeAndTargetId other)
         {
-            return Type == other.Type && Id == other.Id;
+            return Id == other.Id && Type == other.Type;
         }
 
         public override int GetHashCode()

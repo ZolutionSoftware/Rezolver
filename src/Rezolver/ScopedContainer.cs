@@ -38,7 +38,8 @@ namespace Rezolver
         public ScopedContainer(IRootTargetContainer targets = null, IContainerConfig config = null)
             : base(targets)
         {
-            Scope = new ConcurrentContainerScope(this);
+            // annoying: double assignment here (base already initialises it...)
+            _scope = new ConcurrentContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 
@@ -55,7 +56,7 @@ namespace Rezolver
             {
                 if (disposing)
                 {
-                    Scope.Dispose();
+                    _scope.Dispose();
                 }
 
                 this._isDisposed = true;

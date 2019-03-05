@@ -19,6 +19,8 @@ namespace Rezolver.Targets
         /// </summary>
         public override Type DeclaredType { get; }
 
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+
         /// <summary>
         /// Returns <c>true</c> if <see cref="Targets"/> is empty, otherwise <c>false</c>.
         /// </summary>

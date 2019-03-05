@@ -13,24 +13,28 @@ namespace Rezolver
     /// <summary>
     /// 
     /// </summary>
-    public sealed class ResolveContext : IServiceProvider
+    public sealed class ResolveContext : IServiceProvider, IEquatable<ResolveContext>
     {
+        private readonly Type _requestedType;
+        private readonly ContainerScope2 _scope;
+
         /// <summary>
         /// Gets the type being requested from the container.
         /// </summary>
-        public Type RequestedType { get; private set; }
+        public Type RequestedType { get => _requestedType; }
 
-        /// <summary>
-        /// The container for this context.
-        /// </summary>
-        /// <remarks>This is a wrapper for the <see cref="ContainerScope2.Container"/> property of the <see cref="Scope"/></remarks>
-        public Container Container => Scope.Container;
 
         /// <summary>
         /// Gets the scope that's active for all calls for this context.
         /// </summary>
         /// <value>The scope.</value>
-        public ContainerScope2 Scope { get; private set; }
+        public ContainerScope2 Scope { get => _scope; }
+
+        /// <summary>
+        /// The container for this context.
+        /// </summary>
+        /// <remarks>This is a wrapper for the <see cref="ContainerScope2.Container"/> property of the <see cref="Scope"/></remarks>
+        public Container Container => _scope.Container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolveContext"/> class.
@@ -39,8 +43,8 @@ namespace Rezolver
         /// <param name="requestedType">The type of object to be resolved from the container.</param>
         public ResolveContext(Container container, Type requestedType)
         {
-            Scope = container.Scope;
-            RequestedType = requestedType;
+            _scope = container._scope;
+            _requestedType = requestedType;
         }
 
         /// <summary>
@@ -52,8 +56,8 @@ namespace Rezolver
         /// <param name="requestedType">The of object to be resolved from the container.</param>
         public ResolveContext(ContainerScope2 scope, Type requestedType)
         {
-            Scope = scope;
-            RequestedType = requestedType;
+            _scope = scope;
+            _requestedType = requestedType;
         }
 
         /*****
@@ -69,7 +73,7 @@ namespace Rezolver
         /// <typeparam name="TService">Type of service to be resolved.</typeparam>
         public TService Resolve<TService>()
         {
-            return Scope.Resolve<TService>();
+            return _scope.Resolve<TService>();
         }
 
         public TService Resolve<TService>(Container newContainer)
@@ -84,7 +88,7 @@ namespace Rezolver
         /// <param name="serviceType">Type of service to be resolved.</param>
         public object Resolve(Type serviceType)
         {
-            return Scope.Resolve(serviceType);
+            return _scope.Resolve(serviceType);
         }
 
         /// <summary>
@@ -98,23 +102,23 @@ namespace Rezolver
         {
             // switching contains means creating a scope proxy which creates a temporary association between the 
             // scope and the new container.
-            return newContainer.Resolve(new ResolveContext(new ContainerScopeProxy(Scope, newContainer), serviceType));
+            return newContainer.Resolve(new ResolveContext(new ContainerScopeProxy(_scope, newContainer), serviceType));
         }
 
         public IEnumerable ResolveMany(Type serviceType)
         {
-            return (IEnumerable)Scope.Resolve(typeof(IEnumerable<>).MakeGenericType(serviceType));
+            return (IEnumerable)_scope.Resolve(typeof(IEnumerable<>).MakeGenericType(serviceType));
         }
 
         public IEnumerable<TService> ResolveMany<TService>()
         {
-            return Scope.Resolve<IEnumerable<TService>>();
+            return _scope.Resolve<IEnumerable<TService>>();
         }
 
         public ResolveContext ChangeRequestedType(Type serviceType)
         {
-            if (serviceType != RequestedType)
-                return new ResolveContext(Scope, serviceType);
+            if (serviceType != _requestedType)
+                return new ResolveContext(_scope, serviceType);
 
             return this;
         }
@@ -131,7 +135,7 @@ namespace Rezolver
             // we have to create a new 'fake' scope which proxies the current one,
             // but with a different container.
             if (newContainer != Container)
-                return new ResolveContext(new ContainerScopeProxy(Scope, newContainer), RequestedType);
+                return new ResolveContext(new ContainerScopeProxy(_scope, newContainer), _requestedType);
 
             return this;
         }
@@ -141,22 +145,66 @@ namespace Rezolver
         /// </summary>
         /// <remarks>This interface implementation is present for when an object wants to be able to inject a scope factory
         /// in order to create child scopes which are correctly parented either to another active scope or the container.</remarks>
-        public ContainerScope2 CreateScope()
-        {
-            return Scope.CreateScope();
-        }
+        public ContainerScope2 CreateScope() => _scope.CreateScope();
 
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         public override string ToString()
         {
-            return $"(Type: {RequestedType}, Scope: {Scope})";
+            return $"(Type: {_requestedType}, Scope: {_scope})";
         }
 
         object IServiceProvider.GetService(Type serviceType)
         {
-            return ((IServiceProvider)Scope).GetService(serviceType);
+            return ((IServiceProvider)_scope).GetService(serviceType);
+        }
+
+        bool IEquatable<ResolveContext>.Equals(ResolveContext other)
+        {
+            // two contexts are equal if their requested type is the same
+            return _requestedType == other._requestedType;
+        }
+
+        /// <summary>
+        /// Implements the <see cref="object.GetHashCode"/> method using the hash code of
+        /// the <see cref="RequestedType"/>
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode() => _requestedType.GetHashCode();
+
+        // TODO: Add activateimplicit/explicit for this scope and the root scope
+        // TODO: Add also flag on ContainerScope to control whether a scope can activate.
+        // TODO: And then, in here, if the scope can activate, we call it; otherwise we either return or throw
+
+        // Key point being the methods on this class are non-virtual.
+
+        internal T ActivateImplicit_ThisScope<T>(T instance)
+        {
+            if (!_scope._canActivate)
+                return instance;
+            return _scope.ActivateImplicit(instance);
+        }
+
+        internal T ActivateImplicit_RootScope<T>(T instance)
+        {
+            if (!_scope._root._canActivate)
+                return instance;
+            return _scope._root.ActivateImplicit(instance);
+        }
+
+        internal T ActivateExplicit_ThisScope<T>(int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            if (!_scope._canActivate)
+                throw new NotSupportedException("No scope explicitly created; either resolve from a new scope; or use ScopedContainer");
+            return _scope.ActivateExplicit(this, targetId, instanceFactory);
+        }
+
+        internal T ActivateExplicit_RootScope<T>(int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            if (!_scope._root._canActivate)
+                throw new NotSupportedException("Root scope cannot track instances; either resolve from a new scope; or use ScopedContainer");
+            return _scope._root.ActivateExplicit(this, targetId, instanceFactory);
         }
     }
 }

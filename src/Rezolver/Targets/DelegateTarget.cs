@@ -26,6 +26,9 @@ namespace Rezolver.Targets
         /// </summary>
         /// <value>The factory.</value>
         public Delegate Factory { get; }
+
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+
         /// <summary>
         /// Gets the MethodInfo for the <see cref="Factory"/> delegate.
         /// </summary>

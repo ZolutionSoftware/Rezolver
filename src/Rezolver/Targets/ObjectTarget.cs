@@ -84,8 +84,8 @@ namespace Rezolver.Targets
                 return Value;
             // whatever scoping we're doing, we MUST use the root scope.
             return ScopeBehaviour == ScopeBehaviour.Implicit ?
-                context.Scope.Root.ActivateImplicit(Value) :
-                context.Scope.Root.ActivateExplicit(context, this.Id, c => Value);
+                context.ActivateImplicit_RootScope(Value) :
+                context.ActivateExplicit_RootScope(this.Id, c => Value);
         }
 
         object IDirectTarget.GetValue() => Value;

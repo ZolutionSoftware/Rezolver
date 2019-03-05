@@ -2,11 +2,8 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Rezolver.Compilation.Expressions
 {
@@ -52,11 +49,17 @@ namespace Rezolver.Compilation.Expressions
             public static PropertyInfo Scope_RootScope_Property =>
                 (PropertyInfo)Extract.Member((ContainerScope2 s) => s.Root);
 
-            public static MethodInfo Scope_ActivateImplicit_Method =>
-                Extract.Method((ContainerScope2 s) => s.ActivateImplicit<object>(null)).GetGenericMethodDefinition();
+            public static MethodInfo CurrentScope_ActivateImplicit_Method =>
+                Extract.Method((ResolveContext c) => c.ActivateImplicit_ThisScope((object)null)).GetGenericMethodDefinition();
 
-            public static MethodInfo Scope_ActivateExplicit_Method =>
-                Extract.Method((ContainerScope2 s) => s.ActivateExplicit<object>(null, 0, null)).GetGenericMethodDefinition();
+            public static MethodInfo RootScope_ActivateImplicit_Method =>
+                Extract.Method((ResolveContext c) => c.ActivateImplicit_RootScope((object)null)).GetGenericMethodDefinition();
+
+            public static MethodInfo CurrentScope_ActivateExplicit_Method =>
+                Extract.Method((ResolveContext c) => c.ActivateExplicit_ThisScope<object>(0, null)).GetGenericMethodDefinition();
+
+            public static MethodInfo RootScope_ActivateExplicit_Method =>
+                Extract.Method((ResolveContext c) => c.ActivateExplicit_RootScope<object>(0, null)).GetGenericMethodDefinition();
 
             /// <summary>
             /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(ResolveContext)"/>
@@ -83,26 +86,46 @@ namespace Rezolver.Compilation.Expressions
             public static MethodInfo ResolveContext_Resolve_NewContainer_Strong_Method =>
                 Extract.Method((ResolveContext r) => r.Resolve<object>((Container)null)).GetGenericMethodDefinition();
 
-            public static MethodCallExpression CallScope_ActivateImplicit(
-                Expression scopeInstance,
+            public static MethodCallExpression Call_CurrentScope_ActivateImplicit(
+                Expression context,
                 Expression instance)
             {
                 return Expression.Call(
-                    scopeInstance,
-                    Scope_ActivateImplicit_Method.MakeGenericMethod(instance.Type),
+                    context,
+                    CurrentScope_ActivateImplicit_Method.MakeGenericMethod(instance.Type),
                     instance);
             }
 
-            public static MethodCallExpression CallScope_ActivateExplicit(
-                Expression scopeInstance,
-                Expression resolveContext,
+            public static MethodCallExpression Call_RootScope_ActivateImplicit(
+                Expression context,
+                Expression instance)
+            {
+                return Expression.Call(
+                    context,
+                    RootScope_ActivateImplicit_Method.MakeGenericMethod(instance.Type),
+                    instance);
+            }
+
+            public static MethodCallExpression Call_CurrentScope_ActivateExplicit(
+                Expression context,
                 int targetId,
                 LambdaExpression instanceFactory)
             {
                 return Expression.Call(
-                    scopeInstance,
-                    Scope_ActivateExplicit_Method.MakeGenericMethod(instanceFactory.Body.Type),
-                    resolveContext,
+                    context,
+                    CurrentScope_ActivateExplicit_Method.MakeGenericMethod(instanceFactory.Body.Type),
+                    Expression.Constant(targetId),
+                    instanceFactory);
+            }
+
+            public static MethodCallExpression Call_RootScope_ActivateExplicit(
+                Expression context,
+                int targetId,
+                LambdaExpression instanceFactory)
+            {
+                return Expression.Call(
+                    context,
+                    RootScope_ActivateExplicit_Method.MakeGenericMethod(instanceFactory.Body.Type),
                     Expression.Constant(targetId),
                     instanceFactory);
             }
@@ -132,27 +155,6 @@ namespace Rezolver.Compilation.Expressions
                     resolveContext,
                     ResolveContext_Resolve_NewContainer_Strong_Method.MakeGenericMethod(serviceType),
                     container);
-            }
-
-            internal static MethodCallExpression CallContainer_ResolveStrong(Expression container,
-                Type type,
-                Expression context)
-            {
-                return Expression.Call(container, Container_ResolveStrong_Method.MakeGenericMethod(type), context);
-            }
-
-            /// <summary>
-            /// Emits a <see cref="MethodCallExpression"/> which represents calling the
-            /// <see cref="IContainer.CanResolve(ResolveContext)"/> method with the given
-            /// context argument.
-            /// </summary>
-            /// <param name="container">An expression representing the container on which the method will be called</param>
-            /// <param name="serviceType">The static type to be passed to the method.</param>
-            /// <returns></returns>
-            public static MethodCallExpression CallContainer_CanResolve(Expression container,
-                Type serviceType)
-            {
-                return Expression.Call(container, Container_CanResolve_Method, Expression.Constant(serviceType, typeof(Type)));
             }
         }
 
@@ -253,28 +255,42 @@ namespace Rezolver.Compilation.Expressions
                 return builtExpression;
             }
 
-            var originalType = builtExpression.Type;
-            int? targetIdOverride = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
             var scopePreference = context.ScopePreferenceOverride ?? target.ScopePreference;
-
-            Expression scopeExpr = scopePreference == ScopePreference.Current
-                ? context.ContextScopePropertyExpression
-                : Expression.Property(context.ContextScopePropertyExpression, Methods.Scope_RootScope_Property);
-
-            // this will now call either Scope.ActivateImplicit or Scope.ActivateExplicit
+            
+            // this will now call the correct activation method (internal-only) on the ResolveContext
             if (scopeBehaviour == ScopeBehaviour.Implicit)
             {
-                return Methods.CallScope_ActivateImplicit(
-                    scopeExpr,
-                    builtExpression);
+                if (scopePreference == ScopePreference.Current)
+                {
+                    return Methods.Call_CurrentScope_ActivateImplicit(
+                        context.ResolveContextParameterExpression,
+                        builtExpression);
+                }
+                else
+                {
+                    return Methods.Call_RootScope_ActivateImplicit(
+                        context.ResolveContextParameterExpression,
+                        builtExpression);
+                }
             }
             else
             {
-                return Methods.CallScope_ActivateExplicit(
-                    scopeExpr,
-                    context.ResolveContextParameterExpression,
-                    targetIdOverride ?? target.Id,
-                    compiler.BuildResolveLambdaStrong(builtExpression, context));
+                int? targetIdOverride = context.GetOption<Runtime.TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+
+                if (scopePreference == ScopePreference.Current)
+                {
+                    return Methods.Call_CurrentScope_ActivateExplicit(
+                        context.ResolveContextParameterExpression,
+                        targetIdOverride ?? target.Id,
+                        compiler.BuildResolveLambdaStrong(builtExpression, context));
+                }
+                else
+                {
+                    return Methods.Call_RootScope_ActivateExplicit(
+                        context.ResolveContextParameterExpression,
+                        targetIdOverride ?? target.Id,
+                        compiler.BuildResolveLambdaStrong(builtExpression, context));
+                }
             }
         }
 
@@ -293,8 +309,8 @@ namespace Rezolver.Compilation.Expressions
         /// couldn't be resolved for the current context (via <see cref="GetContextCompiler(IExpressionCompileContext)"/></exception>
         Expression IExpressionBuilder.Build(ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            if(target == null) throw new ArgumentNullException(nameof(target));
-            if(context == null) throw new ArgumentNullException(nameof(context));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             if (compiler == null)
             {

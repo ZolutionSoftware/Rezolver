@@ -79,9 +79,9 @@ namespace Rezolver.Targets
         public override Type DeclaredType => InnerTarget.DeclaredType;
 
         /// <summary>
-        /// Always returns <see cref="ScopeBehaviour.Explicit"/>.
+        /// Always returns the same behaviour as the <see cref="InnerTarget"/>
         /// </summary>
-        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
+        public override ScopeBehaviour ScopeBehaviour => InnerTarget.ScopeBehaviour;
 
         /// <summary>
         /// Always returns <see cref="ScopePreference.Root"/>

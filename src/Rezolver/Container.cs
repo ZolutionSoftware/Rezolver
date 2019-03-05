@@ -54,6 +54,8 @@ namespace Rezolver
         });
 
         private readonly ConcurrentCache _cache;
+        internal ContainerScope2 _scope;
+
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
         /// instances.
@@ -77,7 +79,7 @@ namespace Rezolver
         /// <remarks>
         /// You must ***NEVER*** dispose this scope.
         /// </remarks>
-        public ContainerScope2 Scope { get; private protected set; }
+        //public ContainerScope2 Scope { get => _scope; }
 
         /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.
@@ -90,7 +92,7 @@ namespace Rezolver
         {
             _cache = new ConcurrentCache();
             Targets = targets ?? new TargetContainer();
-            Scope = new DisposingContainerScope(this);
+            _scope = new DisposingContainerScope(this);
         }
 
         /// <summary>
@@ -115,7 +117,7 @@ namespace Rezolver
                 throw new InvalidOperationException("This constructor must not be used by derived types because applying configuration will most likely trigger calls to virtual methods on this instance.  Please use the protected constructor and apply configuration explicitly in your derived class");
             }
 
-            Scope = new DisposingContainerScope(this);
+            _scope = new DisposingContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 
@@ -164,7 +166,7 @@ namespace Rezolver
         /// <returns></returns>
         public object Resolve(Type serviceType)
         {
-            return Resolve(new ResolveContext(Scope, serviceType));
+            return Resolve(new ResolveContext(_scope, serviceType));
         }
 
         /// <summary>
@@ -182,7 +184,7 @@ namespace Rezolver
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
-            return ResolveInternal<TService>(new ResolveContext(Scope, typeof(TService)));
+            return ResolveInternal<TService>(new ResolveContext(_scope, typeof(TService)));
         }
 
         public TService Resolve<TService>(ContainerScope2 scope)
@@ -193,7 +195,7 @@ namespace Rezolver
 
         public IEnumerable ResolveMany(Type serviceType)
         {
-            return (IEnumerable)Resolve(new ResolveContext(Scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
+            return (IEnumerable)Resolve(new ResolveContext(_scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
         }
 
         public IEnumerable<TService> ResolveMany<TService>()
@@ -241,7 +243,7 @@ namespace Rezolver
         /// </summary>
         public ContainerScope2 CreateScope()
         {
-            return Scope.CreateScope();
+            return _scope.CreateScope();
         }
 
         /// <summary>
@@ -359,7 +361,7 @@ namespace Rezolver
         object IServiceProvider.GetService(Type serviceType)
         {
             // IServiceProvider should return null if not found - so we use TryResolve.
-            TryResolve(new ResolveContext(Scope, serviceType), out var result);
+            TryResolve(new ResolveContext(_scope, serviceType), out var result);
             return result;
         }
         #endregion

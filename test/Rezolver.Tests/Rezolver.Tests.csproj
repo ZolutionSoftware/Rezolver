@@ -17,8 +17,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  
-  <Import Project="..\..\src\Rezolver.Shared.props " />
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />

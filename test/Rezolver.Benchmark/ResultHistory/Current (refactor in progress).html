@@ -23,17 +23,17 @@ Intel Core i7-4700MQ CPU 2.40GHz (Haswell), 1 CPU, 8 logical and 4 physical core
 </code></pre>
 
 <table>
-<thead><tr><th>          Method</th><th> Categories</th><th>  Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
+<thead><tr><th>          Method</th><th> Categories</th><th>  Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
 </tr>
-</thead><tbody><tr><td>No_New</td><td>New</td><td>3.775 ns</td><td>0.0776 ns</td><td>0.0726 ns</td><td>1.00</td><td>0.00</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
-</tr><tr><td>Rezolver_New_ICompiled</td><td>New</td><td>56.450 ns</td><td>0.5027 ns</td><td>0.4702 ns</td><td>14.96</td><td>0.31</td><td>0.0380</td><td>-</td><td>-</td><td>120 B</td>
-</tr><tr><td>Rezolver_New</td><td>New</td><td>69.022 ns</td><td>0.9918 ns</td><td>0.8792 ns</td><td>18.24</td><td>0.27</td><td>0.0380</td><td>-</td><td>-</td><td>120 B</td>
-</tr><tr><td>No_WithArg</td><td>NewCtorArg</td><td>10.380 ns</td><td>0.2697 ns</td><td>0.2523 ns</td><td>1.00</td><td>0.00</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
-</tr><tr><td>Rezolver_WithArg</td><td>NewCtorArg</td><td>82.272 ns</td><td>1.1821 ns</td><td>1.0479 ns</td><td>7.92</td><td>0.29</td><td>0.0457</td><td>-</td><td>-</td><td>144 B</td>
-</tr><tr><td>No_Complex</td><td>Complex</td><td>71.675 ns</td><td>1.4545 ns</td><td>1.4936 ns</td><td>1.00</td><td>0.00</td><td>0.0991</td><td>-</td><td>-</td><td>312 B</td>
-</tr><tr><td>Rezolver_Complex</td><td>Complex</td><td>234.675 ns</td><td>1.4135 ns</td><td>1.3222 ns</td><td>3.28</td><td>0.07</td><td>0.1292</td><td>-</td><td>-</td><td>408 B</td>
-</tr><tr><td>No_Enumerable</td><td>Enumerable-Simple</td><td>67.134 ns</td><td>1.0254 ns</td><td>0.9591 ns</td><td>1.00</td><td>0.00</td><td>0.0330</td><td>-</td><td>-</td><td>104 B</td>
-</tr><tr><td>Rezolver_Enumerable</td><td>Enumerable-Simple</td><td>2,987.546 ns</td><td>17.6296 ns</td><td>15.6282 ns</td><td>44.55</td><td>0.54</td><td>0.1793</td><td>-</td><td>-</td><td>576 B</td>
+</thead><tbody><tr><td>No_New</td><td>New</td><td>4.354 ns</td><td>0.0986 ns</td><td>0.0874 ns</td><td>4.324 ns</td><td>1.00</td><td>0.00</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>Rezolver_New_ICompiled</td><td>New</td><td>66.326 ns</td><td>0.8276 ns</td><td>0.6910 ns</td><td>66.040 ns</td><td>15.23</td><td>0.36</td><td>0.0380</td><td>-</td><td>-</td><td>120 B</td>
+</tr><tr><td>Rezolver_New</td><td>New</td><td>71.718 ns</td><td>0.8920 ns</td><td>0.7449 ns</td><td>71.917 ns</td><td>16.47</td><td>0.36</td><td>0.0380</td><td>-</td><td>-</td><td>120 B</td>
+</tr><tr><td>No_WithArg</td><td>NewCtorArg</td><td>12.166 ns</td><td>0.3291 ns</td><td>0.6420 ns</td><td>11.897 ns</td><td>1.00</td><td>0.00</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
+</tr><tr><td>Rezolver_WithArg</td><td>NewCtorArg</td><td>81.362 ns</td><td>1.7814 ns</td><td>2.4972 ns</td><td>80.871 ns</td><td>6.69</td><td>0.36</td><td>0.0457</td><td>-</td><td>-</td><td>144 B</td>
+</tr><tr><td>No_Complex</td><td>Complex</td><td>80.173 ns</td><td>1.4480 ns</td><td>1.2836 ns</td><td>80.221 ns</td><td>1.00</td><td>0.00</td><td>0.0991</td><td>-</td><td>-</td><td>312 B</td>
+</tr><tr><td>Rezolver_Complex</td><td>Complex</td><td>179.232 ns</td><td>4.3325 ns</td><td>6.4846 ns</td><td>176.554 ns</td><td>2.24</td><td>0.09</td><td>0.1295</td><td>-</td><td>-</td><td>408 B</td>
+</tr><tr><td>No_Enumerable</td><td>Enumerable-Simple</td><td>71.714 ns</td><td>0.8333 ns</td><td>0.6958 ns</td><td>71.630 ns</td><td>1.00</td><td>0.00</td><td>0.0330</td><td>-</td><td>-</td><td>104 B</td>
+</tr><tr><td>Rezolver_Enumerable</td><td>Enumerable-Simple</td><td>2,983.731 ns</td><td>30.0077 ns</td><td>26.6010 ns</td><td>2,972.302 ns</td><td>41.63</td><td>0.36</td><td>0.1793</td><td>-</td><td>-</td><td>576 B</td>
 </tr></tbody></table>
 </body>
 </html>

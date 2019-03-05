@@ -50,20 +50,20 @@ namespace Rezolver
 
     internal sealed class PerResolveContextCache<TValue>
     {
-        private class ResolveContextTypeComparer : IEqualityComparer<ResolveContext>
-        {
-            public static readonly ResolveContextTypeComparer Instance = new ResolveContextTypeComparer();
+        //private class ResolveContextTypeComparer : IEqualityComparer<ResolveContext>
+        //{
+        //    public static readonly ResolveContextTypeComparer Instance = new ResolveContextTypeComparer();
 
-            public bool Equals(ResolveContext x, ResolveContext y)
-            {
-                return x.RequestedType == y.RequestedType;
-            }
+        //    public bool Equals(ResolveContext x, ResolveContext y)
+        //    {
+        //        return x.RequestedType == y.RequestedType;
+        //    }
 
-            public int GetHashCode(ResolveContext obj)
-            {
-                return obj.RequestedType.GetHashCode();
-            }
-        }
+        //    public int GetHashCode(ResolveContext obj)
+        //    {
+        //        return obj.RequestedType.GetHashCode();
+        //    }
+        //}
 
         public const int DEFAULT_CAPACITY = 512;
         public static int DefaultConcurrencyLevel => Environment.ProcessorCount;
@@ -84,7 +84,7 @@ namespace Rezolver
 
         public PerResolveContextCache(int concurrencyLevel, int capacity)
         {
-            _entries = new ConcurrentDictionary<ResolveContext, TValue>(concurrencyLevel, capacity, ResolveContextTypeComparer.Instance);
+            _entries = new ConcurrentDictionary<ResolveContext, TValue>(concurrencyLevel, capacity/*, ResolveContextTypeComparer.Instance*/);
         }
 
         public TValue Get(ResolveContext context, Func<ResolveContext, TValue> valueFactory)
