@@ -212,6 +212,9 @@ namespace Rezolver
 
     public sealed class ConcurrentContainerScope : DisposingContainerScope
     {
+        // TODO: change this to use a different 'key' which includes the factory
+        // so that we don't need a closure to create the lazy.
+
         /// <summary>
         /// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
         /// </summary>

@@ -47,9 +47,9 @@ namespace Rezolver.PerfAnalysis.NetCore
         {
             var container = new Container();
             container.RegisterType<NoCtor>();
-            container.RegisterType<EnumerableItem1>();
-            container.RegisterType<EnumerableItem2>();
-            container.RegisterType<EnumerableItem3>();
+            //container.RegisterType<EnumerableItem1>();
+            //container.RegisterType<EnumerableItem2>();
+            //container.RegisterType<EnumerableItem3>();
 
             return container;
         }
@@ -60,8 +60,8 @@ namespace Rezolver.PerfAnalysis.NetCore
 
             CancellationTokenSource cancel = new CancellationTokenSource(runTimeSecs * 1000);
 
-            Run_Enumerable(SetupContainer(), cancel.Token, true);
-            //Run_NoCtor(SetupContainer(), cancel.Token, true);
+            //Run_Enumerable(SetupContainer(), cancel.Token, true);
+            Run_NoCtor(SetupContainer(), cancel.Token, true);
 
             Console.WriteLine($"Num instances created in {runTimeSecs}: {_numInstances}. Rate: {(_numInstances / runTimeSecs):0.00}/sec");
         }

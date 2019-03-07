@@ -36,6 +36,7 @@ namespace Rezolver
     /// </remarks>
     public class Container : IRootTargetContainer, IServiceProvider
     {
+
         /// <summary>
         /// The default container config used by all new containers.  You can add/remove configurations from this collection
         /// to change the defaults which are applied to new container instances; or you can supply an explicit configuration
@@ -55,6 +56,7 @@ namespace Rezolver
 
         private readonly ConcurrentCache _cache;
         internal ContainerScope2 _scope;
+        internal PerTypeCache<ResolveContext> _cachedContexts;
 
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
@@ -74,14 +76,6 @@ namespace Rezolver
         protected IRootTargetContainer Targets { get; }
 
         /// <summary>
-        /// Gets the root scope for this container.
-        /// </summary>
-        /// <remarks>
-        /// You must ***NEVER*** dispose this scope.
-        /// </remarks>
-        //public ContainerScope2 Scope { get => _scope; }
-
-        /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.
         /// </summary>
         /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup
@@ -90,9 +84,9 @@ namespace Rezolver
         /// after construction, through the <see cref="Targets"/> property.</param>
         protected Container(IRootTargetContainer targets = null)
         {
-            _cache = new ConcurrentCache();
-            Targets = targets ?? new TargetContainer();
+            _cache = new ConcurrentCache(GetWorker);
             _scope = new DisposingContainerScope(this);
+            Targets = targets ?? new TargetContainer();
         }
 
         /// <summary>
@@ -147,6 +141,21 @@ namespace Rezolver
             }
         }
 
+        private ResolveContext GetDefaultContext(Type serviceType)
+        {
+            return _cachedContexts.Get(serviceType);
+        }
+
+        private ResolveContext GetDefaultContext<TService>()
+        {
+            return _cachedContexts.Get(typeof(TService));
+        }
+
+        private ResolveContext CreateDefaultContext(Type type)
+        {
+            return new ResolveContext(_scope, type);
+        }
+
         /// <summary>
         /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container,
         /// using the scope from <see cref="ResolveContext.Scope"/> (even if different from this container's
@@ -166,7 +175,7 @@ namespace Rezolver
         /// <returns></returns>
         public object Resolve(Type serviceType)
         {
-            return Resolve(new ResolveContext(_scope, serviceType));
+            return Resolve(GetDefaultContext(serviceType));
         }
 
         /// <summary>
@@ -184,7 +193,7 @@ namespace Rezolver
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
-            return ResolveInternal<TService>(new ResolveContext(_scope, typeof(TService)));
+            return ResolveInternal<TService>(GetDefaultContext<TService>());
         }
 
         public TService Resolve<TService>(ContainerScope2 scope)
@@ -195,7 +204,7 @@ namespace Rezolver
 
         public IEnumerable ResolveMany(Type serviceType)
         {
-            return (IEnumerable)Resolve(new ResolveContext(_scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
+            return (IEnumerable)Resolve(GetDefaultContext(typeof(IEnumerable<>).MakeGenericType(serviceType)));
         }
 
         public IEnumerable<TService> ResolveMany<TService>()
@@ -302,7 +311,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="context">The context containing the requested type and any scope which is currently in force.</param>
         /// <returns>Always returns a reference to a compiled target - but note that if
-        /// <see cref="CanResolve(ResolveContext)"/> returns false for the same context, then the target's
+        /// <see cref="CanResolve(Type)"/> returns false for the same context, then the target's
         /// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method will likely throw an exception - in line with
         /// the behaviour of the <see cref="UnresolvedTypeCompiledTarget"/> class.</returns>
         public ICompiledTarget GetCompiledTarget(ResolveContext context)
@@ -310,7 +319,7 @@ namespace Rezolver
             // note that this container is fixed as the container in the context - regardless of the
             // one passed in.  This is important.  Scope and RequestedType are left unchanged
 
-            return _cache.Get(context, GetWorker);
+            return _cache.Get(context);
         }
 
         private ICompiledTarget GetWorker(ResolveContext context)
