@@ -115,7 +115,7 @@ namespace Rezolver.Targets
         /// <summary>
         /// Returns <see cref="ScopeBehaviour.None"/> if the type to be constructed is not disposable.  Strictly, this should also check for a public Dispose method.
         /// </summary>
-        public override ScopeBehaviour ScopeBehaviour => typeof(IDisposable).IsAssignableFrom(DeclaredType) ? ScopeBehaviour.None : ScopeBehaviour.Implicit;
+        public override ScopeBehaviour ScopeBehaviour => typeof(IDisposable).IsAssignableFrom(DeclaredType) ? ScopeBehaviour.Implicit : ScopeBehaviour.None;
 
         /// <summary>
         /// Initializes a just-in-time-bound instance of the <see cref="ConstructorTarget" /> class which must be bound

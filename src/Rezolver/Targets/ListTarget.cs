@@ -19,6 +19,8 @@ namespace Rezolver.Targets
     /// </remarks>
     public class ListTarget : TargetBase
     {
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+
         /// <summary>
         /// Gets the declared type of each element in the array or list that will be constructed.
         ///

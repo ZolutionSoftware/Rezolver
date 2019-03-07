@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE.txt = LICENSE.txt
 		Nuget.config = Nuget.config
 		Performance1.psess = Performance1.psess
+		Performance2.psess = Performance2.psess
 		README.md = README.md
 		readme_microsoft_aspnetcore_hosting_nupkg.md = readme_microsoft_aspnetcore_hosting_nupkg.md
 		readme_microsoft_extensions_dependencyinjection_nupkg.md = readme_microsoft_extensions_dependencyinjection_nupkg.md
@@ -292,6 +293,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0EA3912-4E38-4ACB-AE04-9CA63BD343DE}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true

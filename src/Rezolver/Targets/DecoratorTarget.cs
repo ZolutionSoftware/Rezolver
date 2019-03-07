@@ -37,7 +37,7 @@ namespace Rezolver.Targets
         /// The type of object returned by the decorator target
         /// </summary>
         public override Type DeclaredType => InnerTarget.DeclaredType;
-
+        public override ScopeBehaviour ScopeBehaviour => InnerTarget.ScopeBehaviour;
         /// <summary>
         /// Gets the target which will create an instance of the decorator
         /// </summary>

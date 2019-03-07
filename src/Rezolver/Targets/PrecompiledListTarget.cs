@@ -24,7 +24,6 @@ namespace Rezolver.Targets
     /// <seealso cref="Rezolver.ICompiledTarget" />
     internal class PrecompiledListTarget<TElement> : ListTarget, ICompiledTarget
     {
-
         private readonly IEnumerable<ICompiledTarget> _compiledTargets;
 
         public ITarget SourceTarget => this;

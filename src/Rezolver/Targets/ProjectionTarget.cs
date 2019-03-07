@@ -16,6 +16,7 @@ namespace Rezolver.Targets
     /// </summary>
     public class ProjectionTarget : TargetBase
     {
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
         /// <summary>
         /// Always returns <see cref="OutputType"/>
         /// </summary>
