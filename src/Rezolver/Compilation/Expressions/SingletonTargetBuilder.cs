@@ -28,7 +28,7 @@ namespace Rezolver.Compilation.Expressions
         /// parameter is optional, this will always be provided</param>
         protected override Expression Build(SingletonTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            var holder = context.ResolveContext.Container.Resolve<SingletonTarget.SingletonContainer>();
+            var holder = context.ResolveContext.Resolve<SingletonTarget.SingletonContainer>();
             int? targetIdOverride = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
 
             return Expression.Constant(

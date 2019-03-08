@@ -13,6 +13,10 @@ namespace Rezolver
     /// <summary>
     /// 
     /// </summary>
+    /// <remarks>**Design notes**: benchmarking this as a class and a struct, and also with pooling
+    /// at the container level, shows that the class version is fastest, even though it imposes a
+    /// 32 byte overhead per call. The speed difference between using Rezolver and a hand-written
+    /// 'new' operation decreases the bigger the object graph is.</remarks>
     public sealed class ResolveContext : IServiceProvider, IEquatable<ResolveContext>
     {
         private readonly Type _requestedType;
@@ -21,20 +25,9 @@ namespace Rezolver
         /// <summary>
         /// Gets the type being requested from the container.
         /// </summary>
-        public Type RequestedType { get => _requestedType; }
+        public Type RequestedType { get => _requestedType; } 
 
-
-        /// <summary>
-        /// Gets the scope that's active for all calls for this context.
-        /// </summary>
-        /// <value>The scope.</value>
-        public ContainerScope2 Scope { get => _scope; }
-
-        /// <summary>
-        /// The container for this context.
-        /// </summary>
-        /// <remarks>This is a wrapper for the <see cref="ContainerScope2.Container"/> property of the <see cref="Scope"/></remarks>
-        public Container Container => _scope.Container;
+        internal Container Container => _scope.Container;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolveContext"/> class.
@@ -148,6 +141,13 @@ namespace Rezolver
         public ContainerScope2 CreateScope() => _scope.CreateScope();
 
         /// <summary>
+        /// Implements the <see cref="object.GetHashCode"/> method using the hash code of
+        /// the <see cref="RequestedType"/>
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode() => _requestedType.GetHashCode();
+
+        /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
         public override string ToString()
@@ -165,19 +165,6 @@ namespace Rezolver
             // two contexts are equal if their requested type is the same
             return _requestedType == other._requestedType;
         }
-
-        /// <summary>
-        /// Implements the <see cref="object.GetHashCode"/> method using the hash code of
-        /// the <see cref="RequestedType"/>
-        /// </summary>
-        /// <returns></returns>
-        public override int GetHashCode() => _requestedType.GetHashCode();
-
-        // TODO: Add activateimplicit/explicit for this scope and the root scope
-        // TODO: Add also flag on ContainerScope to control whether a scope can activate.
-        // TODO: And then, in here, if the scope can activate, we call it; otherwise we either return or throw
-
-        // Key point being the methods on this class are non-virtual.
 
         internal T ActivateImplicit_ThisScope<T>(T instance)
         {

@@ -37,17 +37,10 @@ namespace Rezolver.Compilation.Expressions
             /// method.
             /// </summary>
             public static MethodInfo ICompiledTarget_GetObject_Method =>
-                Extract.Method((ICompiledTarget t) => t.GetObject(null));
+                Extract.Method((ICompiledTarget t) => t.GetObject(default));
 
             public static MethodInfo Container_ResolveStrong_Method =>
-                Extract.Method((Container c) => c.ResolveInternal<object>((ResolveContext)null)).GetGenericMethodDefinition();
-
-            /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ContainerScopeExtensions.GetRootScope(IContainerScope)"/>
-            /// extension method.
-            /// </summary>
-            public static PropertyInfo Scope_RootScope_Property =>
-                (PropertyInfo)Extract.Member((ContainerScope2 s) => s.Root);
+                Extract.Method((Container c) => c.ResolveInternal<object>(default)).GetGenericMethodDefinition();
 
             public static MethodInfo CurrentScope_ActivateImplicit_Method =>
                 Extract.Method((ResolveContext c) => c.ActivateImplicit_ThisScope((object)null)).GetGenericMethodDefinition();
@@ -60,14 +53,6 @@ namespace Rezolver.Compilation.Expressions
 
             public static MethodInfo RootScope_ActivateExplicit_Method =>
                 Extract.Method((ResolveContext c) => c.ActivateExplicit_RootScope<object>(0, null)).GetGenericMethodDefinition();
-
-            /// <summary>
-            /// Get a <see cref="MethodInfo"/> for the <see cref="IContainer.CanResolve(ResolveContext)"/>
-            /// method
-            /// </summary>
-            public static MethodInfo Container_CanResolve_Method =>
-                Extract.Method(
-                    (Container c) => c.CanResolve((Type)null));
 
             /// <summary>
             /// Gets a MethodInfo object for the <see cref="ResolveContext.ChangeRequestedType(Type)"/> method

@@ -56,7 +56,7 @@ namespace Rezolver.Compilation
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ResolveContext"/>
         /// </summary>
-        public ResolveContext ResolveContext => this._resolveContext ?? ParentContext?.ResolveContext;
+        public ResolveContext ResolveContext => this._resolveContext.Equals(default(ResolveContext)) ? ParentContext?.ResolveContext ?? default : this._resolveContext;
 
         private readonly Type _targetType;
         /// <summary>

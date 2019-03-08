@@ -10,5 +10,5 @@ using System.Security;
 [assembly: SecurityRules(SecurityRuleSet.Level2, SkipVerificationInFullTrust = true)]
 
 [assembly: InternalsVisibleTo("Rezolver.Tests")]
-[assembly: InternalsVisibleTo("Rezolver.Rezolver.Tests.Compilation.Specification")]
+[assembly: InternalsVisibleTo("Rezolver.Tests.Compilation.Specification")]
 

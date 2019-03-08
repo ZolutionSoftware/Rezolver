@@ -71,7 +71,7 @@ namespace Rezolver.Tests.Targets
 			object expected = GetDefault(expectedType);
 			ICompiledTarget toTest = new DefaultTarget(expectedType);
 			//shouldn't need a ResolveContext
-			Assert.Equal(expected, toTest.GetObject(null));
+			Assert.Equal(expected, toTest.GetObject(default));
 		}
 	}
 }

@@ -21,25 +21,25 @@ namespace Rezolver.Compilation.Expressions
         /// <remarks>Note that this property hides the inherited <see cref="ICompileContext.ParentContext"/> property,
         /// since an <see cref="IExpressionCompileContext"/> can only be a child of another <see cref="IExpressionCompileContext"/>.</remarks>
         new IExpressionCompileContext ParentContext { get; }
-        /// <summary>
-        /// Gets an expression which gives a reference to the <see cref="IContainer" /> for this context -
-        /// i.e. the one on the <see cref="ICompileContext.ResolveContext" /> property.
-        /// </summary>
-        /// <value>The container expression.</value>
-        /// <remarks>Note that this is *not* the same as <see cref="ContextContainerPropertyExpression" /> - but is provided
-        /// to allow expressions to be compiled which compare the container supplied at compile time to the one from the
-        /// <see cref="ResolveContext.Container" /> at resolve-time.</remarks>
-        Expression CurrentContainerExpression { get; }
-        /// <summary>
-        /// Gets an expression for reading the <see cref="ResolveContext.Container"/> property of the <see cref="ResolveContext"/>
-        /// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
-        /// </summary>
-        MemberExpression ContextContainerPropertyExpression { get; }
-        /// <summary>
-        /// Gets an expression for reading the <see cref="ResolveContext.Scope"/> property of the <see cref="ResolveContext"/>
-        /// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
-        /// </summary>
-        MemberExpression ContextScopePropertyExpression { get; }
+        ///// <summary>
+        ///// Gets an expression which gives a reference to the <see cref="IContainer" /> for this context -
+        ///// i.e. the one on the <see cref="ICompileContext.ResolveContext" /> property.
+        ///// </summary>
+        ///// <value>The container expression.</value>
+        ///// <remarks>Note that this is *not* the same as <see cref="ContextContainerPropertyExpression" /> - but is provided
+        ///// to allow expressions to be compiled which compare the container supplied at compile time to the one from the
+        ///// <see cref="ResolveContext.Container" /> at resolve-time.</remarks>
+        //Expression CurrentContainerExpression { get; }
+        ///// <summary>
+        ///// Gets an expression for reading the <see cref="ResolveContext.Container"/> property of the <see cref="ResolveContext"/>
+        ///// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
+        ///// </summary>
+        //MemberExpression ContextContainerPropertyExpression { get; }
+        ///// <summary>
+        ///// Gets an expression for reading the <see cref="ResolveContext.Scope"/> property of the <see cref="ResolveContext"/>
+        ///// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
+        ///// </summary>
+        //MemberExpression ContextScopePropertyExpression { get; }
         /// <summary>
         /// This is the parameter expression which represents the <see cref="ResolveContext" /> that is passed to the
         /// <see cref="ICompiledTarget" /> at resolve-time.  Note, this should only be used for

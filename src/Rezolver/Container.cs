@@ -85,6 +85,7 @@ namespace Rezolver
         protected Container(IRootTargetContainer targets = null)
         {
             _cache = new ConcurrentCache(GetWorker);
+            //_cachedContexts = new PerTypeCache<ResolveContext>(CreateDefaultContext);
             _scope = new DisposingContainerScope(this);
             Targets = targets ?? new TargetContainer();
         }
@@ -141,20 +142,20 @@ namespace Rezolver
             }
         }
 
-        private ResolveContext GetDefaultContext(Type serviceType)
-        {
-            return _cachedContexts.Get(serviceType);
-        }
+        //private ResolveContext GetDefaultContext(Type serviceType)
+        //{
+        //    return _cachedContexts.Get(serviceType);
+        //}
 
-        private ResolveContext GetDefaultContext<TService>()
-        {
-            return _cachedContexts.Get(typeof(TService));
-        }
+        //private ResolveContext GetDefaultContext<TService>()
+        //{
+        //    return _cachedContexts.Get(typeof(TService));
+        //}
 
-        private ResolveContext CreateDefaultContext(Type type)
-        {
-            return new ResolveContext(_scope, type);
-        }
+        //private ResolveContext CreateDefaultContext(Type type)
+        //{
+        //    return new ResolveContext(_scope, type);
+        //}
 
         /// <summary>
         /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container,
@@ -175,7 +176,7 @@ namespace Rezolver
         /// <returns></returns>
         public object Resolve(Type serviceType)
         {
-            return Resolve(GetDefaultContext(serviceType));
+            return Resolve(new ResolveContext(_scope, serviceType));
         }
 
         /// <summary>
@@ -193,7 +194,7 @@ namespace Rezolver
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
-            return ResolveInternal<TService>(GetDefaultContext<TService>());
+            return ResolveInternal<TService>(new ResolveContext(_scope, typeof(TService)));
         }
 
         public TService Resolve<TService>(ContainerScope2 scope)
@@ -204,7 +205,7 @@ namespace Rezolver
 
         public IEnumerable ResolveMany(Type serviceType)
         {
-            return (IEnumerable)Resolve(GetDefaultContext(typeof(IEnumerable<>).MakeGenericType(serviceType)));
+            return (IEnumerable)Resolve(new ResolveContext(_scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
         }
 
         public IEnumerable<TService> ResolveMany<TService>()
@@ -246,7 +247,7 @@ namespace Rezolver
         /// <summary>
         /// Implementation of the <see cref="IScopeFactory.CreateScope"/> method.
         ///
-        /// The base definition creates a <see cref="ContainerScope"/> with this container passed as the scope's container.
+        /// The base definition creates a <see cref="ContainerScope2"/> with this container passed as the scope's container.
         ///
         /// Thus, the new scope is a 'root' scope.
         /// </summary>

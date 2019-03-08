@@ -50,7 +50,7 @@ namespace Rezolver.Compilation
                 throw new ArgumentNullException(nameof(target));
             }
 
-            if (resolveContext == null)
+            if (resolveContext == default)
             {
                 throw new ArgumentNullException(nameof(resolveContext));
             }

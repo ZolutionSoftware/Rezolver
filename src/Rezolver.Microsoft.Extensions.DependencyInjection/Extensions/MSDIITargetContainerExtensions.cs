@@ -57,10 +57,7 @@ namespace Rezolver
 			}
 			else if (service.ImplementationFactory != null)
 			{
-				//not ideal - need ability to provide a delegate that accepts a rezolve context
-				//as a parameter that can then be fed on to the delegate, that way we can ensure that
-				//any scoping is honoured.
-				target = Target.ForDelegate(c => service.ImplementationFactory(c.Container), service.ServiceType);
+				target = Target.ForDelegate(c => service.ImplementationFactory(c), service.ServiceType);
 			}
 
 			if (target != null)
