@@ -33,26 +33,24 @@ namespace Rezolver.Runtime
     public class LazyEnumerable<T> : IEnumerable<T>
     {
         private readonly ResolveContext _context;
-        private readonly Func<ResolveContext, object>[] _factories;
+        private readonly ICompiledTarget[] _factories;
 
         /// <summary>
         /// Creates a new <see cref="LazyEnumerable{T}"/> instance.
         /// </summary>
         /// <param name="context"></param>
         /// <param name="factories"></param>
-        public LazyEnumerable(ResolveContext context, IEnumerable<Func<ResolveContext, object>> factories)
+        public LazyEnumerable(ResolveContext context, ICompiledTarget[] factories)
         {
             this._context = context.ChangeRequestedType(typeof(T));
-
-            // we can eagerly create an array of delegates.
-            this._factories = factories.ToArray();
+            this._factories = factories;
         }
 
         private IEnumerable<T> GetInstances()
         {
             foreach(var factory in _factories)
             {
-                yield return (T)factory(_context);
+                yield return (T)factory.GetObject(_context);
             }
         }
 

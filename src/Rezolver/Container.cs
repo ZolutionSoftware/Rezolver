@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using Rezolver.Compilation;
 using Rezolver.Events;
 using Rezolver.Targets;
@@ -36,6 +37,30 @@ namespace Rezolver
     /// </remarks>
     public class Container : IRootTargetContainer, IServiceProvider
     {
+#if USEDYNAMIC
+        private class ResolveContextFactory
+        {
+            private static AssemblyBuilder _dynAssembly = AssemblyBuilder.DefineDynamicAssembly(new System.Reflection.AssemblyName("Rezolver.Dynamic, Version=1.0"), AssemblyBuilderAccess.Run);
+            private static ModuleBuilder _module;
+
+            static ResolveContextFactory()
+            {
+                _module = _dynAssembly.DefineDynamicModule("Containers");
+            }
+
+            private static class Cached<TContainer, TService>
+            {
+
+            }
+
+            private readonly Container _parent;
+            public ResolveContextFactory(Container parent)
+            {
+                
+            }
+        }
+        public const string HelloWorld = "hello";
+#endif
 
         /// <summary>
         /// The default container config used by all new containers.  You can add/remove configurations from this collection
@@ -367,17 +392,17 @@ namespace Rezolver
             return compiler.CompileTarget(target, context.ChangeContainer(newContainer: this), Targets);
         }
 
-        #region IServiceProvider implementation
+#region IServiceProvider implementation
         object IServiceProvider.GetService(Type serviceType)
         {
             // IServiceProvider should return null if not found - so we use TryResolve.
             TryResolve(new ResolveContext(_scope, serviceType), out var result);
             return result;
         }
-        #endregion
+#endregion
 
 
-        #region IRootTargetContainer explicit implementation
+#region IRootTargetContainer explicit implementation
         ITargetContainer IRootTargetContainer.CreateTargetContainer(Type forType) => Targets.CreateTargetContainer(forType);
 
         Type IRootTargetContainer.GetContainerRegistrationType(Type serviceType) => Targets.GetContainerRegistrationType(serviceType);
@@ -401,6 +426,6 @@ namespace Rezolver
         IEnumerable<Type> ICovariantTypeIndex.GetKnownCompatibleTypes(Type serviceType) => Targets.GetKnownCompatibleTypes(serviceType);
 
         TargetTypeSelector ICovariantTypeIndex.SelectTypes(Type type) => Targets.SelectTypes(type);
-        #endregion
+#endregion
     }
 }
