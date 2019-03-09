@@ -4,10 +4,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 using Rezolver.Compilation;
 using Rezolver.Events;
-using Rezolver.Targets;
 
 namespace Rezolver
 {
@@ -38,28 +38,85 @@ namespace Rezolver
     public class Container : IRootTargetContainer, IServiceProvider
     {
 #if USEDYNAMIC
-        private class ResolveContextFactory
+        private class DynamicContainerCache
         {
-            private static AssemblyBuilder _dynAssembly = AssemblyBuilder.DefineDynamicAssembly(new System.Reflection.AssemblyName("Rezolver.Dynamic, Version=1.0"), AssemblyBuilderAccess.Run);
-            private static ModuleBuilder _module;
-
-            static ResolveContextFactory()
+            private abstract class ContainerCache
             {
-                _module = _dynAssembly.DefineDynamicModule("Containers");
+                public abstract ResolveContext GetDefaultContext<TService>();
+                public abstract ResolveContext GetDefaultContext(Type serviceType);
+
+                public abstract ICompiledTarget GetCompiled<TService>();
+                public abstract ICompiledTarget GetCompiled(Type serviceType);
             }
 
-            private static class Cached<TContainer, TService>
+            private abstract class TypeEntry
             {
-
+                public abstract ResolveContext Context { get; }
+                public abstract ICompiledTarget CompiledTarget { get; }
             }
 
-            private readonly Container _parent;
-            public ResolveContextFactory(Container parent)
+            private sealed class ContainerCache<TContainer> : ContainerCache
             {
-                
+                private static Container TheContainer;
+                public ContainerCache(Container container)
+                {
+                    TheContainer = container;
+                }
+
+                public override ICompiledTarget GetCompiled<TService>()
+                {
+                    return TypeEntry<TService>.Compiled.Target;
+                }
+
+                public override ICompiledTarget GetCompiled(Type serviceType)
+                {
+                    throw new NotImplementedException();
+                }
+
+                public override ResolveContext GetDefaultContext<TService>()
+                {
+                    return TypeEntry<TService>.TheContext;
+                }
+
+                public override ResolveContext GetDefaultContext(Type serviceType)
+                {
+                    throw new NotImplementedException();
+                }
+
+                private class TypeEntry<TService> : TypeEntry
+                {
+                    public static readonly ResolveContext TheContext = new ResolveContext(TheContainer, typeof(TService));
+
+                    public static class Compiled
+                    {
+                        public static readonly ICompiledTarget Target = TheContainer.GetWorker(TheContext);
+                    }
+
+                    public override ResolveContext Context => TheContext;
+                    public override ICompiledTarget CompiledTarget => Compiled.Target;
+                }
             }
+
+            private static readonly AssemblyBuilder _dynAssembly;
+            private static readonly ModuleBuilder _module;
+
+            static DynamicContainerCache()
+            {
+                _dynAssembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Rezolver.Dynamic.Containers, Version=0.0"), AssemblyBuilderAccess.Run);
+                _module = _dynAssembly.DefineDynamicModule("module");
+            }
+
+            private static int _counter = 1;
+            private readonly ContainerCache _cache;
+            public DynamicContainerCache(Container parent)
+            {
+                var fakeContainerType = _module.DefineType($"Container{_counter++:000}", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
+                _cache = (ContainerCache)Activator.CreateInstance(typeof(ContainerCache<>).MakeGenericType(fakeContainerType), parent);
+            }
+
+            public ResolveContext GetContext<TService>() => _cache.GetDefaultContext<TService>();
+            public ICompiledTarget GetCompiled<TService>() => _cache.GetCompiled<TService>();
         }
-        public const string HelloWorld = "hello";
 #endif
 
         /// <summary>
@@ -82,6 +139,10 @@ namespace Rezolver
         private readonly ConcurrentCache _cache;
         internal ContainerScope2 _scope;
         internal PerTypeCache<ResolveContext> _cachedContexts;
+
+#if USEDYNAMIC
+        private DynamicContainerCache _contextFactory;
+#endif
 
         /// <summary>
         /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
@@ -110,9 +171,11 @@ namespace Rezolver
         protected Container(IRootTargetContainer targets = null)
         {
             _cache = new ConcurrentCache(GetWorker);
-            //_cachedContexts = new PerTypeCache<ResolveContext>(CreateDefaultContext);
             _scope = new DisposingContainerScope(this);
             Targets = targets ?? new TargetContainer();
+#if USEDYNAMIC
+            _contextFactory = new DynamicContainerCache(this);
+#endif
         }
 
         /// <summary>
@@ -184,8 +247,7 @@ namespace Rezolver
 
         /// <summary>
         /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container,
-        /// using the scope from <see cref="ResolveContext.Scope"/> (even if different from this container's
-        /// <see cref="Scope"/>).
+        /// using the scope from the <paramref name="context"/>
         /// </summary>
         /// <param name="context">The resolve context</param>
         /// <returns>An instance of the type that was requested.</returns>
@@ -219,7 +281,11 @@ namespace Rezolver
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
+#if !USEDYNAMIC
             return ResolveInternal<TService>(new ResolveContext(_scope, typeof(TService)));
+#else
+            return ResolveInternal<TService>(_contextFactory.GetContext<TService>());
+#endif
         }
 
         public TService Resolve<TService>(ContainerScope2 scope)
@@ -240,7 +306,11 @@ namespace Rezolver
 
         internal TService ResolveInternal<TService>(ResolveContext context)
         {
+#if !USEDYNAMIC
             return (TService)GetCompiledTarget(context).GetObject(context);
+#else
+            return (TService)_contextFactory.GetCompiled<TService>().GetObject(context);
+#endif
         }
 
         /// <summary>
@@ -348,7 +418,7 @@ namespace Rezolver
             return _cache.Get(context);
         }
 
-        private ICompiledTarget GetWorker(ResolveContext context)
+        internal ICompiledTarget GetWorker(ResolveContext context)
         {
             ITarget target = Targets.Fetch(context.RequestedType);
 
