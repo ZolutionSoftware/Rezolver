@@ -97,20 +97,16 @@ namespace Rezolver
                 }
             }
 
-            private static readonly AssemblyBuilder _dynAssembly;
-            private static readonly ModuleBuilder _module;
-
-            static DynamicContainerCache()
-            {
-                _dynAssembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Rezolver.Dynamic.Containers, Version=0.0"), AssemblyBuilderAccess.Run);
-                _module = _dynAssembly.DefineDynamicModule("module");
-            }
-
             private static int _counter = 1;
             private readonly ContainerCache _cache;
+            private readonly AssemblyBuilder _dynAssembly;
+            private readonly ModuleBuilder _module;
+
             public DynamicContainerCache(Container parent)
             {
-                var fakeContainerType = _module.DefineType($"Container{_counter++:000}", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
+                _dynAssembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName($"Rezolver.Dynamic.Containers.C{_counter++:00000}, Version=0.0"), AssemblyBuilderAccess.RunAndCollect);
+                _module = _dynAssembly.DefineDynamicModule("module");
+                var fakeContainerType = _module.DefineType($"ContainerHook", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
                 _cache = (ContainerCache)Activator.CreateInstance(typeof(ContainerCache<>).MakeGenericType(fakeContainerType), parent);
             }
 

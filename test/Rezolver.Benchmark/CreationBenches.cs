@@ -1,12 +1,10 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Diagnostics.Windows.Configs;
 using BenchmarkDotNet.Engines;
 using Rezolver.Benchmark.Types;
 using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Rezolver.Benchmark
 {
@@ -17,7 +15,8 @@ namespace Rezolver.Benchmark
     public class CreationBenches
     {
         private Lazy<Singleton> _singleton;
-        private Container _containerPrepped;
+        private Container _containerPreppedGeneric;
+        private Container _containerPreppedNonGeneric;
         private Container _containerCompiled;
         private Consumer _consumer;
 
@@ -28,23 +27,39 @@ namespace Rezolver.Benchmark
             _consumer = new Consumer();
         }
 
-        [GlobalSetup(Targets = new[] { nameof(Rezolver_New), nameof(Rezolver_WithArg), nameof(Rezolver_Complex), nameof(Rezolver_Enumerable) })]
-        public void SetupPrepped()
+        private void RegisterTypesInContainer(Container container)
         {
-            _containerPrepped = new Container();
+            container.RegisterType<SimpleType>();
+            container.RegisterType<SimpleType2>();
+            container.RegisterType<SimpleType3>();
+            container.RegisterType<RequiresSimpleType>();
+            container.RegisterType<RequiresSimpleType2>();
+            container.RegisterType<RequiresSimpleType3>();
+            container.RegisterType<RequiresLots>();
+            container.RegisterSingleton<Singleton>();
+            container.RegisterType<Types.RequiresLotsAndSingleton>();
+        }
+
+        [GlobalSetup(Targets = new[] { nameof(Rezolver_New_Generic), nameof(Rezolver_WithArg_Generic), nameof(Rezolver_Complex_Generic), nameof(Rezolver_Enumerable_Generic) })]
+        public void SetupPreppedGeneric()
+        {
+            _containerPreppedGeneric = new Container();
             _consumer = new Consumer();
 
-            _containerPrepped.RegisterType<SimpleType>();
-            _containerPrepped.RegisterType<SimpleType2>();
-            _containerPrepped.RegisterType<SimpleType3>();
-            _containerPrepped.RegisterType<RequiresSimpleType>();
-            _containerPrepped.RegisterType<RequiresSimpleType2>();
-            _containerPrepped.RegisterType<RequiresSimpleType3>();
-            _containerPrepped.RegisterType<RequiresLots>();
-            _containerPrepped.RegisterSingleton<Singleton>();
-            _containerPrepped.RegisterType<Types.RequiresLotsAndSingleton>();
+            RegisterTypesInContainer(_containerPreppedGeneric);
 
-            var instances = Warmup(_containerPrepped);
+            var instances = WarmupGeneric(_containerPreppedGeneric);
+        }
+
+        [GlobalSetup(Targets = new[] { nameof(Rezolver_New_NonGeneric), nameof(Rezolver_WithArg_NonGeneric), nameof(Rezolver_Complex_NonGeneric), nameof(Rezolver_Enumerable_NonGeneric) })]
+        public void SetupPreppedNonGeneric()
+        {
+            _containerPreppedNonGeneric = new Container();
+            _consumer = new Consumer();
+
+            RegisterTypesInContainer(_containerPreppedNonGeneric);
+
+            var instances = WarmupNonGeneric(_containerPreppedNonGeneric);
         }
 
         private class CreateSimpleTypeTarget : ITarget, ICompiledTarget
@@ -78,15 +93,27 @@ namespace Rezolver.Benchmark
             var first = _containerCompiled.Resolve<SimpleType>();
         }
 
-        private List<object> Warmup(Container container)
+        private List<object> WarmupGeneric(Container container)
         {
             // literally just calls each of the warm methods once to force compilation
             return new List<object>
             {
-                Rezolver_New(),
-                Rezolver_WithArg(),
-                Rezolver_Complex(),
-                Rezolver_CreateEnumerable()
+                Rezolver_New_Generic(),
+                Rezolver_WithArg_Generic(),
+                Rezolver_Complex_Generic(),
+                Rezolver_CreateEnumerable_Generic()
+            };
+        }
+
+        private List<object> WarmupNonGeneric(Container container)
+        {
+            // literally just calls each of the warm methods once to force compilation
+            return new List<object>
+            {
+                Rezolver_New_NonGeneric(),
+                Rezolver_WithArg_NonGeneric(),
+                Rezolver_Complex_NonGeneric(),
+                Rezolver_CreateEnumerable_NonGeneric()
             };
         }
 
@@ -114,7 +141,7 @@ namespace Rezolver.Benchmark
         }
 
         [Benchmark(Baseline = true)]
-        [BenchmarkCategory("Enumerable-Simple")]
+        [BenchmarkCategory("Enumerable")]
         public void No_Enumerable()
         {
             No_CreateEnumerable().Consume(_consumer);
@@ -130,25 +157,47 @@ namespace Rezolver.Benchmark
 
         #endregion
 
-        #region rezolver benchmarks (prepared)
+        #region rezolver benchmarks (Generic, prepared)
 
         [Benchmark]
         [BenchmarkCategory("New")]
-        public SimpleType Rezolver_New() => _containerPrepped.Resolve<SimpleType>();
+        public SimpleType Rezolver_New_Generic() => _containerPreppedGeneric.Resolve<SimpleType>();
 
         [Benchmark]
         [BenchmarkCategory("NewCtorArg")]
-        public RequiresSimpleType Rezolver_WithArg() => _containerPrepped.Resolve<RequiresSimpleType>();
+        public RequiresSimpleType Rezolver_WithArg_Generic() => _containerPreppedGeneric.Resolve<RequiresSimpleType>();
 
         [Benchmark]
         [BenchmarkCategory("Complex")]
-        public RequiresLotsAndSingleton Rezolver_Complex() => _containerPrepped.Resolve<RequiresLotsAndSingleton>();
+        public RequiresLotsAndSingleton Rezolver_Complex_Generic() => _containerPreppedGeneric.Resolve<RequiresLotsAndSingleton>();
 
-        private IEnumerable<ISimpleType> Rezolver_CreateEnumerable() => _containerPrepped.ResolveMany<ISimpleType>();
+        private IEnumerable<ISimpleType> Rezolver_CreateEnumerable_Generic() => _containerPreppedGeneric.ResolveMany<ISimpleType>();
 
         [Benchmark]
-        [BenchmarkCategory("Enumerable-Simple")]
-        public void Rezolver_Enumerable() => _containerPrepped.ResolveMany<ISimpleType>().Consume(_consumer);
+        [BenchmarkCategory("Enumerable")]
+        public void Rezolver_Enumerable_Generic() => _containerPreppedGeneric.ResolveMany<ISimpleType>().Consume(_consumer);
+
+        #endregion
+
+        #region rezolver benchmarks (Generic, prepared)
+
+        [Benchmark]
+        [BenchmarkCategory("New")]
+        public SimpleType Rezolver_New_NonGeneric() => (SimpleType)_containerPreppedNonGeneric.Resolve(typeof(SimpleType));
+
+        [Benchmark]
+        [BenchmarkCategory("NewCtorArg")]
+        public RequiresSimpleType Rezolver_WithArg_NonGeneric() => (RequiresSimpleType)_containerPreppedNonGeneric.Resolve(typeof(RequiresSimpleType));
+
+        [Benchmark]
+        [BenchmarkCategory("Complex")]
+        public RequiresLotsAndSingleton Rezolver_Complex_NonGeneric() => (RequiresLotsAndSingleton)_containerPreppedNonGeneric.Resolve(typeof(RequiresLotsAndSingleton));
+
+        private IEnumerable<ISimpleType> Rezolver_CreateEnumerable_NonGeneric() => (IEnumerable<SimpleType>)_containerPreppedNonGeneric.Resolve(typeof(IEnumerable<SimpleType>));
+
+        [Benchmark]
+        [BenchmarkCategory("Enumerable")]
+        public void Rezolver_Enumerable_NonGeneric() => _containerPreppedNonGeneric.ResolveMany<ISimpleType>().Consume(_consumer);
 
         #endregion
     }
