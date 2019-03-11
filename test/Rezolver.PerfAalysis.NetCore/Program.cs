@@ -61,7 +61,8 @@ namespace Rezolver.PerfAnalysis.NetCore
             CancellationTokenSource cancel = new CancellationTokenSource(runTimeSecs * 1000);
 
             //Run_Enumerable(SetupContainer(), cancel.Token, true);
-            Run_NoCtor(SetupContainer(), cancel.Token, true);
+            //Run_NoCtor(SetupContainer(), cancel.Token, true);
+            Run_NoCtor_NonGeneric(SetupContainer(), cancel.Token, true);
 
             Console.WriteLine($"Num instances created in {runTimeSecs}: {_numInstances}. Rate: {(_numInstances / runTimeSecs):0.00}/sec");
         }
@@ -78,6 +79,22 @@ namespace Rezolver.PerfAnalysis.NetCore
             while (!cancel.IsCancellationRequested)
             {
                 instance = container.Resolve<NoCtor>();
+                ++_numInstances;
+            }
+        }
+
+        private static void Run_NoCtor_NonGeneric(Container container, CancellationToken cancel, bool warmup)
+        {
+            Console.WriteLine($"Creating instances of {nameof(NoCtor)} using non-generic");
+            NoCtor instance;
+            if (warmup)
+            {
+                instance = (NoCtor)container.Resolve(typeof(NoCtor));
+            }
+
+            while (!cancel.IsCancellationRequested)
+            {
+                instance = (NoCtor)container.Resolve(typeof(NoCtor));
                 ++_numInstances;
             }
         }
