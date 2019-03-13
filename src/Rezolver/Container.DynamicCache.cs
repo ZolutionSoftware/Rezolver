@@ -117,16 +117,12 @@ namespace Rezolver
                 }
             }
 
-            private static int _counter = 1;
             private readonly ContainerCache _cache;
-            private readonly AssemblyBuilder _dynAssembly;
-            private readonly ModuleBuilder _module;
 
             public DynamicCache(Container parent)
             {
-                _dynAssembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName($"Rezolver.Dynamic.Containers.C{_counter++:00000}, Version=0.0"), AssemblyBuilderAccess.RunAndCollect);
-                _module = _dynAssembly.DefineDynamicModule("module");
-                var fakeContainerType = _module.DefineType($"ContainerHook", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
+                var (assembly, module) = DynamicAssemblyHelper.Create("Containers");
+                var fakeContainerType = module.DefineType($"ContainerHook", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
                 _cache = (ContainerCache)Activator.CreateInstance(typeof(ContainerCache<>).MakeGenericType(fakeContainerType), parent);
             }
 

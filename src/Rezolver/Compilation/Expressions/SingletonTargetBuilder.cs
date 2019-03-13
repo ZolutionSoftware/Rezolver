@@ -36,17 +36,26 @@ namespace Rezolver.Compilation.Expressions
                     target.InnerTarget,
                     context.NewContext(
                         context.TargetType ?? target.DeclaredType,
+                        // this override is important - when forcing into the root-scope, as we do
+                        // for singletons, 'explicit' means absolutely nothing.  So, instead of allowing
+                        // our child target to choose, we explicitly ensure that all instances are implicitly 
+                        // tracked within the root scope, if it is one which can track instances.
                         scopeBehaviourOverride: ScopeBehaviour.Implicit,
                         scopePreferenceOverride: ScopePreference.Root));
+#if !USEDYNAMIC
 
             return Expression.Convert(Expression.Call(
                 Expression.Constant(holder),
-                nameof(SingletonTarget.SingletonContainer.GetObjectNew),
+                nameof(SingletonTarget.SingletonContainer.GetObject),
                 null,
                 context.ResolveContextParameterExpression,
                 Expression.Constant(context.TargetType, typeof(Type)),
                 Expression.Constant(targetIdOverride ?? target.Id),
                 Expression.Constant(compiled)), context.TargetType);
+#else
+            var entryType = holder.GetEntryType(compiled, targetIdOverride ?? target.Id, context.TargetType);
+            return Expression.Call(entryType.GetMethod("Resolve", BindingFlags.Static | BindingFlags.Public), context.ResolveContextParameterExpression);
+#endif
         }
 
         protected override Expression ApplyScoping(Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)

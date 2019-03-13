@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Threading;
 using Rezolver.Compilation;
 
@@ -24,7 +25,91 @@ namespace Rezolver.Targets
             private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
                 new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
 
-            public object GetObjectNew(ResolveContext context, Type type, int targetId, ICompiledTarget compiled)
+#if USEDYNAMIC
+            internal abstract class SingletonCacheBase
+            {
+                public abstract Type GetEntryType(Type tTargetType, Type serviceType);
+            }
+
+            // as with the Container.DynamicCache, the type parameter here is a dynamic type
+            // created as a hook to the singleton container instance.
+            internal sealed class SingletonCache<TSingletonContainer> : SingletonCacheBase
+            {
+                internal static class Entry<TTypeAndTarget, TService>
+                {
+                    static volatile ICompiledTarget Compiled;
+                    static volatile ResolveContext InitialContext;
+                    static volatile bool Initialised;
+
+                    internal static void Init(ICompiledTarget target)
+                    {
+                        if (Initialised) return;
+                        Compiled = target;
+                        Initialised = true;
+                    }
+
+                    public static TService Resolve(ResolveContext context)
+                    {
+                        if (Compiled == null)
+                            return Instance.Value;
+                        InitialContext = context;
+                        return Instance.Value;
+                    }
+
+                    internal static class Instance
+                    {
+                        public static readonly TService Value;
+
+                        static Instance()
+                        {
+                            if (InitialContext == null)
+                                throw new InvalidOperationException("Initial context has not been set");
+
+                            // guaranteed only to be executed once by the runtime.
+                            Value = (TService)Compiled.GetObject(InitialContext);
+                            Compiled = null;
+                            InitialContext = null;
+                        }
+                    }
+                }
+
+                public override Type GetEntryType(Type tTargetType, Type serviceType)
+                {
+                    return typeof(Entry<,>).MakeGenericType(typeof(TSingletonContainer), tTargetType, serviceType);
+                }
+            }
+
+            private readonly AssemblyBuilder _dynAssembly;
+            private readonly ModuleBuilder _dynModule;
+            private readonly SingletonCacheBase _cache;
+
+            private ConcurrentDictionary<TypeAndTargetId, Type> _dynTargetTypeCache = new ConcurrentDictionary<TypeAndTargetId, Type>();
+            private Func<TypeAndTargetId, Type> _dynTargetTypeFactory;
+            internal SingletonContainer()
+            {
+                _dynTargetTypeFactory = InitialiseDynamicTargetType;
+                (_dynAssembly, _dynModule) = DynamicAssemblyHelper.Create("Singletons");
+                var fakeContainerType = _dynModule.DefineType("SingletonContainerHook", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
+                _cache = (SingletonCacheBase)Activator.CreateInstance(typeof(SingletonCache<>).MakeGenericType(fakeContainerType));
+            }
+
+            private Type InitialiseDynamicTargetType(TypeAndTargetId id)
+            {
+                return _dynModule.DefineType($"T{id.Id}_{id.Type.TypeHandle.Value}", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
+            }
+
+            internal Type GetEntryType(ICompiledTarget compiled, int targetId, Type type)
+            {
+                var typeAndTargetIdType = _dynTargetTypeCache.GetOrAdd(new TypeAndTargetId(type, targetId), _dynTargetTypeFactory);
+                var entryType = _cache.GetEntryType(typeAndTargetIdType, type);
+                // initialise the singleton holder with the compiled target (if
+                entryType.InvokeMember("Init", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic, null, null, new object[] { compiled });
+                return entryType;
+            }
+
+#endif
+
+            public object GetObject(ResolveContext context, Type type, int targetId, ICompiledTarget compiled)
             {
                 return _cached.GetOrAdd(new TypeAndTargetId(type, targetId), (key) =>
                 {
