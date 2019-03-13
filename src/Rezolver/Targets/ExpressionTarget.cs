@@ -1,8 +1,8 @@
 // Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using Rezolver.Compilation;
 
@@ -68,9 +68,9 @@ namespace Rezolver.Targets
         /// <param name="expression">Required. The static expression which should be used by compilers.</param>
         /// <param name="declaredType">Declared type of the target to be created (used when registering without
         /// an explicit type or when this target is used as a value inside another target).</param>
-        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
-        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
-        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.Implicit"/>, which means
+        /// that that any returned instance will be tracked implicitly by the active scope.  If the expression produces a new instance, then 
+        /// this or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
         /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
         /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
         /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
@@ -84,8 +84,7 @@ namespace Rezolver.Targets
             ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
             ScopePreference scopePreference = ScopePreference.Current)
         {
-            if(expression == null) throw new ArgumentNullException(nameof(expression));
-            Expression = expression;
+            Expression = expression ?? throw new ArgumentNullException(nameof(expression));
             var expressionType = (expression.NodeType == ExpressionType.Lambda ? ((LambdaExpression)expression).Body.Type : expression.Type);
             DeclaredType = declaredType ?? expressionType;
 
@@ -102,9 +101,9 @@ namespace Rezolver.Targets
         /// compiling this target.</param>
         /// <param name="declaredType">Required. Static type of all expressions that will be
         /// returned by <paramref name="expressionFactory"/>.</param>
-        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
-        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
-        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.Implicit"/>, which means
+        /// that that any returned instance will be tracked implicitly by the active scope.  If the expression produces a new instance, then 
+        /// this or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
         /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
         /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
         /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
@@ -114,10 +113,8 @@ namespace Rezolver.Targets
             ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
             ScopePreference scopePreference = ScopePreference.Current)
         {
-            if(expressionFactory == null) throw new ArgumentNullException(nameof(expressionFactory));
-            if(declaredType == null) throw new ArgumentNullException(nameof(declaredType));
-            ExpressionFactory = expressionFactory;
-            DeclaredType = declaredType;
+            ExpressionFactory = expressionFactory ?? throw new ArgumentNullException(nameof(expressionFactory));
+            DeclaredType = declaredType ?? throw new ArgumentNullException(nameof(declaredType));
             _scopeBehaviour = scopeBehaviour;
             _scopePreference = scopePreference;
         }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,10 +77,10 @@ namespace Rezolver.Targets
         /// 0 or more parameters.</param>
         /// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType" /> for the target;
         /// if not provided, then it will be derived from the <paramref name="factory" />'s return type</param>
-        /// <param name="scopeBehaviour">Scope behaviour for this delegate.  The default is <see cref="ScopeBehaviour.None"/>, which means
-        /// that no disposal will take place by default for the instance.  If the delegate produces a new instance, then 
-        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
-        /// the delegate should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopeBehaviour">Scope behaviour for this delegate.  The default is <see cref="ScopeBehaviour.Implicit"/>, which means
+        /// that that any returned instance will be tracked implicitly by the active scope.  If the delegate produces a new instance, then 
+        /// this or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
         /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
         /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
         /// <exception cref="ArgumentException">If the <paramref name="factory" /> represents a void delegate or if
@@ -89,7 +90,7 @@ namespace Rezolver.Targets
         public DelegateTarget(
             Delegate factory, 
             Type declaredType = null, 
-            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit,
             ScopePreference scopePreference = ScopePreference.Current)
         {
             if(factory == null) throw new ArgumentNullException(nameof(factory));

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -22,48 +23,6 @@ namespace Rezolver.Targets
         {
             private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
                 new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
-
-            private readonly ConcurrentDictionary<TypeAndTargetId, ICompiledTarget> _cachedCompiled =
-                new ConcurrentDictionary<TypeAndTargetId, ICompiledTarget>();
-
-            private readonly ConcurrentDictionary<TypeAndTargetId, object> _cachedObjects =
-                new ConcurrentDictionary<TypeAndTargetId, object>();
-            
-            private ICompiledTarget GetCompiled<TCompileContext>(SingletonTarget target, TCompileContext context, in TypeAndTargetId key, Func<SingletonTarget, TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext : ICompileContext
-            {
-                return this._cachedCompiled.GetOrAdd(key, CreateCompiledTarget);
-
-                ICompiledTarget CreateCompiledTarget(TypeAndTargetId k) => compiledTargetFactory(target, context);
-            }
-
-            private Lazy<object> GetLazy(ResolveContext context, int targetId, Func<ResolveContext, object> lazyFactory)
-            {
-                return GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
-            }
-
-            private Lazy<object> GetLazy(ResolveContext context, in TypeAndTargetId key, Func<ResolveContext, object> lazyFactory)
-            {
-                return this._cached.GetOrAdd(key, c => new Lazy<object>(() => lazyFactory(context)));
-            }
-
-            public object GetObject<TCompileContext>(SingletonTarget target, TCompileContext context, int targetId, Func<SingletonTarget, TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext : ICompileContext
-            {
-                return GetObject(target, context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
-            }
-
-            public object GetObject<TCompileContext>(SingletonTarget target, TCompileContext context, in TypeAndTargetId key, Func<SingletonTarget, TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext : ICompileContext
-            {
-                return this._cachedObjects.GetOrAdd(key, GetObject);
-
-                object GetObject(TypeAndTargetId k)
-                {
-                    var compiled = GetCompiled(target, context, k, compiledTargetFactory);
-                    return GetLazy(context.ResolveContext, k, rc => compiled.GetObject(rc)).Value;
-                }
-            }
 
             public object GetObjectNew(ResolveContext context, Type type, int targetId, ICompiledTarget compiled)
             {

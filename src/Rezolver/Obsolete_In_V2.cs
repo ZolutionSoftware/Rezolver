@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,9 +20,9 @@ namespace Rezolver
     public interface IResolveContext
     {
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.Previous"/>
+        /// Obsolete
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.Previous", true)]
+        [Obsolete("Obsolete", true)]
         IResolveContext Previous { get; }
 
         /// <summary>
@@ -31,15 +32,15 @@ namespace Rezolver
         Type RequestedType { get; }
 
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.Container"/>
+        /// Obsolete"/>
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.Container", true)]
+        [Obsolete("Obsolete", true)]
         IContainer Container { get; }
 
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.Scope"/>
+        /// Obsolete
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.Scope", true)]
+        [Obsolete("Obsolete", true)]
         IContainerScope Scope { get; }
 
         /// <summary>
@@ -49,27 +50,27 @@ namespace Rezolver
         object Resolve(Type newRequestedType);
 
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.Resolve{TResult}"/>
+        /// Obsolete, use <see cref="ResolveContext.Resolve{TService}()"/>
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.Resolve{TResult}", true)]
+        [Obsolete("Obsolete", true)]
         TResult Resolve<TResult>();
 
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.TryResolve(Type, out object)"/>
+        /// Obsolete
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.TryResolve(Type, out object)", true)]
+        [Obsolete("Obsolete", true)]
         bool TryResolve(Type newRequestedType, out object result);
 
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.TryResolve{TResult}(out TResult)"/>
+        /// Obsolete"/>
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.TryResolve{TResult}(out TResult)", true)]
+        [Obsolete("Obsolete", true)]
         bool TryResolve<TResult>(out TResult result);
 
         /// <summary>
-        /// Obsolete, use <see cref="ResolveContext.New(Type, Rezolver.Container, IContainerScope)"/>
+        /// Obsolete, use <see cref="ResolveContext.ChangeRequestedType(Type)"/> or <see cref="ResolveContext.ChangeContainer(Rezolver.Container)"/>
         /// </summary>
-        [Obsolete("Obsolete - use ResolveContext.New(Type, Container, IContainerScope)", true)]
+        [Obsolete("Obsolete - use ResolveContext.ChangeRequestedType or ChangeContainer", true)]
         IResolveContext New(Type newRequestedType = null,
             IContainer newContainer = null,
             IContainerScope newScope = null);
@@ -82,9 +83,9 @@ namespace Rezolver
     public interface IContainer : IScopeFactory, IServiceProvider
     {
         /// <summary>
-        /// Obsolete, use <see cref="Container.CanResolve(ResolveContext)"/>
+        /// Obsolete, use <see cref="Container.CanResolve(Type)"/>
         /// </summary>
-        [Obsolete("Obsolete, use Container.CanResolve(ResolveContext)", true)]
+        [Obsolete("Obsolete, use Container.CanResolve(Type)", true)]
         bool CanResolve(ResolveContext context);
 
         /// <summary>
@@ -113,9 +114,9 @@ namespace Rezolver
     public interface IScopedContainer : IContainer, IDisposable
     {
         /// <summary>
-        /// Obsolete, use <see cref="ScopedContainer.Scope"/>
+        /// Obsolete
         /// </summary>
-        [Obsolete("Obsolete, use ScopedContainer.Scope", true)]
+        [Obsolete("Obsolete", true)]
         IContainerScope Scope { get; }
     }
 
@@ -138,15 +139,15 @@ namespace Rezolver
         Container Container { get; }
 
         /// <summary>
-        /// Obsolete, use <see cref="ContainerScope2"/>
+        /// Obsolete
         /// </summary>
-        [Obsolete("Obsolete, use ContainerScope.Parent", true)]
+        [Obsolete("Obsolete", true)]
         void ChildScopeDisposed(IContainerScope child);
 
         /// <summary>
-        /// Obsolete, use <see cref="ContainerScope2.Parent"/>
+        /// Obsolete
         /// </summary>
-        [Obsolete("Obsolete, use ContainerScope.Parent", true)]
+        [Obsolete("Obsolete", true)]
         object Resolve(ResolveContext context, int targetId, Func<ResolveContext, object> factory, ScopeBehaviour behaviour);
     }
 

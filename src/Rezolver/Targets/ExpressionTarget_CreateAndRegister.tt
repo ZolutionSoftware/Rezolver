@@ -112,9 +112,9 @@ void ForExpression(Signature sig)
 		/// <param name="lambda">Required.  The lambda expression that is to be wrapped by the target.</param>
 		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created,
 		/// if different from <typeparamref name="TResult" /></param>
-		/// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
-        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
-        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+		/// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.Implicit"/>, which means
+        /// that that any returned instance will be tracked implicitly by the active scope.  If the expression produces a new instance, then 
+        /// this or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
         /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
         /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
         /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
@@ -126,7 +126,7 @@ void ForExpression(Signature sig)
 <#+
 		}
 #>
-		public static ITarget ForExpression<<#= sig.Spec.Args #>>(Expression<Func<<#= sig.Text #>>> lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None, ScopePreference scopePreference = ScopePreference.Current)
+		public static ITarget ForExpression<<#= sig.Spec.Args #>>(Expression<Func<<#= sig.Text #>>> lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit, ScopePreference scopePreference = ScopePreference.Current)
 		{
 			if(lambda == null) throw new ArgumentNullException(nameof(lambda));
 			return new ExpressionTarget(lambda, declaredType, scopeBehaviour, scopePreference);
@@ -175,9 +175,9 @@ if(sig.Args.Length > 1)
 		/// <param name="lambda">Required.  The lambda expression which is to be compiled and executed when an instance is resolved by a container</param>
 		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created
 		/// if different from <typeparamref name="TResult" />.  Also overrides the type against which the registration will be made.</param>
-		/// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
-        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
-        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+		/// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.Implicit"/>, which means
+        /// that that any returned instance will be tracked implicitly by the active scope.  If the expression produces a new instance, then 
+        /// this or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
         /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
         /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
         /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
@@ -189,7 +189,7 @@ if(sig.Args.Length > 1)
 <#+
 		}
 #>
-		public static void RegisterExpression<<#= sig.Spec.Args #>>(this ITargetContainer targets, Expression<Func<<#= sig.Text #>>> lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None, ScopePreference scopePreference = ScopePreference.Current)
+		public static void RegisterExpression<<#= sig.Spec.Args #>>(this ITargetContainer targets, Expression<Func<<#= sig.Text #>>> lambda, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit, ScopePreference scopePreference = ScopePreference.Current)
 		{
 			targets.RegisterExpression((Expression)lambda, declaredType, scopeBehaviour, scopePreference);
 		}

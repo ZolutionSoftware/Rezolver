@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Rezolver.Targets;
 using System;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Rezolver
 {
@@ -28,10 +26,10 @@ namespace Rezolver
 			if (targets == null) throw new ArgumentNullException(nameof(targets));
             //register service provider - ensuring that it's marked as unscoped because the lifetimes of
             //containers which are also scopes are managed by the code that creates them, not by the containers themselves
-            targets.Register(Target.ForExpression(context => (IServiceProvider)context).Unscoped());
+            targets.RegisterExpression(context => (IServiceProvider)context, scopeBehaviour: ScopeBehaviour.None);
             //register scope factory - uses the context as a scope factory (it will choose between the container or	
             //the scope as the actual scope factory that will be used.	
-            targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory));
+            targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory), ScopeBehaviour.None);
 
             foreach (var serviceAndTarget in services.Select(s => new {
                 serviceType = s.ServiceType,
@@ -57,7 +55,8 @@ namespace Rezolver
 			}
 			else if (service.ImplementationFactory != null)
 			{
-				target = Target.ForDelegate(c => service.ImplementationFactory(c), service.ServiceType);
+                // default to No scope interaction
+				target = Target.ForDelegate(c => service.ImplementationFactory(c), service.ServiceType, ScopeBehaviour.None);
 			}
 
 			if (target != null)

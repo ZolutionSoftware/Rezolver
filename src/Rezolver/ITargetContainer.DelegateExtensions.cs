@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Rezolver
             this ITargetContainer targetContainer, 
             Delegate factory, 
             Type declaredType = null, 
-            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit,
             ScopePreference scopePreference = ScopePreference.Current)
         {
             if(targetContainer == null) throw new ArgumentNullException(nameof(targetContainer));
@@ -52,15 +53,6 @@ namespace Rezolver
             {
                 toRegister = new NullaryDelegateTarget(factory, declaredType, scopeBehaviour: scopeBehaviour, scopePreference: scopePreference);
             }
-
-            //if (scopeBehaviour == ScopeBehaviour.Explicit)
-            //{
-            //    toRegister = toRegister.Scoped();
-            //}
-            //else if (scopeBehaviour == ScopeBehaviour.None)
-            //{
-            //    toRegister = toRegister.Unscoped();
-            //}
 
             targetContainer.Register(toRegister);
         }

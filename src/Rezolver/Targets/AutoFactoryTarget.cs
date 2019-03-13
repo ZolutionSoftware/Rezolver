@@ -1,4 +1,8 @@
-﻿using Rezolver.Compilation;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using Rezolver.Compilation;
 using System;
 using System.Linq;
 

@@ -110,7 +110,7 @@ void ForDelegate(Signature sig)
 		/// <param name="factory">Required.  The factory delegate that is to be wrapped by the target.</param>
 		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created,
 		/// if different from <typeparamref name="TResult" /></param>
-		/// <param name="scopeBehaviour">Optional.  The type of disposal tracking to be employed by this target.  Defaults to <see cref="ScopeBehaviour.None" />.</param>
+		/// <param name="scopeBehaviour">Optional.  The type of disposal tracking to be employed by this target.  Defaults to <see cref="ScopeBehaviour.Implicit" />.</param>
 		/// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
 <#+
 		if(sig.Args.Length > 1)
@@ -120,7 +120,7 @@ void ForDelegate(Signature sig)
 <#+
 		}
 #>
-		public static ITarget ForDelegate<<#= sig.Spec.Args #>>(Func<<#= sig.Text #>> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None, ScopePreference scopePreference = ScopePreference.Current)
+		public static ITarget ForDelegate<<#= sig.Spec.Args #>>(Func<<#= sig.Text #>> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit, ScopePreference scopePreference = ScopePreference.Current)
 		{
 			if(factory == null) throw new ArgumentNullException(nameof(factory));
 <#+
@@ -183,7 +183,7 @@ void RegisterTarget(Signature sig)
 		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created
 		/// if different from <typeparamref name="TResult" />.  Also overrides the type against which the registration will be made.</param>
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the factory delegate will be
-        /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.None" />.</param>
+        /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
 		/// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
 		public static void RegisterDelegate<<#= sig.Spec.Args #>>(this ITargetContainer targets, Func<<#= sig.Text #>> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit, ScopePreference scopePreference = ScopePreference.Current)
 		{
