@@ -175,5 +175,27 @@ namespace Rezolver.Tests.Examples
             Assert.NotNull(result.Service);
             // </example6>
         }
+
+        [Fact]
+        public void ScopeShouldDisposeExpressionResult()
+        {
+            // <example7>
+            var container = new Container();
+            container.RegisterExpression(() => new DisposableType(), scopeBehaviour: ScopeBehaviour.Implicit);
+
+            DisposableType result, result2;
+
+            using (var scope = container.CreateScope())
+            {
+                result = scope.Resolve<DisposableType>();
+                using (var childScope = scope.CreateScope())
+                {
+                    result2 = childScope.Resolve<DisposableType>();
+                }
+                Assert.True(result2.Disposed);
+            }
+            Assert.True(result.Disposed);
+            // </example7>
+        }
     }
 }

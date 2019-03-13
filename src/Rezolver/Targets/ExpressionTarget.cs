@@ -29,6 +29,22 @@ namespace Rezolver.Targets
         /// </summary>
         public Expression Expression { get; }
 
+        private readonly ScopeBehaviour _scopeBehaviour;
+
+        /// <summary>
+        /// Overrides <see cref="TargetBase.ScopeBehaviour"/> to return the value that's passed on construction.
+        /// constructor.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => _scopeBehaviour;
+
+        private readonly ScopePreference _scopePreference;
+
+        /// <summary>
+        /// Overrides <see cref="TargetBase.ScopePreference"/> to return the value that's passed on construction.
+        /// constructor.
+        /// </summary>
+        public override ScopePreference ScopePreference => _scopePreference;
+
         /// <summary>
         /// Gets the type of <see cref="Expression"/> or the type that all expressions returned by the
         /// <see cref="ExpressionFactory"/> are expected to be equal to.
@@ -52,11 +68,21 @@ namespace Rezolver.Targets
         /// <param name="expression">Required. The static expression which should be used by compilers.</param>
         /// <param name="declaredType">Declared type of the target to be created (used when registering without
         /// an explicit type or when this target is used as a value inside another target).</param>
+        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
+        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
+        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
+        /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
         /// <remarks><paramref name="declaredType"/> will automatically be determined if not provided
         /// by examining the type of the <paramref name="expression"/>.  For lambdas, the type will
         /// be derived from the Type of the lambda's body.  For all other expressions, the type is
         /// taken directly from the Type property of the expression itself.</remarks>
-        public ExpressionTarget(Expression expression, Type declaredType = null)
+        public ExpressionTarget(
+            Expression expression, 
+            Type declaredType = null,
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
+            ScopePreference scopePreference = ScopePreference.Current)
         {
             if(expression == null) throw new ArgumentNullException(nameof(expression));
             Expression = expression;
@@ -76,12 +102,24 @@ namespace Rezolver.Targets
         /// compiling this target.</param>
         /// <param name="declaredType">Required. Static type of all expressions that will be
         /// returned by <paramref name="expressionFactory"/>.</param>
-        public ExpressionTarget(Func<ICompileContext, Expression> expressionFactory, Type declaredType)
+        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
+        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
+        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
+        /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
+        public ExpressionTarget(
+            Func<ICompileContext, Expression> expressionFactory, 
+            Type declaredType,
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
+            ScopePreference scopePreference = ScopePreference.Current)
         {
             if(expressionFactory == null) throw new ArgumentNullException(nameof(expressionFactory));
             if(declaredType == null) throw new ArgumentNullException(nameof(declaredType));
             ExpressionFactory = expressionFactory;
             DeclaredType = declaredType;
+            _scopeBehaviour = scopeBehaviour;
+            _scopePreference = scopePreference;
         }
 
         // TODO: Consider adding a Bind() function to this class to carry out the complex lambda rewriting etc, as it's

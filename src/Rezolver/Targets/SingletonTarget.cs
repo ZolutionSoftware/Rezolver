@@ -28,13 +28,7 @@ namespace Rezolver.Targets
 
             private readonly ConcurrentDictionary<TypeAndTargetId, object> _cachedObjects =
                 new ConcurrentDictionary<TypeAndTargetId, object>();
-
-            private ICompiledTarget GetCompiled<TCompileContext>(SingletonTarget target, TCompileContext context, int targetId, Func<SingletonTarget, TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext: ICompileContext
-            {
-                return GetCompiled(target, context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
-            }
-
+            
             private ICompiledTarget GetCompiled<TCompileContext>(SingletonTarget target, TCompileContext context, in TypeAndTargetId key, Func<SingletonTarget, TCompileContext, ICompiledTarget> compiledTargetFactory)
                 where TCompileContext : ICompileContext
             {
@@ -69,6 +63,14 @@ namespace Rezolver.Targets
                     var compiled = GetCompiled(target, context, k, compiledTargetFactory);
                     return GetLazy(context.ResolveContext, k, rc => compiled.GetObject(rc)).Value;
                 }
+            }
+
+            public object GetObjectNew(ResolveContext context, Type type, int targetId, ICompiledTarget compiled)
+            {
+                return _cached.GetOrAdd(new TypeAndTargetId(type, targetId), (key) =>
+                {
+                    return new Lazy<object>(() => compiled.GetObject(context));
+                }).Value;
             }
         }
 

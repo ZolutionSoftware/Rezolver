@@ -50,7 +50,7 @@ namespace Rezolver.Tests.Examples
         {
             // <example3>
             var container = new Container();
-            container.RegisterDelegate(() => new DisposableType());
+            container.RegisterDelegate(() => new DisposableType(), scopeBehaviour: ScopeBehaviour.Implicit);
 
             DisposableType result, result2;
 

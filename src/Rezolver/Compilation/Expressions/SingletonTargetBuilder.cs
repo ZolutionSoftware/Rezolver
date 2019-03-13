@@ -31,20 +31,26 @@ namespace Rezolver.Compilation.Expressions
             var holder = context.ResolveContext.Resolve<SingletonTarget.SingletonContainer>();
             int? targetIdOverride = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
 
-            return Expression.Constant(
-                holder.GetObject(
-                    target, 
-                    context,
-                    targetIdOverride ?? target.Id,
-                    GetCompiled));
-
-            ICompiledTarget GetCompiled(SingletonTarget singleton, IExpressionCompileContext c) => 
-                compiler.CompileTarget(
-                    singleton.InnerTarget, 
-                    c.NewContext(
-                        c.TargetType ?? singleton.DeclaredType, 
+            var compiled = compiler.CompileTarget(
+                    target.InnerTarget,
+                    context.NewContext(
+                        context.TargetType ?? target.DeclaredType,
                         scopeBehaviourOverride: ScopeBehaviour.Implicit,
                         scopePreferenceOverride: ScopePreference.Root));
+
+            return Expression.Convert(Expression.Call(
+                Expression.Constant(holder),
+                nameof(SingletonTarget.SingletonContainer.GetObjectNew),
+                null,
+                context.ResolveContextParameterExpression,
+                Expression.Constant(context.TargetType, typeof(Type)),
+                Expression.Constant(targetIdOverride ?? target.Id),
+                Expression.Constant(compiled)), context.TargetType);
+        }
+
+        protected override Expression ApplyScoping(Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
+        {
+            return builtExpression;
         }
     }
 }

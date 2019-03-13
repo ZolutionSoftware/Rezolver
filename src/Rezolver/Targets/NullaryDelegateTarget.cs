@@ -11,14 +11,21 @@ namespace Rezolver.Targets
     /// <summary>
     /// A special delegate target which explicitly allows direct resolving (via <see cref="IDirectTarget"/>) without compilation.
     ///
-    /// Created by the factory and registration functions e.g. <see cref="Target.ForDelegate{TResult}(Func{ResolveContext, TResult}, Type)"/>
-    /// or <see cref="DelegateTargetContainerExtensions.RegisterDelegate{TResult}(ITargetContainer, Func{ResolveContext, TResult}, Type, ScopeBehaviour)"/>.
+    /// Created by the factory and registration functions e.g. <see cref="Target.ForDelegate{TResult}(Func{IResolveContext, TResult}, Type, ScopeBehaviour, ScopePreference)"/>
+    /// or <see cref="DelegateTargetContainerExtensions.RegisterDelegate{TResult}(ITargetContainer, Func{ResolveContext, TResult}, Type, ScopeBehaviour, ScopePreference)"/>.
     /// </summary>
     internal class NullaryDelegateTarget : DelegateTarget, IDirectTarget
     {
         readonly Func<object> _strongDelegate;
 
-        public NullaryDelegateTarget(Delegate factory, Type declaredType = null) : base(factory, declaredType)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="factory"></param>
+        /// <param name="declaredType"></param>
+        /// <param name="scopeBehaviour"></param>
+        public NullaryDelegateTarget(Delegate factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None, ScopePreference scopePreference = ScopePreference.Current) 
+            : base(factory, declaredType, scopeBehaviour, scopePreference)
         {
             if (FactoryMethod.GetParameters()?.Length > 0)
             {

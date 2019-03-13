@@ -3,6 +3,9 @@
 
 #if USEDYNAMIC
 
+using Rezolver.Compilation;
+using Rezolver.Compilation.Expressions;
+using Rezolver.Targets;
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;

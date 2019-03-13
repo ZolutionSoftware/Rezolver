@@ -7,11 +7,10 @@ namespace Rezolver
 {
     /// <summary>
     /// Provides an abstraction for creating objects based on a given <see cref="ResolveContext"/> - this is
-    /// the ultimate target of all <see cref="IContainer.Resolve(ResolveContext)"/> calls in the standard
+    /// the ultimate target of all <see cref="Container.Resolve(ResolveContext)"/> calls in the standard
     /// container implementations within the Rezolver framework.
     /// </summary>
-    /// <remarks>In the standard implementations of <see cref="IContainer"/> (e.g. <see cref="Container"/>),
-    /// a <see cref="Compilation.ITargetCompiler"/> creates instances of this from <see cref="ITarget"/>s which are
+    /// <remarks>An <see cref="Compilation.ITargetCompiler"/> creates instances of this from <see cref="ITarget"/>s which are
     /// registered in an <see cref="ITargetContainer"/>.
     ///
     /// When the container is then called upon to resolve an instance of a particular type, the <see cref="ICompiledTarget"/> is first

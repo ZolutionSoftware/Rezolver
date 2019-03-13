@@ -170,14 +170,24 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// A simple wrapper for the <see cref="DelegateTarget.DelegateTarget(Delegate, Type)"/> constructor.
+        /// A simple wrapper for the <see cref="DelegateTarget.DelegateTarget(Delegate, Type, ScopeBehaviour, ScopePreference)"/> constructor.
         /// </summary>
         /// <param name="factory">Required, the factory delegate that is to be used to produce an object.</param>
         /// <param name="declaredType">Optional.  If not null, then it will be used as the target's <see cref="ITarget.DeclaredType"/>
         /// which, in turn, is used as the target's default registration type if not overriden when added to
         /// an <see cref="ITargetContainer"/>.  If null, then the return type of the factory will be used.</param>
+        /// <param name="scopeBehaviour">Scope behaviour for this delegate.  The default is <see cref="ScopeBehaviour.None"/>, which means
+        /// that no disposal will take place by default for the instance.  If the delegate produces a new instance, then 
+        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the delegate should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
+        /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
         /// <returns>An <see cref="ITarget"/> which represents the passed factory.</returns>
-        public static ITarget ForDelegate(Delegate factory, Type declaredType = null)
+        public static ITarget ForDelegate(
+            Delegate factory,
+            Type declaredType = null, 
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None, 
+            ScopePreference scopePreference = ScopePreference.Current)
         {
             if (factory == null)
             {
@@ -188,7 +198,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// A simple wrapper for the <see cref="ExpressionTarget.ExpressionTarget(Expression, Type)"/> constructor.
+        /// A simple wrapper for the <see cref="ExpressionTarget.ExpressionTarget(Expression, Type, ScopeBehaviour, ScopePreference)"/> constructor.
         /// </summary>
         /// <param name="expression">Required, the expression representing the code that is to be executed
         /// in order to produce an object.</param>
@@ -197,16 +207,26 @@ namespace Rezolver
         /// <see cref="ITargetContainer"/>.  If null, then the <see cref="Expression.Type"/> will be used, unless
         /// <paramref name="expression"/> is a <see cref="LambdaExpression"/>, in which case the <see cref="Expression.Type"/>
         /// of its <see cref="LambdaExpression.Body"/> will be used.</param>
+        /// <param name="scopeBehaviour">Scope behaviour for this expression.  The default is <see cref="ScopeBehaviour.None"/>, which means
+        /// that no disposal will take place by default for the instance.  If the expression produces a new instance, then 
+        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
+        /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
         /// <returns>An <see cref="ITarget"/> which represents the given expression; which must be compiled or otherwise
         /// translated into a runtime operation which creates/obtains an object.</returns>
-        public static ITarget ForExpression(Expression expression, Type declaredType = null)
+        public static ITarget ForExpression(
+            Expression expression, 
+            Type declaredType = null,
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
+            ScopePreference scopePreference = ScopePreference.Current)
         {
             if (expression == null)
             {
                 throw new ArgumentNullException(nameof(expression));
             }
 
-            return new ExpressionTarget(expression, declaredType);
+            return new ExpressionTarget(expression, declaredType, scopeBehaviour, scopePreference);
         }
 
         private static readonly IDictionary<string, ITarget> _emptyArgsDictionary = new Dictionary<string, ITarget>();

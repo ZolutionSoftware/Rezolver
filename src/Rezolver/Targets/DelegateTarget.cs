@@ -27,7 +27,23 @@ namespace Rezolver.Targets
         /// <value>The factory.</value>
         public Delegate Factory { get; }
 
-        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+        private readonly ScopeBehaviour _scopeBehaviour;
+        
+        /// <summary>
+        /// Overrides <see cref="TargetBase.ScopeBehaviour"/> to return the value that's passed on construction
+        /// through the <see cref="DelegateTarget.DelegateTarget(Delegate, Type, ScopeBehaviour, ScopePreference)"/>
+        /// constructor.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => _scopeBehaviour;
+
+        private readonly ScopePreference _scopePreference;
+
+        /// <summary>
+        /// Overrides <see cref="TargetBase.ScopePreference"/> to return the value that's passed on construction
+        /// through the <see cref="DelegateTarget.DelegateTarget(Delegate, Type, ScopeBehaviour, ScopePreference)"/>
+        /// constructor.
+        /// </summary>
+        public override ScopePreference ScopePreference => _scopePreference;
 
         /// <summary>
         /// Gets the MethodInfo for the <see cref="Factory"/> delegate.
@@ -60,11 +76,21 @@ namespace Rezolver.Targets
         /// 0 or more parameters.</param>
         /// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType" /> for the target;
         /// if not provided, then it will be derived from the <paramref name="factory" />'s return type</param>
+        /// <param name="scopeBehaviour">Scope behaviour for this delegate.  The default is <see cref="ScopeBehaviour.None"/>, which means
+        /// that no disposal will take place by default for the instance.  If the delegate produces a new instance, then 
+        /// <see cref="ScopeBehaviour.Implicit"/> or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the delegate should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
+        /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
         /// <exception cref="ArgumentException">If the <paramref name="factory" /> represents a void delegate or if
         /// <paramref name="declaredType" /> is passed but the type is not compatible with the return type of
         /// <paramref name="factory" />.</exception>
         /// <exception cref="ArgumentNullException">If <paramref name="factory" /> is null</exception>
-        public DelegateTarget(Delegate factory, Type declaredType = null)
+        public DelegateTarget(
+            Delegate factory, 
+            Type declaredType = null, 
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.None,
+            ScopePreference scopePreference = ScopePreference.Current)
         {
             if(factory == null) throw new ArgumentNullException(nameof(factory));
 
@@ -84,6 +110,7 @@ namespace Rezolver.Targets
             }
 
             this._declaredType = declaredType;
+            this._scopeBehaviour = scopeBehaviour;
             Factory = factory;
         }
     }
