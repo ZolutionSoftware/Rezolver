@@ -42,17 +42,6 @@ namespace Rezolver.PerfAnalysis.NetCore
         }
 
         private static int _numInstances = 0;
-        private static Container _container = new Container();
-        private static Container SetupContainer()
-        {
-            var container = new Container();
-            container.RegisterType<NoCtor>();
-            //container.RegisterType<EnumerableItem1>();
-            //container.RegisterType<EnumerableItem2>();
-            //container.RegisterType<EnumerableItem3>();
-
-            return container;
-        }
 
         static void Main(string[] args)
         {
@@ -60,9 +49,10 @@ namespace Rezolver.PerfAnalysis.NetCore
 
             CancellationTokenSource cancel = new CancellationTokenSource(runTimeSecs * 1000);
 
-            //Run_Enumerable(SetupContainer(), cancel.Token, true);
-            //Run_NoCtor(SetupContainer(), cancel.Token, true);
-            Run_NoCtor_NonGeneric(SetupContainer(), cancel.Token, true);
+            //Run_NoCtor(new Container(), cancel.Token, true);
+            //Run_NoCtor_NonGeneric(new Container(), cancel.Token, true);
+            //Run_NoCtor_Singleton(new Container(), cancel.Token, true);
+            Run_Enumerable(new Container(), cancel.Token, true);
 
             Console.WriteLine($"Num instances created in {runTimeSecs}: {_numInstances}. Rate: {(_numInstances / runTimeSecs):0.00}/sec");
         }
@@ -71,6 +61,24 @@ namespace Rezolver.PerfAnalysis.NetCore
         {
             Console.WriteLine($"Creating instances of {nameof(NoCtor)}");
             NoCtor instance;
+            container.RegisterType<NoCtor>();
+            if (warmup)
+            {
+                instance = container.Resolve<NoCtor>();
+            }
+
+            while (!cancel.IsCancellationRequested)
+            {
+                instance = container.Resolve<NoCtor>();
+                ++_numInstances;
+            }
+        }
+
+        private static void Run_NoCtor_Singleton(Container container, CancellationToken cancel, bool warmup)
+        {
+            Console.WriteLine($"Fetching {nameof(NoCtor)} as a singleton");
+            NoCtor instance;
+            container.RegisterSingleton<NoCtor>();
             if (warmup)
             {
                 instance = container.Resolve<NoCtor>();
@@ -87,6 +95,7 @@ namespace Rezolver.PerfAnalysis.NetCore
         {
             Console.WriteLine($"Creating instances of {nameof(NoCtor)} using non-generic");
             NoCtor instance;
+            container.RegisterType<NoCtor>();
             if (warmup)
             {
                 instance = (NoCtor)container.Resolve(typeof(NoCtor));
@@ -103,6 +112,9 @@ namespace Rezolver.PerfAnalysis.NetCore
         {
             Console.WriteLine($"Creating and enumerating instances of enumerables of {nameof(EnumerableItem)}");
             IEnumerable<EnumerableItem> instance;
+            container.RegisterType<EnumerableItem1>();
+            container.RegisterType<EnumerableItem2>();
+            container.RegisterType<EnumerableItem3>();
             if (warmup)
             {
                 instance = container.Resolve<IEnumerable<EnumerableItem>>();

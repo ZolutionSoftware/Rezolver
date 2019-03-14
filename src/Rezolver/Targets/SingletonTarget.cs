@@ -22,9 +22,6 @@ namespace Rezolver.Targets
     {
         internal sealed class SingletonContainer
         {
-            private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
-                new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
-
 #if USEDYNAMIC
             internal abstract class SingletonCacheBase
             {
@@ -37,7 +34,7 @@ namespace Rezolver.Targets
             {
                 internal static class Entry<TTypeAndTarget, TService>
                 {
-                    static volatile ICompiledTarget Compiled;
+                    static ICompiledTarget Compiled;
                     static volatile ResolveContext InitialContext;
                     static volatile bool Initialised;
 
@@ -106,9 +103,10 @@ namespace Rezolver.Targets
                 entryType.InvokeMember("Init", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic, null, null, new object[] { compiled });
                 return entryType;
             }
-
-#endif
-
+#else
+            private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
+                new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
+            
             public object GetObject(ResolveContext context, Type type, int targetId, ICompiledTarget compiled)
             {
                 return _cached.GetOrAdd(new TypeAndTargetId(type, targetId), (key) =>
@@ -116,6 +114,7 @@ namespace Rezolver.Targets
                     return new Lazy<object>(() => compiled.GetObject(context));
                 }).Value;
             }
+#endif
         }
 
         /// <summary>
