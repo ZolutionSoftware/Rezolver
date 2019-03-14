@@ -3,7 +3,6 @@
 
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,87 +30,25 @@ namespace Rezolver.Runtime
     /// type <see cref="string"/>, then you would set the <see cref="Options.LazyEnumerables"/> to <c>false</c> for the type <c>IEnumerable&lt;string&gt;</c>
     /// </remarks>
     /// <seealso cref="EagerEnumerable{T}"/>
-    public sealed class LazyEnumerable<T> : IEnumerable<T>
+    public sealed class LazyEnumerable<T> //: IEnumerable<T>
     {
-        private readonly ResolveContext _context;
-        private readonly ICompiledTarget[] _factories;
-
-        private struct LazyEnumerableEnumerator : IEnumerator<T>
-        {
-            private readonly ResolveContext _context;
-            private readonly ICompiledTarget[] _factories;
-            private T _current;
-            private int _index;
-            public T Current => _current;
-            object IEnumerator.Current => _current;
-
-            public LazyEnumerableEnumerator(LazyEnumerable<T> source)
-            {
-                _context = source._context;
-                _factories = source._factories;
-                _index = -1;
-                _current = default;
-            }
-
-            public void Dispose()
-            {
-                Reset();
-            }
-
-            public bool MoveNext()
-            {
-                if (++_index < _factories.Length)
-                {
-                    _current = (T)_factories[_index].GetObject(_context);
-                    return true;
-                }
-                _current = default;
-                return false;
-            }
-
-            public void Reset()
-            {
-                _index = -1;
-                _current = default;
-            }
-        }
+        private readonly Func<ResolveContext, T>[] _factories;
 
         /// <summary>
         /// Creates a new <see cref="LazyEnumerable{T}"/> instance.
         /// </summary>
-        /// <param name="context"></param>
         /// <param name="factories"></param>
-        public LazyEnumerable(ResolveContext context, ICompiledTarget[] factories)
+        public LazyEnumerable(Delegate[] factories)
         {
-            this._context = context.ChangeRequestedType(typeof(T));
-            this._factories = factories;
+            this._factories = factories.OfType<Func<ResolveContext, T>>().ToArray();
         }
 
-        private IEnumerable<T> GetInstances()
+        public IEnumerable<T> GetInstances(ResolveContext context)
         {
             foreach(var factory in _factories)
             {
-                yield return (T)factory.GetObject(_context);
+                yield return factory(context);
             }
-        }
-
-        /// <summary>
-        /// Implementation of <see cref="IEnumerable{T}.GetEnumerator"/>
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerator<T> GetEnumerator()
-        {
-            return new LazyEnumerableEnumerator(this);
-            //return GetInstances().GetEnumerator();
-        }
-
-        /// <summary>
-        /// Implementation of <see cref="IEnumerable.GetEnumerator"/>
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
         }
     }
 }

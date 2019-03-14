@@ -33,5 +33,22 @@ namespace Rezolver.Compilation.Expressions
             var expression = compiler.Build(target, context);
             return compiler.BuildResolveLambda(expression, context);
         }
+
+        /// <summary>
+        /// Similar to <see cref="BuildResolveLambda(IExpressionCompiler, ITarget, IExpressionCompileContext)"/>, except this builds a
+        /// lambda whose type is a strongly-typed delegate instead of object - i.e. Func{ResolveContext, T}
+        /// </summary>
+        /// <param name="compiler"></param>
+        /// <param name="target"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static LambdaExpression BuildResolveLambdaStrong(this IExpressionCompiler compiler, ITarget target, IExpressionCompileContext context)
+        {
+            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+
+            var expression = compiler.Build(target, context);
+            return compiler.BuildResolveLambdaStrong(expression, context);
+        }
     }
 }
