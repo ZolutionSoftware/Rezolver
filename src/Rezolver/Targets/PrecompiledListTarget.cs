@@ -23,7 +23,7 @@ namespace Rezolver.Targets
     /// <typeparam name="TElement">The type of the t element.</typeparam>
     /// <seealso cref="Rezolver.Targets.ListTarget" />
     /// <seealso cref="Rezolver.ICompiledTarget" />
-    internal class PrecompiledListTarget<TElement> : ListTarget, ICompiledTarget
+    internal class PrecompiledListTarget<TElement> : ListTarget, IResolvable
     {
         private readonly IEnumerable<ICompiledTarget> _compiledTargets;
 

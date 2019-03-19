@@ -53,7 +53,7 @@ namespace Rezolver
         });
 
         
-        internal ContainerScope2 _scope;
+        internal ContainerScope _scope;
 
 #if !USEDYNAMIC
         private readonly ConcurrentCache _cache;
@@ -184,7 +184,7 @@ namespace Rezolver
         /// <param name="serviceType"></param>
         /// <param name="scope"></param>
         /// <returns></returns>
-        public object Resolve(Type serviceType, ContainerScope2 scope)
+        public object Resolve(Type serviceType, ContainerScope scope)
         {
             // resolve, assuming a different scope to this container's scope
             return Resolve(new ResolveContext(new ContainerScopeProxy(scope, this), serviceType));
@@ -200,7 +200,7 @@ namespace Rezolver
 #endif
         }
 
-        public TService Resolve<TService>(ContainerScope2 scope)
+        public TService Resolve<TService>(ContainerScope scope)
         {
 #if !USEDYNAMIC
             // resolve, assuming a different scope to this container's scope
@@ -262,11 +262,11 @@ namespace Rezolver
         /// <summary>
         /// Implementation of the <see cref="IScopeFactory.CreateScope"/> method.
         ///
-        /// The base definition creates a <see cref="ContainerScope2"/> with this container passed as the scope's container.
+        /// The base definition creates a <see cref="ContainerScope"/> with this container passed as the scope's container.
         ///
         /// Thus, the new scope is a 'root' scope.
         /// </summary>
-        public ContainerScope2 CreateScope()
+        public ContainerScope CreateScope()
         {
             return _scope.CreateScope();
         }

@@ -15,14 +15,14 @@ namespace Rezolver
     /// 
     /// This type cannot be inherited by user types.
     /// </summary>
-    public class ContainerScope2 : IDisposable, IServiceProvider
+    public class ContainerScope : IDisposable, IServiceProvider
     {
         private protected bool _isDisposing = false;
         private protected bool _isDisposed = false;
         internal bool _canActivate = false;
-        internal readonly ContainerScope2 _root;
+        internal readonly ContainerScope _root;
         private readonly Container _container;
-        private readonly ContainerScope2 _parent;
+        private readonly ContainerScope _parent;
 
         /// <summary>
         /// The container that this scope uses by default to resolve instances.
@@ -39,16 +39,16 @@ namespace Rezolver
         /// So, as a result of this, this property could point to a scope that's not actually
         /// a parent of <see cref="Parent"/>
         /// </summary>
-        public ContainerScope2 Root => _root;
+        public ContainerScope Root => _root;
         /// <summary>
         /// The scope from which this scope was created.
         /// </summary>
-        public ContainerScope2 Parent => _parent;
+        public ContainerScope Parent => _parent;
         /// <summary>
         /// Creates a new Root scope whose container is set to <paramref name="container"/>
         /// </summary>
         /// <param name="container"></param>
-        private protected ContainerScope2(Container container)
+        private protected ContainerScope(Container container)
         {
             _container = container;
             _root = this;
@@ -59,7 +59,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="isRoot"></param>
-        private protected ContainerScope2(ContainerScope2 parent, bool isRoot)
+        private protected ContainerScope(ContainerScope parent, bool isRoot)
         {
             _container = parent._container;
             _parent = parent;
@@ -75,10 +75,10 @@ namespace Rezolver
 
         internal virtual T ActivateExplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
         {
-            throw new NotSupportedException($"Cannot create instance of {context.RequestedType} from target #{targetId} - Explicitly scoped objects are not supported by the default {nameof(ContainerScope2)} - either manually create a scope, or use the {nameof(ScopedContainer)} as your container type");
+            throw new NotSupportedException($"Cannot create instance of {context.RequestedType} from target #{targetId} - Explicitly scoped objects are not supported by the default {nameof(ContainerScope)} - either manually create a scope, or use the {nameof(ScopedContainer)} as your container type");
         }
 
-        public virtual ContainerScope2 CreateScope()
+        public virtual ContainerScope CreateScope()
         {
             // note that the new scope is set as its own root if this scope's Root is not 
             // a 'full' instance-tracking scope.
@@ -149,7 +149,7 @@ namespace Rezolver
             return _container.ResolveInternal<IEnumerable<TService>>(new ResolveContext(this, typeof(IEnumerable<TService>)));
         }
 
-        private protected virtual void ChildDisposed(ContainerScope2 child)
+        private protected virtual void ChildDisposed(ContainerScope child)
         {
 
         }
@@ -162,10 +162,10 @@ namespace Rezolver
     /// In order to get object lifetime management from a container whose scope is set to an instance of this type,
     /// a new scope must be created from this one.
     /// </summary>
-    public class DisposingContainerScope : ContainerScope2
+    public class DisposingContainerScope : ContainerScope
     {
-        private LockedList<ContainerScope2> _childScopes
-            = new LockedList<ContainerScope2>(64);
+        private LockedList<ContainerScope> _childScopes
+            = new LockedList<ContainerScope>(64);
 
         internal DisposingContainerScope(Container container)
             : base(container)
@@ -173,7 +173,7 @@ namespace Rezolver
 
         }
 
-        internal DisposingContainerScope(ContainerScope2 parent, bool isRoot)
+        internal DisposingContainerScope(ContainerScope parent, bool isRoot)
             : base(parent, isRoot)
         {
 
@@ -193,7 +193,7 @@ namespace Rezolver
             this._childScopes = null;
         }
 
-        private protected override void ChildDisposed(ContainerScope2 child)
+        private protected override void ChildDisposed(ContainerScope child)
         {
             if (!_isDisposing && !_isDisposed)
             {
@@ -201,7 +201,7 @@ namespace Rezolver
             }
         }
 
-        public sealed override ContainerScope2 CreateScope()
+        public sealed override ContainerScope CreateScope()
         {
             if (_isDisposed) throw new ObjectDisposedException(nameof(DisposingContainerScope));
 
@@ -249,7 +249,7 @@ namespace Rezolver
             _canActivate = true;
         }
 
-        public ConcurrentContainerScope(ContainerScope2 parent, bool isRoot)
+        public ConcurrentContainerScope(ContainerScope parent, bool isRoot)
             : base(parent, isRoot)
         {
             _canActivate = true;
@@ -297,10 +297,10 @@ namespace Rezolver
             {
                 // note that explicitly scoped objects might not actually be IDisposable :)
                 var allExplicitObjects = this._explicitlyScopedObjects.Skip(0).ToArray()
-                    .Where(l => l.Value.Value.Object is IDisposable && !(l.Value.Value.Object is ContainerScope2))
+                    .Where(l => l.Value.Value.Object is IDisposable && !(l.Value.Value.Object is ContainerScope))
                     .Select(l => l.Value.Value);
                 var allImplicitObjects = this._implicitlyScopedObjects.Skip(0).ToArray()
-                    .Where(l => !(l.Object is ContainerScope2));
+                    .Where(l => !(l.Object is ContainerScope));
 
                 // deref all used collections
                 this._explicitlyScopedObjects = null;
@@ -318,10 +318,10 @@ namespace Rezolver
     /// <summary>
     /// A scope which proxies another, but with a different Container
     /// </summary>
-    internal sealed class ContainerScopeProxy : ContainerScope2
+    internal sealed class ContainerScopeProxy : ContainerScope
     {
-        private readonly ContainerScope2 _inner;
-        public ContainerScopeProxy(ContainerScope2 inner, Container newContainer)
+        private readonly ContainerScope _inner;
+        public ContainerScopeProxy(ContainerScope inner, Container newContainer)
             : base(newContainer)
         {
             _inner = inner;

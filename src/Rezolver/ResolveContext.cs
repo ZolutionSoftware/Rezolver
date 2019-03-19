@@ -21,7 +21,7 @@ namespace Rezolver
     public sealed class ResolveContext : IServiceProvider, IEquatable<ResolveContext>
     {
         private readonly Type _requestedType;
-        private readonly ContainerScope2 _scope;
+        private readonly ContainerScope _scope;
 
         /// <summary>
         /// Gets the type being requested from the container.
@@ -48,7 +48,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="scope">The scope.</param>
         /// <param name="requestedType">The of object to be resolved from the container.</param>
-        public ResolveContext(ContainerScope2 scope, Type requestedType)
+        public ResolveContext(ContainerScope scope, Type requestedType)
         {
             _scope = scope;
             _requestedType = requestedType;
@@ -139,7 +139,7 @@ namespace Rezolver
         /// </summary>
         /// <remarks>This interface implementation is present for when an object wants to be able to inject a scope factory
         /// in order to create child scopes which are correctly parented either to another active scope or the container.</remarks>
-        public ContainerScope2 CreateScope() => _scope.CreateScope();
+        public ContainerScope CreateScope() => _scope.CreateScope();
 
         /// <summary>
         /// Implements the <see cref="object.GetHashCode"/> method using the hash code of

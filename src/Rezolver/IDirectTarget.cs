@@ -22,12 +22,14 @@ namespace Rezolver
     /// without an <see cref="IContainer"/> being available.  For example, the <see cref="GenericTargetContainer"/> uses
     /// its own registrations (configured by <see cref="ITargetContainerConfig"/> objects) to control how generic
     /// registrations are mapped to generic type requests.</remarks>
+    [Obsolete("Use IResolvable", true)]
     internal interface IDirectTarget : ITarget
     {
         /// <summary>
         /// Gets the object
         /// </summary>
         /// <returns></returns>
+        [Obsolete("Use IResolvable", true)]
         object GetValue();
     }
 }
