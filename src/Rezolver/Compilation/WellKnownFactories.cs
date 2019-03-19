@@ -9,18 +9,31 @@ namespace Rezolver
     /// <summary>
     /// Contains an extension to test the validity of <see cref="ICompiledTarget"/> objects.
     /// </summary>
-    public static class WellKnownFactories
+    internal static class WellKnownFactories
     {
-        internal static readonly Func<ResolveContext, object> Unresolved = c => throw new InvalidOperationException($"Unable to resolve type {c.RequestedType}");
+        internal static class Unresolved
+        {
+            internal static readonly Func<ResolveContext, object> Factory = c => throw new InvalidOperationException($"Unable to resolve type {c.RequestedType}");
+        }
+        
+
+        internal static class Unresolved<TService>
+        {
+            internal static readonly Func<ResolveContext, TService> Factory = c => throw new InvalidOperationException($"Unable to resolve type {typeof(TService)}");
+        }
 
         /// <summary>
         /// Returns true if <paramref name="factory"/> represents a failed dependency lookup.
         /// </summary>
         /// <param name="factory">Required.  The factory to be checked.</param>
-        public static bool IsUnresolved(this Func<ResolveContext, object> factory)
+        internal static bool IsUnresolved(this Func<ResolveContext, object> factory)
         {
-            return factory == null ? throw new ArgumentNullException(nameof(factory))
-                : factory == Unresolved;
+            return factory == Unresolved.Factory;
+        }
+
+        internal static bool IsUnresolved<TService>(this Func<ResolveContext, TService> factory)
+        {
+            return factory == Unresolved<TService>.Factory;
         }
     }
 }

@@ -56,31 +56,11 @@ namespace Rezolver.Compilation.Expressions
 
                 var lazy = ctor.Invoke(new object[] { funcs });
 
-                 //= Activator.CreateInstance(lazyType, compiledTargets);
-
                 return Expression.Call(
                     Expression.Constant(lazy),
                     "GetInstances",
                     null,
                     context.ResolveContextParameterExpression);
-
-                //return Expression.New(
-                //    typeof(LazyEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
-                //    context.ResolveContextParameterExpression,
-                //    Expression.Constant(compiledTargets));
-
-                //List<Expression<Func<ResolveContext, object>>> all = new List<Expression<Func<ResolveContext, object>>>();
-                //for(var f = 0; f<target.Targets.Length; f++)
-                //{
-                //    all.Add(compiler.BuildResolveLambda(target.Targets[f], context.NewContext(target.ElementType)));
-                //}
-
-                //return Expression.New(
-                //    typeof(LazyEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
-                //    context.ResolveContextParameterExpression,
-                //    Expression.NewArrayInit(
-                //        typeof(Func<ResolveContext, object>),
-                //        all));
             }
             else
             {

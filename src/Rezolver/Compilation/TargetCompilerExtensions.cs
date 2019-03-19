@@ -36,7 +36,7 @@ namespace Rezolver.Compilation
         /// <see cref="ICompileContext.TargetType"/> to determine the type to be built for, because if one
         /// object requires another, then compilers do not keep creating new resolve contexts
         /// for each compilation, only new compile contexts for the same resolve context.</remarks>
-        public static ICompiledTarget CompileTarget(this ITargetCompiler compiler,
+        public static Func<ResolveContext, object> CompileTarget(this ITargetCompiler compiler,
             ITarget target,
             ResolveContext resolveContext,
             ITargetContainer targets)
@@ -62,6 +62,34 @@ namespace Rezolver.Compilation
             }
 
             return compiler.CompileTarget(target, compiler.CreateContext(resolveContext, targets));
+        }
+
+        public static Func<ResolveContext, TService> CompileTarget<TService>(this ITargetCompiler compiler,
+            ITarget target,
+            ResolveContext resolveContext,
+            ITargetContainer targets)
+        {
+            if (compiler == null)
+            {
+                throw new ArgumentNullException(nameof(compiler));
+            }
+
+            if (target == null)
+            {
+                throw new ArgumentNullException(nameof(target));
+            }
+
+            if (resolveContext == default)
+            {
+                throw new ArgumentNullException(nameof(resolveContext));
+            }
+
+            if (targets == null)
+            {
+                throw new ArgumentNullException(nameof(targets));
+            }
+
+            return compiler.CompileTarget<TService>(target, compiler.CreateContext(resolveContext, targets));
         }
     }
 }

@@ -34,20 +34,20 @@ namespace Rezolver.Targets
             {
                 internal static class Entry<TTypeAndTarget, TService>
                 {
-                    static ICompiledTarget Compiled;
+                    static Func<ResolveContext, object> Factory;
                     static volatile ResolveContext InitialContext;
                     static volatile bool Initialised;
 
-                    internal static void Init(ICompiledTarget target)
+                    internal static void Init(Func<ResolveContext, object> factory)
                     {
                         if (Initialised) return;
-                        Compiled = target;
+                        Factory = factory;
                         Initialised = true;
                     }
 
                     public static TService Resolve(ResolveContext context)
                     {
-                        if (Compiled == null)
+                        if (Factory == null)
                             return Instance.Value;
                         InitialContext = context;
                         return Instance.Value;
@@ -63,8 +63,8 @@ namespace Rezolver.Targets
                                 throw new InvalidOperationException("Initial context has not been set");
 
                             // guaranteed only to be executed once by the runtime.
-                            Value = (TService)Compiled.GetObject(InitialContext);
-                            Compiled = null;
+                            Value = (TService)Factory(InitialContext);
+                            Factory = null;
                             InitialContext = null;
                         }
                     }
@@ -95,23 +95,23 @@ namespace Rezolver.Targets
                 return _dynModule.DefineType($"T{id.Id}_{id.Type.TypeHandle.Value}", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
             }
 
-            internal Type GetEntryType(ICompiledTarget compiled, int targetId, Type type)
+            internal Type GetEntryType(Func<ResolveContext, object> factory, int targetId, Type type)
             {
                 var typeAndTargetIdType = _dynTargetTypeCache.GetOrAdd(new TypeAndTargetId(type, targetId), _dynTargetTypeFactory);
                 var entryType = _cache.GetEntryType(typeAndTargetIdType, type);
                 // initialise the singleton holder with the compiled target (if
-                entryType.InvokeMember("Init", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic, null, null, new object[] { compiled });
+                entryType.InvokeMember("Init", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic, null, null, new object[] { factory });
                 return entryType;
             }
 #else
             private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
                 new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
             
-            public object GetObject(ResolveContext context, Type type, int targetId, ICompiledTarget compiled)
+            public object GetObject(ResolveContext context, Type type, int targetId, Func<ResolveContext, object> factory)
             {
                 return _cached.GetOrAdd(new TypeAndTargetId(type, targetId), (key) =>
                 {
-                    return new Lazy<object>(() => compiled.GetObject(context));
+                    return new Lazy<object>(() => factory(context));
                 }).Value;
             }
 #endif

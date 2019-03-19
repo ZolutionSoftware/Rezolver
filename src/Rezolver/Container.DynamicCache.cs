@@ -24,8 +24,8 @@ namespace Rezolver
                 public abstract ResolveContext GetDefaultContext<TService>();
                 public abstract ResolveContext GetDefaultContext(Type serviceType);
 
-                public abstract ICompiledTarget GetCompiled<TService>();
-                public abstract ICompiledTarget GetCompiled(Type serviceType);
+                public abstract Func<ResolveContext, TService> GetFactory<TService>();
+                public abstract Func<ResolveContext, object> GetFactory(Type serviceType);
 
                 public abstract TService Resolve<TService>();
                 public abstract TService Resolve<TService>(ResolveContext context);
@@ -37,12 +37,12 @@ namespace Rezolver
             private class Entry
             {
                 public ResolveContext ResolveContext;
-                public ICompiledTarget CompiledTarget;
+                public Func<ResolveContext, object> Factory;
 
                 [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-                public object Resolve() => CompiledTarget.GetObject(ResolveContext);
+                public object Resolve() => Factory(ResolveContext);
                 [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-                public object Resolve(ResolveContext context) => CompiledTarget.GetObject(context);
+                public object Resolve(ResolveContext context) => Factory(context);
             }
 
             private sealed class ContainerCache<TContainer> : ContainerCache
@@ -56,14 +56,14 @@ namespace Rezolver
                     TheContainer = container;
                 }
 
-                public override ICompiledTarget GetCompiled<TService>()
+                public override Func<ResolveContext, TService> GetFactory<TService>()
                 {
-                    return Entry<TService>.Compiled.Target;
+                    return Entry<TService>.Compiled.FactoryStrong;
                 }
 
-                public override ICompiledTarget GetCompiled(Type serviceType)
+                public override Func<ResolveContext, object> GetFactory(Type serviceType)
                 {
-                    return _entries.Get(serviceType).CompiledTarget;
+                    return _entries.Get(serviceType).Factory;
                 }
 
                 public override ResolveContext GetDefaultContext<TService>()
@@ -78,12 +78,12 @@ namespace Rezolver
 
                 public override TService Resolve<TService>()
                 {
-                    return (TService)Entry<TService>.Compiled.Target.GetObject(Entry<TService>.Context.Value);
+                    return Entry<TService>.Compiled.FactoryStrong(Entry<TService>.Context.Value);
                 }
 
                 public override TService Resolve<TService>(ResolveContext context)
                 {
-                    return (TService)Entry<TService>.Compiled.Target.GetObject(context);
+                    return Entry<TService>.Compiled.FactoryStrong(context);
                 }
 
                 public override object Resolve(Type serviceType)
@@ -105,14 +105,15 @@ namespace Rezolver
 
                     public static class Compiled
                     {
-                        public static readonly ICompiledTarget Target = TheContainer.GetWorker(Context.Value);
+                        public static readonly Func<ResolveContext, object> Factory = TheContainer.GetWorker(Context.Value);
+                        public static readonly Func<ResolveContext, TService> FactoryStrong = TheContainer.GetWorker<TService>(Context.Value);
                     }
 
                     public Entry()
                     {
                         // lift the fields out of the statics
                         ResolveContext = Context.Value;
-                        CompiledTarget = Compiled.Target;
+                        Factory = Compiled.Factory;
                     }
                 }
             }
@@ -133,10 +134,10 @@ namespace Rezolver
             public ResolveContext GetContext(Type serviceType) => _cache.GetDefaultContext(serviceType);
 
             [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public ICompiledTarget GetCompiled<TService>() => _cache.GetCompiled<TService>();
+            public Func<ResolveContext, TService> GetFactory<TService>() => _cache.GetFactory<TService>();
 
             [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public ICompiledTarget GetCompiled(Type serviceType) => _cache.GetCompiled(serviceType);
+            public Func<ResolveContext, object> GetFactory(Type serviceType) => _cache.GetFactory(serviceType);
 
             [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
             public TService Resolve<TService>() => _cache.Resolve<TService>();

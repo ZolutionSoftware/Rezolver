@@ -83,17 +83,18 @@ namespace Rezolver.Tests.Compilation.Specification
 			var myDisposable = new MyDisposable();
 			var targets = CreateTargetContainer();
 			targets.RegisterObject(myDisposable, scopeBehaviour: ScopeBehaviour.Explicit);
-			var container = CreateContainer(targets);
-			using (var scope = container.CreateScope())
+
+			;
+			using (var container = CreateScopedContainer(targets))
 			{
-				using (var childScope = scope.CreateScope())
+				using (var childScope = container.CreateScope())
 				{
 					var instance = childScope.Resolve<MyDisposable>();
 					//should not dispose here when scope is disposed because 
 					//we default to the root scope.
 					//if it does, then when instance2 is disposed we'll get an exception we're not expecting
 				}
-				var instance2 = scope.Resolve<MyDisposable>();
+				var instance2 = container.Resolve<MyDisposable>();
 				//should dispose here when root scope is disposed
 			}
 

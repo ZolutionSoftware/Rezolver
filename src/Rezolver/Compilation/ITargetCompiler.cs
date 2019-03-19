@@ -22,7 +22,9 @@ namespace Rezolver.Compilation
         /// <param name="context">Required.  The compilation context to use for compilation.  Obtain this by calling
         /// <see cref="CreateContext(ResolveContext, ITargetContainer)"/>.</param>
         /// <returns>A compiled target which can then be used to get produce objects represented by the <paramref name="target"/>.</returns>
-        ICompiledTarget CompileTarget(ITarget target, ICompileContext context);
+        Func<ResolveContext, object> CompileTarget(ITarget target, ICompileContext context);
+
+        Func<ResolveContext, TService> CompileTarget<TService>(ITarget target, ICompileContext context);
 
         /// <summary>
         /// Creates a compilation context for the given <paramref name="resolveContext"/> - which is used to determine

@@ -65,13 +65,13 @@ namespace Rezolver.Tests.Targets
 
 		[Theory]
 		[MemberData(nameof(TheoryTypes))]
-		public void CompiledTargetImplementationShouldReturnCorrectDefault(Type expectedType)
+		public void IInstanceProviderImplementationShouldReturnCorrectDefault(Type expectedType)
 		{
 			Output.WriteLine($"Expected type is { expectedType }");
 			object expected = GetDefault(expectedType);
-			ICompiledTarget toTest = new DefaultTarget(expectedType);
+			IInstanceProvider toTest = new DefaultTarget(expectedType);
 			//shouldn't need a ResolveContext
-			Assert.Equal(expected, toTest.GetObject(default));
+			Assert.Equal(expected, toTest.GetInstance(default));
 		}
 	}
 }

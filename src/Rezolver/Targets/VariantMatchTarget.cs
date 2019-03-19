@@ -49,7 +49,7 @@ namespace Rezolver.Targets
         public bool SupportsType(Type type) => Target.SupportsType(type);
 
         // variant matches shouldn't be nested and the direct targets should never be wrapped.
-        internal static bool ShouldWrap(ITarget target) => !(target is ICompiledTarget || target is IDirectTarget || target is VariantMatchTarget);
+        internal static bool ShouldWrap(ITarget target) => !(target is IFactoryProvider || target is IInstanceProvider || target is IDirectTarget || target is VariantMatchTarget);
 
         internal static ITarget Wrap(ITarget target, Type requestedType, Type registeredType) => ShouldWrap(target) ?
             new VariantMatchTarget(target, requestedType, registeredType) : target;

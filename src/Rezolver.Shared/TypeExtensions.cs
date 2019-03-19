@@ -220,6 +220,11 @@ namespace Rezolver
             return type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
         }
 
+        internal static FieldInfo GetStaticField(this Type type, string name)
+        {
+            return type.GetField(name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        }
+
         internal static MethodInfo GetPublicInstanceMethod(this Type type, string methodName)
         {
             return type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly);

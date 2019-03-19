@@ -31,14 +31,14 @@ namespace Rezolver.Compilation.Expressions
             /// Gets a <see cref="MethodInfo"/> for the <see cref="IDirectTarget.GetValue"/> method.
             /// </summary>
             public static MethodInfo IDirectTarget_GetValue_Method =>
-            Extract.Method((IDirectTarget t) => t.GetValue());
+                Extract.Method((IDirectTarget t) => t.GetValue());
 
             /// <summary>
-            /// Gets a <see cref="MethodInfo"/> for the <see cref="ICompiledTarget.GetObject(ResolveContext)"/>
+            /// Gets a <see cref="MethodInfo"/> for the <see cref="IInstanceProvider.GetInstance(ResolveContext)"/>
             /// method.
             /// </summary>
-            public static MethodInfo ICompiledTarget_GetObject_Method =>
-                Extract.Method((ICompiledTarget t) => t.GetObject(default));
+            public static MethodInfo IInstanceProvider_GetInstance_Method =>
+                Extract.Method((IInstanceProvider ip) => ip.GetInstance(default));
 
             public static MethodInfo Container_ResolveStrong_Method =>
                 Extract.Method((Container c) => c.ResolveInternal<object>(default)).GetGenericMethodDefinition();
@@ -69,8 +69,8 @@ namespace Rezolver.Compilation.Expressions
             public static MethodInfo ResolveContext_New_Container_Method =>
                 Extract.Method((ResolveContext r) => r.ChangeContainer((Container)null));
 
-            public static MethodInfo ResolveContext_Resolve_NewContainer_Strong_Method =>
-                Extract.Method((ResolveContext r) => r.Resolve<object>((Container)null)).GetGenericMethodDefinition();
+            public static MethodInfo ResolveContext_Resolve_Strong_Method =>
+                Extract.Method((ResolveContext r) => r.Resolve<object>()).GetGenericMethodDefinition();
 
             public static MethodCallExpression Call_CurrentScope_ActivateImplicit(
                 Expression context,
@@ -132,15 +132,13 @@ namespace Rezolver.Compilation.Expressions
                     serviceType);
             }
 
-            public static MethodCallExpression CallResolveContext_Resolve_NewContainer_Strong_Method(
+            public static MethodCallExpression CallResolveContext_Resolve_Strong_Method(
                 Expression resolveContext,
-                Type serviceType,
-                Expression container)
+                Type serviceType)
             {
                 return Expression.Call(
                     resolveContext,
-                    ResolveContext_Resolve_NewContainer_Strong_Method.MakeGenericMethod(serviceType),
-                    container);
+                    ResolveContext_Resolve_Strong_Method.MakeGenericMethod(serviceType));
             }
         }
 

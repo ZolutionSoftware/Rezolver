@@ -20,8 +20,11 @@ namespace Rezolver.Configuration
     /// through the use of options.  Either it's in the configuration, or its not.</remarks>
     public sealed class InjectResolveContext : ITargetContainerConfig
     {
-        private class ResolveContextTarget : ITarget, ICompiledTarget
+        private class ResolveContextTarget : ITarget, IFactoryProvider, IFactoryProvider<ResolveContext>
         {
+            private static readonly Func<ResolveContext, object> _objectFactory = c => c;
+            private static readonly Func<ResolveContext, ResolveContext> _funcFactory = c => c;
+
             public int Id { get; } = TargetBase.NextId();
 
             public bool UseFallback => false;
@@ -34,10 +37,9 @@ namespace Rezolver.Configuration
 
             public ITarget SourceTarget => this;
 
-            public object GetObject(ResolveContext context)
-            {
-                return context;
-            }
+            public Func<ResolveContext, ResolveContext> Factory => _funcFactory;
+
+            Func<ResolveContext, object> IFactoryProvider.Factory => _objectFactory;
 
             public bool SupportsType(Type type)
             {

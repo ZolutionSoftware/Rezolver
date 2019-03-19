@@ -7,28 +7,29 @@ using System;
 namespace Rezolver
 {
     /// <summary>
-    /// Interface for an object (usually an <see cref="ITarget"/> which can provide its own factory. 
+    /// Interface for an object (usually an <see cref="ITarget"/> which can provide a factory which a <see cref="Container"/>
+    /// can use to get an instance. 
     /// </summary>
-    public interface IResolvable
+    public interface IFactoryProvider
     {
         /// <summary>
         /// Gets a factory delegate for the object to be used by a <see cref="Container"/>
         /// </summary>
         /// <returns>A delegate which, when invoked with a <see cref="ResolveContext"/>, produces the object</returns>
-        Func<ResolveContext, object> Factor { get; }
+        Func<ResolveContext, object> Factory { get; }
     }
 
     /// <summary>
     /// Interface for an object (usually an <see cref="ITarget"/> which can provide its own strongly-typed
-    /// factory
+    /// factory which a <see cref="Container"/> can use to get an instance.
     /// </summary>
-    /// <typeparam name="T">The type of instance that will be produced by the <see cref=""/></typeparam>
-    public interface IResolvable<T>
+    /// <typeparam name="TService">The type of instance that will be produced by the <see cref="Factory"/></typeparam>
+    public interface IFactoryProvider<out TService>
     {
         /// <summary>
         /// Gets a strongly-typed delegate for the object to be used by a <see cref="Container"/>
         /// </summary>
         /// <returns>A delegate which, when invoked with a <see cref="ResolveContext"/>, produces the object</returns>
-        Func<ResolveContext, T> Factory { get; }
+        Func<ResolveContext, TService> Factory { get; }
     }
 }

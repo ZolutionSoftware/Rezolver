@@ -9,7 +9,7 @@ namespace Rezolver.Targets
     /// <summary>
     /// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed by application code.
     /// </summary>
-    public class ObjectTarget : TargetBase, IResolvable
+    public class ObjectTarget : TargetBase, IFactoryProvider, IInstanceProvider
     {
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Rezolver.Targets
         /// <value>The value.</value>
         public object Value { get; }
 
-        private Func<ResolveContext, object> _factory;
+        private readonly Func<ResolveContext, object> _factory;
 
         /// <summary>
         /// Creates a new instance of the <see cref="ObjectTarget"/> class.
@@ -95,9 +95,19 @@ namespace Rezolver.Targets
         }
 
         /// <summary>
-        /// Implementation of <see cref="IResolvable.Factory"/>
+        /// Implementation of <see cref="IFactoryProvider.Factory"/>
         /// </summary>
         /// <returns>A factory delegate which returns the <see cref="Value"/></returns>
-        public Func<ResolveContext, object> Factory() => _factory;
+        Func<ResolveContext, object> IFactoryProvider.Factory => _factory;
+
+        object IInstanceProvider.GetInstance(ResolveContext context)
+        {
+            if (ScopeBehaviour == ScopeBehaviour.None)
+                return Value;
+            else if (ScopeBehaviour == ScopeBehaviour.Implicit)
+                return context.ActivateImplicit_RootScope(Value);
+            else
+                return _factory(context);
+        }
     }
 }

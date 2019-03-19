@@ -76,9 +76,14 @@ namespace Rezolver.Compilation.Expressions
                 yield return baseT;
             }
 
-            if (typeof(ICompiledTarget).IsAssignableFrom(targetType))
+            if (typeof(IInstanceProvider).IsAssignableFrom(targetType))
             {
-                yield return typeof(ICompiledTarget);
+                yield return typeof(IInstanceProvider);
+            }
+
+            if(typeof(IFactoryProvider).IsAssignableFrom(targetType))
+            {
+                yield return typeof(IFactoryProvider);
             }
         }
     }

@@ -11,7 +11,7 @@ using Rezolver.Events;
 namespace Rezolver
 {
 #if !USEDYNAMIC
-    using ConcurrentCache = PerResolveContextCache<ICompiledTarget>;// DefaultConcurrentPerTypeCache<ICompiledTarget>;
+    using ConcurrentCache = PerResolveContextCache<Func<ResolveContext, object>>;
 #endif
 
     /// <summary>
@@ -47,9 +47,6 @@ namespace Rezolver
         public static CombinedContainerConfig DefaultConfig { get; } = new CombinedContainerConfig(new IContainerConfig[]
         {
             Configuration.ExpressionCompilation.Instance,
-            // note: this config object only applies itself to OverridingContainer objects, and only when the
-            // EnableAutoEnumerables option is set to true in the ITargetContainer.
-            //Configuration.OverridingEnumerables.Instance
         });
 
         
@@ -158,7 +155,7 @@ namespace Rezolver
         public object Resolve(ResolveContext context)
         {
 #if !USEDYNAMIC
-            return GetCompiledTarget(context).GetObject(context);
+            return GetFactory(context)(context);
 #else
             return _dynCache.Resolve(context);
 #endif
@@ -227,15 +224,13 @@ namespace Rezolver
         internal TService ResolveInternal<TService>(ResolveContext context)
         {
 #if !USEDYNAMIC
-            return (TService)GetCompiledTarget(context).GetObject(context);
+            return (TService)GetFactory(context)(context);
 #else
             return _dynCache.Resolve<TService>(context);
 #endif
         }
 
         /// <summary>
-        /// Implementation of the <see cref="IContainer.TryResolve(ResolveContext, out object)"/> method.
-        ///
         /// Attempts to resolve the requested type (given on the <paramref name="context"/>, returning a boolean
         /// indicating whether the operation was successful.  If successful, then <paramref name="result"/> receives
         /// a reference to the resolved object.
@@ -246,10 +241,10 @@ namespace Rezolver
         /// <returns>A boolean indicating whether the operation completed successfully.</returns>
         public bool TryResolve(ResolveContext context, out object result)
         {
-            var target = GetCompiledTarget(context);
+            var target = GetFactory(context);
             if (!target.IsUnresolved())
             {
-                result = target.GetObject(context);
+                result = target(context);
                 return true;
             }
             else
@@ -276,7 +271,7 @@ namespace Rezolver
         /// </summary>
         /// <param name="serviceType"></param>
         /// <returns></returns>
-        public virtual bool CanResolve(Type serviceType)
+        public bool CanResolve(Type serviceType)
         {
             return Targets.Fetch(serviceType) != null;
         }
@@ -307,7 +302,7 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Called by <see cref="GetCompiledTarget(ResolveContext)"/> if no valid <see cref="ITarget"/> can be
+        /// Called by <see cref="GetFactory(ResolveContext)"/> if no valid <see cref="ITarget"/> can be
         /// found for the <paramref name="context"/> or if the one found has its <see cref="ITarget.UseFallback"/> property
         /// set to <c>true</c>.
         /// </summary>
@@ -316,9 +311,20 @@ namespace Rezolver
         /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
         /// </returns>
         /// <remarks>The base implementation always returns an instance of the <see cref="UnresolvedTypeCompiledTarget"/>.</remarks>
-        protected virtual ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
+        protected Func<ResolveContext, object> GetFallbackCompiledTarget(ResolveContext context)
         {
-            return new UnresolvedTypeCompiledTarget(context.RequestedType);
+            return WellKnownFactories.Unresolved.Factory;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        protected Func<ResolveContext, TService> GetFallbackFactory<TService>(ResolveContext context)
+        {
+            return WellKnownFactories.Unresolved<TService>.Factory;
         }
 
         /// <summary>
@@ -330,18 +336,18 @@ namespace Rezolver
         /// <see cref="CanResolve(Type)"/> returns false for the same context, then the target's
         /// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method will likely throw an exception - in line with
         /// the behaviour of the <see cref="UnresolvedTypeCompiledTarget"/> class.</returns>
-        public ICompiledTarget GetCompiledTarget(ResolveContext context)
+        public Func<ResolveContext, object> GetFactory(ResolveContext context)
         {
             // note that this container is fixed as the container in the context - regardless of the
             // one passed in.  This is important.  Scope and RequestedType are left unchanged
 #if !USEDYNAMIC
             return _cache.Get(context);
 #else
-            return _dynCache.GetCompiled(context.RequestedType);
+            return _dynCache.GetFactory(context.RequestedType);
 #endif
         }
 
-        internal ICompiledTarget GetWorker(ResolveContext context)
+        internal Func<ResolveContext, object> GetWorker(ResolveContext context)
         {
             ITarget target = Targets.Fetch(context.RequestedType);
 
@@ -361,19 +367,21 @@ namespace Rezolver
                 }
             }
 
-            // if the target also supports the ICompiledTarget interface then return it, bypassing the
-            // need for any direct compilation.
-            // Then check whether the type of the target is compatible with the requested type - so long
-            // as the requested type is not System.Object.  If so, return a ConstantCompiledTarget
-            // which will simply return the target when GetObject is called.
-            // note that we don't check for IDirectTarget - because that can't honour scoping rules
-            if (target is ICompiledTarget compiledTarget)
+            // does the target actually need compilation?
+            // - instance provider provides an instance via its GetInstance method
+            // - factory provider provides a factory
+            // - if the target is the same type or of a type compatible with the requested type, return it.
+            if(target is IInstanceProvider instanceProvider)
             {
-                return compiledTarget;
+                return c => instanceProvider.GetInstance(context);
+            }
+            else if (target is IFactoryProvider factoryProvider)
+            {
+                return factoryProvider.Factory;
             }
             else if (context.RequestedType != typeof(object) && context.RequestedType.IsAssignableFrom(target.GetType()))
             {
-                return new ConstantCompiledTarget(target, target);
+                return c => target;
             }
 
             var compiler = Targets.GetOption<ITargetCompiler>(target.GetType());
@@ -383,6 +391,54 @@ namespace Rezolver
             }
 
             return compiler.CompileTarget(target, context.ChangeContainer(newContainer: this), Targets);
+        }
+
+        internal Func<ResolveContext, TService> GetWorker<TService>(ResolveContext context)
+        {
+            ITarget target = Targets.Fetch(context.RequestedType);
+
+            if (target == null)
+            {
+                return GetFallbackFactory<TService>(context);
+            }
+
+            // if the entry advises us to fall back if possible, then we'll see what we get from the
+            // fallback operation.  If it's NOT the unresolved target, then we'll use that instead
+            if (target.UseFallback)
+            {
+                var fallback = GetFallbackFactory<TService>(context);
+                if (!fallback.IsUnresolved())
+                {
+                    return fallback;
+                }
+            }
+
+            // does the target actually need compilation?
+            // - instance provider provides an instance via its GetInstance method
+            // - factory provider provides a factory
+            // - if the target is the same type or of a type compatible with the requested type, return it.
+            if (target is IInstanceProvider<TService> instanceProvider)
+            {
+                return c => instanceProvider.GetInstance(context);
+            }
+            else if (target is IFactoryProvider<TService> factoryProvider)
+            {
+                return factoryProvider.Factory;
+            }
+            else if (context.RequestedType != typeof(object) 
+                && context.RequestedType.IsAssignableFrom(target.GetType())
+                && target is TService typedService)
+            {
+                return c => typedService;
+            }
+
+            var compiler = Targets.GetOption<ITargetCompiler>(target.GetType());
+            if (compiler == null)
+            {
+                throw new InvalidOperationException($"No compiler has been configured in the Targets target container for a target of type {target.GetType()} - please use the SetOption API to set an ITargetCompiler for all target types, or for specific target types.");
+            }
+
+            return compiler.CompileTarget<TService>(target, context.ChangeContainer(newContainer: this), Targets);
         }
 
 #region IServiceProvider implementation

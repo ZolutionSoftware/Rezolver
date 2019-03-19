@@ -58,6 +58,14 @@ namespace Rezolver.Compilation.Expressions
 #endif
         }
 
+        /// <summary>
+        /// Overrides the base to prevent additional scoping information being added to the expression returned by <see cref="Build(SingletonTarget, IExpressionCompileContext, IExpressionCompiler)"/>
+        /// </summary>
+        /// <param name="builtExpression"></param>
+        /// <param name="target"></param>
+        /// <param name="context"></param>
+        /// <param name="compiler"></param>
+        /// <returns></returns>
         protected override Expression ApplyScoping(Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             return builtExpression;

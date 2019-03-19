@@ -62,7 +62,7 @@ namespace Rezolver.Benchmark
             var instances = WarmupNonGeneric(_containerPreppedNonGeneric);
         }
 
-        private class CreateSimpleTypeTarget : ITarget, ICompiledTarget
+        private class CreateSimpleTypeTarget : ITarget, IInstanceProvider<SimpleType>, IInstanceProvider
         {
             public ITarget SourceTarget => this;
             public int Id { get; } = TargetBase.NextId();
@@ -71,18 +71,17 @@ namespace Rezolver.Benchmark
             public ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
             public ScopePreference ScopePreference => ScopePreference.Current;
 
-            public object GetObject(ResolveContext context)
-            {
-                return new SimpleType();
-            }
+            public SimpleType GetInstance(ResolveContext context) => new SimpleType();
+            object IInstanceProvider.GetInstance(ResolveContext context) => new SimpleType();
 
             public bool SupportsType(Type type)
             {
                 return type == typeof(SimpleType);
             }
+
         }
 
-        [GlobalSetup(Targets = new[] { nameof(Rezolver_New_ICompiled) })]
+        [GlobalSetup(Targets = new[] { nameof(Rezolver_New_InstanceProvider_Generic), nameof(Rezolver_New_InstanceProvider_NonGeneric) })]
         public void SetupCompiled()
         {
             _containerCompiled = new Container();
@@ -149,11 +148,15 @@ namespace Rezolver.Benchmark
 
         #endregion
 
-        #region rezolver benchmarks (ICompiledTarget)
+        #region rezolver benchmarks (ICompiledTarget - generic & non-generic)
 
         [Benchmark]
         [BenchmarkCategory("New")]
-        public SimpleType Rezolver_New_ICompiled() => _containerCompiled.Resolve<SimpleType>();
+        public SimpleType Rezolver_New_InstanceProvider_Generic() => _containerCompiled.Resolve<SimpleType>();
+
+        [Benchmark]
+        [BenchmarkCategory("New")]
+        public SimpleType Rezolver_New_InstanceProvider_NonGeneric() => (SimpleType)_containerCompiled.Resolve(typeof(SimpleType));
 
         #endregion
 
@@ -179,7 +182,7 @@ namespace Rezolver.Benchmark
 
         #endregion
 
-        #region rezolver benchmarks (Generic, prepared)
+        #region rezolver benchmarks (Non-Generic, prepared)
 
         [Benchmark]
         [BenchmarkCategory("New")]

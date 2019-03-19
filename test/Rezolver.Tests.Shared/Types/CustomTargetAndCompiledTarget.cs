@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace Rezolver.Tests.Types
 {
     /// <summary>
-    /// An ITarget implementation which is also an ICompiledTarget.
+    /// An ITarget implementation which is also an IInstanceProvider.
     /// 
     /// This is similar to the ObjectTarget type but, crucially, because it's defined in this
     /// project, a compiler implementation defined in Rezolver won't know about it.
     /// </summary>
-    public class CustomTargetAndCompiledTarget : ITarget, ICompiledTarget
+    public class CustomTargetAndCompiledTarget : ITarget, IInstanceProvider
     {
         public int Id { get; } = TargetBase.NextId();
         public bool UseFallback => false;
@@ -33,16 +33,16 @@ namespace Rezolver.Tests.Types
             _obj = obj;
         }
 
-        public object GetObject(ResolveContext context)
+        public bool SupportsType(Type type)
+        {
+            return type.IsAssignableFrom(_obj.GetType());
+        }
+
+        public object GetInstance(ResolveContext context)
         {
             if (!context.RequestedType.IsAssignableFrom(_obj.GetType()))
                 throw new ArgumentException($"The RequestedType { context.RequestedType } on the context is not compatible with the object { _obj }", nameof(context));
             return _obj;
-        }
-
-        public bool SupportsType(Type type)
-        {
-            return type.IsAssignableFrom(_obj.GetType());
         }
     }
 }

@@ -59,24 +59,6 @@ namespace Rezolver.Compilation.Expressions
         /// </summary>
         public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
 
-        private class CompiledLambdaTarget : ICompiledTarget
-        {
-            private readonly Func<ResolveContext, object> _getObjectDelegate;
-
-            public ITarget SourceTarget { get; }
-
-            public CompiledLambdaTarget(ITarget sourceTarget, Func<ResolveContext, object> getObjectDelegate)
-            {
-                SourceTarget = sourceTarget;
-                this._getObjectDelegate = getObjectDelegate;
-            }
-
-            public object GetObject(ResolveContext context)
-            {
-                return this._getObjectDelegate(context);
-            }
-        }
-
         /// <summary>
         /// Create the <see cref="ICompiledTarget" /> for the given <paramref name="target" /> using the <paramref name="context" />
         /// to inform the type of object that is to be built, and for compile-time dependency resolution.
@@ -84,21 +66,49 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="target">Required.  The target to be compiled.</param>
         /// <param name="context">Required.  The current compilation context.</param>
         /// <exception cref="System.ArgumentException">context must be an instance of IExpressionCompileContext</exception>
-        public ICompiledTarget CompileTarget(ITarget target, ICompileContext context)
+        public Func<ResolveContext, object> CompileTarget(ITarget target, ICompileContext context)
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
             if (context == null) throw new ArgumentNullException(nameof(context));
 
             // if the target is already a compiledTarget, then cast it - its implementation
             // of ICompiledTarget is likely to be faster than any we could generate dynamically.
-            if (target is ICompiledTarget compiledTarget)
+            if (target is IFactoryProvider factoryProvider)
             {
-                return compiledTarget;
+                return factoryProvider.Factory;
+            }
+            else if(target is IInstanceProvider instanceProvider)
+            {
+                return instanceProvider.GetInstance;
             }
 
             if (context is IExpressionCompileContext exprContext)
             {
-                return BuildCompiledTargetForLambda(target, this.BuildResolveLambda(target, exprContext));
+                return BuildFactory(target, this.BuildResolveLambda(target, exprContext));
+            }
+            else
+            {
+                throw new ArgumentException("context must be an instance of IExpressionCompileContext", nameof(context));
+            }
+        }
+
+        public Func<ResolveContext, TService> CompileTarget<TService>(ITarget target, ICompileContext context)
+        {
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
+            if (target is IFactoryProvider<TService> factoryProvider)
+            {
+                return factoryProvider.Factory;
+            }
+            else if (target is IInstanceProvider<TService> instanceProvider)
+            {
+                return instanceProvider.GetInstance;
+            }
+
+            if (context is IExpressionCompileContext exprContext)
+            {
+                return BuildFactory<TService>(target, this.BuildResolveLambdaStrong(target, exprContext));
             }
             else
             {
@@ -136,12 +146,17 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="lambda">The lambda expression representing the code to be executed in order to get the underlying
         /// object which will be resolved.  Typically, this is fed directly from the
         /// <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> implementation.</param>
-        protected virtual ICompiledTarget BuildCompiledTargetForLambda(ITarget target, Expression<Func<ResolveContext, object>> lambda)
+        protected virtual Func<ResolveContext, object> BuildFactory(ITarget target, Expression<Func<ResolveContext, object>> lambda)
         {
-            return new CompiledLambdaTarget(target, lambda.CompileForRezolver());
+            return lambda.Compile();
         }
 
-        private static Expression BuildResolveLambdaBody(Expression expression, IExpressionCompileContext context)
+        protected virtual Func<ResolveContext, TService> BuildFactory<TService>(ITarget target, LambdaExpression lambda)
+        {
+            return (Func<ResolveContext, TService>)lambda.Compile();
+        }
+
+        private static Expression BuildFactoryBody(Expression expression, IExpressionCompileContext context)
         {
             if (expression == null) throw new ArgumentNullException(nameof(expression));
             if (context == null) throw new ArgumentNullException(nameof(context));
@@ -183,7 +198,7 @@ namespace Rezolver.Compilation.Expressions
         /// <param name="context">The context.</param>
         public virtual Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
         {
-            expression = BuildResolveLambdaBody(expression, context);
+            expression = BuildFactoryBody(expression, context);
 
             // value types must be boxed, and that requires an explicit convert expression
             if (expression.Type != typeof(object) && expression.Type.IsValueType)
@@ -194,10 +209,15 @@ namespace Rezolver.Compilation.Expressions
             return Expression.Lambda<Func<ResolveContext, object>>(expression, context.ResolveContextParameterExpression);
         }
 
+        /// <summary>
+        /// Equivalent to <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> except this produces a lambda whose delegate
+        /// type is strongly typed for the type of object that's returned (instead of just being 'object').
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public LambdaExpression BuildResolveLambdaStrong(Expression expression, IExpressionCompileContext context)
         {
-            // TODO: Consider whether we need to isolate the resolve context parameter and any other parameter expressions
-            // so they are contained wholly within the lambda and don't accidentally create closures.
             return Expression.Lambda(
                 typeof(Func<,>).MakeGenericType(typeof(ResolveContext), expression.Type),
                 expression, 
@@ -218,7 +238,7 @@ namespace Rezolver.Compilation.Expressions
         /// 
         /// Otherwise, the normal behaviour is to attempt to resolve an <see cref="IExpressionBuilder{TTarget}" /> (with <c>TTarget"</c>
         /// equal to the runtime type of the <paramref name="target" />) or <see cref="IExpressionBuilder" /> whose
-        /// <see cref="IExpressionBuilder.CanBuild(ITarget)" /> function returns <c>true</c> for the given target and context.
+        /// <see cref="IExpressionBuilder.CanBuild(Type)" /> function returns <c>true</c> for the given target and context.
         /// If that lookup fails, then an <see cref="ArgumentException" /> is raised.  If the lookup succeeds, then the builder's
         /// <see cref="IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)" /> function is called, and the expression it
         /// produces is returned.</remarks>
