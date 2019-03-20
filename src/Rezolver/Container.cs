@@ -89,7 +89,7 @@ namespace Rezolver
 #if !USEDYNAMIC
             _cache = new ConcurrentCache(GetWorker);
 #else
-            _dynCache = new DynamicCache(this);
+            _dynCache = DynamicCache.CreateCache(this);
 #endif
         }
 
