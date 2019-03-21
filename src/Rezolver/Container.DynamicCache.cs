@@ -19,45 +19,76 @@ namespace Rezolver
     {
         private abstract class DynamicCache
         {
-            private readonly PerTypeCache<Entry> _entries;
+            // used for non-generic calls
+            private readonly PerTypeCache<ServiceEntry> _entries;
 
-            protected DynamicCache(PerTypeCache<Entry> entries)
+            protected DynamicCache(PerTypeCache<ServiceEntry> entries)
             {
                 _entries = entries;
             }
 
-            public abstract ResolveContext GetDefaultContext<TService>();
-            public ResolveContext GetDefaultContext(Type serviceType) => _entries.Get(serviceType).ResolveContext;
+            protected abstract ServiceEntry<TService> GetEntry<TService>();
 
-            public abstract Func<ResolveContext, TService> GetFactory<TService>();
             public Func<ResolveContext, object> GetFactory(Type serviceType) => _entries.Get(serviceType).Factory;
 
-            public abstract TService Resolve<TService>();
-            public abstract TService Resolve<TService>(ResolveContext context);
+            public TService Resolve<TService>() => GetEntry<TService>().Resolve();
+            public TService Resolve<TService>(ResolveContext context) => GetEntry<TService>().Resolve(context);
 
             public object Resolve(Type serviceType) => _entries.Get(serviceType).Resolve();
             public object Resolve(ResolveContext context) => _entries.Get(context.RequestedType).Factory(context);
 
-            protected class Entry
+            protected interface IServiceEntryProvider
             {
-                public readonly ResolveContext ResolveContext;
+                ServiceEntry Entry { get; }
+            }
+
+            protected interface IServiceEntryProvider<TService> : IServiceEntryProvider
+            {
+                new ServiceEntry<TService> Entry { get; }
+            }
+
+            protected sealed class ServiceEntry
+            {
+                public readonly ResolveContext DefaultContext;
                 public readonly Func<ResolveContext, object> Factory;
 
-                protected Entry(ResolveContext resolveContext, Func<ResolveContext, object> factory)
+                public ServiceEntry(ResolveContext defaultContext, Func<ResolveContext, object> factory)
                 {
-                    ResolveContext = resolveContext;
-                    Factory = factory;
+                    this.DefaultContext = defaultContext;
+                    this.Factory = factory;
                 }
 
                 [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-                public object Resolve() => Factory(ResolveContext);
+                public object Resolve() => Factory(DefaultContext);
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public object Resolve(ResolveContext context) => Factory(context);
+            }
+
+            protected sealed class ServiceEntry<TService>
+            {
+                public readonly ResolveContext DefaultContext;
+                public readonly Func<ResolveContext, TService> Factory;
+
+                public ServiceEntry(ResolveContext defaultContext, Func<ResolveContext, TService> factory)
+                {
+                    this.DefaultContext = defaultContext;
+                    this.Factory = factory;
+                }
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public TService Resolve() => Factory(DefaultContext);
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public TService Resolve(ResolveContext context) => Factory(context);
             }
 
             private sealed class ContainerCache<TContainer> : DynamicCache
             {
                 private static Container TheContainer;
 
-                private static readonly PerTypeCache<Entry> _entries = new PerTypeCache<Entry>(t => (Entry)Activator.CreateInstance(typeof(Entry<>).MakeGenericType(typeof(TContainer), t)));
+                private static readonly PerTypeCache<ServiceEntry> _entries = new PerTypeCache<ServiceEntry>(
+                    t => ((IServiceEntryProvider)Activator.CreateInstance(typeof(Entry<>).MakeGenericType(typeof(TContainer), t))).Entry);
 
                 public ContainerCache(Container container)
                     : base(_entries)
@@ -65,48 +96,21 @@ namespace Rezolver
                     TheContainer = container;
                 }
 
-                public override Func<ResolveContext, TService> GetFactory<TService>()
-                {
-                    return Entry<TService>.CompiledStrong.Factory;
-                }
+                protected override ServiceEntry<TService> GetEntry<TService>() => Entry<TService>.GenericEntry;
 
-                public override ResolveContext GetDefaultContext<TService>()
+                private class Entry<TService> : IServiceEntryProvider<TService>
                 {
-                    return Entry<TService>.Context.Value;
-                }
+                    ServiceEntry<TService> IServiceEntryProvider<TService>.Entry => GenericEntry;
+                    ServiceEntry IServiceEntryProvider.Entry => NonGenericEntry;
 
-                public override TService Resolve<TService>()
-                {
-                    return Entry<TService>.CompiledStrong.Factory(Entry<TService>.Context.Value);
-                }
+                    public static readonly ServiceEntry NonGenericEntry;
+                    public static readonly ServiceEntry<TService> GenericEntry;
 
-                public override TService Resolve<TService>(ResolveContext context)
-                {
-                    return Entry<TService>.CompiledStrong.Factory(context);
-                }
-
-
-                private class Entry<TService> : Entry
-                {
-                    public static class Context
+                    static Entry()
                     {
-                        public static readonly ResolveContext Value = new ResolveContext(TheContainer, typeof(TService));
-                    }
-
-                    public static class Compiled
-                    {
-                        public static readonly Func<ResolveContext, object> Factory = TheContainer.GetWorker(Context.Value);
-                    }
-
-                    public static class CompiledStrong
-                    {
-                        public static readonly Func<ResolveContext, TService> Factory = TheContainer.GetWorker<TService>(Context.Value);
-                    }
-
-                    public Entry()
-                        // lift the fields out of the statics
-                        : base(Context.Value, Compiled.Factory)
-                    {
+                        var defaultContext = new ResolveContext(TheContainer, typeof(TService));
+                        NonGenericEntry = new ServiceEntry(defaultContext, TheContainer.GetWorker(defaultContext));
+                        GenericEntry = new ServiceEntry<TService>(defaultContext, TheContainer.GetWorker<TService>(defaultContext));
                     }
                 }
             }
