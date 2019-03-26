@@ -49,9 +49,9 @@ namespace Rezolver.PerfAnalysis.NetCore
 
             CancellationTokenSource cancel = new CancellationTokenSource(runTimeSecs * 1000);
 
-            Run_NoCtor(new Container(), cancel.Token, true);
+            //Run_NoCtor(new Container(), cancel.Token, true);
             //Run_NoCtor_NonGeneric(new Container(), cancel.Token, true);
-            //Run_NoCtor_Singleton(new Container(), cancel.Token, true);
+            Run_NoCtor_Singleton(new Container(), cancel.Token, true);
             //Run_Enumerable(new Container(), cancel.Token, true);
 
             Console.WriteLine($"Num instances created in {runTimeSecs}: {_numInstances}. Rate: {(_numInstances / runTimeSecs):0.00}/sec");

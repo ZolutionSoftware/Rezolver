@@ -4,11 +4,6 @@
 
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Threading;
 using Rezolver.Compilation;
 
 namespace Rezolver.Targets
@@ -22,99 +17,35 @@ namespace Rezolver.Targets
     {
         internal sealed class SingletonContainer
         {
-#if USEDYNAMIC
-            internal abstract class SingletonCacheBase
+            internal sealed class Entry<TService>
             {
-                public abstract Type GetEntryType(Type tTargetType, Type serviceType);
-            }
+                private readonly Lazy<TService> Lazy;
+                private ResolveContext _context;
 
-            // as with the Container.DynamicCache, the type parameter here is a dynamic type
-            // created as a hook to the singleton container instance.
-            internal sealed class SingletonCache<TSingletonContainer> : SingletonCacheBase
-            {
-                internal static class Entry<TTypeAndTarget, TService>
+                public TService Resolve(ResolveContext context)
                 {
-                    static Func<ResolveContext, object> Factory;
-                    static volatile ResolveContext InitialContext;
-                    static volatile bool Initialised;
-
-                    internal static void Init(Func<ResolveContext, object> factory)
-                    {
-                        if (Initialised) return;
-                        Factory = factory;
-                        Initialised = true;
-                    }
-
-                    public static TService Resolve(ResolveContext context)
-                    {
-                        if (Factory == null)
-                            return Instance.Value;
-                        InitialContext = context;
-                        return Instance.Value;
-                    }
-
-                    internal static class Instance
-                    {
-                        public static readonly TService Value;
-
-                        static Instance()
-                        {
-                            if (InitialContext == null)
-                                throw new InvalidOperationException("Initial context has not been set");
-
-                            // guaranteed only to be executed once by the runtime.
-                            Value = (TService)Factory(InitialContext);
-                            Factory = null;
-                            InitialContext = null;
-                        }
-                    }
+                    if (_context == null) _context = context;
+                    return Lazy.Value;
                 }
 
-                public override Type GetEntryType(Type tTargetType, Type serviceType)
+                public Entry(ResolveContext context, Func<ResolveContext, TService> factory)
                 {
-                    return typeof(Entry<,>).MakeGenericType(typeof(TSingletonContainer), tTargetType, serviceType);
+                    Lazy = new Lazy<TService>(() => factory(_context));
                 }
             }
 
-            private readonly AssemblyBuilder _dynAssembly;
-            private readonly ModuleBuilder _dynModule;
-            private readonly SingletonCacheBase _cache;
-
-            private ConcurrentDictionary<TypeAndTargetId, Type> _dynTargetTypeCache = new ConcurrentDictionary<TypeAndTargetId, Type>();
-            private Func<TypeAndTargetId, Type> _dynTargetTypeFactory;
-            internal SingletonContainer()
-            {
-                _dynTargetTypeFactory = InitialiseDynamicTargetType;
-                (_dynAssembly, _dynModule) = DynamicAssemblyHelper.Create("Singletons");
-                var fakeContainerType = _dynModule.DefineType("SingletonContainerHook", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
-                _cache = (SingletonCacheBase)Activator.CreateInstance(typeof(SingletonCache<>).MakeGenericType(fakeContainerType));
-            }
-
-            private Type InitialiseDynamicTargetType(TypeAndTargetId id)
-            {
-                return _dynModule.DefineType($"T{id.Id}_{id.Type.TypeHandle.Value}", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
-            }
-
-            internal Type GetEntryType(Func<ResolveContext, object> factory, int targetId, Type type)
-            {
-                var typeAndTargetIdType = _dynTargetTypeCache.GetOrAdd(new TypeAndTargetId(type, targetId), _dynTargetTypeFactory);
-                var entryType = _cache.GetEntryType(typeAndTargetIdType, type);
-                // initialise the singleton holder with the compiled target (if
-                entryType.InvokeMember("Init", BindingFlags.InvokeMethod | BindingFlags.Static | BindingFlags.NonPublic, null, null, new object[] { factory });
-                return entryType;
-            }
-#else
-            private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
-                new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
+            private ConcurrentDictionary<TypeAndTargetId, object> _lazies = new ConcurrentDictionary<TypeAndTargetId, object>();
             
-            public object GetObject(ResolveContext context, Type type, int targetId, Func<ResolveContext, object> factory)
+            public object GetLazy(SingletonTarget target, TypeAndTargetId id, Delegate factory, ICompileContext context)
             {
-                return _cached.GetOrAdd(new TypeAndTargetId(type, targetId), (key) =>
+                return _lazies.GetOrAdd(id, tid =>
                 {
-                    return new Lazy<object>(() => factory(context));
-                }).Value;
+                    return Activator.CreateInstance(
+                        typeof(Entry<>).MakeGenericType(tid.Type),
+                        context.ResolveContext.ChangeRequestedType(tid.Type),
+                        factory);
+                });
             }
-#endif
         }
 
         /// <summary>
@@ -143,8 +74,8 @@ namespace Rezolver.Targets
         /// <param name="innerTarget">The target whose result (when compiled) is to be used as the singleton instance.</param>
         public SingletonTarget(ITarget innerTarget)
         {
-            if(innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
-            if(innerTarget is SingletonTarget) throw new ArgumentException("A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
+            if (innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
+            if (innerTarget is SingletonTarget) throw new ArgumentException("A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
 
             InnerTarget = innerTarget;
         }

@@ -32,7 +32,7 @@ namespace Rezolver.Compilation.Expressions
             var holder = context.ResolveContext.Resolve<SingletonTarget.SingletonContainer>();
             int? targetIdOverride = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
 
-            var compiled = compiler.CompileTarget(
+            var compiled = compiler.CompileTargetStrong(
                     target.InnerTarget,
                     context.NewContext(
                         context.TargetType ?? target.DeclaredType,
@@ -42,20 +42,12 @@ namespace Rezolver.Compilation.Expressions
                         // tracked within the root scope, if it is one which can track instances.
                         scopeBehaviourOverride: ScopeBehaviour.Implicit,
                         scopePreferenceOverride: ScopePreference.Root));
-#if !USEDYNAMIC
 
-            return Expression.Convert(Expression.Call(
-                Expression.Constant(holder),
-                nameof(SingletonTarget.SingletonContainer.GetObject),
-                null,
-                context.ResolveContextParameterExpression,
-                Expression.Constant(context.TargetType, typeof(Type)),
-                Expression.Constant(targetIdOverride ?? target.Id),
-                Expression.Constant(compiled)), context.TargetType);
-#else
-            var entryType = holder.GetEntryType(compiled, targetIdOverride ?? target.Id, context.TargetType);
-            return Expression.Call(entryType.GetMethod("Resolve", BindingFlags.Static | BindingFlags.Public), context.ResolveContextParameterExpression);
-#endif
+            var lazy = holder.GetLazy(target, new TypeAndTargetId(context.TargetType ?? target.DeclaredType, targetIdOverride ?? target.Id), compiled, context);
+            return Expression.Call(
+                Expression.Constant(lazy),
+                lazy.GetType().GetMethod("Resolve"),
+                context.ResolveContextParameterExpression);
         }
 
         /// <summary>

@@ -4,6 +4,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace Rezolver.Compilation
@@ -13,6 +14,29 @@ namespace Rezolver.Compilation
     /// </summary>
     public static class TargetCompilerExtensions
     {
+        private static readonly MethodInfo CompileTargetGenericMethod = Extract.Method((ITargetCompiler c) => c.CompileTarget<object>(null, null)).GetGenericMethodDefinition();
+
+        /// <summary>
+        /// Performs a late-bound compilation of a strongly-typed delegate for the <paramref name="target" />.
+        /// The type of the returned delegate will be <see cref="Func{T, TResult}" />, with `TResult` equal to
+        /// the <see cref="ICompileContext.TargetType" /> of the <paramref name="context" />.
+        /// </summary>
+        /// <param name="compiler">The compiler.</param>
+        /// <param name="target">The target.</param>
+        /// <param name="context">The context.</param>
+        /// <returns>A compiled delegate</returns>
+        /// <exception cref="ArgumentNullException">If any of <paramref name="compiler"/>, <paramref name="context"/> or <paramref name="target"/> are null.</exception>
+        public static Delegate CompileTargetStrong(this ITargetCompiler compiler, ITarget target, ICompileContext context)
+        {
+            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (target == null) throw new ArgumentNullException(nameof(target));
+            if (context == null) throw new ArgumentNullException(nameof(context));
+
+            return (Delegate)CompileTargetGenericMethod.MakeGenericMethod(
+                context.TargetType)
+                .Invoke(compiler, new object[] { target, context });
+        }
+
         /// <summary>
         /// Compiles the <paramref name="target"/> by calling the
         /// <see cref="ITargetCompiler.CompileTarget(ITarget, ICompileContext)"/> method of the passed
