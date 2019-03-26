@@ -118,11 +118,15 @@ as doing default(type) in C#.</p>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a></div>
+    <div><a class="xref" href="Rezolver.IFactoryProvider.html">IFactoryProvider</a></div>
+    <div><a class="xref" href="Rezolver.IInstanceProvider.html">IInstanceProvider</a></div>
     <div><a class="xref" href="Rezolver.ITarget.html">ITarget</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_NextId">TargetBase.NextId()</a>
+    </div>
     <div>
       <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_Id">TargetBase.Id</a>
     </div>
@@ -161,7 +165,7 @@ as doing default(type) in C#.</p>
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_Targets_DefaultTarget_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class DefaultTarget : TargetBase, ICompiledTarget, IDirectTarget, ITarget</code></pre>
+    <pre><code class="lang-csharp hljs">public class DefaultTarget : TargetBase, IFactoryProvider, IInstanceProvider, IDirectTarget, ITarget</code></pre>
   </div>
   <h5 id="Rezolver_Targets_DefaultTarget_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>The type also implements the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> interface for direct
@@ -171,10 +175,10 @@ resolving.</p>
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget__ctor_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.%23ctor(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget__ctor_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.%23ctor(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L80">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L108">View Source</a>
   </span>
   <a id="Rezolver_Targets_DefaultTarget__ctor_" data-uid="Rezolver.Targets.DefaultTarget.#ctor*"></a>
   <h4 id="Rezolver_Targets_DefaultTarget__ctor_System_Type_" data-uid="Rezolver.Targets.DefaultTarget.#ctor(System.Type)">DefaultTarget(Type)</h4>
@@ -207,10 +211,10 @@ resolving.</p>
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L60">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L83">View Source</a>
   </span>
   <a id="Rezolver_Targets_DefaultTarget_DeclaredType_" data-uid="Rezolver.Targets.DefaultTarget.DeclaredType*"></a>
   <h4 id="Rezolver_Targets_DefaultTarget_DeclaredType" data-uid="Rezolver.Targets.DefaultTarget.DeclaredType">DeclaredType</h4>
@@ -240,10 +244,41 @@ resolving.</p>
   <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_DeclaredType">TargetBase.DeclaredType</a></div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_Factory.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.Factory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L47">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L102">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_DefaultTarget_Factory_" data-uid="Rezolver.Targets.DefaultTarget.Factory*"></a>
+  <h4 id="Rezolver_Targets_DefaultTarget_Factory" data-uid="Rezolver.Targets.DefaultTarget.Factory">Factory</h4>
+  <div class="markdown level1 summary"><p>Implementation of <a class="xref" href="Rezolver.IFactoryProvider.html#Rezolver_IFactoryProvider_Factory">Factory</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Func&lt;ResolveContext, object&gt; Factory { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L70">View Source</a>
   </span>
   <a id="Rezolver_Targets_DefaultTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.DefaultTarget.ScopeBehaviour*"></a>
   <h4 id="Rezolver_Targets_DefaultTarget_ScopeBehaviour" data-uid="Rezolver.Targets.DefaultTarget.ScopeBehaviour">ScopeBehaviour</h4>
@@ -275,10 +310,10 @@ resolving.</p>
   <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a></div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_Value.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_Value.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.Value%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L68">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L91">View Source</a>
   </span>
   <a id="Rezolver_Targets_DefaultTarget_Value_" data-uid="Rezolver.Targets.DefaultTarget.Value*"></a>
   <h4 id="Rezolver_Targets_DefaultTarget_Value" data-uid="Rezolver.Targets.DefaultTarget.Value">Value</h4>
@@ -308,18 +343,18 @@ resolving.</p>
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.Rezolver%23ICompiledTarget%23GetObject(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_Rezolver_IInstanceProvider_GetInstance_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.Rezolver%23IInstanceProvider%23GetInstance(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L88">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L116">View Source</a>
   </span>
-  <a id="Rezolver_Targets_DefaultTarget_Rezolver_ICompiledTarget_GetObject_" data-uid="Rezolver.Targets.DefaultTarget.Rezolver#ICompiledTarget#GetObject*"></a>
-  <h4 id="Rezolver_Targets_DefaultTarget_Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_" data-uid="Rezolver.Targets.DefaultTarget.Rezolver#ICompiledTarget#GetObject(Rezolver.IResolveContext)">ICompiledTarget.GetObject(IResolveContext)</h4>
+  <a id="Rezolver_Targets_DefaultTarget_Rezolver_IInstanceProvider_GetInstance_" data-uid="Rezolver.Targets.DefaultTarget.Rezolver#IInstanceProvider#GetInstance*"></a>
+  <h4 id="Rezolver_Targets_DefaultTarget_Rezolver_IInstanceProvider_GetInstance_Rezolver_ResolveContext_" data-uid="Rezolver.Targets.DefaultTarget.Rezolver#IInstanceProvider#GetInstance(Rezolver.ResolveContext)">IInstanceProvider.GetInstance(ResolveContext)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">object ICompiledTarget.GetObject(IResolveContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">object IInstanceProvider.GetInstance(ResolveContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -332,7 +367,7 @@ resolving.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
+        <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
         <td><span class="parametername">context</span></td>
         <td></td>
       </tr>
@@ -353,47 +388,17 @@ resolving.</p>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget_Rezolver_ICompiledTarget_SourceTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget.Rezolver%23ICompiledTarget%23SourceTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L86">View Source</a>
-  </span>
-  <a id="Rezolver_Targets_DefaultTarget_Rezolver_ICompiledTarget_SourceTarget_" data-uid="Rezolver.Targets.DefaultTarget.Rezolver#ICompiledTarget#SourceTarget*"></a>
-  <h4 id="Rezolver_Targets_DefaultTarget_Rezolver_ICompiledTarget_SourceTarget" data-uid="Rezolver.Targets.DefaultTarget.Rezolver#ICompiledTarget#SourceTarget">ICompiledTarget.SourceTarget</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ITarget ICompiledTarget.SourceTarget { get; }</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>
+      <a class="xref" href="Rezolver.IFactoryProvider.html">IFactoryProvider</a>
+  </div>
+  <div>
+      <a class="xref" href="Rezolver.IInstanceProvider.html">IInstanceProvider</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.ITarget.html">ITarget</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Rezolver.UnresolvedICompiledTargetExtensions.html#Rezolver_UnresolvedICompiledTargetExtensions_IsUnresolved_Rezolver_ICompiledTarget_">UnresolvedICompiledTargetExtensions.IsUnresolved(ICompiledTarget)</a>
-  </div>
   <div>
       <a class="xref" href="Rezolver.Target.html#Rezolver_Target_Scoped_Rezolver_ITarget_">Target.Scoped(ITarget)</a>
   </div>
@@ -416,10 +421,10 @@ resolving.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DefaultTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Targets_DefaultTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DefaultTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/DefaultTarget.cs/#L18" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DefaultTarget.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

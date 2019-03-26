@@ -389,7 +389,7 @@ about the overriding container.</p>
 <p>If you&#39;re interested in the inner workings when using overriding containers, the process is this:</p>
 <ul>
 <li>The <code>overridingContainer</code> receives the <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call for <code>Requires2MyServices</code></li>
-<li>It looks inside its <a class="xref" href="../../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> target container for a registration for <code>Requires2MyServices</code> and doesn&#39;t find one</li>
+<li>It looks inside its @Rezolver.ContainerBase.Targets target container for a registration for <code>Requires2MyServices</code> and doesn&#39;t find one</li>
 <li>So the call is passed to the overidden <code>container</code>...<ul>
 <li>... which finds its registration and binds to the 2-parameter constructor of <code>Requires2MyServices</code> as before</li>
 <li>The bound constructor is executed<ul>
@@ -412,7 +412,7 @@ for <code>Requires2MyServices</code></li>
 by a container.</p>
 <p>In order to do this, however, we have to change how we create our container.  Until now, we&#39;ve simply been creating a new <a class="xref" href="../../api/Rezolver.Container.html">Container</a>
 instance and registering targets via its own implementation of <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (which, as mentioned elsewhere, wraps its
-<a class="xref" href="../../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> property).</p>
+@Rezolver.ContainerBase.Targets property).</p>
 <p>This time, we&#39;re going to create a <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a> directly, register <code>MyService2</code> and <code>Requires2MyServices</code> in it, then 
 create a <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> on top of that with the other registration of <code>MyService3</code>.  This target container is then 
 passed to the new container on construction.</p>

@@ -134,8 +134,8 @@ to request objects from the container.</p>
 <p>This interface does not mandate that a container has an <code>IRootTargetContainer</code>, it&#39;s simply the case
 that all the provided implementations which we will discuss in the rest of this documentation do
 use that interface as the source of their service registrations.</p>
-<div class="TIP"><h5>Tip</h5><p>The primary implementation of this interface is <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a>, an abstract class which also 
-implements the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> interface by wrapping around the <a class="xref" href="../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> 
+<div class="TIP"><h5>Tip</h5><p>The primary implementation of this interface is @Rezolver.ContainerBase, an abstract class which also 
+implements the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> interface by wrapping around the @Rezolver.ContainerBase.Targets 
 property that it exposes.</p>
 <p>As a consumer of Rezolver, however, you will be using the <a class="xref" href="../api/Rezolver.Container.html">Container</a> and <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a> 
 classes most of the time - which derive most of their functionality from this abstract class.</p>
@@ -155,7 +155,7 @@ var container = new ScopedContainer();
 container&#39;s <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> implementation, and resolving objects from it.</p>
 <h2 id="registering-services">Registering services</h2>
 <p>As mentioned above, with our default implementations of <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>, registration of services ultimately 
-means adding targets to the container&#39;s <a class="xref" href="../api/Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">Targets</a> target container, associating them with service 
+means adding targets to the container&#39;s @Rezolver.ContainerBase.Targets target container, associating them with service 
 types which we will later resolve.  </p>
 <p>The core registration method for this is the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> and an optional type against which the registration is to be made.</p>
@@ -183,8 +183,8 @@ you&#39;re familiar with IOC containers then you&#39;re probably wondering where
 method is!</p>
 <p>Well, fear not.  As with the many extension methods available on <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, the <a class="xref" href="../api/Rezolver.IContainer.html">IContainer</a>
 interface (through which all resolving of objects is done) has extension methods to provide a more traditional
-IOC API, and these are found on the <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a> static class.</p>
-<p>The one you&#39;ll use most frequently, of course, is the <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve__1_Rezolver_IContainer_">Resolve&lt;TObject&gt;(IContainer)</a>
+IOC API, and these are found on the @Rezolver.ContainerResolveExtensions static class.</p>
+<p>The one you&#39;ll use most frequently, of course, is the @Rezolver.ContainerResolveExtensions.Resolve``1(Rezolver.IContainer)
 method, which provides the aforementioned <code>Resolve&lt;TService&gt;()</code> API.</p>
 <p>So, assuming we have the <code>container</code> that we&#39;ve been using up till now, we would resolve an instance of <code>MyService</code>
 simply by doing one of the following:</p>
@@ -211,14 +211,14 @@ that missing services yield a <code>null</code> result instead of throwing an ex
 if it cannot be found.  In this case you can use the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_">TryResolve</a> method, which returns the
 object via an <code>out</code> parameter and returns a <code>bool</code> indicating whether the operation succeeds.</p>
 <p>Naturally, as with the <code>Resolve</code> operation, this method has a generic overload
-(<a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_TryResolve__1_Rezolver_IContainer___0__">TryResolve&lt;TObject&gt;(IContainer, out TObject)</a>) to avoid the need for a 
+(&lt;xref:Rezolver.ContainerResolveExtensions.TryResolve``1(Rezolver.IContainer,``0@)&gt;) to avoid the need for a 
 temporary <code>Object</code> reference:</p>
 <pre><code class="lang-cs">MyService result;
 bool success = container.TryResolve(out result);
 //success == true or false depending on registrations.
 </code></pre><p>Similarly we can also introspect a container to find out if it <em>can</em> resolve an instance of a given type
 by using the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_CanResolve_">CanResolve</a> method.  This method also has friendly overloads via extension
-methods (e.g. <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">CanResolve&lt;TObject&gt;(IContainer)</a>)):</p>
+methods (e.g. &lt;xref:Rezolver.ContainerResolveExtensions.CanResolve``1(Rezolver.IContainer)&gt;)):</p>
 <pre><code class="lang-cs">bool canResolve = container.CanResolve&lt;MyService&gt;();
 </code></pre><hr>
 <h1 id="container-options-and-configuration">Container Options and Configuration</h1>

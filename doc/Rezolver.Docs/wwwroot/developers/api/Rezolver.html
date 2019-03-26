@@ -137,10 +137,6 @@ properties on new instances to services from the container.</p>
       <h4><a class="xref" href="Rezolver.BindSpecificMembersBehaviour.html">BindSpecificMembersBehaviour</a></h4>
       <section><p>Overrides the <a class="xref" href="Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a> to provide explicit per-member bindings.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a></h4>
-      <section><p>Builds on the <a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a> base class to introduce thread-safe caching of compiled targets so they are only compiled once per requested type.</p>
-<p>Only creatable through inheritance.</p>
-</section>
       <h4><a class="xref" href="Rezolver.CombinedContainerConfig.html">CombinedContainerConfig</a></h4>
       <section><p>An <a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a> which contains zero or or more other <a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a>
 objects.  Behaviours can depend on other behaviours, and this collection ensures that they are applied
@@ -159,30 +155,28 @@ collection ensures that they are applied in the correct order.</p>
       <section><p>Extensions for pre-configuring options in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> via a <a class="xref" href="Rezolver.CombinedContainerConfig.html">CombinedContainerConfig</a>, such as the one
 exposed by <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.ConcurrentContainerScope.html">ConcurrentContainerScope</a></h4>
+      <section></section>
+      <h4><a class="xref" href="Rezolver.ConstantCompiledTarget.html">ConstantCompiledTarget</a></h4>
+      <section><p>Obsolete, use <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func&lt;T,TResult&gt;</a></p>
+</section>
       <h4><a class="xref" href="Rezolver.ConstructorBinding.html">ConstructorBinding</a></h4>
       <section><p>Represents a binding specifically to a class constructor, optionally with an additional
 set of <a class="xref" href="Rezolver.ConstructorBinding.html#Rezolver_ConstructorBinding_MemberBindings">MemberBindings</a> to be used to initialise a new instance&apos;s properties
 or fields directly.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Container.html">Container</a></h4>
-      <section><p>The standard IOC container class in Rezolver.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a></h4>
-      <section><p>Starting point for implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> - only creatable through inheritance.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.ContainerResolveExtensions.html">ContainerResolveExtensions</a></h4>
-      <section><p>Extension methods for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which provide shortcuts for the <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>
-operation.</p>
+      <section><p>Container through which objects can be resolved.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></h4>
-      <section><p>Standard implementation of the <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> interface.</p>
+      <section><p>Base class for scopes.</p>
+<p>This type cannot be inherited by user types.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ContainerScopeExtensions.html">ContainerScopeExtensions</a></h4>
-      <section><p>Standard extensions for the <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></p>
+      <section><p>Obsolete - container scope is available directly from <a class="xref" href="Rezolver.ContainerScope.html#Rezolver_ContainerScope_Root">Root</a></p>
 </section>
       <h4><a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">ContainerScopeResolveExtensions</a></h4>
-      <section><p>Extensions for <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> so that instances of that
-interface present a similar set of functionality to <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
+      <section><p>The extension methods in this class are no longer required.  Use ContainerScope directly</p>
 </section>
       <h4><a class="xref" href="Rezolver.CovariantTypeIndex.html">CovariantTypeIndex</a></h4>
       <section><p>Implementation of <a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a> used internally by <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a>
@@ -202,6 +196,18 @@ decoration registrations.</p>
       <h4><a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a></h4>
       <section><p>Extension methods for ITargetContainer designed to simplify the registration of <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> and its
 numerous generic variants.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.DelegatingCompiledTarget.html">DelegatingCompiledTarget</a></h4>
+      <section><p>Obsolete.  See <a class="xref" href="Rezolver.IFactoryProvider.html">IFactoryProvider</a> and <a class="xref" href="Rezolver.IFactoryProvider-1.html">IFactoryProvider&lt;TService&gt;</a>, and object factories
+are now just <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func&lt;T,TResult&gt;</a> with <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> as the parameter type
+and either <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a> as the return type or a strongly-typed return type equal to the
+instance type.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.DisposingContainerScope.html">DisposingContainerScope</a></h4>
+      <section><p>Default scope object used by the<a class="xref" href="Rezolver.Container.html">Container</a> - performs no actual lifetime management
+of objects at all, but can create child scopes and track them for disposal when it is disposed.</p>
+<p>In order to get object lifetime management from a container whose scope is set to an instance of this type,
+a new scope must be created from this one.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ExpressionFunctions.html">ExpressionFunctions</a></h4>
       <section><p>This type is only used when using expressions as targets(via the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> type) - it&apos;s
@@ -259,9 +265,9 @@ target.</p>
 of the various well-known <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementations.</p>
 </section>
       <h4><a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a></h4>
-      <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> which can override the resolve operations of another.  This is useful when you have a
-core application-wide container, with some objects being customised based on some ambient information,
-e.g. configuration, MVC Area/Controller, Brand (in a multi-tenant application for example) or more.</p>
+      <section><p>A child container which extends another.</p>
+<p>Note that this container gets its own singletons, scope, etc - everything is new; it&apos;s just the registrations
+which are shared.</p>
 </section>
       <h4><a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a></h4>
       <section><p>A version of <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> which overrides and extends the registrations of another
@@ -280,8 +286,7 @@ similar to a Linq Select.</p>
 <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> targets.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></h4>
-      <section><p>Standard implementation of <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></p>
-</section>
+      <section></section>
       <h4><a class="xref" href="Rezolver.RezolverOptions.html">RezolverOptions</a></h4>
       <section><p>Options for using Rezolver as the DI container for .Net Core applications.</p>
 </section>
@@ -290,7 +295,7 @@ similar to a Linq Select.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
       <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
-<a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_Scope">Scope</a> that&apos;s created along with it.</p>
+<see cref="!:Scope"></see> that&apos;s created along with it.</p>
 <p>Implementation of the <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a></h4>
@@ -328,18 +333,20 @@ custom logic/behaviour for <a class="xref" href="Rezolver.ITarget.html">ITarget<
 whose targets might produce a compatible instance.</p>
 <p>In particular, this class is responsible for handling generic type matching, including variance.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.UnresolvedICompiledTargetExtensions.html">UnresolvedICompiledTargetExtensions</a></h4>
-      <section><p>Contains an extension to test the validity of <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> objects.</p>
+      <h4><a class="xref" href="Rezolver.UnresolvedTypeCompiledTarget.html">UnresolvedTypeCompiledTarget</a></h4>
+      <section><p>An <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> that can be used when a type could not be resolved.</p>
+<p>Implementations of both <a class="xref" href="Rezolver.UnresolvedTypeCompiledTarget.html#Rezolver_UnresolvedTypeCompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> and <a class="xref" href="Rezolver.UnresolvedTypeCompiledTarget.html#Rezolver_UnresolvedTypeCompiledTarget_SourceTarget">SourceTarget</a> will throw an exception
+if called/read.</p>
 </section>
     <h3 id="interfaces">Interfaces
   </h3>
       <h4><a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a></h4>
-      <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> - this is
-the ultimate target of all <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> calls in the standard
+      <section><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> - this is
+the ultimate target of all <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> calls in the standard
 container implementations within the Rezolver framework.</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainer.html">IContainer</a></h4>
-      <section><p>The primary IOC container interface in the Rezolver framework.</p>
+      <section><p>Obsolete interface - now use the <a class="xref" href="Rezolver.Container.html">Container</a> class</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a></h4>
       <section><p>A configuration callback for instances of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> (which also use <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
@@ -350,16 +357,27 @@ as the source of their registrations).</p>
 of object/behaviour/service/option for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> instances. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></h4>
-      <section><p>This is an <a class="xref" href="Rezolver.IContainer.html">IContainer</a>-like object (resolving functionality is provided through the extension methods
-in the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html">ContainerScopeResolveExtensions</a> class) which provides lifetime scoping for disposable objects,
-and scoped singleton functionality for any object.</p>
-<p>Implementations of this interface must, in their implementation of <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>, create a child scope
-of this scope.</p>
+      <section><p>Obsolete in v2 use <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></p>
 </section>
       <h4><a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a></h4>
       <section><p>For any type <code>T</code>, there exists a list of zero or more other types with which
 it is compatible when covariance is supported.  This index provides the mechanism
 by which Rezolver can perform this reverse lookup.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.IFactoryProvider.html">IFactoryProvider</a></h4>
+      <section><p>Interface for an object (usually an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which can provide a factory which a <a class="xref" href="Rezolver.Container.html">Container</a>
+can use to get an instance. </p>
+</section>
+      <h4><a class="xref" href="Rezolver.IFactoryProvider-1.html">IFactoryProvider&lt;TService&gt;</a></h4>
+      <section><p>Interface for an object (usually an <a class="xref" href="Rezolver.ITarget.html">ITarget</a> which can provide its own strongly-typed
+factory which a <a class="xref" href="Rezolver.Container.html">Container</a> can use to get an instance.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.IInstanceProvider.html">IInstanceProvider</a></h4>
+      <section><p>Interface for an object (usually a <a class="xref" href="Rezolver.ITarget.html">ITarget</a> implementation) which can provide an instance
+for a given <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> without needing to be compiled.</p>
+</section>
+      <h4><a class="xref" href="Rezolver.IInstanceProvider-1.html">IInstanceProvider&lt;TService&gt;</a></h4>
+      <section><p>Strongly-typed version of <a class="xref" href="Rezolver.IInstanceProvider.html">IInstanceProvider</a></p>
 </section>
       <h4><a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a></h4>
       <section><p>Describes a type which discovers and creates property/field bindings, typically for use when creating a new instance.</p>
@@ -368,10 +386,7 @@ by which Rezolver can perform this reverse lookup.</p>
       <section><p>An object responsible for building an <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> for instances of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TInstance</code></p>
 </section>
       <h4><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></h4>
-      <section><p>Captures the state for a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>
-(or <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a>), including the container on which
-the operation is invoked, any <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> that might be active for the call (if different), and the
-type that is being resolved from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
+      <section><p>This interface is now obsolete in v2.0</p>
 </section>
       <h4><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></h4>
       <section><p>Interface for the root-most target container, which typically &apos;owns&apos; all the top-level registrations
@@ -381,15 +396,13 @@ interface too, as well as events which allow an application to listen for target
 within the root.</p>
 </section>
       <h4><a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a></h4>
-      <section><p>An <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that also has a <a class="xref" href="Rezolver.IScopedContainer.html#Rezolver_IScopedContainer_Scope">Scope</a> attached to it.</p>
-<p>Many applications will use such a container as the root container to use as anchors
-for things like scoped singletons.</p>
+      <section><p>Obsolete - use <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></p>
 </section>
       <h4><a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a></h4>
       <section><p>Represents an object from which a scope can be created</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITarget.html">ITarget</a></h4>
-      <section><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>,
+      <section><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,
 when the standard implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> are used (e.g. <a class="xref" href="Rezolver.Container.html">Container</a>).</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></h4>

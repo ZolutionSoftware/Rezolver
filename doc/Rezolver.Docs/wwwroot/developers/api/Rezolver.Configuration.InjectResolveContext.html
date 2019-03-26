@@ -107,7 +107,7 @@
   <h1 id="Rezolver_Configuration_InjectResolveContext" data-uid="Rezolver.Configuration.InjectResolveContext" class="text-break">Class InjectResolveContext
   </h1>
   <div class="markdown level0 summary"><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that enables automatic resolving of the
-<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> created for a <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> operation.</p>
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> created for a <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> operation.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -151,7 +151,7 @@
   </div>
   <h5 id="Rezolver_Configuration_InjectResolveContext_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>The implementation registers a special internal target type which implements <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a>
-simply by returning the context passed to its <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a> method.</p>
+simply by returning the context passed to its <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> method.</p>
 <p>This configuration is applied to the <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a> automatically, and cannot be disabled
 through the use of options.  Either it&apos;s in the configuration, or its not.</p>
 </div>
@@ -159,10 +159,10 @@ through the use of options.  Either it&apos;s in the configuration, or its not.<
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectResolveContext_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectResolveContext.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Configuration_InjectResolveContext_Instance.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectResolveContext.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectResolveContext.cs/#L53">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/InjectResolveContext.cs/#L57">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectResolveContext_Instance_" data-uid="Rezolver.Configuration.InjectResolveContext.Instance*"></a>
   <h4 id="Rezolver_Configuration_InjectResolveContext_Instance" data-uid="Rezolver.Configuration.InjectResolveContext.Instance">Instance</h4>
@@ -192,16 +192,16 @@ through the use of options.  Either it&apos;s in the configuration, or its not.<
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectResolveContext_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Configuration_InjectResolveContext_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectResolveContext.cs/#L62">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/InjectResolveContext.cs/#L66">View Source</a>
   </span>
   <a id="Rezolver_Configuration_InjectResolveContext_Configure_" data-uid="Rezolver.Configuration.InjectResolveContext.Configure*"></a>
   <h4 id="Rezolver_Configuration_InjectResolveContext_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.InjectResolveContext.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
   <div class="markdown level1 summary"><p>Attaches this behaviour to the target container, adding a registration to the <code data-dev-comment-type="paramref" class="paramref">targets</code>
-for the type <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>.</p>
-<p>Note - if the <code data-dev-comment-type="paramref" class="paramref">targets</code> already has a registration for <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>,
+for the type <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>.</p>
+<p>Note - if the <code data-dev-comment-type="paramref" class="paramref">targets</code> already has a registration for <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>,
 then the behaviour DOES NOT overwrite it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -237,10 +237,10 @@ then the behaviour DOES NOT overwrite it.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_InjectResolveContext.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectResolveContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Configuration_InjectResolveContext.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.InjectResolveContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/InjectResolveContext.cs/#L19" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/InjectResolveContext.cs/#L21" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

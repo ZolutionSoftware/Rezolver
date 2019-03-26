@@ -162,7 +162,7 @@ when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITarget
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectResolveContext.html">InjectResolveContext</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that enables automatic resolving of the
-<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> created for a <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> operation.</p>
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> created for a <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> operation.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a></h4>
       <section><p>Abstract base class for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that is dependent upon a particular type of option
@@ -176,13 +176,6 @@ a specific type for configuration (<code data-dev-comment-type="typeparamref" cl
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></h4>
       <section><p>Abstract base class for <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> implementations which are dependent upon
 one or more configuration objects having been applied before being applied themselves.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a></h4>
-      <section><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to
-enable automatically injected enumerables (via the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration callback and the
-<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option), then this will extend enumerable support in the
-<a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> to construct enumerables made up of a combination of all services in the
-overriden container AND those from the overriding container.</p>
 </section>
 </article>
           </div>

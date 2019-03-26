@@ -120,7 +120,7 @@ right up to the delegate-like <a class="xref" href="https://docs.microsoft.com/d
 <h1 id="expression-fragments">Expression &#39;fragments&#39;</h1>
 <p>As we&#39;ve just mentioned, an expression fragment is one of the small, specialised, expression types from the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions">System.Linq.Expressions</a> namespace which wrap a fundamental 
 language expression, such as constants or method calls or whatever.  The <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> supports these through its 
-<a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget__ctor_System_Linq_Expressions_Expression_System_Type_">ExpressionTarget(Expression, Type)</a> constructor.</p>
+@Rezolver.Targets.ExpressionTarget.%23ctor(System.Linq.Expressions.Expression,System.Type) constructor.</p>
 <p>When creating an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> this way, its <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> (and therefore the default type under which it will be registered, unless
 overridden at registration time) will, by default, be set to the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression.type#System_Linq_Expressions_Expression_Type">Type</a> of the expression you pass to the constructor, unless you pass a 
 non-null type explicitly as the second argument.</p>
@@ -213,7 +213,7 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     container.RegisterExpression(() =&gt; CurrentPrincipal);
     // now register the expression for the IUserActionsService, which does the
     // role sniffing over the principal as one expression
-    container.RegisterExpression((IPrincipal p, IResolveContext rc) =&gt;
+    container.RegisterExpression((IPrincipal p, ResolveContext rc) =&gt;
         p.IsInRole(&quot;Customer&quot;) ?
         rc.Resolve&lt;CustomerActionsService&gt;() :
             p.IsInRole(&quot;Sales&quot;) ?
@@ -301,7 +301,7 @@ Assert.NotNull(result.Service);
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/expressions.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/doc/Rezolver.Docs/_docfx_proj/docs/expressions.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

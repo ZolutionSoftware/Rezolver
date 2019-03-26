@@ -104,7 +104,7 @@
 <h1 id="automatic-enumerable-injection">Automatic Enumerable Injection</h1>
 
 <p>By default, a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> (the default <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> used by all containers in the 
-Rezolver framework) is configured to allow any <a class="xref" href="../api/Rezolver.ContainerBase.html">ContainerBase</a> derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
+Rezolver framework) is configured to allow any @Rezolver.ContainerBase derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
 <p>The contents of this enumerable will depend on how many times the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method has been called against the target type <code>Service</code>:</p>
 <ul>
@@ -133,7 +133,7 @@ the underlying registrations were made.</p>
 <p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
 type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
 <pre><code class="lang-cs">var enumerable = container.Resolve&lt;IEnumerable&lt;Foo&gt;&gt;();
-</code></pre><p>However, the <code>ResolveMany</code> extension methods (see <a class="xref" href="../api/Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_">ResolveMany</a>
+</code></pre><p>However, the <code>ResolveMany</code> extension methods (see &lt;xref:Rezolver.ContainerResolveExtensions.ResolveMany*&gt;
 and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortcut which allow you to pass
 just the element type of the enumerable to reduce the &#39;angle-bracket percent&#39; of code which directly resolves
 enumerables (which of course you won&#39;t be doing because you&#39;re not using &#39;service location&#39; are you!? <span class="emoji" shortcode="wink">😉</span> ):</p>

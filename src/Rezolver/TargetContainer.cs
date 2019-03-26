@@ -136,17 +136,17 @@ namespace Rezolver
             // and then autoregistering the container type if it does.  The EnsureContainer function takes
             // care of everything else.
             if (GetRegisteredContainerType(type) != type)
-            {
                 EnsureContainer(type).RegisterContainer(type, container);
-                TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
-                return;
-            }
+            else
+                base.RegisterContainer(type, container);
 
-            base.RegisterContainer(type, container);
-            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+            OnTargetContainerRegistered(container, type);
         }
 
-
+        protected virtual void OnTargetContainerRegistered(ITargetContainer container, Type type)
+        {
+            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+        }
 
         /// <summary>
         /// Overrides the base method to block registration if the <paramref name="target"/> does not support the
@@ -170,7 +170,17 @@ namespace Rezolver
                 notifiableTarget.OnRegistration(Root, serviceType ?? notifiableTarget.DeclaredType);
             }
 
-            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
+            OnTargetRegistered(target, serviceType ?? target.DeclaredType);
+        }
+
+        /// <summary>
+        /// Called when a new target has been registered in this target container.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="serviceType">Type of the service.</param>
+        protected virtual void OnTargetRegistered(ITarget target, Type serviceType)
+        {
+            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType));
         }
 
         /// <summary>

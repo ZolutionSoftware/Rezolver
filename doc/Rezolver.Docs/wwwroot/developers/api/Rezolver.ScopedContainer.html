@@ -107,26 +107,21 @@
   <h1 id="Rezolver_ScopedContainer" data-uid="Rezolver.ScopedContainer" class="text-break">Class ScopedContainer
   </h1>
   <div class="markdown level0 summary"><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
-<a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_Scope">Scope</a> that&apos;s created along with it.</p>
+<see cref="!:Scope"></see> that&apos;s created along with it.</p>
 <p>Implementation of the <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><a class="xref" href="Rezolver.ContainerBase.html">ContainerBase</a></div>
-    <div class="level2"><a class="xref" href="Rezolver.CachingContainerBase.html">CachingContainerBase</a></div>
-    <div class="level3"><a class="xref" href="Rezolver.Container.html">Container</a></div>
-    <div class="level4"><span class="xref">ScopedContainer</span></div>
+    <div class="level1"><a class="xref" href="Rezolver.Container.html">Container</a></div>
+    <div class="level2"><span class="xref">ScopedContainer</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></div>
     <div><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></div>
     <div><a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a></div>
-    <div><a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a></div>
-    <div><a class="xref" href="Rezolver.IContainer.html">IContainer</a></div>
-    <div><a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
@@ -136,76 +131,97 @@
       <a class="xref" href="Rezolver.Container.html#Rezolver_Container_DefaultConfig">Container.DefaultConfig</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.CachingContainerBase.html#Rezolver_CachingContainerBase_GetCompiledTargetVirtual_Rezolver_IResolveContext_">CachingContainerBase.GetCompiledTargetVirtual(IResolveContext)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Targets">Container.Targets</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Targets">ContainerBase.Targets</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_IRootTargetContainer_TargetRegistered">Container.IRootTargetContainer.TargetRegistered</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetRegistered">ContainerBase.IRootTargetContainer.TargetRegistered</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_IRootTargetContainer_TargetContainerRegistered">Container.IRootTargetContainer.TargetContainerRegistered</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_TargetContainerRegistered">ContainerBase.IRootTargetContainer.TargetContainerRegistered</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Container.Resolve(ResolveContext)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_">ContainerBase.IRootTargetContainer.CreateTargetContainer(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_System_Type_">Container.Resolve(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_">ContainerBase.IRootTargetContainer.GetContainerRegistrationType(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_System_Type_Rezolver_ContainerScope_">Container.Resolve(Type, ContainerScope)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Resolve_Rezolver_IResolveContext_">ContainerBase.Resolve(IResolveContext)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve__1">Container.Resolve&lt;TService&gt;()</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_TryResolve_Rezolver_IResolveContext_System_Object__">ContainerBase.TryResolve(IResolveContext, Object)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve__1_Rezolver_ContainerScope_">Container.Resolve&lt;TService&gt;(ContainerScope)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetCompiledTarget_Rezolver_IResolveContext_">ContainerBase.GetCompiledTarget(IResolveContext)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_ResolveMany_System_Type_">Container.ResolveMany(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CanResolve_Rezolver_IResolveContext_">ContainerBase.CanResolve(IResolveContext)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_ResolveMany__1">Container.ResolveMany&lt;TService&gt;()</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetFallbackCompiledTarget_Rezolver_IResolveContext_">ContainerBase.GetFallbackCompiledTarget(IResolveContext)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_TryResolve_Rezolver_ResolveContext_System_Object__">Container.TryResolve(ResolveContext, Object)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_System_IServiceProvider_GetService_System_Type_">ContainerBase.IServiceProvider.GetService(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_CreateScope">Container.CreateScope()</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_GetService_System_Type_">ContainerBase.GetService(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_CanResolve_System_Type_">Container.CanResolve(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Register_Rezolver_ITarget_System_Type_">ContainerBase.Register(ITarget, Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_CanResolve__1">Container.CanResolve&lt;TService&gt;()</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_Root">ContainerBase.ITargetContainer.Root</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Register_Rezolver_ITarget_System_Type_">Container.Register(ITarget, Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_Fetch_System_Type_">ContainerBase.ITargetContainer.Fetch(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_GetFallbackCompiledTarget_Rezolver_ResolveContext_">Container.GetFallbackCompiledTarget(ResolveContext)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchAll_System_Type_">ContainerBase.ITargetContainer.FetchAll(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_GetFallbackFactory__1_Rezolver_ResolveContext_">Container.GetFallbackFactory&lt;TService&gt;(ResolveContext)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">ContainerBase.ITargetContainer.CombineWith(ITargetContainer, Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_GetFactory_Rezolver_ResolveContext_">Container.GetFactory(ResolveContext)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_FetchContainer_System_Type_">ContainerBase.ITargetContainer.FetchContainer(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_System_IServiceProvider_GetService_System_Type_">Container.IServiceProvider.GetService(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">ContainerBase.ITargetContainer.RegisterContainer(Type, ITargetContainer)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_IRootTargetContainer_CreateTargetContainer_System_Type_">Container.IRootTargetContainer.CreateTargetContainer(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">ContainerBase.ICovariantTypeIndex.AddKnownType(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_IRootTargetContainer_GetContainerRegistrationType_System_Type_">Container.IRootTargetContainer.GetContainerRegistrationType(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_">ContainerBase.ICovariantTypeIndex.GetKnownCovariantTypes(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ITargetContainer_Root">Container.ITargetContainer.Root</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_">ContainerBase.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ITargetContainer_Fetch_System_Type_">Container.ITargetContainer.Fetch(Type)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_Rezolver_ICovariantTypeIndex_SelectTypes_System_Type_">ContainerBase.ICovariantTypeIndex.SelectTypes(Type)</a>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ITargetContainer_FetchAll_System_Type_">Container.ITargetContainer.FetchAll(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ITargetContainer_CombineWith_Rezolver_ITargetContainer_System_Type_">Container.ITargetContainer.CombineWith(ITargetContainer, Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ITargetContainer_FetchContainer_System_Type_">Container.ITargetContainer.FetchContainer(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ITargetContainer_RegisterContainer_System_Type_Rezolver_ITargetContainer_">Container.ITargetContainer.RegisterContainer(Type, ITargetContainer)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ICovariantTypeIndex_AddKnownType_System_Type_">Container.ICovariantTypeIndex.AddKnownType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ICovariantTypeIndex_GetKnownCovariantTypes_System_Type_">Container.ICovariantTypeIndex.GetKnownCovariantTypes(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ICovariantTypeIndex_GetKnownCompatibleTypes_System_Type_">Container.ICovariantTypeIndex.GetKnownCompatibleTypes(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Rezolver_ICovariantTypeIndex_SelectTypes_System_Type_">Container.ICovariantTypeIndex.SelectTypes(Type)</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
@@ -233,7 +249,7 @@
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_ScopedContainer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class ScopedContainer : Container, IRootTargetContainer, ITargetContainer, ICovariantTypeIndex, IScopedContainer, IContainer, IScopeFactory, IServiceProvider, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ScopedContainer : Container, IRootTargetContainer, ITargetContainer, ICovariantTypeIndex, IServiceProvider, IDisposable</code></pre>
   </div>
   <h5 id="Rezolver_ScopedContainer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>If you want your root container to act as a lifetime scope, then you should use this
@@ -245,10 +261,10 @@ the two interfaces are not actually compatible with each other, thanks to identi
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.IRootTargetContainer%2CRezolver.IContainerConfig)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_ScopedContainer__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.%23ctor(Rezolver.IRootTargetContainer%2CRezolver.IContainerConfig)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ScopedContainer.cs/#L54">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ScopedContainer.cs/#L39">View Source</a>
   </span>
   <a id="Rezolver_ScopedContainer__ctor_" data-uid="Rezolver.ScopedContainer.#ctor*"></a>
   <h4 id="Rezolver_ScopedContainer__ctor_Rezolver_IRootTargetContainer_Rezolver_IContainerConfig_" data-uid="Rezolver.ScopedContainer.#ctor(Rezolver.IRootTargetContainer,Rezolver.IContainerConfig)">ScopedContainer(IRootTargetContainer, IContainerConfig)</h4>
@@ -286,82 +302,14 @@ container, ultimately being passed to the <a class="xref" href="Rezolver.Targets
       </tr>
     </tbody>
   </table>
-  <h3 id="properties">Properties
-  </h3>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ScopedContainer_Scope.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.Scope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ScopedContainer.cs/#L37">View Source</a>
-  </span>
-  <a id="Rezolver_ScopedContainer_Scope_" data-uid="Rezolver.ScopedContainer.Scope*"></a>
-  <h4 id="Rezolver_ScopedContainer_Scope" data-uid="Rezolver.ScopedContainer.Scope">Scope</h4>
-  <div class="markdown level1 summary"><p>Gets the scope for this scoped container.</p>
-<p>Note that this is used automatically by the container for <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a>
-operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a> property is not already set.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IContainerScope Scope { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ScopedContainer_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_ScopedContainer_Dispose.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ScopedContainer.cs/#L92">View Source</a>
-  </span>
-  <a id="Rezolver_ScopedContainer_CreateScope_" data-uid="Rezolver.ScopedContainer.CreateScope*"></a>
-  <h4 id="Rezolver_ScopedContainer_CreateScope" data-uid="Rezolver.ScopedContainer.CreateScope">CreateScope()</h4>
-  <div class="markdown level1 summary"><p>Overrides the base method&apos;s implementation of <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a> to pass the call to the <a class="xref" href="Rezolver.ScopedContainer.html#Rezolver_ScopedContainer_Scope">Scope</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override IContainerScope CreateScope()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Rezolver.ContainerBase.html#Rezolver_ContainerBase_CreateScope">ContainerBase.CreateScope()</a></div>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ScopedContainer_Dispose.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ScopedContainer.cs/#L84">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ScopedContainer.cs/#L70">View Source</a>
   </span>
   <a id="Rezolver_ScopedContainer_Dispose_" data-uid="Rezolver.ScopedContainer.Dispose*"></a>
   <h4 id="Rezolver_ScopedContainer_Dispose" data-uid="Rezolver.ScopedContainer.Dispose">Dispose()</h4>
@@ -381,15 +329,6 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
   </div>
   <div>
       <a class="xref" href="Rezolver.ICovariantTypeIndex.html">ICovariantTypeIndex</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.IContainer.html">IContainer</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">System.IServiceProvider</a>
@@ -457,30 +396,6 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
   </div>
   <div>
       <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__17_Rezolver_IRootTargetContainer_">AutoFactoryRegistrationExtensions.RegisterAutoFunc&lt;T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TResult&gt;(IRootTargetContainer)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.Resolve(IContainer, Type)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_Resolve__1_Rezolver_IContainer_">ContainerResolveExtensions.Resolve&lt;TObject&gt;(IContainer)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.ResolveMany(IContainer, Type)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany__1_Rezolver_IContainer_">ContainerResolveExtensions.ResolveMany&lt;TObject&gt;(IContainer)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_TryResolve_Rezolver_IContainer_System_Type_System_Object__">ContainerResolveExtensions.TryResolve(IContainer, Type, out Object)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_TryResolve__1_Rezolver_IContainer___0__">ContainerResolveExtensions.TryResolve&lt;TObject&gt;(IContainer, out TObject)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve_Rezolver_IContainer_System_Type_">ContainerResolveExtensions.CanResolve(IContainer, Type)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_CanResolve__1_Rezolver_IContainer_">ContainerResolveExtensions.CanResolve&lt;TObject&gt;(IContainer)</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_CreateTargetContainerForServiceType_Rezolver_IRootTargetContainer_System_Type_">RootTargetContainerExtensions.CreateTargetContainerForServiceType(IRootTargetContainer, Type)</a>
@@ -558,52 +473,52 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
       <a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_Rezolver_IRootTargetContainer_System_Type_System_Type_">DecoratorTargetContainerExtensions.RegisterDecorator(IRootTargetContainer, Type, Type)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate(ITargetContainer, Delegate, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_Rezolver_ITargetContainer_System_Delegate_System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate(ITargetContainer, Delegate, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func___0__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_IResolveContext___0__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;IResolveContext, TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__1_Rezolver_ITargetContainer_System_Func_Rezolver_ResolveContext___0__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;TResult&gt;(ITargetContainer, Func&lt;ResolveContext, TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__2_Rezolver_ITargetContainer_System_Func___0___1__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, TResult&gt;(ITargetContainer, Func&lt;T1, TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, TResult&gt;(ITargetContainer, Func&lt;T1, T2, TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__3_Rezolver_ITargetContainer_System_Func___0___1___2__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, TResult&gt;(ITargetContainer, Func&lt;T1, T2, TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__4_Rezolver_ITargetContainer_System_Func___0___1___2___3__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__5_Rezolver_ITargetContainer_System_Func___0___1___2___3___4__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_Rezolver_ScopeBehaviour_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate__6_Rezolver_ITargetContainer_System_Func___0___1___2___3___4___5__System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">DelegateTargetContainerExtensions.RegisterDelegate&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Func&lt;T1, T2, T3, T4, T5, TResult&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression(ITargetContainer, Expression, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_IResolveContext___0___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;IResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func_Rezolver_ResolveContext___0___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;TResult&gt;(ITargetContainer, Expression&lt;Func&lt;ResolveContext, TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__3_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__3_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__4_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__4_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__5_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__5_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
-      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__6_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_Rezolver_ScopeBehaviour_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type, ScopeBehaviour)</a>
+      <a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html#Rezolver_ExpressionTargetContainerExtensions_RegisterExpression__6_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___1___2___3___4___5___System_Type_Rezolver_ScopeBehaviour_Rezolver_ScopePreference_">ExpressionTargetContainerExtensions.RegisterExpression&lt;T1, T2, T3, T4, T5, TResult&gt;(ITargetContainer, Expression&lt;Func&lt;T1, T2, T3, T4, T5, TResult&gt;&gt;, Type, ScopeBehaviour, ScopePreference)</a>
   </div>
   <div>
       <a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterMultiple_Rezolver_ITargetContainer_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Type_">MultipleTargetContainerExtensions.RegisterMultiple(ITargetContainer, IEnumerable&lt;ITarget&gt;, Type)</a>
@@ -687,10 +602,10 @@ operations where the <a class="xref" href="Rezolver.IResolveContext.html#Rezolve
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ScopedContainer.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_ScopedContainer.md&amp;value=---%0Auid%3A%20Rezolver.ScopedContainer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ScopedContainer.cs/#L27" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ScopedContainer.cs/#L28" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

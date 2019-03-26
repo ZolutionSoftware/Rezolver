@@ -148,22 +148,22 @@
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_IResolveContext_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.TargetCompilerExtensions.CompileTarget(Rezolver.Compilation.ITargetCompiler%2CRezolver.ITarget%2CRezolver.IResolveContext%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_ResolveContext_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.TargetCompilerExtensions.CompileTarget(Rezolver.Compilation.ITargetCompiler%2CRezolver.ITarget%2CRezolver.ResolveContext%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Compilation/TargetCompilerExtensions.cs/#L38">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/TargetCompilerExtensions.cs/#L63">View Source</a>
   </span>
   <a id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTarget*"></a>
-  <h4 id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_IResolveContext_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTarget(Rezolver.Compilation.ITargetCompiler,Rezolver.ITarget,Rezolver.IResolveContext,Rezolver.ITargetContainer)">CompileTarget(ITargetCompiler, ITarget, IResolveContext, ITargetContainer)</h4>
+  <h4 id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_ResolveContext_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTarget(Rezolver.Compilation.ITargetCompiler,Rezolver.ITarget,Rezolver.ResolveContext,Rezolver.ITargetContainer)">CompileTarget(ITargetCompiler, ITarget, ResolveContext, ITargetContainer)</h4>
   <div class="markdown level1 summary"><p>Compiles the <code data-dev-comment-type="paramref" class="paramref">target</code> by calling the
 <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_">CompileTarget(ITarget, ICompileContext)</a> method of the passed
 <code data-dev-comment-type="paramref" class="paramref">compiler</code>, passing an <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a> created first by calling
-its <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_IResolveContext_Rezolver_ITargetContainer_">CreateContext(IResolveContext, ITargetContainer)</a> method.</p>
+its <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_">CreateContext(ResolveContext, ITargetContainer)</a> method.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ICompiledTarget CompileTarget(this ITargetCompiler compiler, ITarget target, IResolveContext resolveContext, ITargetContainer targets)</code></pre>
+    <pre><code class="lang-csharp hljs">public static Func&lt;ResolveContext, object&gt; CompileTarget(this ITargetCompiler compiler, ITarget target, ResolveContext resolveContext, ITargetContainer targets)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -188,11 +188,11 @@ its <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Com
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
+        <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
         <td><span class="parametername">resolveContext</span></td>
-        <td><p>Required.  The current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> - since all
-compilation is usually performed in response to a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> or
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_IResolveContext_System_Object__">TryResolve(IResolveContext, out Object)</a>.</p>
+        <td><p>Required.  The current <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> - since all
+compilation is usually performed in response to a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> or
+<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a>.</p>
 </td>
       </tr>
       <tr>
@@ -215,22 +215,179 @@ returned <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
         <td><p>A compiled target representing the passed <code data-dev-comment-type="paramref" class="paramref">target</code>, ready to be executed
-to obtain an object which satisfies the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> in the
+to obtain an object which satisfies the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> in the
 <code data-dev-comment-type="paramref" class="paramref">resolveContext</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_IResolveContext_Rezolver_ITargetContainer__remarks">Remarks</h5>
+  <h5 id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_ResolveContext_Rezolver_ITargetContainer__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This is typically called specifically for the root object that is to be resolved from
-a container, hence the <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a> will match the type for which
+a container, hence the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a> will match the type for which
 the <code data-dev-comment-type="paramref" class="paramref">target</code> is to be compiled.  Compilers must, however, always use the
 <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> to determine the type to be built for, because if one
 object requires another, then compilers do not keep creating new resolve contexts
 for each compilation, only new compile contexts for the same resolve context.</p>
 </div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Compilation_TargetCompilerExtensions_CompileTarget__1_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_ResolveContext_Rezolver_ITargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.TargetCompilerExtensions.CompileTarget%60%601(Rezolver.Compilation.ITargetCompiler%2CRezolver.ITarget%2CRezolver.ResolveContext%2CRezolver.ITargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/TargetCompilerExtensions.cs/#L91">View Source</a>
+  </span>
+  <a id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTarget*"></a>
+  <h4 id="Rezolver_Compilation_TargetCompilerExtensions_CompileTarget__1_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_ResolveContext_Rezolver_ITargetContainer_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTarget``1(Rezolver.Compilation.ITargetCompiler,Rezolver.ITarget,Rezolver.ResolveContext,Rezolver.ITargetContainer)">CompileTarget&lt;TService&gt;(ITargetCompiler, ITarget, ResolveContext, ITargetContainer)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Func&lt;ResolveContext, TService&gt; CompileTarget&lt;TService&gt;(this ITargetCompiler compiler, ITarget target, ResolveContext resolveContext, ITargetContainer targets)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></td>
+        <td><span class="parametername">compiler</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
+        <td><span class="parametername">resolveContext</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></td>
+        <td><span class="parametername">targets</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a>, TService&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Compilation_TargetCompilerExtensions_CompileTargetStrong_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.TargetCompilerExtensions.CompileTargetStrong(Rezolver.Compilation.ITargetCompiler%2CRezolver.ITarget%2CRezolver.Compilation.ICompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/TargetCompilerExtensions.cs/#L29">View Source</a>
+  </span>
+  <a id="Rezolver_Compilation_TargetCompilerExtensions_CompileTargetStrong_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTargetStrong*"></a>
+  <h4 id="Rezolver_Compilation_TargetCompilerExtensions_CompileTargetStrong_Rezolver_Compilation_ITargetCompiler_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_" data-uid="Rezolver.Compilation.TargetCompilerExtensions.CompileTargetStrong(Rezolver.Compilation.ITargetCompiler,Rezolver.ITarget,Rezolver.Compilation.ICompileContext)">CompileTargetStrong(ITargetCompiler, ITarget, ICompileContext)</h4>
+  <div class="markdown level1 summary"><p>Performs a late-bound compilation of a strongly-typed delegate for the <code data-dev-comment-type="paramref" class="paramref">target</code>.
+The type of the returned delegate will be <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func&lt;T,TResult&gt;</a>, with <code>TResult</code> equal to
+the <a class="xref" href="Rezolver.Compilation.ICompileContext.html#Rezolver_Compilation_ICompileContext_TargetType">TargetType</a> of the <code data-dev-comment-type="paramref" class="paramref">context</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Delegate CompileTargetStrong(this ITargetCompiler compiler, ITarget target, ICompileContext context)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a></td>
+        <td><span class="parametername">compiler</span></td>
+        <td><p>The compiler.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.ITarget.html">ITarget</a></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The target.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></td>
+        <td><span class="parametername">context</span></td>
+        <td><p>The context.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.delegate">Delegate</a></td>
+        <td><p>A compiled delegate</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
+        <td><p>If any of <code data-dev-comment-type="paramref" class="paramref">compiler</code>, <code data-dev-comment-type="paramref" class="paramref">context</code> or <code data-dev-comment-type="paramref" class="paramref">target</code> are null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
@@ -238,10 +395,10 @@ for each compilation, only new compile contexts for the same resolve context.</p
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_TargetCompilerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.TargetCompilerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_Compilation_TargetCompilerExtensions.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.TargetCompilerExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Compilation/TargetCompilerExtensions.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/TargetCompilerExtensions.cs/#L15" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

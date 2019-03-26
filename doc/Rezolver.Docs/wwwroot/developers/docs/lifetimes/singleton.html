@@ -236,7 +236,7 @@ var counterHolderParam = Expression.Parameter(typeof(CounterHolder));
 container.Register(
     new ExpressionTarget(Expression.Lambda(
         Expression.PreIncrementAssign(
-            Expression.Property(counterHolderParam, &quot;Counter&quot;)
+            Expression.Property(counterHolderParam, nameof(CounterHolder.Counter))
         ),
         counterHolderParam
     )).Singleton()
@@ -354,7 +354,7 @@ and the SingletonTarget itself, for instance!) although, right now, Rezolver doe
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/singleton.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/singleton.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
