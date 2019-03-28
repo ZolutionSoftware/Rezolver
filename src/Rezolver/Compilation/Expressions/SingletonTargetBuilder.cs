@@ -31,19 +31,28 @@ namespace Rezolver.Compilation.Expressions
         {
             var holder = context.ResolveContext.Resolve<SingletonTarget.SingletonContainer>();
             int? targetIdOverride = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            TypeAndTargetId id = new TypeAndTargetId(context.TargetType ?? target.DeclaredType, targetIdOverride ?? target.Id);
 
-            var compiled = compiler.CompileTargetStrong(
-                    target.InnerTarget,
-                    context.NewContext(
-                        context.TargetType ?? target.DeclaredType,
-                        // this override is important - when forcing into the root-scope, as we do
-                        // for singletons, 'explicit' means absolutely nothing.  So, instead of allowing
-                        // our child target to choose, we explicitly ensure that all instances are implicitly 
-                        // tracked within the root scope, if it is one which can track instances.
-                        scopeBehaviourOverride: ScopeBehaviour.Implicit,
-                        scopePreferenceOverride: ScopePreference.Root));
+            var lazy = holder.GetLazy(id);
 
-            var lazy = holder.GetLazy(target, new TypeAndTargetId(context.TargetType ?? target.DeclaredType, targetIdOverride ?? target.Id), compiled, context);
+            if(lazy == null)
+            {
+                holder.GetLazy(
+                    target, 
+                    id, 
+                    compiler.CompileTargetStrong(
+                        target.InnerTarget,
+                        context.NewContext(
+                            context.TargetType ?? target.DeclaredType,
+                            // this override is important - when forcing into the root-scope, as we do
+                            // for singletons, 'explicit' means absolutely nothing.  So, instead of allowing
+                            // our child target to choose, we explicitly ensure that all instances are implicitly 
+                            // tracked within the root scope, if it is one which can track instances.
+                            scopeBehaviourOverride: ScopeBehaviour.Implicit,
+                            scopePreferenceOverride: ScopePreference.Root)),
+                    context);
+            }
+
             return Expression.Call(
                 Expression.Constant(lazy),
                 lazy.GetType().GetMethod("Resolve"),

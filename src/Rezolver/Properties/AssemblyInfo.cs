@@ -12,4 +12,4 @@ using System.Security;
 
 [assembly: InternalsVisibleTo("Rezolver.Tests")]
 [assembly: InternalsVisibleTo("Rezolver.Tests.Compilation.Specification")]
-
+[assembly: InternalsVisibleTo("Rezolver.PerfAnalysis.NetCore")]

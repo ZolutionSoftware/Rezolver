@@ -35,7 +35,13 @@ namespace Rezolver.Targets
             }
 
             private ConcurrentDictionary<TypeAndTargetId, object> _lazies = new ConcurrentDictionary<TypeAndTargetId, object>();
-            
+
+            public object GetLazy(TypeAndTargetId id)
+            {
+                _lazies.TryGetValue(id, out var result);
+                return result;
+            }
+
             public object GetLazy(SingletonTarget target, TypeAndTargetId id, Delegate factory, ICompileContext context)
             {
                 return _lazies.GetOrAdd(id, tid =>

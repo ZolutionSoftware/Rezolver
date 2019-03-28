@@ -73,7 +73,7 @@ namespace Rezolver
         /// adding more registrations, then there's no guarantee that new dependencies will be picked up - especially
         /// if the <see cref="Container"/> is being used as your application's container (which it nearly
         /// always will be).</remarks>
-        protected IRootTargetContainer Targets { get; }
+        protected internal IRootTargetContainer Targets { get; }
 
         /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.

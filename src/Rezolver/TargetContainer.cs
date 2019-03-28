@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -31,6 +32,10 @@ namespace Rezolver
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer, IRootTargetContainer
     {
+        private static readonly ConcurrentDictionary<Type, ContainerTypeAttribute> _containerTypeLookup = new ConcurrentDictionary<Type, ContainerTypeAttribute>();
+        private static Func<Type, ContainerTypeAttribute> _getContainerTypeAttribute = (t) => t.GetCustomAttributes<ContainerTypeAttribute>().FirstOrDefault();
+        private static ContainerTypeAttribute GetContainerTypeAttribute(Type serviceType) => _containerTypeLookup.GetOrAdd(serviceType, _getContainerTypeAttribute);
+
         private readonly CovariantTypeIndex _typeIndex;
 
         /// <summary>
@@ -193,7 +198,7 @@ namespace Rezolver
         protected override Type GetRegisteredContainerType(Type serviceType)
         {
             Type toReturn;
-            var attr = serviceType.GetCustomAttributes<ContainerTypeAttribute>(true).FirstOrDefault();
+            var attr = GetContainerTypeAttribute(serviceType);
             if (attr != null)
             {
                 toReturn = attr.Type;

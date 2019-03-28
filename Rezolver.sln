@@ -81,7 +81,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Docs", "doc\Rezolv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.Microsoft.Extensions.Hosting", "src\Rezolver.Microsoft.Extensions.Hosting\Rezolver.Microsoft.Extensions.Hosting.csproj", "{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.PerfAalysis.NetCore", "test\Rezolver.PerfAalysis.NetCore\Rezolver.PerfAalysis.NetCore.csproj", "{3B0D53D0-AF68-4423-A285-ACB2E6239728}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rezolver.PerfAnalysis.NetCore", "test\Rezolver.PerfAnalysis.NetCore\Rezolver.PerfAnalysis.NetCore.csproj", "{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -250,16 +250,16 @@ Global
 		{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
 		{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.PerformanceTesting|Any CPU.ActiveCfg = PerformanceTesting|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.PerformanceTesting|Any CPU.Build.0 = PerformanceTesting|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Debug With Documentation|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Debug With Documentation|Any CPU.Build.0 = Debug|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.PerformanceTesting|Any CPU.ActiveCfg = PerformanceTesting|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.PerformanceTesting|Any CPU.Build.0 = PerformanceTesting|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Release With Documentation|Any CPU.ActiveCfg = Release|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Release With Documentation|Any CPU.Build.0 = Release|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -285,7 +285,7 @@ Global
 		{BFE162A7-CD0B-4603-AF33-87C76B0A75E3} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 		{E7055E56-9E6A-449E-87A5-35A31F652548} = {73996028-9FE2-4094-BB1E-B2FDDB1CFB8F}
 		{8617C0D5-4EF8-46DC-9F9D-A516EA0B86FE} = {27A5E07B-3BEC-4F3A-8215-A9FF592F5F14}
-		{3B0D53D0-AF68-4423-A285-ACB2E6239728} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
+		{EB669F5F-27E2-4CF8-95A7-9DA115CC0FCA} = {C6B597B0-5AF4-43FD-AD4F-4A28CE0C0CDD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0EA3912-4E38-4ACB-AE04-9CA63BD343DE}

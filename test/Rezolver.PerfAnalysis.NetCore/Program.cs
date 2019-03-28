@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rezolver.Compilation;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,41 +8,9 @@ using System.Threading.Tasks;
 
 namespace Rezolver.PerfAnalysis.NetCore
 {
-    class Program
+    partial class Program
     {
-        public class NoCtor
-        {
-            public NoCtor()
-            {
-                //System.Diagnostics.Debugger.Break();
-            }
-        }
-
-        public class EnumerableItem
-        {
-            private int counter = 0;
-            public void DoSomething()
-            {
-                counter++;
-            }
-        }
-
-        public class EnumerableItem1 : EnumerableItem
-        {
-
-        }
-
-        public class EnumerableItem2 : EnumerableItem
-        {
-
-        }
-
-        public class EnumerableItem3 : EnumerableItem
-        {
-
-        }
-
-        private static int _numInstances = 0;
+        private static int _numIterations = 0;
 
         static void Main(string[] args)
         {
@@ -51,10 +20,12 @@ namespace Rezolver.PerfAnalysis.NetCore
 
             //Run_NoCtor(new Container(), cancel.Token, true);
             //Run_NoCtor_NonGeneric(new Container(), cancel.Token, true);
-            Run_NoCtor_Singleton(new Container(), cancel.Token, true);
+            //Run_NoCtor_Singleton(new Container(), cancel.Token, true);
             //Run_Enumerable(new Container(), cancel.Token, true);
+            //Run_Compile_Transient(new Container(), cancel.Token);
+            Run_Compile_Singleton(new Container(), cancel.Token);
 
-            Console.WriteLine($"Num instances created in {runTimeSecs}: {_numInstances}. Rate: {(_numInstances / runTimeSecs):0.00}/sec");
+            Console.WriteLine($"Num iterations in {runTimeSecs}: {_numIterations}. Rate: {(_numIterations / runTimeSecs):0.00}/sec");
         }
 
         private static void Run_NoCtor(Container container, CancellationToken cancel, bool warmup)
@@ -70,7 +41,7 @@ namespace Rezolver.PerfAnalysis.NetCore
             while (!cancel.IsCancellationRequested)
             {
                 instance = container.Resolve<NoCtor>();
-                ++_numInstances;
+                ++_numIterations;
             }
         }
 
@@ -87,7 +58,7 @@ namespace Rezolver.PerfAnalysis.NetCore
             while (!cancel.IsCancellationRequested)
             {
                 instance = container.Resolve<NoCtor>();
-                ++_numInstances;
+                ++_numIterations;
             }
         }
 
@@ -104,7 +75,7 @@ namespace Rezolver.PerfAnalysis.NetCore
             while (!cancel.IsCancellationRequested)
             {
                 instance = (NoCtor)container.Resolve(typeof(NoCtor));
-                ++_numInstances;
+                ++_numIterations;
             }
         }
 
@@ -131,7 +102,61 @@ namespace Rezolver.PerfAnalysis.NetCore
                 {
                     item.DoSomething();
                 }
-                ++_numInstances;
+                ++_numIterations;
+            }
+        }
+
+        private static void Run_Compile_Transient(Container container, CancellationToken cancel)
+        {
+            Console.WriteLine($"Compiling and executing delegates for deep nested dependency graph");
+
+            container.RegisterType<DeepGraph10>();
+            container.RegisterType<DeepGraph9>();
+            container.RegisterType<DeepGraph8>();
+            container.RegisterType<DeepGraph7>();
+            container.RegisterType<DeepGraph6>();
+            container.RegisterType<DeepGraph5>();
+            container.RegisterType<DeepGraph4>();
+            container.RegisterType<DeepGraph3>();
+            container.RegisterType<DeepGraph2>();
+            container.RegisterType<DeepGraph1>();
+            container.RegisterType<DeepGraph>();
+
+            var resolveContext = new ResolveContext(container, typeof(DeepGraph10));
+            DeepGraph10 instance;
+
+            while (!cancel.IsCancellationRequested)
+            {
+                var factory = container.GetWorker<DeepGraph10>(resolveContext);
+                instance = factory(resolveContext);
+                ++_numIterations;
+            }
+        }
+
+        private static void Run_Compile_Singleton(Container container, CancellationToken cancel)
+        {
+            Console.WriteLine($"Compiling and executing delegates for deep nested dependency graph");
+
+            container.RegisterSingleton<DeepGraph10>();
+            container.RegisterSingleton<DeepGraph9>();
+            container.RegisterSingleton<DeepGraph8>();
+            container.RegisterSingleton<DeepGraph7>();
+            container.RegisterSingleton<DeepGraph6>();
+            container.RegisterSingleton<DeepGraph5>();
+            container.RegisterSingleton<DeepGraph4>();
+            container.RegisterSingleton<DeepGraph3>();
+            container.RegisterSingleton<DeepGraph2>();
+            container.RegisterSingleton<DeepGraph1>();
+            container.RegisterSingleton<DeepGraph>();
+
+            var resolveContext = new ResolveContext(container, typeof(DeepGraph10));
+            DeepGraph10 instance;
+
+            while (!cancel.IsCancellationRequested)
+            {
+                var factory = container.GetWorker<DeepGraph10>(resolveContext);
+                instance = factory(resolveContext);
+                ++_numIterations;
             }
         }
     }
