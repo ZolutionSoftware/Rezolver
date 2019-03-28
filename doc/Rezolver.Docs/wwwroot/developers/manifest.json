@@ -1345,7 +1345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Compilation.Expressions.SingletonTargetBuilder.html",
-          "hash": "6WvcEAru46wkxdBBjhYmJA=="
+          "hash": "RjNKwJotgfQenwlWFsi9UQ=="
         }
       },
       "is_incremental": false,
@@ -1429,7 +1429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Compilation.TargetCompilerExtensions.html",
-          "hash": "coXBIjedsxiZ4csnHlIIVA=="
+          "hash": "KReatuZoyUaeNZVlYS7G0Q=="
         }
       },
       "is_incremental": false,
@@ -2989,7 +2989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Rezolver.Targets.SingletonTarget.html",
-          "hash": "84nqnkEbjqf54u6g/V1Z8w=="
+          "hash": "3gevT+0lNdcLFxvwtB4dcA=="
         }
       },
       "is_incremental": false,
@@ -3113,13 +3113,6 @@
         "skipped_file_count": 0
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
@@ -3127,17 +3120,24 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
-          "can_incremental": true,
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 46,
-          "skipped_file_count": 46
+          "total_file_count": 0,
+          "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 193,
-          "skipped_file_count": 192
+          "skipped_file_count": 193
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": true,
+          "incrementalPhase": "build",
+          "total_file_count": 46,
+          "skipped_file_count": 46
         }
       }
     },

@@ -33,7 +33,7 @@ namespace Rezolver
     public class TargetContainer : TargetDictionaryContainer, IRootTargetContainer
     {
         private static readonly ConcurrentDictionary<Type, ContainerTypeAttribute> _containerTypeLookup = new ConcurrentDictionary<Type, ContainerTypeAttribute>();
-        private static Func<Type, ContainerTypeAttribute> _getContainerTypeAttribute = (t) => t.GetCustomAttributes<ContainerTypeAttribute>().FirstOrDefault();
+        private static readonly Func<Type, ContainerTypeAttribute> _getContainerTypeAttribute = (t) => t.GetCustomAttributes<ContainerTypeAttribute>().FirstOrDefault();
         private static ContainerTypeAttribute GetContainerTypeAttribute(Type serviceType) => _containerTypeLookup.GetOrAdd(serviceType, _getContainerTypeAttribute);
 
         private readonly CovariantTypeIndex _typeIndex;
