@@ -11,7 +11,7 @@
   	<meta name="title" content="Class AutoFactoryRegistrationExtensions
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -148,7 +146,7 @@
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_Rezolver_IRootTargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory(Rezolver.IRootTargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_Rezolver_IRootTargetContainer_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory(Rezolver.IRootTargetContainer%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.Core.cs/#L50">View Source</a>
@@ -190,7 +188,7 @@ the container to automatically build and inject a delegate which uses the contai
   </table>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory__1_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory%60%601(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory__1_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory%60%601(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.Core.cs/#L25">View Source</a>
@@ -205,6 +203,7 @@ the container to automatically build and inject a delegate which uses the contai
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static void RegisterAutoFactory&lt;TDelegate&gt;(this IRootTargetContainer targets)
+
     where TDelegate : Delegate</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -244,7 +243,7 @@ and all its parameters must be of distinct types.</p>
   </table>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%601(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%601(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L20">View Source</a>
@@ -299,7 +298,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__10_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6010(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__10_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6010(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L236">View Source</a>
@@ -404,7 +403,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__11_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6011(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__11_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6011(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L265">View Source</a>
@@ -514,7 +513,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__12_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6012(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__12_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6012(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L295">View Source</a>
@@ -629,7 +628,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__13_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6013(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__13_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6013(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L326">View Source</a>
@@ -749,7 +748,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__14_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6014(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__14_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6014(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L358">View Source</a>
@@ -874,7 +873,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__15_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6015(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__15_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6015(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L391">View Source</a>
@@ -1004,7 +1003,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__16_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6016(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__16_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6016(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L425">View Source</a>
@@ -1139,7 +1138,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__17_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6017(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__17_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%6017(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L460">View Source</a>
@@ -1279,7 +1278,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__2_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%602(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__2_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%602(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L40">View Source</a>
@@ -1344,7 +1343,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__3_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%603(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__3_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%603(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L61">View Source</a>
@@ -1414,7 +1413,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__4_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%604(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__4_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%604(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L83">View Source</a>
@@ -1489,7 +1488,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__5_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%605(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__5_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%605(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L106">View Source</a>
@@ -1569,7 +1568,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__6_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%606(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__6_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%606(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L130">View Source</a>
@@ -1654,7 +1653,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__7_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%607(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__7_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%607(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L155">View Source</a>
@@ -1744,7 +1743,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__8_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%608(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__8_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%608(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L181">View Source</a>
@@ -1839,7 +1838,7 @@ it is resolved.</p>
 </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__9_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%609(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__9_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc%60%609(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L208">View Source</a>
@@ -1944,7 +1943,7 @@ it is resolved.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/v2-remove-icompiledtarget/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_AutoFactoryRegistrationExtensions.md&amp;value=---%0Auid%3A%20Rezolver.AutoFactoryRegistrationExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/AutoFactoryRegistrationExtensions.cs/#L9" class="contribution-link">View Source</a>

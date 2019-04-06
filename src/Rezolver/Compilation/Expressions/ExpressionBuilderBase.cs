@@ -3,6 +3,9 @@
 
 
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -20,6 +23,23 @@ namespace Rezolver.Compilation.Expressions
     /// method</remarks>
     public abstract class ExpressionBuilderBase : IExpressionBuilder
     {
+        private static readonly ConcurrentDictionary<int, ITarget> _compiledTargets = new ConcurrentDictionary<int, ITarget>();
+        private static readonly ConcurrentDictionary<TypeAndTargetId, int> _compileCounts = new ConcurrentDictionary<TypeAndTargetId, int>();
+
+        private static void TrackCompilation(ITarget target, IExpressionCompileContext context)
+        {
+            Type theType = context.TargetType ?? target.DeclaredType;
+            int? targetIdOverride = context.GetOption<Runtime.TargetIdentityOverride>(theType);
+
+            _compiledTargets.GetOrAdd(targetIdOverride ?? target.Id, target);
+            _compileCounts.AddOrUpdate(new TypeAndTargetId(theType, targetIdOverride ?? target.Id), 1, (k, i) => i + 1);
+        }
+
+        public static IEnumerable<(Type type, int id, ITarget target, int count)> GetCompileCounts()
+        {
+            return _compileCounts.Skip(0).Select(kvp => (kvp.Key.Type, kvp.Key.Id, _compiledTargets[kvp.Key.Id], kvp.Value));
+        }
+
         /// <summary>
         /// Provides access to a set of <see cref="MethodInfo"/> objects for common functions required
         /// by code produced from <see cref="ITarget"/>s.  Also contains some factory methods for building
@@ -304,7 +324,7 @@ namespace Rezolver.Compilation.Expressions
                     throw new InvalidOperationException("Unable to identify the IExpressionCompiler for the current context");
                 }
             }
-
+            TrackCompilation(target, context);
             return BuildCore(target, context, compiler);
         }
 

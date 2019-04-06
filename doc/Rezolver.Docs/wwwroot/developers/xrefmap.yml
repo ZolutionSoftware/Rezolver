@@ -1488,6 +1488,19 @@ references:
   isSpec: "True"
   fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase.CanBuild
   nameWithType: ExpressionBuilderBase.CanBuild
+- uid: Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetCompileCounts
+  name: GetCompileCounts()
+  href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetCompileCounts
+  commentId: M:Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetCompileCounts
+  fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetCompileCounts()
+  nameWithType: ExpressionBuilderBase.GetCompileCounts()
+- uid: Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetCompileCounts*
+  name: GetCompileCounts
+  href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetCompileCounts_
+  commentId: Overload:Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetCompileCounts
+  isSpec: "True"
+  fullName: Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetCompileCounts
+  nameWithType: ExpressionBuilderBase.GetCompileCounts
 - uid: Rezolver.Compilation.Expressions.ExpressionBuilderBase.GetContextCompiler(Rezolver.Compilation.Expressions.IExpressionCompileContext)
   name: GetContextCompiler(IExpressionCompileContext)
   href: api/Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<(Type t, int id, ITarget target, int count)>
+@{
+    ViewData["Title"] = "Index";
+    ViewData["containerclass"] = "container-fluid";
+}
+
+<h2>Compilation counts</h2>
+<table class="table">
+    <thead><tr><td>Type</td><td>Count</td><td>Target</td><td>Id</td></tr></thead>
+    @foreach(var entry in Model.OrderByDescending(e => e.count)
+        .ThenBy(e => e.t.FullName))
+    {
+        <tr><td>@entry.t.FullName</td><td>@entry.count</td><td>@entry.target</td><td>@entry.id</td></tr>
+    }
+</table>
+

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Rezolver.Compilation;
+using Rezolver.Compilation.Expressions;
 using Rezolver.Docs.Models;
+using Rezolver.Targets;
 
 namespace Rezolver.Docs.Controllers
 {

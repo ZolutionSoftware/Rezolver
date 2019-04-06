@@ -1,5 +1,5 @@
-/// <binding BeforeBuild='default' AfterBuild='sitemap' Clean='cleanDocFXOutput' />
-
+/// <binding BeforeBuild='default' Clean='cleanDocFXOutput' />
+/// AfterBuild='sitemap'
 var gulp = require('gulp');
 var cleancss = require('gulp-clean-css');
 var concat = require('gulp-concat');
