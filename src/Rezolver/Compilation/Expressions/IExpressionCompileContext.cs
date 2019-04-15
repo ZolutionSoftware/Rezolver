@@ -22,39 +22,20 @@ namespace Rezolver.Compilation.Expressions
         /// <remarks>Note that this property hides the inherited <see cref="ICompileContext.ParentContext"/> property,
         /// since an <see cref="IExpressionCompileContext"/> can only be a child of another <see cref="IExpressionCompileContext"/>.</remarks>
         new IExpressionCompileContext ParentContext { get; }
-        ///// <summary>
-        ///// Gets an expression which gives a reference to the <see cref="IContainer" /> for this context -
-        ///// i.e. the one on the <see cref="ICompileContext.ResolveContext" /> property.
-        ///// </summary>
-        ///// <value>The container expression.</value>
-        ///// <remarks>Note that this is *not* the same as <see cref="ContextContainerPropertyExpression" /> - but is provided
-        ///// to allow expressions to be compiled which compare the container supplied at compile time to the one from the
-        ///// <see cref="ResolveContext.Container" /> at resolve-time.</remarks>
-        //Expression CurrentContainerExpression { get; }
-        ///// <summary>
-        ///// Gets an expression for reading the <see cref="ResolveContext.Container"/> property of the <see cref="ResolveContext"/>
-        ///// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
-        ///// </summary>
-        //MemberExpression ContextContainerPropertyExpression { get; }
-        ///// <summary>
-        ///// Gets an expression for reading the <see cref="ResolveContext.Scope"/> property of the <see cref="ResolveContext"/>
-        ///// that's in scope when the <see cref="ICompiledTarget"/> (which is built from the compiled expression) is executed.
-        ///// </summary>
-        //MemberExpression ContextScopePropertyExpression { get; }
+
         /// <summary>
         /// This is the parameter expression which represents the <see cref="ResolveContext" /> that is passed to the
-        /// <see cref="ICompiledTarget" /> at resolve-time.  Note, this should only be used for
-        /// The other expressions - <see cref="ContextContainerPropertyExpression" /> and <see cref="ContextScopePropertyExpression" />
-        /// are both built from this too.
+        /// factory delegate at resolve-time.
         /// </summary>
         /// <remarks>If the code produced by the <see cref="IExpressionBuilder"/> for a given target needs to read or use the
-        /// <see cref="ResolveContext"/> that was originally passed to the <see cref="IContainer.Resolve(ResolveContext)"/> method,
+        /// <see cref="ResolveContext"/> that was originally passed to the <see cref="Container.Resolve(ResolveContext)"/> method,
         /// then it does it by using this expression, which will be set as the only parameter on the lambda expression which is
         /// eventually compiled (in the case of the default expression compiler, <see cref="ExpressionCompiler"/>.</remarks>
         ParameterExpression ResolveContextParameterExpression { get; }
+
         /// <summary>
         /// Gets a read-only enumerable of all the shared expressions that have been inherited from any parent context or added
-        /// via calls to <see cref="GetOrAddSharedExpression(Type, string, Func{Expression}, Type)"/> or
+        /// via calls to <see cref="GetOrAddSharedExpression(Type, string, Func{Type, string, Expression}, Type)"/> or
         /// <see cref="GetOrAddSharedLocal(Type, string, Type)"/>.
         /// </summary>
         /// <value>The shared expressions.</value>
@@ -82,6 +63,7 @@ namespace Rezolver.Compilation.Expressions
             bool inheritSharedExpressions = true,
             ScopeBehaviour? scopeBehaviourOverride = null,
             ScopePreference? scopePreferenceOverride = null);
+
         /// <summary>
         /// Gets or adds an expression which is potentially shared between multiple targets' expression trees.
         /// </summary>
@@ -95,6 +77,7 @@ namespace Rezolver.Compilation.Expressions
         /// merged into one with all the 'true' and 'false' branches being combined into one of each, thus saving multiple identical
         /// comparisons.</remarks>
         Expression GetOrAddSharedExpression(Type type, string name, Func<Type, string, Expression> expressionFactory, Type requestingType = null);
+
         /// <summary>
         /// Similar to <see cref="GetOrAddSharedExpression(Type, string, Func{Type, string, Expression}, Type)"/>, except this is used when expression
         /// builders want to use local variables in block expressions to store the result of some operation in the expression tree built

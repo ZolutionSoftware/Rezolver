@@ -190,11 +190,8 @@ namespace Rezolver.Compilation.Expressions
         /// an exception if it returns null and no compiler was provided to <see cref="BuildCore(ITarget, IExpressionCompileContext, IExpressionCompiler)"/>
         /// (typically via the explicit implementation of <see cref="IExpressionBuilder"/>).
         ///
-        /// The base implementation simply attempts to resolve an instance of <see cref="IExpressionCompiler"/>
-        /// from the <see cref="ResolveContext.Container"/> of the context's <see cref="ICompileContext.ResolveContext"/> which should,
-        /// with the default configuration, resolve to the root <see cref="ExpressionCompiler"/>.  In order for this to work, it is
-        /// imperative that the underlying registered target implements the ICompiledTarget interface - so as to avoid needing a (or,
-        /// more precisely, this) compiler needing to compile it.</remarks>
+        /// The base implementation uses the <see cref="TargetContainerExtensions.GetOption{TOption}(ITargetContainer, TOption)"/> method,
+        /// passing the <see cref="IExpressionCompiler"/> type as the option type.</remarks>
         protected virtual IExpressionCompiler GetContextCompiler(IExpressionCompileContext context)
         {
             return context.GetOption<IExpressionCompiler>();

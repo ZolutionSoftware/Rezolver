@@ -10,7 +10,7 @@ namespace Rezolver.Compilation.Expressions
 {
 
     /// <summary>
-    /// Implementation of the <see cref="ITargetCompiler" /> interface which produces <see cref="ICompiledTarget" /> objects
+    /// Implementation of the <see cref="ITargetCompiler" /> interface which produces factory delegates
     /// by building and compiling expression trees from the <see cref="ITarget" /> objects which are registered.
     /// </summary>
     /// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
@@ -25,7 +25,7 @@ namespace Rezolver.Compilation.Expressions
     ///
     /// Typically, this is done by searching for an <see cref="IExpressionBuilder{TTarget}" /> where 'TTarget' is equal to the runtime type
     /// of the target - e.g. <see cref="Targets.ConstructorTarget" />.  If one cannot be found, it will then search for an <see cref="IExpressionBuilder" />
-    /// whose <see cref="IExpressionBuilder.CanBuild(ITarget)" /> function returns <c>true</c> for the given target.
+    /// whose <see cref="IExpressionBuilder.CanBuild(Type)" /> function returns <c>true</c> for the given target type.
     ///
     /// With a correctly configured target container this should resolve to an instance of the <see cref="ConstructorTargetBuilder" />
     /// class, which implements <c>IExpressionBuilder&lt;ConstructorTarget&gt;</c>.
@@ -36,14 +36,8 @@ namespace Rezolver.Compilation.Expressions
     /// There is a caveat for this, however: you *cannot* use the traditional targets (<see cref="Targets.ConstructorTarget" /> etc) to extend
     /// the compiler because they need to be compiled in order to work - which would cause an infinite recursion.
     ///
-    /// Therefore, the targets which are registered as expression builders must directly implement either the
-    /// <see cref="IExpressionBuilder{TTarget}" /> or <see cref="IExpressionBuilder" /> interfaces; or implement the
-    /// <see cref="ICompiledTarget" /> interface and produce an instance of those interfaces when
-    /// <see cref="ICompiledTarget.GetObject(ResolveContext)" /> is called on them.
-    ///
-    /// Because of this requirement, the most common way to register an expression builder is to register an instance inside an
-    /// <see cref="Targets.ObjectTarget" /> against the correct type, because that class does implement <see cref="ICompiledTarget" />
-    /// in addition to <see cref="ITarget" />.
+    /// As a result, all expression compilers are registered as options through the <see cref="TargetContainerExtensions.SetOption{TOption, TService}(ITargetContainer, TOption)"/>
+    /// method, or its non-generic equivalent, with the service type being set to be equal to the type of target that the compiler is for.
     ///
     /// Using this pattern, it's important that an expression builder is completely threadsafe and recursion safe (since one target's
     /// compilation might depend on the compilation of another of the same type).
@@ -57,7 +51,7 @@ namespace Rezolver.Compilation.Expressions
         public static ExpressionCompiler Default { get; } = new ExpressionCompiler();
 
         /// <summary>
-        /// Create the <see cref="ICompiledTarget" /> for the given <paramref name="target" /> using the <paramref name="context" />
+        /// Create the factory for the given <paramref name="target" /> using the <paramref name="context" />
         /// to inform the type of object that is to be built, and for compile-time dependency resolution.
         /// </summary>
         /// <param name="target">Required.  The target to be compiled.</param>
@@ -68,8 +62,6 @@ namespace Rezolver.Compilation.Expressions
             if (target == null) throw new ArgumentNullException(nameof(target));
             if (context == null) throw new ArgumentNullException(nameof(context));
 
-            // if the target is already a compiledTarget, then cast it - its implementation
-            // of ICompiledTarget is likely to be faster than any we could generate dynamically.
             if (target is IFactoryProvider factoryProvider)
             {
                 return factoryProvider.Factory;
@@ -89,6 +81,14 @@ namespace Rezolver.Compilation.Expressions
             }
         }
 
+        /// <summary>
+        /// Generic, strongly-typed, version of <see cref="CompileTarget(ITarget, ICompileContext)"/> which builds
+        /// a strongly-typed factory for the given <paramref name="target"/>.
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="target">Required.  The target to be compiled.</param>
+        /// <param name="context">Required.  The current compilation context.</param>
+        /// <returns>The compiled delegate.</returns>
         public Func<ResolveContext, TService> CompileTarget<TService>(ITarget target, ICompileContext context)
         {
             if (target == null) throw new ArgumentNullException(nameof(target));
@@ -136,7 +136,7 @@ namespace Rezolver.Compilation.Expressions
         }
 
         /// <summary>
-        /// Creates an <see cref="ICompiledTarget"/> from the finalised <paramref name="lambda"/> expression which was
+        /// Creates a factory delegate from the finalised <paramref name="lambda"/> expression which was
         /// previously built for a target.
         /// </summary>
         /// <param name="target">The <see cref="ITarget"/> from which the passed <paramref name="lambda"/> was built</param>
@@ -189,7 +189,7 @@ namespace Rezolver.Compilation.Expressions
 
         /// <summary>
         /// Takes the unoptimised expression built for a target and optimises it and turns it into a lambda expression ready to
-        /// be compiled into an <see cref="ICompiledTarget"/>.
+        /// be compiled into a factory delegate.
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="context">The context.</param>
@@ -210,8 +210,8 @@ namespace Rezolver.Compilation.Expressions
         /// Equivalent to <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> except this produces a lambda whose delegate
         /// type is strongly typed for the type of object that's returned (instead of just being 'object').
         /// </summary>
-        /// <param name="expression"></param>
-        /// <param name="context"></param>
+        /// <param name="expression">The expression.</param>
+        /// <param name="context">The context.</param>
         /// <returns></returns>
         public LambdaExpression BuildResolveLambdaStrong(Expression expression, IExpressionCompileContext context)
         {

@@ -7,11 +7,7 @@ using System.Collections.Generic;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Contains the extension <see cref="RegisterEventHandler{TEvent}(ITargetContainer, ITargetContainerEventHandler{TEvent})"/>
-    /// which allows a caller to receive notifications about events happening inside a particular target container.
-    /// </summary>
-    internal static class TargetContainerEventExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Adds an event handler to the target container for the event type <typeparamref name="TEvent"/>
