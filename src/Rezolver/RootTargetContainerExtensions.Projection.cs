@@ -5,15 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Rezolver.Runtime;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for the <see cref="IRootTargetContainer"/> interface.
-    /// </summary>
     public static partial class RootTargetContainerExtensions
     {
         /// <summary>

@@ -3,17 +3,11 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Rezolver.Targets;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extension methods for the <see cref="ITargetContainer"/> interface which simplify the registration of singletons.
-    /// </summary>
-    public static class SingletonTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Registers the type <typeparamref name="TObject"/> as a singleton (<see cref="SingletonTarget"/>) in the target container.

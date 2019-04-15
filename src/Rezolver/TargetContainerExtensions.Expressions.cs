@@ -3,10 +3,7 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver
@@ -14,7 +11,7 @@ namespace Rezolver
     /// <summary>
     /// Extensions for to simplify registering expressions in an <see cref="ITargetContainer"/>.
     /// </summary>
-    public static partial class ExpressionTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Registers the expression in the target container

@@ -109,13 +109,6 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
-      <h4><a class="xref" href="Rezolver.AliasTargetContainerExtensions.html">AliasTargetContainerExtensions</a></h4>
-      <section><p>Contains extension methods for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to create targets which alias others by
-different types.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html">AutoFactoryRegistrationExtensions</a></h4>
-      <section><p>Extensions for registering auto factories</p>
-</section>
       <h4><a class="xref" href="Rezolver.BindAllMembersBehaviour.html">BindAllMembersBehaviour</a></h4>
       <section><p>This implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> binds all publicly writable
 properties and public fields to values obtained from the container.</p>
@@ -184,16 +177,8 @@ and <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTar
       <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
 <p>The best way to add a decorator to your target container is to use the extension methods in
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a> - which provide simple shortcuts for creating
+<see cref="!:DecoratorTargetContainerExtensions"></see> - which provide simple shortcuts for creating
 decoration registrations.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a></h4>
-      <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which simplify the registration of decorators (via the
-<a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a> pseudo-target)</p>
-</section>
-      <h4><a class="xref" href="Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a></h4>
-      <section><p>Extension methods for ITargetContainer designed to simplify the registration of <a class="xref" href="Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> and its
-numerous generic variants.</p>
 </section>
       <h4><a class="xref" href="Rezolver.DelegatingCompiledTarget.html">DelegatingCompiledTarget</a></h4>
       <section><p>Obsolete.  See <a class="xref" href="Rezolver.IFactoryProvider.html">IFactoryProvider</a> and <a class="xref" href="Rezolver.IFactoryProvider-1.html">IFactoryProvider&lt;TService&gt;</a>, and object factories
@@ -212,9 +197,6 @@ a new scope must be created from this one.</p>
 functions serve no actual purpose other than to act as hooks to create specific <a class="xref" href="Rezolver.ITarget.html">ITarget</a> objects
 in place of static code.</p>
 <p>All the functions will throw a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.notimplementedexception">NotImplementedException</a> if called at runtime.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.ExpressionTargetContainerExtensions.html">ExpressionTargetContainerExtensions</a></h4>
-      <section><p>Extensions for to simplify registering expressions in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.GenericTargetContainer.html">GenericTargetContainer</a></h4>
       <section><p>A special type of <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which stores targets (and potentially other containers)
@@ -251,17 +233,6 @@ default implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour
 easy importing of all registrations in an <a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a> from <code>Microsoft.Extensions.DependencyInjection</code>
 into a Rezolver <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a></h4>
-      <section><p>Extensions for registering multiple targets individually and against the same type</p>
-</section>
-      <h4><a class="xref" href="Rezolver.ObjectTargetContainerExtensions.html">ObjectTargetContainerExtensions</a></h4>
-      <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> relating to registering concrete instances via the <a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>
-target.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a></h4>
-      <section><p>Contains extension methods for getting and setting container options which are used to control the behaviour, chiefly,
-of the various well-known <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementations.</p>
-</section>
       <h4><a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a></h4>
       <section><p>A child container which extends another.</p>
 <p>Note that this container gets its own singletons, scope, etc - everything is new; it&apos;s just the registrations
@@ -279,30 +250,18 @@ which are shared.</p>
 <p>Effectively, this daisy chains one enumerable into another via something
 similar to a Linq Select.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a></h4>
-      <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to provide shortcuts for the simplest cases of registering
-<a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> targets.</p>
-</section>
       <h4><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></h4>
       <section></section>
       <h4><a class="xref" href="Rezolver.RezolverOptions.html">RezolverOptions</a></h4>
       <section><p>Options for using Rezolver as the DI container for .Net Core applications.</p>
 </section>
       <h4><a class="xref" href="Rezolver.RootTargetContainerExtensions.html">RootTargetContainerExtensions</a></h4>
-      <section><p>Extensions for the <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface.</p>
+      <section><p>Extensions for the <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface</p>
 </section>
       <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
       <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
 <see cref="!:Scope"></see> that&apos;s created along with it.</p>
 <p>Implementation of the <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a></h4>
-      <section><p>Extensions for <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to provide shortcuts for registering constructor-injected types
-whose lifetimes are slaved to that of a parent <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a>.</p>
-<p>All of the extension methods ultimately create a <a class="xref" href="Rezolver.Targets.ScopedTarget.html">ScopedTarget</a></p>
-</section>
-      <h4><a class="xref" href="Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a></h4>
-      <section><p>Extension methods for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> interface which simplify the registration of singletons.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Target.html">Target</a></h4>
       <section><p>Provides static factory methods (including extension methods) for creating numerous types of targets
@@ -314,8 +273,8 @@ from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> names
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.TargetContainerRegistrationExtensions.html">TargetContainerRegistrationExtensions</a></h4>
-      <section><p>Contains registration extensions for the <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> type</p>
+      <h4><a class="xref" href="Rezolver.TargetContainerExtensions.html">TargetContainerExtensions</a></h4>
+      <section><p>Provides numerous extensions for registering targets</p>
 </section>
       <h4><a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> implementation that stores and retrieves

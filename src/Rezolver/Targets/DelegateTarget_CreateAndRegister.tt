@@ -53,7 +53,7 @@ namespace Rezolver
 	using System;
 	using Rezolver.Targets;
 
-	public static partial class DelegateTargetContainerExtensions
+	public static partial class TargetContainerExtensions
 	{
 <#
 	ForSpecs(specs, RegisterTargetGroup);

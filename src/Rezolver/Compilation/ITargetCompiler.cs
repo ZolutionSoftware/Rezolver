@@ -3,28 +3,34 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Rezolver.Compilation
 {
     /// <summary>
-    /// An object that produces <see cref="ICompiledTarget"/>s from <see cref="ITarget"/>s given a
+    /// An object that produces factories from <see cref="ITarget"/>s given a
     /// particular <see cref="ICompileContext"/> - for which it also acts as a factory.
     /// </summary>
     public interface ITargetCompiler
     {
         /// <summary>
-        /// Create the <see cref="ICompiledTarget"/> for the given <paramref name="target"/> using the <paramref name="context"/>
+        /// Create the factory for the given <paramref name="target"/> using the <paramref name="context"/>
         /// to inform the type of object that is to be built, and for compile-time dependency resolution.
         /// </summary>
         /// <param name="target">Required.  The target to be compiled.</param>
         /// <param name="context">Required.  The compilation context to use for compilation.  Obtain this by calling
         /// <see cref="CreateContext(ResolveContext, ITargetContainer)"/>.</param>
-        /// <returns>A compiled target which can then be used to get produce objects represented by the <paramref name="target"/>.</returns>
+        /// <returns>A factory which can then be used to get instances represented by the <paramref name="target"/>.</returns>
         Func<ResolveContext, object> CompileTarget(ITarget target, ICompileContext context);
 
+        /// <summary>
+        /// Creates a strongly-types generic factory for the given <paramref name="target"/> using the
+        /// <paramref name="context"/>.
+        /// </summary>
+        /// <typeparam name="TService">The type of instance to be produced by the resulting factory.</typeparam>
+        /// <param name="target">Required. The target to be compiled.</param>
+        /// <param name="context">Required. The compilation context to use for compilation. Obtain this by calling
+        /// <see cref="CreateContext(ResolveContext, ITargetContainer)"/>.</param>
+        /// <returns>A strongly-typed factory which can then be used to get instances represented by the <paramref name="target"/>.</returns>
         Func<ResolveContext, TService> CompileTarget<TService>(ITarget target, ICompileContext context);
 
         /// <summary>

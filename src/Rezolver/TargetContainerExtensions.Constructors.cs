@@ -3,19 +3,12 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Contains registration extensions for the <see cref="ITargetContainer"/> type
-    /// </summary>
-    public static partial class TargetContainerRegistrationExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Registers a type by constructor alone.

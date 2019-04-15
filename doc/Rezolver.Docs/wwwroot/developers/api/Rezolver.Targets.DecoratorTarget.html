@@ -108,7 +108,7 @@
 (produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>).</p>
 <p>NOTE - You shouldn&apos;t register or otherwise create instances of this target unless you absolutely
 know what you&apos;re doing.  Rather, decorators should be registered using the extension method
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
+<a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
 or its non-generic alternative because the target needs a <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>
 to work properly (the creation of which is automatically handled by these extension methods).</p>
 </div>
@@ -217,7 +217,7 @@ to work properly (the creation of which is automatically handled by these extens
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DecoratorTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DecoratorTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DecoratorTarget.cs/#L40">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DecoratorTarget.cs/#L37">View Source</a>
   </span>
   <a id="Rezolver_Targets_DecoratorTarget_DeclaredType_" data-uid="Rezolver.Targets.DecoratorTarget.DeclaredType*"></a>
   <h4 id="Rezolver_Targets_DecoratorTarget_DeclaredType" data-uid="Rezolver.Targets.DecoratorTarget.DeclaredType">DeclaredType</h4>
@@ -349,7 +349,8 @@ by decoration.</p>
   </span>
   <a id="Rezolver_Targets_DecoratorTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.DecoratorTarget.ScopeBehaviour*"></a>
   <h4 id="Rezolver_Targets_DecoratorTarget_ScopeBehaviour" data-uid="Rezolver.Targets.DecoratorTarget.ScopeBehaviour">ScopeBehaviour</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Always returns the same behaviour as the <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -461,7 +462,7 @@ by decoration.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_DecoratorTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.DecoratorTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DecoratorTarget.cs/#L35" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/DecoratorTarget.cs/#L32" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -132,7 +132,7 @@ being stress-tested by this application, with the list growing.</p>
 destroy and recreate containers.</p>
 <p>In particular, the performance in the &#39;Child Containers&#39; benchmark is particularly poor - caused by 
 the fact that there&#39;s an overhead on the first <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call to a container, 
-as that&#39;s when it compiles the associated <a class="xref" href="../api/Rezolver.ICompiledTarget.html">ICompiledTarget</a> for that service.</p>
+as that&#39;s when it compiles the associated factory for that service.</p>
 <p>Because of the way this benchmark is performed, it means that Rezolver spends most of its time 
 dynamically compiling the same delegates.</p>
 <p>A solution is in the pipeline for this, which will be implemented once we&#39;ve implemented another

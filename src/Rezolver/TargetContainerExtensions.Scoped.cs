@@ -3,20 +3,11 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Rezolver.Targets;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for <see cref="ITargetContainer"/> to provide shortcuts for registering constructor-injected types
-    /// whose lifetimes are slaved to that of a parent <see cref="IScopedContainer"/>.
-    ///
-    /// All of the extension methods ultimately create a <see cref="ScopedTarget"/>
-    /// </summary>
-    public static partial class ScopedTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Registers an explicitly scoped instance of <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via

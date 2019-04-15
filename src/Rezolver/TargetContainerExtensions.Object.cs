@@ -3,18 +3,11 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Rezolver.Targets;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for <see cref="ITargetContainer"/> relating to registering concrete instances via the <see cref="ObjectTarget"/>
-    /// target.
-    /// </summary>
-    public static class ObjectTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Registers an instance to be used when resolving a particular service type via the <see cref="ObjectTarget"/>

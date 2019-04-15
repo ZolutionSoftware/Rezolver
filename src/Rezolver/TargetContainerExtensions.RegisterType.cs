@@ -3,19 +3,11 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using Rezolver.Targets;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for <see cref="ITargetContainer"/> to provide shortcuts for the simplest cases of registering
-    /// <see cref="ConstructorTarget"/> and <see cref="GenericConstructorTarget"/> targets.
-    /// </summary>
-    public static partial class RegisterTypeTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Registers the type <typeparamref name="TObject"/> to be created by an <see cref="IContainer"/> via constructor injection.

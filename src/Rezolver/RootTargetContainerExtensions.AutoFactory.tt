@@ -64,7 +64,7 @@ var specs = new []{
 {
 	using System;
 
-	public static partial class AutoFactoryRegistrationExtensions
+	public static partial class RootTargetContainerExtensions
 	{
 <#
 	ForSpecs(specs, RegisterTargetGroup);

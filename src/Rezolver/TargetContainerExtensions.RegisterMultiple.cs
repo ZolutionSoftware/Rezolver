@@ -5,14 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for registering multiple targets individually and against the same type
-    /// </summary>
-    public static class MultipleTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Called to register multiple targets against the same type.

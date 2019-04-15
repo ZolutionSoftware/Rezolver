@@ -3,8 +3,6 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Rezolver.Runtime;
 
 namespace Rezolver.Targets

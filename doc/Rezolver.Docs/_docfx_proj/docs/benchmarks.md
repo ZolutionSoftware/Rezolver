@@ -40,7 +40,7 @@ destroy and recreate containers.
 
 In particular, the performance in the 'Child Containers' benchmark is particularly poor - caused by 
 the fact that there's an overhead on the first @Rezolver.IContainer.Resolve* call to a container, 
-as that's when it compiles the associated @Rezolver.ICompiledTarget for that service.
+as that's when it compiles the associated factory for that service.
 
 Because of the way this benchmark is performed, it means that Rezolver spends most of its time 
 dynamically compiling the same delegates.

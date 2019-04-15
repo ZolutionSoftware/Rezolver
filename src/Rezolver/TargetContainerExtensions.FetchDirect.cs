@@ -5,13 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rezolver.Targets;
 
 namespace Rezolver
 {
-    internal static class FetchDirectITargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         internal static TObj FetchDirect<TObj>(this ITargetContainer targets)
         {

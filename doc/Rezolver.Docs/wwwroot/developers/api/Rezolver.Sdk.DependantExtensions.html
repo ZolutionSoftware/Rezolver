@@ -161,7 +161,6 @@ will be identified.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T After&lt;T, TDependency&gt;(this T obj, TDependency dep)
-
     where T : IMutableDependant where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -242,7 +241,6 @@ be identified as dependencies.  None of them will be required.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T After&lt;T, TDependency&gt;(this T obj, IEnumerable&lt;TDependency&gt; deps)
-
     where T : IMutableDependant where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -323,7 +321,6 @@ instance is not important.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T AfterAny&lt;T&gt;(this T obj, Type dependencyType)
-
     where T : IMutableDependant</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -398,7 +395,6 @@ required or optional.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static DependencyMetadata CreateObjectDependency&lt;TDependency&gt;(this IDependant obj, TDependency dependency, bool required = true)
-
     where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -487,7 +483,6 @@ fixed set of required or optional dependencies that are known at construction-ti
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static DependencyMetadata CreateTypeDependency&lt;TDependency&gt;(this IDependant obj, bool required = true)
-
     where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -572,7 +567,6 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TDependency&gt; GetDependencies&lt;T, TDependency&gt;(this T obj, IEnumerable&lt;TDependency&gt; objects)
-
     where T : IDependant where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -652,7 +646,6 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T Requires&lt;T, TDependency&gt;(this T obj, TDependency dep)
-
     where T : IMutableDependant where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -732,7 +725,6 @@ method of the <a class="xref" href="Rezolver.Sdk.DependencyMetadataCollection.ht
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T Requires&lt;T, TDependency&gt;(this T obj, IEnumerable&lt;TDependency&gt; deps)
-
     where T : IMutableDependant where TDependency : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -813,7 +805,6 @@ instance is not important.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static T RequiresAny&lt;T&gt;(this T obj, Type dependencyType)
-
     where T : IMutableDependant</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

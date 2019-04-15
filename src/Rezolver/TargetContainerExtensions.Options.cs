@@ -5,54 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Rezolver.Options;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Used as a marker service type for GetOption when a service type is any generic.
-    ///
-    /// Allows options to be defined for any generic type instead of specific generics.
-    /// </summary>
-    internal interface IOptionForAnyGeneric
-    {
-    }
-
-    /// <summary>
-    /// Contains extension methods for getting and setting container options which are used to control the behaviour, chiefly,
-    /// of the various well-known <see cref="ITargetContainer"/> implementations.
-    /// </summary>
-    /// <remarks>Options are different to target container behaviours (<see cref="ITargetContainerConfig"/>) in that options
-    /// are actively *read* by the various <see cref="ITargetContainer"/>-related types throughout the Rezolver framework to
-    /// control how certain standard functionality operates.
-    ///
-    /// The <see cref="ITargetContainerConfig"/>, however, can be used both to *configure* those options and to add extra
-    /// registrations (both <see cref="ITarget"/> and, more commonly, other <see cref="ITargetContainer"/>s via the
-    /// <see cref="ITargetContainer.RegisterContainer(Type, ITargetContainer)"/> method).
-    ///
-    /// The automatic building of <see cref="IEnumerable{T}"/> sequences from all the targets registered for a type, for example,
-    /// is enabled by attaching the <see cref="Configuration.InjectEnumerables"/> to the target container.  Whereas, the
-    /// ability to actually register more than one target for a particular service in the first place is controlled by the
-    /// <see cref="Options.AllowMultiple"/> option.
-    ///
-    /// **Types of options**
-    ///
-    /// Ultimately an option can be of any type, but most of the built-in options use the <see cref="Options.ContainerOption{TOption}"/>
-    /// type to wrap simple types (<see cref="bool"/>, <see cref="string"/>, <see cref="int"/> and so on) as a human-readably
-    /// named type that differentiates that option from others of the same underlying value type.  Note that the phrase 'value type'
-    /// there doesn't mean that all options must be literal value types (i.e. <see cref="ValueType"/>).
-    ///
-    /// Rezolver has several built-in option types - including <see cref="Options.AllowMultiple"/>, <see cref="Options.EnableEnumerableInjection"/>,
-    /// <see cref="Options.EnableContravariance"/> plus many more.  These use the <see cref="Options.ContainerOption{TOption}"/> type to enable
-    /// reading and writing simple boolean-like option values which switch behaviour on and off.
-    ///
-    /// In addition, the <see cref="Targets.ConstructorTarget"/> and <see cref="Targets.GenericConstructorTarget"/> classes use the options
-    /// API to discover <see cref="IMemberBindingBehaviour"/> objects to use when deciding whether to bind properties and/or fields when
-    /// creating new objects.
-    ///
-    /// So you really can use anything you want as an option.</remarks>
-    public static class OptionsTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Sets the passed <paramref name="option"/> into the <paramref name="targets"/> target container.

@@ -3,10 +3,7 @@
 
 
 using Rezolver.Targets;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {

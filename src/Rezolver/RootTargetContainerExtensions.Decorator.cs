@@ -3,17 +3,10 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for <see cref="ITargetContainer"/> which simplify the registration of decorators (via the
-    /// <see cref="DecoratingTargetContainer"/> pseudo-target)
-    /// </summary>
-    public static partial class DecoratorTargetContainerExtensions
+    public static partial class RootTargetContainerExtensions
     {
         /// <summary>
         /// Registers a decorator container which will cause all instances of <typeparamref name="TDecorated"/> to be decorated with

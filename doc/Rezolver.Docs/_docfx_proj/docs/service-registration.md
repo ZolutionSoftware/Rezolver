@@ -3,12 +3,12 @@
 Registering services ultimately means adding @Rezolver.ITarget objects to an @Rezolver.ITargetContainer.
 
 The different built-in implementations of @Rezolver.ITarget provide us with the ability to resolve objects
-in different ways - and this section looks at those implementations in addition to how we actually perform
+in different ways - and this section looks at some those implementations in addition to how we actually perform
 registrations.
 
 > [!TIP]
 > An <xref:Rezolver.ITarget> is an object stored within an @Rezolver.ITargetContainer which contains 
-> information about how an object is to be created or retrieved when a container's @Rezolver.IContainer.Resolve* 
+> information about how an object is to be created or retrieved when a container's @Rezolver.Container.Resolve* 
 > operation is called.
 
 This subject means delving into the @Rezolver.ITargetContainer interface and our default implementation, 
@@ -36,24 +36,20 @@ with the Rezolver framework.
 The majority of the code samples shown on this site use these registration methods, which are documented in the API section
 of this site:
 
-- @Rezolver.AliasTargetContainerExtensions *- for registering aliases of one type to another (useful for reusing singletons for multiple types)*
-- @Rezolver.DecoratorTargetContainerExtensions *- for [registering decorators](decorators.md)*
-- @Rezolver.DelegateTargetContainerExtensions *- for [registering factory delegates](delegates.md)*
-- @Rezolver.ExpressionTargetContainerExtensions *- for [registering expression trees](expressions.md)*
-- @Rezolver.MultipleTargetContainerExtensions *- for batch registering multiple targets*
-- @Rezolver.ObjectTargetContainerExtensions *- for [registering object references/values](objects.md)*
-- @Rezolver.RegisterTypeTargetContainerExtensions *- for [registering constructor-injected types](constructor-injection/index.md) (plain and open-generic)*
-- @Rezolver.ScopedTargetContainerExtensions *- for [registering scoped constructor-injected types](lifetimes/scoped.md)*
-- @Rezolver.SingletonTargetContainerExtensions *- for [registering singleton constructor-injected types](lifetimes/singleton.md)*
+- @Rezolver.TargetContainerExtensions
+  - Contains registration shortcuts and other extensions which should work on any @Rezolver.ITargetContainer implementation
+- @Rezolver.RootTargetContainerExtensions 
+  - Contains more shortcuts which will only work on root-level target containers implementing the @Rezolver.IRootTargetContainer interface.
+Note that this interface also implies the @Rezolver.ITargetContainer interface - so all of the extensions in the @Rezolver.TargetContainerExtensions
+class also apply here.
 
-> [!NOTE] 
-> This list isn't exhaustive, and in Rezolver 2.0 all the registration extension methods will be relocated into a single
-> extension class.
+Since the @Rezolver.Container type implements the @Rezolver.IRootTargetContainer - it means that you can use all of these extension methods 
+on a new container.
 
 ## Registering via @Rezolver.ITargetContainer.Register*
 
 To add registrations to an @Rezolver.ITargetContainer directly, i.e. without extension methods, we ultimately use the 
-@Rezolver.ITargetContainer.Register* method, which accepts an @Rezolver.ITarget object and an optional `Type` against 
+@Rezolver.ITargetContainer.Register* method, which accepts an @Rezolver.ITarget object and an optional @System.Type against 
 which that target is to be registered.
 
 If the optional type is not provided, then the target's @Rezolver.ITarget.DeclaredType is used as the default
@@ -84,7 +80,7 @@ If you attempt to register a target against a type which the target does not sup
 ***
 
 > [!NOTE]
-> **THE DOCUMENTATION AFTER THIS POINT IS PRIMARILY AIMED AT DEVELOPER WHO ARE LOOKING TO EXTEND REZOLVER**
+> **THE DOCUMENTATION AFTER THIS POINT IS PRIMARILY AIMED AT DEVELOPERS WHO ARE LOOKING TO EXTEND REZOLVER**
 
 # Retrieving registrations
 
@@ -124,23 +120,27 @@ on the most important targets you need to know about.
 ## Implementing targets
 
 You can also implement @Rezolver.ITarget yourself if you're feeling adventurous - but you must provide a way for the
-container to compile your target into an @Rezolver.ICompiledTarget that can be used at resolve-time.  Documentation 
+container to compile your target into a factory that can be used at resolve-time.  Documentation 
 on how to do this will be added to this guide in the future, but if you're curious now, then the types in the 
 @Rezolver.Compilation.Expressions namespace will provide a few ideas.
 
 ## Short-circuited targets
 
 Rezolver containers also support short-circuited, 'direct' targets which bypass the compilation process when attempting 
-to fulfil a @Rezolver.IContainer.Resolve* operation, specifically:
+to fulfil a @Rezolver.Container.Resolve* operation, specifically:
 
-- If the target also supports the @Rezolver.ICompiledTarget interface, then its @Rezolver.ICompiledTarget.GetObject* method
-will be used to get the object.
-- If the target can be cast to the type originally requested through the @Rezolver.IContainer.Resolve* method, then the target
+- If the target can be cast to the type originally requested through the @Rezolver.Container.Resolve* method, then the target
 will be returned as the object.
+- If the target implements the @Rezolver.IInstanceProvider or <xref:Rezolver.IInstanceProvider`1> interfaces, then compilation will
+be skipped and, instead, Rezolver will bind either to its [object GetInstance(ResolveContext context)](xref:IInstanceProvider.GetInstance*)
+or [TService GetInstance(ResolveContext context)](xref:IInstanceProvider`1.GetInstance*) method to obtain instances at runtime.
+- If the target implements the @Rezolver.IFactoryProvider or <xref:Rezolver.IFactoryProvider`1> interfaces, then the target will not be
+compiled when a factory is needed, instead, either its [IFactoryProvider.Factory](xref:Rezolver.IFactoryProvider.Factory) or 
+[IFactoryProvider&lt;TService&gt;.Factory](xref:Rezolver.IFactoryProvider`1.Factory) will be used.  This provides an easy way for you to
+extend resolver's available targets without having to implement an expression tree builder.
 
 The framework exploits both of these techniques to use the container as the source of its own services, configuration and options.
 
 # Next steps
 
-- Use [some of the links](#target-types) above to start exploring different ways to create objects in Rezolver.
 - If you haven't already, explore Rezolver's concept of [object lifetimes](lifetimes/index.md) to learn about transient, singleton and scoped objects.

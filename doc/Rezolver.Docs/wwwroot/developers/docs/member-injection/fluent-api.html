@@ -196,7 +196,7 @@ tests that you can run yourself, if you clone the repo.</p>
     public MyService2 Service2 { get; set; }
 }
 </code></pre><p>First, we&#39;ll configure just one of the members for injection using the techniques shown above, but as we
-register the type with the <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">RegisterType&lt;TObject&gt;(ITargetContainer, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
+register the type with the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})
 extension method:</p>
 <pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
 

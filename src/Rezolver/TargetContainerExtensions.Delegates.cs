@@ -3,10 +3,7 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver
@@ -15,7 +12,7 @@ namespace Rezolver
     /// Extension methods for ITargetContainer designed to simplify the registration of <see cref="DelegateTarget"/> and its
     /// numerous generic variants.
     /// </summary>
-    public static partial class DelegateTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Constructs a <see cref="DelegateTarget"/> from the passed factory delegate (optionally with the given <paramref name="declaredType"/>,

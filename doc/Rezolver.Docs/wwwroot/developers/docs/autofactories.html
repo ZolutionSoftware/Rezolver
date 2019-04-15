@@ -130,7 +130,7 @@ a registration like this for each individual type that we&#39;d want to create i
 <h1 id="examples">Examples</h1>
 <h2 id="basic-functionality">Basic functionality</h2>
 <p>Starting with Rezolver 1.4, however, Rezolver makes this kind of registration trivial, and also gives you some extra power.</p>
-<p>The <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc_">RegisterAutoFunc</a> overload provides a simple way to enable Rezolver to automatically
+<p>The @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc* overload provides a simple way to enable Rezolver to automatically
 inject a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> or one of its related types, using its own registrations as the source of the object that is produced by that
 factory when it is executed.</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">var container = new Container();
@@ -157,7 +157,7 @@ var instances = factory();  // will contain three instances
 var factories = container.ResolveMany&lt;Func&lt;IMyService&gt;&gt;();
 var instances = factories.Select(f =&gt; f());
 </code></pre><p>All of the above works for custom delegate types, too (so long as they have a non-<code>void</code> return type), via the 
-<a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> overload:</p>
+@Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory* overload:</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">public delegate IMyService MyServiceFactory();
 </code></pre><pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterAutoFactory&lt;MyServiceFactory&gt;();
 
@@ -238,7 +238,7 @@ Assert.True(outerDisposable.Disposed);
 being thrown.</p>
 </div>
 <h2 id="generics">Generics</h2>
-<p>With the <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> method, Rezolver is also capable of injecting
+<p>With the @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory* method, Rezolver is also capable of injecting
 delegates whose result is an open generic.  When requested, Rezolver will build a delegate of the closed version of that
 generic:</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">public interface IWrapper&lt;T&gt;

@@ -8,10 +8,7 @@ using System.Linq;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Extensions for registering auto factories
-    /// </summary>
-    public static partial class AutoFactoryRegistrationExtensions
+    public static partial class RootTargetContainerExtensions
     {
         /// <summary>
         /// Registers an <see cref="AutoFactoryTarget"/> for the given delegate type <typeparamref name="TDelegate"/>, enabling 

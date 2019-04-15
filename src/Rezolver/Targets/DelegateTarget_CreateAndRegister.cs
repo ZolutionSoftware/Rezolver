@@ -2,12 +2,13 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+
 namespace Rezolver
 {
-	using System;
-	using Rezolver.Targets;
+    using System;
+    using Rezolver.Targets;
 
-	public static partial class Target
+    public static partial class Target
 	{
 		/// <summary>Creates a <see cref="Rezolver.Targets.DelegateTarget" /> for a parameterless factory delegate 
 		/// which returns an instance of <typeparamref name="TResult" /></summary>
@@ -128,10 +129,9 @@ namespace Rezolver
 
 namespace Rezolver
 {
-	using System;
-	using Rezolver.Targets;
+    using System;
 
-	public static partial class DelegateTargetContainerExtensions
+    public static partial class TargetContainerExtensions
 	{
 		/// <summary>Registers a <see cref="Rezolver.Targets.DelegateTarget" /> built from a parameterless factory delegate 
 		/// which returns an instance of <typeparamref name="TResult" /></summary>

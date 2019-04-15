@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using Rezolver.Targets;
 
 namespace Rezolver.Compilation
 {

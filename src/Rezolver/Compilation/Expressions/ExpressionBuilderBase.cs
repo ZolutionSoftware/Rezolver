@@ -124,6 +124,16 @@ namespace Rezolver.Compilation.Expressions
                     instanceFactory);
             }
 
+            /// <summary>
+            /// Emits a <see cref="MethodCallExpression"/> which represents activating the instance produced by the 
+            /// <paramref name="instanceFactory"/> through the root scope.  Only to be used when compiling a target 
+            /// which has a <see cref="ITarget.ScopeBehaviour"/> of <see cref="ScopeBehaviour.Explicit"/> and a
+            /// <see cref="ITarget.ScopePreference"/> of <see cref="ScopePreference.Root" />.
+            /// </summary>
+            /// <param name="context">An expression representing the context on which the method will be called</param>
+            /// <param name="targetId">The <see cref="ITarget.Id"/> of the target from which the <paramref name="instanceFactory"/> was compiled.</param>
+            /// <param name="instanceFactory">A lambda expression </param>
+            /// <returns></returns>
             public static MethodCallExpression Call_RootScope_ActivateExplicit(
                 Expression context,
                 int targetId,
@@ -143,7 +153,7 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             /// <param name="resolveContext">An expression representing the context on which the method will be called</param>
             /// <param name="serviceType">An expression representing the argument to the newRequestedType parameter</param>
-            /// <returns></returns>
+            /// <returns>A <see cref="MethodCallExpression"/></returns>
             public static MethodCallExpression CallResolveContext_New_Type(Expression resolveContext,
                 Expression serviceType)
             {
@@ -152,6 +162,14 @@ namespace Rezolver.Compilation.Expressions
                     serviceType);
             }
 
+            /// <summary>
+            /// Emits a <see cref="MethodCallExpression"/> which represents calling the
+            /// <see cref="ResolveContext.Resolve{TService}()"/> method of the context represented
+            /// by the <paramref name="resolveContext"/> expression.
+            /// </summary>
+            /// <param name="resolveContext">Expression representing the context on which the method is to be called.</param>
+            /// <param name="serviceType">A type which will be used to bind the correct generic method.</param>
+            /// <returns>A <see cref="MethodCallExpression"/></returns>
             public static MethodCallExpression CallResolveContext_Resolve_Strong_Method(
                 Expression resolveContext,
                 Type serviceType)

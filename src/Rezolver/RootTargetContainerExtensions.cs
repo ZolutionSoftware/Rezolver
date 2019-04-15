@@ -3,14 +3,13 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
-    public partial class RootTargetContainerExtensions
+    /// <summary>
+    /// Extensions for the <see cref="IRootTargetContainer"/> interface
+    /// </summary>
+    public static partial class RootTargetContainerExtensions
     {
         /// <summary>
         /// Calls <see cref="IRootTargetContainer.GetContainerRegistrationType(Type)"/> to get the correct registration type for the target container 

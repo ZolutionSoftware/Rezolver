@@ -103,10 +103,10 @@
 
 <p>Registering services ultimately means adding <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> objects to an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>The different built-in implementations of <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> provide us with the ability to resolve objects
-in different ways - and this section looks at those implementations in addition to how we actually perform
+in different ways - and this section looks at some those implementations in addition to how we actually perform
 registrations.</p>
 <div class="TIP"><h5>Tip</h5><p>An <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> is an object stored within an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> which contains 
-information about how an object is to be created or retrieved when a container&#39;s <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> 
+information about how an object is to be created or retrieved when a container&#39;s <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> 
 operation is called.</p>
 </div>
 <p>This subject means delving into the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> interface and our default implementation, 
@@ -127,22 +127,22 @@ with the Rezolver framework.</p>
 <p>The majority of the code samples shown on this site use these registration methods, which are documented in the API section
 of this site:</p>
 <ul>
-<li><a class="xref" href="../api/Rezolver.AliasTargetContainerExtensions.html">AliasTargetContainerExtensions</a> <em>- for registering aliases of one type to another (useful for reusing singletons for multiple types)</em></li>
-<li><a class="xref" href="../api/Rezolver.DecoratorTargetContainerExtensions.html">DecoratorTargetContainerExtensions</a> <em>- for <a href="decorators.html">registering decorators</a></em></li>
-<li><a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html">DelegateTargetContainerExtensions</a> <em>- for <a href="delegates.html">registering factory delegates</a></em></li>
-<li><a class="xref" href="../api/Rezolver.ExpressionTargetContainerExtensions.html">ExpressionTargetContainerExtensions</a> <em>- for <a href="expressions.html">registering expression trees</a></em></li>
-<li><a class="xref" href="../api/Rezolver.MultipleTargetContainerExtensions.html">MultipleTargetContainerExtensions</a> <em>- for batch registering multiple targets</em></li>
-<li><a class="xref" href="../api/Rezolver.ObjectTargetContainerExtensions.html">ObjectTargetContainerExtensions</a> <em>- for <a href="objects.html">registering object references/values</a></em></li>
-<li><a class="xref" href="../api/Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a> <em>- for <a href="constructor-injection/index.html">registering constructor-injected types</a> (plain and open-generic)</em></li>
-<li><a class="xref" href="../api/Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a> <em>- for <a href="lifetimes/scoped.html">registering scoped constructor-injected types</a></em></li>
-<li><a class="xref" href="../api/Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a> <em>- for <a href="lifetimes/singleton.html">registering singleton constructor-injected types</a></em></li>
+<li><a class="xref" href="../api/Rezolver.TargetContainerExtensions.html">TargetContainerExtensions</a><ul>
+<li>Contains registration shortcuts and other extensions which should work on any <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> implementation</li>
 </ul>
-<div class="NOTE"><h5>Note</h5><p>This list isn&#39;t exhaustive, and in Rezolver 2.0 all the registration extension methods will be relocated into a single
-extension class.</p>
-</div>
+</li>
+<li><a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html">RootTargetContainerExtensions</a> <ul>
+<li>Contains more shortcuts which will only work on root-level target containers implementing the <a class="xref" href="../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface.
+Note that this interface also implies the <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> interface - so all of the extensions in the <a class="xref" href="../api/Rezolver.TargetContainerExtensions.html">TargetContainerExtensions</a>
+class also apply here.</li>
+</ul>
+</li>
+</ul>
+<p>Since the <a class="xref" href="../api/Rezolver.Container.html">Container</a> type implements the <a class="xref" href="../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> - it means that you can use all of these extension methods 
+on a new container.</p>
 <h2 id="registering-via-rezolveritargetcontainerregister">Registering via <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a></h2>
 <p>To add registrations to an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> directly, i.e. without extension methods, we ultimately use the 
-<a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a> method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> object and an optional <code>Type</code> against 
+<a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a> method, which accepts an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> object and an optional <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a> against 
 which that target is to be registered.</p>
 <p>If the optional type is not provided, then the target&#39;s <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> is used as the default
 registration type:</p>
@@ -172,7 +172,7 @@ Assert.IsType&lt;ConstructorTarget&gt;(target);
 Assert.Throws&lt;ArgumentException&gt;(
     () =&gt; targets.Register(Target.ForObject(50), typeof(IMyService)));
 </code></pre><hr>
-<div class="NOTE"><h5>Note</h5><p><strong>THE DOCUMENTATION AFTER THIS POINT IS PRIMARILY AIMED AT DEVELOPER WHO ARE LOOKING TO EXTEND REZOLVER</strong></p>
+<div class="NOTE"><h5>Note</h5><p><strong>THE DOCUMENTATION AFTER THIS POINT IS PRIMARILY AIMED AT DEVELOPERS WHO ARE LOOKING TO EXTEND REZOLVER</strong></p>
 </div>
 <h1 id="retrieving-registrations">Retrieving registrations</h1>
 <p>As illustrated by earlier examples, you can interrogate the registrations in an <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> through two methods:</p>
@@ -203,22 +203,26 @@ an API which is similar to the registration API.  For example: <a class="xref" h
 on the most important targets you need to know about.</p>
 <h2 id="implementing-targets">Implementing targets</h2>
 <p>You can also implement <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> yourself if you&#39;re feeling adventurous - but you must provide a way for the
-container to compile your target into an <a class="xref" href="../api/Rezolver.ICompiledTarget.html">ICompiledTarget</a> that can be used at resolve-time.  Documentation 
+container to compile your target into a factory that can be used at resolve-time.  Documentation 
 on how to do this will be added to this guide in the future, but if you&#39;re curious now, then the types in the 
 <a class="xref" href="../api/Rezolver.Compilation.Expressions.html">Rezolver.Compilation.Expressions</a> namespace will provide a few ideas.</p>
 <h2 id="short-circuited-targets">Short-circuited targets</h2>
 <p>Rezolver containers also support short-circuited, &#39;direct&#39; targets which bypass the compilation process when attempting 
-to fulfil a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operation, specifically:</p>
+to fulfil a <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> operation, specifically:</p>
 <ul>
-<li>If the target also supports the <a class="xref" href="../api/Rezolver.ICompiledTarget.html">ICompiledTarget</a> interface, then its <a class="xref" href="../api/Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_">GetObject</a> method
-will be used to get the object.</li>
-<li>If the target can be cast to the type originally requested through the <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method, then the target
+<li>If the target can be cast to the type originally requested through the <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> method, then the target
 will be returned as the object.</li>
+<li>If the target implements the <a class="xref" href="../api/Rezolver.IInstanceProvider.html">IInstanceProvider</a> or <a class="xref" href="../api/Rezolver.IInstanceProvider-1.html">IInstanceProvider&lt;TService&gt;</a> interfaces, then compilation will
+be skipped and, instead, Rezolver will bind either to its <a href="xref:IInstanceProvider.GetInstance*">object GetInstance(ResolveContext context)</a>
+or <a href="xref:IInstanceProvider`1.GetInstance*">TService GetInstance(ResolveContext context)</a> method to obtain instances at runtime.</li>
+<li>If the target implements the <a class="xref" href="../api/Rezolver.IFactoryProvider.html">IFactoryProvider</a> or <a class="xref" href="../api/Rezolver.IFactoryProvider-1.html">IFactoryProvider&lt;TService&gt;</a> interfaces, then the target will not be
+compiled when a factory is needed, instead, either its <a class="xref" href="../api/Rezolver.IFactoryProvider.html#Rezolver_IFactoryProvider_Factory">IFactoryProvider.Factory</a> or 
+<a class="xref" href="../api/Rezolver.IFactoryProvider-1.html#Rezolver_IFactoryProvider_1_Factory">IFactoryProvider<tservice>.Factory</tservice></a> will be used.  This provides an easy way for you to
+extend resolver&#39;s available targets without having to implement an expression tree builder.</li>
 </ul>
 <p>The framework exploits both of these techniques to use the container as the source of its own services, configuration and options.</p>
 <h1 id="next-steps">Next steps</h1>
 <ul>
-<li>Use <a href="#target-types">some of the links</a> above to start exploring different ways to create objects in Rezolver.</li>
 <li>If you haven&#39;t already, explore Rezolver&#39;s concept of <a href="lifetimes/index.html">object lifetimes</a> to learn about transient, singleton and scoped objects.</li>
 </ul>
 </article>

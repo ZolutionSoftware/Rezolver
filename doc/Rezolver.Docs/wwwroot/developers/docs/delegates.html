@@ -108,7 +108,7 @@ delegate will be executed and its result returned as the instance.</p>
 <li>The delegate must have non-<code>void</code> return type</li>
 <li>It must not have any <code>ref</code> or <code>out</code> parameters</li>
 </ul>
-<p>To register delegates you can use one of the many <a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>To register delegates you can use one of the many @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>To create delegate targets you can either:</p>
 <ul>
 <li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> through its constructor</li>
@@ -182,7 +182,7 @@ Assert.Equal(expectedStartDate, result.StartDate);
 <a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a>. It can also be used to create a new child scope (through its implementation of the 
 <a class="xref" href="../api/Rezolver.IScopeFactory.html">IScopeFactory</a> interface).</p>
 <p>If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
-you&#39;ll probably use the single parameter specialisation of the <a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> or
+you&#39;ll probably use the single parameter specialisation of the @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* or
 <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a> methods, but ultimately the parameter can appear anywhere in the delegate&#39;s signature and it will
 be injected.</p>
 <p>This example shows the <code>Func&lt;IRezolveContext, TResult&gt;</code> overload in action:</p>

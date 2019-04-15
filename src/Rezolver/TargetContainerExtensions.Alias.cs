@@ -3,18 +3,11 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver
 {
-    /// <summary>
-    /// Contains extension methods for <see cref="ITargetContainer"/> to create targets which alias others by
-    /// different types.
-    /// </summary>
-    public static class AliasTargetContainerExtensions
+    public static partial class TargetContainerExtensions
     {
         /// <summary>
         /// Generic version of <see cref="RegisterAlias(ITargetContainer, Type, Type)"/>, see that method for more.

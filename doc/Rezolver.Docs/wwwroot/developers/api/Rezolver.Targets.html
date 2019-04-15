@@ -133,7 +133,7 @@ available services and/or any named arguments which might been provided up front
 (produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>).</p>
 <p>NOTE - You shouldn&apos;t register or otherwise create instances of this target unless you absolutely
 know what you&apos;re doing.  Rather, decorators should be registered using the extension method
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
+<a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
 or its non-generic alternative because the target needs a <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>
 to work properly (the creation of which is automatically handled by these extension methods).</p>
 </section>

@@ -106,8 +106,8 @@ constructor, automatically injecting arguments into that constructor from the se
 the container.</p>
 <div class="TIP"><h5>Tip</h5><p>Constructor injection is achieved in Rezolver through the targets <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and
 <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> (for open generic types).  The examples here show how to create and register
-these directly and via some of the extension methods in <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html">RegisterTypeTargetContainerExtensions</a>, 
-<a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html">SingletonTargetContainerExtensions</a> and <a class="xref" href="../../api/Rezolver.ScopedTargetContainerExtensions.html">ScopedTargetContainerExtensions</a>.</p>
+these directly and via some of the extension methods in @Rezolver.RegisterTypeTargetContainerExtensions, 
+@Rezolver.SingletonTargetContainerExtensions and @Rezolver.ScopedTargetContainerExtensions.</p>
 <p>You can see the tests from which these examples are taken, and run them yourself, if you grab the 
 <a href="https://github.com/zolutionsoftware/rezolver">Rezolver source from Github</a>, open the main solution and run
 the tests in the &#39;Rezolver.Tests.Examples&#39; project.</p>
@@ -308,7 +308,7 @@ Assert.Same(RequiresMyServices.Default3, result.Service3);
 some other parts of the framework :)</p>
 <p>Think of it as being the same as an explicit cast from one type to another - you put a target inside it and tell it what type
 you want it to be.</p>
-<p>In the example, we have to use this if we&#39;re determined to the use the <a class="xref" href="../../api/Rezolver.MultipleTargetContainerExtensions.html#Rezolver_MultipleTargetContainerExtensions_RegisterAll_">RegisterAll</a> method(s),
+<p>In the example, we have to use this if we&#39;re determined to the use the @Rezolver.MultipleTargetContainerExtensions.RegisterAll* method(s),
 because they don&#39;t allow us to override the registration type for the targets that we&#39;re registering.</p>
 </div>
 <hr>

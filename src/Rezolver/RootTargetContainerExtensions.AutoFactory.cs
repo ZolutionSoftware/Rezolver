@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
 namespace Rezolver
 {
 	using System;
 
-	public static partial class AutoFactoryRegistrationExtensions
+	public static partial class RootTargetContainerExtensions
 	{
 		/// <summary>Enables the automatic injection of a <see cref="Func{TResult}" /> for the given <typeparamref name="TResult" /></summary>
 		/// <typeparam name="TResult">The return type of the delegate - equivalent to the service type that is to be resolved from the container when the delegate is called.</typeparam>

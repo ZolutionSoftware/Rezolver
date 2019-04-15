@@ -3,15 +3,10 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Rezolver.Events;
-using Rezolver.Runtime;
-using Rezolver.Targets;
 
 namespace Rezolver
 {
-    
+
     /// <summary>
     /// A child container which extends another.
     /// 

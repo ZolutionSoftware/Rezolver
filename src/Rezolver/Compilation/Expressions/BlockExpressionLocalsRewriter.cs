@@ -6,17 +6,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {
-  /// <summary>
-  /// Used to rewrite any block expressions to strip out any locals that have been lifted
-  /// out to an outer scope.
-  ///
-  /// This prevents additional instances of a local being declared inside inner blocks from shared parameter expressions.
-  /// </summary>
-  internal class BlockExpressionLocalsRewriter : ExpressionVisitor
+    /// <summary>
+    /// Used to rewrite any block expressions to strip out any locals that have been lifted
+    /// out to an outer scope.
+    ///
+    /// This prevents additional instances of a local being declared inside inner blocks from shared parameter expressions.
+    /// </summary>
+    internal class BlockExpressionLocalsRewriter : ExpressionVisitor
   {
     private readonly ParameterExpression[] _liftedLocals;
 
