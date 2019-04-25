@@ -4,7 +4,7 @@ Framework authors frequently need to be able to create instances of other develo
 configured to run via an IOC container, this often means one of two things:
 
 - Taking a dependency on an instance of the IOC container
-  - *This can be achieved in Rezolver either by injecting an instance of @Rezolver.IResolveContext or <xref:System.IServiceProvider>*
+  - *This can be achieved in Rezolver either by injecting an instance of @Rezolver.ResolveContext or <xref:System.IServiceProvider>*
 - Taking a dependency on a factory delegate
 
 The second of these two approaches is something that can be set up in Rezolver manually as follows:

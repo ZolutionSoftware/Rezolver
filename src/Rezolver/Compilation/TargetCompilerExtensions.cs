@@ -44,11 +44,11 @@ namespace Rezolver.Compilation
         /// <param name="compiler">Required.  The compiler which will carry out the compilation</param>
         /// <param name="target">Required.  The target to be compiled.</param>
         /// <param name="resolveContext">Required.  The current <see cref="ResolveContext"/> - since all
-        /// compilation is usually performed in response to a call to <see cref="IContainer.Resolve"/> or
-        /// <see cref="IContainer.TryResolve(ResolveContext, out object)"/>.</param>
+        /// compilation is usually performed in response to a call to <see cref="Container.Resolve"/> or
+        /// <see cref="Container.TryResolve(ResolveContext, out object)"/>.</param>
         /// <param name="targets">Required.  The <see cref="ITargetContainer"/> which contains all the registrations
         /// which might be required by the <paramref name="target"/> to obtain all its dependencies when the
-        /// returned <see cref="ICompiledTarget"/> is executed.</param>
+        /// returned factory is executed.</param>
         /// <returns>A compiled target representing the passed <paramref name="target"/>, ready to be executed
         /// to obtain an object which satisfies the <see cref="ResolveContext.RequestedType"/> in the
         /// <paramref name="resolveContext"/>.</returns>

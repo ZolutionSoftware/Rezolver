@@ -115,7 +115,7 @@ namespace Rezolver
         /// <param name="declaredType">Optional - will be used to set the <see cref="ITarget.DeclaredType"/>
         /// of the target that is created.</param>
         /// <param name="scopeBehaviour">The scope behaviour of the target if resolved inside an
-        /// <see cref="IContainerScope"/>.</param>
+        /// <see cref="ContainerScope"/>.</param>
         public static ITarget ForObject<T>(T @object, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
         {
             return new ObjectTarget(@object, declaredType ?? typeof(T), scopeBehaviour);
@@ -130,7 +130,7 @@ namespace Rezolver
         /// <param name="declaredType">Optional - will be used to set the <see cref="ITarget.DeclaredType"/>
         /// of the target that is created.</param>
         /// <param name="scopeBehaviour">The scope behaviour of the target if resolved inside an
-        /// <see cref="IContainerScope"/>.</param>
+        /// <see cref="ContainerScope"/>.</param>
         public static ITarget ForObject(object @object, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.None)
         {
             return new ObjectTarget(@object, declaredType ?? @object?.GetType(), scopeBehaviour);

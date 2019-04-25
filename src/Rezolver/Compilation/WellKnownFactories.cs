@@ -7,7 +7,7 @@ using System;
 namespace Rezolver
 {
     /// <summary>
-    /// Contains an extension to test the validity of <see cref="ICompiledTarget"/> objects.
+    /// Contains an extension to test the validity of factories.
     /// </summary>
     internal static class WellKnownFactories
     {

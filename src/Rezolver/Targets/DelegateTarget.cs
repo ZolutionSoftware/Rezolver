@@ -15,7 +15,7 @@ namespace Rezolver.Targets
     ///
     /// A compiler must ensure that any parameters for the <see cref="Factory"/> are automatically
     /// resolved from the container, and that a parameter of the type <see cref="ResolveContext"/>
-    /// will receive the context passed to the <see cref="IContainer.Resolve(ResolveContext)"/>
+    /// will receive the context passed to the <see cref="Container.Resolve(ResolveContext)"/>
     /// method call for which this target is being compiled and/or executed.</remarks>
     public class DelegateTarget : TargetBase
     {

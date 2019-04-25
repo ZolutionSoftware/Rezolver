@@ -41,7 +41,7 @@ namespace Rezolver
         /// <summary>
         /// Initializes a new instance of the <see cref="ResolveContext"/> class from the given scope.
         ///
-        /// The <see cref="Container"/> is inherited from the scope's <see cref="IContainerScope.Container"/>.
+        /// The <see cref="Container"/> is inherited from the scope's <see cref="ContainerScope.Container"/>.
         /// </summary>
         /// <param name="scope">The scope.</param>
         /// <param name="requestedType">The of object to be resolved from the container.</param>

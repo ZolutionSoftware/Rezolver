@@ -13,8 +13,8 @@ using Rezolver.Runtime;
 namespace Rezolver
 {
     /// <summary>
-    /// Root container for <see cref="ITarget"/>s that can be used as the backing for the standard
-    /// <see cref="IContainer"/> classes - <see cref="Container"/> and <see cref="ScopedContainer"/>.
+    /// Root container for <see cref="ITarget"/>s that can be used as the backing for
+    /// <see cref="Container"/> and <see cref="ScopedContainer"/>.
     ///
     /// Stores and retrieves registrations of <see cref="ITarget"/>s, is also Generic type aware,
     /// unlike its base class - <see cref="TargetDictionaryContainer"/>.

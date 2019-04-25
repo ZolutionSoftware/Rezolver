@@ -59,7 +59,7 @@ namespace Rezolver
 #endif
 
         /// <summary>
-        /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
+        /// Provides the <see cref="ITarget"/> instances that will be compiled into factories.
         /// instances.
         /// </summary>
         /// <remarks>This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that
@@ -97,7 +97,7 @@ namespace Rezolver
         /// Constructs a new instance of the <see cref="Container"/> class.
         /// </summary>
         /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when
-        /// <see cref="IContainer.Resolve(ResolveContext)"/> (and other operations) is called.  If not provided, a new
+        /// <see cref="Resolve(ResolveContext)"/> (and other operations) is called.  If not provided, a new
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available
         /// to derived types, after construction, through the <see cref="Targets"/> property.</param>
         /// <param name="config">Can be null.  Configuration to apply to this container (and, potentially its <see cref="Targets"/>).
@@ -288,12 +288,12 @@ namespace Rezolver
         /// <param name="target"></param>
         /// <param name="serviceType"></param>
         /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an
-        /// <see cref="IContainer"/> has started compiling targets within it can yield unpredictable results.
+        /// <see cref="Container"/> has started compiling targets within it can yield unpredictable results.
         ///
         /// If you create a new container and perform all your registrations before you use it, however, then everything
         /// will work as expected.
         ///
-        /// Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the
+        /// Note also the other <see cref="ITargetContainer"/> interface methods are implemented explicitly so as to hide them from the
         /// list of class members.
         /// </remarks>
         public void Register(ITarget target, Type serviceType = null)
@@ -307,7 +307,7 @@ namespace Rezolver
         /// set to <c>true</c>.
         /// </summary>
         /// <param name="context"></param>
-        /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(ResolveContext)"/>
+        /// <returns>A factory delegate to be used as the result of a <see cref="Resolve(ResolveContext)"/>
         /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
         /// </returns>
         /// <remarks>The base implementation always returns an instance of the <see cref="UnresolvedTypeCompiledTarget"/>.</remarks>
@@ -328,18 +328,15 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Base implementation of <see cref="IContainer.GetCompiledTarget(ResolveContext)"/>.  Note that any container
-        /// already defined in the <see cref="ResolveContext.Container"/> is ignored in favour of this container.
+        /// Gets the factory which will create an instance of the type indicated by <see cref="ResolveContext.RequestedType"/>
+        /// of the passed <paramref name="context"/>.
         /// </summary>
         /// <param name="context">The context containing the requested type and any scope which is currently in force.</param>
-        /// <returns>Always returns a reference to a compiled target - but note that if
+        /// <returns>Always returns a reference to a delegate - but note that if
         /// <see cref="CanResolve(Type)"/> returns false for the same context, then the target's
-        /// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method will likely throw an exception - in line with
-        /// the behaviour of the <see cref="UnresolvedTypeCompiledTarget"/> class.</returns>
+        /// delegate will likely throw an exception.</returns>
         public Func<ResolveContext, object> GetFactory(ResolveContext context)
         {
-            // note that this container is fixed as the container in the context - regardless of the
-            // one passed in.  This is important.  Scope and RequestedType are left unchanged
 #if !USEDYNAMIC
             return _cache.Get(context);
 #else

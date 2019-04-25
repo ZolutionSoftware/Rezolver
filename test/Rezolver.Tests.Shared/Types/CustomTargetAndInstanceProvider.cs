@@ -13,7 +13,7 @@ namespace Rezolver.Tests.Types
     /// This is similar to the ObjectTarget type but, crucially, because it's defined in this
     /// project, a compiler implementation defined in Rezolver won't know about it.
     /// </summary>
-    public class CustomTargetAndCompiledTarget : ITarget, IInstanceProvider
+    public class CustomTargetAndInstanceProvider : ITarget, IInstanceProvider
     {
         public int Id { get; } = TargetBase.NextId();
         public bool UseFallback => false;
@@ -28,7 +28,7 @@ namespace Rezolver.Tests.Types
 
         private object _obj;
 
-        public CustomTargetAndCompiledTarget(object obj)
+        public CustomTargetAndInstanceProvider(object obj)
         {
             _obj = obj;
         }

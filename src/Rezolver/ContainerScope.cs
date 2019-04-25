@@ -257,8 +257,7 @@ namespace Rezolver
 
         internal override T ActivateImplicit<T>(T instance)
         {
-            // don't *ever* track scopes as disposable objects
-            if (instance is IDisposable/* && !(instance is IContainerScope)*/)
+            if (instance is IDisposable)
             {
                 if (_isDisposed) throw new ObjectDisposedException(nameof(ConcurrentContainerScope));
 

@@ -22,7 +22,7 @@ namespace Rezolver.Options
     ///
     ///
     /// Options in Rezolver are achieved by using registrations in the <see cref="ITargetContainer"/> that
-    /// is to be configured (and, in turn, which might then configure any <see cref="IContainer"/>s built from
+    /// is to be configured (and, in turn, which might then configure any <see cref="Container"/>s built from
     /// that target container).
     ///
     /// Since options often take the form of primitive types - e.g <see cref="bool"/>, <see cref="string"/> etc - this

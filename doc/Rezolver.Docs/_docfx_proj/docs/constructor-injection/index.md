@@ -58,7 +58,7 @@ we simply register `MyService` against the type `IMyService`:
 
 'So what?' you say, 'it's doing exactly what I want it to!'  Yes, but there's more going on here than you'd think: the 
 @Rezolver.Targets.ConstructorTarget is selecting the best-matched constructor based on the service registrations present 
-in the container when it's asked to @Rezolver.IContainer.Resolve* the object.
+in the container when it's asked to @Rezolver.Container.Resolve* the object.
 
 * * *
 
@@ -81,7 +81,7 @@ in the second constructor of `RequiresMyService`:
 The best-match algorithm is similar to how a compiler matches a method overload when writing code by hand.  The rules aren't 
 necessarily exactly the same as, say, the C# spec, but they're close.
 
-At the time the first @Rezolver.IContainer.Resolve* call is made, the algorithm will first attempt to select the greediest constructor 
+At the time the first @Rezolver.Container.Resolve* call is made, the algorithm will first attempt to select the greediest constructor 
 whose parameters are *completely* satisfied by services available to the container.  Thus, if a class has two constructors - one with 
 1 parameter and one with 3 parameters - if the single parameter version can be successfully injected, but only 2 of the other 
 constructor's parameters can be, then the single-parameter constructor wins.
@@ -163,7 +163,7 @@ we could 'fix' the container in the previous test so that it successfully builds
 
 This is the solution which most closely matches the child container functionality provided by other IOC libraries - take a container 
 which is already 'established' and override it with another container that has its own registrations.  The two will work together, sharing 
-registrations when creating instances, so long as the overriding container's @Rezolver.IContainer.Resolve* implementation is used:
+registrations when creating instances, so long as the overriding container's @Rezolver.Container.Resolve* implementation is used:
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example6_1)]
 
@@ -177,15 +177,15 @@ Hopefully this should all seem pretty logical.  If so, and you're happy simply t
 
 If you're interested in the inner workings when using overriding containers, the process is this:
 
-- The `overridingContainer` receives the @Rezolver.IContainer.Resolve* call for `Requires2MyServices`
+- The `overridingContainer` receives the @Rezolver.Container.Resolve* call for `Requires2MyServices`
 - It looks inside its @Rezolver.ContainerBase.Targets target container for a registration for `Requires2MyServices` and doesn't find one
 - So the call is passed to the overidden `container`...
   - ... which finds its registration and binds to the 2-parameter constructor of `Requires2MyServices` as before
   - The bound constructor is executed
     - The `MyService2` parameter is fulfiled by the `container`'s own registration
-    - But, for the `MyService3` parameter, `container` sees that it was not the container whose @Rezolver.IContainer.Resolve* method
+    - But, for the `MyService3` parameter, `container` sees that it was not the container whose @Rezolver.Container.Resolve* method
 was *originally* called (i.e. `overridingContainer`), so it forwards the call for `MyService3` to `overridingContainer`.
-- `overridingContainer` receives the @Rezolver.IContainer.Resolve* call for `MyService3`
+- `overridingContainer` receives the @Rezolver.Container.Resolve* call for `MyService3`
   - It finds its registration, and executes it to get the instance, passing it back to `container` - thus completing the constructor call 
 for `Requires2MyServices`
 

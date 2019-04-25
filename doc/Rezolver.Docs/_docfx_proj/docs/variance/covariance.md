@@ -59,7 +59,7 @@ class ProducesMyDerived : ICovariant<MyDerived>
 }
 ```
 
-Given an @Rezolver.IContainer called `container`, we can now do this:
+Given an @Rezolver.Container called `container`, we can now do this:
 
 ```cs
 container.RegisterType<ProducesMyDerived, ICovariant<MyDerived>();

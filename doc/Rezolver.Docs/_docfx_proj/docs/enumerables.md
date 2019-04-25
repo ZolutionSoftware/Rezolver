@@ -36,7 +36,7 @@ the underlying registrations were made.
 ## Resolving enumerables
 
 To resolve an enumerable from a container or through a scope, you can simply use `IEnumerable<Foo>` as the input
-type for a @Rezolver.IContainer.Resolve* call:
+type for a @Rezolver.Container.Resolve* call:
 
 ```cs
 var enumerable = container.Resolve<IEnumerable<Foo>>();
@@ -90,9 +90,9 @@ to show that the enumerable can be injected into a delegate as you'd expect:
 
 When registering targets, you have three lifetimes at your disposal:
 
-- Transient (a new object created for every @Rezolver.IContainer.Resolve* call)
+- Transient (a new object created for every @Rezolver.Container.Resolve* call)
 - Singleton (only one object is ever created)
-- Scoped (one object created per <xref:Rezolver.IContainerScope>)
+- Scoped (one object created per <xref:Rezolver.ContainerScope>)
 
 > [!NOTE]
 > Of course, the @Rezolver.Targets.ObjectTarget (see [objects as services](objects.md)) is technically a singleton, also,

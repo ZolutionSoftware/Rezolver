@@ -20,7 +20,7 @@ tasks in order to resolve an object than the functionality offered by the standa
 
 Whether you *should* perform excessively complex logic in these factories is a topic of debate.  Our view is that
 you should be able to if you want, or need, to, so Rezolver's support for delegates is extensive, including the ability to 
-inject arguments to your delegate from the container, or resolve additional services inside your delegate through @Rezolver.IResolveContext.
+inject arguments to your delegate from the container, or resolve additional services inside your delegate through @Rezolver.ResolveContext.
 
 # Basic Examples
 
@@ -39,7 +39,7 @@ object produced by the delegate:
 
 [!code-csharp[DelegateExamples.cs](../../../../test/Rezolver.Tests.Examples/DelegateExamples.cs#example2)]
 
-## Honouring Scopes (<xref:Rezolver.IContainerScope>)
+## Honouring Scopes (<xref:Rezolver.ContainerScope>)
 
 As you would expect, if the object is resolved through a scope, then it will be tracked and disposed by that scope when it is disposed:
 
@@ -56,12 +56,12 @@ As mentioned in the introduction, Rezolver can inject arguments into your factor
 
 **_Any_ delegate type, with any number of parameters, is supported, so long as it has a return type.**
 
-## Injecting @Rezolver.IResolveContext
+## Injecting @Rezolver.ResolveContext
 
-All @Rezolver.IContainer.Resolve* operations have an @Rezolver.IResolveContext at their heart.  Through the context, you can get the 
-@Rezolver.IResolveContext.Container that originally received the call, the @Rezolver.IResolveContext.Scope and the 
-@Rezolver.IResolveContext.RequestedType. It can also be used to create a new child scope (through its implementation of the 
-@Rezolver.IScopeFactory interface).
+All @Rezolver.Container.Resolve* operations have an @Rezolver.ResolveContext at their heart.  Internally, this captures the
+type that was requested, the container and any active scope.  Through this context you can also create scopes (with 
+<xref:Rezolver.ResolveContext.CreateScope*> and resolve instances of other types with its <xref:Rezolver.ResolveContext.Resolve*> 
+overload.
 
 If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
 you'll probably use the single parameter specialisation of the @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* or
@@ -74,8 +74,8 @@ This example shows the `Func<IRezolveContext, TResult>` overload in action:
 
 ## Resolving inside a delegate
 
-Building on the above, here's an example which injects the @Rezolver.IResolveContext in order to perform a late-bound 
-@Rezolver.IResolveContext.Resolve* operation to inject a different dependency based on some ambient information about a user (which
+Building on the above, here's an example which injects the @Rezolver.ResolveContext in order to perform a late-bound 
+@Rezolver.ResolveContext.Resolve* operation to inject a different dependency based on some ambient information about a user (which
 is also injected into the delegate).
 
 This is quite a long example which, admittedly, can be solved in a few different ways.  We're not saying this is the only way :)
@@ -94,8 +94,3 @@ based on the user's role:
 
 [!code-csharp[DelegateExamples.cs](../../../../test/Rezolver.Tests.Examples/DelegateExamples.cs#example12)]
 
-# Next Steps
-
-That's about it for delegate registrations.  There are plans to add functionality to decorate instances via delegate, but in the meantime
-feel free to explore the table of contents or [head back to the main service registration overview](service-registration.md) to explore 
-more features of Rezolver.

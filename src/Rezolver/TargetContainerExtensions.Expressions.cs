@@ -24,7 +24,7 @@ namespace Rezolver
         ///
         /// Will also override the type against which the expression will be registered if provided.</param>
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the compiled expression will be
-        /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
+        /// tracked if the target is executed within an <see cref="ContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
         /// <param name="scopePreference">Optional.  If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls the
         /// type of scope in which the instance should be tracked.  Defaults to <see cref="ScopePreference.Current"/>.  <see cref="ScopePreference.Root"/>
         /// should be used if the result of the delegate is effectively a singleton.</param>

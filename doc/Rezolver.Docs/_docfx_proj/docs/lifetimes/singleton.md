@@ -10,16 +10,7 @@ on which it is called, converting it into a singleton.
 - The @Rezolver.Targets.SingletonTarget.%23ctor(Rezolver.ITarget) constructor
 
 The @Rezolver.Targets.SingletonTarget enforces a lock around its inner target so that its first result is cached and then returned
-for each subsequent @Rezolver.IContainer.Resolve* operation.
-
-> [!NOTE]
-> At the moment, the lifetime of a singleton is tied to the lifetime of the @Rezolver.Targets.SingletonTarget itself.
-> If you only ever have one container, or if you have multiple containers but use different targets for singletons 
-> of the same type, apply across the whole `AppDomain`, then you won't enounter any issues.  But if you create multiple
-> containers from the same @Rezolver.ITargetContainer, then you will find that singletons will be shared between them.
-> * * *
-> In the future (v1.2), singletons will be unique to each container - 
-> meaning that the same registration in two different containers would yield two different singletons.
+for each subsequent @Rezolver.Container.Resolve* operation.
 
 * * *
 
@@ -151,5 +142,5 @@ a @Rezolver.Targets.SingletonTarget around it.  Clearly, there are some targets 
 and the SingletonTarget itself, for instance!) although, right now, Rezolver doesn't prevent you from doing so.
 
 - You should now take a look at [how explicitly scoped objects](scoped.md) are supported by Rezolver.
-- You might also want to see how singletons behave inside an @Rezolver.IContainerScope - which is part of the 
+- You might also want to see how singletons behave inside an @Rezolver.ContainerScope - which is part of the 
 [container scopes](container-scopes.md) documentation.

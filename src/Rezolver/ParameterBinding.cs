@@ -73,7 +73,7 @@ namespace Rezolver
         /// Creates parameter bindings for each parameter in the passed method where each value will be resolved.
         ///
         /// For any optional parameters - their default values will be used as a fallback if the <see cref="ResolvedTarget"/>
-        /// cannot either resolve a target at compile time or from the <see cref="IContainer"/> at resolve-time.
+        /// cannot either resolve a target at compile time or from the <see cref="SContainer"/> at resolve-time.
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>

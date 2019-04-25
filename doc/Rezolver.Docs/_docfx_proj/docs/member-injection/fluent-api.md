@@ -58,7 +58,7 @@ As mentioned above, once created, you can then start adding properties/fields to
 behaviourBuilder.Bind(o => o.BindableMember);
 ```
 
-This configures the member to be injected via the equivalent of a @Rezolver.IContainer.Resolve* call for 
+This configures the member to be injected via the equivalent of a @Rezolver.Container.Resolve* call for 
 the member's type from the container that is producing the enclosing instance.
 
 ### Configuring a Member Binding

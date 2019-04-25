@@ -25,7 +25,7 @@ namespace Microsoft.AspNetCore.Hosting
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <param name="configureRezolverOptions">Optional. Configuration callback to be applied to the <see cref="RezolverOptions"/>
-        /// instance that configures the <see cref="ITargetContainer"/> and <see cref="IContainer"/> creation process.
+        /// instance that configures the <see cref="ITargetContainer"/> and <see cref="Container"/> creation process.
         /// 
         /// Note - in order for this to be applied, your application will also need to call the 
         /// <see cref="OptionsServiceCollectionExtensions.AddOptions(IServiceCollection)"/> extension method (usually in your 

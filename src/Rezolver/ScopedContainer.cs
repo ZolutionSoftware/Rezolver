@@ -16,7 +16,7 @@ namespace Rezolver
     /// If you want your root container to act as a lifetime scope, then you should use this
     /// class instead of using <see cref="Container"/>.
     ///
-    /// Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
+    /// Note that this class does NOT implement the <see cref="ContainerScope"/> interface because
     /// the two interfaces are not actually compatible with each other, thanks to identical sets of extension methods.
     /// </remarks>
     public sealed class ScopedContainer : Container, IDisposable

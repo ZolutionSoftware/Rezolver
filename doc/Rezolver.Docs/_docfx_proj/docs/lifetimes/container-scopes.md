@@ -1,12 +1,17 @@
 ﻿# Container Scopes
 
-Before we start looking at [scoped objects](scoped.md), we should first look at how Rezolver's @Rezolver.IContainerScope interface, and
-its implementations, are used to implement lifetime scoping.
+Before we start looking at [scoped objects](scoped.md), we should first look at how Rezolver's @Rezolver.ContainerScope
+implements lifetime scoping.
+
+> [!TIP]
+> When using the Asp.Net Core integration, per-request lifetime scoping is automatically implemented by Asp.Net Core.
 
 ## What's the purpose of a scope?
 
-A scope is a disposable object whose main purpose, as mentioned in the [introduction to this section](index.md), is to track and dispose 
-any `IDisposable` objects produced by the container through that scope.
+A scope is a disposable object with two main purposes:
+
+1) Tracking and disposing instances of any `IDisposable` objects produced by the container through that scope, as mentioned in the [introduction to this section](index.md).
+2) Creating and managing 'scoped singletons' - i.e. where one instance of a given type is produced per scope instance, which might also be disposable.
 
 This is necessary, or at least desirable, because the IOC container takes control of both how *and* when your objects are created and, 
 more importantly, they are more often than not created purely to be passed as dependencies into other objects via dependency injection 
@@ -28,15 +33,11 @@ and then dispose of it when you no longer need the objects it produced.
 
 ## Creating a Container Scope
 
-If you've used other IOC containers, then you'll probably already have guessed how to create a new scope.
+You can create a scope explicitly using these `CreateScope` methods:
 
-Formally, the @Rezolver.IScopeFactory interface is how you create a scope - through its @Rezolver.IScopeFactory.CreateScope* method.
-
-The interface is implemented by:
-
-- @Rezolver.IContainer
-- @Rezolver.IContainerScope (because scopes are hierarchical)
-- @Rezolver.IResolveContext
+- [Resolver.Container.CreateScope](xref:Rezolver.Container.CreateScope*)
+- [Resolver.ContainerScope.CreateScope](xref:Rezolver.ContainerScope.CreateScope*)
+- [Resolver.ResolveContext.CreateScope](xref:Rezolver.ResolveContext.CreateScope*)
 
 In the example code, therefore, you will see a lot of this:
 

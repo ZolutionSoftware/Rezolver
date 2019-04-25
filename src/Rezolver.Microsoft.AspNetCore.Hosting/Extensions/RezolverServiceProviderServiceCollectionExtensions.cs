@@ -33,20 +33,20 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">Required. The services to be configured.</param>
         /// <param name="configureRezolverOptions">Optional. Configuration callback to be applied to the <see cref="RezolverOptions"/>
-        /// instance that configures the <see cref="ITargetContainer"/> and <see cref="IContainer"/> creation process.
+        /// instance that configures the <see cref="ITargetContainer"/> and <see cref="Container"/> creation process.
         /// 
         /// Note - in order for this to be applied, your application will also need to call the 
         /// <see cref="OptionsServiceCollectionExtensions.AddOptions(IServiceCollection)"/> extension method (usually in your 
         /// application's ConfigureServices method).</param>
         public static IServiceCollection AddRezolver(this IServiceCollection services, Action<RezolverOptions> configureRezolverOptions = null)
-		{
+        {
             ConfigureDefaultOptions(services);
 
             if (configureRezolverOptions != null)
                 services.Configure(configureRezolverOptions);
 
-			return services.AddSingleton<IServiceProviderFactory<IRootTargetContainer>, AspNetCoreServiceProviderFactory>()
+            return services.AddSingleton<IServiceProviderFactory<IRootTargetContainer>, AspNetCoreServiceProviderFactory>()
                 .AddSingleton<IServiceProviderFactory<ITargetContainer>, AspNetCoreServiceProviderFactory>();
-		}
-	}
+        }
+    }
 }

@@ -26,7 +26,7 @@ This returns a new service provider to the Asp.Net Core stack - thus replacing t
 that's already built.
 
 As the comment in the snippet suggests, you will likely want to perform additional registration operations
-on the @Rezolver.IContainer object that's returned by the `CreateRezolverContainer` function called here,
+on the @Rezolver.Container object that's returned by the `CreateRezolverContainer` function called here,
 since the Rezolver container supports more functionality (e.g. expressions, decorators, custom targets, and more) 
 than the MS DI container does through its `ServiceRegistrations` class.
 

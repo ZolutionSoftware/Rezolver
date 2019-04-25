@@ -148,7 +148,7 @@ namespace Rezolver.Benchmark
 
         #endregion
 
-        #region rezolver benchmarks (ICompiledTarget - generic & non-generic)
+        #region rezolver benchmarks (IInstanceProvider - generic & non-generic)
 
         [Benchmark]
         [BenchmarkCategory("New")]

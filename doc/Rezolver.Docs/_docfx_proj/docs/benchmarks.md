@@ -35,20 +35,15 @@ being stress-tested by this application, with the list growing.
 
 # Notes
 
-Rezolver performs very well across the board, however it suffers in benchmarks which constantly
-destroy and recreate containers.
+Rezolver performs very well across the board - especially in v2 now after a huge amount of refactoring
+and optimisation work, however it suffers in benchmarks which constantly destroy and recreate containers.
 
 In particular, the performance in the 'Child Containers' benchmark is particularly poor - caused by 
-the fact that there's an overhead on the first @Rezolver.IContainer.Resolve* call to a container, 
+the fact that there's an overhead on the first @Rezolver.Container.Resolve* call to a container, 
 as that's when it compiles the associated factory for that service.
 
 Because of the way this benchmark is performed, it means that Rezolver spends most of its time 
 dynamically compiling the same delegates.
-
-A solution is in the pipeline for this, which will be implemented once we've implemented another
-compiler that's based entirely on reflection and late-bound delegates instead of dynamically 
-constructed expression trees.  When this is done and merged with the current expression-tree
-based compiler, the performance of child containers will improve drastically.
 
 As the other benchmarks show, however, Rezolver's normal-use performance is up there with the best
 which, when coupled with its extensibility and featureset, should make it a decent contender for

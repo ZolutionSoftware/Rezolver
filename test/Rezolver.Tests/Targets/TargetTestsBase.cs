@@ -37,7 +37,7 @@ namespace Rezolver.Tests.Targets
 		/// <param name="container">The container to use for the <see cref="ResolveContext"/> from which the compile context
 		/// will be created.  If null, then the <see cref="GetDefaultContainer"/> method is called.</param>
 		/// <param name="targets">The target container to use for the compile context.  If null, then the <paramref name="container"/>
-		/// will be passed to the <see cref="GetDefaultTargetContainer(IContainer)"/> method (including if one is automatically
+		/// will be passed to the <see cref="GetDefaultTargetContainer(Container)"/> method (including if one is automatically
 		/// built) - with the target container that's returned being used instead.</param>
 		protected virtual ICompileContext GetCompileContext(ITarget target, Container container = null, IRootTargetContainer targets = null, Type targetType = null)
 		{

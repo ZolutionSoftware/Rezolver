@@ -15,9 +15,7 @@ namespace Rezolver.Compilation.Expressions
     /// provides the one implementation, too: <see cref="ExpressionCompiler"/>.
     /// </summary>
     /// <remarks>
-    /// All expressions are built to be called from the <see cref="ICompiledTarget.GetObject(ResolveContext)"/> function which,
-    /// in turn, is typically called in response to a container's <see cref="Container.Resolve(ResolveContext)"/> function being
-    /// called.
+    /// All expressions are built to be called by a container's <see cref="Container.Resolve(ResolveContext)"/>.
     ///
     /// Note that the <see cref="Build(ITarget, IExpressionCompileContext)"/> method declared here is effectively an
     /// analogue to the <see cref="IExpressionBuilder.Build(ITarget, IExpressionCompileContext, IExpressionCompiler)"/>.  Indeed, the default

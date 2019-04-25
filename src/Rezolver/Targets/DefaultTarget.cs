@@ -3,7 +3,6 @@
 
 
 using System;
-using System.Collections.Concurrent;
 
 namespace Rezolver.Targets
 {
@@ -11,7 +10,7 @@ namespace Rezolver.Targets
     /// A target that simply creates a default instance of a given type.  I.e. the same
     /// as doing default(type) in C#.
     /// </summary>
-    /// <remarks>The type also implements the <see cref="ICompiledTarget"/> interface for direct
+    /// <remarks>The type also implements the <see cref="IInstanceProvider"/> interface for direct
     /// resolving.</remarks>
     public class DefaultTarget : TargetBase, IFactoryProvider, IInstanceProvider, IDirectTarget
     {
@@ -28,70 +27,47 @@ namespace Rezolver.Targets
             }
         }
 
-        private static readonly ConcurrentDictionary<Type, object> _defaultCallbacks = new ConcurrentDictionary<Type, object>();
-        private static readonly ConcurrentDictionary<Type, Func<ResolveContext, object>> _defaultFactories = new ConcurrentDictionary<Type, Func<ResolveContext, object>>();
-
-        // internal to allow other classes take advantage of late-bound defaults
-        internal static object GetDefault(Type type)
+        private static readonly PerTypeCache<object> _defaultValues = new PerTypeCache<object>(t =>
         {
-            return _defaultCallbacks.GetOrAdd(type, t =>
-            {
-                return typeof(Default<>)
-                    .MakeGenericType(t)
-                    .GetStaticField("Value")
-                    .GetValue(null);
-            });
-        }
+            return typeof(Default<>)
+                .MakeGenericType(t)
+                .GetStaticField("Value")
+                .GetValue(null);
+        });
 
-        internal static Func<ResolveContext, object> GetFactory(Type type)
+        private static readonly PerTypeCache<Func<ResolveContext, object>> _defaultFactories = new PerTypeCache<Func<ResolveContext, object>>(t =>
         {
-            return _defaultFactories.GetOrAdd(type, t =>
-            {
-                return (Func<ResolveContext, object>)typeof(Default<>)
+            return (Func<ResolveContext, object>)typeof(Default<>)
                     .MakeGenericType(t)
                     .GetStaticField("Factory")
                     .GetValue(null);
-            });
-        }
+        });
 
-        internal static Func<ResolveContext, T> GetFactory<T>()
-        {
-            return Default<T>.Factory2;
-        }
+        // internal to allow other classes take advantage of late-bound defaults
+        internal static object GetDefault(Type type) => _defaultValues.Get(type);
+
+        internal static Func<ResolveContext, object> GetFactory(Type type) => _defaultFactories.Get(type);
+
+        internal static Func<ResolveContext, T> GetFactory<T>() => Default<T>.Factory2;
 
         /// <summary>
         /// Override of <see cref="TargetBase.ScopeBehaviour"/> - always returns
         /// <see cref="ScopeBehaviour.None"/>.
         /// </summary>
         /// <value>The scope behaviour.</value>
-        public override ScopeBehaviour ScopeBehaviour
-        {
-            get
-            {
-                return ScopeBehaviour.None;
-            }
-        }
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
 
         private readonly Type _declaredType;
 
         /// <summary>
         /// Always equal to the type for which the default value will be returned
         /// </summary>
-        public override Type DeclaredType
-        {
-            get { return _declaredType; }
-        }
+        public override Type DeclaredType => _declaredType;
 
         /// <summary>
         /// Gets the actual default value represented by this instance.
         /// </summary>
-        public object Value
-        {
-            get
-            {
-                return GetDefault(DeclaredType);
-            }
-        }
+        public object Value => GetDefault(DeclaredType);
 
         /// <summary>
         /// Implementation of <see cref="IFactoryProvider.Factory"/>

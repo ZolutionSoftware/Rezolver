@@ -28,8 +28,8 @@ object-based services interact with scopes.
 
 # Objects in Scopes
 
-A scope (obtained either by using @Rezolver.ScopedContainer or through a @Rezolver.IContainerScope returned from a container's 
-@Rezolver.IScopeFactory.CreateScope* method) will by default dispose of any disposable objects it creates when it is disposed.
+A scope (obtained either by using @Rezolver.ScopedContainer or through a @Rezolver.ContainerScope returned from a container's 
+@Rezolver.Container.CreateScope* method) will by default dispose of any disposable objects it creates when it is disposed.
 
 If those objects are obtained from an @Rezolver.Targets.ObjectTarget, however, then no scope will ever touch them - because *you* created them,
 therefore you will also typically dispose them.
@@ -70,10 +70,3 @@ is then immediately disposed.  The test shows that the object, however, is not d
 is disposed:
 
 [!code-csharp[ObjectExamples.cs](../../../../test/Rezolver.Tests.Examples/ObjectExamples.cs#example11)]
-
-* * *
-
-# Next steps
-
-Feel free to explore the table of contents or [head back to the main service registration overview](service-registration.md) to explore 
-more features of Rezolver.

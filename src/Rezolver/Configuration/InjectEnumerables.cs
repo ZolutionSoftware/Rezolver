@@ -22,7 +22,7 @@ namespace Rezolver.Configuration
     ///
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/>, or is disabled via the
     /// <see cref="Options.EnableEnumerableInjection"/> option, then only explicitly
-    /// registered enumerables will be able to be resolved by any <see cref="IContainer"/> built from that
+    /// registered enumerables will be able to be resolved by any <see cref="Container"/> built from that
     /// target container.
     ///
     /// #### Lazy vs Eager evaluation

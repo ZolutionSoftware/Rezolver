@@ -1,14 +1,14 @@
 ﻿# Transient Objects
 
 Most registrations performed on an @Rezolver.ITargetContainer will result in transient 
-objects being created when the @Rezolver.IContainer.Resolve* method of an @Rezolver.IContainer 
+objects being created when the @Rezolver.Container.Resolve* method of an @Rezolver.Container 
 is called.  Ultimately, the transience of an object is determined by the @Rezolver.ITarget that
 is registered against the type that's requested from the container.
 
 Some of these targets create inherently transient objects, whilst some inherit or expressly control the
 lifetimee of other targets.
 
-The following table summarises this:
+The following table summarises this for the most common target types:
 
 @Rezolver.ITarget implementation | Transient? | Notes
 --- | --- | ---

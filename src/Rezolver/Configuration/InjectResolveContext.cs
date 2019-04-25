@@ -9,10 +9,11 @@ namespace Rezolver.Configuration
 {
     /// <summary>
     /// An <see cref="ITargetContainerConfig"/> that enables automatic resolving of the
-    /// <see cref="ResolveContext"/> created for a <see cref="IContainer.Resolve(ResolveContext)"/> operation.
+    /// <see cref="ResolveContext"/> created for a <see cref="Container.Resolve(ResolveContext)"/> operation.
     /// </summary>
-    /// <remarks>The implementation registers a special internal target type which implements <see cref="ICompiledTarget"/>
-    /// simply by returning the context passed to its <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method.
+    /// <remarks>The implementation registers a special internal target type which implements <see cref="IFactoryProvider"/>
+    /// and <see cref="IFactoryProvider{ResolveContext}"/> by returning delegates that return the context that's passed
+    /// as an argument to those factories.
     /// 
     /// This configuration is applied to the <see cref="TargetContainer.DefaultConfig"/> automatically, and cannot be disabled
     /// through the use of options.  Either it's in the configuration, or its not.</remarks>

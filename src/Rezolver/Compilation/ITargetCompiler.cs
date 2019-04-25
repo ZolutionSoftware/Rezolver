@@ -35,7 +35,8 @@ namespace Rezolver.Compilation
 
         /// <summary>
         /// Creates a compilation context for the given <paramref name="resolveContext"/> - which is used to determine
-        /// the <see cref="ResolveContext.RequestedType"/> that the eventual <see cref="ICompiledTarget"/> should return.
+        /// the <see cref="ResolveContext.RequestedType"/> that the factory which is eventually compiled should return
+        /// (through either the <see cref="CompileTarget(ITarget, ICompileContext)"/> or <see cref="CompileTarget{TService}(ITarget, ICompileContext)"/> methods).
         /// </summary>
         /// <param name="resolveContext">The resolve context - used to get the <see cref="ResolveContext.RequestedType"/>
         /// and the <see cref="ResolveContext.Container"/>, and will be set on the <see cref="ICompileContext.ResolveContext"/>

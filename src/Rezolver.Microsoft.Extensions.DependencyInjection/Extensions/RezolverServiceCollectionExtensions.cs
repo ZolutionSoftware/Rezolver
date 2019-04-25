@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// as targets.
         /// </summary>
         /// <param name="services">The services to be registered.</param>
-        /// <returns>An <see cref="IContainer"/> instance</returns>
+        /// <returns>An <see cref="Container"/> instance</returns>
         /// <exception cref="ArgumentNullException">If <paramref name="services"/> is null.</exception>
         /// <remarks>The <see cref="Rezolver.Options.LazyEnumerables"/> option (is set to <c>false</c> by this method,
         /// because v2.0 of .Net Core 2 seems to expect all enumerables to be eagerly loaded - getting clarification

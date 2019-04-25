@@ -20,12 +20,12 @@ namespace Rezolver.Compilation
     /// Note that many of the interface members are implemented explicitly - therefore most of your interaction with
     /// this type is through its implementation of <see cref="ICompileContext"/> and <see cref="ITargetContainer"/>.
     /// </summary>
-    /// <seealso cref="Rezolver.Compilation.ICompileContext" />
-    /// <seealso cref="Rezolver.ITargetContainer" />
+    /// <seealso cref="ICompileContext" />
+    /// <seealso cref="ITargetContainer" />
     /// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
     /// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via the
     /// <see cref="ITargetCompiler.CreateContext(ResolveContext, ITargetContainer)"/> method of an
-    /// <see cref="ITargetCompiler" /> resolved from an <see cref="IContainer" />.
+    /// <see cref="ITargetCompiler" /> resolved from an <see cref="Container" />.
     /// </remarks>
     public class CompileContext : ICompileContext, ITargetContainer
     {

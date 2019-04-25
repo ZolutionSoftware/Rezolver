@@ -202,10 +202,3 @@ Refer to the topic for detailed examples on how to use member binding.
 # Next Steps
 
 - The [member injection documentation](../member-injection/index.md) might be of interest if you've not already read it.
-
-> [!NOTE]
-> A separate topic will be added in the future regarding Generic Specialisation in the container, but that covers all target types, 
-> not just the @Rezolver.Targets.GenericConstructorTarget - so that will go elsewhere.
-
-Feel free to explore the table of contents or [head back to the main service registration overview](../service-registration.md) to explore 
-more features of Rezolver.

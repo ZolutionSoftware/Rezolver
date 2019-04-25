@@ -24,7 +24,7 @@ namespace Rezolver
         /// that is created which, in turn, will change the type against which the target will be registered in the target container.  If null, then
         /// the return type of the factory will be used.</param>
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the factory delegate will be
-        /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.None" /> - which means 
+        /// tracked if the target is executed within an <see cref="ContainerScope" />.  The default is <see cref="ScopeBehaviour.None" /> - which means 
         /// no disposal will take place.  Be careful with changing this - if the delegate produces new instances each time it's used, then 
         /// <see cref="ScopeBehaviour.Implicit"/> is suitable; if not, then only <see cref="ScopeBehaviour.None"/> or <see cref="ScopeBehaviour.Explicit"/>
         /// are suitable.</param>
