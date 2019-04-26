@@ -189,8 +189,8 @@ its <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Com
         <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
         <td><span class="parametername">resolveContext</span></td>
         <td><p>Required.  The current <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> - since all
-compilation is usually performed in response to a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> or
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a>.</p>
+compilation is usually performed in response to a call to <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> or
+<a class="xref" href="Rezolver.Container.html#Rezolver_Container_TryResolve_Rezolver_ResolveContext_System_Object__">TryResolve(ResolveContext, out Object)</a>.</p>
 </td>
       </tr>
       <tr>
@@ -198,7 +198,7 @@ compilation is usually performed in response to a call to <a class="xref" href="
         <td><span class="parametername">targets</span></td>
         <td><p>Required.  The <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> which contains all the registrations
 which might be required by the <code data-dev-comment-type="paramref" class="paramref">target</code> to obtain all its dependencies when the
-returned <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> is executed.</p>
+returned factory is executed.</p>
 </td>
       </tr>
     </tbody>

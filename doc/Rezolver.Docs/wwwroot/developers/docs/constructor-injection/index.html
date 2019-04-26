@@ -184,7 +184,7 @@ var result = container.Resolve&lt;RequiresMyService&gt;();
 Assert.NotNull(result.Service);
 </code></pre><p>&#39;So what?&#39; you say, &#39;it&#39;s doing exactly what I want it to!&#39;  Yes, but there&#39;s more going on here than you&#39;d think: the 
 <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> is selecting the best-matched constructor based on the service registrations present 
-in the container when it&#39;s asked to <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> the object.</p>
+in the container when it&#39;s asked to <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> the object.</p>
 <hr>
 <h2 id="best-match-examples">Best-match examples</h2>
 <p>Let&#39;s take a bit of deep dive into how Rezolver determines a &#39;best-match&#39; for the constructor to be called by the container.</p>
@@ -203,7 +203,7 @@ Assert.Throws&lt;ArgumentException&gt;(&quot;service&quot;,
 <h3 id="example---best-match-fewest-params">Example - Best-match (fewest params)</h3>
 <p>The best-match algorithm is similar to how a compiler matches a method overload when writing code by hand.  The rules aren&#39;t 
 necessarily exactly the same as, say, the C# spec, but they&#39;re close.</p>
-<p>At the time the first <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call is made, the algorithm will first attempt to select the greediest constructor 
+<p>At the time the first <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call is made, the algorithm will first attempt to select the greediest constructor 
 whose parameters are <em>completely</em> satisfied by services available to the container.  Thus, if a class has two constructors - one with 
 1 parameter and one with 3 parameters - if the single parameter version can be successfully injected, but only 2 of the other 
 constructor&#39;s parameters can be, then the single-parameter constructor wins.</p>
@@ -365,7 +365,7 @@ we could &#39;fix&#39; the container in the previous test so that it successfull
 <h3 id="example---rezolveroverridingcontainer">Example - <a class="xref" href="../../api/Rezolver.OverridingContainer.html">OverridingContainer</a></h3>
 <p>This is the solution which most closely matches the child container functionality provided by other IOC libraries - take a container 
 which is already &#39;established&#39; and override it with another container that has its own registrations.  The two will work together, sharing 
-registrations when creating instances, so long as the overriding container&#39;s <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> implementation is used:</p>
+registrations when creating instances, so long as the overriding container&#39;s <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> implementation is used:</p>
 <pre><code class="lang-csharp" name="ConstructorExamples.cs">var container = new Container();
 container.RegisterType&lt;MyService2&gt;();
 container.RegisterType&lt;Requires2MyServices&gt;();
@@ -386,19 +386,19 @@ about the overriding container.</p>
 <h4 id="how-it-works">How it works</h4>
 <p>If you&#39;re interested in the inner workings when using overriding containers, the process is this:</p>
 <ul>
-<li>The <code>overridingContainer</code> receives the <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call for <code>Requires2MyServices</code></li>
+<li>The <code>overridingContainer</code> receives the <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call for <code>Requires2MyServices</code></li>
 <li>It looks inside its @Rezolver.ContainerBase.Targets target container for a registration for <code>Requires2MyServices</code> and doesn&#39;t find one</li>
 <li>So the call is passed to the overidden <code>container</code>...<ul>
 <li>... which finds its registration and binds to the 2-parameter constructor of <code>Requires2MyServices</code> as before</li>
 <li>The bound constructor is executed<ul>
 <li>The <code>MyService2</code> parameter is fulfiled by the <code>container</code>&#39;s own registration</li>
-<li>But, for the <code>MyService3</code> parameter, <code>container</code> sees that it was not the container whose <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method
+<li>But, for the <code>MyService3</code> parameter, <code>container</code> sees that it was not the container whose <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> method
 was <em>originally</em> called (i.e. <code>overridingContainer</code>), so it forwards the call for <code>MyService3</code> to <code>overridingContainer</code>.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>overridingContainer</code> receives the <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call for <code>MyService3</code><ul>
+<li><code>overridingContainer</code> receives the <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call for <code>MyService3</code><ul>
 <li>It finds its registration, and executes it to get the instance, passing it back to <code>container</code> - thus completing the constructor call 
 for <code>Requires2MyServices</code></li>
 </ul>

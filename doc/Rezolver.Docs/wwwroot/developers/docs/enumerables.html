@@ -129,7 +129,7 @@ has been pushed to an official package release.</p>
 the underlying registrations were made.</p>
 <h2 id="resolving-enumerables">Resolving enumerables</h2>
 <p>To resolve an enumerable from a container or through a scope, you can simply use <code>IEnumerable&lt;Foo&gt;</code> as the input
-type for a <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call:</p>
+type for a <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call:</p>
 <pre><code class="lang-cs">var enumerable = container.Resolve&lt;IEnumerable&lt;Foo&gt;&gt;();
 </code></pre><p>However, the <code>ResolveMany</code> extension methods (see &lt;xref:Rezolver.ContainerResolveExtensions.ResolveMany*&gt;
 and <a class="xref" href="../api/Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_">ResolveMany</a>) provide a shortcut which allow you to pass
@@ -208,9 +208,9 @@ Assert.Equal(4, result.Services.Select(s =&gt; s.GetType()).Distinct().Count());
 </code></pre><h2 id="mixed-lifetimes">Mixed lifetimes</h2>
 <p>When registering targets, you have three lifetimes at your disposal:</p>
 <ul>
-<li>Transient (a new object created for every <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call)</li>
+<li>Transient (a new object created for every <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call)</li>
 <li>Singleton (only one object is ever created)</li>
-<li>Scoped (one object created per <a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a>)</li>
+<li>Scoped (one object created per <a class="xref" href="../api/Rezolver.ContainerScope.html">ContainerScope</a>)</li>
 </ul>
 <div class="NOTE"><h5>Note</h5><p>Of course, the <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a> (see <a href="objects.html">objects as services</a>) is technically a singleton, also,
 but that&#39;s because it wraps a constant reference supplied by you.</p>

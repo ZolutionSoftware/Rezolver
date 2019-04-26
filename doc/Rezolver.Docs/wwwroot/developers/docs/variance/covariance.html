@@ -144,7 +144,7 @@ class ProducesMyDerived : ICovariant&lt;MyDerived&gt;
     //get a MyDerived object and return it.
   }
 }
-</code></pre><p>Given an <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> called <code>container</code>, we can now do this:</p>
+</code></pre><p>Given an <a class="xref" href="../../api/Rezolver.Container.html">Container</a> called <code>container</code>, we can now do this:</p>
 <pre><code class="lang-cs">container.RegisterType&lt;ProducesMyDerived, ICovariant&lt;MyDerived&gt;();
 
 var result = container.Resolve&lt;ICovariant&lt;MyBase&gt;&gt;();

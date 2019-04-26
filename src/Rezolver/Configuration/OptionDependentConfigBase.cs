@@ -22,6 +22,10 @@ namespace Rezolver.Configuration
     public abstract class OptionDependentConfigBase : ITargetContainerConfig, IDependant
     {
         private IEnumerable<DependencyMetadata> _dependencies;
+
+        /// <summary>
+        /// Gets the dependencies for this in instance.  Implementation of <see cref="IDependant.Dependencies"/>
+        /// </summary>
         public IEnumerable<DependencyMetadata> Dependencies
         {
             get
@@ -32,8 +36,16 @@ namespace Rezolver.Configuration
             }
         }
 
+        /// <summary>
+        /// Implement this to provide your dependency logic.
+        /// </summary>
+        /// <returns></returns>
         protected abstract IEnumerable<DependencyMetadata> GetDependenciesBase();
 
+        /// <summary>
+        /// Abstract implementation of <see cref="ITargetContainerConfig.Configure(IRootTargetContainer)"/>
+        /// </summary>
+        /// <param name="targets">The root target container to which this configuration is to be applied.</param>
         public abstract void Configure(IRootTargetContainer targets);
 
         /// <summary>

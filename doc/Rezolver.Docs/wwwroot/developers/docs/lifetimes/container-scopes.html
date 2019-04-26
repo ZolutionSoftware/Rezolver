@@ -101,11 +101,14 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="container-scopes">Container Scopes</h1>
 
-<p>Before we start looking at <a href="scoped.html">scoped objects</a>, we should first look at how Rezolver&#39;s <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> interface, and
-its implementations, are used to implement lifetime scoping.</p>
+<p>Before we start looking at <a href="scoped.html">scoped objects</a>, we should first look at how Rezolver&#39;s <a class="xref" href="../../api/Rezolver.ContainerScope.html">ContainerScope</a>
+implements lifetime scoping.</p>
+<div class="TIP"><h5>Tip</h5><p>When using the Asp.Net Core integration, per-request lifetime scoping is automatically implemented by Asp.Net Core.</p>
+</div>
 <h2 id="whats-the-purpose-of-a-scope">What&#39;s the purpose of a scope?</h2>
-<p>A scope is a disposable object whose main purpose, as mentioned in the <a href="index.html">introduction to this section</a>, is to track and dispose 
-any <code>IDisposable</code> objects produced by the container through that scope.</p>
+<p>A scope is a disposable object with two main purposes:</p>
+<p>1) Tracking and disposing instances of any <code>IDisposable</code> objects produced by the container through that scope, as mentioned in the <a href="index.html">introduction to this section</a>.
+2) Creating and managing &#39;scoped singletons&#39; - i.e. where one instance of a given type is produced per scope instance, which might also be disposable.</p>
 <p>This is necessary, or at least desirable, because the IOC container takes control of both how <em>and</em> when your objects are created and, 
 more importantly, they are more often than not created purely to be passed as dependencies into other objects via dependency injection 
 (via, for example, constructor parameters).  This means that the .Net developer&#39;s preferred pattern of working with disposable objects 
@@ -119,13 +122,11 @@ has been used as a dependency of more than one other object.</p>
 <p>The scope offers a way to simplify this problem by taking ownership of those disposables for you.  All you need to do is to create the scope,
 and then dispose of it when you no longer need the objects it produced.</p>
 <h2 id="creating-a-container-scope">Creating a Container Scope</h2>
-<p>If you&#39;ve used other IOC containers, then you&#39;ll probably already have guessed how to create a new scope.</p>
-<p>Formally, the <a class="xref" href="../../api/Rezolver.IScopeFactory.html">IScopeFactory</a> interface is how you create a scope - through its <a class="xref" href="../../api/Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope_">CreateScope</a> method.</p>
-<p>The interface is implemented by:</p>
+<p>You can create a scope explicitly using these <code>CreateScope</code> methods:</p>
 <ul>
-<li><a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a></li>
-<li><a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> (because scopes are hierarchical)</li>
-<li><a class="xref" href="../../api/Rezolver.IResolveContext.html">IResolveContext</a></li>
+<li><a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_CreateScope_">Resolver.Container.CreateScope</a></li>
+<li><a class="xref" href="../../api/Rezolver.ContainerScope.html#Rezolver_ContainerScope_CreateScope_">Resolver.ContainerScope.CreateScope</a></li>
+<li><a class="xref" href="../../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_CreateScope_">Resolver.ResolveContext.CreateScope</a></li>
 </ul>
 <p>In the example code, therefore, you will see a lot of this:</p>
 <pre><code class="lang-cs">var container = new Container();

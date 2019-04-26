@@ -182,8 +182,8 @@ _theMessage = &quot;Another New Message!!!&quot;;
 Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
 </code></pre><div class="NOTE"><h5>Note</h5><p>Look past the fact that the object being injected is the same instance on which the test is executed, it&#39;s the principle that matters!</p>
 </div>
-<h2 id="injecting-the-iresolvecontext">Injecting the <code>IResolveContext</code></h2>
-<p>Just as with the <a href="delegates.html#injecting-rezolveriresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> into your expression in order
+<h2 id="injecting-the-resolvecontext">Injecting the <code>ResolveContext</code></h2>
+<p>Just as with the <a href="delegates.html#injecting-rezolveriresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> into your expression in order
 to perform late-bound service location within your expression.  As the comment at the start of the test states - this example is functionally identical to the <code>DelegateTarget</code>
 example - but because of the limitations of the C# compiler and its ability to translate code into expression trees, the main expression is written as a series of stacked 
 conditional expressions so that the whole thing is a single expression.</p>
@@ -238,13 +238,13 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
 you could also provide an expression in which the conditional statements where built dynamically (or, more likely, a dynamically built 
 <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.switchexpression">SwitchExpression</a>) and it would still work.</p>
 </div>
-<h1 id="resolving-without-an-iresolvecontext">Resolving without an <code>IResolveContext</code></h1>
+<h1 id="resolving-without-an-resolvecontext">Resolving without an <code>ResolveContext</code></h1>
 <p>These advanced examples with lambda expressions show how you can inject an argument or perform late-bound service location within your expression body.  Sometimes, however,
 you might not want to, or be able to, provide a parameterised lambda expression, or you might be passing an expression fragment which cannot accept
 injected arguments.</p>
 <p>For this purpose, Rezolver provides the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html">ExpressionFunctions</a> static class.  If the compiler sees a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.methodcallexpression">MethodCallExpression</a> bound to one of 
-the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_">Resolve</a> static functions of this class, it will be converted into a call to the appropriate <a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve_">Resolve</a> overload of the 
-<a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> that is in scope when the container executes the code compiled from the expression.</p>
+the <a class="xref" href="../api/Rezolver.ExpressionFunctions.html#Rezolver_ExpressionFunctions_Resolve_">Resolve</a> static functions of this class, it will be converted into a call to the appropriate <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> overload of the 
+<a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> that is in scope when the container executes the code compiled from the expression.</p>
 <div class="WARNING"><h5>Warning</h5><p>These functions only work inside expressions - any attempt to execute them outside of an expression passed to a <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> will result in 
 a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.notimplementedexception">NotImplementedException</a> being thrown.</p>
 </div>

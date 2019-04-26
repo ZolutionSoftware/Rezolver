@@ -119,10 +119,10 @@ that the targets are registered against.</p>
   <div class="markdown level0 remarks"><p>You do not resolve objects from a target container, instead, it holds the <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which will
 later be compiled to produce the objects.</p>
 <p>A target container is considered mutable for its entire lifetime, because it&apos;s only a glorified dictionary
-of targets from which multiple <a class="xref" href="Rezolver.IContainer.html">IContainer</a> objects can be built (when using the types provided
+of targets from which multiple <a class="xref" href="Rezolver.Container.html">Container</a> objects can be built (when using the types provided
 in the framework).</p>
 <p>As an example, the <a class="xref" href="Rezolver.Container.html">Container</a> class uses this as the source of the registrations that it uses to resolve objects
-in its <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> implementation.</p>
+in its <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> implementation.</p>
 <p>Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
 are <a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a> and <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a>.</p>
 </div>

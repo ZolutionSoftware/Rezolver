@@ -128,17 +128,13 @@ addition to its performance.</p>
 <p>Excluding Rezolver and the &#39;No&#39; container, which the baseline, there are 31 containers now
 being stress-tested by this application, with the list growing.</p>
 <h1 id="notes">Notes</h1>
-<p>Rezolver performs very well across the board, however it suffers in benchmarks which constantly
-destroy and recreate containers.</p>
+<p>Rezolver performs very well across the board - especially in v2 now after a huge amount of refactoring
+and optimisation work, however it suffers in benchmarks which constantly destroy and recreate containers.</p>
 <p>In particular, the performance in the &#39;Child Containers&#39; benchmark is particularly poor - caused by 
-the fact that there&#39;s an overhead on the first <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call to a container, 
+the fact that there&#39;s an overhead on the first <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call to a container, 
 as that&#39;s when it compiles the associated factory for that service.</p>
 <p>Because of the way this benchmark is performed, it means that Rezolver spends most of its time 
 dynamically compiling the same delegates.</p>
-<p>A solution is in the pipeline for this, which will be implemented once we&#39;ve implemented another
-compiler that&#39;s based entirely on reflection and late-bound delegates instead of dynamically 
-constructed expression trees.  When this is done and merged with the current expression-tree
-based compiler, the performance of child containers will improve drastically.</p>
 <p>As the other benchmarks show, however, Rezolver&#39;s normal-use performance is up there with the best
 which, when coupled with its extensibility and featureset, should make it a decent contender for
 any new project.</p>

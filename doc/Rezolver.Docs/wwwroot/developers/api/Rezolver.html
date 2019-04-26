@@ -268,8 +268,8 @@ similar to a Linq Select.</p>
 from the <a class="xref" href="Rezolver.Targets.html">Rezolver.Targets</a> namespace.</p>
 </section>
       <h4><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></h4>
-      <section><p>Root container for <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s that can be used as the backing for the standard
-<a class="xref" href="Rezolver.IContainer.html">IContainer</a> classes - <a class="xref" href="Rezolver.Container.html">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a>.</p>
+      <section><p>Root container for <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s that can be used as the backing for
+<a class="xref" href="Rezolver.Container.html">Container</a> and <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a>.</p>
 <p>Stores and retrieves registrations of <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s, is also Generic type aware,
 unlike its base class - <a class="xref" href="Rezolver.TargetDictionaryContainer.html">TargetDictionaryContainer</a>.</p>
 </section>
@@ -306,12 +306,12 @@ container implementations within the Rezolver framework.</p>
       <section><p>Obsolete interface - now use the <a class="xref" href="Rezolver.Container.html">Container</a> class</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerConfig.html">IContainerConfig</a></h4>
-      <section><p>A configuration callback for instances of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> (which also use <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
+      <section><p>A configuration callback for instances of <a class="xref" href="Rezolver.Container.html">Container</a> (which also use <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>
 as the source of their registrations).</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerConfig-1.html">IContainerConfig&lt;T&gt;</a></h4>
       <section><p>Marker interface for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> which is responsible for configuring a specific type
-of object/behaviour/service/option for <a class="xref" href="Rezolver.IContainer.html">IContainer</a> instances. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
+of object/behaviour/service/option for <a class="xref" href="Rezolver.Container.html">Container</a> instances. (Determined by <code data-dev-comment-type="typeparamref" class="typeparamref">T</code>).</p>
 </section>
       <h4><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></h4>
       <section><p>Obsolete in v2 use <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></p>
@@ -359,8 +359,7 @@ within the root.</p>
       <section><p>Represents an object from which a scope can be created</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITarget.html">ITarget</a></h4>
-      <section><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,
-when the standard implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> are used (e.g. <a class="xref" href="Rezolver.Container.html">Container</a>).</p>
+      <section><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a></h4>
       <section><p>Stores and retrieves <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances, keyed by the type of service

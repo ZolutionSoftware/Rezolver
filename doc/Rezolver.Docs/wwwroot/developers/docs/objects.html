@@ -132,8 +132,8 @@ Assert.Same(service, container.Resolve&lt;IMyService&gt;());
 object-based services interact with scopes.</p>
 <hr>
 <h1 id="objects-in-scopes">Objects in Scopes</h1>
-<p>A scope (obtained either by using <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a> or through a <a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a> returned from a container&#39;s 
-<a class="xref" href="../api/Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope_">CreateScope</a> method) will by default dispose of any disposable objects it creates when it is disposed.</p>
+<p>A scope (obtained either by using <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a> or through a <a class="xref" href="../api/Rezolver.ContainerScope.html">ContainerScope</a> returned from a container&#39;s 
+<a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_CreateScope_">CreateScope</a> method) will by default dispose of any disposable objects it creates when it is disposed.</p>
 <p>If those objects are obtained from an <a class="xref" href="../api/Rezolver.Targets.ObjectTarget.html">ObjectTarget</a>, however, then no scope will ever touch them - because <em>you</em> created them,
 therefore you will also typically dispose them.</p>
 <p>Here&#39;s an example, using the aforementioned <a class="xref" href="../api/Rezolver.ScopedContainer.html">ScopedContainer</a>:</p>
@@ -186,11 +186,7 @@ using (var container = new ScopedContainer())
 }
 // Should be disposed
 Assert.True(disposableObj.Disposed);
-</code></pre><hr>
-<h1 id="next-steps">Next steps</h1>
-<p>Feel free to explore the table of contents or <a href="service-registration.html">head back to the main service registration overview</a> to explore 
-more features of Rezolver.</p>
-</article>
+</code></pre></article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
             <div class="sideaffix">

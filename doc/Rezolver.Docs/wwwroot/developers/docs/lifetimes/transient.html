@@ -102,12 +102,12 @@
 <h1 id="transient-objects">Transient Objects</h1>
 
 <p>Most registrations performed on an <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> will result in transient 
-objects being created when the <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> method of an <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> 
+objects being created when the <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> method of an <a class="xref" href="../../api/Rezolver.Container.html">Container</a> 
 is called.  Ultimately, the transience of an object is determined by the <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> that
 is registered against the type that&#39;s requested from the container.</p>
 <p>Some of these targets create inherently transient objects, whilst some inherit or expressly control the
 lifetimee of other targets.</p>
-<p>The following table summarises this:</p>
+<p>The following table summarises this for the most common target types:</p>
 <table>
 <thead>
 <tr>

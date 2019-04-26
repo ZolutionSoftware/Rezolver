@@ -23,6 +23,7 @@ namespace Rezolver.Compilation.Expressions
     /// method</remarks>
     public abstract class ExpressionBuilderBase : IExpressionBuilder
     {
+#if DEBUG
         private static readonly ConcurrentDictionary<int, ITarget> _compiledTargets = new ConcurrentDictionary<int, ITarget>();
         private static readonly ConcurrentDictionary<TypeAndTargetId, int> _compileCounts = new ConcurrentDictionary<TypeAndTargetId, int>();
 
@@ -35,10 +36,24 @@ namespace Rezolver.Compilation.Expressions
             _compileCounts.AddOrUpdate(new TypeAndTargetId(theType, targetIdOverride ?? target.Id), 1, (k, i) => i + 1);
         }
 
+        /// <summary>
+        /// Only available in debug builds
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<(Type type, int id, ITarget target, int count)> GetCompileCounts()
         {
             return _compileCounts.Skip(0).Select(kvp => (kvp.Key.Type, kvp.Key.Id, _compiledTargets[kvp.Key.Id], kvp.Value));
         }
+#else
+        private static void TrackCompilation(ITarget target, IExpressionCompileContext context)
+        {
+        }
+
+        public static IEnumerable<(Type type, int id, ITarget target, int count)> GetCompileCounts()
+        {
+            return Enumerable.Empty<(Type type, int id, ITarget target, int count)>();
+        }
+#endif
 
         /// <summary>
         /// Provides access to a set of <see cref="MethodInfo"/> objects for common functions required
@@ -60,38 +75,62 @@ namespace Rezolver.Compilation.Expressions
             public static MethodInfo IInstanceProvider_GetInstance_Method =>
                 Extract.Method((IInstanceProvider ip) => ip.GetInstance(default));
 
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for an internal strongly typed method `Container.ResolveInternal&lt;TService&gt;(ResolveContext)`
+            /// </summary>
             public static MethodInfo Container_ResolveStrong_Method =>
                 Extract.Method((Container c) => c.ResolveInternal<object>(default)).GetGenericMethodDefinition();
 
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for a scope activation method for objects with implicit scoping in the current scope.
+            /// </summary>
             public static MethodInfo CurrentScope_ActivateImplicit_Method =>
                 Extract.Method((ResolveContext c) => c.ActivateImplicit_ThisScope((object)null)).GetGenericMethodDefinition();
 
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for a scope activation method for objects with implicit scoping in the root scope.
+            /// </summary>
             public static MethodInfo RootScope_ActivateImplicit_Method =>
                 Extract.Method((ResolveContext c) => c.ActivateImplicit_RootScope((object)null)).GetGenericMethodDefinition();
 
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for a scope activation method for implicitly scoped objects within this scope.
+            /// </summary>
             public static MethodInfo CurrentScope_ActivateExplicit_Method =>
                 Extract.Method((ResolveContext c) => c.ActivateExplicit_ThisScope<object>(0, null)).GetGenericMethodDefinition();
 
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> for a scope activation method for explicitly scoped objects within the root scope.
+            /// </summary>
             public static MethodInfo RootScope_ActivateExplicit_Method =>
                 Extract.Method((ResolveContext c) => c.ActivateExplicit_RootScope<object>(0, null)).GetGenericMethodDefinition();
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="ResolveContext.ChangeRequestedType(Type)"/> method
+            /// Gets a <see cref="MethodInfo"/> object for the <see cref="ResolveContext.ChangeRequestedType(Type)"/> method
             /// </summary>
             /// <value>The type of the resolve context create new method.</value>
             public static MethodInfo ResolveContext_New_Type_Method =>
                 Extract.Method((ResolveContext r) => r.ChangeRequestedType((Type)null));
 
             /// <summary>
-            /// Gets a MethodInfo object for the <see cref="ResolveContext.ChangeContainer(Container)"/> method
+            /// Gets a <see cref="MethodInfo"/> object for the <see cref="ResolveContext.ChangeContainer(Container)"/> method
             /// </summary>
             /// <value>The type of the resolve context create new method.</value>
             public static MethodInfo ResolveContext_New_Container_Method =>
                 Extract.Method((ResolveContext r) => r.ChangeContainer((Container)null));
 
+            /// <summary>
+            /// Gets a <see cref="MethodInfo"/> object for the <see cref="ResolveContext.Resolve{TService}()"/> method
+            /// </summary>
             public static MethodInfo ResolveContext_Resolve_Strong_Method =>
                 Extract.Method((ResolveContext r) => r.Resolve<object>()).GetGenericMethodDefinition();
 
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="context"></param>
+            /// <param name="instance"></param>
+            /// <returns></returns>
             public static MethodCallExpression Call_CurrentScope_ActivateImplicit(
                 Expression context,
                 Expression instance)
@@ -301,14 +340,14 @@ namespace Rezolver.Compilation.Expressions
                     return Methods.Call_CurrentScope_ActivateExplicit(
                         context.ResolveContextParameterExpression,
                         targetIdOverride ?? target.Id,
-                        compiler.BuildResolveLambdaStrong(builtExpression, context));
+                        compiler.BuildStrongFactoryLambda(builtExpression, context));
                 }
                 else
                 {
                     return Methods.Call_RootScope_ActivateExplicit(
                         context.ResolveContextParameterExpression,
                         targetIdOverride ?? target.Id,
-                        compiler.BuildResolveLambdaStrong(builtExpression, context));
+                        compiler.BuildStrongFactoryLambda(builtExpression, context));
                 }
             }
         }

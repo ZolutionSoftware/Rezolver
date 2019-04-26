@@ -104,8 +104,7 @@
   
   <h1 id="Rezolver_ITarget" data-uid="Rezolver.ITarget" class="text-break">Interface ITarget
   </h1>
-  <div class="markdown level0 summary"><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>,
-when the standard implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> are used (e.g. <a class="xref" href="Rezolver.Container.html">Container</a>).</p>
+  <div class="markdown level0 summary"><p>Represents an action to be performed in order to obtain an object to satisfy a call to <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Rezolver.html">Rezolver</a></h6>
@@ -115,22 +114,12 @@ when the standard implementations of <a class="xref" href="Rezolver.IContainer.h
     <pre><code class="lang-csharp hljs">public interface ITarget</code></pre>
   </div>
   <h5 id="Rezolver_ITarget_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>As mentioned in the summary, the role of this interface is largely determined by the framework&apos;s own standard implementations of the
-<a class="xref" href="Rezolver.IContainer.html">IContainer</a> interface - all of which use an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> to store service registrations which, when
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is called, is queried to obtain one or more targets which will have been registered
-for the requested type.</p>
-<p>After obtaining a target, an <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> is then used to compile the target(s) into an
-<a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> whose <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> method will ultimately then be called to
-&apos;resolve&apos; the instance.  The role of the target, then, is to act as a description of the action that is to be performed by that
-compiled target that is built from it.</p>
-<p>The interface doesn&apos;t describe the type of target in hand - it only provides the core data required to query the static type of
-the target (the type of object that the target will produce) and to determine compatibility with a request for a particular type.</p>
-<p>The framework&apos;s many implementations of this interface - e.g. <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>, <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>,
+  <div class="markdown level0 remarks"><p>The framework&apos;s many implementations of this interface - e.g. <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>, <a class="xref" href="Rezolver.Targets.SingletonTarget.html">SingletonTarget</a>,
 <a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a> plus many others - then define the behaviour and any additional data required in order for a compiler
-to produce an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> which matches the target&apos;s intent.  E.g, the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>, which
+to produce a factory which matches the target&apos;s intent.  E.g, the <a class="xref" href="Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a>, which
 represents creating a new instance via a constructor, provides all the necessary information to bind to the correct constructor
-(including parameter bindings etc) - and the compiler&apos;s job is to translate that into an <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> which
-executes that constructor, returning the result.</p>
+(including parameter bindings etc) - and the compiler&apos;s job (<a class="xref" href="Rezolver.Compilation.Expressions.ConstructorTargetBuilder.html">ConstructorTargetBuilder</a>) is 
+to translate that into code that can be compiled into a factory which executes that constructor, returning the result.</p>
 </div>
   <h3 id="properties">Properties
   </h3>
@@ -139,7 +128,7 @@ executes that constructor, returning the result.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L53">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L37">View Source</a>
   </span>
   <a id="Rezolver_ITarget_DeclaredType_" data-uid="Rezolver.ITarget.DeclaredType*"></a>
   <h4 id="Rezolver_ITarget_DeclaredType" data-uid="Rezolver.ITarget.DeclaredType">DeclaredType</h4>
@@ -171,7 +160,7 @@ a constructor on a type, then this property should equal the type to which that 
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_Id.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L42">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L26">View Source</a>
   </span>
   <a id="Rezolver_ITarget_Id_" data-uid="Rezolver.ITarget.Id*"></a>
   <h4 id="Rezolver_ITarget_Id" data-uid="Rezolver.ITarget.Id">Id</h4>
@@ -202,7 +191,7 @@ a constructor on a type, then this property should equal the type to which that 
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L58">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L42">View Source</a>
   </span>
   <a id="Rezolver_ITarget_ScopeBehaviour_" data-uid="Rezolver.ITarget.ScopeBehaviour*"></a>
   <h4 id="Rezolver_ITarget_ScopeBehaviour" data-uid="Rezolver.ITarget.ScopeBehaviour">ScopeBehaviour</h4>
@@ -234,7 +223,7 @@ a constructor on a type, then this property should equal the type to which that 
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_ScopePreference.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.ScopePreference%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L62">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L46">View Source</a>
   </span>
   <a id="Rezolver_ITarget_ScopePreference_" data-uid="Rezolver.ITarget.ScopePreference*"></a>
   <h4 id="Rezolver_ITarget_ScopePreference" data-uid="Rezolver.ITarget.ScopePreference">ScopePreference</h4>
@@ -265,7 +254,7 @@ a constructor on a type, then this property should equal the type to which that 
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L48">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L32">View Source</a>
   </span>
   <a id="Rezolver_ITarget_UseFallback_" data-uid="Rezolver.ITarget.UseFallback*"></a>
   <h4 id="Rezolver_ITarget_UseFallback" data-uid="Rezolver.ITarget.UseFallback">UseFallback</h4>
@@ -300,7 +289,7 @@ parameter value.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget_SupportsType_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ITarget.SupportsType(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L87">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L71">View Source</a>
   </span>
   <a id="Rezolver_ITarget_SupportsType_" data-uid="Rezolver.ITarget.SupportsType*"></a>
   <h4 id="Rezolver_ITarget_SupportsType_System_Type_" data-uid="Rezolver.ITarget.SupportsType(System.Type)">SupportsType(Type)</h4>
@@ -388,7 +377,7 @@ because it&apos;s impossible to build an instance of an open generic type.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ITarget.md&amp;value=---%0Auid%3A%20Rezolver.ITarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L37" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ITarget.cs/#L21" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -43,21 +43,11 @@ namespace Rezolver.Compilation
         /// </summary>
         /// <param name="compiler">Required.  The compiler which will carry out the compilation</param>
         /// <param name="target">Required.  The target to be compiled.</param>
-        /// <param name="resolveContext">Required.  The current <see cref="ResolveContext"/> - since all
-        /// compilation is usually performed in response to a call to <see cref="Container.Resolve"/> or
-        /// <see cref="Container.TryResolve(ResolveContext, out object)"/>.</param>
-        /// <param name="targets">Required.  The <see cref="ITargetContainer"/> which contains all the registrations
-        /// which might be required by the <paramref name="target"/> to obtain all its dependencies when the
-        /// returned factory is executed.</param>
-        /// <returns>A compiled target representing the passed <paramref name="target"/>, ready to be executed
+        /// <param name="resolveContext">Required.  The current <see cref="ResolveContext"/>.</param>
+        /// <param name="targets">Required.  Used to locate dependencies during compilation.</param>
+        /// <returns>A delegate representing the passed <paramref name="target"/>, ready to be executed
         /// to obtain an object which satisfies the <see cref="ResolveContext.RequestedType"/> in the
         /// <paramref name="resolveContext"/>.</returns>
-        /// <remarks>This is typically called specifically for the root object that is to be resolved from
-        /// a container, hence the <see cref="ResolveContext.RequestedType"/> will match the type for which
-        /// the <paramref name="target"/> is to be compiled.  Compilers must, however, always use the
-        /// <see cref="ICompileContext.TargetType"/> to determine the type to be built for, because if one
-        /// object requires another, then compilers do not keep creating new resolve contexts
-        /// for each compilation, only new compile contexts for the same resolve context.</remarks>
         public static Func<ResolveContext, object> CompileTarget(this ITargetCompiler compiler,
             ITarget target,
             ResolveContext resolveContext,
@@ -86,6 +76,17 @@ namespace Rezolver.Compilation
             return compiler.CompileTarget(target, compiler.CreateContext(resolveContext, targets));
         }
 
+        /// <summary>
+        /// Strongly-typed version of <see cref="CompileTarget(ITargetCompiler, ITarget, ResolveContext, ITargetContainer)"/> when the
+        /// <typeparamref name="TService"/> is known at compile-time.
+        /// </summary>
+        /// <typeparam name="TService">The type of object to be returned by the factory.S</typeparam>
+        /// <param name="compiler">Required.  The compiler.</param>
+        /// <param name="target">Required.  The target to be compiled.</param>
+        /// <param name="resolveContext">Required.  The current <see cref="ResolveContext"/></param>
+        /// <param name="targets">Required.  Used to locate dependencies during compilation.</param>
+        /// <returns>A strongly-typed delegate representing the passed <paramref name="target"/>.
+        /// Invoking this delegate should produce an instance of the type <typeparamref name="TService"/>.</returns>
         public static Func<ResolveContext, TService> CompileTarget<TService>(this ITargetCompiler compiler,
             ITarget target,
             ResolveContext resolveContext,

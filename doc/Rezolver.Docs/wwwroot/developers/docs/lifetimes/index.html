@@ -102,10 +102,10 @@
 <h1 id="object-lifetimes">Object Lifetimes</h1>
 
 <p>As with most IOC containers, Rezolver understands three primary lifetimes for the objects it produces, including 
-support for automatic disposal of <code>IDisposable</code> objects when an <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> is used.</p>
+support for automatic disposal of <code>IDisposable</code> objects when an <a class="xref" href="../../api/Rezolver.ContainerScope.html">ContainerScope</a> is used.</p>
 <h1 id="transient-objects">Transient Objects</h1>
-<p>This is what&#39;s ultimately produced by a Rezolver <a class="xref" href="../../api/Rezolver.IContainer.html">IContainer</a> most of the time - a transient object is created when
-needed and thrown away when no longer required.  It&#39;s the same as using <code>new</code> to create an instance inside a function and then allowing 
+<p>This is what&#39;s ultimately produced by a Rezolver <a class="xref" href="../../api/Rezolver.Container.html">Container</a> most of the time - a transient object is created when
+requested from the container.  It&#39;s the same as using <code>new</code> to create an instance inside a function and then allowing 
 it to go out of scope when that function returns.</p>
 <p><a href="transient.html">Read more about transient objects</a>.</p>
 <h1 id="singletons">Singletons</h1>
@@ -118,10 +118,10 @@ rules at the code level to ensure that it&#39;s impossible to create more than o
 <p>Unsurprisingly, understanding scoped objects requires an understanding of scopes.</p>
 <p>At its most fundamental level, a scope is simply a disposable &#39;bag&#39; of objects which is created at the start of a particular process 
 (e.g when a web request is received, or when a job is pulled off a job queue) and which is then disposed when that process completes.</p>
-<p>Most IOC containers refer to these as <em>lifetime scopes</em> (<em><strong>note:</strong> &#39;container scopes&#39; in Rezolver, implemented by the <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> interface</em>) 
+<p>Most IOC containers refer to these as <em>lifetime scopes</em> (<em><strong>note:</strong> &#39;container scopes&#39; in Rezolver, implemented by <a class="xref" href="../../api/Rezolver.ContainerScope.html">ContainerScope</a>) 
 and they are most often used (but not exclusively) to track objects that implement the <code>IDisposable</code> interface in order that they can be 
 disposed without the developer explicitly having to do so themselves - often because the developer can never really be sure that she has 
-<em>definitely</em> finished with that object.</p>
+*definitely</em> finished with that object.</p>
 <p>But the presence of a scope at the point where an object is produced/obtained by the container does not <em>automatically</em> mean that that object 
 is itself &#39;scoped&#39;.  Indeed, transients and singletons can be used inside a scope in exactly the same way as outside.</p>
 <p>Instead, a scoped object has a special lifetime behaviour such that it behaves like a singleton, except you get one instance 

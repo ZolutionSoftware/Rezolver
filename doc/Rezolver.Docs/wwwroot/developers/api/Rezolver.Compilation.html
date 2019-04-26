@@ -133,7 +133,7 @@ recording both a target that is being compiled, and the type for which it is bei
   </h3>
       <h4><a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a></h4>
       <section><p>Tracks state and provides services during the compilation phase in which <a class="xref" href="Rezolver.ITarget.html">ITarget</a> targets
-are compiled into <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> targets, which produce actual instances of objects.</p>
+are compiled into <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func&lt;T,TResult&gt;</a> factories.</p>
 <p>Instances of this interface are created by calling the
 <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html#Rezolver_Compilation_ITargetCompiler_CreateContext_Rezolver_ResolveContext_Rezolver_ITargetContainer_">CreateContext(ResolveContext, ITargetContainer)</a> method of the <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a>
 which is registered in a container.</p>

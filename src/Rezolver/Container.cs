@@ -22,11 +22,11 @@ namespace Rezolver
     /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public
     /// API.
     ///
-    /// The reason this class does is to make it easier to create a new container and to register targets into it without
-    /// having to worry about managing a separate <see cref="ITargetContainer"/> instance in your application root -
-    /// because all the registration extension methods defined in classes like
-    /// <see cref="TargetContainerExtensions"/>, <see cref="TargetContainerExtensions"/> (plus many
-    /// more) will be available to developers in code which has a reference to this class, or one derived from it.
+    /// This makes it easier to create a new container and to register targets into it without
+    /// having to worry about managing a separate <see cref="IRootTargetContainer"/> instance in your application root -
+    /// because all the registration extension methods in <see cref="RootTargetContainerExtensions"/>, 
+    /// and <see cref="TargetContainerExtensions"/> will be available to developers in code which has a reference to this 
+    /// class, or one derived from it.
     ///
     /// Note also that calling <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> on an instance of this
     /// type will always cause a <see cref="NotSupportedException"/> to be thrown, thus preventing containers from being
@@ -151,7 +151,6 @@ namespace Rezolver
         /// </summary>
         /// <param name="context">The resolve context</param>
         /// <returns>An instance of the type that was requested.</returns>
-        //[System.Runtime.CompilerServices.MethodImpl(methodImplOptions: System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         public object Resolve(ResolveContext context)
         {
 #if !USEDYNAMIC
@@ -187,6 +186,11 @@ namespace Rezolver
             return Resolve(new ResolveContext(new ContainerScopeProxy(scope, this), serviceType));
         }
 
+        /// <summary>
+        /// Strongly-typed resolve operation
+        /// </summary>
+        /// <typeparam name="TService">The type of object of which an instance is required.</typeparam>
+        /// <returns>The instance.</returns>
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
@@ -197,6 +201,12 @@ namespace Rezolver
 #endif
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="scope"></param>
+        /// <returns></returns>
         public TService Resolve<TService>(ContainerScope scope)
         {
 #if !USEDYNAMIC

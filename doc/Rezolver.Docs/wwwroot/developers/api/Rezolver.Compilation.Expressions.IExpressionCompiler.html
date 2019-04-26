@@ -129,9 +129,7 @@ provides the one implementation, too: <a class="xref" href="Rezolver.Compilation
     <pre><code class="lang-csharp hljs">public interface IExpressionCompiler : ITargetCompiler</code></pre>
   </div>
   <h5 id="Rezolver_Compilation_Expressions_IExpressionCompiler_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>All expressions are built to be called from the <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a> function which,
-in turn, is typically called in response to a container&apos;s <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> function being
-called.</p>
+  <div class="markdown level0 remarks"><p>All expressions are built to be called by a container&apos;s <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a>.</p>
 <p>Note that the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_">Build(ITarget, IExpressionCompileContext)</a> method declared here is effectively an
 analogue to the <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html#Rezolver_Compilation_Expressions_IExpressionBuilder_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">Build(ITarget, IExpressionCompileContext, IExpressionCompiler)</a>.  Indeed, the default
 implementation resolves <a class="xref" href="Rezolver.Compilation.Expressions.IExpressionBuilder.html">IExpressionBuilder</a> instances to delegate the building of expressions.</p>
@@ -143,7 +141,7 @@ implementation resolves <a class="xref" href="Rezolver.Compilation.Expressions.I
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionCompiler_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionCompiler.Build(Rezolver.ITarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L45">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L43">View Source</a>
   </span>
   <a id="Rezolver_Compilation_Expressions_IExpressionCompiler_Build_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.Build*"></a>
   <h4 id="Rezolver_Compilation_Expressions_IExpressionCompiler_Build_Rezolver_ITarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.Build(Rezolver.ITarget,Rezolver.Compilation.Expressions.IExpressionCompileContext)">Build(ITarget, IExpressionCompileContext)</h4>
@@ -209,7 +207,7 @@ this interface.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression%2CRezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L64">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L62">View Source</a>
   </span>
   <a id="Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambda_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda*"></a>
   <h4 id="Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)">BuildResolveLambda(Expression, IExpressionCompileContext)</h4>
@@ -275,7 +273,7 @@ consistent with the <a class="xref" href="Rezolver.ITarget.html">ITarget</a> fro
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambdaStrong_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression%2CRezolver.Compilation.Expressions.IExpressionCompileContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L75">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L73">View Source</a>
   </span>
   <a id="Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambdaStrong_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong*"></a>
   <h4 id="Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambdaStrong_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_" data-uid="Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)">BuildResolveLambdaStrong(Expression, IExpressionCompileContext)</h4>
@@ -355,7 +353,7 @@ equal to the type of the input expression; and <code>T</code> equal to <a class=
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_Expressions_IExpressionCompiler.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.IExpressionCompiler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L26" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/IExpressionCompiler.cs/#L24" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

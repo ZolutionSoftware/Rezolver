@@ -4,9 +4,8 @@
     <AssemblyName>Rezolver</AssemblyName>
     <AssemblyTitle>Rezolver Core</AssemblyTitle>
     <Description>Rezolver is a fast IOC framework that lets you work the way you want to.  It's easy to use and very extensible.</Description>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.2;net472</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    
     <PackageId>Rezolver</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore</PackageTags>
     <Title>Rezolver IOC</Title>
@@ -19,7 +18,7 @@
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <UseDynamic>False</UseDynamic>
-    <UseDynamic Condition="'$(TargetFramework)' == 'netcoreapp2.2'">True</UseDynamic>
+    <UseDynamic Condition="'$(TargetFramework)' != 'netstandard2.0'">True</UseDynamic>
   </PropertyGroup>
 
 

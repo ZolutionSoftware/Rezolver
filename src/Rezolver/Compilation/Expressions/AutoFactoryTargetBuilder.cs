@@ -8,8 +8,18 @@ using System.Linq.Expressions;
 
 namespace Rezolver.Compilation.Expressions
 {
+    /// <summary>
+    /// Expression builder for the <see cref="AutoFactoryTarget"/> target type.
+    /// </summary>
     public class AutoFactoryTargetBuilder : ExpressionBuilderBase<AutoFactoryTarget>
     {
+        /// <summary>
+        /// Builds the expression for the passed <paramref name="target"/>
+        /// </summary>
+        /// <param name="target">The target for which an expression is to be built</param>
+        /// <param name="context">The compilation context</param>
+        /// <param name="compiler">The compiler</param>
+        /// <returns>An expression.</returns>
         protected override Expression Build(AutoFactoryTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             var (returnType, parameterTypes) = TypeHelpers.DecomposeDelegateType(context.TargetType);

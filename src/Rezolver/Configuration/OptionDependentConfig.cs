@@ -17,7 +17,7 @@ namespace Rezolver.Configuration
     /// <see cref="Configure{TOption}"/>, which is the standard contract expected by a configuration object that configures
     /// a particular option.</typeparam>
     /// <remarks>If you are developing an <see cref="ITargetContainerConfig"/> that you want to be configurable via the use of
-    /// a single option type (see the extension methods in the <see cref="OptionsTargetContainerExtensions"/> class), then inheriting from this
+    /// a single option type then inheriting from this
     /// abstract class instead of directly implementing <see cref="ITargetContainerConfig"/> and <see cref="IDependant"/> is a good idea.
     ///
     /// The default implementation of <see cref="GetDependenciesBase"/> will return a single dependency on the type <see cref="Configure{TOption}"/>

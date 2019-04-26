@@ -15,7 +15,7 @@ namespace Rezolver.Compilation.Expressions
         /// <summary>
         /// This method is a shortcut for building a lambda expression directly from an <see cref="ITarget" />.
         /// It calls <see cref="IExpressionCompiler.Build(ITarget, IExpressionCompileContext)" /> and passes the result to
-        /// <see cref="IExpressionCompiler.BuildResolveLambda(Expression, IExpressionCompileContext)" />, which should yield an
+        /// <see cref="IExpressionCompiler.BuildObjectFactoryLambda(Expression, IExpressionCompileContext)" />, which should yield an
         /// optimised lambda expression for the expression produced from the target which can then be
         /// compiled and used as the factory for that target.
         /// </summary>
@@ -28,7 +28,7 @@ namespace Rezolver.Compilation.Expressions
             if(target == null) throw new ArgumentNullException(nameof(target));
 
             var expression = compiler.Build(target, context);
-            return compiler.BuildResolveLambda(expression, context);
+            return compiler.BuildObjectFactoryLambda(expression, context);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Rezolver.Compilation.Expressions
             if (target == null) throw new ArgumentNullException(nameof(target));
 
             var expression = compiler.Build(target, context);
-            return compiler.BuildResolveLambdaStrong(expression, context);
+            return compiler.BuildStrongFactoryLambda(expression, context);
         }
     }
 }

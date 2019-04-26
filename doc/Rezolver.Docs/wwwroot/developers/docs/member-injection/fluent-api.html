@@ -138,7 +138,7 @@ targets and registrations.</p>
 <pre><code class="lang-cs">// adds an instruction to the behaviour builder to ensure that the member &#39;BindableMember&#39;
 // is bound when an instance is created.  
 behaviourBuilder.Bind(o =&gt; o.BindableMember);
-</code></pre><p>This configures the member to be injected via the equivalent of a <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call for 
+</code></pre><p>This configures the member to be injected via the equivalent of a <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call for 
 the member&#39;s type from the container that is producing the enclosing instance.</p>
 <h3 id="configuring-a-member-binding">Configuring a Member Binding</h3>
 <p>The <code>Bind</code> method&#39;s result - the <a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a> class - allows you to customise how a member 

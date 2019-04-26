@@ -105,16 +105,16 @@
 place!</p>
 <p>Crucial types to look at are:</p>
 <ul>
-<li><p><strong><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></strong> (implements <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>): Stores <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances, and 
-is the main class you&#39;ll use for your &#39;registration&#39; phase.</p>
-</li>
-<li><p><strong><a class="xref" href="Rezolver.Container.html">Container</a></strong> (implements <a class="xref" href="Rezolver.IContainer.html">IContainer</a>): The standard, non-scoped, container you&#39;ll use in 
-your composition root - you can create child scopes from this by calling its implementation of <a class="xref" href="Rezolver.IScopeFactory.html#Rezolver_IScopeFactory_CreateScope">CreateScope()</a>, 
-which returns instances of <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>.  This class uses an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> for its registrations,
-which you can supply construction if required.</p>
-</li>
-<li><p><strong><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></strong> - A disposable <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that also acts as a &#39;root&#39; scope.</p>
-</li>
+<li><strong><a class="xref" href="Rezolver.Container.html">Container</a></strong> : The standard, non-scoped, container.  You can create child scopes from this by calling its
+<a class="xref" href="Rezolver.Container.html#Rezolver_Container_CreateScope_">CreateScope</a> method, which returns instances of <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a> (from which you can resolve instances).
+This class uses an <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> for its registrations, which you can supply on construction if required, or you can
+add registrations to it through its own implementation of that interface - all the methods and properties of which are implemented by
+proxying the inner root target container.</li>
+<li><strong><a class="xref" href="Rezolver.TargetContainer.html">TargetContainer</a></strong> (implements <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>): Stores <a class="xref" href="Rezolver.ITarget.html">ITarget</a> instances, and 
+is the main class you&#39;ll use for your &#39;registration&#39; phase if not registering into your container directly.</li>
+<li><strong><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></strong> - A disposable version of <a class="xref" href="Rezolver.Container.html">Container</a> that also acts as a &#39;root&#39; scope.  If you using singletons
+which are also disposable, then it&#39;s important that you have a long-running scope that sits at the root of your application which
+keeps those objects alive.  Using this as a your root container is the easiest way to achieve that.</li>
 </ul>
 </article>
           </div>

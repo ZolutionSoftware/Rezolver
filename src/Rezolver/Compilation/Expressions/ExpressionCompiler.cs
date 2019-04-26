@@ -12,6 +12,8 @@ namespace Rezolver.Compilation.Expressions
     /// <summary>
     /// Implementation of the <see cref="ITargetCompiler" /> interface which produces factory delegates
     /// by building and compiling expression trees from the <see cref="ITarget" /> objects which are registered.
+    /// 
+    /// This is the default compiler (see remarks).
     /// </summary>
     /// <seealso cref="Rezolver.Compilation.Expressions.IExpressionCompiler" />
     /// <seealso cref="Rezolver.Compilation.ITargetCompiler" />
@@ -19,28 +21,6 @@ namespace Rezolver.Compilation.Expressions
     /// <see cref="Configuration.ExpressionCompilation.Instance"/> to the container either on construction (for example, via the
     /// <see cref="Container.Container(IRootTargetContainer, IContainerConfig)"/> constructor) or via the
     /// <see cref="Container.DefaultConfig"/> - which currently configures this compiler by default anyway.
-    ///
-    /// This class works by directly resolving <see cref="IExpressionBuilder" /> instances which can build an expression for a
-    /// given <see cref="ITarget" /> from the <see cref="IExpressionCompileContext" />.
-    ///
-    /// Typically, this is done by searching for an <see cref="IExpressionBuilder{TTarget}" /> where 'TTarget' is equal to the runtime type
-    /// of the target - e.g. <see cref="Targets.ConstructorTarget" />.  If one cannot be found, it will then search for an <see cref="IExpressionBuilder" />
-    /// whose <see cref="IExpressionBuilder.CanBuild(Type)" /> function returns <c>true</c> for the given target type.
-    ///
-    /// With a correctly configured target container this should resolve to an instance of the <see cref="ConstructorTargetBuilder" />
-    /// class, which implements <c>IExpressionBuilder&lt;ConstructorTarget&gt;</c>.
-    ///
-    /// As such, the compiler can be extended to support extra target types and its existing expression builders can be replaced for customised
-    /// behaviour because they are all resolved from the <see cref="ITargetContainer" /> underpinning a particular <see cref="CompileContext" />.
-    ///
-    /// There is a caveat for this, however: you *cannot* use the traditional targets (<see cref="Targets.ConstructorTarget" /> etc) to extend
-    /// the compiler because they need to be compiled in order to work - which would cause an infinite recursion.
-    ///
-    /// As a result, all expression compilers are registered as options through the <see cref="TargetContainerExtensions.SetOption{TOption, TService}(ITargetContainer, TOption)"/>
-    /// method, or its non-generic equivalent, with the service type being set to be equal to the type of target that the compiler is for.
-    ///
-    /// Using this pattern, it's important that an expression builder is completely threadsafe and recursion safe (since one target's
-    /// compilation might depend on the compilation of another of the same type).
     /// </remarks>
     public class ExpressionCompiler : IExpressionCompiler, ITargetCompiler
     {
@@ -137,17 +117,29 @@ namespace Rezolver.Compilation.Expressions
 
         /// <summary>
         /// Creates a factory delegate from the finalised <paramref name="lambda"/> expression which was
-        /// previously built for a target.
+        /// previously built for the <paramref name="target"/>.  This method is typically used by non-generic resolve operations
+        /// (such as the <see cref="Container"/> class' implementation of <see cref="IServiceProvider.GetService(Type)"/>)
         /// </summary>
         /// <param name="target">The <see cref="ITarget"/> from which the passed <paramref name="lambda"/> was built</param>
         /// <param name="lambda">The lambda expression representing the code to be executed in order to get the underlying
         /// object which will be resolved.  Typically, this is fed directly from the
-        /// <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> implementation.</param>
+        /// <see cref="BuildObjectFactoryLambda(Expression, IExpressionCompileContext)"/> method.</param>
         protected virtual Func<ResolveContext, object> BuildFactory(ITarget target, Expression<Func<ResolveContext, object>> lambda)
         {
             return lambda.Compile();
         }
 
+        /// <summary>
+        /// Creates a strongly-typed factory delegate from the finalised <paramref name="lambda"/> expression
+        /// which was previously built for the <paramref name="target"/>.  This method is typically used by the generic
+        /// resolve operations (such as <see cref="Container.Resolve{TService}()"/> and similar).
+        /// </summary>
+        /// <typeparam name="TService">The type of object that is expected to be returned by the factory delegate.</typeparam>
+        /// <param name="target">The <see cref="ITarget"/> from which the passed <paramref name="lambda"/> was built</param>
+        /// <param name="lambda">The lambda expression representing the code to be executed in order to get the underlying
+        /// object which will be resolved.  Typically, this is fed directly from the 
+        /// <see cref="BuildStrongFactoryLambda(Expression, IExpressionCompileContext)"/> method.</param>
+        /// <returns></returns>
         protected virtual Func<ResolveContext, TService> BuildFactory<TService>(ITarget target, LambdaExpression lambda)
         {
             return (Func<ResolveContext, TService>)lambda.Compile();
@@ -193,7 +185,7 @@ namespace Rezolver.Compilation.Expressions
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="context">The context.</param>
-        public virtual Expression<Func<ResolveContext, object>> BuildResolveLambda(Expression expression, IExpressionCompileContext context)
+        public virtual Expression<Func<ResolveContext, object>> BuildObjectFactoryLambda(Expression expression, IExpressionCompileContext context)
         {
             expression = BuildFactoryBody(expression, context);
 
@@ -207,13 +199,13 @@ namespace Rezolver.Compilation.Expressions
         }
 
         /// <summary>
-        /// Equivalent to <see cref="BuildResolveLambda(Expression, IExpressionCompileContext)"/> except this produces a lambda whose delegate
+        /// Equivalent to <see cref="BuildObjectFactoryLambda(Expression, IExpressionCompileContext)"/> except this produces a lambda whose delegate
         /// type is strongly typed for the type of object that's returned (instead of just being 'object').
         /// </summary>
         /// <param name="expression">The expression.</param>
         /// <param name="context">The context.</param>
         /// <returns></returns>
-        public LambdaExpression BuildResolveLambdaStrong(Expression expression, IExpressionCompileContext context)
+        public LambdaExpression BuildStrongFactoryLambda(Expression expression, IExpressionCompileContext context)
         {
             return Expression.Lambda(
                 typeof(Func<,>).MakeGenericType(typeof(ResolveContext), expression.Type),
