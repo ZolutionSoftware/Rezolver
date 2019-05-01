@@ -260,6 +260,12 @@ namespace Rezolver
 
             typeList.Add(type);
         }
+
+        /// <summary>
+        /// Implementation of <see cref="ICovariantTypeIndex.SelectTypes(Type)"/>
+        /// </summary>
+        /// <param name="type">The type for which a search is to be run.</param>
+        /// <returns>A <see cref="TargetTypeSelector"/></returns>
         public TargetTypeSelector SelectTypes(Type type)
         {
             // this function is complicated by the fact that searching and registering types are asymmetrically parallel.

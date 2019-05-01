@@ -94,15 +94,28 @@ namespace Rezolver
                 : Parent.FetchAll(type);
         }
 
+        /// <summary>
+        /// Overrides the base method to record that registrations have been added, and that 
+        /// the <see cref="Fetch(Type)"/> and <see cref="FetchAll(Type)"/> methods should
+        /// combine results from both this and the <see cref="Parent"/> target container.
+        /// </summary>
+        /// <param name="target">The target that was registered</param>
+        /// <param name="serviceType">The type against which the <paramref name="target"/>
+        /// was registered</param>
         protected override void OnTargetRegistered(ITarget target, Type serviceType)
         {
-            if(_hasRegistrations) _hasRegistrations = true;
+            if(!_hasRegistrations) _hasRegistrations = true;
             base.OnTargetRegistered(target, serviceType);
         }
 
+        /// <summary>
+        /// Overrides the base method to record that a target container has been registered.
+        /// </summary>
+        /// <param name="container">The target container that was registered</param>
+        /// <param name="type">The type against which the target container was registered.</param>
         protected override void OnTargetContainerRegistered(ITargetContainer container, Type type)
         {
-            if (_hasRegistrations) _hasRegistrations = true;
+            if (!_hasRegistrations) _hasRegistrations = true;
             base.OnTargetContainerRegistered(container, type);
         }
     }
