@@ -126,11 +126,16 @@ namespace Rezolver.Compilation.Expressions
                 Extract.Method((ResolveContext r) => r.Resolve<object>()).GetGenericMethodDefinition();
 
             /// <summary>
+            /// Gets a method call expression which will activate the given instance in the current scope
+            /// (accessed through the <see cref="ResolveContext"/> identified by the <paramref name="context"/> expression).
             /// 
+            /// Note - the method being called is not publicly accessible.
             /// </summary>
-            /// <param name="context"></param>
-            /// <param name="instance"></param>
-            /// <returns></returns>
+            /// <param name="context">Represents the <see cref="ResolveContext"/> on which the method will be invoked.</param>
+            /// <param name="instance">The instance to be activated.  If the context's active scope is an instance-tracking
+            /// scope, and the instance is <see cref="IDisposable"/>, then the instance will be marked for disposal when
+            /// the scope is disposed.</param>
+            /// <returns>A <see cref="MethodCallExpression"/></returns>
             public static MethodCallExpression Call_CurrentScope_ActivateImplicit(
                 Expression context,
                 Expression instance)
@@ -141,6 +146,17 @@ namespace Rezolver.Compilation.Expressions
                     instance);
             }
 
+            /// <summary>
+            /// Gets a method call expression which will activate the given instance in the root scope
+            /// (accessed through the <see cref="ResolveContext"/> identified by the <paramref name="context"/> expression).
+            /// 
+            /// Note - the method being called is not publicly accessible.
+            /// </summary>
+            /// <param name="context">Represents the <see cref="ResolveContext"/> on which the method will be invoked.</param>
+            /// <param name="instance">The instance to be activated.  If the context's active scope is an instance-tracking
+            /// scope, and the instance is <see cref="IDisposable"/>, then the instance will be marked for disposal when
+            /// the scope is disposed.</param>
+            /// <returns>A <see cref="MethodCallExpression"/></returns>
             public static MethodCallExpression Call_RootScope_ActivateImplicit(
                 Expression context,
                 Expression instance)
@@ -151,6 +167,21 @@ namespace Rezolver.Compilation.Expressions
                     instance);
             }
 
+            /// <summary>
+            /// Gets a method call expression which will either fetch an existing, or activate a new, explicitly scoped 
+            /// instance in the current scope (accessed through the <see cref="ResolveContext"/> identified by the 
+            /// <paramref name="context"/> expression).
+            /// The passed <paramref name="instanceFactory"/> is used to create the new instance if the scope is not
+            /// already tracking an instance.
+            /// 
+            /// Note - the method being called is not publicly accessible.
+            /// </summary>
+            /// <param name="context">Represents the <see cref="ResolveContext"/> on which the method will be invoked.</param>
+            /// <param name="targetId">Required - the <see cref="ITarget.Id"/> of the <see cref="ITarget"/> from which 
+            /// the <paramref name="instanceFactory"/> was built.</param>
+            /// <param name="instanceFactory">A lambda expression representing the factory method that should be used to create a 
+            /// new instance if one does not already exist within the scope.</param>
+            /// <returns>A <see cref="MethodCallExpression"/></returns>
             public static MethodCallExpression Call_CurrentScope_ActivateExplicit(
                 Expression context,
                 int targetId,

@@ -78,11 +78,15 @@ namespace Rezolver
             throw new NotSupportedException($"Cannot create instance of {context.RequestedType} from target #{targetId} - Explicitly scoped objects are not supported by the default {nameof(ContainerScope)} - either manually create a scope, or use the {nameof(ScopedContainer)} as your container type");
         }
 
+        /// <summary>
+        /// Creates a new scope from which instances can be resolved, isolated from the current scope.
+        /// </summary>
+        /// <returns>A new scope.</returns>
         public virtual ContainerScope CreateScope()
         {
             // note that the new scope is set as its own root if this scope's Root is not 
             // a 'full' instance-tracking scope.
-            return new ConcurrentContainerScope(this, !(this._root is ConcurrentContainerScope));
+            return new DisposingContainerScope(this, !(this._root is DisposingContainerScope));
         }
 
         /// <summary>
@@ -129,21 +133,45 @@ namespace Rezolver
             return result;
         }
 
+        /// <summary>
+        /// Resolves an instance of the <paramref name="serviceType"/> from the container.
+        /// </summary>
+        /// <param name="serviceType">The type of object to resolve.</param>
+        /// <returns>An instance of the type <paramref name="serviceType"/> built according to the 
+        /// registrations in this container.</returns>
         public object Resolve(Type serviceType)
         {
             return _container.Resolve(new ResolveContext(this, serviceType));
         }
 
+        /// <summary>
+        /// Resolves an instance of <typeparamref name="TService"/> from the container.
+        /// </summary>
+        /// <typeparam name="TService">The type of object to resolve.</typeparam>
+        /// <returns>An instance of the type <typeparamref name="TService"/> built according to the
+        /// registrations in this container.</returns>
         public TService Resolve<TService>()
         {
             return _container.ResolveInternal<TService>(new ResolveContext(this, typeof(TService)));
         }
 
+        /// <summary>
+        /// Resolves an enumerable of zero or more instances of <paramref name="serviceType"/> from the
+        /// container.
+        /// </summary>
+        /// <param name="serviceType">Type of objects to resolve.</param>
+        /// <returns>An enumerable containing zero or more instances of the type <paramref name="serviceType"/>.</returns>
         public IEnumerable ResolveMany(Type serviceType)
         {
             return (IEnumerable)_container.Resolve(new ResolveContext(this, typeof(IEnumerable<>).MakeGenericType(serviceType)));
         }
 
+        /// <summary>
+        /// Resolves an enumerable of zero or more instances of <typeparamref name="TService"/> from the
+        /// container.
+        /// </summary>
+        /// <typeparam name="TService">Type of objects to resolve.</typeparam>
+        /// <returns>An enumerable containing zero or more instances of the type <typeparamref name="TService"/>.</returns>
         public IEnumerable<TService> ResolveMany<TService>()
         {
             return _container.ResolveInternal<IEnumerable<TService>>(new ResolveContext(this, typeof(IEnumerable<TService>)));
@@ -162,18 +190,18 @@ namespace Rezolver
     /// In order to get object lifetime management from a container whose scope is set to an instance of this type,
     /// a new scope must be created from this one.
     /// </summary>
-    public class DisposingContainerScope : ContainerScope
+    public class NonTrackingContainerScope : ContainerScope
     {
         private LockedList<ContainerScope> _childScopes
             = new LockedList<ContainerScope>(64);
 
-        internal DisposingContainerScope(Container container)
+        internal NonTrackingContainerScope(Container container)
             : base(container)
         {
 
         }
 
-        internal DisposingContainerScope(ContainerScope parent, bool isRoot)
+        internal NonTrackingContainerScope(ContainerScope parent, bool isRoot)
             : base(parent, isRoot)
         {
 
@@ -201,9 +229,16 @@ namespace Rezolver
             }
         }
 
+        /// <summary>
+        /// Creates a new child scope from this scope.  The new scope will use the same container as this one,
+        /// but will have its own lifetime, and will track its own instances of any 'scoped' objects.
+        /// 
+        /// When this scope is disposed, the new scope will be disposed also - unless it has already been disposed.
+        /// </summary>
+        /// <returns></returns>
         public sealed override ContainerScope CreateScope()
         {
-            if (_isDisposed) throw new ObjectDisposedException(nameof(DisposingContainerScope));
+            if (_isDisposed) throw new ObjectDisposedException(nameof(NonTrackingContainerScope));
 
             var scope = base.CreateScope();
             this._childScopes.Add(scope);
@@ -211,7 +246,10 @@ namespace Rezolver
         }
     }
 
-    public sealed class ConcurrentContainerScope : DisposingContainerScope
+    /// <summary>
+    /// Fully functional container scope.  Supports tracking of implicitly and explicitly scoped objects to enable disposal.
+    /// </summary>
+    public sealed class DisposingContainerScope : NonTrackingContainerScope
     {
         // TODO: change this to use a different 'key' which includes the factory
         // so that we don't need a closure to create the lazy.
@@ -243,13 +281,24 @@ namespace Rezolver
             }
         }
 
-        public ConcurrentContainerScope(Container container)
+        /// <summary>
+        /// Creates a new instance of the <see cref="DisposingContainerScope"/> class.
+        /// </summary>
+        /// <param name="container">The container that this scope will use to resolve instances.</param>
+        public DisposingContainerScope(Container container)
             : base(container)
         {
             _canActivate = true;
         }
 
-        public ConcurrentContainerScope(ContainerScope parent, bool isRoot)
+        /// <summary>
+        /// Creates a new instance of the <see cref="DisposingContainerScope"/> class that
+        /// is optionally treated as a root scope.  Typically, root scopes belong to containers
+        /// so that there is always a scope on-hand.
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="isRoot"></param>
+        public DisposingContainerScope(ContainerScope parent, bool isRoot)
             : base(parent, isRoot)
         {
             _canActivate = true;
@@ -259,7 +308,7 @@ namespace Rezolver
         {
             if (instance is IDisposable)
             {
-                if (_isDisposed) throw new ObjectDisposedException(nameof(ConcurrentContainerScope));
+                if (_isDisposed) throw new ObjectDisposedException(nameof(DisposingContainerScope));
 
                 this._implicitlyScopedObjects.Add(new ScopedObject(instance));
             }
@@ -269,7 +318,7 @@ namespace Rezolver
 
         internal override T ActivateExplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
         {
-            if (_isDisposed) throw new ObjectDisposedException(nameof(ConcurrentContainerScope));
+            if (_isDisposed) throw new ObjectDisposedException(nameof(DisposingContainerScope));
 
             var key = new TypeAndTargetId(typeof(T), targetId);
             // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.

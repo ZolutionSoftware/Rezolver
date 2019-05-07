@@ -34,7 +34,7 @@ namespace Rezolver
             : base(targets)
         {
             // annoying: double assignment here (base already initialises it...)
-            _scope = new ConcurrentContainerScope(this);
+            _scope = new DisposingContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 

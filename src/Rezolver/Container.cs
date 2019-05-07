@@ -84,7 +84,7 @@ namespace Rezolver
         /// after construction, through the <see cref="Targets"/> property.</param>
         protected Container(IRootTargetContainer targets = null)
         {
-            _scope = new DisposingContainerScope(this);
+            _scope = new NonTrackingContainerScope(this);
             Targets = targets ?? new TargetContainer();
 #if !USEDYNAMIC
             _cache = new ConcurrentCache(GetWorker);
@@ -115,7 +115,7 @@ namespace Rezolver
                 throw new InvalidOperationException("This constructor must not be used by derived types because applying configuration will most likely trigger calls to virtual methods on this instance.  Please use the protected constructor and apply configuration explicitly in your derived class");
             }
 
-            _scope = new DisposingContainerScope(this);
+            _scope = new NonTrackingContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 
@@ -147,7 +147,7 @@ namespace Rezolver
 
         /// <summary>
         /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container,
-        /// using the scope from the <paramref name="context"/>
+        /// using the scope from the <paramref name="context"/>.
         /// </summary>
         /// <param name="context">The resolve context</param>
         /// <returns>An instance of the type that was requested.</returns>
@@ -161,10 +161,10 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Resolves an instances of the given type using this container's scope.
+        /// Resolves an instance of the given <paramref name="serviceType"/> using this context's scope.
         /// </summary>
-        /// <param name="serviceType"></param>
-        /// <returns></returns>
+        /// <param name="serviceType">The type of service required.</param>
+        /// <returns>An object compatible with the <paramref name="serviceType"/></returns>
         public object Resolve(Type serviceType)
         {
 #if !USEDYNAMIC
@@ -175,11 +175,12 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Resolves an instance of the given type for the given scope
+        /// Resolves an instance of the given <paramref name="serviceType"/> for the given <paramref name="scope"/>.
         /// </summary>
-        /// <param name="serviceType"></param>
-        /// <param name="scope"></param>
-        /// <returns></returns>
+        /// <param name="serviceType">The type of service required.</param>
+        /// <param name="scope">The scope to be used for the operation.  Will be used for all scoping for the
+        /// created object and any dependencies created for it.</param>
+        /// <returns>An object compatible with the <paramref name="serviceType"/></returns>
         public object Resolve(Type serviceType, ContainerScope scope)
         {
             // resolve, assuming a different scope to this container's scope
@@ -187,9 +188,9 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Strongly-typed resolve operation
+        /// Resolves an instance of <typeparamref name="TService"/> using the current container and scope.
         /// </summary>
-        /// <typeparam name="TService">The type of object of which an instance is required.</typeparam>
+        /// <typeparam name="TService">The type of object required.</typeparam>
         /// <returns>The instance.</returns>
         public TService Resolve<TService>()
         {
@@ -202,11 +203,13 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// 
+        /// Resolves an instance of <typeparamref name="TService"/> using the current container but the 
+        /// supplied <paramref name="scope"/>.
         /// </summary>
-        /// <typeparam name="TService"></typeparam>
-        /// <param name="scope"></param>
-        /// <returns></returns>
+        /// <typeparam name="TService">The type of object required.</typeparam>
+        /// /// <param name="scope">The scope to be used for the operation.  Will be used for all scoping for the
+        /// created object and any dependencies created for it.</param>
+        /// <returns>The instance.</returns>
         public TService Resolve<TService>(ContainerScope scope)
         {
 #if !USEDYNAMIC
@@ -217,6 +220,12 @@ namespace Rezolver
 #endif
         }
 
+        /// <summary>
+        /// Resolves an <see cref="IEnumerable{T}"/> of the <paramref name="serviceType"/> using the current container
+        /// and scope.
+        /// </summary>
+        /// <param name="serviceType">The type of object required.</param>
+        /// <returns>An enumerable containing zero or more instances of services compatible with <paramref name="serviceType"/></returns>
         public IEnumerable ResolveMany(Type serviceType)
         {
 #if !USEDYNAMIC
@@ -226,6 +235,12 @@ namespace Rezolver
 #endif
         }
 
+        /// <summary>
+        /// Resolves an <see cref="IEnumerable{T}"/> of the <typeparamref name="TService"/> using the current container
+        /// and scope.
+        /// </summary>
+        /// <typeparam name="TService">the type of object required.</typeparam>
+        /// <returns>A strongly-typed enumerable containing zero or more instances of services compatible with <typeparamref name="TService"/></returns>
         public IEnumerable<TService> ResolveMany<TService>()
         {
             return Resolve<IEnumerable<TService>>();
@@ -279,7 +294,7 @@ namespace Rezolver
         /// <summary>
         /// Returns <c>true</c> if a service registration can be found for the given <paramref name="serviceType"/>
         /// </summary>
-        /// <param name="serviceType"></param>
+        /// <param name="serviceType">The type of service</param>
         /// <returns></returns>
         public bool CanResolve(Type serviceType)
         {
