@@ -3,12 +3,9 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Rezolver.Compilation;
 using Rezolver.Compilation.Expressions;
 using Rezolver.Configuration;
-using Rezolver.Sdk;
 
 namespace Rezolver
 {
@@ -32,8 +29,8 @@ namespace Rezolver
 
         /// <summary>
         /// Replaces any existing <see cref="IContainerConfig{ITargetCompiler}"/> with the passed <paramref name="configuration"/> -
-        /// thus ensuring that any <see cref="IContainer"/> objects which are initialised with the config collection will use whichever
-        /// compiler that is configured when the configuration's <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method
+        /// thus ensuring that any <see cref="Container"/> objects which are initialised with the config collection will use whichever
+        /// compiler that is configured when the configuration's <see cref="IContainerConfig.Configure(Container, IRootTargetContainer)"/> method
         /// is called.
         /// </summary>
         /// <param name="collection"></param>

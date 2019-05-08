@@ -1,4 +1,4 @@
-﻿#if USEDYNAMIC
+﻿#if ENABLE_IL_EMIT
 using System.Reflection;
 using System.Reflection.Emit;
 

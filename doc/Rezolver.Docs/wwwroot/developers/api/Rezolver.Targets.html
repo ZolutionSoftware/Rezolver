@@ -11,7 +11,7 @@
   	<meta name="title" content="Namespace Rezolver.Targets
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -135,7 +133,7 @@ available services and/or any named arguments which might been provided up front
 (produced by <a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_DecoratedTarget">DecoratedTarget</a>) with another (<a class="xref" href="Rezolver.Targets.DecoratorTarget.html#Rezolver_Targets_DecoratorTarget_InnerTarget">InnerTarget</a>).</p>
 <p>NOTE - You shouldn&apos;t register or otherwise create instances of this target unless you absolutely
 know what you&apos;re doing.  Rather, decorators should be registered using the extension method
-<a class="xref" href="Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
+<a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a>
 or its non-generic alternative because the target needs a <a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>
 to work properly (the creation of which is automatically handled by these extension methods).</p>
 </section>
@@ -162,6 +160,7 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
       <h4><a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a></h4>
       <section><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose
 individual items are built by ITarget instances.</p>
+<p>Note that this target is <em>not</em> used in Rezolver&apos;s implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> injection.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></h4>
       <section><p>Implements <a class="xref" href="Rezolver.ITarget.html">ITarget</a> by wrapping a single instance that&apos;s already been constructed by application code.</p>
@@ -178,8 +177,8 @@ into an object of type <a class="xref" href="Rezolver.Targets.ProjectionTarget.h
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ResolvedTarget.html">ResolvedTarget</a></h4>
       <section><p>Represents a target that is rezolved statically at compile time via the <a class="xref" href="Rezolver.Compilation.ICompileContext.html">ICompileContext</a>, or dynamically
-(at &apos;resolve time&apos;) from the <a class="xref" href="Rezolver.IContainer.html">IContainer</a> that is attached to the current <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> when
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> is called.</p>
+(at &apos;resolve time&apos;) from the <a class="xref" href="Rezolver.Container.html">Container</a> that is attached to the current <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> when
+<a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> is called.</p>
 <p>This is the most common way that we bind constructor parameters, for example - i.e. &apos;I want an
 <code>IService</code> instance - go get it&apos;.</p>
 </section>

@@ -46,9 +46,9 @@ namespace Rezolver.Configuration
             // instances of that new behaviour type and this class will automatically use them.
 
             var rezolverAssembly = typeof(Container).Assembly;
-            // the well-known target types for compilation are ICompiledTarget, plus all the concrete target types in Rezolver.Targets
+            // the well-known target types for compilation are IInstanceProvider/IFactoryProvider, plus all the concrete target types in Rezolver.Targets
             foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
-                t == typeof(ICompiledTarget) ||
+                t == typeof(IInstanceProvider) || t == typeof(IFactoryProvider) ||
                 (t.Namespace == typeof(ObjectTarget).Namespace && t.IsPublic && !t.IsAbstract && t.IsClass)))
             {
                 var builderInterfaceType = typeof(IExpressionBuilder<>).GetTypeInfo().MakeGenericType(type);

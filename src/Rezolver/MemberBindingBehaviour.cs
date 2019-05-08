@@ -2,9 +2,6 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Rezolver.Targets;
 
 namespace Rezolver
@@ -17,7 +14,8 @@ namespace Rezolver
     /// </summary>
     /// <remarks>The <see cref="ConstructorTarget"/> and <see cref="GenericConstructorTarget"/> classes can be provided
     /// with an <see cref="IMemberBindingBehaviour"/> when created.  If one is not set, then instead they will attempt to
-    /// get their behaviour via the options API (see <see cref="OptionsTargetContainerExtensions"/>) from the
+    /// get their behaviour via the options API (e.g. <see cref="TargetContainerExtensions.GetOption{TOption}(ITargetContainer, TOption)"/>
+    /// and <see cref="TargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>) from the
     /// <see cref="ITargetContainer"/> in which they have been registered.
     /// </remarks>
     public static class MemberBindingBehaviour

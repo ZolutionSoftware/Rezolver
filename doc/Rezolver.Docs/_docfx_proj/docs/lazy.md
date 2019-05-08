@@ -30,7 +30,7 @@ With this in place, we can adjust our earlier attempt, and it'll work:
 
 ## Simplifying
 
-As you can see from that example, we still need to use the @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc* method to make it possible
+As you can see from that example, we still need to use the @Rezolver.RootTargetContainerExtensions.RegisterAutoFunc* method to make it possible
 for the `Lazy<IFoo>` to be created (or we could register our own `Func<T>` to be used instead).
 
 Instead, if we also [enable Automatic `Func<T>` injection](autofactories.md#automatic-functreturn-injection) using the @Rezolver.Options.EnableAutoFuncInjection 

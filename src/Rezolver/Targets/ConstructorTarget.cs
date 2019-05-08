@@ -3,10 +3,8 @@
 
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Compilation;
 
@@ -22,7 +20,7 @@ namespace Rezolver.Targets
     /// <remarks>Although you can create this target directly through the
     /// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[], IDictionary{string, ITarget})"/> constructor,
     /// you're more likely to create it through factory methods such as <see cref="Target.ForType{T}(IMemberBindingBehaviour)"/> or, more likely still,
-    /// extension methods such as <see cref="RegisterTypeTargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
+    /// extension methods such as <see cref="TargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
     /// your application's container setup phase.
     ///
     /// To compile this target, an <see cref="Compilation.ITargetCompiler"/> should first call the <see cref="Bind(ICompileContext)"/> method,
@@ -80,7 +78,7 @@ namespace Rezolver.Targets
         /// <see cref="Bind(ICompileContext)"/> method, via the Options API.
         /// </summary>
         /// <remarks>The container default <see cref="IMemberBindingBehaviour"/> can be configured by setting it as an
-        /// option using the <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>
+        /// option using the <see cref="TargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>
         /// extension method - passing an instance of member binding behaviour to be used as the default.
         ///
         /// The global default, unconfigured, behaviour is not to inject any members

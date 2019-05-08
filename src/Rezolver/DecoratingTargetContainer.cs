@@ -5,8 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver
@@ -15,9 +13,9 @@ namespace Rezolver
     /// Implements service decoration in an <see cref="ITargetContainer"/>, producing instances of the
     /// <see cref="DecoratorTarget"/> when <see cref="Fetch(Type)"/> or <see cref="FetchAll(Type)"/> are called.
     ///
-    /// The best way to add a decorator to your target container is to use the extension methods in
-    /// <see cref="DecoratorTargetContainerExtensions"/> - which provide simple shortcuts for creating
-    /// decoration registrations.
+    /// The best way to add a decorator to your target container is to use the extension methods like
+    /// <see cref="RootTargetContainerExtensions.RegisterDecorator{TDecorator, TDecorated}(IRootTargetContainer)"/> 
+    /// and its overloads.
     /// </summary>
     /// <remarks>This class does not implement <see cref="ITarget"/>, rather
     /// it's an <see cref="ITargetContainer"/> into which other targets can be added,

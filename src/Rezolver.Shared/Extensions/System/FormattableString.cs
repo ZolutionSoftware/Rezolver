@@ -1,11 +1,4 @@
-﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
-// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 #if NET451
 // SHIM FOR FormattableStringFactory and FormattableString for Net451 builds
 // Courtesy of http://stackoverflow.com/a/32077216/157701

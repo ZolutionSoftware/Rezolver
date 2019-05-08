@@ -20,6 +20,10 @@ namespace Rezolver.Targets
         /// </summary>
         public override Type DeclaredType { get; }
 
+        /// <summary>
+        /// Always returns <see cref="ScopeBehaviour.None"/>
+        /// </summary>
+
         public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
 
         /// <summary>

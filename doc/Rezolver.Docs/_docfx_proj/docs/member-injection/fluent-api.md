@@ -58,7 +58,7 @@ As mentioned above, once created, you can then start adding properties/fields to
 behaviourBuilder.Bind(o => o.BindableMember);
 ```
 
-This configures the member to be injected via the equivalent of a @Rezolver.IContainer.Resolve* call for 
+This configures the member to be injected via the equivalent of a @Rezolver.Container.Resolve* call for 
 the member's type from the container that is producing the enclosing instance.
 
 ### Configuring a Member Binding
@@ -131,7 +131,7 @@ Consider the `Has2InjectableMembers` type that we've used in the [options](optio
 [!code-csharp[Has2InjectableMembers.cs](../../../../../test/Rezolver.Tests.Examples/Types/Has2InjectableMembers.cs#example)]
 
 First, we'll configure just one of the members for injection using the techniques shown above, but as we
-register the type with the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})
+register the type with the @Rezolver.TargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})
 extension method:
 
 [!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example6)]

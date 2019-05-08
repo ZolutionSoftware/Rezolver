@@ -11,7 +11,7 @@
   	<meta name="title" content="Class AutoFactoryTargetBuilder
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -106,7 +104,8 @@
   
   <h1 id="Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder" data-uid="Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder" class="text-break">Class AutoFactoryTargetBuilder
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Expression builder for the <a class="xref" href="Rezolver.Targets.AutoFactoryTarget.html">AutoFactoryTarget</a> target type.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -129,7 +128,10 @@
       <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_Rezolver_Compilation_Expressions_IExpressionBuilder_TTarget__Build__0_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_">ExpressionBuilderBase&lt;AutoFactoryTarget&gt;.IExpressionBuilder&lt;AutoFactoryTarget&gt;.Build(AutoFactoryTarget, IExpressionCompileContext, IExpressionCompiler)</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_Rezolver_ITarget_">ExpressionBuilderBase&lt;AutoFactoryTarget&gt;.CanBuild(ITarget)</a>
+      <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase-1.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_1_CanBuild_System_Type_">ExpressionBuilderBase&lt;AutoFactoryTarget&gt;.CanBuild(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetCompileCounts">ExpressionBuilderBase.GetCompileCounts()</a>
     </div>
     <div>
       <a class="xref" href="Rezolver.Compilation.Expressions.ExpressionBuilderBase.html#Rezolver_Compilation_Expressions_ExpressionBuilderBase_GetContextCompiler_Rezolver_Compilation_Expressions_IExpressionCompileContext_">ExpressionBuilderBase.GetContextCompiler(IExpressionCompileContext)</a>
@@ -178,11 +180,12 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder_Build_Rezolver_Targets_AutoFactoryTarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build(Rezolver.Targets.AutoFactoryTarget%2CRezolver.Compilation.Expressions.IExpressionCompileContext%2CRezolver.Compilation.Expressions.IExpressionCompiler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Compilation/Expressions/AutoFactoryTargetBuilder.cs/#L13">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/AutoFactoryTargetBuilder.cs/#L23">View Source</a>
   </span>
   <a id="Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder_Build_" data-uid="Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build*"></a>
   <h4 id="Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder_Build_Rezolver_Targets_AutoFactoryTarget_Rezolver_Compilation_Expressions_IExpressionCompileContext_Rezolver_Compilation_Expressions_IExpressionCompiler_" data-uid="Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder.Build(Rezolver.Targets.AutoFactoryTarget,Rezolver.Compilation.Expressions.IExpressionCompileContext,Rezolver.Compilation.Expressions.IExpressionCompiler)">Build(AutoFactoryTarget, IExpressionCompileContext, IExpressionCompiler)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Builds the expression for the passed <code data-dev-comment-type="paramref" class="paramref">target</code></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -201,17 +204,20 @@
       <tr>
         <td><a class="xref" href="Rezolver.Targets.AutoFactoryTarget.html">AutoFactoryTarget</a></td>
         <td><span class="parametername">target</span></td>
-        <td></td>
+        <td><p>The target for which an expression is to be built</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompileContext.html">IExpressionCompileContext</a></td>
         <td><span class="parametername">context</span></td>
-        <td></td>
+        <td><p>The compilation context</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="Rezolver.Compilation.Expressions.IExpressionCompiler.html">IExpressionCompiler</a></td>
         <td><span class="parametername">compiler</span></td>
-        <td></td>
+        <td><p>The compiler</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -226,7 +232,8 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a></td>
-        <td></td>
+        <td><p>An expression.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -249,7 +256,7 @@
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Compilation_Expressions_AutoFactoryTargetBuilder.md&amp;value=---%0Auid%3A%20Rezolver.Compilation.Expressions.AutoFactoryTargetBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Compilation/Expressions/AutoFactoryTargetBuilder.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Compilation/Expressions/AutoFactoryTargetBuilder.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -36,7 +32,7 @@ namespace Rezolver.Docs
 
         public void ConfigureContainer(IRootTargetContainer targets)
         {
-            Console.WriteLine("Hello");
+            //Console.WriteLine("Hello");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +58,15 @@ namespace Rezolver.Docs
                     name: "errors",
                     template: "Error/{statusCode?}",
                     defaults: new { controller = "Home", action = "Error" });
+
+                if (env.IsDevelopment())
+                {
+                    routes.MapRoute(
+                        name: "containerdiags",
+                        template: "Diagnostics/{action}",
+                        defaults: new { controller = "Diagnostics", action = "Index" });
+                }
+
                 routes.MapRoute(
                     name: "default",
                     template: "/",

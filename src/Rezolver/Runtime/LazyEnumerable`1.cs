@@ -43,6 +43,11 @@ namespace Rezolver.Runtime
             this._factories = factories.OfType<Func<ResolveContext, T>>().ToArray();
         }
 
+        /// <summary>
+        /// The method that is used to produce instances by the container.
+        /// </summary>
+        /// <param name="context">The current context</param>
+        /// <returns>An enumerable which produces each instance as it is enumerated.</returns>
         public IEnumerable<T> GetInstances(ResolveContext context)
         {
             foreach(var factory in _factories)

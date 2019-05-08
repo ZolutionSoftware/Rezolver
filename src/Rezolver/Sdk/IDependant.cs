@@ -2,7 +2,6 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
-using System;
 using System.Collections.Generic;
 
 namespace Rezolver.Sdk

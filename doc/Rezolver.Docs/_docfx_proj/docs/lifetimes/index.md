@@ -1,12 +1,12 @@
 ﻿# Object Lifetimes
 
 As with most IOC containers, Rezolver understands three primary lifetimes for the objects it produces, including 
-support for automatic disposal of `IDisposable` objects when an @Rezolver.IContainerScope is used.
+support for automatic disposal of `IDisposable` objects when an @Rezolver.ContainerScope is used.
 
 # Transient Objects
 
-This is what's ultimately produced by a Rezolver @Rezolver.IContainer most of the time - a transient object is created when
-needed and thrown away when no longer required.  It's the same as using `new` to create an instance inside a function and then allowing 
+This is what's ultimately produced by a Rezolver @Rezolver.Container most of the time - a transient object is created when
+requested from the container.  It's the same as using `new` to create an instance inside a function and then allowing 
 it to go out of scope when that function returns.
 
 [Read more about transient objects](transient.md).
@@ -28,7 +28,7 @@ Unsurprisingly, understanding scoped objects requires an understanding of scopes
 At its most fundamental level, a scope is simply a disposable 'bag' of objects which is created at the start of a particular process 
 (e.g when a web request is received, or when a job is pulled off a job queue) and which is then disposed when that process completes.
 
-Most IOC containers refer to these as *lifetime scopes* (*__note:__ 'container scopes' in Rezolver, implemented by the @Rezolver.IContainerScope interface*) 
+Most IOC containers refer to these as *lifetime scopes* (*__note:__ 'container scopes' in Rezolver, implemented by <xref:Rezolver.ContainerScope>) 
 and they are most often used (but not exclusively) to track objects that implement the `IDisposable` interface in order that they can be 
 disposed without the developer explicitly having to do so themselves - often because the developer can never really be sure that she has 
 *definitely* finished with that object.

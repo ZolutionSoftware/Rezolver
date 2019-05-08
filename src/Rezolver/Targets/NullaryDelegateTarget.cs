@@ -3,9 +3,7 @@
 
 
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Rezolver.Targets
 {
@@ -13,7 +11,7 @@ namespace Rezolver.Targets
     /// A special delegate target which explicitly allows direct resolving (via <see cref="IDirectTarget"/>) without compilation.
     ///
     /// Created by the factory and registration functions e.g. <see cref="Target.ForDelegate{TResult}(Func{ResolveContext, TResult}, Type, ScopeBehaviour, ScopePreference)"/>
-    /// or <see cref="DelegateTargetContainerExtensions.RegisterDelegate{TResult}(ITargetContainer, Func{ResolveContext, TResult}, Type, ScopeBehaviour, ScopePreference)"/>.
+    /// or <see cref="TargetContainerExtensions.RegisterDelegate{TResult}(ITargetContainer, Func{ResolveContext, TResult}, Type, ScopeBehaviour, ScopePreference)"/>.
     /// </summary>
     internal class NullaryDelegateTarget : DelegateTarget, IDirectTarget
     {
@@ -32,7 +30,7 @@ namespace Rezolver.Targets
             }
 
             this._strongDelegate = Expression.Lambda<Func<object>>(Expression.Convert(
-                Expression.Invoke(Expression.Constant(factory)), typeof(object))).CompileForRezolver();
+                Expression.Invoke(Expression.Constant(factory)), typeof(object))).Compile();
         }
 
         object IDirectTarget.GetValue()

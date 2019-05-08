@@ -11,7 +11,7 @@
   	<meta name="title" content="Interface IScopeFactory
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -113,7 +111,8 @@
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_IScopeFactory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IScopeFactory</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions&quot;, true)]
+public interface IScopeFactory</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
@@ -122,7 +121,7 @@
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IScopeFactory_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.IScopeFactory.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IScopeFactory.cs/#L20">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L161">View Source</a>
   </span>
   <a id="Rezolver_IScopeFactory_CreateScope_" data-uid="Rezolver.IScopeFactory.CreateScope*"></a>
   <h4 id="Rezolver_IScopeFactory_CreateScope" data-uid="Rezolver.IScopeFactory.CreateScope">CreateScope()</h4>
@@ -132,7 +131,8 @@ created as a child scope of that scope.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IContainerScope CreateScope()</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;This interface is now obsolete - Container, ContainerScope and ResolveContext now have dedicated CreateScope() functions&quot;, true)]
+IContainerScope CreateScope()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -159,7 +159,7 @@ created as a child scope of that scope.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_IScopeFactory.md&amp;value=---%0Auid%3A%20Rezolver.IScopeFactory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IScopeFactory.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L154" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

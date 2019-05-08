@@ -43,10 +43,9 @@ namespace Rezolver.Compilation.Expressions
                 // this should generate a missing dependency exception if executed
                 // or, might actually yield a result if registrations have been added
                 // after the expression is compiled.
-                staticExpr = Methods.CallResolveContext_Resolve_NewContainer_Strong_Method(
+                staticExpr = Methods.CallResolveContext_Resolve_Strong_Method(
                     context.ResolveContextParameterExpression,
-                    target.DeclaredType,
-                    Expression.Constant(context.ResolveContext.Container, typeof(Container)));
+                    target.DeclaredType);
             }
 
             return staticExpr;

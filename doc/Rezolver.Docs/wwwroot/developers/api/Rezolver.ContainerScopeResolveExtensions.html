@@ -11,7 +11,7 @@
   	<meta name="title" content="Class ContainerScopeResolveExtensions
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -106,8 +104,7 @@
   
   <h1 id="Rezolver_ContainerScopeResolveExtensions" data-uid="Rezolver.ContainerScopeResolveExtensions" class="text-break">Class ContainerScopeResolveExtensions
   </h1>
-  <div class="markdown level0 summary"><p>Extensions for <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> so that instances of that
-interface present a similar set of functionality to <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
+  <div class="markdown level0 summary"><p>The extension methods in this class are no longer required.  Use ContainerScope directly</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -143,7 +140,8 @@ interface present a similar set of functionality to <a class="xref" href="Rezolv
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_ContainerScopeResolveExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class ContainerScopeResolveExtensions</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;ContainerScopes now have a full suite of Resolve operations implemented as direct methods&quot;, true)]
+public static class ContainerScopeResolveExtensions</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
@@ -152,17 +150,17 @@ interface present a similar set of functionality to <a class="xref" href="Rezolv
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_Resolve_Rezolver_IContainerScope_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.Resolve(Rezolver.IContainerScope%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L50">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L204">View Source</a>
   </span>
   <a id="Rezolver_ContainerScopeResolveExtensions_Resolve_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve*"></a>
   <h4 id="Rezolver_ContainerScopeResolveExtensions_Resolve_Rezolver_IContainerScope_System_Type_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve(Rezolver.IContainerScope,System.Type)">Resolve(IContainerScope, Type)</h4>
-  <div class="markdown level1 summary"><p>Non-generic variant of the <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope_">Resolve&lt;TResult&gt;(IContainerScope)</a>
-extension method.</p>
+  <div class="markdown level1 summary"><p>Obsolete - use the direct resolve operations declared directly on the <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a> class</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static object Resolve(this IContainerScope scope, Type requestedType)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the direct resolve operations declared directly on the ContainerScope class&quot;, true)]
+public static object Resolve(this IContainerScope scope, Type requestedType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -177,14 +175,12 @@ extension method.</p>
       <tr>
         <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
         <td><span class="parametername">scope</span></td>
-        <td><p>The scope.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">requestedType</span></td>
-        <td><p>Type of object required.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -203,36 +199,22 @@ extension method.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.argumentnullexception">ArgumentNullException</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.Resolve%60%601(Rezolver.IContainerScope)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L33">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L195">View Source</a>
   </span>
   <a id="Rezolver_ContainerScopeResolveExtensions_Resolve_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve*"></a>
   <h4 id="Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope_" data-uid="Rezolver.ContainerScopeResolveExtensions.Resolve``1(Rezolver.IContainerScope)">Resolve&lt;TResult&gt;(IContainerScope)</h4>
-  <div class="markdown level1 summary"><p>Resolves an object through the scope&apos;s <a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Container">Container</a></p>
+  <div class="markdown level1 summary"><p>Obsolete - use the direct resolve operations declared directly on the <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a> class</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static TResult Resolve&lt;TResult&gt;(this IContainerScope scope)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the direct resolve operations declared directly on the ContainerScope class&quot;, true)]
+public static TResult Resolve&lt;TResult&gt;(this IContainerScope scope)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -247,8 +229,7 @@ extension method.</p>
       <tr>
         <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
         <td><span class="parametername">scope</span></td>
-        <td><p>The active scope within which the call is to be made.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -278,36 +259,26 @@ extension method.</p>
     <tbody>
       <tr>
         <td><span class="parametername">TResult</span></td>
-        <td><p>The type of object required.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Resolving an object via a scope does not guarantee that it will be
-tracked.  Ultimately, it&apos;s up to the behaviour of the individual underlying
-targets to determine whether they should interact with the scope.</p>
-<p>Indeed, all this extension method does is to forward the method call on to the
-<a class="xref" href="Rezolver.IContainerScope.html#Rezolver_IContainerScope_Container">Container</a> of the given scope, ensuring that
-the scope is set on the <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> that is passed to its
-<a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> method.</p>
-</div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_ResolveMany_Rezolver_IContainerScope_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope%2CSystem.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L68">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L213">View Source</a>
   </span>
   <a id="Rezolver_ContainerScopeResolveExtensions_ResolveMany_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany*"></a>
   <h4 id="Rezolver_ContainerScopeResolveExtensions_ResolveMany_Rezolver_IContainerScope_System_Type_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany(Rezolver.IContainerScope,System.Type)">ResolveMany(IContainerScope, Type)</h4>
-  <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany_Rezolver_IContainer_System_Type_">ResolveMany(IContainer, Type)</a>
-but for scopes.</p>
+  <div class="markdown level1 summary"><p>Obsolete - use the direct resolve operations declared directly on the <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a> class</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEnumerable ResolveMany(this IContainerScope scope, Type type)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the direct resolve operations declared directly on the ContainerScope class&quot;, true)]
+public static IEnumerable ResolveMany(this IContainerScope scope, Type type)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -322,14 +293,12 @@ but for scopes.</p>
       <tr>
         <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
         <td><span class="parametername">scope</span></td>
-        <td><p>The scope from which objects are to be resolved.</p>
-</td>
+        <td></td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><span class="parametername">type</span></td>
-        <td><p>The type of object desired in the enumerable.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -344,9 +313,7 @@ but for scopes.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></td>
-        <td><p>An enumerable (possibly empty) containing all the objects that could
-be resolve of type <code data-dev-comment-type="paramref" class="paramref">type</code></p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -355,17 +322,17 @@ be resolve of type <code data-dev-comment-type="paramref" class="paramref">type<
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions_ResolveMany__1_Rezolver_IContainerScope_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions.ResolveMany%60%601(Rezolver.IContainerScope)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L84">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L222">View Source</a>
   </span>
   <a id="Rezolver_ContainerScopeResolveExtensions_ResolveMany_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany*"></a>
   <h4 id="Rezolver_ContainerScopeResolveExtensions_ResolveMany__1_Rezolver_IContainerScope_" data-uid="Rezolver.ContainerScopeResolveExtensions.ResolveMany``1(Rezolver.IContainerScope)">ResolveMany&lt;TObject&gt;(IContainerScope)</h4>
-  <div class="markdown level1 summary"><p>Equivalent of <a class="xref" href="Rezolver.ContainerResolveExtensions.html#Rezolver_ContainerResolveExtensions_ResolveMany__1_Rezolver_IContainer_">ResolveMany&lt;TObject&gt;(IContainer)</a>
-but for scopes.</p>
+  <div class="markdown level1 summary"><p>Obsolete - use the direct resolve operations declared directly on the <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a> class</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;TObject&gt; ResolveMany&lt;TObject&gt;(this IContainerScope scope)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use the direct resolve operations declared directly on the ContainerScope class&quot;, true)]
+public static IEnumerable&lt;TObject&gt; ResolveMany&lt;TObject&gt;(this IContainerScope scope)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -380,8 +347,7 @@ but for scopes.</p>
       <tr>
         <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
         <td><span class="parametername">scope</span></td>
-        <td><p>The scope from which objects are to be resolved.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -396,9 +362,7 @@ but for scopes.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TObject&gt;</td>
-        <td><p>An enumerable (possibly empty) containing all the objects that could be
-resolved of type <code data-dev-comment-type="typeparamref" class="typeparamref">TObject</code></p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -413,8 +377,7 @@ resolved of type <code data-dev-comment-type="typeparamref" class="typeparamref"
     <tbody>
       <tr>
         <td><span class="parametername">TObject</span></td>
-        <td><p>The type of object desired in the enumerable.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -428,7 +391,7 @@ resolved of type <code data-dev-comment-type="typeparamref" class="typeparamref"
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScopeResolveExtensions.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScopeResolveExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/IContainerScope.ResolveExtensions.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L189" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

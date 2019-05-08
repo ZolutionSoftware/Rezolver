@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Singletons | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -105,7 +103,7 @@
 
 <p>Rezolver&#39;s implementation of singletons has three entry points:</p>
 <ul>
-<li>The <a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload, which offers a shortcut to registering a type via the 
+<li>The <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload, which offers a shortcut to registering a type via the 
 <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> (see the 
 <a href="../constructor-injection/index.html">construction injection topic</a> for more) as a singleton.</li>
 <li>The <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> extension method, which creates a new <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the target
@@ -113,23 +111,15 @@ on which it is called, converting it into a singleton.</li>
 <li>The <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html#Rezolver_Targets_SingletonTarget__ctor_Rezolver_ITarget_">SingletonTarget(ITarget)</a> constructor</li>
 </ul>
 <p>The <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> enforces a lock around its inner target so that its first result is cached and then returned
-for each subsequent <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operation.</p>
-<div class="NOTE"><h5>Note</h5><p>At the moment, the lifetime of a singleton is tied to the lifetime of the <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> itself.
-If you only ever have one container, or if you have multiple containers but use different targets for singletons 
-of the same type, apply across the whole <code>AppDomain</code>, then you won&#39;t enounter any issues.  But if you create multiple
-containers from the same <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a>, then you will find that singletons will be shared between them.</p>
-<hr>
-<p>In the future (v1.2), singletons will be unique to each container - 
-meaning that the same registration in two different containers would yield two different singletons.</p>
-</div>
+for each subsequent <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> operation.</p>
 <hr>
 <h1 id="examples">Examples</h1>
 <div class="TIP"><h5>Tip</h5><p>As with many of the other examples throughout this guide, you&#39;ll find the code for these tests in the <code>test/Rezolver.Examples</code> tests
 project.</p>
 </div>
 <h2 id="constructor-injection">Constructor Injection</h2>
-<p>If you are using the <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_">RegisterType</a> overload, you can swap it for the 
-<a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload to register a singleton for constructor injection:</p>
+<p>If you are using the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterType_">RegisterType</a> overload, you can swap it for the 
+<a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload to register a singleton for constructor injection:</p>
 <pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
 // The RegisterSingleton overload is like the RegisterType
 // overload, it creates a ConstructorTarget/GenericConstructorTarget
@@ -145,7 +135,7 @@ Assert.Same(result1, result2);
 <p>If you need to use some of the more advanced constructor injection functionality, such as 
 <a href="../constructor-injection/index.html#best-match-named-args">named argument binding</a>, or 
 <a href="../constructor-injection/index.html#with-a-constructorinfo">specific <code>ConstructorInfo</code> binding</a>, then you can&#39;t use the 
-<a class="xref" href="../../api/Rezolver.SingletonTargetContainerExtensions.html#Rezolver_SingletonTargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload - because that creates the <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
+<a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload - because that creates the <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
 <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for you.  Instead, you will create it yourself and then wrap a 
 <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> around it - using either its <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html#Rezolver_Targets_SingletonTarget__ctor_Rezolver_ITarget_">SingletonTarget(ITarget)</a> constructor, or 
 the <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> extension method.</p>
@@ -236,7 +226,7 @@ var counterHolderParam = Expression.Parameter(typeof(CounterHolder));
 container.Register(
     new ExpressionTarget(Expression.Lambda(
         Expression.PreIncrementAssign(
-            Expression.Property(counterHolderParam, &quot;Counter&quot;)
+            Expression.Property(counterHolderParam, nameof(CounterHolder.Counter))
         ),
         counterHolderParam
     )).Singleton()
@@ -344,7 +334,7 @@ a <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">Singlet
 and the SingletonTarget itself, for instance!) although, right now, Rezolver doesn&#39;t prevent you from doing so.</p>
 <ul>
 <li>You should now take a look at <a href="scoped.html">how explicitly scoped objects</a> are supported by Rezolver.</li>
-<li>You might also want to see how singletons behave inside an <a class="xref" href="../../api/Rezolver.IContainerScope.html">IContainerScope</a> - which is part of the 
+<li>You might also want to see how singletons behave inside an <a class="xref" href="../../api/Rezolver.ContainerScope.html">ContainerScope</a> - which is part of the 
 <a href="container-scopes.html">container scopes</a> documentation.</li>
 </ul>
 </article>
@@ -354,7 +344,7 @@ and the SingletonTarget itself, for instance!) although, right now, Rezolver doe
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/singleton.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/singleton.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

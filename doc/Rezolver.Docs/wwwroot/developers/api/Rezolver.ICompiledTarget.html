@@ -11,7 +11,7 @@
   	<meta name="title" content="Interface ICompiledTarget
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -106,8 +104,8 @@
   
   <h1 id="Rezolver_ICompiledTarget" data-uid="Rezolver.ICompiledTarget" class="text-break">Interface ICompiledTarget
   </h1>
-  <div class="markdown level0 summary"><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> - this is
-the ultimate target of all <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> calls in the standard
+  <div class="markdown level0 summary"><p>Provides an abstraction for creating objects based on a given <a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> - this is
+the ultimate target of all <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> calls in the standard
 container implementations within the Rezolver framework.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
@@ -115,14 +113,14 @@ container implementations within the Rezolver framework.</p>
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_ICompiledTarget_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface ICompiledTarget</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;No longer using ICompiledTarget - using Func&lt;ResolveContext, object&gt;, Func&lt;ResolveContext, T&gt; and IFactoryProvider/IFactoryProvider&lt;T&gt;&quot;, true)]
+public interface ICompiledTarget</code></pre>
   </div>
   <h5 id="Rezolver_ICompiledTarget_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>In the standard implementations of <a class="xref" href="Rezolver.IContainer.html">IContainer</a> (e.g. <a class="xref" href="Rezolver.Container.html">Container</a>),
-a <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> creates instances of this from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which are
+  <div class="markdown level0 remarks"><p>An <a class="xref" href="Rezolver.Compilation.ITargetCompiler.html">ITargetCompiler</a> creates instances of this from <a class="xref" href="Rezolver.ITarget.html">ITarget</a>s which are
 registered in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>When the container is then called upon to resolve an instance of a particular type, the <a class="xref" href="Rezolver.ICompiledTarget.html">ICompiledTarget</a> is first
-obtained, and then the responsibility for creating the object is delegated to its <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_">GetObject(IResolveContext)</a>
+obtained, and then the responsibility for creating the object is delegated to its <a class="xref" href="Rezolver.ICompiledTarget.html#Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_">GetObject(ResolveContext)</a>
 method.</p>
 </div>
   <h3 id="properties">Properties
@@ -132,7 +130,7 @@ method.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ICompiledTarget_SourceTarget.md&amp;value=---%0Auid%3A%20Rezolver.ICompiledTarget.SourceTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ICompiledTarget.cs/#L35">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L251">View Source</a>
   </span>
   <a id="Rezolver_ICompiledTarget_SourceTarget_" data-uid="Rezolver.ICompiledTarget.SourceTarget*"></a>
   <h4 id="Rezolver_ICompiledTarget_SourceTarget" data-uid="Rezolver.ICompiledTarget.SourceTarget">SourceTarget</h4>
@@ -141,7 +139,8 @@ method.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">ITarget SourceTarget { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;No longer using ICompiledTarget - using Func&lt;ResolveContext, object&gt;, Func&lt;ResolveContext, T&gt; and IFactoryProvider/IFactoryProvider&lt;T&gt;&quot;, true)]
+ITarget SourceTarget { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -162,21 +161,20 @@ method.</p>
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ICompiledTarget.GetObject(Rezolver.IResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_.md&amp;value=---%0Auid%3A%20Rezolver.ICompiledTarget.GetObject(Rezolver.ResolveContext)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ICompiledTarget.cs/#L31">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L246">View Source</a>
   </span>
   <a id="Rezolver_ICompiledTarget_GetObject_" data-uid="Rezolver.ICompiledTarget.GetObject*"></a>
-  <h4 id="Rezolver_ICompiledTarget_GetObject_Rezolver_IResolveContext_" data-uid="Rezolver.ICompiledTarget.GetObject(Rezolver.IResolveContext)">GetObject(IResolveContext)</h4>
-  <div class="markdown level1 summary"><p>Called to get/create an object, potentially using the passed <code data-dev-comment-type="paramref" class="paramref">context</code> to resolve additional dependencies
-(via its <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a>), or interact with any lifetime scope which is &apos;active&apos; for that request
-(through <a class="xref" href="Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a>).</p>
+  <h4 id="Rezolver_ICompiledTarget_GetObject_Rezolver_ResolveContext_" data-uid="Rezolver.ICompiledTarget.GetObject(Rezolver.ResolveContext)">GetObject(ResolveContext)</h4>
+  <div class="markdown level1 summary"><p>Obsolete.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">object GetObject(IResolveContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;No longer using ICompiledTarget - using Func&lt;ResolveContext, object&gt;, Func&lt;ResolveContext, T&gt; and IFactoryProvider/IFactoryProvider&lt;T&gt;&quot;, true)]
+object GetObject(ResolveContext context)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -189,10 +187,9 @@ method.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
+        <td><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></td>
         <td><span class="parametername">context</span></td>
-        <td><p>The current rezolve context.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -207,36 +204,10 @@ method.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td><p>The object that is constructed.  The return value can legitimately be null.</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.invalidoperationexception">InvalidOperationException</a></td>
-        <td><p>If the target fails to create the object</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.exception">Exception</a></td>
-        <td><p>Any other application-level exception could be raised by this operation</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Rezolver.UnresolvedICompiledTargetExtensions.html#Rezolver_UnresolvedICompiledTargetExtensions_IsUnresolved_Rezolver_ICompiledTarget_">UnresolvedICompiledTargetExtensions.IsUnresolved(ICompiledTarget)</a>
-  </div>
 </article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
@@ -247,7 +218,7 @@ method.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ICompiledTarget.md&amp;value=---%0Auid%3A%20Rezolver.ICompiledTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ICompiledTarget.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Obsolete_In_V2.cs/#L240" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

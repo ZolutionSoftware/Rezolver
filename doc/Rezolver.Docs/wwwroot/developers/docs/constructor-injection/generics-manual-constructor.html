@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Specific Constructors for Open Generics | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -141,8 +139,8 @@ instead of getting a shiny new list to play with, you get an exception.</p>
 <h2 id="the-registergenericconstructor-overload">The <code>RegisterGenericConstructor</code> overload</h2>
 <p>When registering targets into the <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, you can use one of these two methods:</p>
 <ul>
-<li><a class="xref" href="../../api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__1_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">RegisterGenericConstructor&lt;TExample&gt;(ITargetContainer, Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</a></li>
-<li><a class="xref" href="../../api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterGenericConstructor__2_Rezolver_ITargetContainer_System_Linq_Expressions_Expression_System_Func___0___Rezolver_IMemberBindingBehaviour_">RegisterGenericConstructor&lt;TExample, TExampleService&gt;(ITargetContainer, Expression&lt;Func&lt;TExample&gt;&gt;, IMemberBindingBehaviour)</a></li>
+<li>Rezolver.TargetContainerExtensions.RegisterGenericConstructor<code>1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{</code>0}},Rezolver.IMemberBindingBehaviour)</li>
+<li>Rezolver.TargetContainerExtensions.RegisterGenericConstructor<code>2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{</code>0}},Rezolver.IMemberBindingBehaviour)</li>
 </ul>
 <p>Both functions expect an expression in which you provide a &#39;model&#39; constructor call to the generic type whose
 constructor you want to bind.  The actual constructor arguments you pass are not important - only that the
@@ -236,7 +234,7 @@ of the <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_ForC
 <p>This overload will create a <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the <code>ConstructorInfo</code> passed belongs to 
 an open generic type.  After creating the target, you can then register it directly into the container using the
 normal <a class="xref" href="../../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a> function or one of its overloads.</p>
-<p>The same is also true of the <a class="xref" href="../../api/Rezolver.TargetContainerRegistrationExtensions.html#Rezolver_TargetContainerRegistrationExtensions_RegisterConstructor_">RegisterConstructor</a> overload.</p>
+<p>The same is also true of the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterConstructor_">RegisterConstructor</a> overload.</p>
 <p>Be aware, though - in all cases, it&#39;s not possible to provide named constructor argument bindings, either by dictionary
 or as an object, because of the inherent difficulty of providing a single target for one or more arguments whose type
 comes from a generic type argument.</p>
@@ -247,7 +245,7 @@ comes from a generic type argument.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/constructor-injection/generics-manual-constructor.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/constructor-injection/generics-manual-constructor.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

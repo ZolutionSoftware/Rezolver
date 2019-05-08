@@ -11,7 +11,7 @@
   	<meta name="title" content="Class OptionDependentConfigBase
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -171,11 +169,12 @@ dependencies.  The easiest way to create these is through one of:</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfigBase_Dependencies.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfigBase.Dependencies%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L24">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L29">View Source</a>
   </span>
   <a id="Rezolver_Configuration_OptionDependentConfigBase_Dependencies_" data-uid="Rezolver.Configuration.OptionDependentConfigBase.Dependencies*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfigBase_Dependencies" data-uid="Rezolver.Configuration.OptionDependentConfigBase.Dependencies">Dependencies</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gets the dependencies for this in instance.  Implementation of <a class="xref" href="Rezolver.Sdk.IDependant.html#Rezolver_Sdk_IDependant_Dependencies">Dependencies</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -203,11 +202,12 @@ dependencies.  The easiest way to create these is through one of:</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfigBase.Configure(Rezolver.IRootTargetContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L36">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L49">View Source</a>
   </span>
   <a id="Rezolver_Configuration_OptionDependentConfigBase_Configure_" data-uid="Rezolver.Configuration.OptionDependentConfigBase.Configure*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfigBase_Configure_Rezolver_IRootTargetContainer_" data-uid="Rezolver.Configuration.OptionDependentConfigBase.Configure(Rezolver.IRootTargetContainer)">Configure(IRootTargetContainer)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Abstract implementation of <a class="xref" href="Rezolver.ITargetContainerConfig.html#Rezolver_ITargetContainerConfig_Configure_Rezolver_IRootTargetContainer_">Configure(IRootTargetContainer)</a></p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -226,7 +226,8 @@ dependencies.  The easiest way to create these is through one of:</p>
       <tr>
         <td><a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a></td>
         <td><span class="parametername">targets</span></td>
-        <td></td>
+        <td><p>The root target container to which this configuration is to be applied.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -235,7 +236,7 @@ dependencies.  The easiest way to create these is through one of:</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency%60%601(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L48">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L61">View Source</a>
   </span>
   <a id="Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency_" data-uid="Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfigBase_CreateOptionDependency__1_System_Boolean_" data-uid="Rezolver.Configuration.OptionDependentConfigBase.CreateOptionDependency``1(System.Boolean)">CreateOptionDependency&lt;TOption&gt;(Boolean)</h4>
@@ -302,11 +303,12 @@ it to take decisions based on that option value.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L34">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L43">View Source</a>
   </span>
   <a id="Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase_" data-uid="Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase*"></a>
   <h4 id="Rezolver_Configuration_OptionDependentConfigBase_GetDependenciesBase" data-uid="Rezolver.Configuration.OptionDependentConfigBase.GetDependenciesBase">GetDependenciesBase()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Implement this to provide your dependency logic.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -354,7 +356,7 @@ it to take decisions based on that option value.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Configuration_OptionDependentConfigBase.md&amp;value=---%0Auid%3A%20Rezolver.Configuration.OptionDependentConfigBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L21" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Configuration/OptionDependentConfigBase.cs/#L22" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

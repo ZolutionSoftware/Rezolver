@@ -6,7 +6,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
@@ -56,6 +55,9 @@ namespace Rezolver
 
         ITarget IList<ITarget>.this[int index] { get => ((IList<ITarget>)this._targets)[index]; set => ((IList<ITarget>)this._targets)[index] = value; }
 
+        /// <summary>
+        /// The root target container.  Implementation of <see cref="ITargetContainer.Root"/>
+        /// </summary>
         public IRootTargetContainer Root { get; }
 
         private bool AllowMultiple { get; }

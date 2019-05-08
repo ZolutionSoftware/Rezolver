@@ -14,7 +14,7 @@ namespace Rezolver
         /// </summary>
         Current = 0,
         /// <summary>
-        /// The object (and all its dependants) will be tracked within the <see cref="ContainerScope2.Root"/> scope of the current scope
+        /// The object (and all its dependants) will be tracked within the <see cref="ContainerScope.Root"/> scope of the current scope
         /// set on the <see cref="ResolveContext"/>
         /// </summary>
         Root

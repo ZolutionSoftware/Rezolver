@@ -7,15 +7,12 @@ using Rezolver.Sdk;
 using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezolver.Configuration
 {
     /// <summary>
     /// Controls whether the injection of <see cref="Func{TResult}"/> will automatically be
-    /// available *without* having to use the <see cref="AutoFactoryRegistrationExtensions.RegisterAutoFunc{TResult}(IRootTargetContainer)"/>
+    /// available *without* having to use the <see cref="RootTargetContainerExtensions.RegisterAutoFunc{TResult}(IRootTargetContainer)"/>
     /// method or explicitly register <see cref="AutoFactoryTarget"/> targets.
     /// </summary>
     /// <remarks>

@@ -3,6 +3,7 @@
 
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -12,8 +13,8 @@ using Rezolver.Runtime;
 namespace Rezolver
 {
     /// <summary>
-    /// Root container for <see cref="ITarget"/>s that can be used as the backing for the standard
-    /// <see cref="IContainer"/> classes - <see cref="Container"/> and <see cref="ScopedContainer"/>.
+    /// Root container for <see cref="ITarget"/>s that can be used as the backing for
+    /// <see cref="Container"/> and <see cref="ScopedContainer"/>.
     ///
     /// Stores and retrieves registrations of <see cref="ITarget"/>s, is also Generic type aware,
     /// unlike its base class - <see cref="TargetDictionaryContainer"/>.
@@ -31,6 +32,10 @@ namespace Rezolver
     /// The <see cref="DefaultConfig"/> is used for new instances which are not passed an explicit configuration.</remarks>
     public class TargetContainer : TargetDictionaryContainer, IRootTargetContainer
     {
+        private static readonly ConcurrentDictionary<Type, ContainerTypeAttribute> _containerTypeLookup = new ConcurrentDictionary<Type, ContainerTypeAttribute>();
+        private static readonly Func<Type, ContainerTypeAttribute> _getContainerTypeAttribute = (t) => t.GetCustomAttributes<ContainerTypeAttribute>().FirstOrDefault();
+        private static ContainerTypeAttribute GetContainerTypeAttribute(Type serviceType) => _containerTypeLookup.GetOrAdd(serviceType, _getContainerTypeAttribute);
+
         private readonly CovariantTypeIndex _typeIndex;
 
         /// <summary>
@@ -136,17 +141,22 @@ namespace Rezolver
             // and then autoregistering the container type if it does.  The EnsureContainer function takes
             // care of everything else.
             if (GetRegisteredContainerType(type) != type)
-            {
                 EnsureContainer(type).RegisterContainer(type, container);
-                TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
-                return;
-            }
+            else
+                base.RegisterContainer(type, container);
 
-            base.RegisterContainer(type, container);
-            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+            OnTargetContainerRegistered(container, type);
         }
 
-
+        /// <summary>
+        /// Raises the <see cref="TargetContainerRegistered"/> event.
+        /// </summary>
+        /// <param name="container">The target container that was registered</param>
+        /// <param name="type">The type against which the <paramref name="container"/> was registered</param>
+        protected virtual void OnTargetContainerRegistered(ITargetContainer container, Type type)
+        {
+            TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));
+        }
 
         /// <summary>
         /// Overrides the base method to block registration if the <paramref name="target"/> does not support the
@@ -170,7 +180,17 @@ namespace Rezolver
                 notifiableTarget.OnRegistration(Root, serviceType ?? notifiableTarget.DeclaredType);
             }
 
-            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType ?? target.DeclaredType));
+            OnTargetRegistered(target, serviceType ?? target.DeclaredType);
+        }
+
+        /// <summary>
+        /// Called when a new target has been registered in this target container.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="serviceType">Type of the service.</param>
+        protected virtual void OnTargetRegistered(ITarget target, Type serviceType)
+        {
+            TargetRegistered?.Invoke(this, new TargetRegisteredEventArgs(target, serviceType));
         }
 
         /// <summary>
@@ -183,7 +203,7 @@ namespace Rezolver
         protected override Type GetRegisteredContainerType(Type serviceType)
         {
             Type toReturn;
-            var attr = serviceType.GetCustomAttributes<ContainerTypeAttribute>(true).FirstOrDefault();
+            var attr = GetContainerTypeAttribute(serviceType);
             if (attr != null)
             {
                 toReturn = attr.Type;

@@ -13,7 +13,7 @@
 </head>
 <body>
 <pre><code>
-BenchmarkDotNet=v0.11.4, OS=Windows 10.0.17763.316 (1809/October2018Update/Redstone5)
+BenchmarkDotNet=v0.11.4, OS=Windows 10.0.17763.379 (1809/October2018Update/Redstone5)
 Intel Core i7-4700MQ CPU 2.40GHz (Haswell), 1 CPU, 8 logical and 4 physical cores
 .NET Core SDK=2.2.101
   [Host] : .NET Core 2.2.0 (CoreCLR 4.6.27110.04, CoreFX 4.6.27110.04), 64bit RyuJIT
@@ -23,21 +23,22 @@ Intel Core i7-4700MQ CPU 2.40GHz (Haswell), 1 CPU, 8 logical and 4 physical core
 </code></pre>
 
 <table>
-<thead><tr><th>                  Method</th><th>Categories</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
+<thead><tr><th>                            Method</th><th>Categories</th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th><th>Ratio</th><th>RatioSD</th><th>Gen 0/1k Op</th><th>Gen 1/1k Op</th><th>Gen 2/1k Op</th><th>Allocated Memory/Op</th>
 </tr>
-</thead><tbody><tr><td>No_New</td><td>New</td><td>3.993 ns</td><td>0.0560 ns</td><td>0.0496 ns</td><td>1.00</td><td>0.00</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
-</tr><tr><td>Rezolver_New_ICompiled</td><td>New</td><td>28.158 ns</td><td>0.1979 ns</td><td>0.1754 ns</td><td>7.05</td><td>0.10</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
-</tr><tr><td>Rezolver_New_Generic</td><td>New</td><td>30.502 ns</td><td>0.2089 ns</td><td>0.1954 ns</td><td>7.64</td><td>0.11</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
-</tr><tr><td>Rezolver_New_NonGeneric</td><td>New</td><td>48.419 ns</td><td>0.4075 ns</td><td>0.3402 ns</td><td>12.12</td><td>0.14</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
-</tr><tr><td>No_WithArg</td><td>NewCtorArg</td><td>10.417 ns</td><td>0.0803 ns</td><td>0.0751 ns</td><td>1.00</td><td>0.00</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
-</tr><tr><td>Rezolver_WithArg_Generic</td><td>NewCtorArg</td><td>38.757 ns</td><td>0.2046 ns</td><td>0.1708 ns</td><td>3.73</td><td>0.03</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
-</tr><tr><td>Rezolver_WithArg_NonGeneric</td><td>NewCtorArg</td><td>52.763 ns</td><td>0.4784 ns</td><td>0.4475 ns</td><td>5.07</td><td>0.06</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
-</tr><tr><td>No_Complex</td><td>Complex</td><td>75.262 ns</td><td>0.4880 ns</td><td>0.4565 ns</td><td>1.00</td><td>0.00</td><td>0.0991</td><td>-</td><td>-</td><td>312 B</td>
-</tr><tr><td>Rezolver_Complex_Generic</td><td>Complex</td><td>116.590 ns</td><td>0.9691 ns</td><td>0.8591 ns</td><td>1.55</td><td>0.01</td><td>0.0989</td><td>-</td><td>-</td><td>312 B</td>
-</tr><tr><td>Rezolver_Complex_NonGeneric</td><td>Complex</td><td>131.309 ns</td><td>0.6551 ns</td><td>0.6128 ns</td><td>1.74</td><td>0.01</td><td>0.0989</td><td>-</td><td>-</td><td>312 B</td>
-</tr><tr><td>No_Enumerable</td><td>Enumerable</td><td>70.345 ns</td><td>0.1580 ns</td><td>0.1234 ns</td><td>1.00</td><td>0.00</td><td>0.0330</td><td>-</td><td>-</td><td>104 B</td>
-</tr><tr><td>Rezolver_Enumerable_Generic</td><td>Enumerable</td><td>177.013 ns</td><td>0.7154 ns</td><td>0.6342 ns</td><td>2.52</td><td>0.01</td><td>0.0455</td><td>-</td><td>-</td><td>144 B</td>
-</tr><tr><td>Rezolver_Enumerable_NonGeneric</td><td>Enumerable</td><td>178.012 ns</td><td>1.4996 ns</td><td>1.4027 ns</td><td>2.53</td><td>0.02</td><td>0.0455</td><td>-</td><td>-</td><td>144 B</td>
+</thead><tbody><tr><td>No_New</td><td>New</td><td>3.628 ns</td><td>0.0682 ns</td><td>0.0570 ns</td><td>3.613 ns</td><td>1.00</td><td>0.00</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>Rezolver_New_InstanceProvider_Generic</td><td>New</td><td>25.617 ns</td><td>0.3814 ns</td><td>0.3567 ns</td><td>25.474 ns</td><td>7.05</td><td>0.17</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>Rezolver_New_InstanceProvider_NonGeneric</td><td>New</td><td>36.871 ns</td><td>0.2308 ns</td><td>0.1927 ns</td><td>36.824 ns</td><td>10.17</td><td>0.17</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>Rezolver_New_Generic</td><td>New</td><td>21.155 ns</td><td>0.1897 ns</td><td>0.1584 ns</td><td>21.157 ns</td><td>5.83</td><td>0.08</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>Rezolver_New_NonGeneric</td><td>New</td><td>35.698 ns</td><td>0.3147 ns</td><td>0.2944 ns</td><td>35.674 ns</td><td>9.82</td><td>0.14</td><td>0.0076</td><td>-</td><td>-</td><td>24 B</td>
+</tr><tr><td>No_WithArg</td><td>NewCtorArg</td><td>9.464 ns</td><td>0.0274 ns</td><td>0.0214 ns</td><td>9.455 ns</td><td>1.00</td><td>0.00</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
+</tr><tr><td>Rezolver_WithArg_Generic</td><td>NewCtorArg</td><td>25.696 ns</td><td>0.1807 ns</td><td>0.1601 ns</td><td>25.690 ns</td><td>2.71</td><td>0.02</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
+</tr><tr><td>Rezolver_WithArg_NonGeneric</td><td>NewCtorArg</td><td>40.012 ns</td><td>0.1175 ns</td><td>0.1042 ns</td><td>39.989 ns</td><td>4.23</td><td>0.01</td><td>0.0152</td><td>-</td><td>-</td><td>48 B</td>
+</tr><tr><td>No_Complex</td><td>Complex</td><td>69.090 ns</td><td>0.4919 ns</td><td>0.4601 ns</td><td>69.000 ns</td><td>1.00</td><td>0.00</td><td>0.0991</td><td>-</td><td>-</td><td>312 B</td>
+</tr><tr><td>Rezolver_Complex_Generic</td><td>Complex</td><td>93.072 ns</td><td>0.4409 ns</td><td>0.3682 ns</td><td>93.133 ns</td><td>1.35</td><td>0.01</td><td>0.0991</td><td>-</td><td>-</td><td>312 B</td>
+</tr><tr><td>Rezolver_Complex_NonGeneric</td><td>Complex</td><td>111.990 ns</td><td>2.3877 ns</td><td>3.4244 ns</td><td>111.256 ns</td><td>1.63</td><td>0.06</td><td>0.0989</td><td>-</td><td>-</td><td>312 B</td>
+</tr><tr><td>No_Enumerable</td><td>Enumerable</td><td>66.334 ns</td><td>0.9315 ns</td><td>0.8713 ns</td><td>65.829 ns</td><td>1.00</td><td>0.00</td><td>0.0330</td><td>-</td><td>-</td><td>104 B</td>
+</tr><tr><td>Rezolver_Enumerable_Generic</td><td>Enumerable</td><td>108.289 ns</td><td>0.6716 ns</td><td>0.6282 ns</td><td>108.175 ns</td><td>1.63</td><td>0.02</td><td>0.0457</td><td>-</td><td>-</td><td>144 B</td>
+</tr><tr><td>Rezolver_Enumerable_NonGeneric</td><td>Enumerable</td><td>125.454 ns</td><td>4.1822 ns</td><td>10.0202 ns</td><td>121.329 ns</td><td>1.98</td><td>0.19</td><td>0.0455</td><td>-</td><td>-</td><td>144 B</td>
 </tr></tbody></table>
 </body>
 </html>

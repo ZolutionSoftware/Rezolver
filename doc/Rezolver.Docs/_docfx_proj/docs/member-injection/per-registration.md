@@ -5,8 +5,8 @@ i.e. @Rezolver.Targets.ConstructorTarget and @Rezolver.Targets.GenericConstructo
 to provide an @Rezolver.IMemberBindingBehaviour that you want to be used to bind the members on each new instance.
 
 You will rarely use these class' constructors directly.  Instead, most of the time, you will be using 
-factory methods like @Rezolver.Target.ForType*, or registration extension methods such as those in 
-@Rezolver.RegisterTypeTargetContainerExtensions.
+factory methods like @Rezolver.Target.ForType*, or the @Rezolver.TargetContainerExtensions.RegisterType*
+extension methods.
 
 Such explicitly provided member binding behaviours will *override* any which might otherwise be applied 
 [via options](options.md).

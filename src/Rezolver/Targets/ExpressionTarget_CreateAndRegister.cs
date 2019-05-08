@@ -2,13 +2,14 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
+
 namespace Rezolver
 {
-	using System;
-	using System.Linq.Expressions;
-	using Rezolver.Targets;
+    using System;
+    using System.Linq.Expressions;
+    using Rezolver.Targets;
 
-	public static partial class Target
+    public static partial class Target
 	{
 		/// <summary>Creates an <see cref="Rezolver.Targets.ExpressionTarget" /> for a parameterless lambda expression 
 		/// which returns an instance of <typeparamref name="TResult" /></summary>
@@ -157,11 +158,10 @@ namespace Rezolver
 
 namespace Rezolver
 {
-	using System;
-	using System.Linq.Expressions;
-	using Rezolver.Targets;
+    using System;
+    using System.Linq.Expressions;
 
-	public static partial class ExpressionTargetContainerExtensions
+    public static partial class TargetContainerExtensions
 	{
 		/// <summary>Registers an <see cref="Rezolver.Targets.ExpressionTarget" /> built from a parameterless lambda expression 
 		/// which returns an instance of <typeparamref name="TResult" /></summary>

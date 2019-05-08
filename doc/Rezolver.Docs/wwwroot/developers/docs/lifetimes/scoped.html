@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Scoped Objects | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -113,7 +111,7 @@ identical), then the <a href="container-scopes.html">container scopes topic</a> 
 <li>Any target can be made to produce a scoped object by wrapping it with a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> (either through its constructor or via the
 <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Scoped_">Scoped</a> extension method)</li>
 <li>You can also register scoped types (i.e. a shortcut for creating a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
-which is then wrapped in a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>) with the <a class="xref" href="../../api/Rezolver.ScopedTargetContainerExtensions.html#Rezolver_ScopedTargetContainerExtensions_RegisterScoped_">RegisterScoped</a> extension methods.</li>
+which is then wrapped in a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>) with the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterScoped_">RegisterScoped</a> extension methods.</li>
 </ul>
 <p>Apart from the fact that a scoped object limits itself to one-per-scope (and one registration can, therefore, produce multiple instances across multiple
 scopes), the big difference between it and a singleton is that a scope must be available when you resolve an instance.</p>
@@ -158,7 +156,7 @@ they do for transient object.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/scoped.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/lifetimes/scoped.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

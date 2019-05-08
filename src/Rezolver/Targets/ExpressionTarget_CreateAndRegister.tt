@@ -55,7 +55,7 @@ namespace Rezolver
 	using System.Linq.Expressions;
 	using Rezolver.Targets;
 
-	public static partial class ExpressionTargetContainerExtensions
+	public static partial class TargetContainerExtensions
 	{
 <#
 	ForSpecs(specs, RegisterTargetGroup);

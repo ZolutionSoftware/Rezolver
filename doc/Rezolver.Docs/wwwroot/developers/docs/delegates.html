@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Factory Delegates | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -110,7 +108,7 @@ delegate will be executed and its result returned as the instance.</p>
 <li>The delegate must have non-<code>void</code> return type</li>
 <li>It must not have any <code>ref</code> or <code>out</code> parameters</li>
 </ul>
-<p>To register delegates you can use one of the many <a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>To register delegates you can use one of the many <a class="xref" href="../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>To create delegate targets you can either:</p>
 <ul>
 <li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> through its constructor</li>
@@ -120,7 +118,7 @@ delegate will be executed and its result returned as the instance.</p>
 tasks in order to resolve an object than the functionality offered by the standard targets in Rezolver.</p>
 <p>Whether you <em>should</em> perform excessively complex logic in these factories is a topic of debate.  Our view is that
 you should be able to if you want, or need, to, so Rezolver&#39;s support for delegates is extensive, including the ability to 
-inject arguments to your delegate from the container, or resolve additional services inside your delegate through <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a>.</p>
+inject arguments to your delegate from the container, or resolve additional services inside your delegate through <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a>.</p>
 <h1 id="basic-examples">Basic Examples</h1>
 <p>Here are some straightforward examples</p>
 <h2 id="registertype-analogue"><code>RegisterType</code> analogue</h2>
@@ -145,10 +143,10 @@ var result = container.Resolve&lt;MyService&gt;();
 var result2 = container.Resolve&lt;MyService&gt;();
 
 Assert.Same(result, result2);
-</code></pre><h2 id="honouring-scopes-xrefrezolvericontainerscope">Honouring Scopes (<a class="xref" href="../api/Rezolver.IContainerScope.html">IContainerScope</a>)</h2>
+</code></pre><h2 id="honouring-scopes-xrefrezolvercontainerscope">Honouring Scopes (<a class="xref" href="../api/Rezolver.ContainerScope.html">ContainerScope</a>)</h2>
 <p>As you would expect, if the object is resolved through a scope, then it will be tracked and disposed by that scope when it is disposed:</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">var container = new Container();
-container.RegisterDelegate(() =&gt; new DisposableType());
+container.RegisterDelegate(() =&gt; new DisposableType(), scopeBehaviour: ScopeBehaviour.Implicit);
 
 DisposableType result, result2;
 
@@ -178,13 +176,13 @@ var result = container.Resolve&lt;RequiresIMyServiceAndDateTime&gt;();
 Assert.NotNull(result.Service);
 Assert.Equal(expectedStartDate, result.StartDate);
 </code></pre><p><strong><em>Any</em> delegate type, with any number of parameters, is supported, so long as it has a return type.</strong></p>
-<h2 id="injecting-rezolveriresolvecontext">Injecting <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a></h2>
-<p>All <a class="xref" href="../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> operations have an <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> at their heart.  Through the context, you can get the 
-<a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Container">Container</a> that originally received the call, the <a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Scope">Scope</a> and the 
-<a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_RequestedType">RequestedType</a>. It can also be used to create a new child scope (through its implementation of the 
-<a class="xref" href="../api/Rezolver.IScopeFactory.html">IScopeFactory</a> interface).</p>
+<h2 id="injecting-rezolverresolvecontext">Injecting <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a></h2>
+<p>All <a class="xref" href="../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> operations have an <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> at their heart.  Internally, this captures the
+type that was requested, the container and any active scope.  Through this context you can also create scopes (with 
+<a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_CreateScope_">CreateScope</a> and resolve instances of other types with its <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> 
+overload.</p>
 <p>If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
-you&#39;ll probably use the single parameter specialisation of the <a class="xref" href="../api/Rezolver.DelegateTargetContainerExtensions.html#Rezolver_DelegateTargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> or
+you&#39;ll probably use the single parameter specialisation of the <a class="xref" href="../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> or
 <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a> methods, but ultimately the parameter can appear anywhere in the delegate&#39;s signature and it will
 be injected.</p>
 <p>This example shows the <code>Func&lt;IRezolveContext, TResult&gt;</code> overload in action:</p>
@@ -192,14 +190,17 @@ be injected.</p>
 // RegisterDelegate has a specialisation for a delegate which takes ResolveContext
 container.RegisterDelegate(rc =&gt; new RequiresResolveContext(rc));
 
-var result = container.Resolve&lt;RequiresResolveContext&gt;();
-// the context was injected
-Assert.NotNull(result.Context);
-// and the container on the context will be the one on which we called Resolve&lt;&gt;
-Assert.Same(container, result.Context.Container);
+// NOTE this pattern of creating a context and passing it in is not one you 
+// have to use - we&#39;re only doing it here so we can verify the ResolveContext 
+// instances are the same.
+var context = new ResolveContext(container, typeof(RequiresResolveContext));
+var result = (RequiresResolveContext)container.Resolve(context);
+
+// and the container on the context will be the one on which we called Resolve
+Assert.Same(context, result.Context);
 </code></pre><h2 id="resolving-inside-a-delegate">Resolving inside a delegate</h2>
-<p>Building on the above, here&#39;s an example which injects the <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> in order to perform a late-bound 
-<a class="xref" href="../api/Rezolver.IResolveContext.html#Rezolver_IResolveContext_Resolve_">Resolve</a> operation to inject a different dependency based on some ambient information about a user (which
+<p>Building on the above, here&#39;s an example which injects the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> in order to perform a late-bound 
+<a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> operation to inject a different dependency based on some ambient information about a user (which
 is also injected into the delegate).</p>
 <p>This is quite a long example which, admittedly, can be solved in a few different ways.  We&#39;re not saying this is the only way :)</p>
 <pre><code class="lang-csharp" name="AppPrincipal.cs">public class AppIdentity : IIdentity
@@ -273,7 +274,7 @@ public class UserControlPanel
 so that it has access to a list of actions the user can perform based on their role.  The <code>UserControlPanel</code> class requires an
 <code>IUserActionsService</code> which provides access to that list of actions, and we have three separate implementations of that interface
 which we could use, based on the user&#39;s role.</p>
-<p>We will use the @RezolveContext.Resolve* operation to create the instance we want to inject after deciding which type to resolve
+<p>We will use the <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> operation to create the instance we want to inject after deciding which type to resolve
 based on the user&#39;s role:</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">static IPrincipal CurrentPrincipal { get; set; }
 
@@ -296,7 +297,7 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     container.RegisterDelegate(() =&gt; CurrentPrincipal);
     // now register the delegate handler for the IUserActionsService, which does the
     // role sniffing over the principal
-    container.RegisterDelegate((IPrincipal p, IResolveContext rc) =&gt; {
+    container.RegisterDelegate((IPrincipal p, ResolveContext rc) =&gt; {
         IUserActionsService toReturn = null;
         if (p != null)
         {
@@ -324,18 +325,14 @@ public void ShouldGetDifferentImplementationFromResolveContextForUser()
     Assert.IsType&lt;SalesActionsService&gt;(result2.ActionsService);
     Assert.IsType&lt;CustomerActionsService&gt;(result3.ActionsService);
 }
-</code></pre><h1 id="next-steps">Next Steps</h1>
-<p>That&#39;s about it for delegate registrations.  There are plans to add functionality to decorate instances via delegate, but in the meantime
-feel free to explore the table of contents or <a href="service-registration.html">head back to the main service registration overview</a> to explore 
-more features of Rezolver.</p>
-</article>
+</code></pre></article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
             <div class="sideaffix">
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

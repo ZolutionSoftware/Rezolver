@@ -4,9 +4,8 @@
     <AssemblyName>Rezolver</AssemblyName>
     <AssemblyTitle>Rezolver Core</AssemblyTitle>
     <Description>Rezolver is a fast IOC framework that lets you work the way you want to.  It's easy to use and very extensible.</Description>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.2;net472;net48</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    
     <PackageId>Rezolver</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore</PackageTags>
     <Title>Rezolver IOC</Title>
@@ -18,8 +17,8 @@
     <Configurations>Debug;Release;PerformanceTesting</Configurations>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <UseDynamic>False</UseDynamic>
-    <UseDynamic Condition="'$(TargetFramework)' == 'netcoreapp2.2'">True</UseDynamic>
+    <EnableILEmit>False</EnableILEmit>
+    <EnableILEmit Condition="'$(TargetFramework)' != 'netstandard2.0'">True</EnableILEmit>
   </PropertyGroup>
 
 
@@ -29,22 +28,22 @@
     <DebugType>full</DebugType>
   </PropertyGroup>
   
-  <PropertyGroup Condition="'$(UseDynamic)' == 'True'">
-    <DefineConstants>USEDYNAMIC</DefineConstants>
+  <PropertyGroup Condition="'$(EnableILEmit)' == 'True'">
+    <DefineConstants>ENABLE_IL_EMIT</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(UseDynamic)' == 'True'">
+  <ItemGroup Condition="'$(EnableILEmit)' == 'True'">
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="AutoFactoryRegistrationExtensions.tt">
+    <None Update="RootTargetContainerExtensions.AutoFactory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AutoFactoryRegistrationExtensions.cs</LastGenOutput>
+      <LastGenOutput>RootTargetContainerExtensions.AutoFactory.cs</LastGenOutput>
     </None>
     <None Update="GenericGenerator.t4">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -61,10 +60,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AutoFactoryRegistrationExtensions.cs">
+    <Compile Update="RootTargetContainerExtensions.AutoFactory.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AutoFactoryRegistrationExtensions.tt</DependentUpon>
+      <DependentUpon>RootTargetContainerExtensions.AutoFactory.tt</DependentUpon>
     </Compile>
     <Compile Update="GenericGenerator.cs">
       <DesignTime>True</DesignTime>

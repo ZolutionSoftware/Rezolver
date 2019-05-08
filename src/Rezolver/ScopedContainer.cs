@@ -3,26 +3,18 @@
 
 
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using Rezolver.Compilation;
 
 namespace Rezolver
 {
     /// <summary>
-    /// Extends the <see cref="Container"/> to implement lifetime implicit scoping through the
-    /// <see cref="Scope"/> that's created along with it.
-    ///
-    /// Implementation of the <see cref="IScopedContainer"/> interface.
+    /// Extends the <see cref="Container"/> to implement lifetime implicit scoping through a
+    /// <see cref="DisposingContainerScope"/> that's created along with it.
     /// </summary>
     /// <remarks>
     /// If you want your root container to act as a lifetime scope, then you should use this
     /// class instead of using <see cref="Container"/>.
     ///
-    /// Note that this class does NOT implement the <see cref="IContainerScope"/> interface because
+    /// Note that this class does NOT implement the <see cref="ContainerScope"/> interface because
     /// the two interfaces are not actually compatible with each other, thanks to identical sets of extension methods.
     /// </remarks>
     public sealed class ScopedContainer : Container, IDisposable
@@ -40,7 +32,7 @@ namespace Rezolver
             : base(targets)
         {
             // annoying: double assignment here (base already initialises it...)
-            _scope = new ConcurrentContainerScope(this);
+            _scope = new DisposingContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 

@@ -1,7 +1,7 @@
 ﻿# Automatic Enumerable Injection
 
 By default, a @Rezolver.TargetContainer (the default @Rezolver.ITargetContainer used by all containers in the 
-Rezolver framework) is configured to allow any @Rezolver.ContainerBase derivative to resolve an `IEnumerable<Service>`.
+Rezolver framework) is configured to allow any @Rezolver.Container derivative to resolve an `IEnumerable<Service>`.
 
 The contents of this enumerable will depend on how many times the @Rezolver.ITargetContainer.Register*
 method has been called against the target type `Service`:
@@ -36,7 +36,7 @@ the underlying registrations were made.
 ## Resolving enumerables
 
 To resolve an enumerable from a container or through a scope, you can simply use `IEnumerable<Foo>` as the input
-type for a @Rezolver.IContainer.Resolve* call:
+type for a @Rezolver.Container.Resolve* call:
 
 ```cs
 var enumerable = container.Resolve<IEnumerable<Foo>>();
@@ -90,9 +90,9 @@ to show that the enumerable can be injected into a delegate as you'd expect:
 
 When registering targets, you have three lifetimes at your disposal:
 
-- Transient (a new object created for every @Rezolver.IContainer.Resolve* call)
+- Transient (a new object created for every @Rezolver.Container.Resolve* call)
 - Singleton (only one object is ever created)
-- Scoped (one object created per <xref:Rezolver.IContainerScope>)
+- Scoped (one object created per <xref:Rezolver.ContainerScope>)
 
 > [!NOTE]
 > Of course, the @Rezolver.Targets.ObjectTarget (see [objects as services](objects.md)) is technically a singleton, also,
@@ -158,7 +158,7 @@ If more decorators were added, of course - then each element would be 're-decora
 ## Explicit `IEnumerable<T>` registrations
 
 Although you get `IEnumerable<T>` handling automatically when the @Rezolver.Configuration.InjectEnumerables configuration 
-is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to `false`), it doesn't 
+is applied (and not also disabled by the @Rezolver.Options.EnableEnumerableInjection option being set to `false`), it doesn't 
 prevent you from manually adding registrations for specific `IEnumerable<>` types which override the default behaviour.
 
 For example, let's say that you have two registrations for services which share a common interface, but they have only

@@ -11,7 +11,7 @@
   	<meta name="title" content="Class CombinedContainerConfigExtensions
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -152,13 +150,13 @@ adding and replacing <a class="xref" href="Rezolver.IContainerConfig.html">ICont
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_CombinedContainerConfigExtensions_UseCompiler_Rezolver_CombinedContainerConfig_Rezolver_IContainerConfig_Rezolver_Compilation_ITargetCompiler__.md&amp;value=---%0Auid%3A%20Rezolver.CombinedContainerConfigExtensions.UseCompiler(Rezolver.CombinedContainerConfig%2CRezolver.IContainerConfig%7BRezolver.Compilation.ITargetCompiler%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/CombinedContainerConfigExtensions.cs/#L41">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/CombinedContainerConfigExtensions.cs/#L39">View Source</a>
   </span>
   <a id="Rezolver_CombinedContainerConfigExtensions_UseCompiler_" data-uid="Rezolver.CombinedContainerConfigExtensions.UseCompiler*"></a>
   <h4 id="Rezolver_CombinedContainerConfigExtensions_UseCompiler_Rezolver_CombinedContainerConfig_Rezolver_IContainerConfig_Rezolver_Compilation_ITargetCompiler__" data-uid="Rezolver.CombinedContainerConfigExtensions.UseCompiler(Rezolver.CombinedContainerConfig,Rezolver.IContainerConfig{Rezolver.Compilation.ITargetCompiler})">UseCompiler(CombinedContainerConfig, IContainerConfig&lt;ITargetCompiler&gt;)</h4>
   <div class="markdown level1 summary"><p>Replaces any existing <a class="xref" href="Rezolver.IContainerConfig-1.html">IContainerConfig&lt;T&gt;</a> with the passed <code data-dev-comment-type="paramref" class="paramref">configuration</code> -
-thus ensuring that any <a class="xref" href="Rezolver.IContainer.html">IContainer</a> objects which are initialised with the config collection will use whichever
-compiler that is configured when the configuration&apos;s <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_IContainer_Rezolver_IRootTargetContainer_">Configure(IContainer, IRootTargetContainer)</a> method
+thus ensuring that any <a class="xref" href="Rezolver.Container.html">Container</a> objects which are initialised with the config collection will use whichever
+compiler that is configured when the configuration&apos;s <a class="xref" href="Rezolver.IContainerConfig.html#Rezolver_IContainerConfig_Configure_Rezolver_Container_Rezolver_IRootTargetContainer_">Configure(Container, IRootTargetContainer)</a> method
 is called.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -208,7 +206,7 @@ is called.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_CombinedContainerConfigExtensions_UseExpressionCompiler_Rezolver_CombinedContainerConfig_.md&amp;value=---%0Auid%3A%20Rezolver.CombinedContainerConfigExtensions.UseExpressionCompiler(Rezolver.CombinedContainerConfig)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/CombinedContainerConfigExtensions.cs/#L27">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/CombinedContainerConfigExtensions.cs/#L25">View Source</a>
   </span>
   <a id="Rezolver_CombinedContainerConfigExtensions_UseExpressionCompiler_" data-uid="Rezolver.CombinedContainerConfigExtensions.UseExpressionCompiler*"></a>
   <h4 id="Rezolver_CombinedContainerConfigExtensions_UseExpressionCompiler_Rezolver_CombinedContainerConfig_" data-uid="Rezolver.CombinedContainerConfigExtensions.UseExpressionCompiler(Rezolver.CombinedContainerConfig)">UseExpressionCompiler(CombinedContainerConfig)</h4>
@@ -265,7 +263,7 @@ any container to which the config collection will be applied will use the <a cla
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_CombinedContainerConfigExtensions.md&amp;value=---%0Auid%3A%20Rezolver.CombinedContainerConfigExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/CombinedContainerConfigExtensions.cs/#L18" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/CombinedContainerConfigExtensions.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -11,7 +11,7 @@
   	<meta name="title" content="Class ListTarget
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -108,6 +106,7 @@
   </h1>
   <div class="markdown level0 summary"><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose
 individual items are built by ITarget instances.</p>
+<p>Note that this target is <em>not</em> used in Rezolver&apos;s implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> injection.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -123,10 +122,10 @@ individual items are built by ITarget instances.</p>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_Id">TargetBase.Id</a>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_NextId">TargetBase.NextId()</a>
     </div>
     <div>
-      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a>
+      <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_Id">TargetBase.Id</a>
     </div>
     <div>
       <a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopePreference">TargetBase.ScopePreference</a>
@@ -173,7 +172,7 @@ individual items are built by ITarget instances.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget__ctor_System_Type_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.%23ctor(System.Type%2CSystem.Collections.Generic.IEnumerable%7BRezolver.ITarget%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L137">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L143">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget__ctor_" data-uid="Rezolver.Targets.ListTarget.#ctor*"></a>
   <h4 id="Rezolver_Targets_ListTarget__ctor_System_Type_System_Collections_Generic_IEnumerable_Rezolver_ITarget__System_Boolean_" data-uid="Rezolver.Targets.ListTarget.#ctor(System.Type,System.Collections.Generic.IEnumerable{Rezolver.ITarget},System.Boolean)">ListTarget(Type, IEnumerable&lt;ITarget&gt;, Boolean)</h4>
@@ -246,7 +245,7 @@ All targets in the items enumerable must support the element type <code data-dev
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_AsArray.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.AsArray%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L85">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L91">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget_AsArray_" data-uid="Rezolver.Targets.ListTarget.AsArray*"></a>
   <h4 id="Rezolver_Targets_ListTarget_AsArray" data-uid="Rezolver.Targets.ListTarget.AsArray">AsArray</h4>
@@ -277,7 +276,7 @@ All targets in the items enumerable must support the element type <code data-dev
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_DeclaredType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.DeclaredType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L41">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L47">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget_DeclaredType_" data-uid="Rezolver.Targets.ListTarget.DeclaredType*"></a>
   <h4 id="Rezolver_Targets_ListTarget_DeclaredType" data-uid="Rezolver.Targets.ListTarget.DeclaredType">DeclaredType</h4>
@@ -311,7 +310,7 @@ or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collection
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_ElementType.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.ElementType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L31">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L37">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget_ElementType_" data-uid="Rezolver.Targets.ListTarget.ElementType*"></a>
   <h4 id="Rezolver_Targets_ListTarget_ElementType" data-uid="Rezolver.Targets.ListTarget.ElementType">ElementType</h4>
@@ -345,7 +344,7 @@ depending on the value of <a class="xref" href="Rezolver.Targets.ListTarget.html
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_Items.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.Items%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L76">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L82">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget_Items_" data-uid="Rezolver.Targets.ListTarget.Items*"></a>
   <h4 id="Rezolver_Targets_ListTarget_Items" data-uid="Rezolver.Targets.ListTarget.Items">Items</h4>
@@ -377,7 +376,7 @@ depending on the value of <a class="xref" href="Rezolver.Targets.ListTarget.html
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_ListConstructor.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.ListConstructor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L98">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L104">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget_ListConstructor_" data-uid="Rezolver.Targets.ListTarget.ListConstructor*"></a>
   <h4 id="Rezolver_Targets_ListTarget_ListConstructor" data-uid="Rezolver.Targets.ListTarget.ListConstructor">ListConstructor</h4>
@@ -422,10 +421,43 @@ depending on the value of <a class="xref" href="Rezolver.Targets.ListTarget.html
   </table>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_ScopeBehaviour.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.ScopeBehaviour%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L28">View Source</a>
+  </span>
+  <a id="Rezolver_Targets_ListTarget_ScopeBehaviour_" data-uid="Rezolver.Targets.ListTarget.ScopeBehaviour*"></a>
+  <h4 id="Rezolver_Targets_ListTarget_ScopeBehaviour" data-uid="Rezolver.Targets.ListTarget.ScopeBehaviour">ScopeBehaviour</h4>
+  <div class="markdown level1 summary"><p>Always returns <a class="xref" href="Rezolver.ScopeBehaviour.html#Rezolver_ScopeBehaviour_None">None</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ScopeBehaviour ScopeBehaviour { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Rezolver.Targets.TargetBase.html#Rezolver_Targets_TargetBase_ScopeBehaviour">TargetBase.ScopeBehaviour</a></div>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget_UseFallback.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget.UseFallback%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L64">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L70">View Source</a>
   </span>
   <a id="Rezolver_Targets_ListTarget_UseFallback_" data-uid="Rezolver.Targets.ListTarget.UseFallback*"></a>
   <h4 id="Rezolver_Targets_ListTarget_UseFallback" data-uid="Rezolver.Targets.ListTarget.UseFallback">UseFallback</h4>
@@ -483,7 +515,7 @@ depending on the value of <a class="xref" href="Rezolver.Targets.ListTarget.html
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_Targets_ListTarget.md&amp;value=---%0Auid%3A%20Rezolver.Targets.ListTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/Targets/ListTarget.cs/#L22" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/Targets/ListTarget.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

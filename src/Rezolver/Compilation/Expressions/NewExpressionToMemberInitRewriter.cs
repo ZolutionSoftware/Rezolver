@@ -4,18 +4,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {
-  /// <summary>
-  /// Rewrites the first NewExpression found for a particular type into a <see cref="MemberInitExpression"/>
-  /// with the given bindings.  If no type is specified on construction, then the first NewExpression that
-  /// is encountered will be used.
-  /// </summary>
-  internal class NewExpressionMemberInitRewriter : ExpressionVisitor
+    /// <summary>
+    /// Rewrites the first NewExpression found for a particular type into a <see cref="MemberInitExpression"/>
+    /// with the given bindings.  If no type is specified on construction, then the first NewExpression that
+    /// is encountered will be used.
+    /// </summary>
+    internal class NewExpressionMemberInitRewriter : ExpressionVisitor
   {
     private readonly Type _ctorType;
     private readonly IEnumerable<System.Linq.Expressions.MemberBinding> _newBindings;

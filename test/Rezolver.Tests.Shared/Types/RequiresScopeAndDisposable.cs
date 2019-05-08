@@ -7,10 +7,10 @@ namespace Rezolver.Tests.Types
 {
     public class RequiresScopeAndDisposable : IDisposable
     {
-        public ContainerScope2 Scope { get; }
+        public ContainerScope Scope { get; }
         public Disposable Disposable { get; }
         public RequiresScopeAndDisposable2 Next { get; }
-        public RequiresScopeAndDisposable(ContainerScope2 scope, Disposable disposable, RequiresScopeAndDisposable2 next)
+        public RequiresScopeAndDisposable(ContainerScope scope, Disposable disposable, RequiresScopeAndDisposable2 next)
         {
             Scope = scope;
             Disposable = disposable;

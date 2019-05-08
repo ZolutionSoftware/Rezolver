@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Compilation;
 using Rezolver.Targets;
@@ -74,7 +73,7 @@ namespace Rezolver
         /// Creates parameter bindings for each parameter in the passed method where each value will be resolved.
         ///
         /// For any optional parameters - their default values will be used as a fallback if the <see cref="ResolvedTarget"/>
-        /// cannot either resolve a target at compile time or from the <see cref="IContainer"/> at resolve-time.
+        /// cannot either resolve a target at compile time or from the <see cref="Container"/> at resolve-time.
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>
@@ -146,13 +145,7 @@ namespace Rezolver
 
         private static ITarget GetNamedArgTarget(ParameterInfo p, IDictionary<string, ITarget> args)
         {
-            ITarget argValue = null;
-            if (args.TryGetValue(p.Name, out argValue))
-            {
-                return argValue;
-            }
-
-            return null;
+            return args.TryGetValue(p.Name, out ITarget argValue) ? argValue : null;
         }
 
         /// <summary>

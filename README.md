@@ -3,7 +3,7 @@
 Rezolver
 ========
 
-Rezolver is a high performance, portable (.NetStandard 1.1 & 2.0), open-source IOC container.
+Rezolver is a high performance open-source IOC container for .Net Core.
 
 > You can get the [Rezolver Package from Nuget](https://www.nuget.org/packages/Rezolver/), and for more 
 > packages, head over to the [packages documentation](http://rezolver.co.uk/developers/docs/nuget-packages/index.html).
@@ -13,17 +13,20 @@ For more information, including API reference and developer how-tos, head on ove
 
 [Follow us on twitter](https://twitter.com/RezolverIOC) for code or documentation updates/release notifications etc.
 
-[![Work in Progress](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ZolutionSoftware/Rezolver) 
-[![Items ready to go](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready)](http://waffle.io/ZolutionSoftware/Rezolver)
-
 ---
 
 # Version Highlights
 
 ## 2.0.0
 
-- `NetStandard2.0` is now the only TFM ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78))
-- Major performance improvements - up to 45% faster than before.
+- TFMs changed for main package ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78)):
+  - `NetStandard2.0`, `netcoreapp2.2`, `net472` and `net48`
+  - The targeting of specific runtimes is to allow some more advanced caching technology, based on `System.Reflection.Emit`, to work.  In theory, once `netstandard2.1` is here, 
+these will be able to be removed in favour of simply targeting the `2.0` and `2.1` flavours of .Net Standard.
+- Major performance improvements:
+  - Enumerables +2500%
+  - Constructor injection up +368%
+  - Compilation speed has also been improved.
 - Scopes are now always present ([#89](https://github.com/ZolutionSoftware/Rezolver/issues/89))
   - But, by default, the `Container` class won't support instance tracking or explicitly scoped registrations. You need to create a scope to do this, unless...
   - You use `ScopedContainer` instead, which creates its own 'root' disposable scope on creation.  This will be used by default by Asp.Net Core)
@@ -31,6 +34,7 @@ For more information, including API reference and developer how-tos, head on ove
   - `IResolveContext` -> `ResolveContext`
   - `IContainer` -> `Container`
   - `IContainerScope` -> `ContainerScope`
+  - `ICompiledTarget` -> retired for factory delegates, `Rezolver.IInstanceProvider` and `Rezolver.IInstanceProvider<T>`
 - Got rid of a bunch of `Resolve` extension methods in favour of concrete methods on the types
 - New Container/Scope/Context behaviour:
   - `IServiceProvider` is now explicitly implemented by all three of `Container`, `ContainerScope` and `ResolveContext`

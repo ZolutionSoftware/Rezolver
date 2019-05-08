@@ -1,19 +1,15 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-
-using System.Collections.Generic;
-using Rezolver.Compilation;
-
 namespace Rezolver
 {
     /// <summary>
-    /// A configuration callback for instances of <see cref="IContainer"/> (which also use <see cref="ITargetContainer"/>
+    /// A configuration callback for instances of <see cref="Container"/> (which also use <see cref="ITargetContainer"/>
     /// as the source of their registrations).
     /// </summary>
     /// <remarks>While similar to <see cref="ITargetContainerConfig"/>, this is specifically used
     /// for new container instances - since some configuration (setting of options etc) only applies to
-    /// <see cref="IContainer"/> and not <see cref="ITargetContainer"/>.
+    /// <see cref="Container"/> and not <see cref="ITargetContainer"/>.
     ///
     /// A configuration instance can be passed to any of the provided <see cref="Container"/>-derived types on
     /// construction (see the <see cref="Container.Container(IRootTargetContainer, IContainerConfig)"/>
@@ -24,7 +20,6 @@ namespace Rezolver
     /// </remarks>
     /// <seealso cref="ITargetContainerConfig"/>
     /// <seealso cref="Configuration.ExpressionCompilation"/>
-    /// <seealso cref="Configuration.OverridingEnumerables"/>
     public interface IContainerConfig
     {
         /// <summary>
@@ -39,7 +34,7 @@ namespace Rezolver
 
     /// <summary>
     /// Marker interface for an <see cref="ITargetContainerConfig"/> which is responsible for configuring a specific type
-    /// of object/behaviour/service/option for <see cref="IContainer"/> instances. (Determined by <typeparamref name="T"/>).
+    /// of object/behaviour/service/option for <see cref="Container"/> instances. (Determined by <typeparamref name="T"/>).
     /// </summary>
     /// <typeparam name="T">Implementation-dependent.  The type of option or service used by the container that is configured
     /// by this configuration object.</typeparam>

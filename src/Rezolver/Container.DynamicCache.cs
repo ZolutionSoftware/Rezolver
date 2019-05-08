@@ -2,7 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
-#if USEDYNAMIC
+#if ENABLE_IL_EMIT
 
 using Rezolver.Compilation;
 using Rezolver.Compilation.Expressions;
@@ -17,138 +17,110 @@ namespace Rezolver
 {
     public partial class Container
     {
-        private sealed class DynamicCache
+        private abstract class DynamicCache
         {
-            private abstract class ContainerCache
+            // used for non-generic calls
+            private readonly PerTypeCache<ServiceEntry> _entries;
+
+            protected DynamicCache(PerTypeCache<ServiceEntry> entries)
             {
-                public abstract ResolveContext GetDefaultContext<TService>();
-                public abstract ResolveContext GetDefaultContext(Type serviceType);
-
-                public abstract ICompiledTarget GetCompiled<TService>();
-                public abstract ICompiledTarget GetCompiled(Type serviceType);
-
-                public abstract TService Resolve<TService>();
-                public abstract TService Resolve<TService>(ResolveContext context);
-
-                public abstract object Resolve(Type serviceType);
-                public abstract object Resolve(ResolveContext context);
+                _entries = entries;
             }
 
-            private class Entry
-            {
-                public ResolveContext ResolveContext;
-                public ICompiledTarget CompiledTarget;
+            protected abstract ServiceEntry<TService> GetEntry<TService>();
 
-                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-                public object Resolve() => CompiledTarget.GetObject(ResolveContext);
-                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-                public object Resolve(ResolveContext context) => CompiledTarget.GetObject(context);
+            public Func<ResolveContext, object> GetFactory(Type serviceType) => _entries.Get(serviceType).Factory;
+
+            public TService Resolve<TService>() => GetEntry<TService>().Resolve();
+            public TService Resolve<TService>(ResolveContext context) => GetEntry<TService>().Resolve(context);
+
+            public object Resolve(Type serviceType) => _entries.Get(serviceType).Resolve();
+            public object Resolve(ResolveContext context) => _entries.Get(context.RequestedType).Factory(context);
+
+            protected interface IServiceEntryProvider
+            {
+                ServiceEntry Entry { get; }
             }
 
-            private sealed class ContainerCache<TContainer> : ContainerCache
+            protected interface IServiceEntryProvider<TService> : IServiceEntryProvider
+            {
+                new ServiceEntry<TService> Entry { get; }
+            }
+
+            protected sealed class ServiceEntry
+            {
+                public readonly ResolveContext DefaultContext;
+                public readonly Func<ResolveContext, object> Factory;
+
+                public ServiceEntry(ResolveContext defaultContext, Func<ResolveContext, object> factory)
+                {
+                    this.DefaultContext = defaultContext;
+                    this.Factory = factory;
+                }
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public object Resolve() => Factory(DefaultContext);
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public object Resolve(ResolveContext context) => Factory(context);
+            }
+
+            protected sealed class ServiceEntry<TService>
+            {
+                public readonly ResolveContext DefaultContext;
+                public readonly Func<ResolveContext, TService> Factory;
+
+                public ServiceEntry(ResolveContext defaultContext, Func<ResolveContext, TService> factory)
+                {
+                    this.DefaultContext = defaultContext;
+                    this.Factory = factory;
+                }
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public TService Resolve() => Factory(DefaultContext);
+
+                [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
+                public TService Resolve(ResolveContext context) => Factory(context);
+            }
+
+            private sealed class ContainerCache<TContainer> : DynamicCache
             {
                 private static Container TheContainer;
 
-                private static PerTypeCache<Entry>  _entries = new PerTypeCache<Entry>(t => (Entry)Activator.CreateInstance(typeof(Entry<>).MakeGenericType(typeof(TContainer), t)));
+                private static readonly PerTypeCache<ServiceEntry> _entries = new PerTypeCache<ServiceEntry>(
+                    t => ((IServiceEntryProvider)Activator.CreateInstance(typeof(Entry<>).MakeGenericType(typeof(TContainer), t))).Entry);
 
                 public ContainerCache(Container container)
+                    : base(_entries)
                 {
                     TheContainer = container;
                 }
 
-                public override ICompiledTarget GetCompiled<TService>()
-                {
-                    return Entry<TService>.Compiled.Target;
-                }
+                protected override ServiceEntry<TService> GetEntry<TService>() => Entry<TService>.GenericEntry;
 
-                public override ICompiledTarget GetCompiled(Type serviceType)
+                private class Entry<TService> : IServiceEntryProvider<TService>
                 {
-                    return _entries.Get(serviceType).CompiledTarget;
-                }
+                    ServiceEntry<TService> IServiceEntryProvider<TService>.Entry => GenericEntry;
+                    ServiceEntry IServiceEntryProvider.Entry => NonGenericEntry;
 
-                public override ResolveContext GetDefaultContext<TService>()
-                {
-                    return Entry<TService>.Context.Value;
-                }
+                    public static readonly ServiceEntry NonGenericEntry;
+                    public static readonly ServiceEntry<TService> GenericEntry;
 
-                public override ResolveContext GetDefaultContext(Type serviceType)
-                {
-                    return _entries.Get(serviceType).ResolveContext;
-                }
-
-                public override TService Resolve<TService>()
-                {
-                    return (TService)Entry<TService>.Compiled.Target.GetObject(Entry<TService>.Context.Value);
-                }
-
-                public override TService Resolve<TService>(ResolveContext context)
-                {
-                    return (TService)Entry<TService>.Compiled.Target.GetObject(context);
-                }
-
-                public override object Resolve(Type serviceType)
-                {
-                    return _entries.Get(serviceType).Resolve();
-                }
-
-                public override object Resolve(ResolveContext context)
-                {
-                    return _entries.Get(context.RequestedType).Resolve(context);
-                }
-
-                private class Entry<TService> : Entry
-                {
-                    public static class Context
+                    static Entry()
                     {
-                        public static readonly ResolveContext Value = new ResolveContext(TheContainer, typeof(TService));
-                    }
-
-                    public static class Compiled
-                    {
-                        public static readonly ICompiledTarget Target = TheContainer.GetWorker(Context.Value);
-                    }
-
-                    public Entry()
-                    {
-                        // lift the fields out of the statics
-                        ResolveContext = Context.Value;
-                        CompiledTarget = Compiled.Target;
+                        var defaultContext = new ResolveContext(TheContainer, typeof(TService));
+                        NonGenericEntry = new ServiceEntry(defaultContext, TheContainer.GetWorker(defaultContext));
+                        GenericEntry = new ServiceEntry<TService>(defaultContext, TheContainer.GetWorker<TService>(defaultContext));
                     }
                 }
             }
 
-            private readonly ContainerCache _cache;
-
-            public DynamicCache(Container parent)
+            public static DynamicCache CreateCache(Container container)
             {
                 var (assembly, module) = DynamicAssemblyHelper.Create("Containers");
                 var fakeContainerType = module.DefineType($"ContainerHook", TypeAttributes.Class | TypeAttributes.Abstract | TypeAttributes.Sealed).CreateType();
-                _cache = (ContainerCache)Activator.CreateInstance(typeof(ContainerCache<>).MakeGenericType(fakeContainerType), parent);
+                return (DynamicCache)Activator.CreateInstance(typeof(ContainerCache<>).MakeGenericType(fakeContainerType), container);
             }
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public ResolveContext GetContext<TService>() => _cache.GetDefaultContext<TService>();
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public ResolveContext GetContext(Type serviceType) => _cache.GetDefaultContext(serviceType);
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public ICompiledTarget GetCompiled<TService>() => _cache.GetCompiled<TService>();
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public ICompiledTarget GetCompiled(Type serviceType) => _cache.GetCompiled(serviceType);
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public TService Resolve<TService>() => _cache.Resolve<TService>();
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public TService Resolve<TService>(ResolveContext context) => _cache.Resolve<TService>(context);
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public object Resolve(Type serviceType) => _cache.Resolve(serviceType);
-
-            [MethodImpl(methodImplOptions: MethodImplOptions.AggressiveInlining)]
-            public object Resolve(ResolveContext context) => _cache.Resolve(context);
         }
     }
 }

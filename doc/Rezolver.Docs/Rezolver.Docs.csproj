@@ -7,8 +7,11 @@
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
 
     <Configurations>Debug;Release;PerformanceTesting</Configurations>
+    
+    <!-- change docfx's logging level -->
+    <LogLevel>Info</LogLevel>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <Content Remove="_docfx_themes\**" />
   </ItemGroup>
@@ -33,6 +36,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>

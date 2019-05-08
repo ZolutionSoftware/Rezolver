@@ -50,8 +50,8 @@ Thankfully, there are a couple of ways to do that.
 
 When registering targets into the @Rezolver.IRootTargetContainer, you can use one of these two methods:
 
-- @Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
-- @Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
+- Rezolver.TargetContainerExtensions.RegisterGenericConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
+- Rezolver.TargetContainerExtensions.RegisterGenericConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)
 
 Both functions expect an expression in which you provide a 'model' constructor call to the generic type whose
 constructor you want to bind.  The actual constructor arguments you pass are not important - only that the
@@ -129,7 +129,7 @@ This overload will create a @Rezolver.Targets.GenericConstructorTarget if the `C
 an open generic type.  After creating the target, you can then register it directly into the container using the
 normal @Rezolver.ITargetContainer.Register* function or one of its overloads.
 
-The same is also true of the @Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor* overload.
+The same is also true of the @Rezolver.TargetContainerExtensions.RegisterConstructor* overload.
 
 Be aware, though - in all cases, it's not possible to provide named constructor argument bindings, either by dictionary
 or as an object, because of the inherent difficulty of providing a single target for one or more arguments whose type

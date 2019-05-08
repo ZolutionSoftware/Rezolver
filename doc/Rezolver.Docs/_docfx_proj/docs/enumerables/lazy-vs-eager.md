@@ -131,7 +131,7 @@ Obviously, being able to switch *all* enumerables to eager is likely to be a bit
 Rezolver also lets you control the production of lazy or eager enumerables on a per-type basis.
 
 To do this, when setting the @Rezolver.Options.LazyEnumerables options to `false`, you also include the type of service
-whose enumerables are to be affected (see the @Rezolver.OptionsTargetContainerExtensions.SetOption* overload for more):
+whose enumerables are to be affected (see the @Rezolver.TargetContainerExtensions.SetOption* overload for more):
 
 [!code-csharp[EnumerableExamples.cs](../../../../../test/Rezolver.Tests.Examples/EnumerableExamples.cs#example11)]
 

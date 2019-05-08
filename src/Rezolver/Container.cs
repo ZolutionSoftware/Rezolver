@@ -10,8 +10,8 @@ using Rezolver.Events;
 
 namespace Rezolver
 {
-#if !USEDYNAMIC
-    using ConcurrentCache = PerResolveContextCache<ICompiledTarget>;// DefaultConcurrentPerTypeCache<ICompiledTarget>;
+#if !ENABLE_IL_EMIT
+    using ConcurrentCache = PerResolveContextCache<Func<ResolveContext, object>>;
 #endif
 
     /// <summary>
@@ -22,11 +22,11 @@ namespace Rezolver
     /// explicitly except the <see cref="Register(ITarget, Type)"/> method,  which is available through the class' public
     /// API.
     ///
-    /// The reason this class does is to make it easier to create a new container and to register targets into it without
-    /// having to worry about managing a separate <see cref="ITargetContainer"/> instance in your application root -
-    /// because all the registration extension methods defined in classes like
-    /// <see cref="RegisterTypeTargetContainerExtensions"/>, <see cref="SingletonTargetContainerExtensions"/> (plus many
-    /// more) will be available to developers in code which has a reference to this class, or one derived from it.
+    /// This makes it easier to create a new container and to register targets into it without
+    /// having to worry about managing a separate <see cref="IRootTargetContainer"/> instance in your application root -
+    /// because all the registration extension methods in <see cref="RootTargetContainerExtensions"/>, 
+    /// and <see cref="TargetContainerExtensions"/> will be available to developers in code which has a reference to this 
+    /// class, or one derived from it.
     ///
     /// Note also that calling <see cref="ITargetContainer.CombineWith(ITargetContainer, Type)"/> on an instance of this
     /// type will always cause a <see cref="NotSupportedException"/> to be thrown, thus preventing containers from being
@@ -47,22 +47,19 @@ namespace Rezolver
         public static CombinedContainerConfig DefaultConfig { get; } = new CombinedContainerConfig(new IContainerConfig[]
         {
             Configuration.ExpressionCompilation.Instance,
-            // note: this config object only applies itself to OverridingContainer objects, and only when the
-            // EnableAutoEnumerables option is set to true in the ITargetContainer.
-            //Configuration.OverridingEnumerables.Instance
         });
 
         
-        internal ContainerScope2 _scope;
+        internal ContainerScope _scope;
 
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
         private readonly ConcurrentCache _cache;
 #else
         private readonly DynamicCache _dynCache;
 #endif
 
         /// <summary>
-        /// Provides the <see cref="ITarget"/> instances that will be compiled into <see cref="ICompiledTarget"/>
+        /// Provides the <see cref="ITarget"/> instances that will be compiled into factories.
         /// instances.
         /// </summary>
         /// <remarks>This class implements the <see cref="ITargetContainer"/> interface by wrapping around this instance so that
@@ -76,7 +73,7 @@ namespace Rezolver
         /// adding more registrations, then there's no guarantee that new dependencies will be picked up - especially
         /// if the <see cref="Container"/> is being used as your application's container (which it nearly
         /// always will be).</remarks>
-        protected IRootTargetContainer Targets { get; }
+        protected internal IRootTargetContainer Targets { get; }
 
         /// <summary>
         /// Constructs a new instance of the <see cref="Container"/> class.
@@ -87,12 +84,12 @@ namespace Rezolver
         /// after construction, through the <see cref="Targets"/> property.</param>
         protected Container(IRootTargetContainer targets = null)
         {
-            _scope = new DisposingContainerScope(this);
+            _scope = new NonTrackingContainerScope(this);
             Targets = targets ?? new TargetContainer();
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             _cache = new ConcurrentCache(GetWorker);
 #else
-            _dynCache = new DynamicCache(this);
+            _dynCache = DynamicCache.CreateCache(this);
 #endif
         }
 
@@ -100,7 +97,7 @@ namespace Rezolver
         /// Constructs a new instance of the <see cref="Container"/> class.
         /// </summary>
         /// <param name="targets">Optional.  The target container whose registrations will be used for dependency lookup when
-        /// <see cref="IContainer.Resolve(ResolveContext)"/> (and other operations) is called.  If not provided, a new
+        /// <see cref="Resolve(ResolveContext)"/> (and other operations) is called.  If not provided, a new
         /// <see cref="TargetContainer"/> instance is constructed.  This will ultimately be available
         /// to derived types, after construction, through the <see cref="Targets"/> property.</param>
         /// <param name="config">Can be null.  Configuration to apply to this container (and, potentially its <see cref="Targets"/>).
@@ -118,7 +115,7 @@ namespace Rezolver
                 throw new InvalidOperationException("This constructor must not be used by derived types because applying configuration will most likely trigger calls to virtual methods on this instance.  Please use the protected constructor and apply configuration explicitly in your derived class");
             }
 
-            _scope = new DisposingContainerScope(this);
+            _scope = new NonTrackingContainerScope(this);
             (config ?? DefaultConfig).Configure(this, Targets);
         }
 
@@ -150,28 +147,27 @@ namespace Rezolver
 
         /// <summary>
         /// Gets an instance of the <see cref="ResolveContext.RequestedType"/> from the container,
-        /// using the scope from the <paramref name="context"/>
+        /// using the scope from the <paramref name="context"/>.
         /// </summary>
         /// <param name="context">The resolve context</param>
         /// <returns>An instance of the type that was requested.</returns>
-        //[System.Runtime.CompilerServices.MethodImpl(methodImplOptions: System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         public object Resolve(ResolveContext context)
         {
-#if !USEDYNAMIC
-            return GetCompiledTarget(context).GetObject(context);
+#if !ENABLE_IL_EMIT
+            return GetFactory(context)(context);
 #else
             return _dynCache.Resolve(context);
 #endif
         }
 
         /// <summary>
-        /// Resolves an instances of the given type using this container's scope.
+        /// Resolves an instance of the given <paramref name="serviceType"/> using this context's scope.
         /// </summary>
-        /// <param name="serviceType"></param>
-        /// <returns></returns>
+        /// <param name="serviceType">The type of service required.</param>
+        /// <returns>An object compatible with the <paramref name="serviceType"/></returns>
         public object Resolve(Type serviceType)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return Resolve(new ResolveContext(_scope, serviceType));
 #else
             return _dynCache.Resolve(serviceType);
@@ -179,30 +175,44 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Resolves an instance of the given type for the given scope
+        /// Resolves an instance of the given <paramref name="serviceType"/> for the given <paramref name="scope"/>.
         /// </summary>
-        /// <param name="serviceType"></param>
-        /// <param name="scope"></param>
-        /// <returns></returns>
-        public object Resolve(Type serviceType, ContainerScope2 scope)
+        /// <param name="serviceType">The type of service required.</param>
+        /// <param name="scope">The scope to be used for the operation.  Will be used for all scoping for the
+        /// created object and any dependencies created for it.</param>
+        /// <returns>An object compatible with the <paramref name="serviceType"/></returns>
+        public object Resolve(Type serviceType, ContainerScope scope)
         {
             // resolve, assuming a different scope to this container's scope
             return Resolve(new ResolveContext(new ContainerScopeProxy(scope, this), serviceType));
         }
 
+        /// <summary>
+        /// Resolves an instance of <typeparamref name="TService"/> using the current container and scope.
+        /// </summary>
+        /// <typeparam name="TService">The type of object required.</typeparam>
+        /// <returns>The instance.</returns>
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return ResolveInternal<TService>(new ResolveContext(_scope, typeof(TService)));
 #else
             return _dynCache.Resolve<TService>();
 #endif
         }
 
-        public TService Resolve<TService>(ContainerScope2 scope)
+        /// <summary>
+        /// Resolves an instance of <typeparamref name="TService"/> using the current container but the 
+        /// supplied <paramref name="scope"/>.
+        /// </summary>
+        /// <typeparam name="TService">The type of object required.</typeparam>
+        /// /// <param name="scope">The scope to be used for the operation.  Will be used for all scoping for the
+        /// created object and any dependencies created for it.</param>
+        /// <returns>The instance.</returns>
+        public TService Resolve<TService>(ContainerScope scope)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             // resolve, assuming a different scope to this container's scope
             return ResolveInternal<TService>(new ResolveContext(new ContainerScopeProxy(scope, this), typeof(TService)));
 #else
@@ -210,15 +220,27 @@ namespace Rezolver
 #endif
         }
 
+        /// <summary>
+        /// Resolves an <see cref="IEnumerable{T}"/> of the <paramref name="serviceType"/> using the current container
+        /// and scope.
+        /// </summary>
+        /// <param name="serviceType">The type of object required.</param>
+        /// <returns>An enumerable containing zero or more instances of services compatible with <paramref name="serviceType"/></returns>
         public IEnumerable ResolveMany(Type serviceType)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return (IEnumerable)Resolve(new ResolveContext(_scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
 #else
             return (IEnumerable)_dynCache.Resolve(typeof(IEnumerable<>).MakeGenericType(serviceType));
 #endif
         }
 
+        /// <summary>
+        /// Resolves an <see cref="IEnumerable{T}"/> of the <typeparamref name="TService"/> using the current container
+        /// and scope.
+        /// </summary>
+        /// <typeparam name="TService">the type of object required.</typeparam>
+        /// <returns>A strongly-typed enumerable containing zero or more instances of services compatible with <typeparamref name="TService"/></returns>
         public IEnumerable<TService> ResolveMany<TService>()
         {
             return Resolve<IEnumerable<TService>>();
@@ -226,16 +248,14 @@ namespace Rezolver
 
         internal TService ResolveInternal<TService>(ResolveContext context)
         {
-#if !USEDYNAMIC
-            return (TService)GetCompiledTarget(context).GetObject(context);
+#if !ENABLE_IL_EMIT
+            return (TService)GetFactory(context)(context);
 #else
             return _dynCache.Resolve<TService>(context);
 #endif
         }
 
         /// <summary>
-        /// Implementation of the <see cref="IContainer.TryResolve(ResolveContext, out object)"/> method.
-        ///
         /// Attempts to resolve the requested type (given on the <paramref name="context"/>, returning a boolean
         /// indicating whether the operation was successful.  If successful, then <paramref name="result"/> receives
         /// a reference to the resolved object.
@@ -246,10 +266,10 @@ namespace Rezolver
         /// <returns>A boolean indicating whether the operation completed successfully.</returns>
         public bool TryResolve(ResolveContext context, out object result)
         {
-            var target = GetCompiledTarget(context);
+            var target = GetFactory(context);
             if (!target.IsUnresolved())
             {
-                result = target.GetObject(context);
+                result = target(context);
                 return true;
             }
             else
@@ -262,11 +282,11 @@ namespace Rezolver
         /// <summary>
         /// Implementation of the <see cref="IScopeFactory.CreateScope"/> method.
         ///
-        /// The base definition creates a <see cref="ContainerScope2"/> with this container passed as the scope's container.
+        /// The base definition creates a <see cref="ContainerScope"/> with this container passed as the scope's container.
         ///
         /// Thus, the new scope is a 'root' scope.
         /// </summary>
-        public ContainerScope2 CreateScope()
+        public ContainerScope CreateScope()
         {
             return _scope.CreateScope();
         }
@@ -274,13 +294,18 @@ namespace Rezolver
         /// <summary>
         /// Returns <c>true</c> if a service registration can be found for the given <paramref name="serviceType"/>
         /// </summary>
-        /// <param name="serviceType"></param>
-        /// <returns></returns>
-        public virtual bool CanResolve(Type serviceType)
+        /// <param name="serviceType">The type of service</param>
+        /// <returns>A boolean indicating whether the service can be resolved</returns>
+        public bool CanResolve(Type serviceType)
         {
             return Targets.Fetch(serviceType) != null;
         }
 
+        /// <summary>
+        /// Returns <c>true</c> if a service registration can be found for the given <typeparamref name="TService"/>
+        /// </summary>
+        /// <typeparam name="TService">The type of service</typeparam>
+        /// <returns>A boolean indicating whether the service can be resolved</returns>
         public bool CanResolve<TService>()
         {
             return CanResolve(typeof(TService));
@@ -293,12 +318,12 @@ namespace Rezolver
         /// <param name="target"></param>
         /// <param name="serviceType"></param>
         /// <remarks>Remember: registering new targets into an <see cref="ITargetContainer"/> after an
-        /// <see cref="IContainer"/> has started compiling targets within it can yield unpredictable results.
+        /// <see cref="Container"/> has started compiling targets within it can yield unpredictable results.
         ///
         /// If you create a new container and perform all your registrations before you use it, however, then everything
         /// will work as expected.
         ///
-        /// Note also the other ITargetContainer interface methods are implemented explicitly so as to hide them from the
+        /// Note also the other <see cref="ITargetContainer"/> interface methods are implemented explicitly so as to hide them from the
         /// list of class members.
         /// </remarks>
         public void Register(ITarget target, Type serviceType = null)
@@ -307,41 +332,49 @@ namespace Rezolver
         }
 
         /// <summary>
-        /// Called by <see cref="GetCompiledTarget(ResolveContext)"/> if no valid <see cref="ITarget"/> can be
+        /// Called by <see cref="GetFactory(ResolveContext)"/> if no valid <see cref="ITarget"/> can be
         /// found for the <paramref name="context"/> or if the one found has its <see cref="ITarget.UseFallback"/> property
         /// set to <c>true</c>.
         /// </summary>
         /// <param name="context"></param>
-        /// <returns>An <see cref="ICompiledTarget"/> to be used as the result of a <see cref="Resolve(ResolveContext)"/>
+        /// <returns>A factory delegate to be used as the result of a <see cref="Resolve(ResolveContext)"/>
         /// operation where the search for a valid target either fails or is inconclusive (e.g. - empty enumerables).
         /// </returns>
         /// <remarks>The base implementation always returns an instance of the <see cref="UnresolvedTypeCompiledTarget"/>.</remarks>
-        protected virtual ICompiledTarget GetFallbackCompiledTarget(ResolveContext context)
+        protected Func<ResolveContext, object> GetFallbackCompiledTarget(ResolveContext context)
         {
-            return new UnresolvedTypeCompiledTarget(context.RequestedType);
+            return WellKnownFactories.Unresolved.Factory;
         }
 
         /// <summary>
-        /// Base implementation of <see cref="IContainer.GetCompiledTarget(ResolveContext)"/>.  Note that any container
-        /// already defined in the <see cref="ResolveContext.Container"/> is ignored in favour of this container.
+        /// 
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        protected Func<ResolveContext, TService> GetFallbackFactory<TService>(ResolveContext context)
+        {
+            return WellKnownFactories.Unresolved<TService>.Factory;
+        }
+
+        /// <summary>
+        /// Gets the factory which will create an instance of the type indicated by <see cref="ResolveContext.RequestedType"/>
+        /// of the passed <paramref name="context"/>.
         /// </summary>
         /// <param name="context">The context containing the requested type and any scope which is currently in force.</param>
-        /// <returns>Always returns a reference to a compiled target - but note that if
+        /// <returns>Always returns a reference to a delegate - but note that if
         /// <see cref="CanResolve(Type)"/> returns false for the same context, then the target's
-        /// <see cref="ICompiledTarget.GetObject(ResolveContext)"/> method will likely throw an exception - in line with
-        /// the behaviour of the <see cref="UnresolvedTypeCompiledTarget"/> class.</returns>
-        public ICompiledTarget GetCompiledTarget(ResolveContext context)
+        /// delegate will likely throw an exception.</returns>
+        public Func<ResolveContext, object> GetFactory(ResolveContext context)
         {
-            // note that this container is fixed as the container in the context - regardless of the
-            // one passed in.  This is important.  Scope and RequestedType are left unchanged
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return _cache.Get(context);
 #else
-            return _dynCache.GetCompiled(context.RequestedType);
+            return _dynCache.GetFactory(context.RequestedType);
 #endif
         }
 
-        internal ICompiledTarget GetWorker(ResolveContext context)
+        internal Func<ResolveContext, object> GetWorker(ResolveContext context)
         {
             ITarget target = Targets.Fetch(context.RequestedType);
 
@@ -361,19 +394,21 @@ namespace Rezolver
                 }
             }
 
-            // if the target also supports the ICompiledTarget interface then return it, bypassing the
-            // need for any direct compilation.
-            // Then check whether the type of the target is compatible with the requested type - so long
-            // as the requested type is not System.Object.  If so, return a ConstantCompiledTarget
-            // which will simply return the target when GetObject is called.
-            // note that we don't check for IDirectTarget - because that can't honour scoping rules
-            if (target is ICompiledTarget compiledTarget)
+            // does the target actually need compilation?
+            // - instance provider provides an instance via its GetInstance method
+            // - factory provider provides a factory
+            // - if the target is the same type or of a type compatible with the requested type, return it.
+            if(target is IInstanceProvider instanceProvider)
             {
-                return compiledTarget;
+                return c => instanceProvider.GetInstance(context);
+            }
+            else if (target is IFactoryProvider factoryProvider)
+            {
+                return factoryProvider.Factory;
             }
             else if (context.RequestedType != typeof(object) && context.RequestedType.IsAssignableFrom(target.GetType()))
             {
-                return new ConstantCompiledTarget(target, target);
+                return c => target;
             }
 
             var compiler = Targets.GetOption<ITargetCompiler>(target.GetType());
@@ -383,6 +418,54 @@ namespace Rezolver
             }
 
             return compiler.CompileTarget(target, context.ChangeContainer(newContainer: this), Targets);
+        }
+
+        internal Func<ResolveContext, TService> GetWorker<TService>(ResolveContext context)
+        {
+            ITarget target = Targets.Fetch(context.RequestedType);
+
+            if (target == null)
+            {
+                return GetFallbackFactory<TService>(context);
+            }
+
+            // if the entry advises us to fall back if possible, then we'll see what we get from the
+            // fallback operation.  If it's NOT the unresolved target, then we'll use that instead
+            if (target.UseFallback)
+            {
+                var fallback = GetFallbackFactory<TService>(context);
+                if (!fallback.IsUnresolved())
+                {
+                    return fallback;
+                }
+            }
+
+            // does the target actually need compilation?
+            // - instance provider provides an instance via its GetInstance method
+            // - factory provider provides a factory
+            // - if the target is the same type or of a type compatible with the requested type, return it.
+            if (target is IInstanceProvider<TService> instanceProvider)
+            {
+                return c => instanceProvider.GetInstance(context);
+            }
+            else if (target is IFactoryProvider<TService> factoryProvider)
+            {
+                return factoryProvider.Factory;
+            }
+            else if (context.RequestedType != typeof(object) 
+                && context.RequestedType.IsAssignableFrom(target.GetType())
+                && target is TService typedService)
+            {
+                return c => typedService;
+            }
+
+            var compiler = Targets.GetOption<ITargetCompiler>(target.GetType());
+            if (compiler == null)
+            {
+                throw new InvalidOperationException($"No compiler has been configured in the Targets target container for a target of type {target.GetType()} - please use the SetOption API to set an ITargetCompiler for all target types, or for specific target types.");
+            }
+
+            return compiler.CompileTarget<TService>(target, context.ChangeContainer(newContainer: this), Targets);
         }
 
 #region IServiceProvider implementation

@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Decorating with delegates | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -126,7 +124,7 @@ container.RegisterDecorator((int i) =&gt; i * 2);
 container.RegisterObject(10);
 
 Assert.Equal(20, container.Resolve&lt;int&gt;());
-</code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../../api/Rezolver.DecoratorTargetContainerExtensions.html#Rezolver_DecoratorTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> is overloaded for the delegate types 
+</code></pre><div class="TIP"><h5>Tip</h5><p>The <a class="xref" href="../../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> is overloaded for the delegate types 
 <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func&lt;T,TResult&gt;</a> and <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.delegate">Delegate</a> - the second of which allows any delegate to be registered as a 
 decorator, subject to parameter and return type checks.  The framework will inject arguments to any 
 parameters the delegate has, with a parameter of the decorated type receiving the undecorated instance.</p>
@@ -257,7 +255,7 @@ in the meantime it&#39;s possible to add support in yourself by extending Rezolv
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/decorators/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/decorators/delegates.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

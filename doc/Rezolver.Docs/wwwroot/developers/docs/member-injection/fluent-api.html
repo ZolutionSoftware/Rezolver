@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Using the Fluent API to customise member bindings | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -140,7 +138,7 @@ targets and registrations.</p>
 <pre><code class="lang-cs">// adds an instruction to the behaviour builder to ensure that the member &#39;BindableMember&#39;
 // is bound when an instance is created.  
 behaviourBuilder.Bind(o =&gt; o.BindableMember);
-</code></pre><p>This configures the member to be injected via the equivalent of a <a class="xref" href="../../api/Rezolver.IContainer.html#Rezolver_IContainer_Resolve_">Resolve</a> call for 
+</code></pre><p>This configures the member to be injected via the equivalent of a <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call for 
 the member&#39;s type from the container that is producing the enclosing instance.</p>
 <h3 id="configuring-a-member-binding">Configuring a Member Binding</h3>
 <p>The <code>Bind</code> method&#39;s result - the <a class="xref" href="../../api/Rezolver.MemberBindingBuilder-2.html">MemberBindingBuilder&lt;TInstance, TMember&gt;</a> class - allows you to customise how a member 
@@ -198,7 +196,7 @@ tests that you can run yourself, if you clone the repo.</p>
     public MyService2 Service2 { get; set; }
 }
 </code></pre><p>First, we&#39;ll configure just one of the members for injection using the techniques shown above, but as we
-register the type with the <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">RegisterType&lt;TObject&gt;(ITargetContainer, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
+register the type with the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterType__1_Rezolver_ITargetContainer_System_Action_Rezolver_IMemberBindingBehaviourBuilder___0___">RegisterType&lt;TObject&gt;(ITargetContainer, Action&lt;IMemberBindingBehaviourBuilder&lt;TObject&gt;&gt;)</a>
 extension method:</p>
 <pre><code class="lang-csharp" name="MemberBindingExamples.cs">var container = new Container();
 
@@ -265,7 +263,7 @@ by the <a href="index.html#standard-behaviours">standard behaviours</a> and by t
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/member-injection/fluent-api.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/member-injection/fluent-api.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

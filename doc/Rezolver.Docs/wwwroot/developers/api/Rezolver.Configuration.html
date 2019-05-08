@@ -11,7 +11,7 @@
   	<meta name="title" content="Namespace Rezolver.Configuration
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -136,7 +134,7 @@ instances via the <a class="xref" href="https://docs.microsoft.com/dotnet/api/sy
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectAutoFuncs.html">InjectAutoFuncs</a></h4>
       <section><p>Controls whether the injection of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> will automatically be
-available <em>without</em> having to use the <a class="xref" href="Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_">RegisterAutoFunc&lt;TResult&gt;(IRootTargetContainer)</a>
+available <em>without</em> having to use the <a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterAutoFunc__1_Rezolver_IRootTargetContainer_">RegisterAutoFunc&lt;TResult&gt;(IRootTargetContainer)</a>
 method or explicitly register <a class="xref" href="Rezolver.Targets.AutoFactoryTarget.html">AutoFactoryTarget</a> targets.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectAutoLazies.html">InjectAutoLazies</a></h4>
@@ -162,7 +160,7 @@ when applied to an <a class="xref" href="Rezolver.ITargetContainer.html">ITarget
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.InjectResolveContext.html">InjectResolveContext</a></h4>
       <section><p>An <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that enables automatic resolving of the
-<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a> created for a <a class="xref" href="Rezolver.IContainer.html#Rezolver_IContainer_Resolve_Rezolver_IResolveContext_">Resolve(IResolveContext)</a> operation.</p>
+<a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a> created for a <a class="xref" href="Rezolver.Container.html#Rezolver_Container_Resolve_Rezolver_ResolveContext_">Resolve(ResolveContext)</a> operation.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html">OptionDependentConfig&lt;TOption&gt;</a></h4>
       <section><p>Abstract base class for an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that is dependent upon a particular type of option
@@ -176,13 +174,6 @@ a specific type for configuration (<code data-dev-comment-type="typeparamref" cl
       <h4><a class="xref" href="Rezolver.Configuration.OptionDependentConfigBase.html">OptionDependentConfigBase</a></h4>
       <section><p>Abstract base class for <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> implementations which are dependent upon
 one or more configuration objects having been applied before being applied themselves.</p>
-</section>
-      <h4><a class="xref" href="Rezolver.Configuration.OverridingEnumerables.html">OverridingEnumerables</a></h4>
-      <section><p>When applied to an <a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> whose target container has been configured to
-enable automatically injected enumerables (via the <a class="xref" href="Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration callback and the
-<a class="xref" href="Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option), then this will extend enumerable support in the
-<a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a> to construct enumerables made up of a combination of all services in the
-overriden container AND those from the overriding container.</p>
 </section>
 </article>
           </div>

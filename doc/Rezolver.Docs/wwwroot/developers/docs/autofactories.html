@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Autofactories | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -107,7 +105,7 @@
 configured to run via an IOC container, this often means one of two things:</p>
 <ul>
 <li>Taking a dependency on an instance of the IOC container<ul>
-<li><em>This can be achieved in Rezolver either by injecting an instance of <a class="xref" href="../api/Rezolver.IResolveContext.html">IResolveContext</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></em></li>
+<li><em>This can be achieved in Rezolver either by injecting an instance of <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></em></li>
 </ul>
 </li>
 <li>Taking a dependency on a factory delegate</li>
@@ -132,7 +130,7 @@ a registration like this for each individual type that we&#39;d want to create i
 <h1 id="examples">Examples</h1>
 <h2 id="basic-functionality">Basic functionality</h2>
 <p>Starting with Rezolver 1.4, however, Rezolver makes this kind of registration trivial, and also gives you some extra power.</p>
-<p>The <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFunc_">RegisterAutoFunc</a> overload provides a simple way to enable Rezolver to automatically
+<p>The <a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterAutoFunc_">RegisterAutoFunc</a> overload provides a simple way to enable Rezolver to automatically
 inject a <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-1">Func&lt;TResult&gt;</a> or one of its related types, using its own registrations as the source of the object that is produced by that
 factory when it is executed.</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">var container = new Container();
@@ -159,7 +157,7 @@ var instances = factory();  // will contain three instances
 var factories = container.ResolveMany&lt;Func&lt;IMyService&gt;&gt;();
 var instances = factories.Select(f =&gt; f());
 </code></pre><p>All of the above works for custom delegate types, too (so long as they have a non-<code>void</code> return type), via the 
-<a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> overload:</p>
+<a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> overload:</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">public delegate IMyService MyServiceFactory();
 </code></pre><pre><code class="lang-csharp" name="AutoFactoryExamples.cs">container.RegisterAutoFactory&lt;MyServiceFactory&gt;();
 
@@ -240,7 +238,7 @@ Assert.True(outerDisposable.Disposed);
 being thrown.</p>
 </div>
 <h2 id="generics">Generics</h2>
-<p>With the <a class="xref" href="../api/Rezolver.AutoFactoryRegistrationExtensions.html#Rezolver_AutoFactoryRegistrationExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> method, Rezolver is also capable of injecting
+<p>With the <a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterAutoFactory_">RegisterAutoFactory</a> method, Rezolver is also capable of injecting
 delegates whose result is an open generic.  When requested, Rezolver will build a delegate of the closed version of that
 generic:</p>
 <pre><code class="lang-csharp" name="AutoFactoryExamples.cs">public interface IWrapper&lt;T&gt;
@@ -319,7 +317,7 @@ of <code>Lazy&lt;T&gt;</code>.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/autofactories.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/autofactories.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

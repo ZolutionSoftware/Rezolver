@@ -4,10 +4,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Rezolver.Targets;
 
 namespace Rezolver.Compilation
 {
@@ -24,12 +20,12 @@ namespace Rezolver.Compilation
     /// Note that many of the interface members are implemented explicitly - therefore most of your interaction with
     /// this type is through its implementation of <see cref="ICompileContext"/> and <see cref="ITargetContainer"/>.
     /// </summary>
-    /// <seealso cref="Rezolver.Compilation.ICompileContext" />
-    /// <seealso cref="Rezolver.ITargetContainer" />
+    /// <seealso cref="ICompileContext" />
+    /// <seealso cref="ITargetContainer" />
     /// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
     /// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via the
     /// <see cref="ITargetCompiler.CreateContext(ResolveContext, ITargetContainer)"/> method of an
-    /// <see cref="ITargetCompiler" /> resolved from an <see cref="IContainer" />.
+    /// <see cref="ITargetCompiler" /> resolved from an <see cref="Container" />.
     /// </remarks>
     public class CompileContext : ICompileContext, ITargetContainer
     {
@@ -61,7 +57,7 @@ namespace Rezolver.Compilation
 
         private readonly Type _targetType;
         /// <summary>
-        /// Any <see cref="ICompiledTarget" /> built for a <see cref="ITarget" /> with this context should target this type.
+        /// Any factory built for a <see cref="ITarget" /> with this context should target this type.
         /// If null, then the <see cref="ITarget.DeclaredType" /> of the target being compiled should be used.
         /// </summary>
         /// <remarks>Note that when creating a child context with a null <c>targetType</c> argument, this property will be inherited
@@ -180,7 +176,7 @@ namespace Rezolver.Compilation
         /// </summary>
         /// <param name="toCompile">The target to be pushed</param>
         /// <param name="targetType">The type for which the target is being compiled, if different from <see cref="ITarget.DeclaredType" /></param>
-        /// <remarks>Targets can appear on the compilation stack more than once for different types, since the <see cref="ICompiledTarget" />
+        /// <remarks>Targets can appear on the compilation stack more than once for different types, since the factory
         /// produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
         /// cyclic dependency graph, then this method will detect that.</remarks>
         bool ICompileContext.PushCompileStack(ITarget toCompile, Type targetType)

@@ -11,7 +11,7 @@
   	<meta name="title" content="Namespace Rezolver.Options
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -119,8 +117,10 @@ any potentially affected registrations are performed.</p>
 <p>The <a class="xref" href="Rezolver.Options.AllowMultiple.html#Rezolver_Options_AllowMultiple_Default">Default</a> (unset) is equivalent to <code>true</code></p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a></h4>
-      <section><p>A suggested base class to use for custom container options to be read/written through the
-<a class="xref" href="Rezolver.OptionsTargetContainerExtensions.html">OptionsTargetContainerExtensions</a> extension methods.</p>
+      <section><p>A suggested base class to use for custom container options to be read/written through extensions
+such as <a class="xref" href="Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_">SetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>,
+<a class="xref" href="Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_">GetOptions&lt;TOption, TService&gt;(ITargetContainer)</a> and the various
+overloads.S</p>
 <p>The type of the option value is the argument to the <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> type parameter.</p>
 <p>Options must currently be objects - the ability to use callbacks to get options might be added at a
 future date.</p>

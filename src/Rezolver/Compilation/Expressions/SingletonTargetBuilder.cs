@@ -2,13 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using Rezolver.Runtime;
 using Rezolver.Targets;
 
@@ -31,33 +25,42 @@ namespace Rezolver.Compilation.Expressions
         {
             var holder = context.ResolveContext.Resolve<SingletonTarget.SingletonContainer>();
             int? targetIdOverride = context.GetOption<TargetIdentityOverride>(context.TargetType ?? target.DeclaredType);
+            TypeAndTargetId id = new TypeAndTargetId(context.TargetType ?? target.DeclaredType, targetIdOverride ?? target.Id);
 
-            var compiled = compiler.CompileTarget(
-                    target.InnerTarget,
-                    context.NewContext(
-                        context.TargetType ?? target.DeclaredType,
-                        // this override is important - when forcing into the root-scope, as we do
-                        // for singletons, 'explicit' means absolutely nothing.  So, instead of allowing
-                        // our child target to choose, we explicitly ensure that all instances are implicitly 
-                        // tracked within the root scope, if it is one which can track instances.
-                        scopeBehaviourOverride: ScopeBehaviour.Implicit,
-                        scopePreferenceOverride: ScopePreference.Root));
-#if !USEDYNAMIC
+            var lazy = holder.GetLazy(id);
 
-            return Expression.Convert(Expression.Call(
-                Expression.Constant(holder),
-                nameof(SingletonTarget.SingletonContainer.GetObject),
-                null,
-                context.ResolveContextParameterExpression,
-                Expression.Constant(context.TargetType, typeof(Type)),
-                Expression.Constant(targetIdOverride ?? target.Id),
-                Expression.Constant(compiled)), context.TargetType);
-#else
-            var entryType = holder.GetEntryType(compiled, targetIdOverride ?? target.Id, context.TargetType);
-            return Expression.Call(entryType.GetMethod("Resolve", BindingFlags.Static | BindingFlags.Public), context.ResolveContextParameterExpression);
-#endif
+            if (lazy == null)
+            {
+                lazy = holder.GetLazy(
+                    target, 
+                    id, 
+                    compiler.CompileTargetStrong(
+                        target.InnerTarget,
+                        context.NewContext(
+                            context.TargetType ?? target.DeclaredType,
+                            // this override is important - when forcing into the root-scope, as we do
+                            // for singletons, 'explicit' means absolutely nothing.  So, instead of allowing
+                            // our child target to choose, we explicitly ensure that all instances are implicitly 
+                            // tracked within the root scope, if it is one which can track instances.
+                            scopeBehaviourOverride: ScopeBehaviour.Implicit,
+                            scopePreferenceOverride: ScopePreference.Root)),
+                    context);
+            }
+
+            return Expression.Call(
+                Expression.Constant(lazy),
+                lazy.GetType().GetMethod("Resolve"),
+                context.ResolveContextParameterExpression);
         }
 
+        /// <summary>
+        /// Overrides the base to prevent additional scoping information being added to the expression returned by <see cref="Build(SingletonTarget, IExpressionCompileContext, IExpressionCompiler)"/>
+        /// </summary>
+        /// <param name="builtExpression"></param>
+        /// <param name="target"></param>
+        /// <param name="context"></param>
+        /// <param name="compiler"></param>
+        /// <returns></returns>
         protected override Expression ApplyScoping(Expression builtExpression, ITarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
             return builtExpression;

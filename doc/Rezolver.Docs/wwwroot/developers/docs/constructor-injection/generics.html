@@ -9,7 +9,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Open Generic Constructor Injection | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../../favicon.ico">
   	<link rel="stylesheet" href="../../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../../styles/docfx.css">
@@ -65,8 +65,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -126,7 +124,7 @@ argument is dependant upon a type argument, then there&#39;s no easy way you cou
 might be passed to it.</p>
 <h2 id="creatingregistering-xrefrezolvertargetsgenericconstructortargets">Creating/registering <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>s</h2>
 <p>You can, of course, simply use the constructors to build a new instance of this target - e.g: <code>new GenericConstructorTarget(typeof(Foo&lt;&gt;))</code>.</p>
-<p>However, the non-generic versions of the <a class="xref" href="../../api/Rezolver.RegisterTypeTargetContainerExtensions.html#Rezolver_RegisterTypeTargetContainerExtensions_RegisterType_">RegisterType</a> method that we&#39;ve been using elsewhere to 
+<p>However, the non-generic versions of the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterType_">RegisterType</a> method that we&#39;ve been using elsewhere to 
 register &#39;simple&#39; types in our target containers are also generic type-aware.  So, if you specify an open generic type as the implementing type, 
 then those functions automatically create a <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for you and register it.  </p>
 <p>So, <code>container.RegisterType(typeof(MyGeneric&lt;&gt;))</code> will register <code>MyGeneric&lt;&gt;</code> for all variants of itself, and 
@@ -330,11 +328,6 @@ version of that type is constructed.</p>
 <ul>
 <li>The <a href="../member-injection/index.html">member injection documentation</a> might be of interest if you&#39;ve not already read it.</li>
 </ul>
-<div class="NOTE"><h5>Note</h5><p>A separate topic will be added in the future regarding Generic Specialisation in the container, but that covers all target types, 
-not just the <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> - so that will go elsewhere.</p>
-</div>
-<p>Feel free to explore the table of contents or <a href="../service-registration.html">head back to the main service registration overview</a> to explore 
-more features of Rezolver.</p>
 </article>
           </div>
           <div class="hidden-sm col-md-3" role="complementary">
@@ -342,7 +335,7 @@ more features of Rezolver.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/autofactories/doc/Rezolver.Docs/_docfx_proj/docs/constructor-injection/generics.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/doc/Rezolver.Docs/_docfx_proj/docs/constructor-injection/generics.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

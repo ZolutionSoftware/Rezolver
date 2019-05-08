@@ -11,7 +11,7 @@
   	<meta name="title" content="Class ContainerScope
    | Rezolver IOC ">
   	<meta name="generator" content="docfx 2.40.10.0">
-  	<meta name="description" content="Rezolver is the portable open-source IOC container framework for .Net - built from the ground up for .Net Core, Asp.Net Core, and also optimised for the 'full .Net' :)">
+  	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
   	<link rel="stylesheet" href="../styles/docfx.css">
@@ -67,8 +67,6 @@
         		</form>
         		<p class="navbar-text navbar-right">
         			<a href="https://www.nuget.org/packages/Rezolver" target="_blank"><img src="//img.shields.io/nuget/v/Rezolver.svg?style=plastic&amp;maxage=480" title="Get the Nuget Package"></a>
-        			<a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work in Progress" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress"></a>
-        			<!-- <a href="http://waffle.io/ZolutionSoftware/Rezolver" title="Open the Waffleboard for this project" target="_blank"><img alt="Work prepared" src="https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready"></img></a> -->
         		</p>
             </div>
           </div>
@@ -106,20 +104,20 @@
   
   <h1 id="Rezolver_ContainerScope" data-uid="Rezolver.ContainerScope" class="text-break">Class ContainerScope
   </h1>
-  <div class="markdown level0 summary"><p>Standard implementation of the <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a> interface.</p>
+  <div class="markdown level0 summary"><p>Base class for scopes.</p>
+<p>This type cannot be inherited by user types.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ContainerScope</span></div>
+      <div class="level2"><a class="xref" href="Rezolver.NonTrackingContainerScope.html">NonTrackingContainerScope</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">IServiceProvider</a></div>
-    <div><a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -149,87 +147,8 @@
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_ContainerScope_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ContainerScope : IContainerScope, IDisposable, IServiceProvider, IScopeFactory</code></pre>
+    <pre><code class="lang-csharp hljs">public class ContainerScope : IDisposable, IServiceProvider</code></pre>
   </div>
-  <h3 id="constructors">Constructors
-  </h3>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope__ctor_Rezolver_IContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.%23ctor(Rezolver.IContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L125">View Source</a>
-  </span>
-  <a id="Rezolver_ContainerScope__ctor_" data-uid="Rezolver.ContainerScope.#ctor*"></a>
-  <h4 id="Rezolver_ContainerScope__ctor_Rezolver_IContainer_" data-uid="Rezolver.ContainerScope.#ctor(Rezolver.IContainer)">ContainerScope(IContainer)</h4>
-  <div class="markdown level1 summary"><p>Creates a new root scope tied to the given <code data-dev-comment-type="paramref" class="paramref">container</code></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ContainerScope(IContainer container)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
-        <td><span class="parametername">container</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope__ctor_Rezolver_IContainerScope_Rezolver_IContainer_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.%23ctor(Rezolver.IContainerScope%2CRezolver.IContainer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L110">View Source</a>
-  </span>
-  <a id="Rezolver_ContainerScope__ctor_" data-uid="Rezolver.ContainerScope.#ctor*"></a>
-  <h4 id="Rezolver_ContainerScope__ctor_Rezolver_IContainerScope_Rezolver_IContainer_" data-uid="Rezolver.ContainerScope.#ctor(Rezolver.IContainerScope,Rezolver.IContainer)">ContainerScope(IContainerScope, IContainer)</h4>
-  <div class="markdown level1 summary"><p>Creates a new container that is a child of another.</p>
-<p>The <a class="xref" href="Rezolver.ContainerScope.html#Rezolver_ContainerScope_Container">Container</a> will be inherited from the <code data-dev-comment-type="paramref" class="paramref">parentScope</code>
-by default, unless it&apos;s overriden by <code data-dev-comment-type="paramref" class="paramref">containerOverride</code>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ContainerScope(IContainerScope parentScope, IContainer containerOverride = null)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
-        <td><span class="parametername">parentScope</span></td>
-        <td><p>Required - the parent scope</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
-        <td><span class="parametername">containerOverride</span></td>
-        <td><p>Optional - the container which should be used for resolve
-operations executed against this scope (note - all the resolve methods are declared as extension
-methods which mirror those present on <a class="xref" href="Rezolver.IContainer.html">IContainer</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
@@ -237,17 +156,16 @@ methods which mirror those present on <a class="xref" href="Rezolver.IContainer.
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Container.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Container%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L63">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L28">View Source</a>
   </span>
   <a id="Rezolver_ContainerScope_Container_" data-uid="Rezolver.ContainerScope.Container*"></a>
   <h4 id="Rezolver_ContainerScope_Container" data-uid="Rezolver.ContainerScope.Container">Container</h4>
-  <div class="markdown level1 summary"><p>The container that this scope is tied to.  All standard resolve operations
-should be made against this container.</p>
+  <div class="markdown level1 summary"><p>The container that this scope uses by default to resolve instances.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IContainer Container { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Container Container { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -259,41 +177,8 @@ should be made against this container.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.IContainer.html">IContainer</a></td>
-        <td><p>The container.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Disposed.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Disposed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L55">View Source</a>
-  </span>
-  <a id="Rezolver_ContainerScope_Disposed_" data-uid="Rezolver.ContainerScope.Disposed*"></a>
-  <h4 id="Rezolver_ContainerScope_Disposed" data-uid="Rezolver.ContainerScope.Disposed">Disposed</h4>
-  <div class="markdown level1 summary"><p>Gets a value indicating whether this <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a> is disposed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Disposed { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><p><code>true</code> if disposed; otherwise, <code>false</code>.</p>
-</td>
+        <td><a class="xref" href="Rezolver.Container.html">Container</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -302,16 +187,16 @@ should be made against this container.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Parent.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Parent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L75">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L46">View Source</a>
   </span>
   <a id="Rezolver_ContainerScope_Parent_" data-uid="Rezolver.ContainerScope.Parent*"></a>
   <h4 id="Rezolver_ContainerScope_Parent" data-uid="Rezolver.ContainerScope.Parent">Parent</h4>
-  <div class="markdown level1 summary"><p>If this scope has a parent scope, this is it.</p>
+  <div class="markdown level1 summary"><p>The scope from which this scope was created.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IContainerScope Parent { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ContainerScope Parent { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -323,9 +208,44 @@ should be made against this container.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
-        <td><p>The parent.</p>
-</td>
+        <td><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Root.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Root%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L41">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerScope_Root_" data-uid="Rezolver.ContainerScope.Root*"></a>
+  <h4 id="Rezolver_ContainerScope_Root" data-uid="Rezolver.ContainerScope.Root">Root</h4>
+  <div class="markdown level1 summary"><p>Root scope to be used for &apos;top-level&apos; object tracking.</p>
+<p>Note - when a <a class="xref" href="Rezolver.ContainerScope.html#Rezolver_ContainerScope_Container">Container</a> is used, this should be the first scope
+created via the <a class="xref" href="Rezolver.Container.html#Rezolver_Container_CreateScope">CreateScope()</a> method.</p>
+<p>With <a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a> it will be the scope that lives inside that container.</p>
+<p>So, as a result of this, this property could point to a scope that&apos;s not actually
+a parent of <a class="xref" href="Rezolver.ContainerScope.html#Rezolver_ContainerScope_Parent">Parent</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContainerScope Root { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -333,60 +253,19 @@ should be made against this container.</p>
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_ChildScopeDisposed_Rezolver_IContainerScope_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.ChildScopeDisposed(Rezolver.IContainerScope)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L157">View Source</a>
-  </span>
-  <a id="Rezolver_ContainerScope_ChildScopeDisposed_" data-uid="Rezolver.ContainerScope.ChildScopeDisposed*"></a>
-  <h4 id="Rezolver_ContainerScope_ChildScopeDisposed_Rezolver_IContainerScope_" data-uid="Rezolver.ContainerScope.ChildScopeDisposed(Rezolver.IContainerScope)">ChildScopeDisposed(IContainerScope)</h4>
-  <div class="markdown level1 summary"><p>Called by child scopes when they are disposed to notify the parent that they
-will no longer need to be disposed of when the parent is disposed.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ChildScopeDisposed(IContainerScope child)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
-        <td><span class="parametername">child</span></td>
-        <td><p>The child.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Rezolver_ContainerScope_ChildScopeDisposed_Rezolver_IContainerScope__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This is an infrastructure method and not something you would usually need to call.
-It&apos;s exposed for developers who are extending the container scoping functionality only.</p>
-</div>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L138">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L86">View Source</a>
   </span>
   <a id="Rezolver_ContainerScope_CreateScope_" data-uid="Rezolver.ContainerScope.CreateScope*"></a>
   <h4 id="Rezolver_ContainerScope_CreateScope" data-uid="Rezolver.ContainerScope.CreateScope">CreateScope()</h4>
-  <div class="markdown level1 summary"><p>Called to create a child scope from this scope.  The implementation adds the
-new scope to a private collection so that it can dispose of the new child if
-it is not already disposed.</p>
+  <div class="markdown level1 summary"><p>Creates a new scope from which instances can be resolved, isolated from the current scope.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IContainerScope CreateScope()</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual ContainerScope CreateScope()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -398,8 +277,9 @@ it is not already disposed.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></td>
-        <td></td>
+        <td><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></td>
+        <td><p>A new scope.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -408,11 +288,11 @@ it is not already disposed.</p>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Dispose.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L168">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L96">View Source</a>
   </span>
   <a id="Rezolver_ContainerScope_Dispose_" data-uid="Rezolver.ContainerScope.Dispose*"></a>
   <h4 id="Rezolver_ContainerScope_Dispose" data-uid="Rezolver.ContainerScope.Dispose">Dispose()</h4>
-  <div class="markdown level1 summary"><p>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</p>
+  <div class="markdown level1 summary"><p>Disposes this scope and any of its child scopes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -421,19 +301,19 @@ it is not already disposed.</p>
   </div>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Resolve_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Resolve(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L178">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L143">View Source</a>
   </span>
-  <a id="Rezolver_ContainerScope_Dispose_" data-uid="Rezolver.ContainerScope.Dispose*"></a>
-  <h4 id="Rezolver_ContainerScope_Dispose_System_Boolean_" data-uid="Rezolver.ContainerScope.Dispose(System.Boolean)">Dispose(Boolean)</h4>
-  <div class="markdown level1 summary"><p>Releases unmanaged and - optionally - managed resources.</p>
+  <a id="Rezolver_ContainerScope_Resolve_" data-uid="Rezolver.ContainerScope.Resolve*"></a>
+  <h4 id="Rezolver_ContainerScope_Resolve_System_Type_" data-uid="Rezolver.ContainerScope.Resolve(System.Type)">Resolve(Type)</h4>
+  <div class="markdown level1 summary"><p>Resolves an instance of the <code data-dev-comment-type="paramref" class="paramref">serviceType</code> from the container.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+    <pre><code class="lang-csharp hljs">public object Resolve(Type serviceType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -446,59 +326,10 @@ it is not already disposed.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">disposing</span></td>
-        <td><p><code>true</code> to release both managed and unmanaged resources; <code>false</code> to release only unmanaged resources.</p>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>The type of object to resolve.</p>
 </td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_System_Guid_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Rezolver%23IContainerScope%23Resolve(Rezolver.IResolveContext%2CSystem.Guid%2CSystem.Func%7BRezolver.IResolveContext%2CSystem.Object%7D%2CRezolver.ScopeBehaviour)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L225">View Source</a>
-  </span>
-  <a id="Rezolver_ContainerScope_Rezolver_IContainerScope_Resolve_" data-uid="Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve*"></a>
-  <h4 id="Rezolver_ContainerScope_Rezolver_IContainerScope_Resolve_Rezolver_IResolveContext_System_Guid_System_Func_Rezolver_IResolveContext_System_Object__Rezolver_ScopeBehaviour_" data-uid="Rezolver.ContainerScope.Rezolver#IContainerScope#Resolve(Rezolver.IResolveContext,System.Guid,System.Func{Rezolver.IResolveContext,System.Object},Rezolver.ScopeBehaviour)">IContainerScope.Resolve(IResolveContext, Guid, Func&lt;IResolveContext, Object&gt;, ScopeBehaviour)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">object IContainerScope.Resolve(IResolveContext context, Guid targetId, Func&lt;IResolveContext, object&gt; factory, ScopeBehaviour behaviour)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
-        <td><span class="parametername">targetId</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Rezolver.IResolveContext.html">IResolveContext</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
-        <td><span class="parametername">factory</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Rezolver.ScopeBehaviour.html">ScopeBehaviour</a></td>
-        <td><span class="parametername">behaviour</span></td>
-        <td></td>
       </tr>
     </tbody>
   </table>
@@ -513,16 +344,169 @@ it is not already disposed.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
-        <td></td>
+        <td><p>An instance of the type <code data-dev-comment-type="paramref" class="paramref">serviceType</code> built according to the 
+registrations in this container.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_Resolve__1.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.Resolve%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L154">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerScope_Resolve_" data-uid="Rezolver.ContainerScope.Resolve*"></a>
+  <h4 id="Rezolver_ContainerScope_Resolve__1" data-uid="Rezolver.ContainerScope.Resolve``1">Resolve&lt;TService&gt;()</h4>
+  <div class="markdown level1 summary"><p>Resolves an instance of <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code> from the container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TService Resolve&lt;TService&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TService</span></td>
+        <td><p>An instance of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code> built according to the
+registrations in this container.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>The type of object to resolve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_ResolveMany_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.ResolveMany(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L165">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerScope_ResolveMany_" data-uid="Rezolver.ContainerScope.ResolveMany*"></a>
+  <h4 id="Rezolver_ContainerScope_ResolveMany_System_Type_" data-uid="Rezolver.ContainerScope.ResolveMany(System.Type)">ResolveMany(Type)</h4>
+  <div class="markdown level1 summary"><p>Resolves an enumerable of zero or more instances of <code data-dev-comment-type="paramref" class="paramref">serviceType</code> from the
+container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable ResolveMany(Type serviceType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">serviceType</span></td>
+        <td><p>Type of objects to resolve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></td>
+        <td><p>An enumerable containing zero or more instances of the type <code data-dev-comment-type="paramref" class="paramref">serviceType</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_ResolveMany__1.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.ResolveMany%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L176">View Source</a>
+  </span>
+  <a id="Rezolver_ContainerScope_ResolveMany_" data-uid="Rezolver.ContainerScope.ResolveMany*"></a>
+  <h4 id="Rezolver_ContainerScope_ResolveMany__1" data-uid="Rezolver.ContainerScope.ResolveMany``1">ResolveMany&lt;TService&gt;()</h4>
+  <div class="markdown level1 summary"><p>Resolves an enumerable of zero or more instances of <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code> from the
+container.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;TService&gt; ResolveMany&lt;TService&gt;()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;TService&gt;</td>
+        <td><p>An enumerable containing zero or more instances of the type <code data-dev-comment-type="typeparamref" class="typeparamref">TService</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">TService</span></td>
+        <td><p>Type of objects to resolve.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope_System_IServiceProvider_GetService_System_Type_.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope.System%23IServiceProvider%23GetService(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L259">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L129">View Source</a>
   </span>
   <a id="Rezolver_ContainerScope_System_IServiceProvider_GetService_" data-uid="Rezolver.ContainerScope.System#IServiceProvider#GetService*"></a>
   <h4 id="Rezolver_ContainerScope_System_IServiceProvider_GetService_System_Type_" data-uid="Rezolver.ContainerScope.System#IServiceProvider#GetService(System.Type)">IServiceProvider.GetService(Type)</h4>
@@ -566,36 +550,10 @@ it is not already disposed.</p>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a>
-  </div>
-  <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iserviceprovider">System.IServiceProvider</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.IScopeFactory.html">IScopeFactory</a>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Rezolver.ContainerScopeExtensions.html#Rezolver_ContainerScopeExtensions_GetRootScope_Rezolver_IContainerScope_">ContainerScopeExtensions.GetRootScope(IContainerScope)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_Resolve__1_Rezolver_IContainerScope_">ContainerScopeResolveExtensions.Resolve&lt;TResult&gt;(IContainerScope)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_Resolve_Rezolver_IContainerScope_System_Type_">ContainerScopeResolveExtensions.Resolve(IContainerScope, Type)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany_Rezolver_IContainerScope_System_Type_">ContainerScopeResolveExtensions.ResolveMany(IContainerScope, Type)</a>
-  </div>
-  <div>
-      <a class="xref" href="Rezolver.ContainerScopeResolveExtensions.html#Rezolver_ContainerScopeResolveExtensions_ResolveMany__1_Rezolver_IContainerScope_">ContainerScopeResolveExtensions.ResolveMany&lt;TObject&gt;(IContainerScope)</a>
-  </div>
-  <h3 id="seealso">See Also</h3>
-  <div class="seealso">
-      <div><a class="xref" href="Rezolver.IContainerScope.html">IContainerScope</a></div>
   </div>
 </article>
           </div>
@@ -607,7 +565,7 @@ it is not already disposed.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_ContainerScope.md&amp;value=---%0Auid%3A%20Rezolver.ContainerScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/master/src/Rezolver/ContainerScope.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L18" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

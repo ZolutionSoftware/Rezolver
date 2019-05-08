@@ -18,7 +18,7 @@ namespace Rezolver.Tests
         {
             Disposable disposable;
 
-            using (var scope = new ConcurrentContainerScope(new Container()))
+            using (var scope = new DisposingContainerScope(new Container()))
             {
                 disposable = scope.ActivateImplicit(new Disposable());
             }
@@ -32,7 +32,7 @@ namespace Rezolver.Tests
         {
             Disposable disposable;
 
-            using (var scope = new ConcurrentContainerScope(new Container()))
+            using (var scope = new DisposingContainerScope(new Container()))
             {
                 disposable = scope.ActivateExplicit(
                     new ResolveContext(scope, typeof(Disposable)),
@@ -47,7 +47,7 @@ namespace Rezolver.Tests
         [Fact]
         public void ChildScopeShouldDisposeItsOwnImplicitDisposable()
         {
-            using (var scope = new ConcurrentContainerScope(new Container()))
+            using (var scope = new DisposingContainerScope(new Container()))
             {
                 Disposable inner1, inner2;
 
@@ -73,7 +73,7 @@ namespace Rezolver.Tests
         public void ShouldCreateOnlyOneExplicitNonDisposable()
         {
             // note - this works because we pass the same target both times
-            using (var scope = new ConcurrentContainerScope(new Container()))
+            using (var scope = new DisposingContainerScope(new Container()))
             {
                 Func<ResolveContext, NoCtor> factory = c => new NoCtor();
                 var target = new TestTarget();
@@ -96,7 +96,7 @@ namespace Rezolver.Tests
         [Fact]
         public void ChildScopeShouldGetItsOwnExplicitInstance()
         {
-            using (var scope = new ConcurrentContainerScope(new Container()))
+            using (var scope = new DisposingContainerScope(new Container()))
             {
                 Func<ResolveContext, NoCtor> factory = c => new NoCtor();
                 var target = new TestTarget();
@@ -123,7 +123,7 @@ namespace Rezolver.Tests
         public void ImplicitlyScopedObjectShouldNotBeSameAsExplicitlyScopedObject()
         {
             Disposable explicitlyScoped, implicitlyScoped;
-            using (var scope = new ConcurrentContainerScope(new Container()))
+            using (var scope = new DisposingContainerScope(new Container()))
             {
                 Func<ResolveContext, Disposable> factory = c => new Disposable();
                 explicitlyScoped = scope.ActivateExplicit(
@@ -145,7 +145,7 @@ namespace Rezolver.Tests
         {
             Disposable parentObj, childObj, grandChildObj, siblingObj;
 
-            using (var parent = new ConcurrentContainerScope(new Container()))
+            using (var parent = new DisposingContainerScope(new Container()))
             {
                 var child = parent.CreateScope();
                 var grandChild = child.CreateScope();

@@ -3,27 +3,24 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
 using Rezolver.Compilation;
 
 namespace Rezolver.Targets
 {
     /// <summary>
     /// Represents a target that is rezolved statically at compile time via the <see cref="ICompileContext"/>, or dynamically
-    /// (at 'resolve time') from the <see cref="IContainer"/> that is attached to the current <see cref="ResolveContext"/> when
-    /// <see cref="IContainer.Resolve(ResolveContext)"/> is called.
+    /// (at 'resolve time') from the <see cref="Container"/> that is attached to the current <see cref="ResolveContext"/> when
+    /// <see cref="Container.Resolve(ResolveContext)"/> is called.
     ///
     /// This is the most common way that we bind constructor parameters, for example - i.e. 'I want an
     /// <c>IService</c> instance - go get it'.
     /// </summary>
-    /// <remarks>Represents an object that will be resolved from the container when its <see cref="ICompiledTarget"/> is executed,
+    /// <remarks>Represents an object that will be resolved from the container when a factory into which this target is compiled,
     /// or when the target is used perhaps by another <see cref="ITarget"/> (e.g. - a <see cref="ConstructorTarget"/> with a
     /// constructor parameter bound to one of these).
     ///
     /// So, in essence, a <see cref="ResolvedTarget"/> represents an automatic call to a container's
-    /// <see cref="IContainer.Resolve(ResolveContext)"/> method, for the <see cref="DeclaredType"/>.
+    /// <see cref="Container.Resolve(ResolveContext)"/> method, for the <see cref="DeclaredType"/>.
     ///
     /// In practise - an <see cref="ITargetCompiler"/> might take advantage of the fact that, during compilation, targets
     /// can be discovered directly from the <see cref="ICompileContext"/> that is passed to
@@ -34,7 +31,7 @@ namespace Rezolver.Targets
     /// choosing to compile all the expressions for all targets required for an operation into one dynamically built method -
     /// which results in very fast execution times for all resolve operations.
     ///
-    /// Not only this, but the behaviour can be extended still further by realising that a <see cref="ResolveContext.Container"/>
+    /// Not only this, but the behaviour can be extended still further by realising that a container
     /// on which a resolve operation is invoked might not be the same container for which this <see cref="ResolvedTarget"/> was
     /// first compiled.  In this case - it's possible that the other container has alternative registrations for a given service
     /// type which the application expects to take precedence over those which were originally resolved when compilation took
@@ -97,8 +94,8 @@ namespace Rezolver.Targets
         /// <summary>
         /// Attempts to obtain the target that this <see cref="ResolvedTarget"/> resolves to for the given <see cref="ICompileContext"/>.
         ///
-        /// This function should be used by <see cref="ITargetCompiler"/> implementations when producing the <see cref="ICompiledTarget"/>
-        /// for this instance, who wish to perform some form of up-front optimisations.
+        /// This function should be used by <see cref="ITargetCompiler"/> implementations when compiling factories which included this
+        /// instance, who wish to perform some form of up-front optimisations.
         /// </summary>
         /// <param name="context">The context from which a target is to be resolved.</param>
         /// <returns>The target resolved by this target - could be the <see cref="FallbackTarget"/>, could be null.</returns>
