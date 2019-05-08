@@ -1,7 +1,7 @@
 ﻿# Automatic Enumerable Injection
 
 By default, a @Rezolver.TargetContainer (the default @Rezolver.ITargetContainer used by all containers in the 
-Rezolver framework) is configured to allow any @Rezolver.ContainerBase derivative to resolve an `IEnumerable<Service>`.
+Rezolver framework) is configured to allow any @Rezolver.Container derivative to resolve an `IEnumerable<Service>`.
 
 The contents of this enumerable will depend on how many times the @Rezolver.ITargetContainer.Register*
 method has been called against the target type `Service`:
@@ -158,7 +158,7 @@ If more decorators were added, of course - then each element would be 're-decora
 ## Explicit `IEnumerable<T>` registrations
 
 Although you get `IEnumerable<T>` handling automatically when the @Rezolver.Configuration.InjectEnumerables configuration 
-is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to `false`), it doesn't 
+is applied (and not also disabled by the @Rezolver.Options.EnableEnumerableInjection option being set to `false`), it doesn't 
 prevent you from manually adding registrations for specific `IEnumerable<>` types which override the default behaviour.
 
 For example, let's say that you have two registrations for services which share a common interface, but they have only

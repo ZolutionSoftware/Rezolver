@@ -131,7 +131,7 @@ Consider the `Has2InjectableMembers` type that we've used in the [options](optio
 [!code-csharp[Has2InjectableMembers.cs](../../../../../test/Rezolver.Tests.Examples/Types/Has2InjectableMembers.cs#example)]
 
 First, we'll configure just one of the members for injection using the techniques shown above, but as we
-register the type with the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})
+register the type with the @Rezolver.TargetContainerExtensions.RegisterType``1(Rezolver.ITargetContainer,System.Action{Rezolver.IMemberBindingBehaviourBuilder{``0}})
 extension method:
 
 [!code-csharp[MemberBindingExamples.cs](../../../../../test/Rezolver.Tests.Examples/MemberBindingExamples.cs#example6)]

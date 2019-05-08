@@ -39,7 +39,7 @@ namespace Rezolver
         /// Provides a way to emit a <see cref="ResolveContext.Resolve(Type)"/> call to the <see cref="ResolveContext"/>
         /// which is active when an expression is compiled and executed when resolving an object.
         /// </summary>
-        /// <param name="t">The type to be resolved.</param>
+        /// <param name="_">The type to be resolved.</param>
         /// <exception cref="NotImplementedException">Always.  The method is not intended to be used outside of an expression, instead
         /// it should be rewritten either to a <see cref="ResolvedTarget"/> or another <see cref="MethodCallExpression"/> bound
         /// to the <see cref="ResolveContext.Resolve(Type)"/> method of a <see cref="ResolveContext"/>.</exception>

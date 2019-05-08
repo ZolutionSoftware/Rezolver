@@ -148,6 +148,11 @@ namespace Rezolver
             OnTargetContainerRegistered(container, type);
         }
 
+        /// <summary>
+        /// Raises the <see cref="TargetContainerRegistered"/> event.
+        /// </summary>
+        /// <param name="container">The target container that was registered</param>
+        /// <param name="type">The type against which the <paramref name="container"/> was registered</param>
         protected virtual void OnTargetContainerRegistered(ITargetContainer container, Type type)
         {
             TargetContainerRegistered?.Invoke(this, new TargetContainerRegisteredEventArgs(container, type));

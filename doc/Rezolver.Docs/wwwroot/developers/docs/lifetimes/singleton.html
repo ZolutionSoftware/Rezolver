@@ -103,7 +103,7 @@
 
 <p>Rezolver&#39;s implementation of singletons has three entry points:</p>
 <ul>
-<li>The @Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload, which offers a shortcut to registering a type via the 
+<li>The <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload, which offers a shortcut to registering a type via the 
 <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> (see the 
 <a href="../constructor-injection/index.html">construction injection topic</a> for more) as a singleton.</li>
 <li>The <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> extension method, which creates a new <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> that wraps the target
@@ -118,8 +118,8 @@ for each subsequent <a class="xref" href="../../api/Rezolver.Container.html#Rezo
 project.</p>
 </div>
 <h2 id="constructor-injection">Constructor Injection</h2>
-<p>If you are using the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* overload, you can swap it for the 
-@Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload to register a singleton for constructor injection:</p>
+<p>If you are using the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterType_">RegisterType</a> overload, you can swap it for the 
+<a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload to register a singleton for constructor injection:</p>
 <pre><code class="lang-csharp" name="SingletonExamples.cs">var container = new Container();
 // The RegisterSingleton overload is like the RegisterType
 // overload, it creates a ConstructorTarget/GenericConstructorTarget
@@ -135,7 +135,7 @@ Assert.Same(result1, result2);
 <p>If you need to use some of the more advanced constructor injection functionality, such as 
 <a href="../constructor-injection/index.html#best-match-named-args">named argument binding</a>, or 
 <a href="../constructor-injection/index.html#with-a-constructorinfo">specific <code>ConstructorInfo</code> binding</a>, then you can&#39;t use the 
-@Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload - because that creates the <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
+<a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterSingleton_">RegisterSingleton</a> overload - because that creates the <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or
 <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> for you.  Instead, you will create it yourself and then wrap a 
 <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html">SingletonTarget</a> around it - using either its <a class="xref" href="../../api/Rezolver.Targets.SingletonTarget.html#Rezolver_Targets_SingletonTarget__ctor_Rezolver_ITarget_">SingletonTarget(ITarget)</a> constructor, or 
 the <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Singleton_">Singleton</a> <a class="xref" href="../../api/Rezolver.ITarget.html">ITarget</a> extension method.</p>

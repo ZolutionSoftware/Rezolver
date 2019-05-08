@@ -4,7 +4,7 @@ Sometimes you will want to create an object yourself and register that in the co
 a particular service type.
 
 This is done either by creating an @Rezolver.Targets.ObjectTarget and registering it in a target 
-container, or via the extension method(s) @Rezolver.ObjectTargetContainerExtensions.RegisterObject*.
+container, or via the extension method(s) @Rezolver.TargetContainerExtensions.RegisterObject*.
 
 This type of registration is often thought of as a singleton, but it's more accurate to think of
 it as a 'constant' service - because, from the moment the registration is created, the object reference

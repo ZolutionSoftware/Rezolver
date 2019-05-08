@@ -184,7 +184,7 @@ a particular option.</p>
   </table>
   <h5 id="Rezolver_Configuration_OptionDependentConfig_1_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>If you are developing an <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> that you want to be configurable via the use of
-a single option type (see the extension methods in the <see cref="!:OptionsTargetContainerExtensions"></see> class), then inheriting from this
+a single option type then inheriting from this
 abstract class instead of directly implementing <a class="xref" href="Rezolver.ITargetContainerConfig.html">ITargetContainerConfig</a> and <a class="xref" href="Rezolver.Sdk.IDependant.html">IDependant</a> is a good idea.</p>
 <p>The default implementation of <a class="xref" href="Rezolver.Configuration.OptionDependentConfig-1.html#Rezolver_Configuration_OptionDependentConfig_1_GetDependenciesBase">GetDependenciesBase()</a> will return a single dependency on the type <a class="xref" href="Rezolver.Configuration.Configure-1.html">Configure&lt;TOption&gt;</a>
 specialised for the option type <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code>.</p>

@@ -1799,32 +1799,32 @@ references:
   fullName.vb: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildFactory(Of TService)(Rezolver.ITarget, System.Linq.Expressions.LambdaExpression)
   nameWithType: ExpressionCompiler.BuildFactory<TService>(ITarget, LambdaExpression)
   nameWithType.vb: ExpressionCompiler.BuildFactory(Of TService)(ITarget, LambdaExpression)
-- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  name: BuildResolveLambda(Expression, IExpressionCompileContext)
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildResolveLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
-  commentId: M:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  nameWithType: ExpressionCompiler.BuildResolveLambda(Expression, IExpressionCompileContext)
-- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambda*
-  name: BuildResolveLambda
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildResolveLambda_
-  commentId: Overload:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambda
+- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildObjectFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  name: BuildObjectFactoryLambda(Expression, IExpressionCompileContext)
+  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildObjectFactoryLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
+  commentId: M:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildObjectFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildObjectFactoryLambda(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  nameWithType: ExpressionCompiler.BuildObjectFactoryLambda(Expression, IExpressionCompileContext)
+- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildObjectFactoryLambda*
+  name: BuildObjectFactoryLambda
+  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildObjectFactoryLambda_
+  commentId: Overload:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildObjectFactoryLambda
   isSpec: "True"
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambda
-  nameWithType: ExpressionCompiler.BuildResolveLambda
-- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  name: BuildResolveLambdaStrong(Expression, IExpressionCompileContext)
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildResolveLambdaStrong_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
-  commentId: M:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  nameWithType: ExpressionCompiler.BuildResolveLambdaStrong(Expression, IExpressionCompileContext)
-- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambdaStrong*
-  name: BuildResolveLambdaStrong
-  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildResolveLambdaStrong_
-  commentId: Overload:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambdaStrong
+  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildObjectFactoryLambda
+  nameWithType: ExpressionCompiler.BuildObjectFactoryLambda
+- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildStrongFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  name: BuildStrongFactoryLambda(Expression, IExpressionCompileContext)
+  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildStrongFactoryLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
+  commentId: M:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildStrongFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildStrongFactoryLambda(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  nameWithType: ExpressionCompiler.BuildStrongFactoryLambda(Expression, IExpressionCompileContext)
+- uid: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildStrongFactoryLambda*
+  name: BuildStrongFactoryLambda
+  href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_BuildStrongFactoryLambda_
+  commentId: Overload:Rezolver.Compilation.Expressions.ExpressionCompiler.BuildStrongFactoryLambda
   isSpec: "True"
-  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildResolveLambdaStrong
-  nameWithType: ExpressionCompiler.BuildResolveLambdaStrong
+  fullName: Rezolver.Compilation.Expressions.ExpressionCompiler.BuildStrongFactoryLambda
+  nameWithType: ExpressionCompiler.BuildStrongFactoryLambda
 - uid: Rezolver.Compilation.Expressions.ExpressionCompiler.CompileTarget(Rezolver.ITarget,Rezolver.Compilation.ICompileContext)
   name: CompileTarget(ITarget, ICompileContext)
   href: api/Rezolver.Compilation.Expressions.ExpressionCompiler.html#Rezolver_Compilation_Expressions_ExpressionCompiler_CompileTarget_Rezolver_ITarget_Rezolver_Compilation_ICompileContext_
@@ -2142,32 +2142,32 @@ references:
   isSpec: "True"
   fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.Build
   nameWithType: IExpressionCompiler.Build
-- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  name: BuildResolveLambda(Expression, IExpressionCompileContext)
-  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
-  commentId: M:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  nameWithType: IExpressionCompiler.BuildResolveLambda(Expression, IExpressionCompileContext)
-- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda*
-  name: BuildResolveLambda
-  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambda_
-  commentId: Overload:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda
+- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildObjectFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  name: BuildObjectFactoryLambda(Expression, IExpressionCompileContext)
+  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildObjectFactoryLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
+  commentId: M:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildObjectFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildObjectFactoryLambda(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  nameWithType: IExpressionCompiler.BuildObjectFactoryLambda(Expression, IExpressionCompileContext)
+- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildObjectFactoryLambda*
+  name: BuildObjectFactoryLambda
+  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildObjectFactoryLambda_
+  commentId: Overload:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildObjectFactoryLambda
   isSpec: "True"
-  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambda
-  nameWithType: IExpressionCompiler.BuildResolveLambda
-- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  name: BuildResolveLambdaStrong(Expression, IExpressionCompileContext)
-  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambdaStrong_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
-  commentId: M:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
-  nameWithType: IExpressionCompiler.BuildResolveLambdaStrong(Expression, IExpressionCompileContext)
-- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong*
-  name: BuildResolveLambdaStrong
-  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildResolveLambdaStrong_
-  commentId: Overload:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong
+  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildObjectFactoryLambda
+  nameWithType: IExpressionCompiler.BuildObjectFactoryLambda
+- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildStrongFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  name: BuildStrongFactoryLambda(Expression, IExpressionCompileContext)
+  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildStrongFactoryLambda_System_Linq_Expressions_Expression_Rezolver_Compilation_Expressions_IExpressionCompileContext_
+  commentId: M:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildStrongFactoryLambda(System.Linq.Expressions.Expression,Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildStrongFactoryLambda(System.Linq.Expressions.Expression, Rezolver.Compilation.Expressions.IExpressionCompileContext)
+  nameWithType: IExpressionCompiler.BuildStrongFactoryLambda(Expression, IExpressionCompileContext)
+- uid: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildStrongFactoryLambda*
+  name: BuildStrongFactoryLambda
+  href: api/Rezolver.Compilation.Expressions.IExpressionCompiler.html#Rezolver_Compilation_Expressions_IExpressionCompiler_BuildStrongFactoryLambda_
+  commentId: Overload:Rezolver.Compilation.Expressions.IExpressionCompiler.BuildStrongFactoryLambda
   isSpec: "True"
-  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildResolveLambdaStrong
-  nameWithType: IExpressionCompiler.BuildResolveLambdaStrong
+  fullName: Rezolver.Compilation.Expressions.IExpressionCompiler.BuildStrongFactoryLambda
+  nameWithType: IExpressionCompiler.BuildStrongFactoryLambda
 - uid: Rezolver.Compilation.Expressions.InstanceProviderTargetBuilder
   name: InstanceProviderTargetBuilder
   href: api/Rezolver.Compilation.Expressions.InstanceProviderTargetBuilder.html
@@ -2785,31 +2785,6 @@ references:
   isSpec: "True"
   fullName: Rezolver.Compilation.TargetCompilerExtensions.CompileTargetStrong
   nameWithType: TargetCompilerExtensions.CompileTargetStrong
-- uid: Rezolver.ConcurrentContainerScope
-  name: ConcurrentContainerScope
-  href: api/Rezolver.ConcurrentContainerScope.html
-  commentId: T:Rezolver.ConcurrentContainerScope
-  fullName: Rezolver.ConcurrentContainerScope
-  nameWithType: ConcurrentContainerScope
-- uid: Rezolver.ConcurrentContainerScope.#ctor(Rezolver.Container)
-  name: ConcurrentContainerScope(Container)
-  href: api/Rezolver.ConcurrentContainerScope.html#Rezolver_ConcurrentContainerScope__ctor_Rezolver_Container_
-  commentId: M:Rezolver.ConcurrentContainerScope.#ctor(Rezolver.Container)
-  fullName: Rezolver.ConcurrentContainerScope.ConcurrentContainerScope(Rezolver.Container)
-  nameWithType: ConcurrentContainerScope.ConcurrentContainerScope(Container)
-- uid: Rezolver.ConcurrentContainerScope.#ctor(Rezolver.ContainerScope,System.Boolean)
-  name: ConcurrentContainerScope(ContainerScope, Boolean)
-  href: api/Rezolver.ConcurrentContainerScope.html#Rezolver_ConcurrentContainerScope__ctor_Rezolver_ContainerScope_System_Boolean_
-  commentId: M:Rezolver.ConcurrentContainerScope.#ctor(Rezolver.ContainerScope,System.Boolean)
-  fullName: Rezolver.ConcurrentContainerScope.ConcurrentContainerScope(Rezolver.ContainerScope, System.Boolean)
-  nameWithType: ConcurrentContainerScope.ConcurrentContainerScope(ContainerScope, Boolean)
-- uid: Rezolver.ConcurrentContainerScope.#ctor*
-  name: ConcurrentContainerScope
-  href: api/Rezolver.ConcurrentContainerScope.html#Rezolver_ConcurrentContainerScope__ctor_
-  commentId: Overload:Rezolver.ConcurrentContainerScope.#ctor
-  isSpec: "True"
-  fullName: Rezolver.ConcurrentContainerScope.ConcurrentContainerScope
-  nameWithType: ConcurrentContainerScope.ConcurrentContainerScope
 - uid: Rezolver.Configuration
   name: Rezolver.Configuration
   href: api/Rezolver.Configuration.html
@@ -4361,19 +4336,25 @@ references:
   commentId: T:Rezolver.DisposingContainerScope
   fullName: Rezolver.DisposingContainerScope
   nameWithType: DisposingContainerScope
-- uid: Rezolver.DisposingContainerScope.CreateScope
-  name: CreateScope()
-  href: api/Rezolver.DisposingContainerScope.html#Rezolver_DisposingContainerScope_CreateScope
-  commentId: M:Rezolver.DisposingContainerScope.CreateScope
-  fullName: Rezolver.DisposingContainerScope.CreateScope()
-  nameWithType: DisposingContainerScope.CreateScope()
-- uid: Rezolver.DisposingContainerScope.CreateScope*
-  name: CreateScope
-  href: api/Rezolver.DisposingContainerScope.html#Rezolver_DisposingContainerScope_CreateScope_
-  commentId: Overload:Rezolver.DisposingContainerScope.CreateScope
+- uid: Rezolver.DisposingContainerScope.#ctor(Rezolver.Container)
+  name: DisposingContainerScope(Container)
+  href: api/Rezolver.DisposingContainerScope.html#Rezolver_DisposingContainerScope__ctor_Rezolver_Container_
+  commentId: M:Rezolver.DisposingContainerScope.#ctor(Rezolver.Container)
+  fullName: Rezolver.DisposingContainerScope.DisposingContainerScope(Rezolver.Container)
+  nameWithType: DisposingContainerScope.DisposingContainerScope(Container)
+- uid: Rezolver.DisposingContainerScope.#ctor(Rezolver.ContainerScope,System.Boolean)
+  name: DisposingContainerScope(ContainerScope, Boolean)
+  href: api/Rezolver.DisposingContainerScope.html#Rezolver_DisposingContainerScope__ctor_Rezolver_ContainerScope_System_Boolean_
+  commentId: M:Rezolver.DisposingContainerScope.#ctor(Rezolver.ContainerScope,System.Boolean)
+  fullName: Rezolver.DisposingContainerScope.DisposingContainerScope(Rezolver.ContainerScope, System.Boolean)
+  nameWithType: DisposingContainerScope.DisposingContainerScope(ContainerScope, Boolean)
+- uid: Rezolver.DisposingContainerScope.#ctor*
+  name: DisposingContainerScope
+  href: api/Rezolver.DisposingContainerScope.html#Rezolver_DisposingContainerScope__ctor_
+  commentId: Overload:Rezolver.DisposingContainerScope.#ctor
   isSpec: "True"
-  fullName: Rezolver.DisposingContainerScope.CreateScope
-  nameWithType: DisposingContainerScope.CreateScope
+  fullName: Rezolver.DisposingContainerScope.DisposingContainerScope
+  nameWithType: DisposingContainerScope.DisposingContainerScope
 - uid: Rezolver.Events
   name: Rezolver.Events
   href: api/Rezolver.Events.html
@@ -5938,6 +5919,25 @@ references:
   isSpec: "True"
   fullName: Rezolver.MSDIITargetContainerExtensions.Populate
   nameWithType: MSDIITargetContainerExtensions.Populate
+- uid: Rezolver.NonTrackingContainerScope
+  name: NonTrackingContainerScope
+  href: api/Rezolver.NonTrackingContainerScope.html
+  commentId: T:Rezolver.NonTrackingContainerScope
+  fullName: Rezolver.NonTrackingContainerScope
+  nameWithType: NonTrackingContainerScope
+- uid: Rezolver.NonTrackingContainerScope.CreateScope
+  name: CreateScope()
+  href: api/Rezolver.NonTrackingContainerScope.html#Rezolver_NonTrackingContainerScope_CreateScope
+  commentId: M:Rezolver.NonTrackingContainerScope.CreateScope
+  fullName: Rezolver.NonTrackingContainerScope.CreateScope()
+  nameWithType: NonTrackingContainerScope.CreateScope()
+- uid: Rezolver.NonTrackingContainerScope.CreateScope*
+  name: CreateScope
+  href: api/Rezolver.NonTrackingContainerScope.html#Rezolver_NonTrackingContainerScope_CreateScope_
+  commentId: Overload:Rezolver.NonTrackingContainerScope.CreateScope
+  isSpec: "True"
+  fullName: Rezolver.NonTrackingContainerScope.CreateScope
+  nameWithType: NonTrackingContainerScope.CreateScope
 - uid: Rezolver.Options
   name: Rezolver.Options
   href: api/Rezolver.Options.html

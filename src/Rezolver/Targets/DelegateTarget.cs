@@ -109,6 +109,7 @@ namespace Rezolver.Targets
 
             this._declaredType = declaredType;
             this._scopeBehaviour = scopeBehaviour;
+            this._scopePreference = scopePreference;
             Factory = factory;
         }
     }

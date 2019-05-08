@@ -8,7 +8,7 @@ The delegate can be of any type, subject to the following constraints:
 - The delegate must have non-`void` return type
 - It must not have any `ref` or `out` parameters
 
-To register delegates you can use one of the many @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* extension methods for @Rezolver.ITargetContainer.
+To register delegates you can use one of the many @Rezolver.TargetContainerExtensions.RegisterDelegate* extension methods for @Rezolver.ITargetContainer.
 
 To create delegate targets you can either:
 
@@ -64,7 +64,7 @@ type that was requested, the container and any active scope.  Through this conte
 overload.
 
 If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
-you'll probably use the single parameter specialisation of the @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* or
+you'll probably use the single parameter specialisation of the @Rezolver.TargetContainerExtensions.RegisterDelegate* or
 @Rezolver.Target.ForDelegate* methods, but ultimately the parameter can appear anywhere in the delegate's signature and it will
 be injected.
 
@@ -89,7 +89,7 @@ so that it has access to a list of actions the user can perform based on their r
 `IUserActionsService` which provides access to that list of actions, and we have three separate implementations of that interface
 which we could use, based on the user's role.
 
-We will use the @RezolveContext.Resolve* operation to create the instance we want to inject after deciding which type to resolve
+We will use the @Rezolver.ResolveContext.Resolve* operation to create the instance we want to inject after deciding which type to resolve
 based on the user's role:
 
 [!code-csharp[DelegateExamples.cs](../../../../test/Rezolver.Tests.Examples/DelegateExamples.cs#example12)]

@@ -2,7 +2,7 @@
 
 Rezolver's implementation of singletons has three entry points:
 
-- The @Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload, which offers a shortcut to registering a type via the 
+- The @Rezolver.TargetContainerExtensions.RegisterSingleton* overload, which offers a shortcut to registering a type via the 
 @Rezolver.Targets.ConstructorTarget or @Rezolver.Targets.GenericConstructorTarget (see the 
 [construction injection topic](../constructor-injection/index.md) for more) as a singleton.
 - The @Rezolver.Target.Singleton* extension method, which creates a new @Rezolver.Targets.SingletonTarget that wraps the target
@@ -22,8 +22,8 @@ for each subsequent @Rezolver.Container.Resolve* operation.
 
 ## Constructor Injection
 
-If you are using the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* overload, you can swap it for the 
-@Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload to register a singleton for constructor injection:
+If you are using the @Rezolver.TargetContainerExtensions.RegisterType* overload, you can swap it for the 
+@Rezolver.TargetContainerExtensions.RegisterSingleton* overload to register a singleton for constructor injection:
 
 [!code-csharp[SingletonExamples.cs](../../../../../test/Rezolver.Tests.Examples/SingletonExamples.cs#example1)]
 
@@ -34,7 +34,7 @@ If you are using the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterTyp
 If you need to use some of the more advanced constructor injection functionality, such as 
 [named argument binding](../constructor-injection/index.md#best-match-named-args), or 
 [specific `ConstructorInfo` binding](../constructor-injection/index.md#with-a-constructorinfo), then you can't use the 
-@Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload - because that creates the @Rezolver.Targets.ConstructorTarget or
+@Rezolver.TargetContainerExtensions.RegisterSingleton* overload - because that creates the @Rezolver.Targets.ConstructorTarget or
 @Rezolver.Targets.GenericConstructorTarget for you.  Instead, you will create it yourself and then wrap a 
 @Rezolver.Targets.SingletonTarget around it - using either its @Rezolver.Targets.SingletonTarget.%23ctor(Rezolver.ITarget) constructor, or 
 the @Rezolver.Target.Singleton* @Rezolver.ITarget extension method.

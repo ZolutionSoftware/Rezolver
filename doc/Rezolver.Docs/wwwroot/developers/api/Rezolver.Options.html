@@ -117,8 +117,10 @@ any potentially affected registrations are performed.</p>
 <p>The <a class="xref" href="Rezolver.Options.AllowMultiple.html#Rezolver_Options_AllowMultiple_Default">Default</a> (unset) is equivalent to <code>true</code></p>
 </section>
       <h4><a class="xref" href="Rezolver.Options.ContainerOption-1.html">ContainerOption&lt;TOption&gt;</a></h4>
-      <section><p>A suggested base class to use for custom container options to be read/written through the
-<see cref="!:OptionsTargetContainerExtensions"></see> extension methods.</p>
+      <section><p>A suggested base class to use for custom container options to be read/written through extensions
+such as <a class="xref" href="Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_">SetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>,
+<a class="xref" href="Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_">GetOptions&lt;TOption, TService&gt;(ITargetContainer)</a> and the various
+overloads.S</p>
 <p>The type of the option value is the argument to the <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> type parameter.</p>
 <p>Options must currently be objects - the ability to use callbacks to get options might be added at a
 future date.</p>

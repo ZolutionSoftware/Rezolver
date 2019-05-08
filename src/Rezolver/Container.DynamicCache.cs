@@ -2,7 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 
-#if USEDYNAMIC
+#if ENABLE_IL_EMIT
 
 using Rezolver.Compilation;
 using Rezolver.Compilation.Expressions;

@@ -111,7 +111,7 @@ identical), then the <a href="container-scopes.html">container scopes topic</a> 
 <li>Any target can be made to produce a scoped object by wrapping it with a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a> (either through its constructor or via the
 <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_Scoped_">Scoped</a> extension method)</li>
 <li>You can also register scoped types (i.e. a shortcut for creating a <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> or <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a>
-which is then wrapped in a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>) with the @Rezolver.ScopedTargetContainerExtensions.RegisterScoped* extension methods.</li>
+which is then wrapped in a <a class="xref" href="../../api/Rezolver.Targets.ScopedTarget.html">ScopedTarget</a>) with the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterScoped_">RegisterScoped</a> extension methods.</li>
 </ul>
 <p>Apart from the fact that a scoped object limits itself to one-per-scope (and one registration can, therefore, produce multiple instances across multiple
 scopes), the big difference between it and a singleton is that a scope must be available when you resolve an instance.</p>

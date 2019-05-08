@@ -104,18 +104,15 @@
   
   <h1 id="Rezolver_DisposingContainerScope" data-uid="Rezolver.DisposingContainerScope" class="text-break">Class DisposingContainerScope
   </h1>
-  <div class="markdown level0 summary"><p>Default scope object used by the<a class="xref" href="Rezolver.Container.html">Container</a> - performs no actual lifetime management
-of objects at all, but can create child scopes and track them for disposal when it is disposed.</p>
-<p>In order to get object lifetime management from a container whose scope is set to an instance of this type,
-a new scope must be created from this one.</p>
+  <div class="markdown level0 summary"><p>Fully functional container scope.  Supports tracking of implicitly and explicitly scoped objects to enable disposal.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></div>
-    <div class="level2"><span class="xref">DisposingContainerScope</span></div>
-      <div class="level3"><a class="xref" href="Rezolver.ConcurrentContainerScope.html">ConcurrentContainerScope</a></div>
+    <div class="level2"><a class="xref" href="Rezolver.NonTrackingContainerScope.html">NonTrackingContainerScope</a></div>
+    <div class="level3"><span class="xref">DisposingContainerScope</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -124,6 +121,9 @@ a new scope must be created from this one.</p>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Rezolver.NonTrackingContainerScope.html#Rezolver_NonTrackingContainerScope_CreateScope">NonTrackingContainerScope.CreateScope()</a>
+    </div>
     <div>
       <a class="xref" href="Rezolver.ContainerScope.html#Rezolver_ContainerScope_Container">ContainerScope.Container</a>
     </div>
@@ -177,42 +177,83 @@ a new scope must be created from this one.</p>
   <h6><strong>Assembly</strong>: Rezolver.dll</h6>
   <h5 id="Rezolver_DisposingContainerScope_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class DisposingContainerScope : ContainerScope, IDisposable, IServiceProvider</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class DisposingContainerScope : NonTrackingContainerScope, IDisposable, IServiceProvider</code></pre>
   </div>
-  <h3 id="methods">Methods
+  <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide contribution-link-body">
     <span class="divider">|</span>
-    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_DisposingContainerScope_CreateScope.md&amp;value=---%0Auid%3A%20Rezolver.DisposingContainerScope.CreateScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_DisposingContainerScope__ctor_Rezolver_Container_.md&amp;value=---%0Auid%3A%20Rezolver.DisposingContainerScope.%23ctor(Rezolver.Container)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide contribution-link-body">
-    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L204">View Source</a>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/DisposingContainerScope.cs/#L50">View Source</a>
   </span>
-  <a id="Rezolver_DisposingContainerScope_CreateScope_" data-uid="Rezolver.DisposingContainerScope.CreateScope*"></a>
-  <h4 id="Rezolver_DisposingContainerScope_CreateScope" data-uid="Rezolver.DisposingContainerScope.CreateScope">CreateScope()</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Rezolver_DisposingContainerScope__ctor_" data-uid="Rezolver.DisposingContainerScope.#ctor*"></a>
+  <h4 id="Rezolver_DisposingContainerScope__ctor_Rezolver_Container_" data-uid="Rezolver.DisposingContainerScope.#ctor(Rezolver.Container)">DisposingContainerScope(Container)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.DisposingContainerScope.html">DisposingContainerScope</a> class.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override sealed ContainerScope CreateScope()</code></pre>
+    <pre><code class="lang-csharp hljs">public DisposingContainerScope(Container container)</code></pre>
   </div>
-  <h5 class="returns">Returns</h5>
+  <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Rezolver.Container.html">Container</a></td>
+        <td><span class="parametername">container</span></td>
+        <td><p>The container that this scope will use to resolve instances.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <span class="divider">|</span>
+    <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_DisposingContainerScope__ctor_Rezolver_ContainerScope_System_Boolean_.md&amp;value=---%0Auid%3A%20Rezolver.DisposingContainerScope.%23ctor(Rezolver.ContainerScope%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide contribution-link-body">
+    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/DisposingContainerScope.cs/#L62">View Source</a>
+  </span>
+  <a id="Rezolver_DisposingContainerScope__ctor_" data-uid="Rezolver.DisposingContainerScope.#ctor*"></a>
+  <h4 id="Rezolver_DisposingContainerScope__ctor_Rezolver_ContainerScope_System_Boolean_" data-uid="Rezolver.DisposingContainerScope.#ctor(Rezolver.ContainerScope,System.Boolean)">DisposingContainerScope(ContainerScope, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of the <a class="xref" href="Rezolver.DisposingContainerScope.html">DisposingContainerScope</a> class that
+is optionally treated as a root scope.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisposingContainerScope(ContainerScope parent, bool isRoot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a></td>
+        <td><span class="parametername">parent</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">isRoot</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Rezolver.ContainerScope.html#Rezolver_ContainerScope_CreateScope">ContainerScope.CreateScope()</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
@@ -230,7 +271,7 @@ a new scope must be created from this one.</p>
                     <a href="https://github.com/ZolutionSoftware/Rezolver/new/master/apiSpec/new?filename=Rezolver_DisposingContainerScope.md&amp;value=---%0Auid%3A%20Rezolver.DisposingContainerScope%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/ContainerScope.cs/#L165" class="contribution-link">View Source</a>
+                    <a href="https://github.com/ZolutionSoftware/Rezolver/blob/v2-remove-icompiledtarget/src/Rezolver/DisposingContainerScope.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

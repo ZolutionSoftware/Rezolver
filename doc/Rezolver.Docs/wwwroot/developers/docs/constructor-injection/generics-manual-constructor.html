@@ -139,8 +139,8 @@ instead of getting a shiny new list to play with, you get an exception.</p>
 <h2 id="the-registergenericconstructor-overload">The <code>RegisterGenericConstructor</code> overload</h2>
 <p>When registering targets into the <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a>, you can use one of these two methods:</p>
 <ul>
-<li>@Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)</li>
-<li>@Rezolver.TargetContainerRegistrationExtensions.RegisterGenericConstructor``2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{``0}},Rezolver.IMemberBindingBehaviour)</li>
+<li>Rezolver.TargetContainerExtensions.RegisterGenericConstructor<code>1(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{</code>0}},Rezolver.IMemberBindingBehaviour)</li>
+<li>Rezolver.TargetContainerExtensions.RegisterGenericConstructor<code>2(Rezolver.ITargetContainer,System.Linq.Expressions.Expression{System.Func{</code>0}},Rezolver.IMemberBindingBehaviour)</li>
 </ul>
 <p>Both functions expect an expression in which you provide a &#39;model&#39; constructor call to the generic type whose
 constructor you want to bind.  The actual constructor arguments you pass are not important - only that the
@@ -234,7 +234,7 @@ of the <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_ForC
 <p>This overload will create a <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> if the <code>ConstructorInfo</code> passed belongs to 
 an open generic type.  After creating the target, you can then register it directly into the container using the
 normal <a class="xref" href="../../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a> function or one of its overloads.</p>
-<p>The same is also true of the @Rezolver.TargetContainerRegistrationExtensions.RegisterConstructor* overload.</p>
+<p>The same is also true of the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterConstructor_">RegisterConstructor</a> overload.</p>
 <p>Be aware, though - in all cases, it&#39;s not possible to provide named constructor argument bindings, either by dictionary
 or as an object, because of the inherent difficulty of providing a single target for one or more arguments whose type
 comes from a generic type argument.</p>

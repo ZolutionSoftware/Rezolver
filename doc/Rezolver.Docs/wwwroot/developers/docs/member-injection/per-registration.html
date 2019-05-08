@@ -105,8 +105,8 @@
 i.e. <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> - you also have the ability
 to provide an <a class="xref" href="../../api/Rezolver.IMemberBindingBehaviour.html">IMemberBindingBehaviour</a> that you want to be used to bind the members on each new instance.</p>
 <p>You will rarely use these class&#39; constructors directly.  Instead, most of the time, you will be using 
-factory methods like <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_ForType_">ForType</a>, or registration extension methods such as those in 
-@Rezolver.RegisterTypeTargetContainerExtensions.</p>
+factory methods like <a class="xref" href="../../api/Rezolver.Target.html#Rezolver_Target_ForType_">ForType</a>, or the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterType_">RegisterType</a>
+extension methods.</p>
 <p>Such explicitly provided member binding behaviours will <em>override</em> any which might otherwise be applied 
 <a href="options.html">via options</a>.</p>
 <p>As with the documentation on that topic our example also uses the <code>Has2InjectableMembers</code> demo type:</p>

@@ -10,7 +10,7 @@ using Rezolver.Events;
 
 namespace Rezolver
 {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
     using ConcurrentCache = PerResolveContextCache<Func<ResolveContext, object>>;
 #endif
 
@@ -52,7 +52,7 @@ namespace Rezolver
         
         internal ContainerScope _scope;
 
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
         private readonly ConcurrentCache _cache;
 #else
         private readonly DynamicCache _dynCache;
@@ -86,7 +86,7 @@ namespace Rezolver
         {
             _scope = new NonTrackingContainerScope(this);
             Targets = targets ?? new TargetContainer();
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             _cache = new ConcurrentCache(GetWorker);
 #else
             _dynCache = DynamicCache.CreateCache(this);
@@ -153,7 +153,7 @@ namespace Rezolver
         /// <returns>An instance of the type that was requested.</returns>
         public object Resolve(ResolveContext context)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return GetFactory(context)(context);
 #else
             return _dynCache.Resolve(context);
@@ -167,7 +167,7 @@ namespace Rezolver
         /// <returns>An object compatible with the <paramref name="serviceType"/></returns>
         public object Resolve(Type serviceType)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return Resolve(new ResolveContext(_scope, serviceType));
 #else
             return _dynCache.Resolve(serviceType);
@@ -195,7 +195,7 @@ namespace Rezolver
         public TService Resolve<TService>()
         {
             // our scope is bound to this container
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return ResolveInternal<TService>(new ResolveContext(_scope, typeof(TService)));
 #else
             return _dynCache.Resolve<TService>();
@@ -212,7 +212,7 @@ namespace Rezolver
         /// <returns>The instance.</returns>
         public TService Resolve<TService>(ContainerScope scope)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             // resolve, assuming a different scope to this container's scope
             return ResolveInternal<TService>(new ResolveContext(new ContainerScopeProxy(scope, this), typeof(TService)));
 #else
@@ -228,7 +228,7 @@ namespace Rezolver
         /// <returns>An enumerable containing zero or more instances of services compatible with <paramref name="serviceType"/></returns>
         public IEnumerable ResolveMany(Type serviceType)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return (IEnumerable)Resolve(new ResolveContext(_scope, typeof(IEnumerable<>).MakeGenericType(serviceType)));
 #else
             return (IEnumerable)_dynCache.Resolve(typeof(IEnumerable<>).MakeGenericType(serviceType));
@@ -248,7 +248,7 @@ namespace Rezolver
 
         internal TService ResolveInternal<TService>(ResolveContext context)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return (TService)GetFactory(context)(context);
 #else
             return _dynCache.Resolve<TService>(context);
@@ -295,12 +295,17 @@ namespace Rezolver
         /// Returns <c>true</c> if a service registration can be found for the given <paramref name="serviceType"/>
         /// </summary>
         /// <param name="serviceType">The type of service</param>
-        /// <returns></returns>
+        /// <returns>A boolean indicating whether the service can be resolved</returns>
         public bool CanResolve(Type serviceType)
         {
             return Targets.Fetch(serviceType) != null;
         }
 
+        /// <summary>
+        /// Returns <c>true</c> if a service registration can be found for the given <typeparamref name="TService"/>
+        /// </summary>
+        /// <typeparam name="TService">The type of service</typeparam>
+        /// <returns>A boolean indicating whether the service can be resolved</returns>
         public bool CanResolve<TService>()
         {
             return CanResolve(typeof(TService));
@@ -362,7 +367,7 @@ namespace Rezolver
         /// delegate will likely throw an exception.</returns>
         public Func<ResolveContext, object> GetFactory(ResolveContext context)
         {
-#if !USEDYNAMIC
+#if !ENABLE_IL_EMIT
             return _cache.Get(context);
 #else
             return _dynCache.GetFactory(context.RequestedType);

@@ -3,14 +3,17 @@
 Rezolver is a [fast](docs/benchmarks.md), efficient, extensible, [open source](https://github.com/ZolutionSoftware/Rezolver) IOC container 
 with Asp.Net Core integration.
 
-The nuget package has binaries specifically targeted to these .Net versions/standards:
+The nuget package has binaries specifically targeted to these TFMs:
 
-- .Net Standard 2.0
-- .Net Standard 1.1
-- .Net 4.6.1
+- `netstandard2.0`
+- `netcoreapp2.2`
+- `net472`
+- `net48`
 
-> [!WARNING]
-> Rezolver 2.0 (the next version) will ***only*** target `netstandard2.0` TFM.
+> [!TIP]
+> While Rezolver is fast, whichever version of the DLL you use, the runtime-specific versions are particularly fast due to the use of some
+> advanced internal caching built using IL Emit which, until `netstandard2.1` is ready, can only be used when directly targeting a specific
+> runtime.
 
 # Integration
 
@@ -28,6 +31,18 @@ Read the [quickstart tutorial](quickstart.md) - which shows how to create and us
 
 For full release notes for each version - [see release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 
+- **2.0.0**
+  - Major performance improvements
+  - TFMs changed to `netStandard2.0`, `netcoreapp2.2`, `net472` and `net48` ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78))
+  - Scopes are now always present ([#89](https://github.com/ZolutionSoftware/Rezolver/issues/89))
+  - Got rid of a whole bunch of interfaces in favour of concrete classes with non-virtual (where possible) methods ([#90](https://github.com/ZolutionSoftware/Rezolver/issues/90)):
+    - `IResolveContext` -> `ResolveContext`
+    - `IContainer` -> `Container`
+    - `IContainerScope` -> `ContainerScope`
+    - `ICompiledTarget` -> retired for factory delegates, @Rezolver.IInstanceProvider and @Rezolver.IInstanceProvider`1
+  - `OverridingContainer` renamed to `ChildContainer` ([#87](https://github.com/ZolutionSoftware/Rezolver/issues/87))
+    - Constructor now no longer accepts an `IRootTargetContainer` on creation.  To register new services, you create a new instance and then register into it via its implementation of `IRootTargetContainer`
+  - `OverridingTargetContainer` renamed to `ChildTargetContainer` ([#88](https://github.com/ZolutionSoftware/Rezolver/issues/88))
 - **1.4.0**
   - [.Net Core Generic Host Support](docs/nuget-packages/rezolver.microsoft.extensions.hosting.md) via the `Rezolver.Microsoft.Extensions.Hosting` package
   - ['Autofactories'](docs/autofactories.md) -  Container-created factory methods (`e.g. Func<T>` or `delegate Foo FooFactory(IBar, IBaz)`) which create instances via the container/scope

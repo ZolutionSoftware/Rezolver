@@ -106,8 +106,7 @@ constructor, automatically injecting arguments into that constructor from the se
 the container.</p>
 <div class="TIP"><h5>Tip</h5><p>Constructor injection is achieved in Rezolver through the targets <a class="xref" href="../../api/Rezolver.Targets.ConstructorTarget.html">ConstructorTarget</a> and
 <a class="xref" href="../../api/Rezolver.Targets.GenericConstructorTarget.html">GenericConstructorTarget</a> (for open generic types).  The examples here show how to create and register
-these directly and via some of the extension methods in @Rezolver.RegisterTypeTargetContainerExtensions, 
-@Rezolver.SingletonTargetContainerExtensions and @Rezolver.ScopedTargetContainerExtensions.</p>
+these directly and via some of the extension methods in <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html">TargetContainerExtensions</a>.</p>
 <p>You can see the tests from which these examples are taken, and run them yourself, if you grab the 
 <a href="https://github.com/zolutionsoftware/rezolver">Rezolver source from Github</a>, open the main solution and run
 the tests in the &#39;Rezolver.Tests.Examples&#39; project.</p>
@@ -308,7 +307,7 @@ Assert.Same(RequiresMyServices.Default3, result.Service3);
 some other parts of the framework :)</p>
 <p>Think of it as being the same as an explicit cast from one type to another - you put a target inside it and tell it what type
 you want it to be.</p>
-<p>In the example, we have to use this if we&#39;re determined to the use the @Rezolver.MultipleTargetContainerExtensions.RegisterAll* method(s),
+<p>In the example, we have to use this if we&#39;re determined to the use the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterAll_">RegisterAll</a> method(s),
 because they don&#39;t allow us to override the registration type for the targets that we&#39;re registering.</p>
 </div>
 <hr>
@@ -387,7 +386,7 @@ about the overriding container.</p>
 <p>If you&#39;re interested in the inner workings when using overriding containers, the process is this:</p>
 <ul>
 <li>The <code>overridingContainer</code> receives the <a class="xref" href="../../api/Rezolver.Container.html#Rezolver_Container_Resolve_">Resolve</a> call for <code>Requires2MyServices</code></li>
-<li>It looks inside its @Rezolver.ContainerBase.Targets target container for a registration for <code>Requires2MyServices</code> and doesn&#39;t find one</li>
+<li>It looks inside its <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> for a registration for <code>Requires2MyServices</code> and doesn&#39;t find one</li>
 <li>So the call is passed to the overidden <code>container</code>...<ul>
 <li>... which finds its registration and binds to the 2-parameter constructor of <code>Requires2MyServices</code> as before</li>
 <li>The bound constructor is executed<ul>
@@ -409,8 +408,8 @@ for <code>Requires2MyServices</code></li>
 <p>This solution is similar to the previous one, except this time we&#39;re not overriding the container, but overriding the <em>target container</em> used 
 by a container.</p>
 <p>In order to do this, however, we have to change how we create our container.  Until now, we&#39;ve simply been creating a new <a class="xref" href="../../api/Rezolver.Container.html">Container</a>
-instance and registering targets via its own implementation of <a class="xref" href="../../api/Rezolver.ITargetContainer.html">ITargetContainer</a> (which, as mentioned elsewhere, wraps its
-@Rezolver.ContainerBase.Targets property).</p>
+instance and registering targets via its own implementation of <a class="xref" href="../../api/Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> (which, as mentioned elsewhere, simply proxies
+the target container it was given, or that it created, when it was created).</p>
 <p>This time, we&#39;re going to create a <a class="xref" href="../../api/Rezolver.TargetContainer.html">TargetContainer</a> directly, register <code>MyService2</code> and <code>Requires2MyServices</code> in it, then 
 create a <a class="xref" href="../../api/Rezolver.OverridingTargetContainer.html">OverridingTargetContainer</a> on top of that with the other registration of <code>MyService3</code>.  This target container is then 
 passed to the new container on construction.</p>

@@ -133,7 +133,7 @@ container.RegisterAutoFunc&lt;IFoo&gt;();
 
 var result = container.Resolve&lt;Lazy&lt;IFoo&gt;&gt;();
 </code></pre><h2 id="simplifying">Simplifying</h2>
-<p>As you can see from that example, we still need to use the @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc* method to make it possible
+<p>As you can see from that example, we still need to use the <a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterAutoFunc_">RegisterAutoFunc</a> method to make it possible
 for the <code>Lazy&lt;IFoo&gt;</code> to be created (or we could register our own <code>Func&lt;T&gt;</code> to be used instead).</p>
 <p>Instead, if we also <a href="autofactories.html#automatic-functreturn-injection">enable Automatic <code>Func&lt;T&gt;</code> injection</a> using the <a class="xref" href="../api/Rezolver.Options.EnableAutoFuncInjection.html">EnableAutoFuncInjection</a> 
 option, then we can remove the need for the second registration:</p>

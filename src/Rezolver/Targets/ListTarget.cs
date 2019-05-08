@@ -12,6 +12,8 @@ namespace Rezolver.Targets
     /// <summary>
     /// This target produces arrays (<see cref="AsArray"/> = <c>true</c>) or lists (<see cref="AsArray"/> = <c>false</c>) whose
     /// individual items are built by ITarget instances.
+    /// 
+    /// Note that this target is *not* used in Rezolver's implementation of <see cref="IEnumerable{T}"/> injection.
     /// </summary>
     /// <remarks>
     /// The element type you feed on construction determines the type of array or the generic argument to List&lt;T&gt;.
@@ -20,6 +22,9 @@ namespace Rezolver.Targets
     /// </remarks>
     public class ListTarget : TargetBase
     {
+        /// <summary>
+        /// Always returns <see cref="ScopeBehaviour.None"/>
+        /// </summary>
         public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
 
         /// <summary>

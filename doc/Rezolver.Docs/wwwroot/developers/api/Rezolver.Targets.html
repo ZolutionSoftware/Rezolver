@@ -160,6 +160,7 @@ would handle the closed type MyType&lt;int, string&gt;.</p>
       <h4><a class="xref" href="Rezolver.Targets.ListTarget.html">ListTarget</a></h4>
       <section><p>This target produces arrays (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>true</code>) or lists (<a class="xref" href="Rezolver.Targets.ListTarget.html#Rezolver_Targets_ListTarget_AsArray">AsArray</a> = <code>false</code>) whose
 individual items are built by ITarget instances.</p>
+<p>Note that this target is <em>not</em> used in Rezolver&apos;s implementation of <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable&lt;T&gt;</a> injection.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Targets.ObjectTarget.html">ObjectTarget</a></h4>
       <section><p>Implements <a class="xref" href="Rezolver.ITarget.html">ITarget</a> by wrapping a single instance that&apos;s already been constructed by application code.</p>

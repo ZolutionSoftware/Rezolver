@@ -96,13 +96,16 @@
 
 <p>Rezolver is a <a href="docs/benchmarks.html">fast</a>, efficient, extensible, <a href="https://github.com/ZolutionSoftware/Rezolver">open source</a> IOC container 
 with Asp.Net Core integration.</p>
-<p>The nuget package has binaries specifically targeted to these .Net versions/standards:</p>
+<p>The nuget package has binaries specifically targeted to these TFMs:</p>
 <ul>
-<li>.Net Standard 2.0</li>
-<li>.Net Standard 1.1</li>
-<li>.Net 4.6.1</li>
+<li><code>netstandard2.0</code></li>
+<li><code>netcoreapp2.2</code></li>
+<li><code>net472</code></li>
+<li><code>net48</code></li>
 </ul>
-<div class="WARNING"><h5>Warning</h5><p>Rezolver 2.0 (the next version) will <strong><em>only</em></strong> target <code>netstandard2.0</code> TFM.</p>
+<div class="TIP"><h5>Tip</h5><p>While Rezolver is fast, whichever version of the DLL you use, the runtime-specific versions are particularly fast due to the use of some
+advanced internal caching built using IL Emit which, until <code>netstandard2.1</code> is ready, can only be used when directly targeting a specific
+runtime.</p>
 </div>
 <h1 id="integration">Integration</h1>
 <p>In addition to simply using the Rezolver nuget package and creating a <a class="xref" href="api/Rezolver.Container.html">Container</a> directly, Rezolver also offers some off-the-shelf integrations:</p>
@@ -116,6 +119,24 @@ with Asp.Net Core integration.</p>
 <h1 id="release-highlights">Release Highlights</h1>
 <p>For full release notes for each version - <a href="https://github.com/ZolutionSoftware/Rezolver/releases">see release notes on Github</a>.</p>
 <ul>
+<li><strong>2.0.0</strong><ul>
+<li>Major performance improvements</li>
+<li>TFMs changed to <code>netStandard2.0</code>, <code>netcoreapp2.2</code>, <code>net472</code> and <code>net48</code> (<a href="https://github.com/ZolutionSoftware/Rezolver/issues/78">#78</a>)</li>
+<li>Scopes are now always present (<a href="https://github.com/ZolutionSoftware/Rezolver/issues/89">#89</a>)</li>
+<li>Got rid of a whole bunch of interfaces in favour of concrete classes with non-virtual (where possible) methods (<a href="https://github.com/ZolutionSoftware/Rezolver/issues/90">#90</a>):<ul>
+<li><code>IResolveContext</code> -&gt; <code>ResolveContext</code></li>
+<li><code>IContainer</code> -&gt; <code>Container</code></li>
+<li><code>IContainerScope</code> -&gt; <code>ContainerScope</code></li>
+<li><code>ICompiledTarget</code> -&gt; retired for factory delegates, <a class="xref" href="api/Rezolver.IInstanceProvider.html">IInstanceProvider</a> and <a class="xref" href="api/Rezolver.IInstanceProvider-1.html">IInstanceProvider&lt;TService&gt;</a></li>
+</ul>
+</li>
+<li><code>OverridingContainer</code> renamed to <code>ChildContainer</code> (<a href="https://github.com/ZolutionSoftware/Rezolver/issues/87">#87</a>)<ul>
+<li>Constructor now no longer accepts an <code>IRootTargetContainer</code> on creation.  To register new services, you create a new instance and then register into it via its implementation of <code>IRootTargetContainer</code></li>
+</ul>
+</li>
+<li><code>OverridingTargetContainer</code> renamed to <code>ChildTargetContainer</code> (<a href="https://github.com/ZolutionSoftware/Rezolver/issues/88">#88</a>)</li>
+</ul>
+</li>
 <li><strong>1.4.0</strong><ul>
 <li><a href="docs/nuget-packages/rezolver.microsoft.extensions.hosting.html">.Net Core Generic Host Support</a> via the <code>Rezolver.Microsoft.Extensions.Hosting</code> package</li>
 <li><a href="docs/autofactories.html">&#39;Autofactories&#39;</a> -  Container-created factory methods (<code>e.g. Func&lt;T&gt;</code> or <code>delegate Foo FooFactory(IBar, IBaz)</code>) which create instances via the container/scope</li>

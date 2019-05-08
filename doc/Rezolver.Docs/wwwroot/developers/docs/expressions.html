@@ -105,7 +105,7 @@
 parameters) as a factory for a given type registration.</p>
 <p>Rezolver can do the same with expression trees (derived from the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression">Expression</a> class) and has one or two additional tricks up its sleeve when doing
 so.</p>
-<p>To register expessions you can use one of the many @Rezolver.ExpressionTargetContainerExtensions.RegisterExpression* extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>To register expessions you can use one of the many <a class="xref" href="../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterExpression_">RegisterExpression</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>To create expression targets you can either:</p>
 <ul>
 <li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> through its constructor</li>
@@ -118,7 +118,7 @@ right up to the delegate-like <a class="xref" href="https://docs.microsoft.com/d
 <h1 id="expression-fragments">Expression &#39;fragments&#39;</h1>
 <p>As we&#39;ve just mentioned, an expression fragment is one of the small, specialised, expression types from the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions">System.Linq.Expressions</a> namespace which wrap a fundamental 
 language expression, such as constants or method calls or whatever.  The <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> supports these through its 
-@Rezolver.Targets.ExpressionTarget.%23ctor(System.Linq.Expressions.Expression,System.Type) constructor.</p>
+<a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html#Rezolver_Targets_ExpressionTarget__ctor_">constructors</a>.</p>
 <p>When creating an <a class="xref" href="../api/Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> this way, its <a class="xref" href="../api/Rezolver.ITarget.html#Rezolver_ITarget_DeclaredType">DeclaredType</a> (and therefore the default type under which it will be registered, unless
 overridden at registration time) will, by default, be set to the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.linq.expressions.expression.type#System_Linq_Expressions_Expression_Type">Type</a> of the expression you pass to the constructor, unless you pass a 
 non-null type explicitly as the second argument.</p>
@@ -183,7 +183,7 @@ Assert.Same(_theMessage, container.Resolve&lt;string&gt;());
 </code></pre><div class="NOTE"><h5>Note</h5><p>Look past the fact that the object being injected is the same instance on which the test is executed, it&#39;s the principle that matters!</p>
 </div>
 <h2 id="injecting-the-resolvecontext">Injecting the <code>ResolveContext</code></h2>
-<p>Just as with the <a href="delegates.html#injecting-rezolveriresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> into your expression in order
+<p>Just as with the <a href="delegates.html#injecting-rezolverresolvecontext"><code>DelegateTarget</code> example</a>, you can also inject the <a class="xref" href="../api/Rezolver.ResolveContext.html">ResolveContext</a> into your expression in order
 to perform late-bound service location within your expression.  As the comment at the start of the test states - this example is functionally identical to the <code>DelegateTarget</code>
 example - but because of the limitations of the C# compiler and its ability to translate code into expression trees, the main expression is written as a series of stacked 
 conditional expressions so that the whole thing is a single expression.</p>

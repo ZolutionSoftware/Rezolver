@@ -81,6 +81,10 @@ gulp.task('cleanDocFXOutput', function () {
     return del(['./wwwroot/developers/**', '!./developers']);
 });
 
+gulp.task('cleanDocFXLog', function () {
+    return del(['./log.txt']);
+});
+
 gulp.task('copy', function () {
     return merge(
         gulp.src(bootstrap.src, { cwd: bootstrap.cwd })
@@ -138,7 +142,7 @@ gulp.task('bundles', ['less'], function () {
 });
 
 //the default task - single dependencies are used to chain all the tasks together
-gulp.task('default', ['bundles']);
+gulp.task('default', ['cleanDocFXLog', 'bundles']);
 
 //used only when performing style updates to the Rezolver docfx
 //theme or underlying bootstrap theme whilst running the site - runs the default

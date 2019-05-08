@@ -268,7 +268,7 @@ then both would create their instances up-front, independent of each other.</p>
 <p>Obviously, being able to switch <em>all</em> enumerables to eager is likely to be a bit of a sledgehammer in many cases.  So
 Rezolver also lets you control the production of lazy or eager enumerables on a per-type basis.</p>
 <p>To do this, when setting the <a class="xref" href="../../api/Rezolver.Options.LazyEnumerables.html">LazyEnumerables</a> options to <code>false</code>, you also include the type of service
-whose enumerables are to be affected (see the @Rezolver.OptionsTargetContainerExtensions.SetOption* overload for more):</p>
+whose enumerables are to be affected (see the <a class="xref" href="../../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_SetOption_">SetOption</a> overload for more):</p>
 <pre><code class="lang-csharp" name="EnumerableExamples.cs">// for this test we&#39;ll drop the two foreach loops and just use .ToArray()
 var container = new Container();
 var instanceCounter1 = 0;

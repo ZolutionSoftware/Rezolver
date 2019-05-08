@@ -104,8 +104,10 @@
   
   <h1 id="Rezolver_Options_ContainerOption_1" data-uid="Rezolver.Options.ContainerOption`1" class="text-break">Class ContainerOption&lt;TOption&gt;
   </h1>
-  <div class="markdown level0 summary"><p>A suggested base class to use for custom container options to be read/written through the
-<see cref="!:OptionsTargetContainerExtensions"></see> extension methods.</p>
+  <div class="markdown level0 summary"><p>A suggested base class to use for custom container options to be read/written through extensions
+such as <a class="xref" href="Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_SetOption__1_Rezolver_ITargetContainer___0_">SetOption&lt;TOption&gt;(ITargetContainer, TOption)</a>,
+<a class="xref" href="Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_GetOptions__2_Rezolver_ITargetContainer_">GetOptions&lt;TOption, TService&gt;(ITargetContainer)</a> and the various
+overloads.S</p>
 <p>The type of the option value is the argument to the <code data-dev-comment-type="typeparamref" class="typeparamref">TOption</code> type parameter.</p>
 <p>Options must currently be objects - the ability to use callbacks to get options might be added at a
 future date.</p>
@@ -186,10 +188,8 @@ with the argument to the <code data-dev-comment-type="typeparamref" class="typep
 between them.</p>
 <hr>
 <h3 id="note">Note:</h3>
-<p>Whilst Rezolver uses this type for most of its configurable options, the options API implemented by the extension methods
-(e.g. <see cref="!:OptionsTargetContainerExtensions.GetOption&lt;TOption>(ITargetContainer, TOption)"></see>
-or <see cref="!:OptionsTargetContainerExtensions.SetOption&lt;TOption>(ITargetContainer, TOption)"></see>) do <strong>not</strong> require
-you to use it.</p>
+<p>Whilst Rezolver uses this type for most of its configurable options, you don&apos;t need to use it. Any type can be used as 
+an option.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>

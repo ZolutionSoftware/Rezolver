@@ -24,7 +24,7 @@ a registration like this for each individual type that we'd want to create insta
 
 Starting with Rezolver 1.4, however, Rezolver makes this kind of registration trivial, and also gives you some extra power.
 
-The @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFunc* overload provides a simple way to enable Rezolver to automatically
+The @Rezolver.RootTargetContainerExtensions.RegisterAutoFunc* overload provides a simple way to enable Rezolver to automatically
 inject a @System.Func`1 or one of its related types, using its own registrations as the source of the object that is produced by that
 factory when it is executed.
 
@@ -39,7 +39,7 @@ Or to resolve an enumerable of factories
 [!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example3)]
 
 All of the above works for custom delegate types, too (so long as they have a non-`void` return type), via the 
-@Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory* overload:
+@Rezolver.RootTargetContainerExtensions.RegisterAutoFactory* overload:
 
 [!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example4a)]
 [!code-csharp[AutoFactoryExamples.cs](../../../../test/Rezolver.Tests.Examples/AutoFactoryExamples.cs#example4b)]
@@ -85,7 +85,7 @@ The objects produced by Autofactories are tied to the scope that created the aut
 
 ## Generics
 
-With the @Rezolver.AutoFactoryRegistrationExtensions.RegisterAutoFactory* method, Rezolver is also capable of injecting
+With the @Rezolver.RootTargetContainerExtensions.RegisterAutoFactory* method, Rezolver is also capable of injecting
 delegates whose result is an open generic.  When requested, Rezolver will build a delegate of the closed version of that
 generic:
 

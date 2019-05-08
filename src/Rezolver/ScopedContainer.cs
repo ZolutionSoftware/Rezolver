@@ -7,10 +7,8 @@ using System;
 namespace Rezolver
 {
     /// <summary>
-    /// Extends the <see cref="Container"/> to implement lifetime implicit scoping through the
-    /// <see cref="Scope"/> that's created along with it.
-    ///
-    /// Implementation of the <see cref="IScopedContainer"/> interface.
+    /// Extends the <see cref="Container"/> to implement lifetime implicit scoping through a
+    /// <see cref="DisposingContainerScope"/> that's created along with it.
     /// </summary>
     /// <remarks>
     /// If you want your root container to act as a lifetime scope, then you should use this

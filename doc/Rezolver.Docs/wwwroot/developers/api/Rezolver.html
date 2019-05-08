@@ -146,8 +146,6 @@ collection ensures that they are applied in the correct order.</p>
       <section><p>Extensions for pre-configuring options in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a> via a <a class="xref" href="Rezolver.CombinedContainerConfig.html">CombinedContainerConfig</a>, such as the one
 exposed by <a class="xref" href="Rezolver.TargetContainer.html#Rezolver_TargetContainer_DefaultConfig">DefaultConfig</a>.</p>
 </section>
-      <h4><a class="xref" href="Rezolver.ConcurrentContainerScope.html">ConcurrentContainerScope</a></h4>
-      <section></section>
       <h4><a class="xref" href="Rezolver.ConstantCompiledTarget.html">ConstantCompiledTarget</a></h4>
       <section><p>Obsolete, use <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.func-2">Func&lt;T,TResult&gt;</a></p>
 </section>
@@ -176,9 +174,9 @@ and <a class="xref" href="Rezolver.OverridingTargetContainer.html">OverridingTar
       <h4><a class="xref" href="Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a></h4>
       <section><p>Implements service decoration in an <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>, producing instances of the
 <a class="xref" href="Rezolver.Targets.DecoratorTarget.html">DecoratorTarget</a> when <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_Fetch_System_Type_">Fetch(Type)</a> or <a class="xref" href="Rezolver.DecoratingTargetContainer.html#Rezolver_DecoratingTargetContainer_FetchAll_System_Type_">FetchAll(Type)</a> are called.</p>
-<p>The best way to add a decorator to your target container is to use the extension methods in
-<see cref="!:DecoratorTargetContainerExtensions"></see> - which provide simple shortcuts for creating
-decoration registrations.</p>
+<p>The best way to add a decorator to your target container is to use the extension methods like
+<a class="xref" href="Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator__2_Rezolver_IRootTargetContainer_">RegisterDecorator&lt;TDecorator, TDecorated&gt;(IRootTargetContainer)</a> 
+and its overloads.</p>
 </section>
       <h4><a class="xref" href="Rezolver.DelegatingCompiledTarget.html">DelegatingCompiledTarget</a></h4>
       <section><p>Obsolete.  See <a class="xref" href="Rezolver.IFactoryProvider.html">IFactoryProvider</a> and <a class="xref" href="Rezolver.IFactoryProvider-1.html">IFactoryProvider&lt;TService&gt;</a>, and object factories
@@ -187,10 +185,7 @@ and either <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.ob
 instance type.</p>
 </section>
       <h4><a class="xref" href="Rezolver.DisposingContainerScope.html">DisposingContainerScope</a></h4>
-      <section><p>Default scope object used by the<a class="xref" href="Rezolver.Container.html">Container</a> - performs no actual lifetime management
-of objects at all, but can create child scopes and track them for disposal when it is disposed.</p>
-<p>In order to get object lifetime management from a container whose scope is set to an instance of this type,
-a new scope must be created from this one.</p>
+      <section><p>Fully functional container scope.  Supports tracking of implicitly and explicitly scoped objects to enable disposal.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ExpressionFunctions.html">ExpressionFunctions</a></h4>
       <section><p>This type is only used when using expressions as targets(via the <a class="xref" href="Rezolver.Targets.ExpressionTarget.html">ExpressionTarget</a> type) - it&apos;s
@@ -233,6 +228,12 @@ default implementation of <a class="xref" href="Rezolver.IMemberBindingBehaviour
 easy importing of all registrations in an <a class="xref" href="https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection">IServiceCollection</a> from <code>Microsoft.Extensions.DependencyInjection</code>
 into a Rezolver <a class="xref" href="Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 </section>
+      <h4><a class="xref" href="Rezolver.NonTrackingContainerScope.html">NonTrackingContainerScope</a></h4>
+      <section><p>Default scope object used by the<a class="xref" href="Rezolver.Container.html">Container</a> - performs no actual lifetime management
+of objects at all, but can create child scopes and track them for disposal when it is disposed.</p>
+<p>In order to get object lifetime management from a container whose scope is set to an instance of this type,
+a new scope must be created from this one.</p>
+</section>
       <h4><a class="xref" href="Rezolver.OverridingContainer.html">OverridingContainer</a></h4>
       <section><p>A child container which extends another.</p>
 <p>Note that this container gets its own singletons, scope, etc - everything is new; it&apos;s just the registrations
@@ -251,7 +252,10 @@ which are shared.</p>
 similar to a Linq Select.</p>
 </section>
       <h4><a class="xref" href="Rezolver.ResolveContext.html">ResolveContext</a></h4>
-      <section></section>
+      <section><p>Captures the context of a resolve operation.  Publicly, only the <a class="xref" href="Rezolver.ResolveContext.html#Rezolver_ResolveContext_RequestedType">RequestedType</a>
+is captured; however, internally, it captures both the original <a class="xref" href="Rezolver.Container.html">Container</a>
+and <a class="xref" href="Rezolver.ContainerScope.html">ContainerScope</a>.</p>
+</section>
       <h4><a class="xref" href="Rezolver.RezolverOptions.html">RezolverOptions</a></h4>
       <section><p>Options for using Rezolver as the DI container for .Net Core applications.</p>
 </section>
@@ -259,9 +263,8 @@ similar to a Linq Select.</p>
       <section><p>Extensions for the <a class="xref" href="Rezolver.IRootTargetContainer.html">IRootTargetContainer</a> interface</p>
 </section>
       <h4><a class="xref" href="Rezolver.ScopedContainer.html">ScopedContainer</a></h4>
-      <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through the
-<see cref="!:Scope"></see> that&apos;s created along with it.</p>
-<p>Implementation of the <a class="xref" href="Rezolver.IScopedContainer.html">IScopedContainer</a> interface.</p>
+      <section><p>Extends the <a class="xref" href="Rezolver.Container.html">Container</a> to implement lifetime implicit scoping through a
+<a class="xref" href="Rezolver.DisposingContainerScope.html">DisposingContainerScope</a> that&apos;s created along with it.</p>
 </section>
       <h4><a class="xref" href="Rezolver.Target.html">Target</a></h4>
       <section><p>Provides static factory methods (including extension methods) for creating numerous types of targets

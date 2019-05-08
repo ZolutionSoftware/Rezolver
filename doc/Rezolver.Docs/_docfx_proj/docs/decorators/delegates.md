@@ -25,7 +25,7 @@ doubled.  It's not a particularly real-world example - but it's a simple way to 
 [!code-csharp[DecoratorExamples.cs](../../../../../test/Rezolver.Tests.Examples/DecoratorExamples.cs#example10)]
 
 > [!TIP]
-> The @Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* is overloaded for the delegate types 
+> The @Rezolver.RootTargetContainerExtensions.RegisterDecorator* is overloaded for the delegate types 
 > @System.Func`2 and @System.Delegate - the second of which allows any delegate to be registered as a 
 > decorator, subject to parameter and return type checks.  The framework will inject arguments to any 
 > parameters the delegate has, with a parameter of the decorated type receiving the undecorated instance.

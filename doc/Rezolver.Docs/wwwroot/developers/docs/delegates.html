@@ -108,7 +108,7 @@ delegate will be executed and its result returned as the instance.</p>
 <li>The delegate must have non-<code>void</code> return type</li>
 <li>It must not have any <code>ref</code> or <code>out</code> parameters</li>
 </ul>
-<p>To register delegates you can use one of the many @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
+<p>To register delegates you can use one of the many <a class="xref" href="../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> extension methods for <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a>.</p>
 <p>To create delegate targets you can either:</p>
 <ul>
 <li>Manually create an instance of <a class="xref" href="../api/Rezolver.Targets.DelegateTarget.html">DelegateTarget</a> through its constructor</li>
@@ -182,7 +182,7 @@ type that was requested, the container and any active scope.  Through this conte
 <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_CreateScope_">CreateScope</a> and resolve instances of other types with its <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> 
 overload.</p>
 <p>If you need the context to be passed to your delegate - just make sure to declare a parameter of that type, most commonly
-you&#39;ll probably use the single parameter specialisation of the @Rezolver.DelegateTargetContainerExtensions.RegisterDelegate* or
+you&#39;ll probably use the single parameter specialisation of the <a class="xref" href="../api/Rezolver.TargetContainerExtensions.html#Rezolver_TargetContainerExtensions_RegisterDelegate_">RegisterDelegate</a> or
 <a class="xref" href="../api/Rezolver.Target.html#Rezolver_Target_ForDelegate_">ForDelegate</a> methods, but ultimately the parameter can appear anywhere in the delegate&#39;s signature and it will
 be injected.</p>
 <p>This example shows the <code>Func&lt;IRezolveContext, TResult&gt;</code> overload in action:</p>
@@ -274,7 +274,7 @@ public class UserControlPanel
 so that it has access to a list of actions the user can perform based on their role.  The <code>UserControlPanel</code> class requires an
 <code>IUserActionsService</code> which provides access to that list of actions, and we have three separate implementations of that interface
 which we could use, based on the user&#39;s role.</p>
-<p>We will use the @RezolveContext.Resolve* operation to create the instance we want to inject after deciding which type to resolve
+<p>We will use the <a class="xref" href="../api/Rezolver.ResolveContext.html#Rezolver_ResolveContext_Resolve_">Resolve</a> operation to create the instance we want to inject after deciding which type to resolve
 based on the user&#39;s role:</p>
 <pre><code class="lang-csharp" name="DelegateExamples.cs">static IPrincipal CurrentPrincipal { get; set; }
 

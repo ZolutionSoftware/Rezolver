@@ -20,8 +20,9 @@ For more information, including API reference and developer how-tos, head on ove
 ## 2.0.0
 
 - TFMs changed for main package ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78)):
-  - `NetStandard2.0`, `netcoreapp2.2` and `net472`
-  - The explicit targeting of `netcoreapp2.2` (and, later we'll add other `netcoreapp` flavours as they are added) is to allow some more advanced caching technology, based on `System.Reflection.Emit` to work.
+  - `NetStandard2.0`, `netcoreapp2.2`, `net472` and `net48`
+  - The targeting of specific runtimes is to allow some more advanced caching technology, based on `System.Reflection.Emit`, to work.  In theory, once `netstandard2.1` is here, 
+these will be able to be removed in favour of simply targeting the `2.0` and `2.1` flavours of .Net Standard.
 - Major performance improvements:
   - Enumerables +2500%
   - Constructor injection up +368%
@@ -33,7 +34,7 @@ For more information, including API reference and developer how-tos, head on ove
   - `IResolveContext` -> `ResolveContext`
   - `IContainer` -> `Container`
   - `IContainerScope` -> `ContainerScope`
-  - `ICompiledTarget` -> retired for factory delegates, @Rezolver.IInstanceProvider and @Rezolver.IInstanceProvider`1
+  - `ICompiledTarget` -> retired for factory delegates, `Rezolver.IInstanceProvider` and `Rezolver.IInstanceProvider<T>`
 - Got rid of a bunch of `Resolve` extension methods in favour of concrete methods on the types
 - New Container/Scope/Context behaviour:
   - `IServiceProvider` is now explicitly implemented by all three of `Container`, `ContainerScope` and `ResolveContext`

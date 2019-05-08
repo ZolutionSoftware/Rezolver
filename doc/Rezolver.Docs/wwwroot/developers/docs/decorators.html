@@ -109,7 +109,7 @@ dedicated to those.</p>
 </div>
 <h2 id="registering-decorators-in-rezolver">Registering decorators in Rezolver</h2>
 <p>Registration of Decorators in Rezolver is done through the overloaded extension method 
-@Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator*.  There is a generic and non-generic version
+<a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a>.  There is a generic and non-generic version
 (as is typical for nearly all Rezolver registration functions), but, unlike many other target types,
 there is no factory method in the <a class="xref" href="../api/Rezolver.Target.html">Target</a> static class to create one on its own.</p>
 <p>The sharp-eyed developer will be confused by this omission, especially since the type 
@@ -117,7 +117,7 @@ there is no factory method in the <a class="xref" href="../api/Rezolver.Target.h
 you read the summary notes about that class, it should be apparent why: Decoration isn&#39;t <em>solely</em> 
 implemented through an <a class="xref" href="../api/Rezolver.ITarget.html">ITarget</a> implementation, it also needs a special target container 
 type in which that target will be registered -<br><a class="xref" href="../api/Rezolver.DecoratingTargetContainer.html">DecoratingTargetContainer</a>, the creation of which is handled automatically by the 
-@Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* methods.</p>
+<a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> methods.</p>
 <h1 id="examples">Examples</h1>
 <p>For the first few examples, we&#39;ll be using these decorators for the interface <code>IMyService</code>, which 
 has also been used in many of the other examples.  If you&#39;ve already looked at the 
@@ -205,7 +205,7 @@ Assert.All(serviceTypes.Zip(result, (t, s) =&gt; (type: t, service: s)),
 </code></pre><hr>
 <h2 id="open-generic-decorator">Open Generic Decorator</h2>
 <p>You can also use decorators with open generics - register them just like <a href="constructor-injection/generics.html">normal generic types</a>, except
-via the @Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* method.</p>
+via the <a class="xref" href="../api/Rezolver.RootTargetContainerExtensions.html#Rezolver_RootTargetContainerExtensions_RegisterDecorator_">RegisterDecorator</a> method.</p>
 <p>For this, our basic generic decorator is this:</p>
 <pre><code class="lang-csharp" name="MyServiceDecorators.cs">public class UsesAnyServiceDecorator&lt;TAnyService&gt; : IUsesAnyService&lt;TAnyService&gt;
 {

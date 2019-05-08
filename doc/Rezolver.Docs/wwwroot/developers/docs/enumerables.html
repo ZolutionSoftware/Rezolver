@@ -102,7 +102,7 @@
 <h1 id="automatic-enumerable-injection">Automatic Enumerable Injection</h1>
 
 <p>By default, a <a class="xref" href="../api/Rezolver.TargetContainer.html">TargetContainer</a> (the default <a class="xref" href="../api/Rezolver.ITargetContainer.html">ITargetContainer</a> used by all containers in the 
-Rezolver framework) is configured to allow any @Rezolver.ContainerBase derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
+Rezolver framework) is configured to allow any <a class="xref" href="../api/Rezolver.Container.html">Container</a> derivative to resolve an <code>IEnumerable&lt;Service&gt;</code>.</p>
 <p>The contents of this enumerable will depend on how many times the <a class="xref" href="../api/Rezolver.ITargetContainer.html#Rezolver_ITargetContainer_Register_">Register</a>
 method has been called against the target type <code>Service</code>:</p>
 <ul>
@@ -325,7 +325,7 @@ collection types.  <a href="decorators/collections.html">Read about this now</a>
 <hr>
 <h2 id="explicit-ienumerablet-registrations">Explicit <code>IEnumerable&lt;T&gt;</code> registrations</h2>
 <p>Although you get <code>IEnumerable&lt;T&gt;</code> handling automatically when the <a class="xref" href="../api/Rezolver.Configuration.InjectEnumerables.html">InjectEnumerables</a> configuration 
-is applied (and not also disabled by the @Rezolver.Options.EnumerableInjection option being set to <code>false</code>), it doesn&#39;t 
+is applied (and not also disabled by the <a class="xref" href="../api/Rezolver.Options.EnableEnumerableInjection.html">EnableEnumerableInjection</a> option being set to <code>false</code>), it doesn&#39;t 
 prevent you from manually adding registrations for specific <code>IEnumerable&lt;&gt;</code> types which override the default behaviour.</p>
 <p>For example, let&#39;s say that you have two registrations for services which share a common interface, but they have only
 been registered against their concrete type (perhaps it&#39;s historical code you can&#39;t risk changing). Your code 
