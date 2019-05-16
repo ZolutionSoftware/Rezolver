@@ -139,6 +139,9 @@ namespace Rezolver
 
         internal static bool IsVariantTypeParameter(this Type type)
         {
+            if (!type.IsGenericParameter)
+                return false;
+
             var masked = type.GenericParameterAttributes
                        & GenericParameterAttributes.VarianceMask;
             return masked == GenericParameterAttributes.Contravariant || masked == GenericParameterAttributes.Covariant;
