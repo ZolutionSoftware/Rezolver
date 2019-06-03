@@ -16,12 +16,28 @@ namespace Rezolver.Tests
             Output.WriteLine(header);
             Output.WriteLine("================");
 
-            int counter = 0;
-            StringBuilder sb = new StringBuilder();
+            var counter = 0;
+            var sb = new StringBuilder();
             foreach (var type in types)
             {
                 type.CSharpLikeTypeName(sb);
                 Output.WriteLine("{0} => {1}", counter++, sb.ToString());
+                sb.Clear();
+            }
+            Output.WriteLine("");
+        }
+
+        private void LogTypes((Type type, bool isVariant)[] tvs, string header)
+        {
+            Output.WriteLine(header);
+            Output.WriteLine("================");
+
+            var counter = 0;
+            var sb = new StringBuilder();
+            foreach (var (type, isVariant) in tvs)
+            {
+                type.CSharpLikeTypeName(sb);
+                Output.WriteLine("{0} => {1}{2}", counter++, sb.ToString(), isVariant ? " (Variant)" : "");
                 sb.Clear();
             }
             Output.WriteLine("");
@@ -32,7 +48,17 @@ namespace Rezolver.Tests
             LogTypes(result, "Actual");
         }
 
+        private void LogActual((Type type, bool isVariant)[] result)
+        {
+            LogTypes(result, "Actual");
+        }
+
         private void LogExpectedOrder(Type[] expected)
+        {
+            LogTypes(expected, "Expected (Specified Relative Order)");
+        }
+
+        private void LogExpectedOrder((Type type, bool isVariant)[] expected)
         {
             LogTypes(expected, "Expected (Specified Relative Order)");
         }
@@ -47,6 +73,18 @@ namespace Rezolver.Tests
         public TypeIndexTests(ITestOutputHelper output)
         {
             Output = output;
+        }
+
+
+        [Fact]
+        public void Basic_ShouldGetNonGenericRefAssignableTo()
+        {
+            // Arrange
+
+
+            // Act
+
+            // Assert
         }
 
         // non-generic types should just be returned as-is
@@ -70,7 +108,7 @@ namespace Rezolver.Tests
             var typeIndex = new TypeIndex();
 
             // Act & Assert
-            Assert.Equal(new[] { type }, typeIndex.For(type).GetTargetSearchTypes());
+            Assert.Equal(new[] { type }, typeIndex.For(type).GetCompatibleTypes().Select(tv => tv.type));
         }
 
         // these are 'simple' because they don't have bases and are neither contravariant nor covariant
@@ -104,7 +142,7 @@ namespace Rezolver.Tests
             var typeIndex = new TypeIndex();
 
             // Act & Assert
-            Assert.Equal(expected, typeIndex.For(type).GetTargetSearchTypes());
+            Assert.Equal(expected, typeIndex.For(type).GetCompatibleTypes().Select(tv => tv.type));
         }
 
         public static TheoryData<Type, Type[]> NestedGenericTypes = new TheoryData<Type, Type[]>
@@ -174,12 +212,16 @@ namespace Rezolver.Tests
             var typeIndex = new TypeIndex();
 
             // Act
-            var result = typeIndex.For(type).GetTargetSearchTypes().ToArray();
+            var result = typeIndex.For(type).GetCompatibleTypes().Select(tv => tv.type).ToArray();
             LogExpectedOrder(expected);
             LogActual(result);
 
             // Assert
             Assert.Equal(expected, result);
+
+            //Func<string> fs = null;
+            //Func<object> fo = null;
+            //fo = fs;
 
             //Func<Action<object>> fao = null;
             //Func<Action<string>> fas = null;
@@ -198,6 +240,83 @@ namespace Rezolver.Tests
             //Action<Func<Action<string>>> afas = null;
 
             //afao = afas;
+
+            //Func<Action<Func<object>>> fafo = null;
+            //Func<Action<Func<string>>> fafs = null;
+            //fafs = fafo;
+        }
+
+        [Fact]
+        public void Covariant_ShouldBeCorrectForFuncObjectDelegate()
+        {
+            // Arrange
+            var typeIndex = new TypeIndex();
+            typeIndex.Prepare<Func<string>>();
+            var entry = typeIndex.For<Func<object>>();
+
+            // Act
+            var result = entry.GetCompatibleTypes().ToArray();
+
+            LogActual(result);
+
+            // Assert
+            Assert.Equal(new[]
+            {
+                (typeof(Func<object>), false),
+                (typeof(Func<string>), true),
+                (typeof(Func<>), false)
+            }, result);
+        }
+
+        [Fact]
+        public void Covariant_ShouldBeCorrectForFuncIEnumerableCharDelegate()
+        {
+            // Arrange
+            var typeIndex = new TypeIndex();
+            typeIndex.Prepare<Func<string>>();
+            var entry = typeIndex.For<Func<IEnumerable<char>>>();
+
+            // Act
+            //var result = entry.GetTargetSearchTypes().ToArray();
+            var result = entry.GetCompatibleTypes().ToArray();
+
+            LogActual(result);
+
+            // Assert
+            Assert.Equal(new[] {
+                (typeof(Func<IEnumerable<char>>), false),
+                (typeof(Func<>).MakeGenericType(typeof(IEnumerable<>)), false),
+                (typeof(Func<string>), true),
+                (typeof(Func<>), false)
+            }, result);
+        }
+
+        [Fact]
+        public void Covariant_ShouldIncludeAllDerivedRegistrations_MostRecentToLeast()
+        {
+            // Arrange
+            var typeIndex = new TypeIndex();
+            typeIndex.Prepare(typeof(ICovariant<BaseClass>),
+                typeof(ICovariant<BaseClassChild>),
+                typeof(ICovariant<BaseClassGrandchild>));
+
+            var entry = typeIndex.For<ICovariant<BaseClass>>();
+
+            // Act
+            var result = entry.GetCompatibleTypes().ToArray();
+
+            LogActual(result);
+
+            // Assert
+            // here, the order of the covariant types should be determined by the order they're added.
+            // Most recent should be last.
+            Assert.Equal(new[]
+            {
+                (typeof(ICovariant<BaseClass>), false),
+                (typeof(ICovariant<BaseClassGrandchild>), true),
+                (typeof(ICovariant<BaseClassChild>), true),
+                (typeof(ICovariant<>), false)
+            }, result);
         }
     }
 }

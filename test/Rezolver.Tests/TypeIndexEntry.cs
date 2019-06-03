@@ -14,14 +14,14 @@ namespace Rezolver.Tests
     }
 
     [DebuggerDisplay("{Type}")]
-    public class TypeIndexEntry
+    public sealed partial class TypeIndexEntry : IEquatable<TypeIndexEntry>, IEquatable<Type>
     {
         public static readonly (Type, TypeIndexEntry)[] EmptyArgs = new (Type, TypeIndexEntry)[0];
 
         /// <summary>
         /// The type that this metadata describes
         /// </summary>
-        public Type Type { get; protected set; }
+        public Type Type { get; }
 
         /// <summary>
         /// If the type is a class, this is the metadata for its base class.
@@ -29,7 +29,7 @@ namespace Rezolver.Tests
         /// Note - Value Types and Interfaces will have <c>null</c>.
         /// All other types terminate at the metadata for <see cref="object"/>, which will also have a <c>null</c>
         /// </summary>
-        public TypeIndexEntry Base { get; protected set; }
+        public TypeIndexEntry Base { get; set; }
 
         /// <summary>
         /// Gets all the bases of this type in order, starting with <see cref="Base"/>
@@ -50,7 +50,7 @@ namespace Rezolver.Tests
         /// <summary>
         /// Only includes *immediate* derived types
         /// </summary>
-        public List<TypeIndexEntry> DerivedTypes { get; protected set; } = new List<TypeIndexEntry>();
+        public List<TypeIndexEntry> DerivedTypes { get; } = new List<TypeIndexEntry>();
 
         /// <summary>
         /// Gets an enumerable of all the types which are derived from this type, in *generally* increasing order of inheritance.
@@ -64,11 +64,11 @@ namespace Rezolver.Tests
             get
             {
                 // breadth-first enumerable of derived types
-                List<TypeIndexEntry> nextLevel = new List<TypeIndexEntry>() { this };
+                var nextLevel = new List<TypeIndexEntry>() { this };
 
                 while (nextLevel.Count != 0)
                 {
-                    List<TypeIndexEntry> temp = new List<TypeIndexEntry>();
+                    var temp = new List<TypeIndexEntry>();
                     foreach (var next in nextLevel)
                     {
                         foreach (var derived in next.DerivedTypes)
@@ -82,12 +82,18 @@ namespace Rezolver.Tests
             }
         }
 
+        public bool IsValueType => Type.IsValueType;
+
+        public bool IsClass => Type.IsClass;
+
+        public bool IsInterface => Type.IsInterface;
+
         /// <summary>
         /// Metadata for the generic type definition, if this type is a closed generic.
         /// 
         /// Note - <c>null</c> if this type is a generic type definition, or is not a generic.
         /// </summary>
-        public TypeIndexEntry GenericTypeDefinition { get; protected set; }
+        public TypeIndexEntry GenericTypeDefinition { get; set; }
 
         public HashSet<TypeIndexEntry> KnownGenerics { get; } = new HashSet<TypeIndexEntry>();
 
@@ -98,17 +104,18 @@ namespace Rezolver.Tests
         /// 
         /// This is lazy because arguments can be recursive - e.g. `class MyType : BaseType&lt;MyType&gt;`
         /// </summary>
-        public Lazy<(Type param, TypeIndexEntry argMeta)[]> GenericParametersAndArgs { get; }
+        //public Lazy<(Type param, TypeIndexEntry argMeta)[]> GenericParametersAndArgs { get; }
+        public (Type param, TypeIndexEntry argMeta)[] GenericParametersAndArgs { get; private set; }
 
         /// <summary>
         /// Generic interfaces implemented or inferred (if it's an interface) by this type
         /// </summary>
-        public TypeIndexEntry[] GenericInterfaces { get; protected set; }
+        public TypeIndexEntry[] GenericInterfaces { get; set; }
 
         /// <summary>
         /// Non-generic interfaces implemented or inferred (if it's an interface) by this type
         /// </summary>
-        public TypeIndexEntry[] NonGenericInterfaces { get; protected set; }
+        public TypeIndexEntry[] NonGenericInterfaces { get; set; }
 
         /// <summary>
         /// Classes or value types which implement this interface
@@ -119,18 +126,80 @@ namespace Rezolver.Tests
         /// Other interfaces which infer this interface
         /// </summary>
         public HashSet<TypeIndexEntry> ImplementingInterfaces { get; } = new HashSet<TypeIndexEntry>();
-        public TypeIndex Index { get; }
 
-        private protected TypeIndexEntry(TypeIndex index)
+        public TypeIndex Index { get; set; }
+
+        internal TypeIndexEntry(TypeIndex index, Type type)
         {
-            GenericParametersAndArgs = new Lazy<(Type, TypeIndexEntry)[]>(
-                () => Type.IsGenericType && !Type.IsGenericTypeDefinition ? Type.GetGenericArguments().Select(ga => (ga, Index.For(ga))).ToArray() : EmptyArgs);
             Index = index;
+            Type = type;
+
+            //GenericParametersAndArgs = new Lazy<(Type, TypeIndexEntry)[]>(
+            //    () => Type.IsGenericType && !Type.IsGenericTypeDefinition ? Type.GetGenericArguments().Select(ga => (ga, Index.For(ga))).ToArray() : EmptyArgs);
+        }
+
+        internal void Initialise(Dictionary<Type, TypeIndexEntry> beingBuilt)
+        {
+            beingBuilt[Type] = this;
+
+            if (Type.IsClass)
+            {
+                if (Type != typeof(object))
+                {
+                    Base = Index.For(Type.BaseType);
+                    Base.DerivedTypes.Add(this);
+                }
+            }
+
+            var interfaces = Type.GetInterfaces().Select(iface => Index.For(iface, beingBuilt)).ToArray();
+
+            GenericInterfaces = interfaces.Where(iface => iface.Type.IsGenericType).ToArray();
+            NonGenericInterfaces = interfaces.Where(iface => !iface.Type.IsGenericType).ToArray();
+
+            if (!Type.IsInterface)
+            {
+                foreach (var iface in interfaces)
+                {
+                    iface.ImplementingTypes.Add(this);
+                }
+            }
+            else
+            {
+                foreach (var iface in interfaces)
+                {
+                    iface.ImplementingInterfaces.Add(this);
+                }
+            }
+
+            if (Type.IsGenericType && !Type.IsGenericTypeDefinition)
+            {
+                GenericTypeDefinition = Index.For(Type.GetGenericTypeDefinition(), beingBuilt);
+                GenericTypeDefinition.KnownGenerics.Add(this);
+            }
+
+
+
+            GenericParametersAndArgs =
+                Type.IsGenericType && !Type.IsGenericTypeDefinition ?
+                Type.GetGenericTypeDefinition()
+                    .GetGenericArguments()
+                    .Zip(Type.GetGenericArguments(), (p, a) => (param: p, arg: a))
+                    .Select(pa => (pa.param, Index.For(pa.arg, beingBuilt))).ToArray() : EmptyArgs;
+        }
+
+        public bool Equals(TypeIndexEntry other)
+        {
+            return Type.Equals(other?.Type);
+        }
+
+        public bool Equals(Type other)
+        {
+            return Type.Equals(other);
         }
 
         public override bool Equals(object obj)
         {
-            return Type.Equals((obj as TypeIndexEntry)?.Type);
+            return obj is TypeIndexEntry entry ? Equals(entry) : Equals(obj as Type);
         }
 
         public override int GetHashCode()
@@ -138,59 +207,111 @@ namespace Rezolver.Tests
             return Type.GetHashCode();
         }
 
-        public VarianceSearch SelectVariance(Type typeParameter, VarianceSearch current)
+        public IEnumerable<(Type type, bool isVariant)> GetCompatibleTypes()
         {
-            if (current == VarianceSearch.Disabled || !typeParameter.IsVariantTypeParameter())
-                return VarianceSearch.Disabled;
-
-            throw new NotSupportedException("In development");
-
-            //if (typeParameter.IsCovariantTypeParameter())
-            //    return current == VarianceSearch.Initial ? VarianceSearch.DerivedTypesAndImplementations : current;
-            //else if (typeParameter.IsContravariantTypeParameter())
-
-
+            return GetCompatibleEntries().Select(ev => (ev.entry.Type, ev.isVariant));
         }
 
-        public IEnumerable<TypeIndexEntry> GetTargetSearchTypeMetadatas(Type typeParameter = null, VarianceSearch variance = VarianceSearch.Initial)
+        public IEnumerable<(TypeIndexEntry entry, bool isVariant)> GetCompatibleEntries()
+        {
+            var search = new TypeIndexSearch(typeParameter: null);
+            GetCompatibleEntries(search);
+            return search.Results.Distinct();
+        }
+
+        private void GetCompatibleEntries(in TypeIndexSearch search)
         {
             if (GenericTypeDefinition != null)
             {
-                //var argsSearches = GenericParametersAndArgs.Value.Select(pa => pa.argMeta.GetTargetSearchTypeMetadatas(pa.param).ToArray()).ToArray();
-                //var permutated = argsSearches.Permutate().ToArray();
-
+                var searchCopy = search;
                 // recurse for the type arguments, permutating the results.
-                foreach (var genericMeta in GenericParametersAndArgs.Value.Select(pa => pa.argMeta.GetTargetSearchTypeMetadatas(pa.param))
+                foreach (var (type, isVariant) in GenericParametersAndArgs
+                    .Select(pa =>
+                    {
+                        var argSearch = new TypeIndexSearch(
+                            parent: in searchCopy,
+                            includeClassVariants: true,
+                            includeInterfaceVariants: true,
+                            includeGenericDefinition: true,
+                            typeParameter: pa.param,
+                            useNewResultsList: true);
+
+                        pa.argMeta.GetCompatibleEntries(argSearch);
+
+                        return argSearch.Results;
+                    })
                     .Permutate()
-                    .Select(typeArgs => Index.For(GenericTypeDefinition.Type.MakeGenericType(typeArgs.Select(a => a.Type).ToArray()))))
+                    .Select(typeArgs => (
+                        type: GenericTypeDefinition.Type.MakeGenericType(typeArgs.Select(a => a.entry.Type).ToArray()), 
+                        isVariant: typeArgs.Any(ev => ev.variantMatch)))
+                    .Where(result => !searchCopy.KnownGenericsOnly ||
+                                    //(searchCopy.IncludeGenericDefinition && result.type.ContainsGenericParameters) ||
+                                    Index.Has(result.type))
+                    .Select(result => (Index.For(result.type), result.isVariant)))
                 {
-                    yield return genericMeta;
+                    if (type.Equals(this))
+                        search.AddResult(type, false);
+                    else
+                        search.AddResult(type, isVariant);
                 }
 
-                yield return GenericTypeDefinition;
+                if (search.IncludeGenericDefinition && GenericTypeDefinition != null)
+                {
+                    search.AddResult(GenericTypeDefinition);
+                }
             }
             else
             {
-                yield return this;
+                search.AddResult(this);
             }
 
-            if (variance != VarianceSearch.Disabled)
+            // gets only concrete types to which this type can be assigned by reference.
+            // therefore value types are excluded.
+            if (Type.IsValueType)
+                return;
+
+            TypeIndexEntry objectEntry = null;
+            if (search.IncludeClassVariants)
             {
-                if (typeParameter != null)
+                if (search.VarianceDirection < 0)
                 {
-                    //variance
+                    if (Base != null && Base.Equals(typeof(object)))
+                        objectEntry = Base;
+                    else
+                        search.AddResult(Base, true);
+
+                    Base.GetCompatibleEntries(new TypeIndexSearch(
+                        parent: in search,
+                        includeClassVariants: true,
+                        includeInterfaceVariants: false,
+                        includeGenericDefinition: search.IncludeGenericDefinition,
+                        typeParameter: search.TypeParameter,
+                        resultsAreVariant: true));
+                }
+                else if (search.VarianceDirection > 0)
+                {
+                    if (IsClass)
+                        search.AddResults(AllDerivedTypes, true);
+                    else if (IsInterface)
+                        search.AddResults(ImplementingTypes.Where(t => !t.IsValueType), true);
                 }
             }
 
-            if (typeParameter?.IsVariantTypeParameter() ?? false && variance != VarianceSearch.Disabled)
+            if (search.IncludeInterfaceVariants)
             {
-
+                if (search.VarianceDirection < 0)
+                {
+                    search.AddResults(GenericInterfaces, true);
+                    search.AddResults(NonGenericInterfaces, true);
+                }
+                else if (search.VarianceDirection > 0)
+                {
+                    search.AddResults(ImplementingInterfaces, true);
+                }
             }
-        }
 
-        public IEnumerable<Type> GetTargetSearchTypes(Type typeParameter = null)
-        {
-            return this.GetTargetSearchTypeMetadatas(typeParameter).Select(m => m.Type);
+            if (objectEntry != null)
+                search.AddResult(objectEntry, true);
         }
     }
 }

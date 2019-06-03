@@ -7,30 +7,33 @@ namespace Rezolver.Tests
     [DebuggerDisplay("{CachedMetadata}")]
     public class TypeIndex
     {
-        // might need to be a Lazy<TargetTypeMetadata>...
         private protected PerTypeCache<TypeIndexEntry> CachedMetadata { get; }
-
-        private TypeIndexEntry CreateMetadata(Type t)
-        {
-            if (!t.ContainsGenericParameters)
-                return (TypeIndexEntry)Activator.CreateInstance(typeof(TypeIndexEntry<>).MakeGenericType(t), this);
-            else
-                return (TypeIndexEntry)Activator.CreateInstance(typeof(TypeIndexGenericEntry), this, t);
-        }
 
         public TypeIndex()
         {
-            CachedMetadata = new PerTypeCache<TypeIndexEntry>(CreateMetadata);
+            CachedMetadata = new PerTypeCache<TypeIndexEntry>(t => new TypeIndexEntry(this, t));
         }
 
         public TypeIndexEntry For<T>()
         {
-            return CachedMetadata.Get(typeof(T));
+            return For(typeof(T), new Dictionary<Type, TypeIndexEntry>());
         }
 
         public TypeIndexEntry For(Type type)
         {
-            return CachedMetadata.Get(type);
+            return For(type, new Dictionary<Type, TypeIndexEntry>());
+        }
+
+        internal TypeIndexEntry For(Type type, Dictionary<Type, TypeIndexEntry> beingBuilt)
+        {
+            if (beingBuilt.TryGetValue(type, out var alreadyBuilt))
+                return alreadyBuilt;
+
+            var result = CachedMetadata.Get(type);
+            beingBuilt[type] = result;
+            result.Initialise(beingBuilt);
+
+            return result;
         }
 
         /// <summary>
@@ -39,17 +42,30 @@ namespace Rezolver.Tests
         /// <typeparam name="T">The type whose metadata is required.</typeparam>
         public void Prepare<T>()
         {
-            CachedMetadata.Get(typeof(T));
+            For<T>();//CachedMetadata.Get(typeof(T));
         }
 
-        public void Prepare(params Type[] types) => Prepare((IEnumerable<Type>)types);
+        public void Prepare(params Type[] types)
+        {
+            Prepare((IEnumerable<Type>)types);
+        }
 
         public void Prepare(IEnumerable<Type> types)
         {
             foreach (var type in types)
             {
-                CachedMetadata.Get(type);
+                For(type);
             }
+        }
+
+        public bool Has<T>()
+        {
+            return CachedMetadata.Contains(typeof(T));
+        }
+
+        public bool Has(Type type)
+        {
+            return CachedMetadata.Contains(type);
         }
     }
 }

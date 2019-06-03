@@ -31,7 +31,7 @@ namespace Rezolver
         public PerTypeCache(Func<Type, TValue> creationCallback, int concurrencyLevel, int capacity)
         {
             _entries = new ConcurrentDictionary<Type, TValue>(concurrencyLevel, capacity);
-            this._creationCallback = creationCallback;
+            _creationCallback = creationCallback;
         }
 
         public TValue Get(Type type)
@@ -39,10 +39,15 @@ namespace Rezolver
             // Implementation note: after extensive testing, we found that this approach is faster in the best
             // case than always using GetOrAdd - that is: once a compiled target is built and cached, TryGetValue
             // performs better than GetOrAdd.
-            if (this._entries.TryGetValue(type, out var value))
+            if (_entries.TryGetValue(type, out var value))
                 return value;
 
-            return this._entries.GetOrAdd(type, _creationCallback);
+            return _entries.GetOrAdd(type, _creationCallback);
+        }
+
+        public bool Contains(Type type)
+        {
+            return _entries.ContainsKey(type);
         }
     }
 
@@ -69,7 +74,7 @@ namespace Rezolver
         public PerResolveContextCache(Func<ResolveContext, TValue> creationCallback, int concurrencyLevel, int capacity)
         {
             _entries = new ConcurrentDictionary<ResolveContext, TValue>(concurrencyLevel, capacity);
-            this._creationCallback = creationCallback;
+            _creationCallback = creationCallback;
         }
 
         public TValue Get(ResolveContext context)
@@ -77,10 +82,10 @@ namespace Rezolver
             // Implementation note: after extensive testing, we found that this approach is faster in the best
             // case than always using GetOrAdd - that is: once a compiled target is built and cached, TryGetValue
             // performs better than GetOrAdd.
-            if (this._entries.TryGetValue(context, out var value))
+            if (_entries.TryGetValue(context, out var value))
                 return value;
 
-            return this._entries.GetOrAdd(context, _creationCallback);
+            return _entries.GetOrAdd(context, _creationCallback);
         }
     }
 }
