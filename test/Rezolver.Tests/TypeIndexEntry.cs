@@ -50,7 +50,7 @@ namespace Rezolver.Tests
         /// <summary>
         /// Only includes *immediate* derived types
         /// </summary>
-        public List<TypeIndexEntry> DerivedTypes { get; } = new List<TypeIndexEntry>();
+        public HashSet<TypeIndexEntry> DerivedTypes { get; } = new HashSet<TypeIndexEntry>();
 
         /// <summary>
         /// Gets an enumerable of all the types which are derived from this type, in *generally* increasing order of inheritance.
