@@ -32,4 +32,9 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    testAssemblyVer2: |
+        **\Rezolver.Tests.dll
+        **\Rezolver.Microsoft.DependencyInjection.Tests.dll
+        **\Rezolver.Tests.Compilation.Expressions.dll
+        **\Rezolver.Tests.Examples.dll
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
