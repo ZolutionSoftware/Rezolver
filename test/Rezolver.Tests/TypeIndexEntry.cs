@@ -88,6 +88,12 @@ namespace Rezolver.Tests
 
         public bool IsInterface => Type.IsInterface;
 
+        public bool IsVariantTypeParameter => Type.IsVariantTypeParameter();
+
+        public bool IsCovariantTypeParameter => Type.IsCovariantTypeParameter();
+
+        public bool IsContravariantTypeParameter => Type.IsContravariantTypeParameter();
+
         /// <summary>
         /// Metadata for the generic type definition, if this type is a closed generic.
         /// 
@@ -105,7 +111,11 @@ namespace Rezolver.Tests
         /// This is lazy because arguments can be recursive - e.g. `class MyType : BaseType&lt;MyType&gt;`
         /// </summary>
         //public Lazy<(Type param, TypeIndexEntry argMeta)[]> GenericParametersAndArgs { get; }
-        public (Type param, TypeIndexEntry argMeta)[] GenericParametersAndArgs { get; private set; }
+        public (TypeIndexEntry param, TypeIndexEntry argMeta)[] GenericParametersAndArgs { get; private set; }
+
+        public TypeIndexEntry[] GenericParameters { get; private set; }
+
+        public HashSet<TypeIndexEntry> KnownArguments { get; } = new HashSet<TypeIndexEntry>();
 
         /// <summary>
         /// Generic interfaces implemented or inferred (if it's an interface) by this type
@@ -171,20 +181,26 @@ namespace Rezolver.Tests
                 }
             }
 
-            if (Type.IsGenericType && !Type.IsGenericTypeDefinition)
+            if (Type.IsGenericType)
             {
-                GenericTypeDefinition = Index.For(Type.GetGenericTypeDefinition(), beingBuilt);
-                GenericTypeDefinition.KnownGenerics.Add(this);
+                if (!Type.IsGenericTypeDefinition)
+                {
+                    GenericTypeDefinition = Index.For(Type.GetGenericTypeDefinition(), beingBuilt);
+
+                    GenericParametersAndArgs =
+                        GenericTypeDefinition
+                            .GenericParameters
+                            .Zip(Type.GetGenericArguments(), (p, a) => (param: p, arg: a))
+                            .Select(pa => (pa.param, Index.For(pa.arg, beingBuilt))).ToArray();
+
+                    GenericTypeDefinition.AddKnownGeneric(this);
+                }
+                else
+                {
+                    GenericParameters = Type.IsGenericTypeDefinition ?
+                        Type.GetGenericArguments().Select(p => Index.For(p, beingBuilt)).ToArray() : new TypeIndexEntry[0];
+                }
             }
-
-
-
-            GenericParametersAndArgs =
-                Type.IsGenericType && !Type.IsGenericTypeDefinition ?
-                Type.GetGenericTypeDefinition()
-                    .GetGenericArguments()
-                    .Zip(Type.GetGenericArguments(), (p, a) => (param: p, arg: a))
-                    .Select(pa => (pa.param, Index.For(pa.arg, beingBuilt))).ToArray() : EmptyArgs;
         }
 
         public bool Equals(TypeIndexEntry other)
@@ -219,6 +235,16 @@ namespace Rezolver.Tests
             return search.Results.Distinct();
         }
 
+        internal void AddKnownGeneric(TypeIndexEntry entry)
+        {
+            KnownGenerics.Add(this);
+
+            foreach(var (param, arg) in GenericParameters.Zip(entry.GenericParametersAndArgs, (param, incoming) => (param, incoming.argMeta)))
+            {
+                param.KnownArguments.Add(arg);
+            }
+        }
+
         private void GetCompatibleEntries(in TypeIndexSearch search)
         {
             if (GenericTypeDefinition != null)
@@ -242,11 +268,12 @@ namespace Rezolver.Tests
                     })
                     .Permutate()
                     .Select(typeArgs => (
-                        type: GenericTypeDefinition.Type.MakeGenericType(typeArgs.Select(a => a.entry.Type).ToArray()), 
+                        type: GenericTypeDefinition.Type.MakeGenericType(typeArgs.Select(a => a.entry.Type).ToArray()),
                         isVariant: typeArgs.Any(ev => ev.variantMatch)))
                     .Where(result => !searchCopy.KnownGenericsOnly ||
-                                    //(searchCopy.IncludeGenericDefinition && result.type.ContainsGenericParameters) ||
-                                    Index.Has(result.type))
+                                    (!result.type.ContainsGenericParameters
+                                        ? Index.Has(result.type)
+                                        : result.type.GetGenericArguments().All(ta => ta.IsGenericTypeParameter || Index.Has(ta))))
                     .Select(result => (Index.For(result.type), result.isVariant)))
                 {
                     if (type.Equals(this))

@@ -9,6 +9,8 @@ using Xunit.Abstractions;
 
 namespace Rezolver.Tests
 {
+    // ALL OF THIS IS EXPERIMENTAL...
+
     public class TypeIndexTests
     {
         private void LogTypes(Type[] types, string header)
@@ -76,7 +78,7 @@ namespace Rezolver.Tests
         }
 
 
-        [Fact]
+        // [Fact]
         public void Basic_ShouldGetNonGenericRefAssignableTo()
         {
             // Arrange
@@ -246,7 +248,7 @@ namespace Rezolver.Tests
             //fafs = fafo;
         }
 
-        [Fact]
+        // [Fact]
         public void Covariant_ShouldBeCorrectForFuncObjectDelegate()
         {
             // Arrange
@@ -268,7 +270,7 @@ namespace Rezolver.Tests
             }, result);
         }
 
-        [Fact]
+        // [Fact]
         public void Covariant_ShouldBeCorrectForFuncIEnumerableCharDelegate()
         {
             // Arrange
@@ -276,22 +278,25 @@ namespace Rezolver.Tests
             typeIndex.Prepare<Func<string>>();
             var entry = typeIndex.For<Func<IEnumerable<char>>>();
 
-            // Act
-            //var result = entry.GetTargetSearchTypes().ToArray();
-            var result = entry.GetCompatibleTypes().ToArray();
-
-            LogActual(result);
-
-            // Assert
-            Assert.Equal(new[] {
+            var expected = new[] {
                 (typeof(Func<IEnumerable<char>>), false),
                 (typeof(Func<>).MakeGenericType(typeof(IEnumerable<>)), false),
                 (typeof(Func<string>), true),
                 (typeof(Func<>), false)
-            }, result);
+            };
+
+            // Act
+            //var result = entry.GetTargetSearchTypes().ToArray();
+            var result = entry.GetCompatibleTypes().ToArray();
+
+            LogExpectedOrder(expected);
+            LogActual(result);
+
+            // Assert
+            Assert.Equal(expected, result);
         }
 
-        [Fact]
+        // [Fact]
         public void Covariant_ShouldIncludeAllDerivedRegistrations_MostRecentToLeast()
         {
             // Arrange

@@ -10,7 +10,7 @@ namespace Rezolver.Tests
         public bool IncludeClassVariants { get; }
         public bool IncludeInterfaceVariants { get; }
         public bool IncludeGenericDefinition { get; }
-        public Type TypeParameter { get; }
+        public TypeIndexEntry TypeParameter { get; }
         public int NumContra { get; }
         public bool EnableVariance { get; }
         public List<(TypeIndexEntry entry, bool variantMatch)> Results { get; }
@@ -27,7 +27,7 @@ namespace Rezolver.Tests
             bool includeInterfaceVariants = false,
             bool includeGenericDefinition = true,
             bool enableVariance = true,
-            Type typeParameter = null)
+            TypeIndexEntry typeParameter = null)
         {
             KnownGenericsOnly = knownGenericsOnly;
             TypeParameter = typeParameter;
@@ -35,9 +35,9 @@ namespace Rezolver.Tests
             VarianceDirection = 0;
             NumContra = 0;
 
-            if (typeParameter != null)
+            if (TypeParameter != null)
             {
-                if (!typeParameter.IsVariantTypeParameter())
+                if (!TypeParameter.IsVariantTypeParameter)
                 {
                     EnableVariance = false;
                     IncludeClassVariants = false;
@@ -48,7 +48,7 @@ namespace Rezolver.Tests
                     EnableVariance = enableVariance;
                     IncludeClassVariants = includeClassVariants;
                     IncludeInterfaceVariants = includeInterfaceVariants;
-                    if (TypeParameter.IsCovariantTypeParameter())
+                    if (TypeParameter.IsCovariantTypeParameter)
                     {
                         VarianceDirection = 1; // derived types/implementations
                     }
@@ -75,7 +75,7 @@ namespace Rezolver.Tests
             bool includeClassVariants = false,
             bool includeInterfaceVariants = false,
             bool includeGenericDefinition = true,
-            Type typeParameter = null,
+            TypeIndexEntry typeParameter = null,
             bool resultsAreVariant = false,
             bool useNewResultsList = false)
         {
@@ -85,7 +85,7 @@ namespace Rezolver.Tests
             Results = useNewResultsList ? new List<(TypeIndexEntry entry, bool variantMatch)>() : parent.Results;
             ResultsAreVariant = resultsAreVariant;
 
-            if (typeParameter != null && typeParameter == parent.TypeParameter)
+            if (TypeParameter != null && TypeParameter == parent.TypeParameter)
             {
                 // same type parameter as the source, so we set the three supplied arguments,
                 // and inherit (rather than calculate) the rest.
@@ -98,7 +98,7 @@ namespace Rezolver.Tests
             }
             else
             {
-                EnableVariance = parent.EnableVariance && (typeParameter?.IsVariantTypeParameter() ?? true);
+                EnableVariance = parent.EnableVariance && (TypeParameter?.IsVariantTypeParameter ?? true);
 
                 if (!EnableVariance)
                 {
@@ -111,8 +111,8 @@ namespace Rezolver.Tests
                 {
                     IncludeClassVariants = includeClassVariants;
                     IncludeInterfaceVariants = includeInterfaceVariants;
-                    NumContra = parent.NumContra + (TypeParameter.IsContravariantTypeParameter() ? 1 : 0);
-                    if (TypeParameter.IsCovariantTypeParameter())
+                    NumContra = parent.NumContra + (TypeParameter.IsContravariantTypeParameter ? 1 : 0);
+                    if (TypeParameter.IsCovariantTypeParameter)
                     {
                         VarianceDirection = 1; // derived types/implementations
                     }
