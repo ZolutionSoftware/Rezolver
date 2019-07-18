@@ -13,10 +13,6 @@ variables:
   solution: 'Rezolver.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  majorMain: '2'
-  minorMain: '0'
-  majorOther: '2'
-  minorOther: '3'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -45,23 +41,18 @@ steps:
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Package Rezolver'
+  displayName: 'Package PreRelease'
   inputs:
     command: 'pack'
-    searchPatternPack: '**\Rezolver\Rezolver.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '$(majorMain)'
-    minorVersion: '$(minorMain)'
-    patchVersion: '$(rev:.r)'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    nobuild: true
+    buildProperties: 'VersionSuffix="CI-$(Build.BuildNumber)"'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Package Others'
+  displayName: 'Package'
   inputs:
     command: 'pack'
-    searchPatternPack: '**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '$(majorOther)'
-    minorVersion: '$(minorOther)'
-    patchVersion: '$(rev:.r)'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    nobuild: true
 
 - task: PublishBuildArtifacts@1
