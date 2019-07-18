@@ -13,8 +13,10 @@ variables:
   solution: 'Rezolver.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  major: 2
-  minor: 0
+  majorMain: '2'
+  minorMain: '0'
+  majorOther: '2'
+  minorOther: '3'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -43,13 +45,23 @@ steps:
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Prepare Packages'
+  displayName: 'Package Rezolver'
   inputs:
-    command: pack
-    searchPatternPack: **\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj
-    versioningScheme: byPrereleaseNumber
-    majorVersion: $(major)
-    minorVersion: $(minor)
-    patchVersion: $(rev:.r)
+    command: 'pack'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '$(majorMain)'
+    minorVersion: '$(minorMain)'
+    patchVersion: '$(rev:.r)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Package Others'
+  inputs:
+    command: 'pack'
+    searchPatternPack: '**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    versioningScheme: 'byPrereleaseNumber'
+    majorVersion: '$(majorOther)'
+    minorVersion: '$(minorOther)'
+    patchVersion: '$(rev:.r)'
 
 - task: PublishBuildArtifacts@1
