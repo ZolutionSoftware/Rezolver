@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-latest' #vs2017-win2016 for docs
 
 variables:
   solution: 'Rezolver.sln'
@@ -32,3 +32,4 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    otherConsoleOptions: '/Framework:NetCoreApp2.2'
