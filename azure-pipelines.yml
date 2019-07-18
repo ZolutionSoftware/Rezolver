@@ -32,4 +32,4 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    otherConsoleOptions: '/Framework:NetCoreApp2.2'
+    otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
