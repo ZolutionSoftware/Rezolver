@@ -13,6 +13,8 @@ variables:
   solution: 'Rezolver.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  major: 2
+  minor: 0
 
 steps:
 - task: NuGetToolInstaller@1
@@ -37,4 +39,17 @@ steps:
         **\Rezolver.Microsoft.DependencyInjection.Tests.dll
         **\Rezolver.Tests.Compilation.Expressions.dll
         **\Rezolver.Tests.Examples.dll
+        !**\obj\**
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Prepare Packages'
+  inputs:
+    command: pack
+    searchPatternPack: **\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj
+    versioningScheme: byPrereleaseNumber
+    majorVersion: $(major)
+    minorVersion: $(minor)
+    patchVersion: $(rev:.r)
+
+- task: PublishBuildArtifacts@1
