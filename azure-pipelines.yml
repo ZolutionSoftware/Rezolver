@@ -47,6 +47,7 @@ steps:
     searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
     nobuild: true
     buildProperties: 'VersionSuffix="CI-$(Build.BuildNumber)"'
+    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\pre'
 
 - task: DotNetCoreCLI@2
   displayName: 'Package'
@@ -54,5 +55,6 @@ steps:
     command: 'pack'
     searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
     nobuild: true
+    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\final'
 
 - task: PublishBuildArtifacts@1
