@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class Configure
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="generator" content="docfx 2.43.2.0">
   	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -162,7 +162,6 @@ its various overloads.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static Configure&lt;TOption&gt; Option&lt;TOption&gt;(TOption value, Type serviceType = null)
-
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -237,7 +236,6 @@ pass it here.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static Configure&lt;TOption&gt; Option&lt;TOption&gt;(Func&lt;ITargetContainer, Type, TOption&gt; optionFactory, Type serviceType = null)
-
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -313,7 +311,6 @@ pass it here.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static Configure&lt;TOption&gt; Option&lt;TOption, TService&gt;(TOption value)
-
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -387,7 +384,6 @@ passing <code data-dev-comment-type="typeparamref" class="typeparamref">TService
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static Configure&lt;TOption&gt; Option&lt;TOption, TService&gt;(Func&lt;ITargetContainer, Type, TOption&gt; optionFactory)
-
     where TOption : class</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>

@@ -10,7 +10,7 @@
   	<meta name="viewport" content="width=device-width">
   	<meta name="title" content="Class DependantCollection&lt;T&gt;
    | Rezolver IOC ">
-  	<meta name="generator" content="docfx 2.40.10.0">
+  	<meta name="generator" content="docfx 2.43.2.0">
   	<meta name="description" content="Rezolver is an open-source IOC container framework for .Net Core">
   	<link rel="shortcut icon" href="../favicon.ico">
   	<link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -549,7 +549,6 @@ are cloned from this collection&apos;s items.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">protected TDerived Clone&lt;TDerived&gt;()
-
     where TDerived : DependantCollection&lt;T&gt;, new()</code></pre>
   </div>
   <h5 class="returns">Returns</h5>
@@ -1004,7 +1003,6 @@ the end of the collection.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ReplaceAnyOrAdd&lt;TOriginal&gt;(T replacement)
-
     where TOriginal : T</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
@@ -1061,7 +1059,6 @@ will be added to the end of the collection.</p>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ReplaceAnyOrAdd&lt;TOriginal&gt;(Func&lt;IEnumerable&lt;T&gt;, T&gt; replacementCallback)
-
     where TOriginal : T</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
