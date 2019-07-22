@@ -11,8 +11,8 @@ The nuget package has binaries specifically targeted to these TFMs:
 - `net48`
 
 > [!TIP]
-> While Rezolver is fast, whichever version of the DLL you use, the runtime-specific versions are particularly fast due to the use of some
-> advanced internal caching built using IL Emit which, until `netstandard2.1` is ready, can only be used when directly targeting a specific
+> While Rezolver is fast, whichever version you use, the runtime-specific versions (i.e. `netcoreapp2.2` or `netframework472/48`) are faster due to the use of some
+> internal caching built using IL Emit which, until `netstandard2.1` is ready, can only be used when directly targeting a specific
 > runtime.
 
 # Integration

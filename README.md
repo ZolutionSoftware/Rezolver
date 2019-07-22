@@ -13,6 +13,8 @@ For more information, including API reference and developer how-tos, head on ove
 
 [Follow us on twitter](https://twitter.com/RezolverIOC) for code or documentation updates/release notifications etc.
 
+[![Build Status](https://dev.azure.com/zolution/Rezolver/_apis/build/status/Rezolver-Nupkg?branchName=master)](https://dev.azure.com/zolution/Rezolver/_build/latest?definitionId=8&branchName=master)
+
 ---
 
 # Version Highlights
