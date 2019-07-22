@@ -32,7 +32,7 @@ steps:
   inputs:
     command: publish
     projects: '$(docsProject)'
-    #publishWebProjects: True
+    publishWebProjects: False
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
