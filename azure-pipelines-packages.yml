@@ -3,18 +3,16 @@
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-- master
+# trigger:
+# - master
 
 pool:
   vmImage: 'windows-latest' #vs2017-win2016 for docs
 
 variables:
   solution: 'Rezolver.sln'
-  docsProject: 'doc/Rezolver.Docs/Rezolver.Docs.csproj'
   buildPlatform: 'Any CPU'
-  packageBuildConfig: 'Release'
-  docsBuildConfig: 'Documentation'
+  buildConfiguration: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -24,17 +22,16 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
-  displayName: 'Build packages'
   inputs:
     solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
-    configuration: '$(packageBuildConfig)'
+    configuration: '$(buildConfiguration)'
 
 - task: VSTest@2
-  displayName: 'Run unit tests'
   inputs:
     platform: '$(buildPlatform)'
-    configuration: '$(packageBuildConfig)'
+    configuration: '$(buildConfiguration)'
     testAssemblyVer2: |
         **\Rezolver.Tests.dll
         **\Rezolver.Microsoft.DependencyInjection.Tests.dll
@@ -42,14 +39,6 @@ steps:
         **\Rezolver.Tests.Examples.dll
         !**\obj\**
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
-
-- task: VSBuild@1
-  displayName: 'Build documentation site'
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(docsBuildConfig)'
-
 
 - task: DotNetCoreCLI@2
   displayName: 'Package PreRelease'
@@ -61,21 +50,11 @@ steps:
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\pre'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Package Final'
+  displayName: 'Package'
   inputs:
     command: 'pack'
     searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
     nobuild: true
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\final'
-
-task: DotNetCoreCLI@2
-  displayName: 'Zip Website'
-  inputs:
-    command: publish
-    projects: '$(docsProject)'
-    publishWebProjects: False
-    arguments: '--configuration $(docsBuildConfig) --output $(Build.ArtifactStagingDirectory)\docs'
-    zipAfterPublish: True
-
 
 - task: PublishBuildArtifacts@1
