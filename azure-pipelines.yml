@@ -24,14 +24,14 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
-  displayName: 'Build packages'
+  displayName: 'Build Core'
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(packageBuildConfig)'
 
 - task: VSTest@2
-  displayName: 'Run unit tests'
+  displayName: 'Run Unit Tests'
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(packageBuildConfig)'
@@ -42,14 +42,6 @@ steps:
         **\Rezolver.Tests.Examples.dll
         !**\obj\**
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
-
-- task: VSBuild@1
-  displayName: 'Build documentation site'
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(docsBuildConfig)'
-
 
 - task: DotNetCoreCLI@2
   displayName: 'Package PreRelease'
@@ -67,6 +59,13 @@ steps:
     searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
     nobuild: true
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\final'
+
+- task: VSBuild@1
+  displayName: 'Build documentation site'
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(docsBuildConfig)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Zip Website'
