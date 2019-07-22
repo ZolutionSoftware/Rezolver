@@ -68,7 +68,7 @@ steps:
     nobuild: true
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\final'
 
-task: DotNetCoreCLI@2
+- task: DotNetCoreCLI@2
   displayName: 'Zip Website'
   inputs:
     command: publish
@@ -76,6 +76,5 @@ task: DotNetCoreCLI@2
     publishWebProjects: False
     arguments: '--configuration $(docsBuildConfig) --output $(Build.ArtifactStagingDirectory)\docs'
     zipAfterPublish: True
-
 
 - task: PublishBuildArtifacts@1
