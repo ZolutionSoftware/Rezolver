@@ -11,6 +11,7 @@ pool:
 
 variables:
   solution: 'Rezolver.sln'
+  docsProject: 'doc/Rezolver.Docs/Rezolver.Docs.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Documentation'
 
@@ -21,10 +22,17 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
-    publishWebProjects: True
+    projects: '$(docsProject)'
+    #publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
