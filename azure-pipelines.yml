@@ -14,6 +14,7 @@ variables:
   docsProject: 'doc/Rezolver.Docs/Rezolver.Docs.csproj'
   buildPlatform: 'Any CPU'
   packageBuildConfig: 'Release'
+  localPackageBuildConfig: 'Debug'
   docsBuildConfig: 'Documentation'
 
 steps:
@@ -61,6 +62,23 @@ steps:
     configurationToPack: '$(packageBuildConfig)'
     nobuild: true
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\final'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Local Package PreRelease'
+  inputs:
+    command: 'pack'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    configurationToPack: '$(localPackageBuildConfig)'
+    buildProperties: 'VersionSuffix="CI-$(Build.BuildNumber)"'
+    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\local-pre'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Local Package Final'
+  inputs:
+    command: 'pack'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    configurationToPack: '$(localPackageBuildConfig)'
+    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\local-final'
 
 - task: VSBuild@1
   displayName: 'Build documentation site'
