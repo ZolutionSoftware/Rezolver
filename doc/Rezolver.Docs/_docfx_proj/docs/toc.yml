@@ -3,10 +3,6 @@
 - name: Nuget Packages
   href: nuget-packages/toc.yml
   homepage: nuget-packages/index.md
-- name: Create & Use a Container
-  href: create-and-use-a-container.md
-- name: Service Registration
-  href: service-registration.md
 - name: Lifetimes
   href: lifetimes/toc.yml
   homepage: lifetimes/index.md

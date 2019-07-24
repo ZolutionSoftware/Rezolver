@@ -11,7 +11,7 @@
 var specs = new []{
 	new GenericSpec { 
 		Args = "TResult", 
-		Signatures = new[] { null, "IResolveContext, TResult" } 
+		Signatures = new[] { null, "ResolveContext, TResult" } 
 	},
 	new GenericSpec {
 		Args = "T1, TResult"
@@ -53,7 +53,7 @@ namespace Rezolver
 	using System;
 	using Rezolver.Targets;
 
-	public static partial class DelegateTargetContainerExtensions
+	public static partial class TargetContainerExtensions
 	{
 <#
 	ForSpecs(specs, RegisterTargetGroup);
@@ -80,12 +80,12 @@ void ForDelegate(Signature sig)
 {
 	if(sig.Args.Length > 1)
 	{
-		if(sig.Args[0] == "IResolveContext")
+		if(sig.Args[0] == "ResolveContext")
 		{
 #>
 
 		/// <summary>Creates a <see cref="Rezolver.Targets.DelegateTarget" /> for a factory delegate which takes an 
-		/// <see cref="IResolveContext" /><#= sig.Args.Length > 2 ? string.Format(" plus {0} other {1},", sig.Args.Length - 2, Pluralize(sig.Args.Length - 2, "argument", "arguments")) : "" #> and which returns
+		/// <see cref="ResolveContext" /><#= sig.Args.Length > 2 ? string.Format(" plus {0} other {1},", sig.Args.Length - 2, Pluralize(sig.Args.Length - 2, "argument", "arguments")) : "" #> and which returns
 		/// an instance of <typeparamref name="TResult" /></summary>
 <#+
 		}
@@ -110,6 +110,8 @@ void ForDelegate(Signature sig)
 		/// <param name="factory">Required.  The factory delegate that is to be wrapped by the target.</param>
 		/// <param name="declaredType">Optional.  The <see cref="ITarget.DeclaredType" /> of the target to be created,
 		/// if different from <typeparamref name="TResult" /></param>
+		/// <param name="scopeBehaviour">Optional.  The type of disposal tracking to be employed by this target.  Defaults to <see cref="ScopeBehaviour.Implicit" />.</param>
+		/// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
 <#+
 		if(sig.Args.Length > 1)
 		{
@@ -118,20 +120,20 @@ void ForDelegate(Signature sig)
 <#+
 		}
 #>
-		public static ITarget ForDelegate<<#= sig.Spec.Args #>>(Func<<#= sig.Text #>> factory, Type declaredType = null)
+		public static ITarget ForDelegate<<#= sig.Spec.Args #>>(Func<<#= sig.Text #>> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit, ScopePreference scopePreference = ScopePreference.Current)
 		{
 			if(factory == null) throw new ArgumentNullException(nameof(factory));
 <#+
         if(sig.Args.Length > 1)
         {
 #>
-			return new DelegateTarget(factory, declaredType);
+			return new DelegateTarget(factory, declaredType, scopeBehaviour, scopePreference);
 <#+
         }
         else
         {
 #>
-            return new NullaryDelegateTarget(factory, declaredType);
+            return new NullaryDelegateTarget(factory, declaredType, scopeBehaviour, scopePreference);
 <#+
         }
 #>
@@ -151,12 +153,12 @@ void RegisterTarget(Signature sig)
 {	
     if(sig.Args.Length > 1)
 	{
-		if(sig.Args[0] == "IResolveContext")
+		if(sig.Args[0] == "ResolveContext")
 		{
 #>
 
 		/// <summary>Registers a <see cref="Rezolver.Targets.DelegateTarget" /> built from a factory delegate which takes an 
-		/// <see cref="IResolveContext" /><#= sig.Args.Length > 2 ? string.Format(" plus {0} other {1},", sig.Args.Length - 2, Pluralize(sig.Args.Length - 2, "argument", "arguments")) : "" #> and which returns an instance of <typeparamref name="TResult" /></summary>
+		/// <see cref="ResolveContext" /><#= sig.Args.Length > 2 ? string.Format(" plus {0} other {1},", sig.Args.Length - 2, Pluralize(sig.Args.Length - 2, "argument", "arguments")) : "" #> and which returns an instance of <typeparamref name="TResult" /></summary>
 <#+
 		}
 		else
@@ -182,9 +184,10 @@ void RegisterTarget(Signature sig)
 		/// if different from <typeparamref name="TResult" />.  Also overrides the type against which the registration will be made.</param>
         /// <param name="scopeBehaviour">Optional.  Controls how the object generated from the factory delegate will be
         /// tracked if the target is executed within an <see cref="IContainerScope" />.  The default is <see cref="ScopeBehaviour.Implicit" />.</param>
-		public static void RegisterDelegate<<#= sig.Spec.Args #>>(this ITargetContainer targets, Func<<#= sig.Text #>> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit)
+		/// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
+		public static void RegisterDelegate<<#= sig.Spec.Args #>>(this ITargetContainer targets, Func<<#= sig.Text #>> factory, Type declaredType = null, ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit, ScopePreference scopePreference = ScopePreference.Current)
 		{
-			targets.RegisterDelegate((Delegate)factory, declaredType, scopeBehaviour);
+			targets.RegisterDelegate((Delegate)factory, declaredType, scopeBehaviour, scopePreference);
 		}
 <#+
 }

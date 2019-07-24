@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace Rezolver
         public void AddKnownType(Type serviceType)
         {
             // Open generic types are not tracked
-            if (TypeHelpers.ContainsGenericParameters(serviceType))
+            if (serviceType.ContainsGenericParameters)
             {
                 return;
             }
@@ -56,9 +57,9 @@ namespace Rezolver
             if (this.KnownTypes.Add(serviceType))
             {
                 Stack<Type> derivedTypeStack = new Stack<Type>(new[] { serviceType });
-                if (TypeHelpers.IsArray(serviceType))
+                if (serviceType.IsArray)
                 {
-                    var elementType = TypeHelpers.GetElementType(serviceType);
+                    var elementType = serviceType.GetElementType();
 
                     foreach (var type in GetGenericCovariants(elementType, derivedTypeStack)
                         .Select(t => TypeHelpers.MakeArrayType(t)))
@@ -140,14 +141,14 @@ namespace Rezolver
             // if this type is a closed generic type whose generic type definition has one or
             // more covariant arguments, then we descend each covariant argument's type hierarchy,
             // constructing a new generic and adding that too.
-            if (TypeHelpers.IsGenericType(type) && !TypeHelpers.IsGenericTypeDefinition(type))
+            if (type.IsGenericType && !type.IsGenericTypeDefinition)
             {
                 var genericTypeDef = type.GetGenericTypeDefinition();
                 // get the generic type arguments and the parameters they belong to.
-                return TypeHelpers.GetGenericArguments(type)
+                return type.GetGenericArguments()
                         .Zip(
-                            TypeHelpers.GetGenericArguments(genericTypeDef),
-                            (ta, tp) => new { typeArg = ta, typeParam = tp }
+                            genericTypeDef.GetGenericArguments(),
+                            (ta, tp) => (typeArg: ta, typeParam: tp)
                         )
                         .Select(tap =>
                             // when a type argument is passed to a covariant parameter, then we can
@@ -180,12 +181,12 @@ namespace Rezolver
         private IEnumerable<Type> GetTypeHierarchy(Type type)
         {
             var toReturn = Enumerable.Empty<Type>();
-            if (TypeHelpers.IsClass(type))
+            if (type.IsClass)
             {
                 toReturn = toReturn.Concat(type.GetAllBases());
             }
 
-            toReturn = toReturn.Concat(TypeHelpers.GetInterfaces(type));
+            toReturn = toReturn.Concat(type.GetInterfaces());
             return toReturn.OrderBy(t => t, DescendingTypeOrder.Instance);
         }
 
@@ -205,9 +206,9 @@ namespace Rezolver
         {
             List<Type> toReturn = new List<Type>();
 
-            if (TypeHelpers.IsArray(type))
+            if (type.IsArray)
             {
-                foreach (var t in GetAllCompatibleTypes(TypeHelpers.GetElementType(type), derivedTypeStack))
+                foreach (var t in GetAllCompatibleTypes(type.GetElementType(), derivedTypeStack))
                 {
                     toReturn.Add(TypeHelpers.MakeArrayType(t));
                 }
@@ -259,18 +260,19 @@ namespace Rezolver
 
             typeList.Add(type);
         }
+
+        /// <summary>
+        /// Implementation of <see cref="ICovariantTypeIndex.SelectTypes(Type)"/>
+        /// </summary>
+        /// <param name="type">The type for which a search is to be run.</param>
+        /// <returns>A <see cref="TargetTypeSelector"/></returns>
         public TargetTypeSelector SelectTypes(Type type)
         {
-            // TODO: implement a 'stability' calculator for this function which disables caching until the _version
-            // local has not changed for a certain number of successive calls. 
-            // -- UPDATE to above.  I tried it - it made no difference.
-
             // this function is complicated by the fact that searching and registering types are asymmetrically parallel.
             // in theory most applications will register first and then start searching.  However, the searching part is parallelised
             // equally, if registrations continue whilst searching is being performed, then we'd have a problem.  So this is written to
             // ensure that the cached type selectors stay up to date as extra registrations are made.
-            var result = _cachedSearches.GetOrAdd(type,
-                t => new CachedTargetTypeSelector() { Version = Interlocked.Read(ref _version), Selector = new TargetTypeSelector(type, _root) });
+            var result = _cachedSearches.GetOrAdd(type, CreateSelector);
             long resultVersion = Interlocked.Read(ref result.Version);
             long currentVersion = Interlocked.Read(ref _version);
             long oldResultVersion = resultVersion;
@@ -289,6 +291,11 @@ namespace Rezolver
             }
 
             return result.Selector;
+
+            CachedTargetTypeSelector CreateSelector(Type t)
+            {
+                return new CachedTargetTypeSelector() { Version = Interlocked.Read(ref _version), Selector = new TargetTypeSelector(t, _root) };
+            }
         }
     }
 }

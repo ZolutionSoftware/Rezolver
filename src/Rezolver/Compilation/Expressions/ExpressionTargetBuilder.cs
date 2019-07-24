@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver.Compilation.Expressions
@@ -16,7 +16,7 @@ namespace Rezolver.Compilation.Expressions
     /// target type.
     ///
     /// This builder takes care of all expressions, including lambdas (where additional parameters beyond the standard
-    /// <see cref="IResolveContext"/> are turned into local variables with injected values), producing an expression which can
+    /// <see cref="ResolveContext"/> are turned into local variables with injected values), producing an expression which can
     /// be compiled by an <see cref="IExpressionCompiler"/> after a <see cref="TargetExpressionRewriter"/> has been used to
     /// expand any targets embedded in the expression.
     /// </summary>
@@ -70,8 +70,8 @@ namespace Rezolver.Compilation.Expressions
             /// </summary>
             private static readonly MethodInfo[] RezolveMethods =
             {
-                Extract.Method((IResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
-                Extract.Method((IResolveContext rc) => rc.Resolve(typeof(int)))
+                Extract.Method((ResolveContext rc) => rc.Resolve<int>()).GetGenericMethodDefinition(),
+                Extract.Method((ResolveContext rc) => rc.Resolve((Type)typeof(int)))
             };
 
             /// <summary>
@@ -104,28 +104,22 @@ namespace Rezolver.Compilation.Expressions
                 // in order for it to be translated.  If it is not, then it will not be converted to a ResolvedTarget and will instead be baked as a
                 // method call.  This isn't a problem as such, it just reduces the potential efficiency of the generated expression as it will not be able
                 // to 'lift' the expression for that target into the expression being compiled.
-                var methodExpr = e as MethodCallExpression;
-
-                if (methodExpr == null)
+                if (!(e is MethodCallExpression methodExpr))
                 {
                     return null;
                 }
 
-                var match = RezolveMethods.FirstOrDefault(m =>
-                    m == methodExpr.Method ||
-                    methodExpr.Method.IsGenericMethod && m.IsGenericMethodDefinition && m.Equals(methodExpr.Method.GetGenericMethodDefinition()));
-
-                if (match != null)
+                for(var f = 0; f<RezolveMethods.Length; f++)
                 {
-                    if (match.IsGenericMethodDefinition)
-                    {
-                        return methodExpr.Method.GetGenericArguments()[0];
-                    }
-                    else
+                    if(RezolveMethods[f] == methodExpr.Method)
                     {
                         // the first non-null Constant type is compatible with System.Type is the one we use.
-                        var typeArg = methodExpr.Arguments.OfType<ConstantExpression>().FirstOrDefault(arg => arg.Value != null && TypeHelpers.IsAssignableFrom(typeof(Type), arg.Type));
+                        var typeArg = methodExpr.Arguments.OfType<ConstantExpression>().FirstOrDefault(arg => arg.Value != null && typeof(Type).IsAssignableFrom(arg.Type));
                         return (Type)typeArg.Value;
+                    }
+                    else if(RezolveMethods[f].IsGenericMethodDefinition && methodExpr.Method.IsGenericMethod && RezolveMethods[f] == methodExpr.Method.GetGenericMethodDefinition())
+                    {
+                        return methodExpr.Method.GetGenericArguments()[0];
                     }
                 }
 
@@ -171,8 +165,9 @@ namespace Rezolver.Compilation.Expressions
 
             protected override Expression VisitMemberInit(MemberInitExpression node)
             {
-                // var constructorTarget = ConstructorTarget.FromNewExpression(node.Type, node.NewExpression, _adapter);
-                return new TargetExpression(new ExpressionTarget(c =>
+                return new TargetExpression(new ExpressionTarget(Factory, node.Type));
+
+                Expression Factory(ICompileContext context)
                 {
                     var adaptedCtorExp = Visit(node.NewExpression);
                     // var ctorTargetExpr = constructorTarget.CreateExpression(c.New(node.Type));
@@ -183,7 +178,7 @@ namespace Rezolver.Compilation.Expressions
                     // that is put around nearly all expressions produced by RezolveTargetBase implementations.
                     var rewriter = new NewExpressionMemberInitRewriter(node.Type, node.Bindings.Select(mb => VisitMemberBinding(mb)));
                     return rewriter.Visit(adaptedCtorExp);
-                }, node.Type));
+                }
             }
 
             protected override Expression VisitLambda<T>(Expression<T> node)
@@ -191,7 +186,7 @@ namespace Rezolver.Compilation.Expressions
                 Expression body = node.Body;
                 try
                 {
-                    ParameterExpression rezolveContextParam = node.Parameters.SingleOrDefault(p => p.Type == typeof(IResolveContext));
+                    ParameterExpression rezolveContextParam = node.Parameters.SingleOrDefault(p => p.Type == typeof(ResolveContext));
                     // if the lambda had a parameter of the type ResolveContext, swap it for the
                     // RezolveContextParameterExpression parameter expression that all the internal
                     // components use when building expression trees from targets.
@@ -207,7 +202,7 @@ namespace Rezolver.Compilation.Expressions
                     throw new ArgumentException($"The lambda expression {node} is not supported - it has multiple ResolveContext parameters, and only a maximum of one is allowed", nameof(node), ioex);
                 }
 
-                var variables = node.Parameters.Where(p => p.Type != typeof(IResolveContext)).ToArray();
+                var variables = node.Parameters.Where(p => p.Type != typeof(ResolveContext)).ToArray();
                 // if we have lambda parameters which need to be converted to block variables which are resolved
                 // by assignment (dynamic service location I suppose you'd call it) then we need to wrap everything
                 // in a block expression.

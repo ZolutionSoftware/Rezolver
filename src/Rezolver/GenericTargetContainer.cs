@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using Rezolver.Targets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
@@ -57,7 +56,7 @@ namespace Rezolver
             : base(root ?? throw new ArgumentNullException(nameof(root)))
         {
             GenericType = genericType ?? throw new ArgumentNullException(nameof(genericType));
-            if (!TypeHelpers.IsGenericTypeDefinition(GenericType))
+            if (!GenericType.IsGenericTypeDefinition)
             {
                 throw new ArgumentException("type must be a generic type definition", nameof(genericType));
             }
@@ -100,7 +99,7 @@ namespace Rezolver
             {
                 // the type MUST therefore be a closed generic over the generic type definition,
                 // if it's not, then we must throw an exception
-                if (!TypeHelpers.IsGenericType(serviceType) || serviceType.GetGenericTypeDefinition() != GenericType)
+                if (!serviceType.IsGenericType || serviceType.GetGenericTypeDefinition() != GenericType)
                 {
                     throw new ArgumentException($"Type must be equal to the generic type definition {GenericType} or a closed instance of that type", nameof(serviceType));
                 }

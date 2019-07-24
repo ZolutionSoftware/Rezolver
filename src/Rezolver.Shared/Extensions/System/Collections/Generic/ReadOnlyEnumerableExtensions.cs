@@ -2,9 +2,7 @@
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace System.Collections.Generic
 {
@@ -105,7 +103,7 @@ namespace System.Collections.Generic
 
         public static IList<T> AsReadOnly<T>(this IEnumerable<T> range)
         {
-            range.MustNotBeNull(nameof(range));
+            if(range == null) throw new ArgumentNullException(nameof(range));
             return new ReadOnlyCollection<T>(range);
         }
     }

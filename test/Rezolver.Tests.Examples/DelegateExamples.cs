@@ -50,7 +50,7 @@ namespace Rezolver.Tests.Examples
         {
             // <example3>
             var container = new Container();
-            container.RegisterDelegate(() => new DisposableType());
+            container.RegisterDelegate(() => new DisposableType(), scopeBehaviour: ScopeBehaviour.Implicit);
 
             DisposableType result, result2;
 
@@ -93,11 +93,14 @@ namespace Rezolver.Tests.Examples
             // RegisterDelegate has a specialisation for a delegate which takes ResolveContext
             container.RegisterDelegate(rc => new RequiresResolveContext(rc));
 
-            var result = container.Resolve<RequiresResolveContext>();
-            // the context was injected
-            Assert.NotNull(result.Context);
-            // and the container on the context will be the one on which we called Resolve<>
-            Assert.Same(container, result.Context.Container);
+            // NOTE this pattern of creating a context and passing it in is not one you 
+            // have to use - we're only doing it here so we can verify the ResolveContext 
+            // instances are the same.
+            var context = new ResolveContext(container, typeof(RequiresResolveContext));
+            var result = (RequiresResolveContext)container.Resolve(context);
+
+            // and the container on the context will be the one on which we called Resolve
+            Assert.Same(context, result.Context);
             // </example11>
         }
 
@@ -123,7 +126,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterDelegate(() => CurrentPrincipal);
             // now register the delegate handler for the IUserActionsService, which does the
             // role sniffing over the principal
-            container.RegisterDelegate((IPrincipal p, IResolveContext rc) => {
+            container.RegisterDelegate((IPrincipal p, ResolveContext rc) => {
                 IUserActionsService toReturn = null;
                 if (p != null)
                 {

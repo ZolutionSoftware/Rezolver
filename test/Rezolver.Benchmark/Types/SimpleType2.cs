@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Rezolver.Benchmark.Types
 {
-    public class SimpleType2
+    public class SimpleType2 : ISimpleType
     {
     }
 }

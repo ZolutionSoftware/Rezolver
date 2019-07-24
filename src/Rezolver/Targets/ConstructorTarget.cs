@@ -1,11 +1,10 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Compilation;
 
@@ -21,7 +20,7 @@ namespace Rezolver.Targets
     /// <remarks>Although you can create this target directly through the
     /// <see cref="ConstructorTarget.ConstructorTarget(Type, ConstructorInfo, IMemberBindingBehaviour, ParameterBinding[], IDictionary{string, ITarget})"/> constructor,
     /// you're more likely to create it through factory methods such as <see cref="Target.ForType{T}(IMemberBindingBehaviour)"/> or, more likely still,
-    /// extension methods such as <see cref="RegisterTypeTargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
+    /// extension methods such as <see cref="TargetContainerExtensions.RegisterType{TObject, TService}(ITargetContainer, IMemberBindingBehaviour)"/> during
     /// your application's container setup phase.
     ///
     /// To compile this target, an <see cref="Compilation.ITargetCompiler"/> should first call the <see cref="Bind(ICompileContext)"/> method,
@@ -79,7 +78,7 @@ namespace Rezolver.Targets
         /// <see cref="Bind(ICompileContext)"/> method, via the Options API.
         /// </summary>
         /// <remarks>The container default <see cref="IMemberBindingBehaviour"/> can be configured by setting it as an
-        /// option using the <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>
+        /// option using the <see cref="TargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>
         /// extension method - passing an instance of member binding behaviour to be used as the default.
         ///
         /// The global default, unconfigured, behaviour is not to inject any members
@@ -113,6 +112,11 @@ namespace Rezolver.Targets
         public override Type DeclaredType { get; }
 
         /// <summary>
+        /// Returns <see cref="ScopeBehaviour.None"/> if the type to be constructed is not disposable.  Strictly, this should also check for a public Dispose method.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => typeof(IDisposable).IsAssignableFrom(DeclaredType) ? ScopeBehaviour.Implicit : ScopeBehaviour.None;
+
+        /// <summary>
         /// Initializes a just-in-time-bound instance of the <see cref="ConstructorTarget" /> class which must be bound
         /// to the best constructor at compile-time by calling the <see cref="Bind(ICompileContext)"/> method.
         /// </summary>
@@ -136,7 +140,7 @@ namespace Rezolver.Targets
         {
             // it's a post-check, but the private constructor sidesteps null types and ctors to allow the
             // public constructors to do their thing.
-            type.MustNotBeNull(nameof(type));
+            if(type == null) throw new ArgumentNullException(nameof(type));
         }
 
         /// <summary>
@@ -154,7 +158,7 @@ namespace Rezolver.Targets
         public ConstructorTarget(ConstructorInfo ctor, ParameterBinding[] parameterBindings = null, IMemberBindingBehaviour memberBinding = null)
             : this(null, ctor, memberBinding, parameterBindings, null)
         {
-            ctor.MustNotBeNull(nameof(ctor));
+            if(ctor == null) throw new ArgumentNullException(nameof(ctor));
         }
 
         private ConstructorTarget(Type type,
@@ -167,7 +171,7 @@ namespace Rezolver.Targets
             DeclaredType = type ?? ctor?.DeclaringType;
             if (type != null)
             {
-                type.MustNot(t => TypeHelpers.IsInterface(t) || TypeHelpers.IsAbstract(t), "Type must not be an interface or an abstract class", nameof(type));
+                if(type.IsInterface || type.IsAbstract) throw new ArgumentException("Type must not be an interface or an abstract class", nameof(type));
             }
 
             this._parameterBindings = parameterBindings ?? ParameterBinding.None;
@@ -193,7 +197,7 @@ namespace Rezolver.Targets
         /// which are to be set with values from the container after construction.  The exact behaviour of this is
         /// controlled by the behaviour set on the <see cref="MemberBindingBehaviour"/> property, or, if <c>null</c>
         /// then the method attempts to resolve an <see cref="IMemberBindingBehaviour"/> from the
-        /// <see cref="IResolveContext.Container"/> of the <see cref="IResolveContext"/> set on the
+        /// <see cref="ResolveContext.Container"/> of the <see cref="ResolveContext"/> set on the
         /// <see cref="ICompileContext.ResolveContext"/> of the passed <paramref name="context"/>.</remarks>
         public ConstructorBinding Bind(ICompileContext context)
         {
@@ -204,7 +208,6 @@ namespace Rezolver.Targets
                 // have to go searching for the best constructor match for the current context,
                 // which will also give us our arguments
                 var publicCtorGroups = GetPublicConstructorGroups(DeclaredType);
-                // var possibleBindingsGrouped = publicCtorGroups.Select(g => g.Select(ci => new BoundConstructorTarget(ci, ParameterBinding.BindMethod(ci))));
                 var ctorsWithBindingsGrouped = publicCtorGroups.Select(g =>
                   g.Select(ci => new
                   {
@@ -312,7 +315,7 @@ namespace Rezolver.Targets
 
         private static IGrouping<int, ConstructorInfo>[] GetPublicConstructorGroups(Type declaredType)
         {
-            var ctorGroups = TypeHelpers.GetConstructors(declaredType)
+            var ctorGroups = declaredType.GetConstructors()
                     .GroupBy(c => c.GetParameters().Length)
                     .OrderByDescending(g => g.Key).ToArray();
 

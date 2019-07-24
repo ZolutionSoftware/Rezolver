@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Rezolver
     /// container and in the parent.</remarks>
     public sealed class OverridingTargetContainer : TargetContainer
     {
+        private bool _hasRegistrations = false;
+
         /// <summary>
         /// Gets the parent target container.
         /// </summary>
@@ -63,6 +66,9 @@ namespace Rezolver
         /// </returns>
         public override ITarget Fetch(Type type)
         {
+            if (!_hasRegistrations)
+                return Parent.Fetch(type);
+
             var result = base.Fetch(type);
             // ascend the tree of target containers looking for a type match.
             if ((result == null || result.UseFallback))
@@ -82,8 +88,35 @@ namespace Rezolver
         /// empty enumerable if the type is not registered.</returns>
         public override IEnumerable<ITarget> FetchAll(Type type)
         {
-            return (Parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
-                base.FetchAll(type) ?? Enumerable.Empty<ITarget>());
+            return _hasRegistrations ?
+                 (Parent.FetchAll(type) ?? Enumerable.Empty<ITarget>()).Concat(
+                    base.FetchAll(type) ?? Enumerable.Empty<ITarget>())
+                : Parent.FetchAll(type);
+        }
+
+        /// <summary>
+        /// Overrides the base method to record that registrations have been added, and that 
+        /// the <see cref="Fetch(Type)"/> and <see cref="FetchAll(Type)"/> methods should
+        /// combine results from both this and the <see cref="Parent"/> target container.
+        /// </summary>
+        /// <param name="target">The target that was registered</param>
+        /// <param name="serviceType">The type against which the <paramref name="target"/>
+        /// was registered</param>
+        protected override void OnTargetRegistered(ITarget target, Type serviceType)
+        {
+            if(!_hasRegistrations) _hasRegistrations = true;
+            base.OnTargetRegistered(target, serviceType);
+        }
+
+        /// <summary>
+        /// Overrides the base method to record that a target container has been registered.
+        /// </summary>
+        /// <param name="container">The target container that was registered</param>
+        /// <param name="type">The type against which the target container was registered.</param>
+        protected override void OnTargetContainerRegistered(ITargetContainer container, Type type)
+        {
+            if (!_hasRegistrations) _hasRegistrations = true;
+            base.OnTargetContainerRegistered(container, type);
         }
     }
 }

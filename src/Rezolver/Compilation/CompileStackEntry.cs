@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver.Compilation
 {
@@ -30,8 +28,8 @@ namespace Rezolver.Compilation
         /// <param name="targetType">Type for which the target is being compiled.</param>
         public CompileStackEntry(ITarget target, Type targetType)
         {
-            target.MustNotBeNull(nameof(target));
-            targetType.MustNotBeNull(nameof(targetType));
+            if(target == null) throw new ArgumentNullException(nameof(target));
+            if(targetType == null) throw new ArgumentNullException(nameof(targetType));
 
             Target = target;
             TargetType = targetType;

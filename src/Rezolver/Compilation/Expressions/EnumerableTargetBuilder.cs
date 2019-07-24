@@ -1,13 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 using Rezolver.Runtime;
 using Rezolver.Targets;
 
@@ -45,21 +43,34 @@ namespace Rezolver.Compilation.Expressions
         {
             if (context.GetOption(target.ElementType, Options.LazyEnumerables.Default))
             {
-                var all = target.Targets.Select(t => compiler.BuildResolveLambda(t, context.NewContext(target.ElementType)));
-                return Expression.New(
-                    TypeHelpers.GetConstructors(typeof(LazyEnumerable<>).MakeGenericType(target.ElementType)).Single(),
-                    context.ResolveContextParameterExpression,
-                    Expression.NewArrayInit(
-                        typeof(Func<IResolveContext, object>),
-                        all));
+                var funcs =
+                    target.Targets.Select(t => compiler.BuildResolveLambdaStrong(t, context.NewContext(target.ElementType)).Compile())
+                    .ToArray();
+
+                var lazyType = typeof(LazyEnumerable<>).MakeGenericType(target.ElementType);
+
+                var ctor = lazyType.GetConstructor(new[] { typeof(Delegate[]) });
+
+                var lazy = ctor.Invoke(new object[] { funcs });
+
+                return Expression.Call(
+                    Expression.Constant(lazy),
+                    "GetInstances",
+                    null,
+                    context.ResolveContextParameterExpression);
             }
             else
             {
+                List<Expression> all = new List<Expression>();
+
+                for(var f = 0; f<target.Targets.Length; f++)
+                {
+                    all.Add(compiler.Build(target.Targets[f], context.NewContext(target.ElementType)));
+                }
+
                 return Expression.New(
-                    TypeHelpers.GetConstructors(typeof(EagerEnumerable<>).MakeGenericType(target.ElementType)).Single(),
-                    Expression.NewArrayInit(target.ElementType,
-                        target.Targets.Select(t => compiler.Build(t, context.NewContext(target.ElementType))))
-                    );
+                    typeof(EagerEnumerable<>).MakeGenericType(target.ElementType).GetConstructors()[0],
+                    Expression.NewArrayInit(target.ElementType, all));
             }
         }
     }

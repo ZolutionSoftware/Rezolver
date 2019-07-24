@@ -1,18 +1,18 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
-using Rezolver.Targets;
 
 namespace Rezolver.Compilation
 {
     /// <summary>
     /// Tracks state and provides services during the compilation phase in which <see cref="ITarget"/> targets
-    /// are compiled into <see cref="ICompiledTarget"/> targets, which produce actual instances of objects.
+    /// are compiled into <see cref="Func{ResolveContext, TResult}"/> factories.
     ///
     /// Instances of this interface are created by calling the
-    /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of the <see cref="ITargetCompiler"/>
+    /// <see cref="ITargetCompiler.CreateContext(ResolveContext, ITargetContainer)"/> method of the <see cref="ITargetCompiler"/>
     /// which is registered in a container.
     /// </summary>
     /// <seealso cref="Rezolver.ITargetContainer" />
@@ -20,7 +20,7 @@ namespace Rezolver.Compilation
     /// Implementations must also implement the <see cref="ITargetContainer"/> so the compile context can be used for
     /// dependency lookups during compilation time.  Indeed, if you are developing your own compilation component (possibly
     /// for a custom <see cref="ITarget"/> implementation) and need to resolve any dependencies from an <see cref="ITargetContainer"/>
-    /// during compilation, it should be done through the context's implementation of ITargetContainer.</remarks>
+    /// during compilation, it should be done through the context's implementation of <see cref="ITargetContainer"/>.</remarks>
     public interface ICompileContext : ITargetContainer
     {
         /// <summary>
@@ -46,7 +46,7 @@ namespace Rezolver.Compilation
         ScopePreference? ScopePreferenceOverride { get; }
 
         /// <summary>
-        /// Any <see cref="ICompiledTarget"/> built for a <see cref="ITarget"/> with this context should target this type.
+        /// Any factory built for a <see cref="ITarget"/> with this context should target this type.
         /// If null, then the <see cref="ITarget.DeclaredType"/> of the target being compiled should be used.
         /// </summary>
         Type TargetType { get; }
@@ -62,7 +62,7 @@ namespace Rezolver.Compilation
         ///
         /// Provides access to the current container, scope and more besides
         /// </summary>
-        IResolveContext ResolveContext { get; }
+        ResolveContext ResolveContext { get; }
 
         /// <summary>
         /// Creates a new child context from this one, except the <see cref="TargetType"/> and
@@ -93,7 +93,7 @@ namespace Rezolver.Compilation
         /// </summary>
         /// <param name="toCompile">To compile.</param>
         /// <param name="targetType">The type for which the target is being compiled, if different from <see cref="ITarget.DeclaredType"/></param>
-        /// <remarks>Targets can appear on the compilation stack more than once for different types, since the <see cref="ICompiledTarget" />
+        /// <remarks>Targets can appear on the compilation stack more than once for different types, since the factory
         /// produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
         /// cyclic dependency graph, then this method will detect that.</remarks>
         bool PushCompileStack(ITarget toCompile, Type targetType = null);

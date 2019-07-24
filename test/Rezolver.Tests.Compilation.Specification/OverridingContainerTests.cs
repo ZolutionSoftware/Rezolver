@@ -48,11 +48,10 @@ namespace Rezolver.Tests.Compilation.Specification
 
 			//the thing being that the parent container does not know how to resolve an integer 
 			//and so must use the child container at call-time.
-			var childTargets = CreateTargetContainer();
-			childTargets.RegisterType<Dependant>();
-			IContainer childContainer = CreateOverridingContainer(parent, childTargets);
+			Container childContainer = CreateOverridingContainer(parent);
+            childContainer.RegisterType<Dependant>();
 
-			var result = childContainer.Resolve<Dependant>();
+            var result = childContainer.Resolve<Dependant>();
 			Assert.NotNull(result);
 			Assert.NotNull(result.Dependency);
 		}
@@ -68,8 +67,9 @@ namespace Rezolver.Tests.Compilation.Specification
 			//the thing being that the parent container does not know how to resolve the dependency
 			//and so must use the child container at call-time.
 			var childTargets = CreateTargetContainer();
-			childTargets.RegisterType<Dependency>();
-			IContainer childContainer = CreateOverridingContainer(parent, childTargets);
+
+			Container childContainer = CreateOverridingContainer(parent);
+			childContainer.RegisterType<Dependency>();
 
 			var result = childContainer.Resolve<Dependant>();
 			Assert.NotNull(result);
@@ -86,12 +86,10 @@ namespace Rezolver.Tests.Compilation.Specification
 			targets.RegisterType<Dependant>();
 			var parent = CreateContainer(targets);
 
-			//The container interface mandates that missing resolve ops throw an InvalidOperationException
 			Assert.Throws<InvalidOperationException>(() => parent.Resolve<Dependency>());
 
-			var childTargets = CreateTargetContainer();
-			childTargets.RegisterType<Dependency>();
-			IContainer childContainer = CreateOverridingContainer(parent, childTargets);
+			Container childContainer = CreateOverridingContainer(parent);
+			childContainer.RegisterType<Dependency>();
 
 			var result = childContainer.Resolve<Dependant>();
 			Assert.NotNull(result);
@@ -119,10 +117,9 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterObject(1);
             var baseContainer = CreateContainer(targets);
 
-            var targets2 = CreateTargetContainer();
-            targets2.RegisterObject(2);
+            var container = CreateOverridingContainer(baseContainer);
+            container.RegisterObject(2);
 
-            var container = CreateOverridingContainer(baseContainer, targets2);
 
             var result = container.Resolve<IEnumerable<int>>();
             Assert.Equal(new[] { 1, 2 }, result);

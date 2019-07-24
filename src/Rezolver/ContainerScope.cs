@@ -1,270 +1,186 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
     /// <summary>
-    /// Standard implementation of the <see cref="IContainerScope"/> interface.
+    /// Base class for scopes.
+    /// 
+    /// This type cannot be inherited by user types.
     /// </summary>
-    /// <seealso cref="Rezolver.IContainerScope" />
-    public class ContainerScope : IContainerScope
+    public class ContainerScope : IDisposable, IServiceProvider
     {
+        private protected bool _isDisposing = false;
+        private protected bool _isDisposed = false;
+        internal bool _canActivate = false;
+        internal readonly ContainerScope _root;
+
         /// <summary>
-        /// Explicitly scoped objects can be a mixture of disposable and non-disposable objects
+        /// The container that this scope uses by default to resolve instances.
         /// </summary>
-        // private ConcurrentDictionary<IResolveContext, Lazy<object>> _explicitlyScopedObjects;
-        private ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>> _explicitlyScopedObjects;
+        public Container Container { get; private set; }
 
         /// <summary>
-        /// implicitly scoped objects will always be IDisposable
+        /// Root scope to be used for 'top-level' object tracking.
+        /// 
+        /// Note - when a <see cref="Container"/> is used, this should be the first scope
+        /// created via the <see cref="Container.CreateScope"/> method.
+        /// 
+        /// With <see cref="ScopedContainer"/> it will be the scope that lives inside that container.
+        /// 
+        /// So, as a result of this, this property could point to a scope that's not actually
+        /// a parent of <see cref="Parent"/>
         /// </summary>
-        private ConcurrentBag<ScopedObject> _implicitlyScopedObjects
-            = new ConcurrentBag<ScopedObject>();
-
-        private LockedList<IContainerScope> _childScopes
-            = new LockedList<IContainerScope>();
-
-        private struct ScopedObject
-        {
-            private static int _order = 0;
-
-            public int Id { get; }
-
-            public object Object { get; }
-
-            public ScopedObject(object obj)
-            {
-                Id = _order++;
-                Object = obj;
-            }
-        }
-
-        private bool _disposed = false;
-        private bool _disposing = false;
+        public ContainerScope Root => _root;
 
         /// <summary>
-        /// Gets a value indicating whether this <see cref="ContainerScope"/> is disposed.
+        /// The scope from which this scope was created.
         /// </summary>
-        /// <value><c>true</c> if disposed; otherwise, <c>false</c>.</value>
-        public bool Disposed { get { return this._disposed; } }
-
-        private readonly IContainer _container;
-        /// <summary>
-        /// The container that this scope is tied to.  All standard resolve operations
-        /// should be made against this container.
-        /// </summary>
-        /// <value>The container.</value>
-        public IContainer Container
-        {
-            get
-            {
-                return this._container ?? Parent.Container;
-            }
-        }
+        public ContainerScope Parent { get; private set; }
 
         /// <summary>
-        /// If this scope has a parent scope, this is it.
-        /// </summary>
-        /// <value>The parent.</value>
-        public IContainerScope Parent
-        {
-            get;
-        }
-
-        private void InitScopeContainers()
-        {
-            // _explicitlyScopedObjects = new ConcurrentDictionary<IResolveContext, Lazy<object>>(ResolveContext.RequestedTypeComparer);
-            this._explicitlyScopedObjects = new ConcurrentDictionary<TypeAndTargetId, Lazy<ScopedObject>>();
-            this._implicitlyScopedObjects = new ConcurrentBag<ScopedObject>();
-            this._childScopes = new LockedList<IContainerScope>();
-        }
-
-        private void FreeScopeContainers()
-        {
-            this._explicitlyScopedObjects = null;
-            this._implicitlyScopedObjects = null;
-            this._childScopes = null;
-        }
-
-        private ContainerScope()
-        {
-            InitScopeContainers();
-        }
-
-        /// <summary>
-        /// Creates a new container that is a child of another.
-        ///
-        /// The <see cref="Container"/> will be inherited from the <paramref name="parentScope"/>
-        /// by default, unless it's overriden by <paramref name="containerOverride"/>.
-        /// </summary>
-        /// <param name="parentScope">Required - the parent scope</param>
-        /// <param name="containerOverride">Optional - the container which should be used for resolve
-        /// operations executed against this scope (note - all the resolve methods are declared as extension
-        /// methods which mirror those present on <see cref="IContainer"/>.</param>
-        public ContainerScope(IContainerScope parentScope, IContainer containerOverride = null)
-            : this()
-        {
-            parentScope.MustNotBeNull(nameof(parentScope));
-            Parent = parentScope;
-            if (containerOverride != null)
-            {
-                this._container = containerOverride;
-            }
-        }
-
-        /// <summary>
-        /// Creates a new root scope tied to the given <paramref name="container"/>
+        /// Creates a new Root scope whose container is set to <paramref name="container"/>
         /// </summary>
         /// <param name="container"></param>
-        public ContainerScope(IContainer container)
-            : this()
+        private protected ContainerScope(Container container)
         {
-            container.MustNotBeNull(nameof(container));
-
-            this._container = container;
+            Container = container;
+            _root = this;
         }
 
         /// <summary>
-        /// Called to create a child scope from this scope.  The implementation adds the
-        /// new scope to a private collection so that it can dispose of the new child if
-        /// it is not already disposed.
+        /// Creates a new child scope whose container is inherited from the <paramref name="parent"/>
         /// </summary>
-        public IContainerScope CreateScope()
+        /// <param name="parent"></param>
+        /// <param name="isRoot"></param>
+        private protected ContainerScope(ContainerScope parent, bool isRoot)
         {
-            if (Disposed)
-            {
-                throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
-            }
+            Container = parent.Container;
+            Parent = parent;
+            // cheeky - basically as soon as we have a fully-functioning scope that can track instances,
+            // that must become the root scope; but until that point, it just gets 
+            _root = isRoot ? this : parent._root;
+        }
 
-            var newScope = new ContainerScope(this);
-            this._childScopes.Add(newScope);
-            return newScope;
+        internal virtual T ActivateImplicit<T>(T instance)
+        {
+            throw new NotSupportedException($"This scope (type = {this.GetType()}) cannot track instances, either manually create a scope, or use the {nameof(ScopedContainer)} as your container type");
+        }
+
+        internal virtual T ActivateExplicit<T>(ResolveContext context, int targetId, Func<ResolveContext, T> instanceFactory)
+        {
+            throw new NotSupportedException($"Cannot create instance of {context.RequestedType} from target #{targetId} - Explicitly scoped objects are not supported by the default {nameof(ContainerScope)} - either manually create a scope, or use the {nameof(ScopedContainer)} as your container type");
         }
 
         /// <summary>
-        /// Called by child scopes when they are disposed to notify the parent that they
-        /// will no longer need to be disposed of when the parent is disposed.
+        /// Creates a new scope from which instances can be resolved, isolated from the current scope.
         /// </summary>
-        /// <param name="child">The child.</param>
-        /// <remarks>This is an infrastructure method and not something you would usually need to call.
-        /// It's exposed for developers who are extending the container scoping functionality only.</remarks>
-        public void ChildScopeDisposed(IContainerScope child)
+        /// <returns>A new scope.</returns>
+        public virtual ContainerScope CreateScope()
         {
-            if (!this._disposing)
-            {
-                this._childScopes.Remove(child);
-            }
+            // note that the new scope is set as its own root if this scope's Root is not 
+            // a 'full' instance-tracking scope.
+            return new DisposingContainerScope(this, !(this._root is DisposingContainerScope));
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Disposes this scope and any of its child scopes.
         /// </summary>
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Releases unmanaged and - optionally - managed resources.
-        /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
-            // have to cope with recursion below because of the complexity of some of the disposable
-            // scenarios we might have to deal with.
-            if (Disposed || this._disposing)
-            {
-                return;
-            }
-
             if (disposing)
             {
-                this._disposing = true;
+                if (!_isDisposed && !_isDisposing)
+                {
+                    _isDisposing = true;
+                }
+
                 try
                 {
-                    using (var listLock = this._childScopes.Lock())
-                    {
-                        // dispose child scopes in reverse order of creation
-                        for (var f = this._childScopes.Count; f>0; f--)
-                        {
-                            this._childScopes[f-1].Dispose();
-                        }
-                    }
-
-                    // note that explicitly scoped objects might not actually be IDisposable :)
-
-                    var allExplicitObjects = this._explicitlyScopedObjects.Skip(0).ToArray()
-                        .Where(l => l.Value.Value.Object is IDisposable)
-                        .Select(l => l.Value.Value);
-                    var allImplicitObjects = this._implicitlyScopedObjects.Skip(0).ToArray();
-
-                    // deref all used collections
-                    FreeScopeContainers();
-
-                    foreach (var obj in allExplicitObjects.Concat(allImplicitObjects)
-                        .OrderByDescending(so => so.Id))
-                    {
-                        ((IDisposable)obj.Object).Dispose();
-                    }
+                    // allow derived types to dispose any objects they're tracking.
+                    OnDispose();
                 }
                 finally
                 {
-                    this._disposed = true;
-                    this._disposing = false;
+                    _isDisposing = false;
+                    _isDisposed = true;
                 }
+                Parent?.ChildDisposed(this);
             }
         }
 
-        object IContainerScope.Resolve(IResolveContext context, Guid targetId, Func<IResolveContext, object> factory, ScopeBehaviour behaviour)
+        private protected virtual void OnDispose()
         {
-            if (Disposed)
-            {
-                throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
-            }
 
-            if (behaviour == ScopeBehaviour.Explicit)
-            {
-                // TODO: RequestedType is IEnumerable<Blah> when a scoped object is requested as part of an enumerable - hence why these two MSDI Tests fail.
-                if (this._explicitlyScopedObjects.TryGetValue(new TypeAndTargetId(context.RequestedType, targetId), out Lazy<ScopedObject> lazy))
-                {
-                    return lazy.Value.Object;
-                }
-
-                // use a lazily evaluated object which is bound to this resolve context to ensure only one instance is created
-                return this._explicitlyScopedObjects.GetOrAdd(new TypeAndTargetId(context.RequestedType, targetId),
-                    k => new Lazy<ScopedObject>(() => new ScopedObject(factory(context)))).Value.Object;
-            }
-            else if (behaviour == ScopeBehaviour.Implicit)
-            {
-                var result = factory(context);
-                // don't *ever* track scopes as disposable objects
-                if (result is IDisposable && !(result is IContainerScope))
-                {
-                    this._implicitlyScopedObjects.Add(new ScopedObject(result));
-                }
-
-                return result;
-            }
-
-            return factory(context);
         }
 
         object IServiceProvider.GetService(Type serviceType)
         {
-            if (Disposed)
-            {
-                throw new ObjectDisposedException("ContainerScope", "This scope has been disposed");
-            }
+            // when resolving through a scope, we give the container a context
+            // which explicitly has this scope on it.
+            Container.TryResolve(new ResolveContext(this, serviceType), out object result);
+            return result;
+        }
 
-            Container.TryResolve(new ResolveContext(this, serviceType), out object toReturn);
-            return toReturn;
+        /// <summary>
+        /// Resolves an instance of the <paramref name="serviceType"/> from the container.
+        /// </summary>
+        /// <param name="serviceType">The type of object to resolve.</param>
+        /// <returns>An instance of the type <paramref name="serviceType"/> built according to the 
+        /// registrations in this container.</returns>
+        public object Resolve(Type serviceType)
+        {
+            return Container.Resolve(new ResolveContext(this, serviceType));
+        }
+
+        /// <summary>
+        /// Resolves an instance of <typeparamref name="TService"/> from the container.
+        /// </summary>
+        /// <typeparam name="TService">The type of object to resolve.</typeparam>
+        /// <returns>An instance of the type <typeparamref name="TService"/> built according to the
+        /// registrations in this container.</returns>
+        public TService Resolve<TService>()
+        {
+            return Container.ResolveInternal<TService>(new ResolveContext(this, typeof(TService)));
+        }
+
+        /// <summary>
+        /// Resolves an enumerable of zero or more instances of <paramref name="serviceType"/> from the
+        /// container.
+        /// </summary>
+        /// <param name="serviceType">Type of objects to resolve.</param>
+        /// <returns>An enumerable containing zero or more instances of the type <paramref name="serviceType"/>.</returns>
+        public IEnumerable ResolveMany(Type serviceType)
+        {
+            return (IEnumerable)Container.Resolve(new ResolveContext(this, typeof(IEnumerable<>).MakeGenericType(serviceType)));
+        }
+
+        /// <summary>
+        /// Resolves an enumerable of zero or more instances of <typeparamref name="TService"/> from the
+        /// container.
+        /// </summary>
+        /// <typeparam name="TService">Type of objects to resolve.</typeparam>
+        /// <returns>An enumerable containing zero or more instances of the type <typeparamref name="TService"/>.</returns>
+        public IEnumerable<TService> ResolveMany<TService>()
+        {
+            return Container.ResolveInternal<IEnumerable<TService>>(new ResolveContext(this, typeof(IEnumerable<TService>)));
+        }
+
+        private protected virtual void ChildDisposed(ContainerScope child)
+        {
+
         }
     }
 }

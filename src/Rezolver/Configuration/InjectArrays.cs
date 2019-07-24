@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Rezolver.Options;
 using Rezolver.Sdk;
 
@@ -32,7 +32,7 @@ namespace Rezolver.Configuration
 
             public Type GetContainerType(Type serviceType)
             {
-                if (TypeHelpers.IsArray(serviceType))
+                if (serviceType.IsArray)
                 {
                     return typeof(Array);
                 }

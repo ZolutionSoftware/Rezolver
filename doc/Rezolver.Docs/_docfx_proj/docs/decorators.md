@@ -11,7 +11,7 @@ and Rezolver offers first-class support for implementing it either non-generical
 ## Registering decorators in Rezolver
 
 Registration of Decorators in Rezolver is done through the overloaded extension method 
-@Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator*.  There is a generic and non-generic version
+@Rezolver.RootTargetContainerExtensions.RegisterDecorator*.  There is a generic and non-generic version
 (as is typical for nearly all Rezolver registration functions), but, unlike many other target types,
 there is no factory method in the @Rezolver.Target static class to create one on its own.
 
@@ -21,7 +21,7 @@ you read the summary notes about that class, it should be apparent why: Decorati
 implemented through an @Rezolver.ITarget implementation, it also needs a special target container 
 type in which that target will be registered -  
 @Rezolver.DecoratingTargetContainer, the creation of which is handled automatically by the 
-@Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* methods.
+@Rezolver.RootTargetContainerExtensions.RegisterDecorator* methods.
 
 # Examples
 
@@ -63,7 +63,7 @@ Decorators are also applied to elements of an enumerable:
 ## Open Generic Decorator
 
 You can also use decorators with open generics - register them just like [normal generic types](constructor-injection/generics.md), except
-via the @Rezolver.DecoratorTargetContainerExtensions.RegisterDecorator* method.
+via the @Rezolver.RootTargetContainerExtensions.RegisterDecorator* method.
 
 For this, our basic generic decorator is this:
 

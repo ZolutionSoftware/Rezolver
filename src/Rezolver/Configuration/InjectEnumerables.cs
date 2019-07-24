@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Rezolver.Sdk;
 
 namespace Rezolver.Configuration
 {
@@ -24,7 +22,7 @@ namespace Rezolver.Configuration
     ///
     /// If this behaviour is not attached to an <see cref="ITargetContainer"/>, or is disabled via the
     /// <see cref="Options.EnableEnumerableInjection"/> option, then only explicitly
-    /// registered enumerables will be able to be resolved by any <see cref="IContainer"/> built from that
+    /// registered enumerables will be able to be resolved by any <see cref="Container"/> built from that
     /// target container.
     ///
     /// #### Lazy vs Eager evaluation
@@ -65,7 +63,7 @@ namespace Rezolver.Configuration
         /// the enumerable resolving behaviour is simply to make sure this configuration object is applied to an <see cref="IRootTargetContainer"/></remarks>
         public override void Configure(IRootTargetContainer targets)
         {
-            targets.MustNotBeNull(nameof(targets));
+            if(targets == null) throw new ArgumentNullException(nameof(targets));
             // if an option has already been set on the target container which disables automatic enumerables,
             // then do not apply the configuration.
             if (!targets.GetOption(Options.EnableEnumerableInjection.Default))

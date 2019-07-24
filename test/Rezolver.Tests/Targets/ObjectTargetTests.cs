@@ -50,12 +50,22 @@ namespace Rezolver.Tests.Targets
 
 		[Theory]
 		[MemberData(nameof(ValueData))]
-		public void CompiledTargetImplementationShouldReturnValue(object value)
+		public void InstanceProviderImplementationShouldReturnValue(object value)
 		{
-			ICompiledTarget target = new ObjectTarget(value);
-			Assert.Same(value, target.GetObject(new ResolveContext((IContainer)null, value.GetType())));
+			IInstanceProvider target = new ObjectTarget(value);
+			Assert.Same(value, target.GetInstance(new ResolveContext(new Container(), value.GetType())));
 			//also check that it works for a base (going for typeof(object))
-			Assert.Same(value, target.GetObject(new ResolveContext((IContainer)null, typeof(object))));
+			Assert.Same(value, target.GetInstance(new ResolveContext(new Container(), typeof(object))));
 		}
-	}
+
+        [Theory]
+        [MemberData(nameof(ValueData))]
+        public void FactoryProviderImplementationShouldReturnValue(object value)
+        {
+            IFactoryProvider target = new ObjectTarget(value);
+            Assert.Same(value, target.Factory(new ResolveContext(new Container(), value.GetType())));
+            //also check that it works for a base (going for typeof(object))
+            Assert.Same(value, target.Factory(new ResolveContext(new Container(), typeof(object))));
+        }
+    }
 }

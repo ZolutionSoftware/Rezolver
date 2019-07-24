@@ -9,7 +9,7 @@ namespace Rezolver.Tests.Compilation.Specification
 {
     public partial class CompilerTestsBase
     {
-        private IContainer PrepareAutoListContainer()
+        private Container PrepareAutoListContainer()
         {
             //using the default configuration
             var targets = new TargetContainer();
@@ -25,7 +25,7 @@ namespace Rezolver.Tests.Compilation.Specification
         [Fact]
         public void AutoLists_ShouldResolveListByDefault()
         {
-            IContainer container = PrepareAutoListContainer();
+            Container container = PrepareAutoListContainer();
 
             var result = container.Resolve<List<Types.NoCtor>>();
 
@@ -39,7 +39,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoLists_ShouldResolveIListByDefault()
         {
             //same test really, except this time resolving by IList<T>
-            IContainer container = PrepareAutoListContainer();
+            Container container = PrepareAutoListContainer();
 
             var result = container.Resolve<IList<Types.NoCtor>>();
 
@@ -52,7 +52,7 @@ namespace Rezolver.Tests.Compilation.Specification
         public void AutoLists_ShouldResolveIReadOnlyListByDefault()
         {
             //same test really, except this time resolving by IList<T>
-            IContainer container = PrepareAutoListContainer();
+            Container container = PrepareAutoListContainer();
 
             var result = container.Resolve<IReadOnlyList<Types.NoCtor>>();
 

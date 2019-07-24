@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 
@@ -78,6 +79,12 @@ namespace Rezolver
         /// either directly or by inheritance.</returns>
         IEnumerable<Type> GetKnownCompatibleTypes(Type serviceType);
 
+        /// <summary>
+        /// Returns a <see cref="TargetTypeSelector"/> which will return the types to be sought, in order of most specific to
+        /// least specific, which are compatible with the <paramref name="type"/>
+        /// </summary>
+        /// <param name="type">The type for which matches are sought.</param>
+        /// <returns>A <see cref="TargetTypeSelector"/> which will generate a series of types to be sought.</returns>
         TargetTypeSelector SelectTypes(Type type);
     }
 }

@@ -84,15 +84,13 @@
             </div>
         </header>
 
-        <partial name="_CookieConsentPartial" />
-
         <div id="search-results">
             <div class="search-list"></div>
             <div class="sr-items"></div>
             <ul id="pagination"></ul>
         </div>
 
-        <div role="main" class="container body-content hide-when-search">
+        <div role="main" class="@(ViewData["containerclass"] ?? "container") body-content hide-when-search">
             <div class="article row grid">
                 <div class="col-md-10">
                     <article id="_content" class="content wrap">

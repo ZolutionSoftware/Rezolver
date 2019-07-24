@@ -40,7 +40,7 @@ namespace Rezolver
 		protected IRootTargetContainer CreateTargetContainer(IServiceCollection services) 
             => new TargetContainer(_options.TargetContainerConfig);
 
-		protected IContainer CreateDefaultContainer(IRootTargetContainer targets)
+		protected Container CreateDefaultContainer(IRootTargetContainer targets)
             => new ScopedContainer(targets, _options.ContainerConfig);
 
         ITargetContainer IServiceProviderFactory<ITargetContainer>.CreateBuilder(IServiceCollection services)

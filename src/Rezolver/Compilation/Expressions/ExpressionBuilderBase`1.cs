@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver.Compilation.Expressions
@@ -92,7 +90,7 @@ namespace Rezolver.Compilation.Expressions
                 throw new ArgumentNullException(nameof(target));
             }
 
-            context.MustNotBeNull(nameof(target));
+            if(context == null) throw new ArgumentNullException(nameof(context));
 
             if (compiler == null)
             {
@@ -128,13 +126,13 @@ namespace Rezolver.Compilation.Expressions
         /// <summary>
         /// Determines whether this instance can build an expression from the specified target.
         ///
-        /// This base implementation simply checks that the type of <paramref name="target"/> is
+        /// This base implementation simply checks that the type of <paramref name="targetType"/> is
         /// compatible with the type <typeparamref name="TTarget"/>.
         /// </summary>
-        /// <param name="target">The target.</param>
-        public override bool CanBuild(ITarget target)
+        /// <param name="targetType">The target type.</param>
+        public override bool CanBuild(Type targetType)
         {
-            return target is TTarget;
+            return typeof(TTarget).IsAssignableFrom(targetType);
         }
     }
 }

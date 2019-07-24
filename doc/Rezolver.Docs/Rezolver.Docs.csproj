@@ -5,8 +5,13 @@
     <UserSecretsId>ccd314f1-a669-4af4-b1db-065388be2cae</UserSecretsId>
 
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-  </PropertyGroup>
 
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
+    
+    <!-- change docfx's logging level -->
+    <LogLevel>Info</LogLevel>
+  </PropertyGroup>
+  
   <ItemGroup>
     <Content Remove="_docfx_themes\**" />
   </ItemGroup>
@@ -25,12 +30,13 @@
 
 
   <ItemGroup>
-    <PackageReference Include="docfx.console" Version="2.40.10">
+    <PackageReference Include="docfx.console" Version="2.43.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>

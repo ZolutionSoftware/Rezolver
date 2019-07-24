@@ -14,8 +14,6 @@ namespace Rezolver.Tests
         //[Fact]
         public void ShouldFindLinkedListAddMethod()
         {
-
-
             // Arrange
             var linkedListType = typeof(LinkedList<int>);
 

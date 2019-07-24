@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,7 +76,7 @@ namespace Rezolver
 
         public override ITarget Fetch(Type type)
         {
-            if (!TypeHelpers.IsGenericType(type))
+            if (!type.IsGenericType)
             {
                 throw new ArgumentException("Only IEnumerable<T> is supported by this container", nameof(type));
             }
@@ -116,20 +117,20 @@ namespace Rezolver
                 }
             }
 
-            var elementType = TypeHelpers.GetGenericArguments(type)[0];
+            var elementType = type.GetGenericArguments()[0];
 
             bool enableCovariance = Root.GetOption(elementType, Options.EnableEnumerableCovariance.Default);
 
             if (enableCovariance)
             {
                 return new EnumerableTarget(Root.FetchAllCompatibleTargetsInternal(elementType)
-                        .OrderBy(t => _tracker.GetOrder(t)), elementType);
+                        .OrderBy(_tracker.GetOrder), elementType);
             }
             else
             {
                 return new EnumerableTarget(Root.FetchAll(elementType)
                     .Distinct(TargetIdentityComparer.Instance) // don't duplicate targets
-                    .OrderBy(t => this._tracker.GetOrder(t)), elementType);
+                    .OrderBy(_tracker.GetOrder), elementType);
             }
         }
 

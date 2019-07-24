@@ -53,7 +53,7 @@ namespace Rezolver.Tests.Compilation.Specification
             targets.RegisterType<BaseClassGrandchild, BaseClass>();
         }
 
-        private IContainer Get3BaseClassItemsContainer()
+        private Container Get3BaseClassItemsContainer()
         {
             var targets = CreateTargetContainer();
 

@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>net462;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-    <AssemblyName>rezolver-bench</AssemblyName>
+    <AssemblyName>Rezolver.Benchmark</AssemblyName>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.10.14" />
-    <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.2.4" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.4" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.11.4" />
   </ItemGroup>
 
   <ItemGroup>

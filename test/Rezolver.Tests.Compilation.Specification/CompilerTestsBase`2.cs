@@ -33,10 +33,9 @@ namespace Rezolver.Tests.Compilation.Specification
         {
             Output.WriteLine("Testing that the container returned from CreateOverridingContainer can also get a compiler from options as the base container does.  If this fails, then any tests to do with overriding containers will fail.");
             var container = CreateContainer(CreateTargetContainer());
-            var overridingTargets = CreateTargetContainer();
-            var overrideContainer = CreateOverridingContainer(container, overridingTargets);
+            var overrideContainer = CreateOverridingContainer(container);
 
-            Assert.IsType<TCompiler>(overridingTargets.GetOption<ITargetCompiler>());
+            Assert.IsType<TCompiler>(overrideContainer.GetOption<ITargetCompiler>());
         }
 	}
 }

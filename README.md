@@ -3,7 +3,7 @@
 Rezolver
 ========
 
-Rezolver is a high performance, portable (.NetStandard 1.1 & 2.0), open-source IOC container.
+Rezolver is a high performance open-source IOC container for .Net Core.
 
 > You can get the [Rezolver Package from Nuget](https://www.nuget.org/packages/Rezolver/), and for more 
 > packages, head over to the [packages documentation](http://rezolver.co.uk/developers/docs/nuget-packages/index.html).
@@ -13,12 +13,46 @@ For more information, including API reference and developer how-tos, head on ove
 
 [Follow us on twitter](https://twitter.com/RezolverIOC) for code or documentation updates/release notifications etc.
 
-[![Work in Progress](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=in%20progress&title=In%20Progress)](http://waffle.io/ZolutionSoftware/Rezolver) 
-[![Items ready to go](https://badge.waffle.io/ZolutionSoftware/Rezolver.png?label=ready&title=Ready)](http://waffle.io/ZolutionSoftware/Rezolver)
+[![Build Status](https://dev.azure.com/zolution/Rezolver/_apis/build/status/Rezolver-Nupkg?branchName=master)](https://dev.azure.com/zolution/Rezolver/_build/latest?definitionId=8&branchName=master)
 
 ---
 
 # Version Highlights
+
+## 2.0.0
+
+- TFMs changed for main package ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78)):
+  - `NetStandard2.0`, `netcoreapp2.2`, `net472` and `net48`
+  - The targeting of specific runtimes is to allow some more advanced caching technology, based on `System.Reflection.Emit`, to work.  In theory, once `netstandard2.1` is here, 
+these will be able to be removed in favour of simply targeting the `2.0` and `2.1` flavours of .Net Standard.
+- Major performance improvements:
+  - Enumerables +2500%
+  - Constructor injection up +368%
+  - Compilation speed has also been improved.
+- Scopes are now always present ([#89](https://github.com/ZolutionSoftware/Rezolver/issues/89))
+  - But, by default, the `Container` class won't support instance tracking or explicitly scoped registrations. You need to create a scope to do this, unless...
+  - You use `ScopedContainer` instead, which creates its own 'root' disposable scope on creation.  This will be used by default by Asp.Net Core)
+- Got rid of a whole bunch of interfaces in favour of concrete classes with non-virtual (where possible) methods ([#90](https://github.com/ZolutionSoftware/Rezolver/issues/90)):
+  - `IResolveContext` -> `ResolveContext`
+  - `IContainer` -> `Container`
+  - `IContainerScope` -> `ContainerScope`
+  - `ICompiledTarget` -> retired for factory delegates, `Rezolver.IInstanceProvider` and `Rezolver.IInstanceProvider<T>`
+- Got rid of a bunch of `Resolve` extension methods in favour of concrete methods on the types
+- New Container/Scope/Context behaviour:
+  - `IServiceProvider` is now explicitly implemented by all three of `Container`, `ContainerScope` and `ResolveContext`
+  - All three also have their own `Resolve` method implementations, the behaviour of which is slightly different for each:
+    - All `Container` instances have a `Scope`
+      - The default root scope used by `Container` doesn't track instances, only child scopes
+      - `ScopedContainer` should be used if you want the root scope to track instances (this is the default for Asp.Net Core and Generic Host integration)
+      - Resolving through a `Container` uses the scope on the `ResolveContext`, but defaults to its own `Scope` when calling the `Resolve` methods which only take a type
+    - All `ContainerScope` instances have a `Container`
+      - Resolving through a `Scope` routes the call to its own `Container`, but with a `ResolveContext` which fixes the `Scope` to that scope.
+    - `ResolveContext` now only has a `Scope` (the `Container` property just proxies the Container from the scope)
+    - Resolving through a `ResolveContext` routes the call to its own `Scope` (and therefore `Container`)
+- `OverridingContainer` renamed to `ChildContainer` ([#87](https://github.com/ZolutionSoftware/Rezolver/issues/87))
+  - Constructor now no longer accepts an `IRootTargetContainer` on creation.  To register new services, you create a new instance and then register into it via its implementation of `IRootTargetContainer`
+- `OverridingTargetContainer` renamed to `ChildTargetContainer` ([#88](https://github.com/ZolutionSoftware/Rezolver/issues/88))
+
 
 ## 1.4.0
 

@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using Rezolver.Compilation;
 using Rezolver.Targets;
@@ -73,14 +73,14 @@ namespace Rezolver
         /// Creates parameter bindings for each parameter in the passed method where each value will be resolved.
         ///
         /// For any optional parameters - their default values will be used as a fallback if the <see cref="ResolvedTarget"/>
-        /// cannot either resolve a target at compile time or from the <see cref="IContainer"/> at resolve-time.
+        /// cannot either resolve a target at compile time or from the <see cref="Container"/> at resolve-time.
         /// </summary>
         /// <param name="method"></param>
         /// <returns></returns>
         public static ParameterBinding[] BindWithRezolvedArguments(MethodBase method)
         {
             // TODO: allow some bindings to be passed up front, so that they can be used instead of the default resolved binding; falling back to a resolved binding if not provided.
-            method.MustNotBeNull("method");
+            if(method == null) throw new ArgumentNullException(nameof(method));
             var parameters = method.GetParameters();
             return parameters.Select(pi =>
               new ParameterBinding(pi, BindRezolvedArgument(pi))).ToArray();
@@ -104,7 +104,7 @@ namespace Rezolver
         public static ParameterBinding[] BindOverload(MethodBase[] methods, IDictionary<string, ITarget> args, out MethodBase resolvedMethod)
         {
             resolvedMethod = null;
-            methods.MustNotBeNull("methods");
+            if(methods == null) throw new ArgumentNullException(nameof(methods));
             if (methods.Length == 0)
             {
                 throw new ArgumentException("The methods array must contain at least one item", "methods");
@@ -145,13 +145,7 @@ namespace Rezolver
 
         private static ITarget GetNamedArgTarget(ParameterInfo p, IDictionary<string, ITarget> args)
         {
-            ITarget argValue = null;
-            if (args.TryGetValue(p.Name, out argValue))
-            {
-                return argValue;
-            }
-
-            return null;
+            return args.TryGetValue(p.Name, out ITarget argValue) ? argValue : null;
         }
 
         /// <summary>

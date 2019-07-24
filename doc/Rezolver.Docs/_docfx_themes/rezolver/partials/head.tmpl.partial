@@ -18,7 +18,4 @@
 	{{#_noindex}}<meta name="searchOption" content="noindex">{{/_noindex}}
 	{{#_enableSearch}}<meta property="docfx:rel" content="{{_rel}}">{{/_enableSearch}}
 	{{>partials/browsericons}}
-	{{#_GATracking}}
-	{{>partials/ga}}
-	{{/_GATracking}}
 </head>

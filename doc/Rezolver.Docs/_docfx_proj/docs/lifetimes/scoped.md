@@ -11,7 +11,7 @@ identical), then the [container scopes topic](container-scopes.md) so that you k
 - Any target can be made to produce a scoped object by wrapping it with a @Rezolver.Targets.ScopedTarget (either through its constructor or via the
 @Rezolver.Target.Scoped* extension method)
 - You can also register scoped types (i.e. a shortcut for creating a @Rezolver.Targets.ConstructorTarget or @Rezolver.Targets.GenericConstructorTarget
-which is then wrapped in a <xref:Rezolver.Targets.ScopedTarget>) with the @Rezolver.ScopedTargetContainerExtensions.RegisterScoped* extension methods.
+which is then wrapped in a <xref:Rezolver.Targets.ScopedTarget>) with the @Rezolver.TargetContainerExtensions.RegisterScoped* extension methods.
 
 Apart from the fact that a scoped object limits itself to one-per-scope (and one registration can, therefore, produce multiple instances across multiple
 scopes), the big difference between it and a singleton is that a scope must be available when you resolve an instance.

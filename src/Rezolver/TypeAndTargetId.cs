@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Rezolver
 {
-    internal struct TypeAndTargetId : IEquatable<TypeAndTargetId>
+    internal readonly struct TypeAndTargetId : IEquatable<TypeAndTargetId>
     {
         public Type Type { get; }
 
-        public Guid Id { get; }
+        public int Id { get; }
 
         public TypeAndTargetId(Type type, ITarget target)
         {
@@ -19,7 +18,7 @@ namespace Rezolver
             Id = target.Id;
         }
 
-        public TypeAndTargetId(Type type, Guid id)
+        public TypeAndTargetId(Type type, int id)
         {
             Type = type;
             Id = id;
@@ -32,17 +31,12 @@ namespace Rezolver
                 return false;
             }
 
-            if (!(obj is TypeAndTargetId ttObj))
-            {
-                return false;
-            }
-
-            return Equals(ttObj);
+            return Equals((TypeAndTargetId)obj);
         }
 
         public bool Equals(TypeAndTargetId other)
         {
-            return Type == other.Type && Id == other.Id;
+            return Id == other.Id && Type == other.Type;
         }
 
         public override int GetHashCode()

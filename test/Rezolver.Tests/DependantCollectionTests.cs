@@ -615,7 +615,8 @@ namespace Rezolver.Tests
 
             var coll = new DependantCollection<TestDependant>(new TestDependant[] { dependant1, dependant2 });
 
-            Assert.Throws<DependencyException>(() => Run(coll));
+            var ioex = Assert.Throws<InvalidOperationException>(() => Run(coll));
+            Assert.IsType<DependencyException>(ioex.InnerException);
         }
 
         [Fact]
@@ -627,7 +628,10 @@ namespace Rezolver.Tests
             coDependant2.Requires(coDependant1);
 
             RunTest(new[] { coDependant1, coDependant2 },
-                c => Assert.Throws<DependencyException>(() => Run(c)),
+                c => {
+                    var ioex = Assert.Throws<InvalidOperationException>(() => Run(c));
+                    Assert.IsType<DependencyException>(ioex.InnerException);
+                },
                 dontConfigure: true);
         }
 
@@ -641,7 +645,10 @@ namespace Rezolver.Tests
             intermediate.Requires(root);
             dependant.Requires(intermediate);
             RunTest(new[] { root, intermediate, dependant },
-                c => Assert.Throws<DependencyException>(() => Run(c)),
+                c => {
+                    var ioex = Assert.Throws<InvalidOperationException>(() => Run(c));
+                    Assert.IsType<DependencyException>(ioex.InnerException);
+                },
                 dontConfigure: true);
         }
     }

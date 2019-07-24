@@ -25,9 +25,9 @@ namespace Rezolver
 			_scope.Dispose();
 		}
 
-		private IContainerScope _scope;
+		private ContainerScope _scope;
 
-		public RezolverServiceScope(IContainerScope scope)
+		public RezolverServiceScope(ContainerScope scope)
 		{
 			_scope = scope;
 		}

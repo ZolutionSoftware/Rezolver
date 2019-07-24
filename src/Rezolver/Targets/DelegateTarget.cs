@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace Rezolver.Targets
 {
@@ -16,8 +14,8 @@ namespace Rezolver.Targets
     /// <remarks>The delegate must be non-void and can have any number of parameters.
     ///
     /// A compiler must ensure that any parameters for the <see cref="Factory"/> are automatically
-    /// resolved from the container, and that a parameter of the type <see cref="IResolveContext"/>
-    /// will receive the context passed to the <see cref="IContainer.Resolve(IResolveContext)"/>
+    /// resolved from the container, and that a parameter of the type <see cref="ResolveContext"/>
+    /// will receive the context passed to the <see cref="Container.Resolve(ResolveContext)"/>
     /// method call for which this target is being compiled and/or executed.</remarks>
     public class DelegateTarget : TargetBase
     {
@@ -26,6 +24,25 @@ namespace Rezolver.Targets
         /// </summary>
         /// <value>The factory.</value>
         public Delegate Factory { get; }
+
+        private readonly ScopeBehaviour _scopeBehaviour;
+        
+        /// <summary>
+        /// Overrides <see cref="TargetBase.ScopeBehaviour"/> to return the value that's passed on construction
+        /// through the <see cref="DelegateTarget.DelegateTarget(Delegate, Type, ScopeBehaviour, ScopePreference)"/>
+        /// constructor.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => _scopeBehaviour;
+
+        private readonly ScopePreference _scopePreference;
+
+        /// <summary>
+        /// Overrides <see cref="TargetBase.ScopePreference"/> to return the value that's passed on construction
+        /// through the <see cref="DelegateTarget.DelegateTarget(Delegate, Type, ScopeBehaviour, ScopePreference)"/>
+        /// constructor.
+        /// </summary>
+        public override ScopePreference ScopePreference => _scopePreference;
+
         /// <summary>
         /// Gets the MethodInfo for the <see cref="Factory"/> delegate.
         /// </summary>
@@ -57,16 +74,30 @@ namespace Rezolver.Targets
         /// 0 or more parameters.</param>
         /// <param name="declaredType">Optional - type that will be set into the <see cref="DeclaredType" /> for the target;
         /// if not provided, then it will be derived from the <paramref name="factory" />'s return type</param>
+        /// <param name="scopeBehaviour">Scope behaviour for this delegate.  The default is <see cref="ScopeBehaviour.Implicit"/>, which means
+        /// that that any returned instance will be tracked implicitly by the active scope.  If the delegate produces a new instance, then 
+        /// this or <see cref="ScopeBehaviour.Explicit"/> can be used safely - the choice being whether
+        /// the expression should produce one instance per scope, or should act as a disposable transient object.</param>
+        /// <param name="scopePreference">If <paramref name="scopeBehaviour"/> is not <see cref="ScopeBehaviour.None"/>, then this controls
+        /// the preferred scope for the instance to be tracked.  Defaults to <see cref="ScopePreference.Current"/></param>
         /// <exception cref="ArgumentException">If the <paramref name="factory" /> represents a void delegate or if
         /// <paramref name="declaredType" /> is passed but the type is not compatible with the return type of
         /// <paramref name="factory" />.</exception>
         /// <exception cref="ArgumentNullException">If <paramref name="factory" /> is null</exception>
-        public DelegateTarget(Delegate factory, Type declaredType = null)
+        public DelegateTarget(
+            Delegate factory, 
+            Type declaredType = null, 
+            ScopeBehaviour scopeBehaviour = ScopeBehaviour.Implicit,
+            ScopePreference scopePreference = ScopePreference.Current)
         {
-            factory.MustNotBeNull(nameof(factory));
+            if(factory == null) throw new ArgumentNullException(nameof(factory));
+
             FactoryMethod = factory.GetMethodInfo();
-            FactoryMethod.MustNot(m => FactoryMethod.ReturnType == typeof(void), "Factory must have a return type", nameof(factory));
-            FactoryMethod.MustNot(m => m.GetParameters().Any(p => p.ParameterType.IsByRef), "Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
+
+            if (FactoryMethod.ReturnType == typeof(void))
+                throw new ArgumentException("Factory must have a return type", nameof(factory));
+            if (FactoryMethod.GetParameters().Any(p => p.ParameterType.IsByRef))
+                throw new ArgumentException("Delegates which have ref or out parameters are not permitted as the factory argument", nameof(factory));
 
             if (declaredType != null)
             {
@@ -77,6 +108,8 @@ namespace Rezolver.Targets
             }
 
             this._declaredType = declaredType;
+            this._scopeBehaviour = scopeBehaviour;
+            this._scopePreference = scopePreference;
             Factory = factory;
         }
     }

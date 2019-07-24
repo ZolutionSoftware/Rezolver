@@ -1,18 +1,19 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 
 namespace Rezolver.Targets
 {
     /// <summary>
     /// This target produces arrays (<see cref="AsArray"/> = <c>true</c>) or lists (<see cref="AsArray"/> = <c>false</c>) whose
     /// individual items are built by ITarget instances.
+    /// 
+    /// Note that this target is *not* used in Rezolver's implementation of <see cref="IEnumerable{T}"/> injection.
     /// </summary>
     /// <remarks>
     /// The element type you feed on construction determines the type of array or the generic argument to List&lt;T&gt;.
@@ -21,6 +22,11 @@ namespace Rezolver.Targets
     /// </remarks>
     public class ListTarget : TargetBase
     {
+        /// <summary>
+        /// Always returns <see cref="ScopeBehaviour.None"/>
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+
         /// <summary>
         /// Gets the declared type of each element in the array or list that will be constructed.
         ///
@@ -103,7 +109,7 @@ namespace Rezolver.Targets
                 {
                     if (DeclaredType == typeof(List<>).MakeGenericType(ElementType))
                     {
-                        this._listConstructor = TypeHelpers.GetConstructor(DeclaredType, new[] { typeof(IEnumerable<>).MakeGenericType(ElementType) });
+                        this._listConstructor = DeclaredType.GetConstructor(new[] { typeof(IEnumerable<>).MakeGenericType(ElementType) });
                         if (this._listConstructor == null)
                         {
                             throw new InvalidOperationException(string.Format("Fatal error: Could not get IEnumerable<{0}> constructor for List<{0}>", ElementType));
@@ -136,10 +142,10 @@ namespace Rezolver.Targets
         /// All targets in the items enumerable must support the element type <paramref name="elementType"/></exception>
         public ListTarget(Type elementType, IEnumerable<ITarget> items, bool asArray = false)
         {
-            elementType.MustNotBeNull(nameof(elementType));
-            items.MustNotBeNull(nameof(items));
-            items.MustNot(ts => ts.Any(t => t == null), "All targets in the items enumerable must be non-null", nameof(items));
-            items.MustNot(ts => ts.Any(t => !t.SupportsType(elementType)), $"All targets in the items enumerable must support the element type {elementType}", nameof(items));
+            if (elementType == null) throw new ArgumentNullException(nameof(elementType));
+            if (items == null) throw new ArgumentNullException(nameof(items));
+            if (items.Any(t => t == null)) throw new ArgumentException("All targets in the items enumerable must be non-null", nameof(items));
+            if (items.Any(t => !t.SupportsType(elementType))) throw new ArgumentException($"All targets in the items enumerable must support the element type {elementType}", nameof(items));
 
             ElementType = elementType;
             Items = items;

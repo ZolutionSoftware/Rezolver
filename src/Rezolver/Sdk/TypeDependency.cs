@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Rezolver.Sdk
 {
@@ -25,7 +25,7 @@ namespace Rezolver.Sdk
             bool match;
             foreach (var o in objects)
             {
-                match = !object.ReferenceEquals(Owner, o) && TypeHelpers.IsAssignableFrom(Type, o.GetType());
+                match = !object.ReferenceEquals(Owner, o) && Type.IsAssignableFrom(o.GetType());
 
                 if (match && o is IDependant oDependant)
                 {
@@ -39,7 +39,7 @@ namespace Rezolver.Sdk
                     // calculated, then it should be).
                     foreach (var oDependency in oDependant.Dependencies.OfType<TypeDependency>())
                     {
-                        if (oDependency.Type == Type && TypeHelpers.IsAssignableFrom(Type, Owner.GetType()))
+                        if (oDependency.Type == Type && Type.IsAssignableFrom(Owner.GetType()))
                         {
                             match = false;
 

@@ -1,12 +1,8 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
 
 namespace Rezolver.Targets
 {
@@ -16,7 +12,7 @@ namespace Rezolver.Targets
     /// <remarks>Scopes in Rezolver operate much the same as they do in any IOC framework, but use
     /// of them is always entirely optional.
     ///
-    /// When a scope is active for a given <see cref="IContainer.Resolve(IResolveContext)"/> operation, most
+    /// When a scope is active for a given <see cref="Container.Resolve(ResolveContext)"/> operation, most
     /// objects which are returned from those operations will implicitly be scoped to whichever scope is active
     /// when the objects are resolved.  Implicitly scoped objects are only disposed of when their containing
     /// scope is disposed, and you can have an unlimited number of instances of implicitly scoped objects
@@ -60,8 +56,7 @@ namespace Rezolver.Targets
         /// <param name="innerTarget">Required.  The inner target.</param>
         public ScopedTarget(ITarget innerTarget)
         {
-            innerTarget.MustNotBeNull("innerTarget");
-            InnerTarget = innerTarget;
+            InnerTarget = innerTarget ?? throw new ArgumentNullException(nameof(innerTarget));
         }
 
         /// <summary>

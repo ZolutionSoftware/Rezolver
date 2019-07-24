@@ -7,8 +7,7 @@ the container.
 > [!TIP]
 > Constructor injection is achieved in Rezolver through the targets @Rezolver.Targets.ConstructorTarget and
 > @Rezolver.Targets.GenericConstructorTarget (for open generic types).  The examples here show how to create and register
-> these directly and via some of the extension methods in @Rezolver.RegisterTypeTargetContainerExtensions, 
-> @Rezolver.SingletonTargetContainerExtensions and @Rezolver.ScopedTargetContainerExtensions.
+> these directly and via some of the extension methods in @Rezolver.TargetContainerExtensions.
 > 
 > You can see the tests from which these examples are taken, and run them yourself, if you grab the 
 > [Rezolver source from Github](https://github.com/zolutionsoftware/rezolver), open the main solution and run
@@ -58,7 +57,7 @@ we simply register `MyService` against the type `IMyService`:
 
 'So what?' you say, 'it's doing exactly what I want it to!'  Yes, but there's more going on here than you'd think: the 
 @Rezolver.Targets.ConstructorTarget is selecting the best-matched constructor based on the service registrations present 
-in the container when it's asked to @Rezolver.IContainer.Resolve* the object.
+in the container when it's asked to @Rezolver.Container.Resolve* the object.
 
 * * *
 
@@ -81,7 +80,7 @@ in the second constructor of `RequiresMyService`:
 The best-match algorithm is similar to how a compiler matches a method overload when writing code by hand.  The rules aren't 
 necessarily exactly the same as, say, the C# spec, but they're close.
 
-At the time the first @Rezolver.IContainer.Resolve* call is made, the algorithm will first attempt to select the greediest constructor 
+At the time the first @Rezolver.Container.Resolve* call is made, the algorithm will first attempt to select the greediest constructor 
 whose parameters are *completely* satisfied by services available to the container.  Thus, if a class has two constructors - one with 
 1 parameter and one with 3 parameters - if the single parameter version can be successfully injected, but only 2 of the other 
 constructor's parameters can be, then the single-parameter constructor wins.
@@ -118,7 +117,7 @@ the base:
 > Think of it as being the same as an explicit cast from one type to another - you put a target inside it and tell it what type
 > you want it to be.
 > 
-> In the example, we have to use this if we're determined to the use the @Rezolver.MultipleTargetContainerExtensions.RegisterAll* method(s),
+> In the example, we have to use this if we're determined to the use the @Rezolver.TargetContainerExtensions.RegisterAll* method(s),
 > because they don't allow us to override the registration type for the targets that we're registering.
 
 * * *
@@ -163,7 +162,7 @@ we could 'fix' the container in the previous test so that it successfully builds
 
 This is the solution which most closely matches the child container functionality provided by other IOC libraries - take a container 
 which is already 'established' and override it with another container that has its own registrations.  The two will work together, sharing 
-registrations when creating instances, so long as the overriding container's @Rezolver.IContainer.Resolve* implementation is used:
+registrations when creating instances, so long as the overriding container's @Rezolver.Container.Resolve* implementation is used:
 
 [!code-csharp[ConstructorExamples.cs](../../../../../test/Rezolver.Tests.Examples/ConstructorExamples.cs#example6_1)]
 
@@ -177,15 +176,15 @@ Hopefully this should all seem pretty logical.  If so, and you're happy simply t
 
 If you're interested in the inner workings when using overriding containers, the process is this:
 
-- The `overridingContainer` receives the @Rezolver.IContainer.Resolve* call for `Requires2MyServices`
-- It looks inside its @Rezolver.ContainerBase.Targets target container for a registration for `Requires2MyServices` and doesn't find one
+- The `overridingContainer` receives the @Rezolver.Container.Resolve* call for `Requires2MyServices`
+- It looks inside its @Rezolver.IRootTargetContainer for a registration for `Requires2MyServices` and doesn't find one
 - So the call is passed to the overidden `container`...
   - ... which finds its registration and binds to the 2-parameter constructor of `Requires2MyServices` as before
   - The bound constructor is executed
     - The `MyService2` parameter is fulfiled by the `container`'s own registration
-    - But, for the `MyService3` parameter, `container` sees that it was not the container whose @Rezolver.IContainer.Resolve* method
+    - But, for the `MyService3` parameter, `container` sees that it was not the container whose @Rezolver.Container.Resolve* method
 was *originally* called (i.e. `overridingContainer`), so it forwards the call for `MyService3` to `overridingContainer`.
-- `overridingContainer` receives the @Rezolver.IContainer.Resolve* call for `MyService3`
+- `overridingContainer` receives the @Rezolver.Container.Resolve* call for `MyService3`
   - It finds its registration, and executes it to get the instance, passing it back to `container` - thus completing the constructor call 
 for `Requires2MyServices`
 
@@ -197,8 +196,8 @@ This solution is similar to the previous one, except this time we're not overrid
 by a container.
 
 In order to do this, however, we have to change how we create our container.  Until now, we've simply been creating a new @Rezolver.Container
-instance and registering targets via its own implementation of @Rezolver.ITargetContainer (which, as mentioned elsewhere, wraps its
-@Rezolver.ContainerBase.Targets property).
+instance and registering targets via its own implementation of @Rezolver.IRootTargetContainer (which, as mentioned elsewhere, simply proxies
+the target container it was given, or that it created, when it was created).
 
 This time, we're going to create a @Rezolver.TargetContainer directly, register `MyService2` and `Requires2MyServices` in it, then 
 create a @Rezolver.OverridingTargetContainer on top of that with the other registration of `MyService3`.  This target container is then 

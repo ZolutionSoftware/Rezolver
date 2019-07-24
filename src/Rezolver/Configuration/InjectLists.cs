@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Rezolver.Configuration
 {
@@ -29,18 +28,6 @@ namespace Rezolver.Configuration
     public class InjectLists : OptionDependentConfig<Options.EnableListInjection>
     {
         private static readonly System.Reflection.ConstructorInfo _listCtor = Extract.GenericConstructor((IEnumerable<object> o) => new List<object>(o));
-
-        static InjectLists()
-        {
-#if MAXCOMPAT
-            // SEE https://stackoverflow.com/questions/47445250/get-generic-constructor-from-closed-version-net-standard-1-1
-            if (_listCtor == null) throw new InvalidOperationException("Couldn't locate List constructor");
-            if (_listCtor.GetParameters()?.Length != 1)
-            {
-                throw new InvalidOperationException($"Expression extractor returned incorrect constructor {_listCtor} for { _listCtor.DeclaringType }");
-            }
-#endif
-        }
 
         /// <summary>
         /// The one and only instance of <see cref="InjectLists"/>

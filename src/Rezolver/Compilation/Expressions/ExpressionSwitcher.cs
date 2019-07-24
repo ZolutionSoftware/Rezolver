@@ -1,11 +1,8 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Rezolver.Compilation.Expressions
 {
@@ -29,10 +26,10 @@ namespace Rezolver.Compilation.Expressions
 
         public override Expression Visit(Expression node)
         {
-            var found = Array.Find(this._replacements, r => r.Original == node);
-            if (found != null)
+            for(var f = 0; f<_replacements.Length; f++)
             {
-                return base.Visit(found.Replacement);
+                if (_replacements[f].Original == node)
+                    return base.Visit(_replacements[f].Replacement);
             }
 
             return base.Visit(node);

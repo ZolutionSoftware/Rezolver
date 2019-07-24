@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Rezolver.Compilation;
 using Rezolver.Compilation.Expressions;
 using Rezolver.Targets;
@@ -45,16 +45,15 @@ namespace Rezolver.Configuration
             // builders.  This means that applications can extend this compiler behaviour simply by adding
             // instances of that new behaviour type and this class will automatically use them.
 
-            var rezolverAssembly = TypeHelpers.GetAssembly(typeof(IContainer));
-            var thisAssembly = TypeHelpers.GetAssembly(typeof(ExpressionCompilation));
-            // the well-known target types for compilation are ICompiledTarget, plus all the concrete target types in Rezolver.Targets
+            var rezolverAssembly = typeof(Container).Assembly;
+            // the well-known target types for compilation are IInstanceProvider/IFactoryProvider, plus all the concrete target types in Rezolver.Targets
             foreach (var type in rezolverAssembly.ExportedTypes.Where(t =>
-                t == typeof(ICompiledTarget) ||
-                (t.Namespace == typeof(ObjectTarget).Namespace && TypeHelpers.IsPublic(t) && !TypeHelpers.IsAbstract(t) && TypeHelpers.IsClass(t))))
+                t == typeof(IInstanceProvider) || t == typeof(IFactoryProvider) ||
+                (t.Namespace == typeof(ObjectTarget).Namespace && t.IsPublic && !t.IsAbstract && t.IsClass)))
             {
                 var builderInterfaceType = typeof(IExpressionBuilder<>).GetTypeInfo().MakeGenericType(type);
                 // attempt to find a single expressionbuilder type in this assembly which implements the builderInterfaceType
-                var possibleTypes = thisAssembly.DefinedTypes.Where(t => t.IsClass
+                var possibleTypes = rezolverAssembly.DefinedTypes.Where(t => t.IsClass
                     && !t.ContainsGenericParameters
                     && !t.IsAbstract
                     && t.ImplementedInterfaces.Contains(builderInterfaceType)).ToArray();
@@ -85,7 +84,7 @@ namespace Rezolver.Configuration
         }
 
         /// <summary>
-        /// Implements the <see cref="IContainerConfig.Configure(IContainer, IRootTargetContainer)"/> method,
+        /// Implements the <see cref="IContainerConfig.Configure(Container, IRootTargetContainer)"/> method,
         /// registering all the targets necessary to use expression-based compilation for all the standard targets
         /// defined in the <c>Rezolver</c> core library.
         /// </summary>
@@ -93,9 +92,9 @@ namespace Rezolver.Configuration
         /// <param name="targets">Required - the target container into which the various targets will be registered.</param>
         /// <remarks>All targets registered by this function are <see cref="ObjectTarget"/> targets backed by concrete instances
         /// of the various components (compiler etc).</remarks>
-        public virtual void Configure(IContainer container, IRootTargetContainer targets)
+        public virtual void Configure(Container container, IRootTargetContainer targets)
         {
-            targets.MustNotBeNull(nameof(targets));
+            if(targets == null) throw new ArgumentNullException(nameof(targets));
             // note - the singleton container is done like this because the expression compiler which uses
             // it Resolves it from the container during compilation.  This is to ensure that each container
             // gets the same singleton container (including OverridingContainer), rather than a single shared one

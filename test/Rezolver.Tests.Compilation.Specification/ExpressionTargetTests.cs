@@ -42,7 +42,7 @@ namespace Rezolver.Tests.Compilation.Specification
 		    targets.RegisterExpression(rc => rc);
 			var container = CreateContainer(targets);
 
-			IResolveContext context = new ResolveContext(container, typeof(IResolveContext));
+			ResolveContext context = new ResolveContext(container, typeof(ResolveContext));
 			Assert.Same(context, container.Resolve(context));
 		}
 

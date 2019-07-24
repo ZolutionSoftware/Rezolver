@@ -11,7 +11,7 @@
     <Product>Rezolver</Product>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ZolutionSoftware/Rezolver</RepositoryUrl>
-    <VersionPrefix>1.4.0</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <PreReleaseSuffix>$([System.DateTime]::Now.ToString('yyMMddHHmm'))</PreReleaseSuffix>
     <PreReleaseType Condition ="'$(PreReleaseType)' == ''">alpha</PreReleaseType>
     <VersionSuffix Condition="'$(VersionSuffix)' == '' AND '$(Configuration)' != 'Release'">$(PreReleaseType)-$(PreReleaseSuffix)</VersionSuffix>

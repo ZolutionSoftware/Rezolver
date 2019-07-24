@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Reflection;
 
@@ -57,8 +58,8 @@ namespace Rezolver.Targets
         /// Its <see cref="ParameterInfo.IsOptional"/> property must be <c>true</c> otherwise an <see cref="ArgumentException"/> is thrown.</param>
         public OptionalParameterTarget(ParameterInfo methodParameter)
         {
-            methodParameter.MustNotBeNull(nameof(methodParameter));
-            methodParameter.MustNot(pi => !pi.IsOptional, "The methodParameter must represent an optional parameter", nameof(methodParameter));
+            if(methodParameter == null) throw new ArgumentNullException(nameof(methodParameter));
+            if (!methodParameter.IsOptional) throw new ArgumentException("The methodParameter must represent an optional parameter", nameof(methodParameter));
             MethodParameter = methodParameter;
             // re-use the DefaultTarget's GetDefault method, which gives us easy access to the default value for any type.
             Value = (MethodParameter.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault ?

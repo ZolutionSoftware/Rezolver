@@ -1,18 +1,15 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Rezolver.Targets;
 
 namespace Rezolver.Compilation
 {
     /// <summary>
     /// Core implementation of <see cref="ICompileContext" />.  A root context (i.e. where <see cref="ParentContext"/> is
-    /// <c>null</c>; created via the <see cref="CompileContext.CompileContext(IResolveContext, ITargetContainer, Type)"/>
+    /// <c>null</c>; created via the <see cref="CompileContext.CompileContext(ResolveContext, ITargetContainer, Type)"/>
     /// constructor) is the starting point for all shared state, such as the <see cref="Container"/> and the compilation
     /// stack.
     ///
@@ -23,12 +20,12 @@ namespace Rezolver.Compilation
     /// Note that many of the interface members are implemented explicitly - therefore most of your interaction with
     /// this type is through its implementation of <see cref="ICompileContext"/> and <see cref="ITargetContainer"/>.
     /// </summary>
-    /// <seealso cref="Rezolver.Compilation.ICompileContext" />
-    /// <seealso cref="Rezolver.ITargetContainer" />
+    /// <seealso cref="ICompileContext" />
+    /// <seealso cref="ITargetContainer" />
     /// <remarks>Note that you can only create an instance of this either through inheritance, via the explicit implementation
     /// of <see cref="ICompileContext.NewContext(Type, ScopeBehaviour?, ScopePreference?)"/>, or (preferably) via the
-    /// <see cref="ITargetCompiler.CreateContext(IResolveContext, ITargetContainer)"/> method of an
-    /// <see cref="ITargetCompiler" /> resolved from an <see cref="IContainer" />.
+    /// <see cref="ITargetCompiler.CreateContext(ResolveContext, ITargetContainer)"/> method of an
+    /// <see cref="ITargetCompiler" /> resolved from an <see cref="Container" />.
     /// </remarks>
     public class CompileContext : ICompileContext, ITargetContainer
     {
@@ -52,15 +49,15 @@ namespace Rezolver.Compilation
         /// <value>The parent context.</value>
         public ICompileContext ParentContext { get; }
 
-        private readonly IResolveContext _resolveContext;
+        private readonly ResolveContext _resolveContext;
         /// <summary>
         /// Implementation of <see cref="ICompileContext.ResolveContext"/>
         /// </summary>
-        public IResolveContext ResolveContext => this._resolveContext ?? ParentContext?.ResolveContext;
+        public ResolveContext ResolveContext => this._resolveContext.Equals(default(ResolveContext)) ? ParentContext?.ResolveContext ?? default : this._resolveContext;
 
         private readonly Type _targetType;
         /// <summary>
-        /// Any <see cref="ICompiledTarget" /> built for a <see cref="ITarget" /> with this context should target this type.
+        /// Any factory built for a <see cref="ITarget" /> with this context should target this type.
         /// If null, then the <see cref="ITarget.DeclaredType" /> of the target being compiled should be used.
         /// </summary>
         /// <remarks>Note that when creating a child context with a null <c>targetType</c> argument, this property will be inherited
@@ -111,11 +108,11 @@ namespace Rezolver.Compilation
             ScopeBehaviour? scopeBehaviourOverride = null,
             ScopePreference? scopePreferenceOverride = null)
         {
-            parentContext.MustNotBeNull(nameof(parentContext));
+            if(parentContext == null) throw new ArgumentNullException(nameof(parentContext));
             ParentContext = parentContext;
             DependencyTargetContainer = new OverridingTargetContainer(parentContext, _emptyConfig);
             this._targetType = targetType;
-            this._resolveContext = parentContext.ResolveContext.New(newRequestedType: targetType);
+            this._resolveContext = parentContext.ResolveContext.ChangeRequestedType(targetType);
             ScopeBehaviourOverride = scopeBehaviourOverride;
             this._scopePreferenceOverride = scopePreferenceOverride;
             // note - many of the other members are inherited in the property getters or interface implementations
@@ -135,13 +132,13 @@ namespace Rezolver.Compilation
         /// without modifying the underlying targets in the container you pass.</param>
         /// <param name="targetType">Optional. Will be set into the <see cref="TargetType" /> property.  If null, then any
         /// <see cref="ITarget"/> that is compiled should be compiled for its own <see cref="ITarget.DeclaredType"/>.</param>
-        protected CompileContext(IResolveContext resolveContext,
+        protected CompileContext(ResolveContext resolveContext,
           ITargetContainer dependencyTargetContainer,
           Type targetType = null
           )
         {
-            resolveContext.MustNotBeNull(nameof(resolveContext));
-            dependencyTargetContainer.MustNotBeNull(nameof(dependencyTargetContainer));
+            if(resolveContext == null) throw new ArgumentNullException(nameof(resolveContext));
+            if(dependencyTargetContainer == null) throw new ArgumentNullException(nameof(dependencyTargetContainer));
             DependencyTargetContainer = new OverridingTargetContainer(dependencyTargetContainer, _emptyConfig);
             this._resolveContext = resolveContext;
             this._targetType = targetType;
@@ -179,7 +176,7 @@ namespace Rezolver.Compilation
         /// </summary>
         /// <param name="toCompile">The target to be pushed</param>
         /// <param name="targetType">The type for which the target is being compiled, if different from <see cref="ITarget.DeclaredType" /></param>
-        /// <remarks>Targets can appear on the compilation stack more than once for different types, since the <see cref="ICompiledTarget" />
+        /// <remarks>Targets can appear on the compilation stack more than once for different types, since the factory
         /// produced for a target for one type can be different than it is for another.  Ultimately, if a target does in fact have a
         /// cyclic dependency graph, then this method will detect that.</remarks>
         bool ICompileContext.PushCompileStack(ITarget toCompile, Type targetType)
@@ -190,7 +187,7 @@ namespace Rezolver.Compilation
                 return ParentContext.PushCompileStack(toCompile, targetType ?? TargetType);
             }
 
-            toCompile.MustNotBeNull("toCompile");
+            if(toCompile == null) throw new ArgumentNullException(nameof(toCompile));
             // whereas here we default to the target's declared type if no targetType is passed.
             CompileStackEntry entry = new CompileStackEntry(toCompile, targetType ?? toCompile.DeclaredType);
             if (!this._compileStack.Contains(entry))

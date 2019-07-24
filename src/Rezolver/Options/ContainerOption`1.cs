@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezolver.Options
 {
     /// <summary>
-    /// A suggested base class to use for custom container options to be read/written through the
-    /// <see cref="OptionsTargetContainerExtensions"/> extension methods.
+    /// A suggested base class to use for custom container options to be read/written through extensions
+    /// such as <see cref="TargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>,
+    /// <see cref="TargetContainerExtensions.GetOptions{TOption, TService}(ITargetContainer)"/> and the various
+    /// overloads.S
     ///
     /// The type of the option value is the argument to the <typeparamref name="TOption"/> type parameter.
     ///
@@ -25,7 +24,7 @@ namespace Rezolver.Options
     ///
     ///
     /// Options in Rezolver are achieved by using registrations in the <see cref="ITargetContainer"/> that
-    /// is to be configured (and, in turn, which might then configure any <see cref="IContainer"/>s built from
+    /// is to be configured (and, in turn, which might then configure any <see cref="Container"/>s built from
     /// that target container).
     ///
     /// Since options often take the form of primitive types - e.g <see cref="bool"/>, <see cref="string"/> etc - this
@@ -42,10 +41,8 @@ namespace Rezolver.Options
     ///
     /// ### Note:
     ///
-    /// Whilst Rezolver uses this type for most of its configurable options, the options API implemented by the extension methods
-    /// (e.g. <see cref="OptionsTargetContainerExtensions.GetOption{TOption}(ITargetContainer, TOption)"/>
-    /// or <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption)"/>) do **not** require
-    /// you to use it.</remarks>
+    /// Whilst Rezolver uses this type for most of its configurable options, you don't need to use it. Any type can be used as 
+    /// an option.</remarks>
     [System.Diagnostics.DebuggerDisplay("Value = {Value}")]
     public class ContainerOption<TOption>
     {

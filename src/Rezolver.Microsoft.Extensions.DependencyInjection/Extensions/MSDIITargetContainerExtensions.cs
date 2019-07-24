@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Rezolver.Targets;
 using System;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Rezolver
 {
@@ -28,12 +26,12 @@ namespace Rezolver
 			if (targets == null) throw new ArgumentNullException(nameof(targets));
             //register service provider - ensuring that it's marked as unscoped because the lifetimes of
             //containers which are also scopes are managed by the code that creates them, not by the containers themselves
-            targets.Register(Target.ForExpression(context => (IServiceProvider)context.Container).Unscoped());
-			//register scope factory - uses the context as a scope factory (it will choose between the container or
-			//the scope as the actual scope factory that will be used.
-			targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory));
+            targets.RegisterExpression(context => (IServiceProvider)context, scopeBehaviour: ScopeBehaviour.None);
+            //register scope factory - uses the context as a scope factory (it will choose between the container or	
+            //the scope as the actual scope factory that will be used.	
+            targets.RegisterExpression(context => new RezolverContainerScopeFactory(context), typeof(IServiceScopeFactory), ScopeBehaviour.None);
 
-            foreach(var serviceAndTarget in services.Select(s => new {
+            foreach (var serviceAndTarget in services.Select(s => new {
                 serviceType = s.ServiceType,
                 target = CreateTargetFromService(s)
             }).Where(st => st.target != null))
@@ -57,10 +55,8 @@ namespace Rezolver
 			}
 			else if (service.ImplementationFactory != null)
 			{
-				//not ideal - need ability to provide a delegate that accepts a rezolve context
-				//as a parameter that can then be fed on to the delegate, that way we can ensure that
-				//any scoping is honoured.
-				target = Target.ForDelegate(c => service.ImplementationFactory(c.Container), service.ServiceType);
+                // default to No scope interaction
+				target = Target.ForDelegate(c => service.ImplementationFactory(c), service.ServiceType, ScopeBehaviour.None);
 			}
 
 			if (target != null)

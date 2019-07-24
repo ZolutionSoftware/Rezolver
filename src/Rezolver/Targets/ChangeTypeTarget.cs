@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 
 namespace Rezolver.Targets
@@ -52,15 +53,15 @@ namespace Rezolver.Targets
         /// <param name="targetType">Required.  See <see cref="DeclaredType"/></param>
         public ChangeTypeTarget(ITarget innerTarget, Type targetType)
         {
-            innerTarget.MustNotBeNull(nameof(innerTarget));
-            targetType.MustNotBeNull(nameof(targetType));
+            if(innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
+            if(targetType == null) throw new ArgumentNullException(nameof(targetType));
 
             // to check validity of the type change, we can't use innerTarget.SupportsType, because that's a different
             // idea - that method returns true if it can build an instance of that type.
             // What we need here is simply a check that the two types can be cast either up or down to each other - which
             // should be a simple IsAssignableFrom check in either direction.
-            if (!TypeHelpers.IsAssignableFrom(targetType, innerTarget.DeclaredType)
-                && !TypeHelpers.IsAssignableFrom(innerTarget.DeclaredType, targetType))
+            if (!targetType.IsAssignableFrom(innerTarget.DeclaredType)
+                && !innerTarget.DeclaredType.IsAssignableFrom(targetType))
             {
                 throw new ArgumentException($"The type {targetType} is not compatible with the target's DeclaredType {innerTarget.DeclaredType}", nameof(targetType));
             }

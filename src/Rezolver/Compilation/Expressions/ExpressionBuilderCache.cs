@@ -1,35 +1,35 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {
     internal class ExpressionBuilderCache
     {
-        private readonly ConcurrentDictionary<Type, Lazy<IExpressionBuilder>> _cache
-             = new ConcurrentDictionary<Type, Lazy<IExpressionBuilder>>();
+        private readonly ConcurrentDictionary<Type, IExpressionBuilder> _cache
+             = new ConcurrentDictionary<Type, IExpressionBuilder>();
 
-        private readonly IContainer _container;
+        private readonly Container _container;
 
-        public ExpressionBuilderCache(IContainer container)
+        public ExpressionBuilderCache(Container container)
         {
             this._container = container;
         }
 
         public IExpressionBuilder ResolveBuilder(ITarget target)
         {
-            if (this._cache.TryGetValue(target.GetType(), out Lazy<IExpressionBuilder> builder))
+            if (this._cache.TryGetValue(target.GetType(), out IExpressionBuilder builder))
             {
-                return builder.Value;
+                return builder;
             }
 
-            return this._cache.GetOrAdd(target.GetType(), t => new Lazy<IExpressionBuilder>(() =>
+            return this._cache.GetOrAdd(target.GetType(), t => 
             {
                 List<Type> builderTypes =
                     TargetSearchTypes(t)
@@ -41,11 +41,12 @@ namespace Rezolver.Compilation.Expressions
 
                 foreach (var type in builderTypes)
                 {
+                    // TODO: investigate whether the TargetSearchTypes method is needed any more, because it was written before Rezolver supported contravariance.
                     foreach (IExpressionBuilder expressionBuilder in (IEnumerable)this._container.Resolve(typeof(IEnumerable<>).MakeGenericType(type)))
                     {
                         if (expressionBuilder != this)
                         {
-                            if (expressionBuilder.CanBuild(target))
+                            if (expressionBuilder.CanBuild(t))
                             {
                                 return expressionBuilder;
                             }
@@ -54,10 +55,10 @@ namespace Rezolver.Compilation.Expressions
                 }
 
                 return null;
-            })).Value;
+            });
         }
 
-        private IEnumerable<Type> TargetSearchTypes(Type targetType)
+        private static IEnumerable<Type> TargetSearchTypes(Type targetType)
         {
             // the search list is:
             // 1) the target's type
@@ -69,14 +70,19 @@ namespace Rezolver.Compilation.Expressions
             // because it has no bases which implement ITarget
             yield return targetType;
             // return all bases which can be treated as ITarget
-            foreach (var baseT in targetType.GetAllBases().Where(t => TypeHelpers.IsAssignableFrom(typeof(ITarget), t)))
+            foreach (var baseT in targetType.GetAllBases().Where(t => typeof(ITarget).IsAssignableFrom(t)))
             {
                 yield return baseT;
             }
 
-            if (TypeHelpers.IsAssignableFrom(typeof(ICompiledTarget), targetType))
+            if (typeof(IInstanceProvider).IsAssignableFrom(targetType))
             {
-                yield return typeof(ICompiledTarget);
+                yield return typeof(IInstanceProvider);
+            }
+
+            if(typeof(IFactoryProvider).IsAssignableFrom(targetType))
+            {
+                yield return typeof(IFactoryProvider);
             }
         }
     }

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using System;
 
 namespace Rezolver.Targets
 {
@@ -16,25 +16,47 @@ namespace Rezolver.Targets
     /// the wrapped target.</remarks>
     public class VariantMatchTarget : ITarget
     {
-        public Guid Id => Target.Id;
+        /// <summary>
+        /// Always returns the <see cref="ITarget.Id"/> of the <see cref="Target"/>, since this target
+        /// masquerades as the one that it wraps.
+        /// </summary>
+        public int Id => Target.Id;
 
+        /// <summary>
+        /// Returns the value of the same property returned by the <see cref="Target"/>
+        /// </summary>
         public bool UseFallback => Target.UseFallback;
 
+        /// <summary>
+        /// Returns the value of the same property returned by the <see cref="Target"/>
+        /// </summary>
         public Type DeclaredType => Target.DeclaredType;
 
+        /// <summary>
+        /// Returns the value of the same property returned by the <see cref="Target"/>
+        /// </summary>
         public ScopeBehaviour ScopeBehaviour => Target.ScopeBehaviour;
 
+        /// <summary>
+        /// Returns the value of the same property returned by the <see cref="Target"/>
+        /// </summary>
         public ScopePreference ScopePreference => Target.ScopePreference;
 
         /// <summary>
         /// Type originally requested
         /// </summary>
         public Type RequestedType { get; }
+
         /// <summary>
         /// Type against which the <see cref="Target"/> was found
         /// </summary>
         public Type RegisteredType { get; }
+
+        /// <summary>
+        /// The <see cref="ITarget"/> that's wrapped by this target
+        /// </summary>
         public ITarget Target { get; }
+
         private VariantMatchTarget(ITarget target, Type requestedType,  Type registeredType)
         {
             Target = target;
@@ -42,10 +64,16 @@ namespace Rezolver.Targets
             RegisteredType = registeredType;
         }
 
+        /// <summary>
+        /// Returns whether the <see cref="Target"/> supports the given <paramref name="type"/>
+        /// </summary>
+        /// <param name="type">The type to be checked for compatibility.</param>
+        /// <returns><c>true</c> if the inner <see cref="Target"/> can build/obtain an instance
+        /// of the given <paramref name="type"/>, otherwise <c>false.</c></returns>
         public bool SupportsType(Type type) => Target.SupportsType(type);
 
         // variant matches shouldn't be nested and the direct targets should never be wrapped.
-        internal static bool ShouldWrap(ITarget target) => !(target is ICompiledTarget || target is IDirectTarget || target is VariantMatchTarget);
+        internal static bool ShouldWrap(ITarget target) => !(target is IFactoryProvider || target is IInstanceProvider || target is IDirectTarget || target is VariantMatchTarget);
 
         internal static ITarget Wrap(ITarget target, Type requestedType, Type registeredType) => ShouldWrap(target) ?
             new VariantMatchTarget(target, requestedType, registeredType) : target;

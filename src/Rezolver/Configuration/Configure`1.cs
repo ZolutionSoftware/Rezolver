@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Rezolver.Configuration
 {
@@ -14,7 +13,7 @@ namespace Rezolver.Configuration
     /// This class' implementation of that method is actually handled by the <see cref="ConfigureOption(ITargetContainer)"/> method.
     /// </summary>
     /// <typeparam name="TOption">The type of option to be set.  Will ultimately be passed through to the
-    /// <see cref="OptionsTargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption, Type)"/> method when the option is set.</typeparam>
+    /// <see cref="TargetContainerExtensions.SetOption{TOption}(ITargetContainer, TOption, Type)"/> method when the option is set.</typeparam>
     /// <remarks>This class is most often used to modify the options which are set in the <see cref="TargetContainer.DefaultConfig"/> of the
     /// <see cref="TargetContainer"/> class - but can, of course, be used to configure any <see cref="ITargetContainer"/>.
     ///

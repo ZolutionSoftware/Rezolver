@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Rezolver
 {
@@ -19,11 +18,11 @@ namespace Rezolver
     /// later be compiled to produce the objects.
     ///
     /// A target container is considered mutable for its entire lifetime, because it's only a glorified dictionary
-    /// of targets from which multiple <see cref="IContainer"/> objects can be built (when using the types provided
+    /// of targets from which multiple <see cref="Container"/> objects can be built (when using the types provided
     /// in the framework).
     ///
     /// As an example, the <see cref="Container"/> class uses this as the source of the registrations that it uses to resolve objects
-    /// in its <see cref="IContainer.Resolve(IResolveContext)"/> implementation.
+    /// in its <see cref="Container.Resolve(ResolveContext)"/> implementation.
     ///
     /// Note that there are multiple implementations of this interface in the framework, however the two you will use most commonly
     /// are <see cref="TargetContainer"/> and <see cref="OverridingTargetContainer"/>.</remarks>

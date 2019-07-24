@@ -36,9 +36,8 @@ namespace Rezolver.Tests.Compilation.Specification
 			var container = CreateContainer(targets);
 
 			//create targets for our overriding container
-			var childTargets = CreateTargetContainer();
-			childTargets.RegisterObject(158, typeof(int));
-			var overridingContainer = CreateOverridingContainer(container, childTargets);
+			var overridingContainer = CreateOverridingContainer(container);
+			overridingContainer.RegisterObject(158, typeof(int));
 						
 			var result = (int)overridingContainer.Resolve<object>();
 			Assert.Equal(158, result);

@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver.Targets
 {
@@ -60,7 +58,7 @@ namespace Rezolver.Targets
         /// <param name="inner">Required - the inner target.</param>
         public UnscopedTarget(ITarget inner)
         {
-            inner.MustNotBeNull(nameof(inner));
+            if(inner == null) throw new ArgumentNullException(nameof(inner));
             Inner = inner;
         }
 

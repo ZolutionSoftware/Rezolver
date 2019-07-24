@@ -304,7 +304,7 @@ to a `StringBuilder`:
 
 As with much of the rest of the built-in functionality in Rezolver, it's possible to disable
 contravariance by setting an option on the @Rezolver.ITargetContainer which underpins your
-@Rezolver.IContainer (which, if you're using either @Rezolver.Container or 
+@Rezolver.Container (which, if you're using either @Rezolver.Container or 
 @Rezolver.ScopedContainer is the container itself).
 
 The option is @Rezolver.Options.EnableContravariance, which has a 

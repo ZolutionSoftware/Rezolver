@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using Rezolver.Targets;
 
 namespace Rezolver.Compilation.Expressions
@@ -28,8 +26,14 @@ namespace Rezolver.Compilation.Expressions
         /// parameter is optional, this will always be provided</param>
         protected override Expression Build(ListTarget target, IExpressionCompileContext context, IExpressionCompiler compiler)
         {
-            var arrayExpr = Expression.NewArrayInit(target.ElementType,
-                    target.Items.Select(t => compiler.Build(t, context.NewContext(target.ElementType))));
+            var items = new List<Expression>();
+
+            foreach(var itemTarget in target.Items)
+            {
+                items.Add(compiler.Build(itemTarget, context.NewContext(target.ElementType)));
+            }
+
+            var arrayExpr = Expression.NewArrayInit(target.ElementType, items);
 
             if (target.AsArray)
             {

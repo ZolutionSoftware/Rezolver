@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Rezolver.Targets;
 
 namespace Rezolver
@@ -76,9 +76,7 @@ namespace Rezolver
                 // Now, technically arrays are covariant and therefore
                 // should contain any object whose type is equal to or derived from
                 // the desired element type.  Need to figure that one out.
-                Type elementType = TypeHelpers.GetElementType(arrayType);
-
-                return new ArrayTarget(arrayType, elementType);
+                return new ArrayTarget(arrayType, arrayType.GetElementType());
             }
         }
     }

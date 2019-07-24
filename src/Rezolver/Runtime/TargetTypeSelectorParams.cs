@@ -1,9 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Rezolver
 {
@@ -11,7 +13,7 @@ namespace Rezolver
     internal class TargetTypeSelectorParams
     {
         private static bool? GetInternalContravarianceOverride(Type type) =>
-            TypeHelpers.GetCustomAttributes<Runtime.ContravarianceAttribute>(type).SingleOrDefault()?.Enable;
+            type.GetCustomAttributes<Runtime.ContravarianceAttribute>(false).SingleOrDefault()?.Enable;
 
         public TargetTypeSelectorParams Parent { get; }
 

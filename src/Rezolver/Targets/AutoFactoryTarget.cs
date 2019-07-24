@@ -1,4 +1,8 @@
-﻿using Rezolver.Compilation;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using Rezolver.Compilation;
 using System;
 using System.Linq;
 
@@ -16,8 +20,6 @@ namespace Rezolver.Targets
     /// <remarks>This is used to implement the [Autofactories functionality](/developers/docs/autofactories.html).</remarks>
     public class AutoFactoryTarget : TargetBase, INotifyRegistrationTarget
     {
-        private readonly bool _isOpenGenericReturnType;
-
         private readonly Type _delegateType;
         /// <summary>
         /// The delegate type that will be built by this target - always equal to <see cref="DeclaredType"/>
@@ -45,17 +47,22 @@ namespace Rezolver.Targets
         public Type[] ParameterTypes { get; }
 
         /// <summary>
+        /// Overrides the property always to return <see cref="ScopeBehaviour.None"/> by default.
+        /// </summary>
+        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.None;
+
+        /// <summary>
         /// Creates a new <see cref="AutoFactoryTarget"/> for the given <paramref name="delegateType"/>, optionally already bound
         /// to the given <paramref name="boundTarget"/>.
         /// </summary>
         /// <param name="delegateType">Required.  The type of delegate that is to be produced by this target.  It MUST have a non-void return type.</param>
         /// <param name="boundTarget">Optional.  The target whose result is to be wrapped by the delegate.</param>
         public AutoFactoryTarget(Type delegateType, ITarget boundTarget = null)
-            : base(boundTarget?.Id ?? Guid.NewGuid())
+            : base(boundTarget?.Id ?? NextId())
         {
             if (delegateType == null)
                 throw new ArgumentNullException(nameof(delegateType));
-            if (!TypeHelpers.IsAssignableFrom(typeof(Delegate), delegateType))
+            if (!typeof(Delegate).IsAssignableFrom(delegateType))
                 throw new ArgumentException("Must be a delegate type with a non-void return type", nameof(delegateType));
 
             var (returnType, paramTypes) = TypeHelpers.DecomposeDelegateType(delegateType);
@@ -70,20 +77,18 @@ namespace Rezolver.Targets
             ReturnType = returnType;
             ParameterTypes = paramTypes;
             BoundTarget = boundTarget;
-            _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
         }
 
         internal AutoFactoryTarget(Type delegateType, Type returnType, Type[] parameterTypes, ITarget boundTarget = null)
-            : base(boundTarget?.Id ?? Guid.NewGuid()) // note here - passing the ID in from the inner target to preserve the order.
+            : base(boundTarget?.Id ?? NextId()) // note here - passing the ID in from the inner target to preserve the order.
         {
             _delegateType = delegateType;
             ReturnType = returnType;
-            ParameterTypes = parameterTypes ?? TypeHelpers.EmptyTypes;
+            ParameterTypes = parameterTypes ?? Type.EmptyTypes;
             if (ParameterTypes.Distinct().Count() != ParameterTypes.Length)
                 throw new ArgumentException($"Invalid auto factory delegate type: {delegateType} - all parameter types must be unique", nameof(parameterTypes));
 
             BoundTarget = boundTarget;
-            _isOpenGenericReturnType = TypeHelpers.ContainsGenericParameters(returnType);
         }
 
         /// <summary>
@@ -102,33 +107,28 @@ namespace Rezolver.Targets
             // Func<T<>> (or something similar).  In this case, we have to check the
             // return
 
-            if (!TypeHelpers.IsGenericType(type))
-                return false;
-
-            if (TypeHelpers.ContainsGenericParameters(type))
+            if (!type.IsGenericType || type.ContainsGenericParameters)
                 return false;   //we don't bind to open generics
 
             if (type.GetGenericTypeDefinition() != typeof(Func<>))
                 return false;
 
             // get the desired return type
-            var expectedReturnType = TypeHelpers.GetGenericArguments(type)[0];
+            var expectedReturnType = type.GetGenericArguments()[0];
 
-            if (TypeHelpers.IsAssignableFrom(expectedReturnType, ReturnType))
+            if (expectedReturnType.IsAssignableFrom(ReturnType))
                 return true;
 
-            if (!_isOpenGenericReturnType)
+            if (!ReturnType.ContainsGenericParameters)
                 return false;
 
             // if we have an open generic return type, then we're compatible if
             // the desired return type is a generic that's based on that open generic,
             // or another which inherits from it.
-            if (!TypeHelpers.IsGenericType(expectedReturnType))
+            if (!expectedReturnType.IsGenericType)
                 return false;
-
-            var expectedReturnGenericType = expectedReturnType.GetGenericTypeDefinition();
-
-            return TypeHelpers.IsAssignableFrom(expectedReturnGenericType, ReturnType);
+            
+            return expectedReturnType.GetGenericTypeDefinition().IsAssignableFrom(ReturnType);
         }
 
         /// <summary>
@@ -156,8 +156,10 @@ namespace Rezolver.Targets
         void INotifyRegistrationTarget.OnRegistration(IRootTargetContainer root, Type registeredType)
         {
             if (this.BoundTarget == null) {
-                root.RegisterProjection(ReturnType, registeredType, (root2, source) => new AutoFactoryTarget(registeredType, ReturnType, ParameterTypes, source));
+                root.RegisterProjection(ReturnType, registeredType, CreateTarget);
             }
+
+            AutoFactoryTarget CreateTarget(IRootTargetContainer root2, ITarget source) => new AutoFactoryTarget(registeredType, ReturnType, ParameterTypes, source);
         }
     }
 }

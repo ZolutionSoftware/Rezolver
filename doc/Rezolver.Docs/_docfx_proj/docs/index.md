@@ -67,4 +67,3 @@ If you have a question about something that's not covered here, please feel free
 
 - Asp.Net Core developers should read how to 
 [integrate Rezolver into the Asp.Net Core hosting pipeline](nuget-packages/rezolver.microsoft.aspnetcore.hosting.md).
-- Learn how to [create and use a container](create-and-use-a-container.md).

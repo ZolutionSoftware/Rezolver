@@ -1,9 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Rezolver.Microsoft.DependencyInjection.Tests</AssemblyName>
     <PackageId>Rezolver.Microsoft.DependencyInjection.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <Configurations>Debug;Release;PerformanceTesting</Configurations>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -29,7 +30,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0" />
   </ItemGroup>
 

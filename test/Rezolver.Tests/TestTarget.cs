@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Rezolver.Tests
 {
 	public class TestTarget : ITarget
 	{
-        public Guid Id { get; } = Guid.NewGuid();
+        private static int _id = 1;
+
+        public int Id { get; } = Interlocked.Increment(ref _id);
 
 		private Type _declaredType;
 		public Type DeclaredType

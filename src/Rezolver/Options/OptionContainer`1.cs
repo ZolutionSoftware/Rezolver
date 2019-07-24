@@ -1,13 +1,15 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
+using Rezolver.Targets;
 using System;
 
 namespace Rezolver.Options
 {
     internal class OptionContainer<TOption> : IDirectTarget, ITarget, IOptionContainer<TOption>
     {
-        public Guid Id { get; } = Guid.NewGuid();
+        public int Id { get; } = TargetBase.NextId();
 
         public TOption Option { get; }
 
@@ -32,11 +34,11 @@ namespace Rezolver.Options
             // so we can register an option against a service, taking advantage of the contravariance
             // and other generic functionality of the target containers -
             return typeof(IOptionContainer<TOption>) == type
-                || (TypeHelpers.IsGenericType(type)
+                || (type.IsGenericType
                     && (typeof(IOptionContainer<,>).Equals(type.GetGenericTypeDefinition())
-                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[1])
+                        && typeof(TOption) == type.GetGenericArguments()[1])
                     || (typeof(IAnyGenericOptionContainer<>).Equals(type.GetGenericTypeDefinition())
-                        && typeof(TOption) == TypeHelpers.GetGenericArguments(type)[0]));
+                        && typeof(TOption) == type.GetGenericArguments()[0]));
         }
     }
 }

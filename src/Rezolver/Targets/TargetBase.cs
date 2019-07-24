@@ -1,10 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Linq.Expressions;
-using System.Reflection;
-using Rezolver.Compilation;
+using System.Threading;
 
 namespace Rezolver.Targets
 {
@@ -13,12 +12,26 @@ namespace Rezolver.Targets
     /// </summary>
     public abstract class TargetBase : ITarget
     {
+        private static int _id = 1;
+
+        /// <summary>
+        /// Gets the next available ID for a target.
+        /// </summary>
+        /// <remarks>
+        /// This function is not generally intended to be called from your code.
+        /// </remarks>
+        /// <returns>The next application-unique ID available for a new target</returns>
+        public static int NextId()
+        {
+            return Interlocked.Increment(ref _id);
+        }
+
         /// <summary>
         /// Implementation of <see cref="ITarget.Id"/>.  Unique Id for this target.
         ///
         /// Always initialised to a new <see cref="Guid"/> using <see cref="Guid.NewGuid"/>
         /// </summary>
-        public Guid Id { get; private set; }
+        public int Id { get; private set; }
 
         /// <summary>
         /// Implementation of <see cref="ITarget.UseFallback"/>
@@ -85,7 +98,7 @@ namespace Rezolver.Targets
         /// </remarks>
         public virtual bool SupportsType(Type type)
         {
-            type.MustNotBeNull("type");
+            if(type == null) throw new ArgumentNullException(nameof(type));
             // removed generic type test here because it's a blunt instrument.
             return TypeHelpers.AreCompatible(DeclaredType, type);
         }
@@ -103,7 +116,7 @@ namespace Rezolver.Targets
         /// Default constructor for derived types
         /// </summary>
         protected TargetBase()
-            : this(Guid.NewGuid())
+            : this(NextId())
         {
 
         }
@@ -113,7 +126,7 @@ namespace Rezolver.Targets
         /// such as with the <see cref="VariantMatchTarget"/> etc.
         /// </summary>
         /// <param name="id"></param>
-        protected TargetBase(Guid id)
+        protected TargetBase(int id)
         {
             Id = id;
         }

@@ -1,12 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Threading;
 using Rezolver.Compilation;
 
 namespace Rezolver.Targets
@@ -18,52 +15,41 @@ namespace Rezolver.Targets
     /// </summary>
     public class SingletonTarget : TargetBase
     {
-        internal class SingletonContainer
+        internal sealed class SingletonContainer
         {
-            private readonly ConcurrentDictionary<TypeAndTargetId, Lazy<object>> _cached =
-                new ConcurrentDictionary<TypeAndTargetId, Lazy<object>>();
-
-            private readonly ConcurrentDictionary<TypeAndTargetId, ICompiledTarget> _cachedCompiled =
-                new ConcurrentDictionary<TypeAndTargetId, ICompiledTarget>();
-
-            private readonly ConcurrentDictionary<TypeAndTargetId, object> _cachedObjects =
-                new ConcurrentDictionary<TypeAndTargetId, object>();
-
-            private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext: ICompileContext
+            internal sealed class Entry<TService>
             {
-                return GetCompiled(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
-            }
+                private readonly Lazy<TService> Lazy;
+                private ResolveContext _context;
 
-            private ICompiledTarget GetCompiled<TCompileContext>(TCompileContext context, TypeAndTargetId key, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext : ICompileContext
-            {
-                return this._cachedCompiled.GetOrAdd(key, t => compiledTargetFactory(context));
-            }
-
-            private Lazy<object> GetLazy(IResolveContext context, Guid targetId, Func<IResolveContext, object> lazyFactory)
-            {
-                return GetLazy(context, new TypeAndTargetId(context.RequestedType, targetId), lazyFactory);
-            }
-
-            private Lazy<object> GetLazy(IResolveContext context, TypeAndTargetId key, Func<IResolveContext, object> lazyFactory)
-            {
-                return this._cached.GetOrAdd(key, c => new Lazy<object>(() => lazyFactory(context)));
-            }
-
-            public object GetObject<TCompileContext>(TCompileContext context, Guid targetId, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext : ICompileContext
-            {
-                return GetObject(context, new TypeAndTargetId(context.TargetType, targetId), compiledTargetFactory);
-            }
-
-            public object GetObject<TCompileContext>(TCompileContext context, TypeAndTargetId key, Func<TCompileContext, ICompiledTarget> compiledTargetFactory)
-                where TCompileContext : ICompileContext
-            {
-                return this._cachedObjects.GetOrAdd(key, k =>
+                public TService Resolve(ResolveContext context)
                 {
-                    var compiled = GetCompiled(context, key, compiledTargetFactory);
-                    return GetLazy(context.ResolveContext, key, rc => compiled.GetObject(rc)).Value;
+                    if (_context == null) _context = context;
+                    return Lazy.Value;
+                }
+
+                public Entry(ResolveContext context, Func<ResolveContext, TService> factory)
+                {
+                    Lazy = new Lazy<TService>(() => factory(_context));
+                }
+            }
+
+            private ConcurrentDictionary<TypeAndTargetId, object> _lazies = new ConcurrentDictionary<TypeAndTargetId, object>();
+
+            public object GetLazy(TypeAndTargetId id)
+            {
+                _lazies.TryGetValue(id, out var result);
+                return result;
+            }
+
+            public object GetLazy(SingletonTarget target, TypeAndTargetId id, Delegate factory, ICompileContext context)
+            {
+                return _lazies.GetOrAdd(id, tid =>
+                {
+                    return Activator.CreateInstance(
+                        typeof(Entry<>).MakeGenericType(tid.Type),
+                        context.ResolveContext.ChangeRequestedType(tid.Type),
+                        factory);
                 });
             }
         }
@@ -75,9 +61,9 @@ namespace Rezolver.Targets
         public override Type DeclaredType => InnerTarget.DeclaredType;
 
         /// <summary>
-        /// Always returns <see cref="ScopeBehaviour.Explicit"/>.
+        /// Always returns the same behaviour as the <see cref="InnerTarget"/>
         /// </summary>
-        public override ScopeBehaviour ScopeBehaviour => ScopeBehaviour.Implicit;
+        public override ScopeBehaviour ScopeBehaviour => InnerTarget.ScopeBehaviour;
 
         /// <summary>
         /// Always returns <see cref="ScopePreference.Root"/>
@@ -94,8 +80,8 @@ namespace Rezolver.Targets
         /// <param name="innerTarget">The target whose result (when compiled) is to be used as the singleton instance.</param>
         public SingletonTarget(ITarget innerTarget)
         {
-            innerTarget.MustNotBeNull("innerTarget");
-            innerTarget.MustNot(t => t is SingletonTarget, "A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
+            if (innerTarget == null) throw new ArgumentNullException(nameof(innerTarget));
+            if (innerTarget is SingletonTarget) throw new ArgumentException("A SingletonTarget cannot wrap another SingletonTarget", nameof(innerTarget));
 
             InnerTarget = innerTarget;
         }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -104,7 +105,7 @@ namespace Rezolver.Sdk
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            if (TypeHelpers.IsValueType(dependencyType))
+            if (dependencyType.IsValueType)
             {
                 throw new ArgumentException($"{dependencyType} is a value type - only reference types are allowed", nameof(dependencyType));
             }
@@ -185,7 +186,7 @@ namespace Rezolver.Sdk
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            if (TypeHelpers.IsValueType(dependencyType))
+            if (dependencyType.IsValueType)
             {
                 throw new ArgumentException($"{dependencyType} is a value type - only reference types are allowed", nameof(dependencyType));
             }

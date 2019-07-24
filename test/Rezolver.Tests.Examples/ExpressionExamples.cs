@@ -104,7 +104,7 @@ namespace Rezolver.Tests.Examples
             container.RegisterExpression(() => CurrentPrincipal);
             // now register the expression for the IUserActionsService, which does the
             // role sniffing over the principal as one expression
-            container.RegisterExpression((IPrincipal p, IResolveContext rc) =>
+            container.RegisterExpression((IPrincipal p, ResolveContext rc) =>
                 p.IsInRole("Customer") ?
                 rc.Resolve<CustomerActionsService>() :
                     p.IsInRole("Sales") ?
@@ -174,6 +174,28 @@ namespace Rezolver.Tests.Examples
 
             Assert.NotNull(result.Service);
             // </example6>
+        }
+
+        [Fact]
+        public void ScopeShouldDisposeExpressionResult()
+        {
+            // <example7>
+            var container = new Container();
+            container.RegisterExpression(() => new DisposableType(), scopeBehaviour: ScopeBehaviour.Implicit);
+
+            DisposableType result, result2;
+
+            using (var scope = container.CreateScope())
+            {
+                result = scope.Resolve<DisposableType>();
+                using (var childScope = scope.CreateScope())
+                {
+                    result2 = childScope.Resolve<DisposableType>();
+                }
+                Assert.True(result2.Disposed);
+            }
+            Assert.True(result.Disposed);
+            // </example7>
         }
     }
 }

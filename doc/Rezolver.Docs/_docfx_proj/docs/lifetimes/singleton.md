@@ -2,7 +2,7 @@
 
 Rezolver's implementation of singletons has three entry points:
 
-- The @Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload, which offers a shortcut to registering a type via the 
+- The @Rezolver.TargetContainerExtensions.RegisterSingleton* overload, which offers a shortcut to registering a type via the 
 @Rezolver.Targets.ConstructorTarget or @Rezolver.Targets.GenericConstructorTarget (see the 
 [construction injection topic](../constructor-injection/index.md) for more) as a singleton.
 - The @Rezolver.Target.Singleton* extension method, which creates a new @Rezolver.Targets.SingletonTarget that wraps the target
@@ -10,16 +10,7 @@ on which it is called, converting it into a singleton.
 - The @Rezolver.Targets.SingletonTarget.%23ctor(Rezolver.ITarget) constructor
 
 The @Rezolver.Targets.SingletonTarget enforces a lock around its inner target so that its first result is cached and then returned
-for each subsequent @Rezolver.IContainer.Resolve* operation.
-
-> [!NOTE]
-> At the moment, the lifetime of a singleton is tied to the lifetime of the @Rezolver.Targets.SingletonTarget itself.
-> If you only ever have one container, or if you have multiple containers but use different targets for singletons 
-> of the same type, apply across the whole `AppDomain`, then you won't enounter any issues.  But if you create multiple
-> containers from the same @Rezolver.ITargetContainer, then you will find that singletons will be shared between them.
-> * * *
-> In the future (v1.2), singletons will be unique to each container - 
-> meaning that the same registration in two different containers would yield two different singletons.
+for each subsequent @Rezolver.Container.Resolve* operation.
 
 * * *
 
@@ -31,8 +22,8 @@ for each subsequent @Rezolver.IContainer.Resolve* operation.
 
 ## Constructor Injection
 
-If you are using the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterType* overload, you can swap it for the 
-@Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload to register a singleton for constructor injection:
+If you are using the @Rezolver.TargetContainerExtensions.RegisterType* overload, you can swap it for the 
+@Rezolver.TargetContainerExtensions.RegisterSingleton* overload to register a singleton for constructor injection:
 
 [!code-csharp[SingletonExamples.cs](../../../../../test/Rezolver.Tests.Examples/SingletonExamples.cs#example1)]
 
@@ -43,7 +34,7 @@ If you are using the @Rezolver.RegisterTypeTargetContainerExtensions.RegisterTyp
 If you need to use some of the more advanced constructor injection functionality, such as 
 [named argument binding](../constructor-injection/index.md#best-match-named-args), or 
 [specific `ConstructorInfo` binding](../constructor-injection/index.md#with-a-constructorinfo), then you can't use the 
-@Rezolver.SingletonTargetContainerExtensions.RegisterSingleton* overload - because that creates the @Rezolver.Targets.ConstructorTarget or
+@Rezolver.TargetContainerExtensions.RegisterSingleton* overload - because that creates the @Rezolver.Targets.ConstructorTarget or
 @Rezolver.Targets.GenericConstructorTarget for you.  Instead, you will create it yourself and then wrap a 
 @Rezolver.Targets.SingletonTarget around it - using either its @Rezolver.Targets.SingletonTarget.%23ctor(Rezolver.ITarget) constructor, or 
 the @Rezolver.Target.Singleton* @Rezolver.ITarget extension method.
@@ -151,5 +142,5 @@ a @Rezolver.Targets.SingletonTarget around it.  Clearly, there are some targets 
 and the SingletonTarget itself, for instance!) although, right now, Rezolver doesn't prevent you from doing so.
 
 - You should now take a look at [how explicitly scoped objects](scoped.md) are supported by Rezolver.
-- You might also want to see how singletons behave inside an @Rezolver.IContainerScope - which is part of the 
+- You might also want to see how singletons behave inside an @Rezolver.ContainerScope - which is part of the 
 [container scopes](container-scopes.md) documentation.

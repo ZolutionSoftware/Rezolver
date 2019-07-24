@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Rezolver.Compilation;
 
 namespace Rezolver.Targets
 {
     /// <summary>
     /// Implements <see cref="ITarget"/> by wrapping a single instance that's already been constructed by application code.
     /// </summary>
-    public class ObjectTarget : TargetBase, ICompiledTarget, IDirectTarget
+    public class ObjectTarget : TargetBase, IFactoryProvider, IInstanceProvider
     {
 
         /// <summary>
@@ -37,6 +35,8 @@ namespace Rezolver.Targets
         /// </summary>
         /// <value>The value.</value>
         public object Value { get; }
+
+        private readonly Func<ResolveContext, object> _factory;
 
         /// <summary>
         /// Creates a new instance of the <see cref="ObjectTarget"/> class.
@@ -78,24 +78,36 @@ namespace Rezolver.Targets
             {
                 DeclaredType = Value == null ? typeof(object) : Value.GetType();
             }
+
+            switch (ScopeBehaviour)
+            {
+                case ScopeBehaviour.None:
+                    _factory = (ResolveContext context) => Value;
+                    break;
+                case ScopeBehaviour.Implicit:
+                    _factory = (ResolveContext context) => context.ActivateImplicit_RootScope(Value);
+                    break;
+                case ScopeBehaviour.Explicit:
+                    Func<ResolveContext, object> activation = (ResolveContext cc) => Value;
+                    _factory = (ResolveContext context) => context.ActivateExplicit_RootScope(this.Id, activation);
+                    break;
+            }
         }
 
-        object ICompiledTarget.GetObject(IResolveContext context)
+        /// <summary>
+        /// Implementation of <see cref="IFactoryProvider.Factory"/>
+        /// </summary>
+        /// <returns>A factory delegate which returns the <see cref="Value"/></returns>
+        Func<ResolveContext, object> IFactoryProvider.Factory => _factory;
+
+        object IInstanceProvider.GetInstance(ResolveContext context)
         {
-            // when directly implementing ICompiledTarget, the scoping rules have to be honoured manually
-            if (context.Scope == null)
-            {
+            if (ScopeBehaviour == ScopeBehaviour.None)
                 return Value;
-            }
+            else if (ScopeBehaviour == ScopeBehaviour.Implicit)
+                return context.ActivateImplicit_RootScope(Value);
             else
-            {
-                // whatever scoping we're doing, we MUST use the root scope.
-                return context.Scope.GetRootScope().Resolve(context, Id, r => Value, ScopeBehaviour);
-            }
+                return _factory(context);
         }
-
-        object IDirectTarget.GetValue() => Value;
-
-        ITarget ICompiledTarget.SourceTarget => this;
     }
 }

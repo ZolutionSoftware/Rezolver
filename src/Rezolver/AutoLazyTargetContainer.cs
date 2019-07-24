@@ -1,4 +1,8 @@
-﻿using Rezolver.Targets;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using Rezolver.Targets;
 using System;
 using System.Collections.Concurrent;
 
@@ -6,7 +10,7 @@ namespace Rezolver
 {
     internal class AutoLazyTargetContainer : GenericTargetContainer
     {
-        private ConcurrentDictionary<Type, ConstructorTarget> _cachedTargets = new ConcurrentDictionary<Type, ConstructorTarget>();
+        private ConcurrentDictionary<Type, ITarget> _cachedTargets = new ConcurrentDictionary<Type, ITarget>();
         internal AutoLazyTargetContainer(IRootTargetContainer root)
             : base(root, typeof(Lazy<>))
         {
@@ -16,7 +20,7 @@ namespace Rezolver
         public override ITarget Fetch(Type type)
         {
             Type genericType;
-            if (!TypeHelpers.IsGenericType(type) || (genericType = type.GetGenericTypeDefinition()) != GenericType)
+            if (!type.IsGenericType || (genericType = type.GetGenericTypeDefinition()) != GenericType)
             {
                 throw new ArgumentException($"Only {GenericType} is supported by this container", nameof(type));
             }
@@ -30,18 +34,18 @@ namespace Rezolver
 
             return _cachedTargets.GetOrAdd(type, BuildTarget);
 
-            ConstructorTarget BuildTarget(Type t)
+            ITarget BuildTarget(Type t)
             {
                 // we need a ConstructorTarget that binds to the correct Lazy<T> constructor (for the specific type 
                 // passed as the generic type argument)
                 // for that, we need the generic type argument
-                var innerLazyType = TypeHelpers.GetGenericArguments(t)[0];
-                var constructor = TypeHelpers.GetConstructor(t, new[] { typeof(Func<>).MakeGenericType(innerLazyType) });
+                var innerLazyType = t.GetGenericArguments()[0];
+                var constructor = t.GetConstructor(new[] { typeof(Func<>).MakeGenericType(innerLazyType) });
 
                 if (constructor == null)
                     throw new InvalidOperationException($"Could not get Func callback constructor for {t}");
 
-                return new ConstructorTarget(constructor);
+                return new ConstructorTarget(constructor).Unscoped();
             }
         }
     }

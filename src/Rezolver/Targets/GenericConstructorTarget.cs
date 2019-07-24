@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Rezolver.Compilation;
 using Rezolver.Runtime;
 
@@ -86,12 +86,15 @@ namespace Rezolver.Targets
         /// <see cref="ICompileContext"/> - and if one is still not available, then no member binding will be performed.</param>
         public GenericConstructorTarget(Type genericType, IMemberBindingBehaviour memberBinding = null)
         {
-            if (!TypeHelpers.IsGenericTypeDefinition(genericType ?? throw new ArgumentNullException(nameof(genericType))))
+            if (genericType == null)
+                throw new ArgumentNullException(nameof(genericType));
+
+            if (!genericType.IsGenericTypeDefinition)
             {
                 throw new ArgumentException("The generic constructor target currently only supports fully open generics.  Use ConstructorTarget for closed generics.");
             }
 
-            if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
+            if (genericType.IsAbstract || genericType.IsInterface)
             {
                 throw new ArgumentException("The type must be a generic type definition of either a non-abstract class or value type.");
             }
@@ -117,12 +120,12 @@ namespace Rezolver.Targets
             }
 
             Type genericType = genericConstructor.DeclaringType;
-            if (!TypeHelpers.IsGenericTypeDefinition(genericType))
+            if (!genericType.IsGenericTypeDefinition)
             {
                 throw new ArgumentException($"The supplied constructor {genericConstructor} does not belong to an open generic type.  Use ConstructorTarget for non-generic constructors");
             }
 
-            if (TypeHelpers.IsAbstract(genericType) || TypeHelpers.IsInterface(genericType))
+            if (genericType.IsAbstract || genericType.IsInterface)
             {
                 throw new ArgumentException($"The type which owns the given constructor ({genericConstructor}) must be a generic type definition of either a non-abstract class or value type.");
             }
@@ -160,17 +163,17 @@ namespace Rezolver.Targets
         /// <param name="targetType">Type of the target.</param>
         public GenericTypeMapping MapType(Type targetType)
         {
-            if (!TypeHelpers.IsGenericType(targetType))
+            if (!targetType.IsGenericType)
             {
                 return new GenericTypeMapping(targetType, GetMappingError_DeclaredTypeCannotBeMapped(DeclaredType, targetType));
             }
 
-            var genericType = TypeHelpers.IsGenericTypeDefinition(targetType) ? targetType : targetType.GetGenericTypeDefinition();
+            var genericType = targetType.IsGenericTypeDefinition ? targetType : targetType.GetGenericTypeDefinition();
             Type[] suppliedTypeArguments = EmptyTypes;
             Type[] finalTypeArguments = EmptyTypes;
             if (genericType == DeclaredType)
             {
-                finalTypeArguments = TypeHelpers.GetGenericArguments(targetType);
+                finalTypeArguments = targetType.GetGenericArguments();
             }
             else
             {
@@ -181,7 +184,7 @@ namespace Rezolver.Targets
                     return new GenericTypeMapping(targetType, GetMappingError_NotABaseOrInterface(DeclaredType, targetType));
                 }
 
-                var genericMismatches = finalTypeArguments.Where(a => TypeHelpers.IsAssignableFrom(typeof(ITypeArgGenericMismatch), a)).ToArray();
+                var genericMismatches = finalTypeArguments.Where(a => typeof(ITypeArgGenericMismatch).IsAssignableFrom(a)).ToArray();
 
                 if (genericMismatches.Length != 0)
                 {
@@ -195,7 +198,7 @@ namespace Rezolver.Targets
                     // type.  So that's what the error message here is for - it'll be used as an exception if Bind is called with the same
                     // type, even though SupportsType would return true.
                     // TODO: change dis to deep search for *ANY* open generics
-                    if (TypeHelpers.ContainsGenericParameters(targetType))
+                    if (targetType.ContainsGenericParameters)
                     {
                         return new GenericTypeMapping(targetType, DeclaredType, bindErrorMessage: GetMappingError_OpenGenericResult(DeclaredType, targetType));
                     }
@@ -276,7 +279,7 @@ namespace Rezolver.Targets
         /// </remarks>
         public ITarget Bind(ICompileContext context)
         {
-            context.MustNotBeNull(nameof(context));
+            if(context == null) throw new ArgumentNullException(nameof(context));
 
             // always create a constructor target from new
             // basically this class simply acts as a factory for other constructor targets.
@@ -308,15 +311,15 @@ namespace Rezolver.Targets
         private Type[] MapGenericParameters(Type requestedType)
         {
             var requestedTypeGenericDefinition = requestedType.GetGenericTypeDefinition();
-            Type[] finalTypeArguments = TypeHelpers.GetGenericArguments(DeclaredType);
+            Type[] finalTypeArguments = DeclaredType.GetGenericArguments();
             // check whether it's a base or an interface
-            var mappedBase = TypeHelpers.IsInterface(requestedTypeGenericDefinition) ?
-                TypeHelpers.GetInterfaces(DeclaredType).FirstOrDefault(t => TypeHelpers.IsGenericType(t) && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
-                : DeclaredType.GetAllBases().SingleOrDefault(b => TypeHelpers.IsGenericType(b) && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
+            var mappedBase = requestedTypeGenericDefinition.IsInterface ?
+                DeclaredType.GetInterfaces().FirstOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == requestedTypeGenericDefinition)
+                : DeclaredType.GetAllBases().SingleOrDefault(b => b.IsGenericType && b.GetGenericTypeDefinition() == requestedTypeGenericDefinition);
             if (mappedBase != null)
             {
-                var baseTypeParams = TypeHelpers.GetGenericArguments(mappedBase);
-                var typeParamPositions = TypeHelpers.GetGenericArguments(DeclaredType)
+                var baseTypeParams = mappedBase.GetGenericArguments();
+                var typeParamPositions = DeclaredType.GetGenericArguments()
                     .Select(t =>
                     {
                         var mapping = DeepSearchTypeParameterMapping(null, mappedBase, t);
@@ -337,7 +340,7 @@ namespace Rezolver.Targets
                         };
                     }).OrderBy(r => r.Mapping != null ? r.Mapping[0].Index : int.MinValue).ToArray();
 
-                var suppliedTypeArguments = TypeHelpers.GetGenericArguments(requestedType);
+                var suppliedTypeArguments = requestedType.GetGenericArguments();
                 Type suppliedArg = null;
                 foreach (var typeParam in typeParamPositions.Where(p => p.Mapping != null))
                 {
@@ -352,7 +355,7 @@ namespace Rezolver.Targets
                     foreach (var mapping in typeParam.Mapping.Skip(1))
                     {
                         // so if the next parameter is not a generic type, then we can't get the arguments
-                        if (!TypeHelpers.IsGenericType(suppliedArg))
+                        if (!suppliedArg.IsGenericType)
                         {
                             suppliedArg = typeof(ITypeArgGenericMismatch<,,,>).MakeGenericType(
                                 mapping.BaseTypeArgument,
@@ -363,7 +366,7 @@ namespace Rezolver.Targets
                         }
                         else
                         {
-                            suppliedArg = TypeHelpers.GetGenericArguments(suppliedArg)[mapping.Index];
+                            suppliedArg = suppliedArg.GetGenericArguments()[mapping.Index];
                         }
                     }
 
@@ -422,9 +425,9 @@ namespace Rezolver.Targets
                 previousTypeParameterPositions = new Stack<GenericParameterMapping>();
             }
 
-            if (TypeHelpers.IsGenericType(baseTypeParameter))
+            if (baseTypeParameter.IsGenericType)
             {
-                var args = TypeHelpers.GetGenericArguments(baseTypeParameter);
+                var args = baseTypeParameter.GetGenericArguments();
                 GenericParameterMapping[] result = null;
                 for (int f = 0; f < args.Length; f++)
                 {
@@ -467,7 +470,7 @@ namespace Rezolver.Targets
             return $@"One or more type arguments in the requested type {requestedType} are 'less generic' than those of {genericType}: {
                                     string.Join(", ", genericMismatches.Select(t =>
                                     {
-                                        var mismatchedArgs = TypeHelpers.GetGenericArguments(t);
+                                        var mismatchedArgs = t.GetGenericArguments();
                                         return $@"{
                                             mismatchedArgs[0]} in {(mismatchedArgs[1] != typeof(INotGeneric) ? mismatchedArgs[1].ToString() : "[not generic]")} is mapped to less generic argument {
                                             mismatchedArgs[2]} of {(mismatchedArgs[3] != typeof(INotGeneric) ? mismatchedArgs[3].ToString() : "[not generic]")}";

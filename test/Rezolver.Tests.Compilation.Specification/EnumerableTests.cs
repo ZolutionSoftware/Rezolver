@@ -188,5 +188,23 @@ namespace Rezolver.Tests.Compilation.Specification
             Assert.NotSame(result[1], result[2]);
             Assert.Same(last, result[2]);
         }
+
+        [Fact]
+        public void EagerEnumerable_ShouldCreateSameScopeds()
+        {
+            var targets = CreateTargetContainer();
+            targets.SetOption<Options.LazyEnumerables, BaseClass>(false);
+            var container = new ScopedContainer(targets);
+            container.RegisterScoped<BaseClass>();
+            container.RegisterScoped<BaseClassChild, BaseClass>();
+            container.RegisterScoped<BaseClassGrandchild, BaseClass>();
+
+
+            var last = container.Resolve<BaseClass>();
+            var result = container.ResolveMany<BaseClass>().ToArray();
+            Assert.NotSame(result[0], result[1]);
+            Assert.NotSame(result[1], result[2]);
+            Assert.Same(last, result[2]);
+        }
     }
 }

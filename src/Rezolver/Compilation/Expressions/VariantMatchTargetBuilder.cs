@@ -1,8 +1,9 @@
-﻿using Rezolver.Targets;
-using System;
-using System.Collections.Generic;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using Rezolver.Targets;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Rezolver.Compilation.Expressions
 {

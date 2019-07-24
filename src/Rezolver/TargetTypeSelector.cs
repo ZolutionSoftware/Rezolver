@@ -1,12 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using Rezolver.Runtime;
 
 namespace Rezolver
@@ -90,14 +89,14 @@ namespace Rezolver
             List<Type> explicitlyAddedBases = new List<Type>();
             Type[] temp;
 
-            if (TypeHelpers.IsGenericType(search.Type) && !TypeHelpers.IsGenericTypeDefinition(search.Type))
+            if (search.Type.IsGenericType && !search.Type.IsGenericTypeDefinition)
             {
                 // now return any covariant matches if applicable
                 // NOTE - if the search is for a type parameter, then we don't perform this operation
                 // as we're only interested in materialising covariant types which we know *should* materialise
                 // at least one target match.
                 if (search.TypeParameter == null &&
-                    !TypeHelpers.IsValueType(search.Type) &&
+                    !search.Type.IsValueType &&
                     RootTargets != null)
                 {
                     temp = RootTargets.GetKnownCovariantTypes(search.Type).ToArray();
@@ -108,13 +107,13 @@ namespace Rezolver
                 // for every generic type, there is at least two versions - the closed and the open
                 // when you consider, also, that a generic parameter might also be a generic, with multiple
                 // versions - you can see that things can get icky.
-                var argSearches = TypeHelpers.GetGenericArguments(search.Type).Zip(
-                TypeHelpers.GetGenericArguments(search.Type.GetGenericTypeDefinition()),
-                (arg, param) => new TargetTypeSelectorParams(
-                    arg,
-                    param,
-                    search)
-                ).ToArray();
+                var argSearches = search.Type.GetGenericArguments()
+                    .Zip(search.Type.GetGenericTypeDefinition().GetGenericArguments(),
+                    (arg, param) => new TargetTypeSelectorParams(
+                        arg,
+                        param,
+                        search)
+                    ).ToArray();
 
                 var typeParamSearchLists = argSearches.Select(t => Run(t).ToArray()).ToArray();
                 var genericType = search.Type.GetGenericTypeDefinition();
@@ -135,7 +134,7 @@ namespace Rezolver
                         continue;
                     }
                     // check if this combination counts as a variant match
-                    if (!TypeHelpers.ContainsGenericParameters(compatibleType))
+                    if (!compatibleType.ContainsGenericParameters)
                     {
                         for (var f = 0; f < combinationArray.Length; f++)
                         {
@@ -149,7 +148,7 @@ namespace Rezolver
 
                     toReturn.Add(compatibleType);
                     if (search.TypeParameter == null &&
-                        !TypeHelpers.IsValueType(search.Type) &&
+                        !search.Type.IsValueType &&
                         RootTargets != null)
                     {
                         temp = RootTargets.GetKnownCovariantTypes(compatibleType).ToArray();
@@ -161,7 +160,7 @@ namespace Rezolver
                 toReturn.Add(genericType);
             }
 
-            bool isArray = TypeHelpers.IsArray(search.Type);
+            bool isArray = search.Type.IsArray;
             Type arrayElemType = null;
             bool isValueTypeArray = false;
             bool addElemTypeInterfaces = false;
@@ -171,11 +170,11 @@ namespace Rezolver
             if (isArray)
             {
                 allArrayTypes.Add(search.Type);
-                arrayElemType = TypeHelpers.GetElementType(search.Type);
-                isValueTypeArray = TypeHelpers.IsValueType(arrayElemType);
+                arrayElemType = search.Type.GetElementType();
+                isValueTypeArray = arrayElemType.IsValueType;
                 if (!isValueTypeArray)
                 {
-                    addElemTypeInterfaces = TypeHelpers.IsInterface(arrayElemType);
+                    addElemTypeInterfaces = arrayElemType.IsInterface;
                     addArrayBases = !addElemTypeInterfaces;
                 }
             }
@@ -223,8 +222,8 @@ namespace Rezolver
                         }
 
                         // if it's a class then iterate the bases
-                        if (!TypeHelpers.IsInterface(search.Type)
-                            && !TypeHelpers.IsValueType(search.Type)
+                        if (!search.Type.IsInterface
+                            && !search.Type.IsValueType
                             && search.Type != typeof(object))
                         {
                             if (!explicitlyAddedBases.Contains(typeof(object)))
@@ -234,7 +233,7 @@ namespace Rezolver
 
                             // note - disable interfaces when recursing into the base
                             // note also - ignore 'object'
-                            temp = Run(new TargetTypeSelectorParams(TypeHelpers.BaseType(search.Type), search.TypeParameter, search.Parent, Contravariance.Bases))
+                            temp = Run(new TargetTypeSelectorParams(search.Type.BaseType, search.TypeParameter, search.Parent, Contravariance.Bases))
                                 .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                             variantMatches.UnionWith(temp);
                             toReturn.AddRange(temp);
@@ -244,14 +243,14 @@ namespace Rezolver
                     if ((search.Contravariance & Contravariance.Interfaces) == Contravariance.Interfaces)
                     {
                         // don't check interfaces when type is a value type
-                        if (!TypeHelpers.IsValueType(search.Type))
+                        if (!search.Type.IsValueType)
                         {
                             if (isArray)
                             {
                                 // have to include all the interfaces of all the array types that are compatible per array covariance
                                 temp = allArrayTypes
-                                    .SelectMany(t => TypeHelpers.GetInterfaces(t)
-                                    .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
+                                    .SelectMany(t => t.GetInterfaces()
+                                        .SelectMany(tt => Run(new TargetTypeSelectorParams(tt, search.TypeParameter, search.Parent, Contravariance.Bases))))
                                     .OrderBy(t => t, DescendingTypeOrder.Instance)
                                     .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                                 variantMatches.UnionWith(temp);
@@ -259,7 +258,7 @@ namespace Rezolver
                             }
                             else
                             {
-                                temp = TypeHelpers.GetInterfaces(search.Type)
+                                temp = search.Type.GetInterfaces()
                                     .SelectMany(t => Run(new TargetTypeSelectorParams(t, search.TypeParameter, search.Parent, Contravariance.Bases)))
                                     .Where(tt => !explicitlyAddedBases.Contains(tt)).ToArray();
                                 variantMatches.UnionWith(temp);

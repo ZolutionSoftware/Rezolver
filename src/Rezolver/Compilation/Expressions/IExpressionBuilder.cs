@@ -1,11 +1,9 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Rezolver.Compilation.Expressions
 {
@@ -16,10 +14,10 @@ namespace Rezolver.Compilation.Expressions
     public interface IExpressionBuilder
     {
         /// <summary>
-        /// Determines whether this instance can build an expression for the specified target.
+        /// Determines whether this instance can build an expression for the specified target type.
         /// </summary>
-        /// <param name="target">The target.</param>
-        bool CanBuild(ITarget target);
+        /// <param name="targetType">The type of target.</param>
+        bool CanBuild(Type targetType);
         /// <summary>
         /// Builds an expression for the specified target.
         /// </summary>

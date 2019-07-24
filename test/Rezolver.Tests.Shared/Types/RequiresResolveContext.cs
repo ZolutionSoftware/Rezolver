@@ -7,8 +7,8 @@ namespace Rezolver.Tests.Types
 {
     public class RequiresResolveContext
     {
-		public IResolveContext Context { get; }
-		public RequiresResolveContext(IResolveContext context)
+		public ResolveContext Context { get; }
+		public RequiresResolveContext(ResolveContext context)
 		{
 			Context = context;
 		}

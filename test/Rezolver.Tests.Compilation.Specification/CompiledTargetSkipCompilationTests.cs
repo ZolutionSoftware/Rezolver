@@ -13,7 +13,7 @@ namespace Rezolver.Tests.Compilation.Specification
         // These feature tests came from Issue #31
 
         [Fact]
-        public void ICompiledTarget_ShouldResolveCustomCompileTargetDirectly()
+        public void InstanceProvider_ShouldResolveInstanceWithoutCompilation()
         {
             // First test just registers the custom compiled target in the container
             // and then directly resolves it.  The compiler *shouldn't* even be required because
@@ -23,7 +23,7 @@ namespace Rezolver.Tests.Compilation.Specification
             var targets = CreateTargetContainer();
 
             // will register against 'int'
-            targets.Register(new CustomTargetAndCompiledTarget(1));
+            targets.Register(new CustomTargetAndInstanceProvider(1));
 
             var container = CreateContainer(targets);
 
@@ -31,17 +31,17 @@ namespace Rezolver.Tests.Compilation.Specification
         }
 
         [Fact]
-        public void ICompiledTarget_ShouldUseCustomCompiledTargetAsDependency()
+        public void InstanceProvider_ShouldWorkAsDependencyWithoutCompilationn()
         {
             // This test does the same, except this time the Custom target is used to
             // satisfy a dependency in another object.  This is different because the compiler 
             // should be directly involved in 'compiling' the target for the purposes of 
             // satisfying the constructor parameter.  And since we haven't told the compiler
-            // anything about our custom target, it should be forced to consider its ICompiledTarget
+            // anything about our custom target, it should be forced to consider its IInstanceProvider
             // implementation.
             var targets = CreateTargetContainer();
 
-            targets.Register(new CustomTargetAndCompiledTarget(2));
+            targets.Register(new CustomTargetAndInstanceProvider(2));
             targets.RegisterType<RequiresInt>();
 
             var container = CreateContainer(targets);

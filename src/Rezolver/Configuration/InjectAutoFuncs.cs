@@ -1,17 +1,18 @@
-﻿using Rezolver.Options;
+﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
+// Licensed under the MIT License, see LICENSE.txt in the solution root for license information
+
+
+using Rezolver.Options;
 using Rezolver.Sdk;
 using Rezolver.Targets;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rezolver.Configuration
 {
     /// <summary>
     /// Controls whether the injection of <see cref="Func{TResult}"/> will automatically be
-    /// available *without* having to use the <see cref="AutoFactoryRegistrationExtensions.RegisterAutoFunc{TResult}(IRootTargetContainer)"/>
+    /// available *without* having to use the <see cref="RootTargetContainerExtensions.RegisterAutoFunc{TResult}(IRootTargetContainer)"/>
     /// method or explicitly register <see cref="AutoFactoryTarget"/> targets.
     /// </summary>
     /// <remarks>
@@ -72,9 +73,9 @@ namespace Rezolver.Configuration
             targets.TargetRegistered += (object sender, Events.TargetRegisteredEventArgs e) =>
             {
                 if (e.Target is AutoFactoryTarget ||
-                    (TypeHelpers.IsAssignableFrom(typeof(Delegate), e.Type)
-                    && TypeHelpers.IsGenericType(e.Type)
-                    && ((TypeHelpers.IsGenericTypeDefinition(e.Type) && FuncTypes.Contains(e.Type))
+                    (typeof(Delegate).IsAssignableFrom(e.Type)
+                    && e.Type.IsGenericType
+                    && ((e.Type.IsGenericTypeDefinition && FuncTypes.Contains(e.Type))
                         || FuncTypes.Contains(e.Type.GetGenericTypeDefinition()))))
                 {
                     return;
@@ -89,7 +90,7 @@ namespace Rezolver.Configuration
                     // you'd think we would bind to the target that was registered, but we don't because
                     // that would prevent auto IEnumerable<delegate_type> from working, and would also prevent
                     // decorators from working.
-                    root.Register(new AutoFactoryTarget(funcType, e.Type, TypeHelpers.EmptyTypes));
+                    root.Register(new AutoFactoryTarget(funcType, e.Type, Type.EmptyTypes));
                 }
 
                 if (enableEnumerables)
@@ -99,7 +100,7 @@ namespace Rezolver.Configuration
                     existing = root.Fetch(funcType);
                     if(existing == null || existing.UseFallback)
                     {
-                        root.Register(new AutoFactoryTarget(funcType, enumerableType, TypeHelpers.EmptyTypes));
+                        root.Register(new AutoFactoryTarget(funcType, enumerableType, Type.EmptyTypes));
                     }
                 }
             };

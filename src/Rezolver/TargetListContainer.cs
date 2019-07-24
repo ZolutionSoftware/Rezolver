@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Zolution Software Ltd. All rights reserved.
 // Licensed under the MIT License, see LICENSE.txt in the solution root for license information
 
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rezolver
 {
@@ -55,6 +55,9 @@ namespace Rezolver
 
         ITarget IList<ITarget>.this[int index] { get => ((IList<ITarget>)this._targets)[index]; set => ((IList<ITarget>)this._targets)[index] = value; }
 
+        /// <summary>
+        /// The root target container.  Implementation of <see cref="ITargetContainer.Root"/>
+        /// </summary>
         public IRootTargetContainer Root { get; }
 
         private bool AllowMultiple { get; }
