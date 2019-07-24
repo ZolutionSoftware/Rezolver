@@ -1,7 +1,9 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# CI Build for Rezolver
+# - Builds release and debug versions
+# - Runs release unit tests
+# - Packages Pre-Release versions for Devops and Nuget (Debug builds)
+# - Packages Final versions for Devops and Nuget (Release builds)
+# - Builds and packages documentation website
 
 trigger:
 - master
@@ -13,8 +15,8 @@ variables:
   solution: 'Rezolver.sln'
   docsProject: 'doc/Rezolver.Docs/Rezolver.Docs.csproj'
   buildPlatform: 'Any CPU'
-  packageBuildConfig: 'Release'
-  localPackageBuildConfig: 'Debug'
+  debugConfig: 'debug'
+  releaseConfig: 'release'
   docsBuildConfig: 'Documentation'
 
 steps:
@@ -25,17 +27,24 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
-  displayName: 'Build Core'
+  displayName: 'Build Debug'
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
-    configuration: '$(packageBuildConfig)'
+    configuration: '$(debugConfig)' 
+
+- task: VSBuild@1
+  displayName: 'Build Release'
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(releaseConfig)'
 
 - task: VSTest@2
-  displayName: 'Run Unit Tests'
+  displayName: 'Run Tests (Release Build)'
   inputs:
     platform: '$(buildPlatform)'
-    configuration: '$(packageBuildConfig)'
+    configuration: '$(releaseConfig)'
     testAssemblyVer2: |
         **\Rezolver.Tests.dll
         **\Rezolver.Microsoft.DependencyInjection.Tests.dll
@@ -45,40 +54,42 @@ steps:
     otherConsoleOptions: '/Framework:.NETCoreApp,Version=v2.2'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Package PreRelease'
+  displayName: 'Build Local Pre-release Packages'
   inputs:
     command: 'pack'
     searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
-    configurationToPack: '$(packageBuildConfig)'
+    configurationToPack: '$(debugConfig)'
+    nobuild: true
+    buildProperties: 'VersionSuffix="CI-$(Build.BuildNumber)"'
+    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\local-pre'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Local Final Packages'
+  inputs:
+    command: 'pack'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    configurationToPack: '$(releaseConfig)'
+    nobuild: true
+    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\local-final'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Public PreRelease Packages'
+  inputs:
+    command: 'pack'
+    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
+    configurationToPack: '$(debugConfig)'
     nobuild: true
     buildProperties: 'VersionSuffix="Beta-$(Build.BuildNumber)"'
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\pre'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Package Final'
+  displayName: 'Build Public Final Packages'
   inputs:
     command: 'pack'
     searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
-    configurationToPack: '$(packageBuildConfig)'
+    configurationToPack: '$(releaseConfig)'
     nobuild: true
     packDirectory: '$(Build.artifactStagingDirectory)\nupkg\final'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Local Package PreRelease'
-  inputs:
-    command: 'pack'
-    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
-    configurationToPack: '$(localPackageBuildConfig)'
-    buildProperties: 'VersionSuffix="CI-$(Build.BuildNumber)"'
-    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\local-pre'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Local Package Final'
-  inputs:
-    command: 'pack'
-    searchPatternPack: '**\Rezolver\Rezolver.csproj;**\Rezolver.Microsoft.Extensions.DependencyInjection.csproj;**\Rezolver.Microsoft.AspNetCore.Hosting.csproj;**\Rezolver.Microsoft.Extensions.Hosting.csproj'
-    configurationToPack: '$(localPackageBuildConfig)'
-    packDirectory: '$(Build.artifactStagingDirectory)\nupkg\local-final'
 
 - task: VSBuild@1
   displayName: 'Build documentation site'
