@@ -3,12 +3,7 @@
 
 
 using Rezolver;
-using Rezolver.Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.Hosting
 {
@@ -37,10 +32,10 @@ namespace Microsoft.Extensions.Hosting
         /// and <see cref="UseRezolver(IHostBuilder, Action{IRootTargetContainer}, Action{RezolverOptions})"/> overloads, on the other hand,
         /// allow you to provide one initial callback in which you can perform Rezolver-specific operations.</remarks>
         public static IHostBuilder UseRezolver(
-            this IHostBuilder hostBuilder, 
+            this IHostBuilder hostBuilder,
             Action<RezolverOptions> configureOptions = null)
         {
-            return hostBuilder.UseServiceProviderFactory(new NetCoreServiceProviderFactory(configureOptions));
+            return hostBuilder.UseServiceProviderFactory(new RezolverServiceProviderFactory(configureOptions));
         }
 
         /// <summary>
@@ -57,12 +52,12 @@ namespace Microsoft.Extensions.Hosting
         /// are created.  Use this to preconfigure Rezolver-specific options, such as <see cref="Rezolver.Options.EnableAutoFuncInjection"/>.</param>
         /// <returns>The host builder</returns>
         public static IHostBuilder UseRezolver(
-            this IHostBuilder hostBuilder, 
-            Action<HostBuilderContext, IRootTargetContainer> configureContainer, 
+            this IHostBuilder hostBuilder,
+            Action<HostBuilderContext, IRootTargetContainer> configureContainer,
             Action<RezolverOptions> configureOptions = null)
         {
             return hostBuilder
-                .UseServiceProviderFactory(new NetCoreServiceProviderFactory(configureOptions))
+                .UseServiceProviderFactory(new RezolverServiceProviderFactory(configureOptions))
                 .ConfigureRezolver(configureContainer);
         }
 
@@ -85,7 +80,7 @@ namespace Microsoft.Extensions.Hosting
             Action<RezolverOptions> configureOptions = null)
         {
             return hostBuilder
-                .UseServiceProviderFactory(new NetCoreServiceProviderFactory(configureOptions))
+                .UseServiceProviderFactory(new RezolverServiceProviderFactory(configureOptions))
                 .ConfigureRezolver(configureContainer);
         }
 
@@ -99,7 +94,7 @@ namespace Microsoft.Extensions.Hosting
         /// <remarks>This is a wrapper for <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
         /// with <see cref="IRootTargetContainer"/> as the generic type argument.</remarks>
         public static IHostBuilder ConfigureRezolver(
-            this IHostBuilder hostBuilder, 
+            this IHostBuilder hostBuilder,
             Action<HostBuilderContext, IRootTargetContainer> configureContainer)
         {
             return hostBuilder.ConfigureContainer(configureContainer);
@@ -115,7 +110,7 @@ namespace Microsoft.Extensions.Hosting
         /// <remarks>This is a wrapper for <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
         /// with <see cref="IRootTargetContainer"/> as the generic type argument, and the host builder context fixed to null.</remarks>
         public static IHostBuilder ConfigureRezolver(
-            this IHostBuilder hostBuilder, 
+            this IHostBuilder hostBuilder,
             Action<IRootTargetContainer> configureContainer)
         {
             return hostBuilder.ConfigureContainer<IRootTargetContainer>((context, targets) => configureContainer(targets));

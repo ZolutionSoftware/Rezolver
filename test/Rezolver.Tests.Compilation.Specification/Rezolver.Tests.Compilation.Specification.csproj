@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <AssemblyName>Rezolver.Tests.Compilation.Specification</AssemblyName>
     <PackageId>Rezolver.Tests.Compilation.Specification</PackageId>
     <Configurations>Debug;Release;PerformanceTesting</Configurations>

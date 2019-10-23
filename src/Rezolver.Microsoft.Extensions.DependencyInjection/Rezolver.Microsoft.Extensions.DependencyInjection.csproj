@@ -2,17 +2,16 @@
   <Import Project="../../common.props" />
   <PropertyGroup>
     <AssemblyName>Rezolver.Microsoft.Extensions.DependencyInjection</AssemblyName>
-    <AssemblyTitle>Rezolver .Net Core 2 IServiceProvider implementation</AssemblyTitle>
+    <AssemblyTitle>Rezolver .Net Core 3 IServiceProvider implementation</AssemblyTitle>
     <Description>Provides the implementation and extensions to use Rezolver containers in place of the standard Microsoft.Extensions.DependencyInjection container(s)</Description>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-
     <PackageId>Rezolver.Microsoft.Extensions.DependencyInjection</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore;aspnetcore</PackageTags>
     <Title>Rezolver MS Dependency Injection Extensions</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageOutputPath>../../.nupkg</PackageOutputPath>
-    <VersionPrefix>2.2.1</VersionPrefix>
+    <VersionPrefix>3.0</VersionPrefix>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -30,7 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-62925-02" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="icon64x64.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
 </Project>
