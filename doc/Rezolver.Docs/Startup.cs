@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace Rezolver.Docs
 {
@@ -25,18 +26,16 @@ namespace Rezolver.Docs
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllersWithViews();
         }
 
         public void ConfigureContainer(IRootTargetContainer targets)
         {
-            //Console.WriteLine("Hello");
+            System.Console.WriteLine("Hello");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -52,24 +51,25 @@ namespace Rezolver.Docs
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "errors",
-                    template: "Error/{statusCode?}",
+                    pattern: "Error/{statusCode?}",
                     defaults: new { controller = "Home", action = "Error" });
 
                 if (env.IsDevelopment())
                 {
-                    routes.MapRoute(
+                    endpoints.MapControllerRoute(
                         name: "containerdiags",
-                        template: "Diagnostics/{action}",
+                        pattern: "Diagnostics/{action}",
                         defaults: new { controller = "Diagnostics", action = "Index" });
                 }
 
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "/",
+                    pattern: "/",
                     defaults: new { controller = "Home", action = "Index" });
             });
         }

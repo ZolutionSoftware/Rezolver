@@ -34,14 +34,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Rezolver.Microsoft.AspNetCore.Hosting\Rezolver.Microsoft.AspNetCore.Hosting.csproj" />
     <ProjectReference Include="..\..\src\Rezolver.Microsoft.Extensions.DependencyInjection\Rezolver.Microsoft.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\src\Rezolver.Microsoft.Extensions.Hosting\Rezolver.Microsoft.Extensions.Hosting.csproj" />
     <ProjectReference Include="..\..\src\Rezolver\Rezolver.csproj" />
   </ItemGroup>
 
