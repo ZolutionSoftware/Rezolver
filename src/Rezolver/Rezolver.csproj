@@ -4,7 +4,7 @@
     <AssemblyName>Rezolver</AssemblyName>
     <AssemblyTitle>Rezolver Core</AssemblyTitle>
     <Description>Rezolver is a fast IOC framework that lets you work the way you want to.  It's easy to use and very extensible.</Description>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.2;net472;net48;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netcoreapp2.2;net472;net48;netstandard2.1;netcoreapp3</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <VersionPrefix>2.1.0</VersionPrefix>
     <PackageId>Rezolver</PackageId>

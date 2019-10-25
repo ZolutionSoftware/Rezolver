@@ -7,6 +7,7 @@ The nuget package has binaries specifically targeted to these TFMs:
 
 - `netstandard2.1`
 - `netstandard2.0`
+- `netcoreapp3.0`
 - `netcoreapp2.2`
 - `net472`
 - `net48`
@@ -14,6 +15,8 @@ The nuget package has binaries specifically targeted to these TFMs:
 > [!TIP]
 > While Rezolver is fast, whichever version you use, the `netstandard2.0` build is slightly slower because it's not able to use some dynamic IL
 > generation that's used by the versions which target the other TFMs.
+>
+> From Version 3.0, Rezolver will only target `netstandard2.0` and `netstandard2.1`.
 
 # Integration
 
