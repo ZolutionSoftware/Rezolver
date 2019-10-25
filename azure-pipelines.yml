@@ -17,7 +17,7 @@ variables:
   buildPlatform: 'Any CPU'
   debugConfig: 'debug'
   releaseConfig: 'release'
-  docsBuildConfig: 'Documentation'
+  docsBuildSlnConfig: 'Documentation'
 
 steps:
 - task: UseDotNet@2
@@ -101,7 +101,7 @@ steps:
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
-    configuration: '$(docsBuildConfig)'
+    configuration: '$(docsBuildSlnConfig)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Zip Website'
@@ -109,7 +109,7 @@ steps:
     command: publish
     projects: '$(docsProject)'
     publishWebProjects: False
-    arguments: '--configuration $(docsBuildConfig) --output $(Build.ArtifactStagingDirectory)\docs'
+    arguments: '--configuration $(releaseConfig) --output $(Build.ArtifactStagingDirectory)\docs'
     zipAfterPublish: True
 
 - task: PublishBuildArtifacts@1

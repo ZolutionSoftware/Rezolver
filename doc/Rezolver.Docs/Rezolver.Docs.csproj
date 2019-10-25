@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <None Include="gulpfile.js" />
-    <None Include="index.md" />
     <None Include="toc.yml" />
   </ItemGroup>
 

@@ -23,10 +23,13 @@ namespace Microsoft.Extensions.Hosting
         /// objects which will be fed to the <see cref="TargetContainer"/> and <see cref="ScopedContainer"/> which
         /// are created.  Use this to preconfigure Rezolver-specific options, such as <see cref="Rezolver.Options.EnableAutoFuncInjection"/>.</param>
         /// <returns>The host builder</returns>
-        /// <remarks>With this overload, you will need to call <see cref="ConfigureRezolver(IHostBuilder, Action{HostBuilderContext, IRootTargetContainer})"/>
-        /// or 
-        /// <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
-        /// at least once to add rezolver-specific registrations, with the type <see cref="IRootTargetContainer"/> as the <code>TContainerBuilder</code>.
+        /// <remarks>
+        /// This is equivalent to calling <see cref="IHostBuilder.UseServiceProviderFactory{TContainerBuilder}(DependencyInjection.IServiceProviderFactory{TContainerBuilder})"/>
+        /// with an instance of <see cref="RezolverServiceProviderFactory"/>.
+        /// 
+        /// With this overload, you will need to call <see cref="ConfigureRezolver(IHostBuilder, Action{HostBuilderContext, IRootTargetContainer})"/>
+        /// or <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
+        /// at least once if you want to add rezolver-specific registrations, with the type <see cref="IRootTargetContainer"/> as the <code>TContainerBuilder</code>.
         /// 
         /// The <see cref="UseRezolver(IHostBuilder, Action{HostBuilderContext, IRootTargetContainer}, Action{RezolverOptions})"/>
         /// and <see cref="UseRezolver(IHostBuilder, Action{IRootTargetContainer}, Action{RezolverOptions})"/> overloads, on the other hand,
@@ -51,6 +54,10 @@ namespace Microsoft.Extensions.Hosting
         /// objects which will be fed to the <see cref="TargetContainer"/> and <see cref="ScopedContainer"/> which
         /// are created.  Use this to preconfigure Rezolver-specific options, such as <see cref="Rezolver.Options.EnableAutoFuncInjection"/>.</param>
         /// <returns>The host builder</returns>
+        /// <remarks>
+        /// This is equivalent to calling <see cref="IHostBuilder.UseServiceProviderFactory{TContainerBuilder}(DependencyInjection.IServiceProviderFactory{TContainerBuilder})"/>
+        /// with an instance of <see cref="RezolverServiceProviderFactory"/> and then calling <see cref="ConfigureRezolver(IHostBuilder, Action{HostBuilderContext, IRootTargetContainer})"/>
+        /// </remarks>
         public static IHostBuilder UseRezolver(
             this IHostBuilder hostBuilder,
             Action<HostBuilderContext, IRootTargetContainer> configureContainer,
@@ -74,6 +81,10 @@ namespace Microsoft.Extensions.Hosting
         /// objects which will be fed to the <see cref="TargetContainer"/> and <see cref="ScopedContainer"/> which
         /// are created.  Use this to preconfigure Rezolver-specific options, such as <see cref="Rezolver.Options.EnableAutoFuncInjection"/>.</param>
         /// <returns>The host builder</returns>
+        /// <remarks>
+        /// This is equivalent to calling <see cref="IHostBuilder.UseServiceProviderFactory{TContainerBuilder}(DependencyInjection.IServiceProviderFactory{TContainerBuilder})"/>
+        /// with an instance of <see cref="RezolverServiceProviderFactory"/> and then calling <see cref="ConfigureRezolver(IHostBuilder, Action{IRootTargetContainer})"/>
+        /// </remarks>
         public static IHostBuilder UseRezolver(
             this IHostBuilder hostBuilder,
             Action<IRootTargetContainer> configureContainer,
@@ -91,7 +102,7 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The host builder</param>
         /// <param name="configureContainer">Required. The configuration callback.</param>
         /// <returns>The host builder</returns>
-        /// <remarks>This is a wrapper for <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
+        /// <remarks>This is equivalent to calling <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
         /// with <see cref="IRootTargetContainer"/> as the generic type argument.</remarks>
         public static IHostBuilder ConfigureRezolver(
             this IHostBuilder hostBuilder,
@@ -107,7 +118,7 @@ namespace Microsoft.Extensions.Hosting
         /// <param name="hostBuilder">The host builder</param>
         /// <param name="configureContainer">Required. The configuration callback.</param>
         /// <returns>The host builder</returns>
-        /// <remarks>This is a wrapper for <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
+        /// <remarks>This is equivalent to calling <see cref="IHostBuilder.ConfigureContainer{TContainerBuilder}(Action{HostBuilderContext, TContainerBuilder})"/>
         /// with <see cref="IRootTargetContainer"/> as the generic type argument, and the host builder context fixed to null.</remarks>
         public static IHostBuilder ConfigureRezolver(
             this IHostBuilder hostBuilder,

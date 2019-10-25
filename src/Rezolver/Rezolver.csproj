@@ -6,7 +6,7 @@
     <Description>Rezolver is a fast IOC framework that lets you work the way you want to.  It's easy to use and very extensible.</Description>
     <TargetFrameworks>netstandard2.0;netcoreapp2.2;net472;net48;netstandard2.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <VersionPrefix>2.2.0</VersionPrefix>
+    <VersionPrefix>2.1.0</VersionPrefix>
     <PackageId>Rezolver</PackageId>
     <PackageTags>ioc;di;dependency injection;rezolver;dotnetcore</PackageTags>
     <Title>Rezolver IOC</Title>
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="icon64x64.png" Pack="true" PackagePath="\" />
+    <None Include="icon64x64.png" Pack="true" PackagePath="" />
     <None Update="RootTargetContainerExtensions.AutoFactory.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>RootTargetContainerExtensions.AutoFactory.cs</LastGenOutput>

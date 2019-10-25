@@ -14,16 +14,29 @@ namespace Rezolver
         : IServiceProviderFactory<IRootTargetContainer>
     {
         private readonly Action<RezolverOptions> _configureOptions;
+        private readonly Action<RezolverOptions, IRootTargetContainer> _configureContainerBeforePopulate;
+        private readonly Action<RezolverOptions, IRootTargetContainer> _configureContainerAfterPopulate;
         private readonly RezolverOptions _options = new RezolverOptions();
 
         /// <summary>
         /// Initialises a new instance of the <see cref="RezolverServiceProviderFactory"/>
-        /// with an optional callback for configuring the factory options.
+        /// with optional callbacks for configuring the factory options, and the <see cref="IRootTargetContainer"/>
+        /// before and after it's been populated with services from the <see cref="IServiceCollection"/>.
         /// </summary>
-        /// <param name="configureOptions"></param>
-        public RezolverServiceProviderFactory(Action<RezolverOptions> configureOptions = null)
+        /// <param name="configureOptions">An optional delegate which customises the options that are passed to the
+        /// <see cref="TargetContainer"/> and, later, the <see cref="ScopedContainer"/> on construction.</param>
+        /// <param name="configureContainerBeforePopulate">An optional delegate that can be used to perform registrations
+        /// and/or configuration of the <see cref="IRootTargetContainer"/> that is built by the <see cref="CreateBuilder(IServiceCollection)"/>
+        /// implementation, and *before* the services are populated from the service collection.</param>
+        /// <param name="configureContainerAfterPopulate">Similar to <paramref name="configureContainerBeforePopulate"/>, except this delegate
+        /// will be called after the services have been populated from the service collection.</param>
+        public RezolverServiceProviderFactory(Action<RezolverOptions> configureOptions = null,
+            Action<RezolverOptions, IRootTargetContainer> configureContainerBeforePopulate = null,
+            Action<RezolverOptions, IRootTargetContainer> configureContainerAfterPopulate = null)
         {
             _configureOptions = configureOptions;
+            _configureContainerBeforePopulate = configureContainerBeforePopulate;
+            _configureContainerAfterPopulate = configureContainerAfterPopulate;
         }
 
         /// <summary>
@@ -37,7 +50,10 @@ namespace Rezolver
 
             var targetContainer = new TargetContainer(_options.TargetContainerConfig ?? TargetContainer.DefaultConfig.Clone());
 
+            _configureContainerBeforePopulate?.Invoke(_options, targetContainer);
             targetContainer.Populate(services);
+            _configureContainerAfterPopulate?.Invoke(_options, targetContainer);
+
             return targetContainer;
         }
 
