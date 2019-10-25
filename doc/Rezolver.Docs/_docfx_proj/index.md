@@ -34,7 +34,8 @@ Read the [quickstart tutorial](quickstart.md) - which shows how to create and us
 
 For full release notes for each version - [see release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
 - **2.1.0**
-  - Added `netstandard2.1` to main `Rezolver` package.
+  - Added `netstandard2.1` & `netcoreapp3.0` to main `Rezolver` package.
+    - We're forced to do this at the moment, because of the prior targeting of `netcoreapp2.2`.  Rezolver v3 will only target `netstandard2.0` and `netstandard2.1`.
   - `Rezolver.Microsoft.Extensions.Hosting` is now v3.0 and uses `Microsoft.Extensions.Hosting.Abstractions` v3.0.
     - Renamed and made public the `RezolverServiceProviderFactory` class to allow it to be used directly; e.g. for Blazor WebAssembly:
     ```cs
