@@ -42,8 +42,8 @@ type for a @Rezolver.Container.Resolve* call:
 var enumerable = container.Resolve<IEnumerable<Foo>>();
 ```
 
-However, the `ResolveMany` extension methods (see <xref:Rezolver.ContainerResolveExtensions.ResolveMany*>
-and <xref:Rezolver.ContainerScopeResolveExtensions.ResolveMany*>) provide a shortcut which allow you to pass
+However, the `ResolveMany` methods (see <xref:Rezolver.Container.ResolveMany*>, <xref:Rezolver.ContainerScope.ResolveMany*>
+and <xref:Rezolver.ResolveContext.ResolveMany*>) provide a shortcut which allow you to pass
 just the element type of the enumerable to reduce the 'angle-bracket percent' of code which directly resolves
 enumerables (which of course you won't be doing because you're not using 'service location' are you!? :wink: ):
 

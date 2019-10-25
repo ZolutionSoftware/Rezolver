@@ -5,13 +5,12 @@
     <Authors>Andras Zoltan</Authors>
     <Company>Zolution Software Ltd</Company>
     <PackageReleaseNotes>See https://github.com/ZolutionSoftware/Rezolver/releases</PackageReleaseNotes>
-    <PackageIconUrl>http://rezolver.co.uk/favicon-96x96.png</PackageIconUrl>
+    <PackageIcon>icon64x64.png</PackageIcon>
     <PackageProjectUrl>http://rezolver.co.uk</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Product>Rezolver</Product>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ZolutionSoftware/Rezolver</RepositoryUrl>
-    <VersionPrefix>2.0.0</VersionPrefix>
     <PreReleaseSuffix>$([System.DateTime]::Now.ToString('yyMMddHHmm'))</PreReleaseSuffix>
     <PreReleaseType Condition ="'$(PreReleaseType)' == ''">alpha</PreReleaseType>
     <VersionSuffix Condition="'$(VersionSuffix)' == '' AND '$(Configuration)' != 'Release'">$(PreReleaseType)-$(PreReleaseSuffix)</VersionSuffix>

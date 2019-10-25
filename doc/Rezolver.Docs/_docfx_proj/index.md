@@ -5,23 +5,26 @@ with Asp.Net Core integration.
 
 The nuget package has binaries specifically targeted to these TFMs:
 
+- `netstandard2.1`
 - `netstandard2.0`
+- `netcoreapp3.0`
 - `netcoreapp2.2`
 - `net472`
 - `net48`
 
 > [!TIP]
-> While Rezolver is fast, whichever version you use, the runtime-specific versions (i.e. `netcoreapp2.2` or `netframework472/48`) are faster due to the use of some
-> internal caching built using IL Emit which, until `netstandard2.1` is ready, can only be used when directly targeting a specific
-> runtime.
+> While Rezolver is fast, whichever version you use, the `netstandard2.0` build is slightly slower because it's not able to use some dynamic IL
+> generation that's used by the versions which target the other TFMs.
+>
+> From Version 3.0, Rezolver will only target `netstandard2.0` and `netstandard2.1`.
 
 # Integration
 
 In addition to simply using the Rezolver nuget package and creating a @Rezolver.Container directly, Rezolver also offers some off-the-shelf integrations:
 
-- Asp.Net Core support (v2.2 and below) is provided by the [Rezolver.Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) package
-- [.Net Core Generic Host]((https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host)) support (v2.2 and above) is provided by the [Rezolver.Microsoft.Extensions.Hosting](docs/nuget-packages/rezolver.microsoft.extensions.hosting.md) package
+- [.Net Core Generic Host 2.2+ and Asp.Net Core 3+](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host) support is provided by the [Rezolver.Microsoft.Extensions.Hosting](docs/nuget-packages/rezolver.microsoft.extensions.hosting.md) package
 - Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an @System.IServiceProvider from an <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) is provided by the [Rezolver.Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) package.  This package is used by the other two packages above.
+- Asp.Net Core support (v2.2 and below) is provided by the [Rezolver.Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) package, the last version of which will be 2.3.
 
 # Quickstart
 
@@ -30,7 +33,26 @@ Read the [quickstart tutorial](quickstart.md) - which shows how to create and us
 # Release Highlights
 
 For full release notes for each version - [see release notes on Github](https://github.com/ZolutionSoftware/Rezolver/releases).
+- **2.1.0**
+  - Added `netstandard2.1` & `netcoreapp3.0` to main `Rezolver` package.
+    - We're forced to do this at the moment, because of the prior targeting of `netcoreapp2.2`.  Rezolver v3 will only target `netstandard2.0` and `netstandard2.1`.
+  - `Rezolver.Microsoft.Extensions.Hosting` is now v3.0 and uses `Microsoft.Extensions.Hosting.Abstractions` v3.0.
+    - Renamed and made public the `RezolverServiceProviderFactory` class to allow it to be used directly; e.g. for Blazor WebAssembly:
+    ```cs
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
 
+        public static IWebAssemblyHostBuilder CreateHostBuilder(string[] args) =>
+            BlazorWebAssemblyHost.CreateDefaultBuilder()
+                .UseServiceProviderFactory(new RezolverServiceProviderFactory())
+                .UseBlazorStartup<Startup>();
+    }
+    ```
+  - `Rezolver.Microsoft.Extensions.DependencyInjection` is also now v3.0 and uses `Microsoft.Extensions.DependencyInjection.Abstractions` v3.0
 - **2.0.0**
   - Major performance improvements
   - TFMs changed to `netStandard2.0`, `netcoreapp2.2`, `net472` and `net48` ([#78](https://github.com/ZolutionSoftware/Rezolver/issues/78))
