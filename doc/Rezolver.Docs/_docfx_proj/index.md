@@ -19,7 +19,7 @@ The nuget package has binaries specifically targeted to these TFMs:
 
 In addition to simply using the Rezolver nuget package and creating a @Rezolver.Container directly, Rezolver also offers some off-the-shelf integrations:
 
-- [.Net Core Generic Host 2.2+ and Asp.Net Core 3+]((https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host)) support is provided by the [Rezolver.Microsoft.Extensions.Hosting](docs/nuget-packages/rezolver.microsoft.extensions.hosting.md) package
+- [.Net Core Generic Host 2.2+ and Asp.Net Core 3+](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host) support is provided by the [Rezolver.Microsoft.Extensions.Hosting](docs/nuget-packages/rezolver.microsoft.extensions.hosting.md) package
 - Low-level integration with the core Microsoft.Extensions.DependencyInjection DI abstractions (i.e creating an @System.IServiceProvider from an <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>) is provided by the [Rezolver.Microsoft.Extensions.DependencyInjection](docs/nuget-packages/rezolver.microsoft.extensions.dependencyinjection.md) package.  This package is used by the other two packages above.
 - Asp.Net Core support (v2.2 and below) is provided by the [Rezolver.Microsoft.AspNetCore.Hosting](docs/nuget-packages/rezolver.microsoft.aspnetcore.hosting.md) package, the last version of which will be 2.3.
 
