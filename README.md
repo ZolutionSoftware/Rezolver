@@ -1,3 +1,9 @@
+# Rezolver is now archived - no more updates will be pushed to the repository.
+
+The library is still fully functional, but will not be updated to future versions of .Net, sorry!
+
+Thanks for all the support :)
+
 ![Rezolver Logo](https://raw.githubusercontent.com/ZolutionSoftware/Rezolver/master/doc/Rezolver.Documentation/Content/rz_square_white_on_orange_256x256.png)
 
 Rezolver
